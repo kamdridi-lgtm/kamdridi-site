@@ -4,7 +4,7 @@ import { PageHero, Section, SectionHeading } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Fan Club",
-  description: "Join the KAMDRIDI fan club for exclusive content, private videos, and early merch access."
+  description: "Join the KAMDRIDI fan club with Stripe-powered membership tiers and exclusive content access."
 };
 
 export default function FanClubPage() {
@@ -12,15 +12,15 @@ export default function FanClubPage() {
     <>
       <PageHero
         eyebrow="Fan Club"
-        title="Member accounts, private media, and community access"
-        description="Fans can sign up, log in, and access exclusive content, private videos, community prompts, and early merch opportunities."
+        title="Memberships, private media, and community access"
+        description="Fans can join paid Stripe membership tiers, then sign up or log in for exclusive content, private videos, and early merch access."
         image="/assets/images/band/live2.jpg"
       />
       <Section>
         <SectionHeading
           eyebrow="Membership Area"
-          title="A complete starter fan club experience"
-          description="This page includes a production-ready signed-session flow and Vercel-compatible storage support."
+          title="Stripe memberships and fan access"
+          description="Choose a hosted Stripe subscription tier, then use your site account for the private fan vault."
         />
         <div className="mt-12">
           <FanClubPanel />

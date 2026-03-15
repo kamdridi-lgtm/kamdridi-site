@@ -27,10 +27,19 @@ export type Product = {
   name: string;
   category: string;
   image: string;
-  price: number;
+  priceLabel: string;
   description: string;
-  sizes?: string[];
+  checkoutUrl: string;
   limited?: boolean;
+};
+
+export type MembershipTier = {
+  id: string;
+  name: string;
+  priceLabel: string;
+  description: string;
+  checkoutUrl: string;
+  features: string[];
 };
 
 export type Member = {
@@ -120,7 +129,7 @@ export const navigation: NavItem[] = [
     href: "/store",
     children: [
       { label: "Featured Merch", href: "/store#featured" },
-      { label: "Cart", href: "/store#cart" }
+      { label: "Secure Checkout", href: "/store#featured" }
     ]
   },
   {
@@ -280,59 +289,89 @@ export const tourDates: TourDate[] = [
   }
 ];
 
+export const membershipTiers: MembershipTier[] = [
+  {
+    id: "inner-circle-membership",
+    name: "INNER CIRCLE MEMBERSHIP",
+    priceLabel: "$5 / month",
+    description:
+      "A direct monthly entry point for fans who want private updates, early merch windows, and access to the inner campaign world.",
+    checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_INNER_CIRCLE || "",
+    features: [
+      "Private updates and member-only announcements",
+      "Early access to selected merch drops",
+      "Community access and upcoming release previews"
+    ]
+  },
+  {
+    id: "collector-membership",
+    name: "COLLECTOR MEMBERSHIP",
+    priceLabel: "$25 / month",
+    description:
+      "A premium membership tier for collectors who want deeper access, earlier drops, and the highest-priority fan-club experience.",
+    checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_COLLECTOR || "",
+    features: [
+      "Everything in Inner Circle",
+      "Priority early merch access",
+      "Exclusive collector updates and premium content"
+    ]
+  }
+];
+
 export const products: Product[] = [
   {
-    id: "tee-echoes-crest",
-    name: "Echoes Unearthed Crest Tee",
-    category: "T-Shirts",
-    image: "/assets/images/merch/tee_black.png",
-    price: 38,
-    description: "Black premium tee with distressed crest art inspired by the album world.",
-    sizes: ["S", "M", "L", "XL", "2XL"]
+    id: "ai-music-video",
+    name: "AI MUSIC VIDEO",
+    category: "Creative Services",
+    image: "/assets/images/band/live_stage.jpg",
+    priceLabel: process.env.NEXT_PUBLIC_PRICE_AI_MUSIC_VIDEO || "Configured in Stripe",
+    description: "Hosted Stripe checkout for the AI music video production offer.",
+    checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_AI_MUSIC_VIDEO || ""
   },
   {
-    id: "hoodie-unearthed",
-    name: "Unearthed Heavy Hoodie",
-    category: "Hoodies",
-    image: "/assets/images/merch/hoodie.png",
-    price: 74,
-    description: "Heavyweight hoodie with sleeve print and oversized cinematic back graphic.",
-    sizes: ["M", "L", "XL", "2XL"]
+    id: "visual-album-production",
+    name: "VISUAL ALBUM PRODUCTION",
+    category: "Creative Services",
+    image: "/assets/images/band/live3.jpg",
+    priceLabel: process.env.NEXT_PUBLIC_PRICE_VISUAL_ALBUM_PRODUCTION || "Configured in Stripe",
+    description: "Hosted Stripe checkout for full visual album production.",
+    checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_VISUAL_ALBUM_PRODUCTION || ""
   },
   {
-    id: "vinyl-echoes-deluxe",
-    name: "Echoes Unearthed Deluxe Vinyl",
-    category: "Vinyl",
+    id: "echoes-unearthed-digipack-cd",
+    name: "ECHOES UNEARTHED DIGIPACK CD",
+    category: "Music",
     image: "/assets/images/releases/echoes-unearthed-cover.jpg",
-    price: 52,
-    description: "180g collector vinyl with lyric insert, art print, and deluxe packaging.",
-    limited: true
+    priceLabel: process.env.NEXT_PUBLIC_PRICE_ECHOES_UNEARTHED_DIGIPACK_CD || "$19",
+    description: "Physical digipack edition of Echoes Unearthed.",
+    checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_ECHOES_UNEARTHED_DIGIPACK_CD || ""
   },
   {
-    id: "cd-echoes-digipak",
-    name: "Echoes Unearthed Digipak CD",
-    category: "CDs",
-    image: "/assets/images/releases/war-machines-cover.jpg",
-    price: 19,
-    description: "Physical CD edition with expanded artwork and campaign credits."
+    id: "kam-dridi-hoodie",
+    name: "KAM DRIDI Hoodie",
+    category: "Merch",
+    image: "/assets/images/merch/hoodie.png",
+    priceLabel: process.env.NEXT_PUBLIC_PRICE_KAM_DRIDI_HOODIE || "$74",
+    description: "Official KAMDRIDI heavyweight hoodie.",
+    checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_KAM_DRIDI_HOODIE || ""
   },
   {
-    id: "collector-box-war-machines",
-    name: "War Machines Collector Box",
-    category: "Limited Editions",
+    id: "kam-dridi-tshirt",
+    name: "KAM DRIDI T-shirt",
+    category: "Merch",
+    image: "/assets/images/merch/tee_black.png",
+    priceLabel: process.env.NEXT_PUBLIC_PRICE_KAM_DRIDI_TSHIRT || "$38",
+    description: "Official KAMDRIDI T-shirt.",
+    checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_KAM_DRIDI_TSHIRT || ""
+  },
+  {
+    id: "war-machines-collector-artifact",
+    name: "WAR MACHINES COLLECTOR ARTIFACT",
+    category: "Collector",
     image: "/assets/images/merch/reg2.png",
-    price: 128,
-    description: "Numbered collector box with vinyl, signed card, patch, and exclusive apparel.",
-    limited: true,
-    sizes: ["M", "L", "XL"]
-  },
-  {
-    id: "artifact-pick-tin",
-    name: "Unearthed Artifact Pick Tin",
-    category: "Accessories",
-    image: "/assets/images/merch/reg1.png",
-    price: 18,
-    description: "Collector accessory tin with custom picks and metallic foil stamp."
+    priceLabel: process.env.NEXT_PUBLIC_PRICE_WAR_MACHINES_COLLECTOR_ARTIFACT || "$128",
+    description: "Premium hosted checkout for the War Machines collector piece.",
+    checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_WAR_MACHINES_COLLECTOR_ARTIFACT || ""
   }
 ];
 

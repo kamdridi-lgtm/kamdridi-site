@@ -1,13 +1,13 @@
 # KAMDRIDI Official Website
 
-Production-ready cinematic artist website for **KAMDRIDI** and **Echoes Unearthed**, built with Next.js, Tailwind CSS, Stripe Checkout, and Vercel-compatible server routes.
+Production-ready cinematic artist website for **KAMDRIDI** and **Echoes Unearthed**, built with Next.js, Tailwind CSS, Stripe hosted checkout, and Vercel-compatible server routes.
 
 ## What is included
 
 - Premium dark metal / cinematic visual design
 - Responsive pages for Home, News, Band, Tour, Media, Store, Fan Club, and Contact
 - Dropdown navigation and social media header
-- Stripe Checkout store with product images, size selection, and cart state
+- Stripe Payment Links for store products and fan-club memberships
 - Fan club signup/login with signed server-side sessions
 - Neon Postgres support for fan-club accounts and contact submissions
 - SEO metadata, sitemap, robots, and manifest routes
@@ -19,7 +19,7 @@ Production-ready cinematic artist website for **KAMDRIDI** and **Echoes Unearthe
 - React 19
 - Tailwind CSS v4
 - Next.js Route Handlers for backend logic
-- Stripe Checkout
+- Stripe Payment Links / hosted checkout
 - Neon serverless Postgres
 
 ## Project structure
@@ -96,6 +96,14 @@ Create `.env.local` with:
 ```env
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_publishable_key
+NEXT_PUBLIC_STRIPE_LINK_INNER_CIRCLE=https://buy.stripe.com/your-inner-circle-link
+NEXT_PUBLIC_STRIPE_LINK_COLLECTOR=https://buy.stripe.com/your-collector-link
+NEXT_PUBLIC_STRIPE_LINK_AI_MUSIC_VIDEO=https://buy.stripe.com/your-ai-music-video-link
+NEXT_PUBLIC_STRIPE_LINK_VISUAL_ALBUM_PRODUCTION=https://buy.stripe.com/your-visual-album-link
+NEXT_PUBLIC_STRIPE_LINK_ECHOES_UNEARTHED_DIGIPACK_CD=https://buy.stripe.com/your-digipack-link
+NEXT_PUBLIC_STRIPE_LINK_KAM_DRIDI_HOODIE=https://buy.stripe.com/your-hoodie-link
+NEXT_PUBLIC_STRIPE_LINK_KAM_DRIDI_TSHIRT=https://buy.stripe.com/your-tshirt-link
+NEXT_PUBLIC_STRIPE_LINK_WAR_MACHINES_COLLECTOR_ARTIFACT=https://buy.stripe.com/your-artifact-link
 STRIPE_SECRET_KEY=sk_test_your_secret_key
 STRIPE_WEBHOOK_SECRET=whsec_example
 DATABASE_URL=postgres://user:password@host:5432/dbname
@@ -105,17 +113,19 @@ FAN_CLUB_SESSION_SECRET=replace-with-a-long-random-string
 
 ## Stripe configuration
 
-Stripe Checkout is implemented in [app/api/checkout/route.ts](/C:/Users/Administrator/OneDrive/Documents/EchoesEngine_complete/band-site/app/api/checkout/route.ts).
+Store products and memberships use Stripe-hosted checkout through Payment Links.
 
 For production:
 
 1. Create a Stripe account
-2. Add `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
-3. Add `STRIPE_SECRET_KEY`
-4. Set your production site URL in `NEXT_PUBLIC_SITE_URL`
-5. Test checkout in Stripe test mode before switching to live keys
-
-If Stripe keys are missing in local development, the store falls back to a simulated success redirect so the UI can still be tested.
+2. Paste your existing Stripe Payment Links into the `NEXT_PUBLIC_STRIPE_LINK_*` environment variables
+3. Add `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
+4. Add `STRIPE_SECRET_KEY`
+5. Set your production site URL in `NEXT_PUBLIC_SITE_URL`
+6. In Stripe, configure each Payment Link redirect URL to:
+   `/store?purchase=success` for store items
+   `/fan-club?membership=success` for memberships
+7. Test checkout in Stripe test mode before switching to live links or keys
 
 ## Fan club and contact storage
 
@@ -143,6 +153,14 @@ cmd /c npm run start
 ```text
 NEXT_PUBLIC_SITE_URL
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+NEXT_PUBLIC_STRIPE_LINK_INNER_CIRCLE
+NEXT_PUBLIC_STRIPE_LINK_COLLECTOR
+NEXT_PUBLIC_STRIPE_LINK_AI_MUSIC_VIDEO
+NEXT_PUBLIC_STRIPE_LINK_VISUAL_ALBUM_PRODUCTION
+NEXT_PUBLIC_STRIPE_LINK_ECHOES_UNEARTHED_DIGIPACK_CD
+NEXT_PUBLIC_STRIPE_LINK_KAM_DRIDI_HOODIE
+NEXT_PUBLIC_STRIPE_LINK_KAM_DRIDI_TSHIRT
+NEXT_PUBLIC_STRIPE_LINK_WAR_MACHINES_COLLECTOR_ARTIFACT
 STRIPE_SECRET_KEY
 STRIPE_WEBHOOK_SECRET
 DATABASE_URL
@@ -171,9 +189,9 @@ https://kamdridi.com
 - Replace placeholder social/profile URLs with real KAMDRIDI links
 - Replace the placeholder YouTube embed in `data/site.ts`
 - Replace sample ticket links with real ticketing URLs
-- Add live Stripe keys when you are ready to sell
+- Paste the real Stripe Payment Links from the Stripe dashboard
 - Configure a production domain in Vercel
-- Verify checkout, signup, and contact form once production env vars are set
+- Verify checkout return redirects, signup, and contact form once production env vars are set
 
 ## Direct production status
 

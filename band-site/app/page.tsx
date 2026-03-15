@@ -11,7 +11,7 @@ import {
   socialLinks,
   tourDates
 } from "@/data/site";
-import { formatCurrency, formatDate } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -195,9 +195,9 @@ export default function HomePage() {
                 <h3 className="mt-3 text-2xl text-white">{product.name}</h3>
                 <p className="mt-3 text-sm leading-7 text-stone-400">{product.description}</p>
                 <div className="mt-6 flex items-center justify-between">
-                  <span className="text-lg text-[#f4c66a]">{formatCurrency(product.price)}</span>
+                  <span className="text-lg text-[#f4c66a]">{product.priceLabel}</span>
                   <Link href="/store" className="text-xs uppercase tracking-[0.25em] text-stone-200 transition hover:text-[#f4c66a]">
-                    Add to cart
+                    Buy now
                   </Link>
                 </div>
               </div>
