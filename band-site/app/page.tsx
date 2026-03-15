@@ -4,6 +4,7 @@ import Link from "next/link";
 import { CTAButton, GlassCard, Section, SectionHeading } from "@/components/ui";
 import {
   featuredVideo,
+  gameExperiences,
   newsPosts,
   products,
   siteMeta,
@@ -15,7 +16,8 @@ import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Home",
-  description: "Official KAMDRIDI website with music, videos, merch, tour dates, fan club, and news."
+  description:
+    "Official KAMDRIDI website with music, visual album content, games, merch, tour dates, fan club, and news."
 };
 
 export default function HomePage() {
@@ -41,13 +43,7 @@ export default function HomePage() {
 
         <div className="absolute inset-x-0 top-[16%] z-10 flex justify-center px-4">
           <div className="relative h-36 w-[min(150vw,1100px)] opacity-30 blur-[3px] sm:h-48 md:h-64 lg:h-80">
-            <Image
-              src="/assets/images/logo.png"
-              alt=""
-              fill
-              priority
-              className="object-contain"
-            />
+            <Image src="/assets/images/logo.png" alt="" fill priority className="object-contain" />
           </div>
         </div>
 
@@ -64,9 +60,7 @@ export default function HomePage() {
         </div>
 
         <div className="relative z-20 mx-auto flex min-h-[calc(100vh-100px)] max-w-7xl flex-col items-center justify-start px-4 pb-[320px] pt-24 text-center sm:px-6 sm:pt-28 md:pb-[420px] md:pt-32 lg:pb-[520px]">
-          <p className="text-xs uppercase tracking-[0.6em] text-stone-400">
-            official artist website
-          </p>
+          <p className="text-xs uppercase tracking-[0.6em] text-stone-400">official artist website</p>
           <h1 className="mt-6 max-w-5xl font-display text-5xl uppercase leading-[0.92] tracking-[0.08em] text-white drop-shadow-[0_12px_40px_rgba(0,0,0,0.85)] md:text-8xl">
             MELODIC.
             <br />
@@ -75,16 +69,16 @@ export default function HomePage() {
             UNEARTHED.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-stone-300 md:text-lg">
-            Enter the world of Echoes Unearthed with official music, premium visuals,
-            collector merch, fan-club access, and a stage-ready campaign built for commercial release.
+            Enter the world of Echoes Unearthed with official music, premium visuals, interactive
+            fan-universe layers, collector merch, and a stage-ready campaign built for commercial release.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <CTAButton href="/tour">View Tour Dates</CTAButton>
+            <CTAButton href="/music">Enter The Music</CTAButton>
+            <CTAButton href="/games" tone="secondary">
+              Games Protocol
+            </CTAButton>
             <CTAButton href="/store" tone="secondary">
               Shop Merch
-            </CTAButton>
-            <CTAButton href="/fan-club" tone="secondary">
-              Join Fan Club
             </CTAButton>
           </div>
         </div>
@@ -100,6 +94,52 @@ export default function HomePage() {
               >
                 {item.label} {item.handle}
               </span>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Section id="fan-universe">
+        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+          <GlassCard className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.2),transparent_38%)]" />
+            <div className="relative">
+              <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Fan Universe</p>
+              <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.08em] text-white md:text-5xl">
+                Echoes Unearthed goes beyond the album
+              </h2>
+              <p className="mt-5 max-w-2xl text-base leading-8 text-stone-300">
+                Membership now opens into a layered world of games, comic pages, vault material,
+                visual album fragments, and collector-first access across the KAMDRIDI campaign.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <CTAButton href="/fan-club">Join Fan Club</CTAButton>
+                <CTAButton href="/who-is-kam-dridi" tone="secondary">
+                  Read the Comic
+                </CTAButton>
+              </div>
+            </div>
+          </GlassCard>
+          <div className="grid gap-6">
+            {gameExperiences.map((game) => (
+              <GlassCard key={game.id}>
+                <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">{game.subtitle}</p>
+                <h3 className="mt-4 font-display text-3xl uppercase tracking-[0.08em] text-white">
+                  {game.title}
+                </h3>
+                <p className="mt-4 text-sm leading-7 text-stone-400">{game.description}</p>
+                <div className="mt-5 flex items-center justify-between gap-4">
+                  <span className="text-[11px] uppercase tracking-[0.3em] text-stone-500">
+                    {game.membership}
+                  </span>
+                  <Link
+                    href="/games"
+                    className="text-xs uppercase tracking-[0.25em] text-stone-200 transition hover:text-[#f4c66a]"
+                  >
+                    Open launcher
+                  </Link>
+                </div>
+              </GlassCard>
             ))}
           </div>
         </div>
@@ -150,9 +190,14 @@ export default function HomePage() {
           <GlassCard className="panel-grid overflow-hidden p-0">
             <div className="divide-y divide-white/10">
               {tourDates.map((show) => (
-                <div key={`${show.city}-${show.date}`} className="grid gap-3 p-6 md:grid-cols-[0.9fr_1.1fr_0.7fr_auto] md:items-center">
+                <div
+                  key={`${show.city}-${show.date}`}
+                  className="grid gap-3 p-6 md:grid-cols-[0.9fr_1.1fr_0.7fr_auto] md:items-center"
+                >
                   <div>
-                    <p className="text-xs uppercase tracking-[0.35em] text-[#f4c66a]">{formatDate(show.date)}</p>
+                    <p className="text-xs uppercase tracking-[0.35em] text-[#f4c66a]">
+                      {formatDate(show.date)}
+                    </p>
                     <p className="mt-2 text-xl text-white">{show.city}</p>
                   </div>
                   <div>
@@ -182,13 +227,18 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Featured Merch"
           title="Storefront built for conversion"
-          description="Highlight premium apparel, music formats, limited editions, and accessories with cart-ready interactions and Stripe checkout."
+          description="Highlight premium apparel, music formats, limited editions, and accessories with direct hosted Stripe checkout."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {products.slice(0, 4).map((product) => (
             <GlassCard key={product.id} className="overflow-hidden p-0">
               <div className="relative h-72 bg-black/40">
-                <Image src={product.image} alt={product.name} fill className="object-cover transition duration-500 hover:scale-105" />
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover transition duration-500 hover:scale-105"
+                />
               </div>
               <div className="p-6">
                 <p className="text-xs uppercase tracking-[0.35em] text-stone-500">{product.category}</p>
@@ -196,7 +246,10 @@ export default function HomePage() {
                 <p className="mt-3 text-sm leading-7 text-stone-400">{product.description}</p>
                 <div className="mt-6 flex items-center justify-between">
                   <span className="text-lg text-[#f4c66a]">{product.priceLabel}</span>
-                  <Link href="/store" className="text-xs uppercase tracking-[0.25em] text-stone-200 transition hover:text-[#f4c66a]">
+                  <Link
+                    href="/store"
+                    className="text-xs uppercase tracking-[0.25em] text-stone-200 transition hover:text-[#f4c66a]"
+                  >
                     Buy now
                   </Link>
                 </div>
@@ -228,9 +281,9 @@ export default function HomePage() {
               <p className="mt-6 text-base leading-8 text-stone-400">{featuredVideo.description}</p>
             </div>
             <div className="mt-10 flex gap-4">
-              <CTAButton href="/media">Open media page</CTAButton>
-              <CTAButton href="/fan-club" tone="secondary">
-                Unlock private clips
+              <CTAButton href="/music">Open music page</CTAButton>
+              <CTAButton href="/visual-album" tone="secondary">
+                Enter visual album
               </CTAButton>
             </div>
           </GlassCard>
@@ -243,7 +296,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="Newsletter Signup"
               title="Stay on the list"
-              description="Collect emails for releases, ticket drops, and merch launches. This can later connect to Mailchimp, Klaviyo, ConvertKit, or your CRM."
+              description="Collect emails for releases, ticket drops, protocol launches, and merch announcements."
             />
             <form className="mt-8 grid gap-4">
               <input

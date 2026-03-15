@@ -5,10 +5,11 @@ Production-ready cinematic artist website for **KAMDRIDI** and **Echoes Unearthe
 ## What is included
 
 - Premium dark metal / cinematic visual design
-- Responsive pages for Home, News, Band, Tour, Media, Store, Fan Club, and Contact
+- Responsive pages for Home, Music, News, Band, Tour, Store, Fan Club, Games, Visual Album, Who is Kam Dridi, and Contact
 - Dropdown navigation and social media header
 - Stripe Payment Links for store products and fan-club memberships
 - Fan club signup/login with signed server-side sessions
+- Games launcher page and comic-style reader layout
 - Neon Postgres support for fan-club accounts and contact submissions
 - SEO metadata, sitemap, robots, and manifest routes
 - Placeholder images, merch art, and release artwork
@@ -35,10 +36,14 @@ band-site/
     band/
     contact/
     fan-club/
+    games/
     media/
+    music/
     news/
     store/
     tour/
+    visual-album/
+    who-is-kam-dridi/
     globals.css
     layout.tsx
     manifest.ts
@@ -47,7 +52,10 @@ band-site/
     sitemap.ts
   components/
     contact-form.tsx
+    comic-reader.tsx
     fan-club.tsx
+    games-panel.tsx
+    music-hub.tsx
     providers.tsx
     site-shell.tsx
     storefront.tsx
@@ -104,6 +112,8 @@ NEXT_PUBLIC_STRIPE_LINK_ECHOES_UNEARTHED_DIGIPACK_CD=https://buy.stripe.com/your
 NEXT_PUBLIC_STRIPE_LINK_KAM_DRIDI_HOODIE=https://buy.stripe.com/your-hoodie-link
 NEXT_PUBLIC_STRIPE_LINK_KAM_DRIDI_TSHIRT=https://buy.stripe.com/your-tshirt-link
 NEXT_PUBLIC_STRIPE_LINK_WAR_MACHINES_COLLECTOR_ARTIFACT=https://buy.stripe.com/your-artifact-link
+NEXT_PUBLIC_GAME_THE_GILDED_NULL_URL=https://kamdridi.com/games/the-gilded-null
+NEXT_PUBLIC_GAME_MONSTER_SYSTEM_URL=https://kamdridi.com/games/monster-system
 STRIPE_SECRET_KEY=sk_test_your_secret_key
 STRIPE_WEBHOOK_SECRET=whsec_example
 DATABASE_URL=postgres://user:password@host:5432/dbname
@@ -190,6 +200,7 @@ https://kamdridi.com
 - Replace the placeholder YouTube embed in `data/site.ts`
 - Replace sample ticket links with real ticketing URLs
 - Paste the real Stripe Payment Links from the Stripe dashboard
+- Point the game launcher env vars at the live game URLs when those builds are available
 - Configure a production domain in Vercel
 - Verify checkout return redirects, signup, and contact form once production env vars are set
 

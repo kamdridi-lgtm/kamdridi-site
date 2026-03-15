@@ -42,6 +42,32 @@ export type MembershipTier = {
   features: string[];
 };
 
+export type GameExperience = {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  poster: string;
+  launchUrl: string;
+  membership: "Inner Circle" | "Collector";
+  launcherLabel: string;
+  comingSoon?: boolean;
+};
+
+export type ComicPage = {
+  id: string;
+  title: string;
+  image: string;
+  caption: string;
+};
+
+export type VisualAlbumScene = {
+  id: string;
+  title: string;
+  image: string;
+  description: string;
+};
+
 export type Member = {
   name: string;
   role: string;
@@ -62,7 +88,7 @@ export const siteMeta = {
   albumName: "Echoes Unearthed",
   tagline: "Heavy, cinematic, and unearthed from dust, steel, and long-form atmosphere.",
   description:
-    "Official cinematic artist website for KAMDRIDI featuring news, tour dates, music and video media, merchandise, fan club access, and contact tools.",
+    "Official cinematic artist website for KAMDRIDI featuring Echoes Unearthed music, visual album content, games, memberships, merchandise, and fan-universe access.",
   heroVideo:
     "https://cdn.coverr.co/videos/coverr-stage-lights-1565701223930?download=1080p",
   email: "management@kamdridi.com",
@@ -71,6 +97,9 @@ export const siteMeta = {
     "KAMDRIDI",
     "Echoes Unearthed",
     "cinematic metal",
+    "visual album",
+    "interactive music experience",
+    "The Gilded Null",
     "artist website",
     "music merch store",
     "tour dates",
@@ -91,37 +120,12 @@ export const socialLinks = [
 export const navigation: NavItem[] = [
   { label: "Home", href: "/" },
   {
-    label: "News",
-    href: "/news",
+    label: "Music",
+    href: "/music",
     children: [
-      { label: "Latest Headlines", href: "/news#latest-headlines" },
-      { label: "Announcements", href: "/news#latest-headlines" }
-    ]
-  },
-  {
-    label: "Band",
-    href: "/band",
-    children: [
-      { label: "Biography", href: "/band#biography" },
-      { label: "Members", href: "/band#members" },
-      { label: "Timeline", href: "/band#timeline" }
-    ]
-  },
-  {
-    label: "Tour",
-    href: "/tour",
-    children: [
-      { label: "Tour Dates", href: "/tour#dates" },
-      { label: "VIP", href: "/tour#vip" }
-    ]
-  },
-  {
-    label: "Media",
-    href: "/media",
-    children: [
-      { label: "Videos", href: "/media#videos" },
-      { label: "Gallery", href: "/media#gallery" },
-      { label: "Discography", href: "/media#discography" }
+      { label: "Latest Video", href: "/music#videos" },
+      { label: "Discography", href: "/music#discography" },
+      { label: "Tour Dates", href: "/tour#dates" }
     ]
   },
   {
@@ -129,15 +133,40 @@ export const navigation: NavItem[] = [
     href: "/store",
     children: [
       { label: "Featured Merch", href: "/store#featured" },
-      { label: "Secure Checkout", href: "/store#featured" }
+      { label: "Collector Drops", href: "/store#featured" }
     ]
   },
   {
     label: "Fan Club",
     href: "/fan-club",
     children: [
-      { label: "Membership", href: "/fan-club#membership" },
-      { label: "Exclusive Vault", href: "/fan-club#vault" }
+      { label: "Membership Levels", href: "/fan-club#membership" },
+      { label: "Games Access", href: "/fan-club#game-access" },
+      { label: "Fan Vault", href: "/fan-club#vault" }
+    ]
+  },
+  {
+    label: "Games",
+    href: "/games",
+    children: [
+      { label: "Games Protocol", href: "/games#games-protocol" },
+      { label: "The Gilded Null", href: "/games#the-gilded-null" }
+    ]
+  },
+  {
+    label: "Visual Album",
+    href: "/visual-album",
+    children: [
+      { label: "Scene Archive", href: "/visual-album#scene-archive" },
+      { label: "Album World", href: "/visual-album#album-world" }
+    ]
+  },
+  {
+    label: "Who is Kam Dridi",
+    href: "/who-is-kam-dridi",
+    children: [
+      { label: "Comic Reader", href: "/who-is-kam-dridi#comic-reader" },
+      { label: "Lore Archive", href: "/who-is-kam-dridi#lore-archive" }
     ]
   },
   {
@@ -295,12 +324,13 @@ export const membershipTiers: MembershipTier[] = [
     name: "INNER CIRCLE MEMBERSHIP",
     priceLabel: "$5 / month",
     description:
-      "A direct monthly entry point for fans who want private updates, early merch windows, and access to the inner campaign world.",
+      "For fans who want a direct line into the Echoes Unearthed universe with private updates, first-wave access, and the first protocol unlocked.",
     checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_INNER_CIRCLE || "",
     features: [
+      "Access to the first game in Games Protocol",
+      "Partial fan vault access",
       "Private updates and member-only announcements",
-      "Early access to selected merch drops",
-      "Community access and upcoming release previews"
+      "Early access to selected merch drops"
     ]
   },
   {
@@ -308,12 +338,14 @@ export const membershipTiers: MembershipTier[] = [
     name: "COLLECTOR MEMBERSHIP",
     priceLabel: "$25 / month",
     description:
-      "A premium membership tier for collectors who want deeper access, earlier drops, and the highest-priority fan-club experience.",
+      "For collectors who want full universe access, deeper vault unlocks, rare drops, and the most complete KAMDRIDI membership tier.",
     checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_COLLECTOR || "",
     features: [
       "Everything in Inner Circle",
+      "Access to both games",
+      "Full fan vault access and collector section",
       "Priority early merch access",
-      "Exclusive collector updates and premium content"
+      "Exclusive drops and premium content"
     ]
   }
 ];
@@ -402,7 +434,7 @@ export const socialFeed = [
 
 export const privateVault = {
   intro:
-    "Fan club members get private clips, rehearsal previews, pre-sale alerts, and early access to premium merch drops.",
+    "Fan club members get private clips, rehearsal previews, pre-sale alerts, game protocol access, and early entry to premium drops inside the Echoes Unearthed world.",
   videos: [
     "Echoes Unearthed studio diary",
     "Private rehearsal cut: War Machines",
@@ -412,5 +444,105 @@ export const privateVault = {
     "Collector vinyl mockups and favorites",
     "Which deep cut should appear in the live set?",
     "Early fan-club discussion for upcoming merch access"
+  ],
+  accessNotes: [
+    "Inner Circle unlocks the first game, private updates, and a partial vault archive.",
+    "Collector unlocks both game protocols, the full vault, collector-only drops, and deeper archive access."
   ]
 };
+
+export const gameExperiences: GameExperience[] = [
+  {
+    id: "the-gilded-null",
+    title: "THE GILDED NULL",
+    subtitle: "Corridor Protocol",
+    description: "Hold the line. Collect the gold. Outrun the darkness.",
+    poster: "/assets/images/releases/war-machines-cover.jpg",
+    launchUrl: process.env.NEXT_PUBLIC_GAME_THE_GILDED_NULL_URL || "/games#the-gilded-null",
+    membership: "Inner Circle",
+    launcherLabel: "Initiate Protocol"
+  },
+  {
+    id: "monster-system",
+    title: "MONSTER SYSTEM",
+    subtitle: "Vault Sequence",
+    description:
+      "Enter the archive, track your score, and push deeper into the premium layer of the Echoes Unearthed world.",
+    poster: "/assets/images/band/live3.jpg",
+    launchUrl: process.env.NEXT_PUBLIC_GAME_MONSTER_SYSTEM_URL || "/games#games-protocol",
+    membership: "Collector",
+    launcherLabel: "Launch Sequence",
+    comingSoon: true
+  }
+];
+
+export const comicPages: ComicPage[] = [
+  {
+    id: "page-1",
+    title: "Page 01",
+    image: "/assets/images/gallery/p01_hero.jpg",
+    caption: "The first signals surface through dust, floodlights, and a city still waking up."
+  },
+  {
+    id: "page-2",
+    title: "Page 02",
+    image: "/assets/images/gallery/p02_live.jpg",
+    caption: "The stage becomes a threshold where memory, pressure, and performance collide."
+  },
+  {
+    id: "page-3",
+    title: "Page 03",
+    image: "/assets/images/gallery/p03_portrait_mic.jpg",
+    caption: "A voice emerges from the static with fragments of the Echoes Unearthed story."
+  },
+  {
+    id: "page-4",
+    title: "Page 04",
+    image: "/assets/images/gallery/p04_portrait_leather.jpg",
+    caption: "The figure behind the signal steps fully into the frame: Kam Dridi."
+  }
+];
+
+export const visualAlbumScenes: VisualAlbumScene[] = [
+  {
+    id: "war-machines",
+    title: "War Machines",
+    image: "/assets/images/releases/war-machines-cover.jpg",
+    description: "Industrial pressure, scorched light, and the first rupture in the campaign world."
+  },
+  {
+    id: "echoes-unearthed",
+    title: "Echoes Unearthed",
+    image: "/assets/images/releases/echoes-unearthed-cover.jpg",
+    description: "The central record as a visual ruin: heavy, haunted, and cinematic."
+  },
+  {
+    id: "live-stage",
+    title: "Stage Transmission",
+    image: "/assets/images/band/live_stage.jpg",
+    description: "Live performance reframed as a cinematic corridor between album scenes."
+  }
+];
+
+export const fanClubHubSections = [
+  {
+    id: "game-access",
+    title: "Game Access",
+    description: "Protocol launch cards for members, including The Gilded Null and the deeper Collector-only sequence."
+  },
+  {
+    id: "comic-access",
+    title: "Comic Access",
+    description: "Responsive reader access for Who is Kam Dridi with sequential page navigation."
+  },
+  {
+    id: "fan-vault",
+    title: "Fan Vault",
+    description: "Archive drops, private videos, hidden updates, and premium world-building materials."
+  },
+  {
+    id: "exclusive-content",
+    title: "Exclusive Content",
+    description: "Drops, collector updates, early merch access, and private release notes from the campaign."
+  }
+];

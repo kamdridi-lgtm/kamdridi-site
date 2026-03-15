@@ -2,13 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 import { GlassCard } from "@/components/ui";
-import { membershipTiers, privateVault } from "@/data/site";
+import {
+  fanClubHubSections,
+  gameExperiences,
+  membershipTiers,
+  privateVault
+} from "@/data/site";
 import { useApp } from "@/components/providers";
 
 type VaultResponse = {
   intro: string;
   videos: string[];
   communityTopics: string[];
+  accessNotes: string[];
 };
 
 export function FanClubPanel() {
@@ -84,7 +90,9 @@ export function FanClubPanel() {
         {membershipTiers.map((tier) => (
           <GlassCard key={tier.id} className="flex h-full flex-col">
             <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">{tier.name}</p>
-            <p className="mt-4 font-display text-5xl uppercase tracking-[0.08em] text-white">{tier.priceLabel}</p>
+            <p className="mt-4 font-display text-5xl uppercase tracking-[0.08em] text-white">
+              {tier.priceLabel}
+            </p>
             <p className="mt-4 text-sm leading-7 text-stone-400">{tier.description}</p>
             <div className="mt-6 grid gap-2">
               {tier.features.map((feature) => (
@@ -113,6 +121,15 @@ export function FanClubPanel() {
         ))}
       </div>
 
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {fanClubHubSections.map((section) => (
+          <GlassCard key={section.id} id={`${section.id}-card`}>
+            <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">{section.title}</p>
+            <p className="mt-4 text-sm leading-7 text-stone-400">{section.description}</p>
+          </GlassCard>
+        ))}
+      </div>
+
       <GlassCard>
         <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Membership Checkout</p>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-stone-400">
@@ -122,6 +139,34 @@ export function FanClubPanel() {
         </p>
         {status ? <p className="mt-4 text-sm text-emerald-200">{status}</p> : null}
       </GlassCard>
+
+      <div id="game-access" className="grid gap-6 lg:grid-cols-2">
+        {gameExperiences.map((game) => (
+          <GlassCard key={game.id}>
+            <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">{game.title}</p>
+            <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.08em] text-white">
+              {game.subtitle}
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-stone-400">{game.description}</p>
+            <div className="mt-6 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.25em] text-stone-400">
+              <span className="rounded-full border border-white/10 px-3 py-2">{game.membership}</span>
+              {game.comingSoon ? (
+                <span className="rounded-full border border-[#f4c66a]/30 bg-[#f4c66a]/10 px-3 py-2 text-[#f4c66a]">
+                  Collector Preview
+                </span>
+              ) : null}
+            </div>
+            <a
+              href={game.launchUrl}
+              target={game.launchUrl.startsWith("/") ? undefined : "_blank"}
+              rel={game.launchUrl.startsWith("/") ? undefined : "noreferrer"}
+              className="mt-8 inline-flex rounded-full bg-[#f4c66a] px-6 py-4 text-xs uppercase tracking-[0.25em] text-black transition hover:bg-[#ffd989]"
+            >
+              {game.launcherLabel}
+            </a>
+          </GlassCard>
+        ))}
+      </div>
 
       <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="grid gap-6">
@@ -146,21 +191,27 @@ export function FanClubPanel() {
                 type="text"
                 placeholder="Full name"
                 value={signup.name}
-                onChange={(event) => setSignup((current) => ({ ...current, name: event.target.value }))}
+                onChange={(event) =>
+                  setSignup((current) => ({ ...current, name: event.target.value }))
+                }
               />
               <input
                 className="rounded-full border border-white/10 bg-black/40 px-5 py-4 text-white placeholder:text-stone-500"
                 type="email"
                 placeholder="Email"
                 value={signup.email}
-                onChange={(event) => setSignup((current) => ({ ...current, email: event.target.value }))}
+                onChange={(event) =>
+                  setSignup((current) => ({ ...current, email: event.target.value }))
+                }
               />
               <input
                 className="rounded-full border border-white/10 bg-black/40 px-5 py-4 text-white placeholder:text-stone-500"
                 type="password"
                 placeholder="Password"
                 value={signup.password}
-                onChange={(event) => setSignup((current) => ({ ...current, password: event.target.value }))}
+                onChange={(event) =>
+                  setSignup((current) => ({ ...current, password: event.target.value }))
+                }
               />
               <button
                 type="submit"
@@ -192,7 +243,9 @@ export function FanClubPanel() {
                 type="password"
                 placeholder="Password"
                 value={login.password}
-                onChange={(event) => setLogin((current) => ({ ...current, password: event.target.value }))}
+                onChange={(event) =>
+                  setLogin((current) => ({ ...current, password: event.target.value }))
+                }
               />
               <button
                 type="submit"
@@ -216,9 +269,19 @@ export function FanClubPanel() {
         <GlassCard id="vault">
           <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Exclusive Content</p>
           <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.08em] text-white">
-            Private videos, community, and early access
+            Private videos, vault access, and collector channels
           </h2>
           <p className="mt-4 text-sm leading-7 text-stone-400">{privateVault.intro}</p>
+          <div className="mt-6 grid gap-3">
+            {privateVault.accessNotes.map((note) => (
+              <div
+                key={note}
+                className="rounded-2xl border border-[#f4c66a]/15 bg-[#f4c66a]/5 p-4 text-sm text-stone-300"
+              >
+                {note}
+              </div>
+            ))}
+          </div>
 
           {fan && vault ? (
             <div className="mt-8 grid gap-6">
@@ -229,7 +292,10 @@ export function FanClubPanel() {
                 <p className="text-xs uppercase tracking-[0.35em] text-stone-500">Private videos</p>
                 <div className="mt-4 grid gap-3">
                   {vault.videos.map((video) => (
-                    <div key={video} className="rounded-2xl border border-white/10 bg-black/30 p-4 text-sm text-stone-200">
+                    <div
+                      key={video}
+                      className="rounded-2xl border border-white/10 bg-black/30 p-4 text-sm text-stone-200"
+                    >
                       {video}
                     </div>
                   ))}
@@ -239,7 +305,10 @@ export function FanClubPanel() {
                 <p className="text-xs uppercase tracking-[0.35em] text-stone-500">Fan community</p>
                 <div className="mt-4 grid gap-3">
                   {vault.communityTopics.map((topic) => (
-                    <div key={topic} className="rounded-2xl border border-white/10 bg-black/30 p-4 text-sm text-stone-200">
+                    <div
+                      key={topic}
+                      className="rounded-2xl border border-white/10 bg-black/30 p-4 text-sm text-stone-200"
+                    >
                       {topic}
                     </div>
                   ))}
@@ -249,7 +318,7 @@ export function FanClubPanel() {
           ) : (
             <div className="mt-8 rounded-3xl border border-dashed border-white/15 bg-black/20 p-8 text-sm leading-7 text-stone-400">
               Log in or create an account to unlock exclusive content, private videos, fan community
-              discussion prompts, and early merch access.
+              discussion prompts, game protocol updates, comic access, and early merch access.
             </div>
           )}
         </GlassCard>

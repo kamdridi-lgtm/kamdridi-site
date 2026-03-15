@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronRight, Menu, ShoppingBag, User, X } from "lucide-react";
+import { ChevronRight, Gamepad2, Menu, User, X } from "lucide-react";
 import { useState } from "react";
 import clsx from "clsx";
 import { navigation, siteMeta, socialLinks } from "@/data/site";
@@ -34,7 +35,7 @@ function SocialBar() {
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const { cart, fan } = useApp();
+  const { fan } = useApp();
 
   return (
     <div className="min-h-screen bg-[#090909] text-white">
@@ -42,13 +43,15 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[#090909]/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
           <Link href="/" className="flex items-center gap-3">
-            <div className="h-11 w-11 rounded-full border border-[#f4c66a]/40 bg-[#111] shadow-[0_0_30px_rgba(244,198,106,0.15)]" />
+            <div className="relative h-11 w-11 overflow-hidden rounded-full border border-[#f4c66a]/40 bg-[#111] shadow-[0_0_30px_rgba(244,198,106,0.15)]">
+              <Image src="/assets/images/logo.png" alt="KAMDRIDI logo" fill className="object-contain p-1.5" />
+            </div>
             <div>
               <p className="font-display text-2xl uppercase tracking-[0.25em] text-[#f4c66a]">
                 {siteMeta.bandName}
               </p>
               <p className="text-xs uppercase tracking-[0.35em] text-stone-400">
-                cinematic metal artist
+                echoes unearthed universe
               </p>
             </div>
           </Link>
@@ -92,11 +95,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               {fan ? fan.name : "Fan Club"}
             </Link>
             <Link
-              href="/store#cart"
+              href="/games"
               className="inline-flex items-center rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-stone-200 transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"
             >
-              <ShoppingBag className="mr-2 h-4 w-4" />
-              Cart ({cart.reduce((sum, item) => sum + item.quantity, 0)})
+              <Gamepad2 className="mr-2 h-4 w-4" />
+              Games
             </Link>
             <button
               type="button"
@@ -151,8 +154,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               {siteMeta.bandName}
             </p>
             <p className="mt-3 max-w-xl text-sm leading-7 text-stone-400">
-              {siteMeta.tagline} Built as a complete entertainment website with tour, media,
-              store, community, and contact workflows ready for expansion.
+              {siteMeta.tagline} Built as a living fan universe with music, games, visual-album
+              layers, collector drops, and fan-club access ready for expansion.
             </p>
           </div>
           <div>
@@ -174,7 +177,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <div className="mt-4 grid gap-2 text-sm text-stone-300">
               <p>{siteMeta.email}</p>
               <p>Booking, press, management, licensing</p>
-              <p className="text-stone-500">© 2026 KAMDRIDI</p>
+              <p className="text-stone-500">(c) 2026 KAMDRIDI</p>
             </div>
           </div>
         </div>
