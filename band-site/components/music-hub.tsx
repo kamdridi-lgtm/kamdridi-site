@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { Disc3, Music2, Play, Radio } from "lucide-react";
 import { GlassCard, Section, SectionHeading } from "@/components/ui";
-import { albumTimeline, featuredVideo } from "@/data/site";
+import { albumTimeline, featuredVideo, streamingLinks } from "@/data/site";
 
 const galleryImages = [
   "/assets/images/gallery/p01_hero.jpg",
@@ -11,14 +12,56 @@ const galleryImages = [
   "/assets/images/band/live3.jpg"
 ];
 
+const streamIcons: Record<string, React.ReactNode> = {
+  Spotify: <Music2 className="h-5 w-5" />,
+  "Apple Music": <Play className="h-5 w-5" />,
+  "Amazon Music": <Radio className="h-5 w-5" />,
+  Deezer: <Disc3 className="h-5 w-5" />
+};
+
 export function MusicHub() {
   return (
     <>
+      <Section id="listen-now">
+        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <GlassCard>
+            <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Listen Now</p>
+            <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.08em] text-white">
+              War Machines is live
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-stone-400">
+              Stream the current KAMDRIDI single across the official platform links below.
+            </p>
+          </GlassCard>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {streamingLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-between rounded-[28px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_35px_80px_rgba(0,0,0,0.35)] backdrop-blur transition hover:-translate-y-1 hover:border-[#f4c66a]/40"
+              >
+                <div className="flex items-center gap-4">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/30">
+                    {streamIcons[link.label] ?? <Music2 className="h-5 w-5" />}
+                  </span>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">{link.label}</p>
+                    <p className="mt-2 text-sm text-white">{link.note}</p>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </Section>
+
       <Section id="videos">
         <SectionHeading
           eyebrow="Music and Video"
           title="The sound and image core of Echoes Unearthed"
-          description="A premium music hub for official video, visual world-building, gallery imagery, and the release timeline that anchors the KAMDRIDI universe."
+          description="A premium music hub for official audio, visual world-building, gallery imagery, and the release timeline that anchors the KAMDRIDI universe."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <GlassCard className="overflow-hidden p-0">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Disc3, Music2, Play, Radio } from "lucide-react";
 import { CTAButton, GlassCard, Section, SectionHeading } from "@/components/ui";
 import {
   featuredVideo,
@@ -10,9 +11,17 @@ import {
   siteMeta,
   socialFeed,
   socialLinks,
+  streamingLinks,
   tourDates
 } from "@/data/site";
 import { formatDate } from "@/lib/utils";
+
+const streamIcons: Record<string, React.ReactNode> = {
+  Spotify: <Music2 className="h-5 w-5" />,
+  "Apple Music": <Play className="h-5 w-5" />,
+  "Amazon Music": <Radio className="h-5 w-5" />,
+  Deezer: <Disc3 className="h-5 w-5" />
+};
 
 export const metadata: Metadata = {
   title: "Home",
@@ -28,7 +37,7 @@ export default function HomePage() {
       <section className="relative isolate overflow-hidden">
         <div className="absolute inset-0">
           <video
-            className="h-full w-full object-cover opacity-35"
+            className="h-full w-full object-cover opacity-50"
             autoPlay
             loop
             muted
@@ -37,8 +46,8 @@ export default function HomePage() {
           >
             <source src={siteMeta.heroVideo} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(244,198,106,0.22),transparent_24%),linear-gradient(180deg,rgba(0,0,0,0.25),rgba(0,0,0,0.88))]" />
-          <div className="absolute inset-x-0 bottom-0 h-52 bg-[linear-gradient(180deg,transparent,rgba(9,9,9,0.95))]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(244,198,106,0.12),transparent_26%),linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.45)_58%,rgba(0,0,0,0.7))]" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,transparent,rgba(9,9,9,0.9))]" />
         </div>
 
         <div className="absolute inset-x-0 top-[16%] z-10 flex justify-center px-4">
@@ -48,7 +57,7 @@ export default function HomePage() {
         </div>
 
         <div className="absolute inset-x-0 bottom-0 z-[15] flex justify-center px-4">
-          <div className="relative h-[290px] w-[min(96vw,680px)] sm:h-[360px] md:h-[460px] lg:h-[560px]">
+          <div className="relative h-[320px] w-[min(96vw,760px)] sm:h-[400px] md:h-[520px] lg:h-[620px]">
             <Image
               src="/assets/images/band/live_stage.png"
               alt="KAMDRIDI band hero"
@@ -59,30 +68,52 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="relative z-20 mx-auto flex min-h-[calc(100vh-100px)] max-w-7xl flex-col items-center justify-start px-4 pb-[320px] pt-24 text-center sm:px-6 sm:pt-28 md:pb-[420px] md:pt-32 lg:pb-[520px]">
+        <div className="relative z-20 mx-auto flex min-h-[calc(100vh-100px)] max-w-7xl flex-col items-center justify-end px-4 pb-20 text-center sm:px-6 md:pb-24 lg:pb-28">
           <p className="text-xs uppercase tracking-[0.6em] text-stone-400">official artist website</p>
-          <h1 className="mt-6 max-w-5xl font-display text-5xl uppercase leading-[0.92] tracking-[0.08em] text-white drop-shadow-[0_12px_40px_rgba(0,0,0,0.85)] md:text-8xl">
-            MELODIC.
-            <br />
-            CINEMATIC.
-            <br />
-            UNEARTHED.
+          <h1 className="mt-6 whitespace-nowrap font-display text-[clamp(1.35rem,3.2vw,3.4rem)] uppercase tracking-[0.12em] text-white drop-shadow-[0_12px_40px_rgba(0,0,0,0.85)]">
+            MELODIC · CINEMATIC · UNEARTHED
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-stone-300 md:text-lg">
-            Enter the world of Echoes Unearthed with official music, premium visuals, interactive
-            fan-universe layers, collector merch, and a stage-ready campaign built for commercial release.
-          </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <CTAButton href="/music">Enter The Music</CTAButton>
-            <CTAButton href="/games" tone="secondary">
-              Games Protocol
-            </CTAButton>
-            <CTAButton href="/store" tone="secondary">
-              Shop Merch
-            </CTAButton>
-          </div>
+          <a
+            href="https://open.spotify.com/track/1jfpUX2dXWBzwnfAhhMm7W"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-6 inline-flex items-center justify-center rounded-full bg-[#f4c66a] px-7 py-4 text-sm uppercase tracking-[0.25em] text-black transition duration-300 hover:-translate-y-0.5 hover:bg-[#ffd989]"
+          >
+            LISTEN TO WAR MACHINES
+          </a>
         </div>
       </section>
+
+      <Section id="stream-war-machines" className="pt-14 md:pt-18">
+        <SectionHeading
+          eyebrow="STREAM WAR MACHINES"
+          title="Choose your platform"
+          description="Official streaming links for War Machines across the current release platforms."
+          align="center"
+        />
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {streamingLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center justify-between rounded-[28px] border border-white/10 bg-white/[0.04] px-6 py-5 shadow-[0_35px_80px_rgba(0,0,0,0.35)] backdrop-blur transition hover:-translate-y-1 hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"
+            >
+              <div className="flex items-center gap-4">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/30">
+                  {streamIcons[link.label] ?? <Music2 className="h-5 w-5" />}
+                </span>
+                <div>
+                  <p className="text-sm uppercase tracking-[0.3em] text-white">{link.label}</p>
+                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-stone-500">{link.note}</p>
+                </div>
+              </div>
+              <span className="text-xs uppercase tracking-[0.25em] text-stone-300">Open</span>
+            </a>
+          ))}
+        </div>
+      </Section>
 
       <Section>
         <div className="marquee rounded-full border border-white/10 bg-white/[0.03] py-4">

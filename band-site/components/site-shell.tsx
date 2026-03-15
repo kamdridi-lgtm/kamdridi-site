@@ -3,27 +3,114 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronRight, Gamepad2, Menu, User, X } from "lucide-react";
+import {
+  ChevronRight,
+  Facebook,
+  Gamepad2,
+  Instagram,
+  Menu,
+  Music2,
+  User,
+  X,
+  Youtube
+} from "lucide-react";
 import { useState } from "react";
 import clsx from "clsx";
 import { navigation, siteMeta, socialLinks } from "@/data/site";
 import { useApp } from "@/components/providers";
+
+function IconBase({
+  children,
+  viewBox = "0 0 24 24"
+}: {
+  children: React.ReactNode;
+  viewBox?: string;
+}) {
+  return (
+    <svg viewBox={viewBox} aria-hidden="true" className="h-4 w-4 fill-none stroke-current">
+      {children}
+    </svg>
+  );
+}
+
+function SpotifyIcon() {
+  return (
+    <IconBase>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M8 10.2c2.8-1 5.9-.8 8.3.5" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M8.8 13c2.1-.7 4.4-.6 6.2.4" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M9.6 15.6c1.5-.4 3-.3 4.2.3" strokeWidth="1.8" strokeLinecap="round" />
+    </IconBase>
+  );
+}
+
+function TikTokIcon() {
+  return (
+    <IconBase>
+      <path
+        d="M14 4v8.3a3.2 3.2 0 1 1-2.4-3.1"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M14 4c.6 1.8 2 3.2 3.8 3.8"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </IconBase>
+  );
+}
+
+function AppleMusicIcon() {
+  return (
+    <IconBase>
+      <path
+        d="M15 5v9.5a2.5 2.5 0 1 1-1.8-2.4V7.2L9 8.2v7.3a2.5 2.5 0 1 1-1.8-2.4V6.8L15 5Z"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </IconBase>
+  );
+}
+
+function XIcon() {
+  return (
+    <IconBase>
+      <path d="M5 5l14 14M19 5 5 19" strokeWidth="1.8" strokeLinecap="round" />
+    </IconBase>
+  );
+}
+
+const socialIcons: Record<string, React.ReactNode> = {
+  YouTube: <Youtube className="h-4 w-4" />,
+  Instagram: <Instagram className="h-4 w-4" />,
+  TikTok: <TikTokIcon />,
+  Spotify: <SpotifyIcon />,
+  "Apple Music": <AppleMusicIcon />,
+  Facebook: <Facebook className="h-4 w-4" />,
+  Twitter: <XIcon />
+};
 
 function SocialBar() {
   return (
     <div className="border-b border-white/10 bg-black/30">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 text-[11px] uppercase tracking-[0.35em] text-stone-300 sm:px-6">
         <span className="text-stone-500">Streaming + social</span>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap items-center gap-3">
           {socialLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               target="_blank"
               rel="noreferrer"
-              className="transition hover:text-[#f4c66a]"
+              aria-label={link.label}
+              title={link.label}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"
             >
-              {link.label}
+              {socialIcons[link.label] ?? <Music2 className="h-4 w-4" />}
             </a>
           ))}
         </div>
@@ -40,8 +127,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-[#090909] text-white">
       <SocialBar />
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#090909]/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+      <header className="sticky top-0 z-[1000] border-b border-white/10 bg-[#090909]/85 backdrop-blur-xl">
+        <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
           <Link href="/" className="flex items-center gap-3">
             <div className="relative h-11 w-11 overflow-hidden rounded-full border border-[#f4c66a]/40 bg-[#111] shadow-[0_0_30px_rgba(244,198,106,0.15)]">
               <Image src="/assets/images/logo.png" alt="KAMDRIDI logo" fill className="object-contain p-1.5" />
@@ -69,17 +156,19 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   {item.label}
                 </Link>
                 {item.children ? (
-                  <div className="pointer-events-none absolute left-0 top-full mt-4 w-64 translate-y-2 rounded-2xl border border-white/10 bg-black/90 p-3 opacity-0 shadow-2xl shadow-black/40 transition duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.label}
-                        href={child.href}
-                        className="flex items-center justify-between rounded-xl px-3 py-2 text-sm text-stone-300 transition hover:bg-white/5 hover:text-[#f4c66a]"
-                      >
-                        {child.label}
-                        <ChevronRight className="h-4 w-4 opacity-50" />
-                      </Link>
-                    ))}
+                  <div className="invisible absolute left-0 top-full z-[2000] pt-4 opacity-0 transition duration-300 group-hover:visible group-hover:opacity-100">
+                    <div className="pointer-events-auto w-64 rounded-2xl border border-white/10 bg-black/90 p-3 shadow-2xl shadow-black/40">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.label}
+                          href={child.href}
+                          className="flex items-center justify-between rounded-xl px-3 py-2 text-sm text-stone-300 transition hover:bg-white/5 hover:text-[#f4c66a]"
+                        >
+                          {child.label}
+                          <ChevronRight className="h-4 w-4 opacity-50" />
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 ) : null}
               </div>

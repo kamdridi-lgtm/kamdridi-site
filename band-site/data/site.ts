@@ -68,6 +68,12 @@ export type VisualAlbumScene = {
   description: string;
 };
 
+export type StreamingLink = {
+  label: string;
+  href: string;
+  note: string;
+};
+
 export type Member = {
   name: string;
   role: string;
@@ -111,10 +117,41 @@ export const socialLinks = [
   { label: "YouTube", href: "https://youtube.com/@kamdridi", handle: "@kamdridi" },
   { label: "Instagram", href: "https://instagram.com/kamdridi", handle: "@kamdridi" },
   { label: "TikTok", href: "https://tiktok.com/@kamdridi", handle: "@kamdridi" },
-  { label: "Spotify", href: "https://open.spotify.com", handle: "KAMDRIDI" },
-  { label: "Apple Music", href: "https://music.apple.com", handle: "KAMDRIDI" },
+  {
+    label: "Spotify",
+    href: "https://open.spotify.com/track/1jfpUX2dXWBzwnfAhhMm7W?si=c07e266c25314fc8",
+    handle: "War Machines"
+  },
+  {
+    label: "Apple Music",
+    href: "https://music.apple.com/us/album/war-machines-radio-edit-single/1871879256",
+    handle: "War Machines"
+  },
   { label: "Facebook", href: "https://facebook.com/kamdridi", handle: "KAMDRIDI" },
   { label: "Twitter", href: "https://x.com/kamdridi", handle: "@kamdridi" }
+];
+
+export const streamingLinks: StreamingLink[] = [
+  {
+    label: "Apple Music",
+    href: "https://music.apple.com/us/album/war-machines-radio-edit-single/1871879256",
+    note: "War Machines (Radio Edit)"
+  },
+  {
+    label: "Spotify",
+    href: "https://open.spotify.com/track/1jfpUX2dXWBzwnfAhhMm7W?si=c07e266c25314fc8",
+    note: "War Machines"
+  },
+  {
+    label: "Amazon Music",
+    href: "https://amazon.com/music/player/tracks/B0GJN46NSS",
+    note: "War Machines"
+  },
+  {
+    label: "Deezer",
+    href: "https://link.deezer.com/s/32ItAgNBZtNl",
+    note: "War Machines"
+  }
 ];
 
 export const navigation: NavItem[] = [
@@ -408,10 +445,10 @@ export const products: Product[] = [
 ];
 
 export const featuredVideo = {
-  title: "War Machines Official Visual",
-  embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?si=kamdridi-placeholder",
+  title: "War Machines - Official Audio",
+  embedUrl: "https://www.youtube.com/embed/hzIVyLQN6a8",
   description:
-    "Replace this embed with the official KAMDRIDI video link when the final visual is published."
+    "Official audio for War Machines, presented as the current featured media release inside the Echoes Unearthed campaign."
 };
 
 export const socialFeed = [
