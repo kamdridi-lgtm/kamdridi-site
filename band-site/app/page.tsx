@@ -39,17 +39,40 @@ export default function HomePage() {
           <div className="absolute inset-x-0 bottom-0 h-52 bg-[linear-gradient(180deg,transparent,rgba(9,9,9,0.95))]" />
         </div>
 
-        <div className="relative mx-auto flex min-h-[calc(100vh-100px)] max-w-7xl flex-col items-center justify-center px-4 py-24 text-center sm:px-6">
-          <div className="hero-glow logo-float rounded-full border border-[#f4c66a]/30 bg-black/35 px-8 py-4 backdrop-blur">
-            <p className="font-display text-5xl uppercase tracking-[0.35em] text-[#f4c66a] md:text-7xl">
-              KAMDRIDI
-            </p>
+        <div className="absolute inset-x-0 top-[16%] z-10 flex justify-center px-4">
+          <div className="relative h-36 w-[min(150vw,1100px)] opacity-30 blur-[3px] sm:h-48 md:h-64 lg:h-80">
+            <Image
+              src="/assets/images/logo.png"
+              alt=""
+              fill
+              priority
+              className="object-contain"
+            />
           </div>
-          <p className="mt-8 text-xs uppercase tracking-[0.6em] text-stone-400">
+        </div>
+
+        <div className="absolute inset-x-0 bottom-0 z-[15] flex justify-center px-4">
+          <div className="relative h-[290px] w-[min(96vw,680px)] sm:h-[360px] md:h-[460px] lg:h-[560px]">
+            <Image
+              src="/assets/images/band/live_stage.png"
+              alt="KAMDRIDI band hero"
+              fill
+              priority
+              className="object-contain object-bottom"
+            />
+          </div>
+        </div>
+
+        <div className="relative z-20 mx-auto flex min-h-[calc(100vh-100px)] max-w-7xl flex-col items-center justify-start px-4 pb-[320px] pt-24 text-center sm:px-6 sm:pt-28 md:pb-[420px] md:pt-32 lg:pb-[520px]">
+          <p className="text-xs uppercase tracking-[0.6em] text-stone-400">
             official artist website
           </p>
-          <h1 className="mt-6 max-w-5xl font-display text-5xl uppercase leading-[0.92] tracking-[0.08em] text-white md:text-8xl">
-            Heavy. Cinematic. Unearthed.
+          <h1 className="mt-6 max-w-5xl font-display text-5xl uppercase leading-[0.92] tracking-[0.08em] text-white drop-shadow-[0_12px_40px_rgba(0,0,0,0.85)] md:text-8xl">
+            MELODIC.
+            <br />
+            CINEMATIC.
+            <br />
+            UNEARTHED.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-stone-300 md:text-lg">
             Enter the world of Echoes Unearthed with official music, premium visuals,
@@ -63,18 +86,6 @@ export default function HomePage() {
             <CTAButton href="/fan-club" tone="secondary">
               Join Fan Club
             </CTAButton>
-          </div>
-          <div className="mt-12 grid w-full max-w-4xl gap-4 md:grid-cols-3">
-            {[
-              { label: "Album", value: siteMeta.albumName },
-              { label: "Single", value: "War Machines" },
-              { label: "Access", value: "Fan Club Presale" }
-            ].map((item) => (
-              <div key={item.label} className="rounded-[24px] border border-white/10 bg-black/30 px-5 py-4 backdrop-blur">
-                <p className="text-[11px] uppercase tracking-[0.45em] text-stone-500">{item.label}</p>
-                <p className="mt-2 font-display text-2xl uppercase tracking-[0.12em] text-white">{item.value}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
