@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KAM DRIDI — Photos</title>
+
+  <meta name="description" content="Cinematic metal universe — Echoes Unearthed. Live capsules, visuals, music, and the War Machines chapter."/>
+  <meta name="theme-color" content="#000000"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="KAM DRIDI — Photos"/>
+  <meta property="og:description" content="Cinematic metal universe — Echoes Unearthed. Live capsules, visuals, music, and the War Machines chapter."/>
+  <meta property="og:image" content="assets/images/logo.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="preload" as="image" href="assets/images/hero-roof.jpg"/>
+  <link rel="preload" as="image" href="assets/images/present/live_stage.jpg"/>
+  <link rel="preload" as="image" href="assets/images/present/photos_bg.jpg"/>
+  <link rel="preload" as="image" href="assets/images/album-footer.jpg"/>
+  <link rel="icon" href="assets/images/logo.png"/>
+
+  <style>
+    :root{--bg:#090a0c;--card:#111318;--gold:#c7a44a;--text:#e9ebf0;--muted:#a7adba;}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);
+      background:radial-gradient(1000px 700px at 50% -10%, rgba(199,164,74,.18), transparent 60%), var(--bg);}
+    header{position:sticky;top:0;background:rgba(9,10,12,.75);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06);z-index:10}
+    .wrap{max-width:1120px;margin:0 auto;padding:18px 18px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.08em}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 16px rgba(199,164,74,.6)}
+    nav a{color:var(--muted);text-decoration:none;margin-left:14px;font-size:14px}
+    nav a:hover{color:var(--text)}
+    h1{margin:18px 0 6px;font-size:34px;letter-spacing:.02em}
+    p{margin:0;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+    @media (max-width:980px){.grid{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:720px){.grid{grid-template-columns:repeat(2,1fr)}}
+    .card{background:rgba(17,19,24,.7);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;cursor:pointer}
+    .card img{width:100%;height:260px;object-fit:cover;display:block;filter:saturate(1.05) contrast(1.05)}
+    .cap{padding:10px 12px;border-top:1px solid rgba(255,255,255,.06);font-size:12px;color:var(--muted)}
+    .lb{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:22px;z-index:50}
+    .lb.open{display:flex}
+    .lb img{max-width:min(1100px,92vw);max-height:86vh;border-radius:14px;border:1px solid rgba(255,255,255,.12);box-shadow:0 25px 80px rgba(0,0,0,.55)}
+    .lb .x{position:absolute;top:16px;right:16px;background:rgba(17,19,24,.75);border:1px solid rgba(255,255,255,.14);
+      color:var(--text);padding:10px 12px;border-radius:12px;cursor:pointer}
+    .lb .x:hover{border-color:rgba(199,164,74,.55)}
+  
+/* SUPER PREMIUM MOBILE TUNING */
+@media (max-width: 720px){
+  .hero{min-height: 88vh; padding-top: 84px;}
+  .hero::before{opacity:.55;}
+  .hero .inner{padding: 0 18px;}
+  .hero h1{font-size: clamp(28px, 8vw, 44px); letter-spacing:.06em;}
+  .hero .sub{max-width: 34ch; font-size: 14px; line-height: 1.55; opacity:.95;}
+  .hero .cta{flex-direction: column; gap: 10px; width: 100%;}
+  .hero .cta .btn{width: 100%; justify-content:center; padding: 14px 16px; border-radius: 16px;}
+  header .right{gap: 8px;}
+  header .icon{width: 42px; height: 42px; border-radius: 14px;}
+  .lang-switch{gap: 8px;}
+  .lang-switch button{min-width: 40px; height: 32px; border-radius: 12px;}
+  .cards{grid-template-columns: 1fr; gap: 14px;}
+  .card{border-radius: 22px;}
+  .card .img{aspect-ratio: 16/10;}
+  .section{padding: 44px 0;}
+  .footer .cols{grid-template-columns: 1fr; gap: 16px;}
+}
+@media (max-width: 420px){
+  .hero{min-height: 86vh;}
+  .hero h1{font-size: 30px;}
+  .topline{font-size: 12px; letter-spacing:.22em;}
+}
+@media (prefers-reduced-motion: reduce){
+  *{scroll-behavior:auto!important;}
+}
+
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#home">Skip to content</a>
+
+  <header>
+    <div class="wrap top">
+      <div class="brand"><span class="dot"></span><span class="brand-text" data-text="KAM DRIDI">KAM DRIDI</span></div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="/merch.html">Store</a>
+        <a href="media.html">Media</a>
+        <a href="press.html">Press</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1>PHOTOS</h1>
+    <p>Premium gallery — click any photo to view full size.</p>
+
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <div class="lb" id="lb" aria-hidden="true">
+    <button class="x" id="close">Close ✕</button>
+    <img id="lbImg" alt="Photo"  loading="lazy" decoding="async" />
+  </div>
+
+  <script>
+    const photos = [
+      {src:'assets/images/photos/p01_present_01.jpg', cap:'Present — Studio'},
+      {src:'assets/images/photos/p02_present_02.jpg', cap:'Present — Studio'},
+      {src:'assets/images/photos/p03_present_03.jpg', cap:'Present — Studio'},
+      {src:'assets/images/photos/p04_present_04.jpg', cap:'Present — Neon'},
+      {src:'assets/images/photos/p05_present_05.jpg', cap:'Present — Stage'},
+      {src:'assets/images/photos/p06_present_06.jpg', cap:'Present — Portrait'},
+      {src:'assets/images/photos/p07_past_01.jpg', cap:'Past (1993–1995)'},
+      {src:'assets/images/photos/p08_past_02.jpg', cap:'Past (1993–1995)'},
+      {src:'assets/images/photos/p09_past_03.jpg', cap:'Past (1993–1995)'},
+      {src:'assets/images/photos/p10_past_04.jpg', cap:'Past (1993–1995)'},
+      {src:'assets/images/photos/p11_past_05.jpg', cap:'Past (1993–1995)'},
+      {src:'assets/images/photos/p12_past_06.jpg', cap:'Past (1993–1995)'},
+      {src:'assets/images/photos/p13_past_07.jpg', cap:'Past (1993–1995)'},
+      {src:'assets/images/photos/p14_past_08.jpg', cap:'Past (1993–1995)'},
+      {src:'assets/images/photos/p15_band_01.jpg', cap:'Band'},
+      {src:'assets/images/photos/p16_band_02.jpg', cap:'Band'},
+      {src:'assets/images/photos/p17_band_03.jpg', cap:'Band'},
+      {src:'assets/images/photos/p18_band_04.jpg', cap:'Band'},
+      {src:'assets/images/photos/p19_live_01.jpg', cap:'Live'},
+      {src:'assets/images/photos/p20_live_02.jpg', cap:'Live'},
+      {src:'assets/images/photos/p21_live_03.jpg', cap:'Live'},
+      {src:'assets/images/photos/p22_merch_01.jpg', cap:'Merch'},
+      {src:'assets/images/photos/p23_merch_02.jpg', cap:'Merch'},
+      {src:'assets/images/photos/p24_artifact_01.jpg', cap:'Collector Artifact'},
+      {src:'assets/images/photos/p25_artifact_02.jpg', cap:'Collector Artifact'}
+    ];
+
+    const grid = document.getElementById('grid');
+    const lb = document.getElementById('lb');
+    const lbImg = document.getElementById('lbImg');
+
+    photos.forEach(p=>{
+      const d=document.createElement('div');
+      d.className='card';
+      d.innerHTML=`<img src="${p.src}" alt="${p.cap}" loading="lazy" decoding="async"><div class="cap">${p.cap}</div>`;
+      d.onclick=()=>{ lb.classList.add('open'); lbImg.src=p.src; lb.setAttribute('aria-hidden','false'); };
+      grid.appendChild(d);
+    });
+
+    const close=()=>{lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); lbImg.src='';};
+    document.getElementById('close').onclick=close;
+    lb.addEventListener('click', (e)=>{ if(e.target===lb) close(); });
+    document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
+  </script>
+  <script src="assets/config.js" defer></script>
+  <script src="assets/apply-links.js" defer></script>
+  <script src="assets/site-audit.js" defer></script>
+  <script src="phase2.js" defer></script>
+</body>
+</html>

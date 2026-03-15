@@ -1,0 +1,109 @@
+{
+  "_comment": "EchoesLabel — Configuration locale complète",
+  "_version": "1.0.0",
+
+  "paths": {
+    "output_root":    "./releases",
+    "models_root":    "./models",
+    "temp_dir":       "./temp",
+    "echoes_engine":  "./EchoesEngine"
+  },
+
+  "music_generator": {
+    "model":          "facebook/musicgen-large",
+    "model_local":    "./models/musicgen-large",
+    "duration_sec":   30,
+    "sample_rate":    44100,
+    "guidance_scale": 3.0,
+    "device":         "cuda",
+    "_note":          "Fallback: musicgen-medium si VRAM < 8GB"
+  },
+
+  "voice_engine": {
+    "rvc_model_dir":  "./models/rvc",
+    "default_model":  "./models/rvc/default_voice.pth",
+    "default_index":  "./models/rvc/default_voice.index",
+    "pitch_shift":    0,
+    "f0_method":      "crepe",
+    "index_rate":     0.75,
+    "filter_radius":  3,
+    "resample_sr":    44100,
+    "rms_mix_rate":   0.25,
+    "protect":        0.33,
+    "_note":          "f0_method: crepe | harvest | pm | dio"
+  },
+
+  "mix_engine": {
+    "echoes_binary":  "./EchoesEngine/EchoesEngine",
+    "echoes_binary_win": "./EchoesEngine/EchoesEngine.exe",
+    "sample_rate":    44100,
+    "block_size":     512,
+    "vocal_gain_db":  0.0,
+    "inst_gain_db":   -3.0,
+    "gate_thresh_db": -40.0,
+    "comp_ratio":     4.0,
+    "comp_thresh_db": -18.0,
+    "spatial_width":  1.2,
+    "emotional_state": 3,
+    "emotional_intensity": 0.7,
+    "_states":        "0=Neutral 1=Tension 2=Release 3=Aggression 4=Intimacy 5=Euphoria 6=Grief 7=Power"
+  },
+
+  "master_engine": {
+    "target_lufs":    -14.0,
+    "true_peak_db":   -1.0,
+    "mb_bands":       4,
+    "mb_crossovers":  [200, 2000, 8000],
+    "mb_ratios":      [2.0, 3.0, 4.0, 2.5],
+    "mb_thresholds":  [-24.0, -20.0, -18.0, -22.0],
+    "eq_presence_db": 1.5,
+    "eq_air_db":      1.0,
+    "eq_warmth_db":   -0.5,
+    "sample_rate":    44100
+  },
+
+  "video_engine": {
+    "mode":           "auto",
+    "_modes":         "svd=StableVideoDiffusion | slideshow=FFmpeg fallback | auto=detect",
+    "svd_model":      "stabilityai/stable-video-diffusion-img2vid-xt",
+    "svd_model_local":"./models/svd",
+    "fps":            24,
+    "duration_sec":   30,
+    "width":          1024,
+    "height":         576,
+    "num_frames":     25,
+    "motion_bucket":  127,
+    "noise_aug":      0.02,
+    "slideshow_fps":  24,
+    "slideshow_zoom": 0.02,
+    "device":         "cuda"
+  },
+
+  "cover_engine": {
+    "model":          "stabilityai/stable-diffusion-xl-base-1.0",
+    "model_local":    "./models/sdxl",
+    "width":          1024,
+    "height":         1024,
+    "steps":          30,
+    "guidance_scale": 7.5,
+    "negative_prompt": "text, watermark, blurry, ugly, deformed, low quality",
+    "device":         "cuda",
+    "_fallback":      "SD 1.5 si VRAM < 8GB"
+  },
+
+  "metadata_defaults": {
+    "label":          "Echoes Records",
+    "country":        "CA",
+    "language":       "en",
+    "explicit":       false,
+    "copyright":      "2026 Echoes Records"
+  },
+
+  "gpu_profiles": {
+    "rtx_4090":  { "musicgen": "large", "sdxl": true,  "svd": true  },
+    "rtx_3090":  { "musicgen": "large", "sdxl": true,  "svd": true  },
+    "rtx_3080":  { "musicgen": "medium","sdxl": true,  "svd": false },
+    "rtx_3070":  { "musicgen": "small", "sdxl": false, "svd": false },
+    "cpu_only":  { "musicgen": "small", "sdxl": false, "svd": false }
+  }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Artifact — KAMDRIDI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h2>WAR MACHINES — ARTIFACT I</h2>
+
+<div class="card">
+<span class="badge">HAND NUMBERED • 100 WORLDWIDE</span>
+<p>Forged under industrial resonance.</p>
+<p id="stock">47 REMAINING</p>
+<div id="countdown"></div>
+<a href="https://buy.stripe.com/4gMbJ1eByf4w6kw0fCeEo01" class="btn-gold" target="_blank" rel="noopener">ACQUIRE</a>
+</div>
+
+<script>
+const endDate = new Date();
+endDate.setHours(endDate.getHours() + 48);
+const countdownEl = document.getElementById("countdown");
+function updateCountdown(){
+ const now = new Date().getTime();
+ const distance = endDate - now;
+ if(distance < 0){
+   countdownEl.innerHTML = "ARCHIVE CLOSED";
+   return;
+ }
+ const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+ const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+ const seconds = Math.floor((distance % (1000*60)) / 1000);
+ countdownEl.innerHTML = hours + "H " + minutes + "M " + seconds + "S";
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
+
+</body>
+</html>

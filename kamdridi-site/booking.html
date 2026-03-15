@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KAM DRIDI | Booking</title>
+  <meta name="description" content="Structured booking, press, business, and fan contact for KAM DRIDI." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/site-enhancements.css" />
+</head>
+<body>
+  <main class="section" style="padding-top:42px;">
+    <div class="container" style="max-width:980px;">
+      <div class="section-head">
+        <div>
+          <div class="tag">CONTACT</div>
+          <h1 style="margin:14px 0 8px;">Booking and Contact</h1>
+          <p class="meta-copy">Categorize each request so booking, press, business inquiries, and fan messages arrive with a clear structure.</p>
+        </div>
+        <div class="button-row">
+          <a class="btn" href="index.html#contact">Homepage Contact</a>
+          <a class="btn" href="press.html">Press Kit</a>
+        </div>
+      </div>
+
+      <div class="contact-split">
+        <div class="info-panel" style="padding:24px;">
+          <h3>Send the right brief</h3>
+          <ul class="micro-list">
+            <li><strong>Booking:</strong> event date, city, venue, budget, and production notes.</li>
+            <li><strong>Press:</strong> publication, deadline, format, and asset needs.</li>
+            <li><strong>Business:</strong> partnerships, licensing, and brand collaboration details.</li>
+            <li><strong>Fan Message:</strong> direct message to the artist archive.</li>
+          </ul>
+          <p class="meta-copy" style="margin-top:16px;">Direct email remains available at <a href="mailto:contact@kamdridi.com">contact@kamdridi.com</a>.</p>
+        </div>
+
+        <form class="form-shell" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-supabase-form="1" action="/success.html?type=contact">
+          <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="source" value="booking-page" />
+          <p hidden><label>Do not fill this out: <input name="bot-field" /></label></p>
+
+          <div class="form-grid two-col">
+            <div class="field">
+              <label for="name">Name / Company</label>
+              <input id="name" name="name" type="text" required placeholder="Your name or company" />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required placeholder="you@email.com" />
+            </div>
+            <div class="field">
+              <label for="category">Category</label>
+              <select id="category" name="category" required>
+                <option value="Booking">Booking</option>
+                <option value="Press">Press</option>
+                <option value="Business">Business</option>
+                <option value="Fan Message">Fan Message</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="subject">Subject</label>
+              <input id="subject" name="subject" type="text" required placeholder="Festival hold / Interview / Partnership" />
+            </div>
+          </div>
+
+          <div class="form-grid two-col" style="margin-top:14px;">
+            <div class="field">
+              <label for="location">Location / Publication</label>
+              <input id="location" name="location" type="text" placeholder="City, venue, or publication" />
+            </div>
+            <div class="field">
+              <label for="timeline">Timeline</label>
+              <input id="timeline" name="timeline" type="date" />
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:14px;">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="Share dates, budget, format, context, links, and any practical details."></textarea>
+          </div>
+
+          <div class="button-row" style="margin-top:18px;">
+            <button class="btn primary" type="submit">Send Request</button>
+            <a class="btn" href="mailto:contact@kamdridi.com?subject=KAM%20DRIDI%20Inquiry">Email Directly</a>
+          </div>
+          <p class="form-meta" data-form-status aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/supabase-client.js" defer></script>
+  <script src="assets/js/site-core.js" defer></script>
+</body>
+</html>

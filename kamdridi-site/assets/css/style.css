@@ -1,0 +1,41 @@
+
+body{
+ background:#0b0b0b;
+ color:white;
+ font-family:Arial;
+ text-align:center;
+ padding:40px;
+}
+
+nav a{
+ margin:0 15px;
+ color:gold;
+ text-decoration:none;
+}
+
+.hero{
+ margin-top:80px;
+}
+
+.card{
+ border:1px solid gold;
+ padding:30px;
+ margin:30px auto;
+ max-width:500px;
+ background:#111;
+}
+
+.badge{
+ background:red;
+ padding:5px 10px;
+ font-size:12px;
+}
+
+.btn-gold{
+ background:gold;
+ color:black;
+ padding:12px 25px;
+ text-decoration:none;
+ display:inline-block;
+ margin-top:15px;
+}

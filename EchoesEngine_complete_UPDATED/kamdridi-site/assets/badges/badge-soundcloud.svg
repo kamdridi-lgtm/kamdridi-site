@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="210" height="56" viewBox="0 0 210 56" role="img" aria-label="SoundCloud">
+  <defs></defs>
+  <rect x="1" y="1" width="208" height="54" rx="14" fill="rgba(0,0,0,0.72)" stroke="rgba(255,255,255,0.18)"/>
+  <rect x="1" y="1" width="208" height="54" rx="14" fill="#FF5500" fill-opacity="0.10"/>
+  <circle cx="28" cy="28" r="14" fill="#FF5500"/>
+  <g transform="translate(28 28) scale(0.045) translate(-256 -256)" fill="#fff">
+    <path d="M537.6 226.6c-13.3 0-26 2.5-37.8 7C490.3 162.7 429.4 112 356.8 112c-35.2 0-67.7 11.7-93.8 31.4-5.7 4.3-9 11.1-9 18.2v226.9c0 13.3 10.7 24 24 24h259.6c56.5 0 102.4-45.9 102.4-102.4S594.1 226.6 537.6 226.6z"/>
+  </g>
+  <text x="118" y="35" font-family="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">SoundCloud</text>
+</svg>

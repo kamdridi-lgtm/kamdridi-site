@@ -1,0 +1,251 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.9.0
+2 info using node@v25.6.1
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\.npmrc
+5 silly config load:file:C:\Users\Administrator\.npmrc
+6 silly config load:file:C:\Users\Administrator\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install
+8 verbose argv "install" "--cache" ".npm-cache"
+9 verbose logfile logs-max:10 dir:C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\.npm-cache\_logs\2026-03-15T10_34_37_033Z-
+10 verbose logfile C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\.npm-cache\_logs\2026-03-15T10_34_37_033Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules
+14 silly idealTree buildDeps
+15 silly fetch manifest @neondatabase/serverless@^1.0.1
+16 silly packumentCache full:https://registry.npmjs.org/@neondatabase%2fserverless cache-miss
+17 http fetch GET 200 https://registry.npmjs.org/@neondatabase%2fserverless 762ms (cache revalidated)
+18 silly packumentCache full:https://registry.npmjs.org/@neondatabase%2fserverless set size:173277 disposed:false
+19 silly placeDep ROOT @neondatabase/serverless@1.0.2 OK for: iron-eclipse-band-site@1.0.0 want: ^1.0.1
+20 silly fetch manifest @types/pg@^8.8.0
+21 silly packumentCache full:https://registry.npmjs.org/@types%2fpg cache-miss
+22 http fetch GET 200 https://registry.npmjs.org/@types%2fpg 233ms (cache revalidated)
+23 silly packumentCache full:https://registry.npmjs.org/@types%2fpg set size:193920 disposed:false
+24 silly placeDep ROOT @types/pg@8.18.0 OK for: @neondatabase/serverless@1.0.2 want: ^8.8.0
+25 silly fetch manifest pg-types@^2.2.0
+26 silly packumentCache full:https://registry.npmjs.org/pg-types cache-miss
+27 silly fetch manifest pg-protocol@*
+28 silly packumentCache full:https://registry.npmjs.org/pg-protocol cache-miss
+29 http fetch GET 200 https://registry.npmjs.org/pg-protocol 38ms (cache revalidated)
+30 silly packumentCache full:https://registry.npmjs.org/pg-protocol set size:51532 disposed:false
+31 http fetch GET 200 https://registry.npmjs.org/pg-types 67ms (cache revalidated)
+32 silly packumentCache full:https://registry.npmjs.org/pg-types set size:51397 disposed:false
+33 silly placeDep ROOT pg-protocol@1.13.0 OK for: @types/pg@8.18.0 want: *
+34 silly placeDep ROOT pg-types@2.2.0 OK for: @types/pg@8.18.0 want: ^2.2.0
+35 silly fetch manifest pg-int8@1.0.1
+36 silly packumentCache full:https://registry.npmjs.org/pg-int8 cache-miss
+37 silly fetch manifest postgres-date@~1.0.4
+38 silly packumentCache full:https://registry.npmjs.org/postgres-date cache-miss
+39 silly fetch manifest postgres-array@~2.0.0
+40 silly packumentCache full:https://registry.npmjs.org/postgres-array cache-miss
+41 silly fetch manifest postgres-bytea@~1.0.0
+42 silly packumentCache full:https://registry.npmjs.org/postgres-bytea cache-miss
+43 silly fetch manifest postgres-interval@^1.1.0
+44 silly packumentCache full:https://registry.npmjs.org/postgres-interval cache-miss
+45 http fetch GET 200 https://registry.npmjs.org/postgres-array 134ms (cache revalidated)
+46 silly packumentCache full:https://registry.npmjs.org/postgres-array set size:21967 disposed:false
+47 http fetch GET 200 https://registry.npmjs.org/postgres-interval 136ms (cache revalidated)
+48 silly packumentCache full:https://registry.npmjs.org/postgres-interval set size:30514 disposed:false
+49 http fetch GET 200 https://registry.npmjs.org/postgres-date 179ms (cache revalidated)
+50 silly packumentCache full:https://registry.npmjs.org/postgres-date set size:27126 disposed:false
+51 http fetch GET 200 https://registry.npmjs.org/postgres-bytea 358ms (cache revalidated)
+52 silly packumentCache full:https://registry.npmjs.org/postgres-bytea set size:8854 disposed:false
+53 http fetch GET 200 https://registry.npmjs.org/pg-int8 364ms (cache revalidated)
+54 silly packumentCache full:https://registry.npmjs.org/pg-int8 set size:3652 disposed:false
+55 silly placeDep ROOT pg-int8@1.0.1 OK for: pg-types@2.2.0 want: 1.0.1
+56 silly placeDep ROOT postgres-array@2.0.0 OK for: pg-types@2.2.0 want: ~2.0.0
+57 silly placeDep ROOT postgres-bytea@1.0.1 OK for: pg-types@2.2.0 want: ~1.0.0
+58 silly placeDep ROOT postgres-date@1.0.7 OK for: pg-types@2.2.0 want: ~1.0.4
+59 silly placeDep ROOT postgres-interval@1.2.0 OK for: pg-types@2.2.0 want: ^1.1.0
+60 silly fetch manifest xtend@^4.0.0
+61 silly packumentCache full:https://registry.npmjs.org/xtend cache-miss
+62 http fetch GET 200 https://registry.npmjs.org/xtend 46ms (cache miss)
+63 silly packumentCache full:https://registry.npmjs.org/xtend set size:undefined disposed:false
+64 silly placeDep ROOT xtend@4.0.2 OK for: postgres-interval@1.2.0 want: ^4.0.0
+65 silly reify moves {}
+66 silly audit bulk request {
+66 silly audit   '@alloc/quick-lru': [ '5.2.0' ],
+66 silly audit   '@emnapi/runtime': [ '1.9.0' ],
+66 silly audit   '@img/colour': [ '1.1.0' ],
+66 silly audit   '@img/sharp-darwin-arm64': [ '0.34.5' ],
+66 silly audit   '@img/sharp-darwin-x64': [ '0.34.5' ],
+66 silly audit   '@img/sharp-libvips-darwin-arm64': [ '1.2.4' ],
+66 silly audit   '@img/sharp-libvips-darwin-x64': [ '1.2.4' ],
+66 silly audit   '@img/sharp-libvips-linux-arm': [ '1.2.4' ],
+66 silly audit   '@img/sharp-libvips-linux-arm64': [ '1.2.4' ],
+66 silly audit   '@img/sharp-libvips-linux-ppc64': [ '1.2.4' ],
+66 silly audit   '@img/sharp-libvips-linux-riscv64': [ '1.2.4' ],
+66 silly audit   '@img/sharp-libvips-linux-s390x': [ '1.2.4' ],
+66 silly audit   '@img/sharp-libvips-linux-x64': [ '1.2.4' ],
+66 silly audit   '@img/sharp-libvips-linuxmusl-arm64': [ '1.2.4' ],
+66 silly audit   '@img/sharp-libvips-linuxmusl-x64': [ '1.2.4' ],
+66 silly audit   '@img/sharp-linux-arm': [ '0.34.5' ],
+66 silly audit   '@img/sharp-linux-arm64': [ '0.34.5' ],
+66 silly audit   '@img/sharp-linux-ppc64': [ '0.34.5' ],
+66 silly audit   '@img/sharp-linux-riscv64': [ '0.34.5' ],
+66 silly audit   '@img/sharp-linux-s390x': [ '0.34.5' ],
+66 silly audit   '@img/sharp-linux-x64': [ '0.34.5' ],
+66 silly audit   '@img/sharp-linuxmusl-arm64': [ '0.34.5' ],
+66 silly audit   '@img/sharp-linuxmusl-x64': [ '0.34.5' ],
+66 silly audit   '@img/sharp-wasm32': [ '0.34.5' ],
+66 silly audit   '@img/sharp-win32-arm64': [ '0.34.5' ],
+66 silly audit   '@img/sharp-win32-ia32': [ '0.34.5' ],
+66 silly audit   '@img/sharp-win32-x64': [ '0.34.5' ],
+66 silly audit   '@jridgewell/gen-mapping': [ '0.3.13' ],
+66 silly audit   '@jridgewell/remapping': [ '2.3.5' ],
+66 silly audit   '@jridgewell/resolve-uri': [ '3.1.2' ],
+66 silly audit   '@jridgewell/sourcemap-codec': [ '1.5.5' ],
+66 silly audit   '@jridgewell/trace-mapping': [ '0.3.31' ],
+66 silly audit   '@next/env': [ '15.5.12' ],
+66 silly audit   '@next/swc-darwin-arm64': [ '15.5.12' ],
+66 silly audit   '@next/swc-darwin-x64': [ '15.5.12' ],
+66 silly audit   '@next/swc-linux-arm64-gnu': [ '15.5.12' ],
+66 silly audit   '@next/swc-linux-arm64-musl': [ '15.5.12' ],
+66 silly audit   '@next/swc-linux-x64-gnu': [ '15.5.12' ],
+66 silly audit   '@next/swc-linux-x64-musl': [ '15.5.12' ],
+66 silly audit   '@next/swc-win32-arm64-msvc': [ '15.5.12' ],
+66 silly audit   '@next/swc-win32-x64-msvc': [ '15.5.12' ],
+66 silly audit   '@stripe/stripe-js': [ '4.10.0' ],
+66 silly audit   '@swc/helpers': [ '0.5.15' ],
+66 silly audit   '@tailwindcss/node': [ '4.2.1' ],
+66 silly audit   '@tailwindcss/oxide': [ '4.2.1' ],
+66 silly audit   '@tailwindcss/oxide-android-arm64': [ '4.2.1' ],
+66 silly audit   '@tailwindcss/oxide-darwin-arm64': [ '4.2.1' ],
+66 silly audit   '@tailwindcss/oxide-darwin-x64': [ '4.2.1' ],
+66 silly audit   '@tailwindcss/oxide-freebsd-x64': [ '4.2.1' ],
+66 silly audit   '@tailwindcss/oxide-linux-arm-gnueabihf': [ '4.2.1' ],
+66 silly audit   '@tailwindcss/oxide-linux-arm64-gnu': [ '4.2.1' ],
+66 silly audit   '@tailwindcss/oxide-linux-arm64-musl': [ '4.2.1' ],
+66 silly audit   '@tailwindcss/oxide-linux-x64-gnu': [ '4.2.1' ],
+66 silly audit   '@tailwindcss/oxide-linux-x64-musl': [ '4.2.1' ],
+66 silly audit   '@tailwindcss/oxide-wasm32-wasi': [ '4.2.1' ],
+66 silly audit   '@tailwindcss/oxide-win32-arm64-msvc': [ '4.2.1' ],
+66 silly audit   '@tailwindcss/oxide-win32-x64-msvc': [ '4.2.1' ],
+66 silly audit   '@tailwindcss/postcss': [ '4.2.1' ],
+66 silly audit   '@types/node': [ '22.19.15' ],
+66 silly audit   '@types/react': [ '19.2.14' ],
+66 silly audit   '@types/react-dom': [ '19.2.3' ],
+66 silly audit   'call-bind-apply-helpers': [ '1.0.2' ],
+66 silly audit   'call-bound': [ '1.0.4' ],
+66 silly audit   'caniuse-lite': [ '1.0.30001779' ],
+66 silly audit   'client-only': [ '0.0.1' ],
+66 silly audit   clsx: [ '2.1.1' ],
+66 silly audit   csstype: [ '3.2.3' ],
+66 silly audit   'detect-libc': [ '2.1.2' ],
+66 silly audit   'dunder-proto': [ '1.0.1' ],
+66 silly audit   'enhanced-resolve': [ '5.20.0' ],
+66 silly audit   'es-define-property': [ '1.0.1' ],
+66 silly audit   'es-errors': [ '1.3.0' ],
+66 silly audit   'es-object-atoms': [ '1.1.1' ],
+66 silly audit   'function-bind': [ '1.1.2' ],
+66 silly audit   'get-intrinsic': [ '1.3.0' ],
+66 silly audit   'get-proto': [ '1.0.1' ],
+66 silly audit   gopd: [ '1.2.0' ],
+66 silly audit   'graceful-fs': [ '4.2.11' ],
+66 silly audit   'has-symbols': [ '1.1.0' ],
+66 silly audit   hasown: [ '2.0.2' ],
+66 silly audit   jiti: [ '2.6.1' ],
+66 silly audit   lightningcss: [ '1.31.1' ],
+66 silly audit   'lightningcss-android-arm64': [ '1.31.1' ],
+66 silly audit   'lightningcss-darwin-arm64': [ '1.31.1' ],
+66 silly audit   'lightningcss-darwin-x64': [ '1.31.1' ],
+66 silly audit   'lightningcss-freebsd-x64': [ '1.31.1' ],
+66 silly audit   'lightningcss-linux-arm-gnueabihf': [ '1.31.1' ],
+66 silly audit   'lightningcss-linux-arm64-gnu': [ '1.31.1' ],
+66 silly audit   'lightningcss-linux-arm64-musl': [ '1.31.1' ],
+66 silly audit   'lightningcss-linux-x64-gnu': [ '1.31.1' ],
+66 silly audit   'lightningcss-linux-x64-musl': [ '1.31.1' ],
+66 silly audit   'lightningcss-win32-arm64-msvc': [ '1.31.1' ],
+66 silly audit   'lightningcss-win32-x64-msvc': [ '1.31.1' ],
+66 silly audit   'lucide-react': [ '0.511.0' ],
+66 silly audit   'magic-string': [ '0.30.21' ],
+66 silly audit   'math-intrinsics': [ '1.1.0' ],
+66 silly audit   nanoid: [ '3.3.11' ],
+66 silly audit   next: [ '15.5.12' ],
+66 silly audit   postcss: [ '8.4.31', '8.5.8' ],
+66 silly audit   'object-inspect': [ '1.13.4' ],
+66 silly audit   picocolors: [ '1.1.1' ],
+66 silly audit   qs: [ '6.15.0' ],
+66 silly audit   react: [ '19.2.4' ],
+66 silly audit   'react-dom': [ '19.2.4' ],
+66 silly audit   scheduler: [ '0.27.0' ],
+66 silly audit   semver: [ '7.7.4' ],
+66 silly audit   sharp: [ '0.34.5' ],
+66 silly audit   'side-channel': [ '1.1.0' ],
+66 silly audit   'side-channel-list': [ '1.0.0' ],
+66 silly audit   'side-channel-map': [ '1.0.1' ],
+66 silly audit   'side-channel-weakmap': [ '1.0.2' ],
+66 silly audit   'source-map-js': [ '1.2.1' ],
+66 silly audit   stripe: [ '18.5.0' ],
+66 silly audit   'styled-jsx': [ '5.1.6' ],
+66 silly audit   tailwindcss: [ '4.2.1' ],
+66 silly audit   tapable: [ '2.3.0' ],
+66 silly audit   tslib: [ '2.8.1' ],
+66 silly audit   typescript: [ '5.9.3' ],
+66 silly audit   'undici-types': [ '6.21.0' ],
+66 silly audit   '@neondatabase/serverless': [ '1.0.2' ],
+66 silly audit   '@types/pg': [ '8.18.0' ],
+66 silly audit   'pg-protocol': [ '1.13.0' ],
+66 silly audit   'pg-types': [ '2.2.0' ],
+66 silly audit   'pg-int8': [ '1.0.1' ],
+66 silly audit   'postgres-array': [ '2.0.0' ],
+66 silly audit   'postgres-bytea': [ '1.0.1' ],
+66 silly audit   'postgres-date': [ '1.0.7' ],
+66 silly audit   'postgres-interval': [ '1.2.0' ],
+66 silly audit   xtend: [ '4.0.2' ]
+66 silly audit }
+67 http cache postgres-interval@https://registry.npmjs.org/postgres-interval/-/postgres-interval-1.2.0.tgz 0ms (cache hit)
+68 http cache xtend@https://registry.npmjs.org/xtend/-/xtend-4.0.2.tgz 0ms (cache hit)
+69 http cache postgres-date@https://registry.npmjs.org/postgres-date/-/postgres-date-1.0.7.tgz 0ms (cache hit)
+70 http cache postgres-bytea@https://registry.npmjs.org/postgres-bytea/-/postgres-bytea-1.0.1.tgz 0ms (cache hit)
+71 http cache @neondatabase/serverless@https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.2.tgz 0ms (cache hit)
+72 http cache postgres-array@https://registry.npmjs.org/postgres-array/-/postgres-array-2.0.0.tgz 0ms (cache hit)
+73 http cache pg-types@https://registry.npmjs.org/pg-types/-/pg-types-2.2.0.tgz 0ms (cache hit)
+74 http cache pg-protocol@https://registry.npmjs.org/pg-protocol/-/pg-protocol-1.13.0.tgz 0ms (cache hit)
+75 http cache sharp@https://registry.npmjs.org/sharp/-/sharp-0.34.5.tgz 0ms (cache hit)
+76 http cache @img/colour@https://registry.npmjs.org/@img/colour/-/colour-1.1.0.tgz 0ms (cache hit)
+77 http cache @img/sharp-win32-x64@https://registry.npmjs.org/@img/sharp-win32-x64/-/sharp-win32-x64-0.34.5.tgz 0ms (cache hit)
+78 silly tarball no local data for postgres-interval@https://registry.npmjs.org/postgres-interval/-/postgres-interval-1.2.0.tgz. Extracting by manifest.
+79 silly tarball no local data for xtend@https://registry.npmjs.org/xtend/-/xtend-4.0.2.tgz. Extracting by manifest.
+80 silly tarball no local data for postgres-date@https://registry.npmjs.org/postgres-date/-/postgres-date-1.0.7.tgz. Extracting by manifest.
+81 silly tarball no local data for postgres-bytea@https://registry.npmjs.org/postgres-bytea/-/postgres-bytea-1.0.1.tgz. Extracting by manifest.
+82 silly tarball no local data for @neondatabase/serverless@https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.2.tgz. Extracting by manifest.
+83 silly tarball no local data for postgres-array@https://registry.npmjs.org/postgres-array/-/postgres-array-2.0.0.tgz. Extracting by manifest.
+84 silly tarball no local data for pg-types@https://registry.npmjs.org/pg-types/-/pg-types-2.2.0.tgz. Extracting by manifest.
+85 http cache @types/pg@https://registry.npmjs.org/@types/pg/-/pg-8.18.0.tgz 0ms (cache hit)
+86 http cache semver@https://registry.npmjs.org/semver/-/semver-7.7.4.tgz 0ms (cache hit)
+87 http cache pg-int8@https://registry.npmjs.org/pg-int8/-/pg-int8-1.0.1.tgz 0ms (cache hit)
+88 silly tarball no local data for @types/pg@https://registry.npmjs.org/@types/pg/-/pg-8.18.0.tgz. Extracting by manifest.
+89 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 210ms
+90 silly audit report {}
+91 http fetch GET 200 https://registry.npmjs.org/postgres-date/-/postgres-date-1.0.7.tgz 216ms (cache miss)
+92 http fetch GET 200 https://registry.npmjs.org/postgres-bytea/-/postgres-bytea-1.0.1.tgz 216ms (cache miss)
+93 http fetch GET 200 https://registry.npmjs.org/postgres-interval/-/postgres-interval-1.2.0.tgz 226ms (cache miss)
+94 http fetch GET 200 https://registry.npmjs.org/xtend/-/xtend-4.0.2.tgz 234ms (cache miss)
+95 http fetch GET 200 https://registry.npmjs.org/postgres-array/-/postgres-array-2.0.0.tgz 242ms (cache miss)
+96 http fetch GET 200 https://registry.npmjs.org/pg-types/-/pg-types-2.2.0.tgz 268ms (cache miss)
+97 http fetch GET 200 https://registry.npmjs.org/@types/pg/-/pg-8.18.0.tgz 343ms (cache miss)
+98 http fetch GET 200 https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.2.tgz 429ms (cache miss)
+99 info run sharp@0.34.5 install node_modules/sharp node install/check.js || npm run build
+100 info run sharp@0.34.5 install { code: 0, signal: null }
+101 silly ADD node_modules/xtend
+102 silly ADD node_modules/postgres-interval
+103 silly ADD node_modules/postgres-date
+104 silly ADD node_modules/postgres-bytea
+105 silly ADD node_modules/postgres-array
+106 silly ADD node_modules/pg-int8
+107 silly ADD node_modules/pg-types
+108 silly ADD node_modules/pg-protocol
+109 silly ADD node_modules/@types/pg
+110 silly ADD node_modules/@neondatabase/serverless
+111 silly ADD node_modules/sharp
+112 silly ADD node_modules/semver
+113 silly ADD node_modules/@img/sharp-win32-x64
+114 silly ADD node_modules/@img/colour
+115 verbose cwd C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site
+116 verbose os Windows_NT 10.0.26200
+117 verbose node v25.6.1
+118 verbose npm  v11.9.0
+119 verbose exit 0
+120 info ok

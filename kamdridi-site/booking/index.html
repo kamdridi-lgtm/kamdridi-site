@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KAMDRIDI — Presskit</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/platform-bar.css"/>
+</head>
+<body>
+
+<div class="kd-platformbar" role="navigation" aria-label="KAMDRIDI platform links">
+  <div class="kd-platformbar__inner">
+    <a class="kd-badge" href="/listen" target="_blank" rel="noopener" aria-label="Apple Music">
+      <img src="assets/badges/badge-apple-music.svg" alt="Apple Music">
+    </a>
+    <a class="kd-badge" href="/spotify" target="_blank" rel="noopener" aria-label="Spotify">
+      <img src="assets/badges/badge-spotify.svg" alt="Spotify">
+    </a>
+    <a class="kd-badge" href="/instagram" target="_blank" rel="noopener" aria-label="Instagram">
+      <img src="assets/badges/badge-instagram.svg" alt="Instagram">
+    </a>
+    <a class="kd-badge" href="/youtube" target="_blank" rel="noopener" aria-label="YouTube">
+      <img src="assets/badges/badge-youtube.svg" alt="YouTube">
+    </a>
+    <a class="kd-badge" href="/tiktok" target="_blank" rel="noopener" aria-label="TikTok">
+      <img src="assets/badges/badge-tiktok.svg" alt="TikTok">
+    </a>
+    <a class="kd-badge" href="/soundcloud" target="_blank" rel="noopener" aria-label="SoundCloud">
+      <img src="assets/badges/badge-soundcloud.svg" alt="SoundCloud">
+    </a>
+    <a class="kd-badge" href="/x" target="_blank" rel="noopener" aria-label="X">
+      <img src="assets/badges/badge-x.svg" alt="X">
+    </a>
+
+    <a class="kd-link kd-link--epk" href="/epk">EPK</a>
+    <a class="kd-link kd-link--booking" href="/booking">Booking</a>
+    <a class="kd-link kd-link--store" href="/merch">Store</a>
+  </div>
+</div>
+
+
+  <main class="section" style="padding-top:42px;">
+    <div class="container" style="max-width:860px;">
+      <h1 style="margin:0 0 8px 0;">Booking</h1>
+      <p style="opacity:.9;margin:0 0 22px 0;">For shows, festivals, collaborations, and media requests.</p>
+
+      <form name="booking" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" style="display:grid;gap:14px;">
+        <input type="hidden" name="form-name" value="booking" />
+        <p style="display:none;">
+          <label>Don’t fill this out: <input name="bot-field" /></label>
+        </p>
+
+        <label><div style="font-weight:700;margin-bottom:6px;">Name / Company</div>
+          <input required name="name" type="text" placeholder="Your name or company" style="width:100%;padding:12px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.35);color:#fff;">
+        </label>
+
+        <label><div style="font-weight:700;margin-bottom:6px;">Email</div>
+          <input required name="email" type="email" placeholder="you@email.com" style="width:100%;padding:12px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.35);color:#fff;">
+        </label>
+
+        <label><div style="font-weight:700;margin-bottom:6px;">Subject</div>
+          <input name="subject" type="text" placeholder="Booking / Festival / Press / Collaboration" style="width:100%;padding:12px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.35);color:#fff;">
+        </label>
+
+        <label><div style="font-weight:700;margin-bottom:6px;">Message</div>
+          <textarea required name="message" rows="7" placeholder="Tell us dates, city, venue/festival, budget, and any details." style="width:100%;padding:12px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.35);color:#fff;resize:vertical;"></textarea>
+        </label>
+
+        <button class="btn primary" type="submit" style="justify-self:start;">Send</button>
+        <p style="opacity:.75;margin:10px 0 0 0;font-size:13px;">Tip: Include date, city, venue/festival, capacity, and technical requirements.</p>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,456 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.9.0
+2 info using node@v25.6.1
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\.npmrc
+5 silly config load:file:C:\Users\Administrator\.npmrc
+6 silly config load:file:C:\Users\Administrator\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install
+8 verbose argv "install" "--cache" ".npm-cache"
+9 verbose logfile logs-max:10 dir:C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\.npm-cache\_logs\2026-03-15T06_02_56_477Z-
+10 verbose logfile C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\.npm-cache\_logs\2026-03-15T06_02_56_477Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly idealTree buildDeps
+14 silly fetch manifest @vercel/postgres@^0.10.0
+15 silly packumentCache full:https://registry.npmjs.org/@vercel%2fpostgres cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/@vercel%2fpostgres 318ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/@vercel%2fpostgres set size:undefined disposed:false
+18 silly placeDep ROOT @vercel/postgres@0.10.0 OK for: iron-eclipse-band-site@1.0.0 want: ^0.10.0
+19 silly fetch manifest ws@^8.17.1
+20 silly packumentCache full:https://registry.npmjs.org/ws cache-miss
+21 silly fetch manifest bufferutil@^4.0.8
+22 silly packumentCache full:https://registry.npmjs.org/bufferutil cache-miss
+23 silly fetch manifest @neondatabase/serverless@^0.9.3
+24 silly packumentCache full:https://registry.npmjs.org/@neondatabase%2fserverless cache-miss
+25 http fetch GET 200 https://registry.npmjs.org/ws 48ms (cache miss)
+26 silly packumentCache full:https://registry.npmjs.org/ws set size:undefined disposed:false
+27 http fetch GET 200 https://registry.npmjs.org/bufferutil 79ms (cache miss)
+28 silly packumentCache full:https://registry.npmjs.org/bufferutil set size:undefined disposed:false
+29 http fetch GET 200 https://registry.npmjs.org/@neondatabase%2fserverless 340ms (cache miss)
+30 silly packumentCache full:https://registry.npmjs.org/@neondatabase%2fserverless set size:undefined disposed:false
+31 silly fetch manifest utf-8-validate@>=5.0.2
+32 silly packumentCache full:https://registry.npmjs.org/utf-8-validate cache-miss
+33 http fetch GET 200 https://registry.npmjs.org/utf-8-validate 109ms (cache miss)
+34 silly packumentCache full:https://registry.npmjs.org/utf-8-validate set size:undefined disposed:false
+35 silly placeDep ROOT @neondatabase/serverless@0.9.5 OK for: @vercel/postgres@0.10.0 want: ^0.9.3
+36 silly placeDep ROOT bufferutil@4.1.0 OK for: @vercel/postgres@0.10.0 want: ^4.0.8
+37 silly placeDep ROOT ws@8.19.0 OK for: @vercel/postgres@0.10.0 want: ^8.17.1
+38 silly fetch manifest @types/pg@8.11.6
+39 silly packumentCache full:https://registry.npmjs.org/@types%2fpg cache-miss
+40 silly fetch manifest node-gyp-build@^4.3.0
+41 silly packumentCache full:https://registry.npmjs.org/node-gyp-build cache-miss
+42 http fetch GET 200 https://registry.npmjs.org/node-gyp-build 54ms (cache miss)
+43 silly packumentCache full:https://registry.npmjs.org/node-gyp-build set size:undefined disposed:false
+44 http fetch GET 200 https://registry.npmjs.org/@types%2fpg 61ms (cache miss)
+45 silly packumentCache full:https://registry.npmjs.org/@types%2fpg set size:undefined disposed:false
+46 silly placeDep ROOT @types/pg@8.11.6 OK for: @neondatabase/serverless@0.9.5 want: 8.11.6
+47 silly fetch manifest pg-types@^4.0.1
+48 silly packumentCache full:https://registry.npmjs.org/pg-types cache-miss
+49 silly fetch manifest pg-protocol@*
+50 silly packumentCache full:https://registry.npmjs.org/pg-protocol cache-miss
+51 http fetch GET 200 https://registry.npmjs.org/pg-types 44ms (cache miss)
+52 silly packumentCache full:https://registry.npmjs.org/pg-types set size:undefined disposed:false
+53 http fetch GET 200 https://registry.npmjs.org/pg-protocol 46ms (cache miss)
+54 silly packumentCache full:https://registry.npmjs.org/pg-protocol set size:undefined disposed:false
+55 silly placeDep ROOT pg-protocol@1.13.0 OK for: @types/pg@8.11.6 want: *
+56 silly placeDep ROOT pg-types@4.1.0 OK for: @types/pg@8.11.6 want: ^4.0.1
+57 silly fetch manifest pg-int8@1.0.1
+58 silly packumentCache full:https://registry.npmjs.org/pg-int8 cache-miss
+59 silly fetch manifest pg-numeric@1.0.2
+60 silly packumentCache full:https://registry.npmjs.org/pg-numeric cache-miss
+61 silly fetch manifest postgres-array@~3.0.1
+62 silly packumentCache full:https://registry.npmjs.org/postgres-array cache-miss
+63 silly fetch manifest postgres-bytea@~3.0.0
+64 silly packumentCache full:https://registry.npmjs.org/postgres-bytea cache-miss
+65 silly fetch manifest postgres-date@~2.1.0
+66 silly packumentCache full:https://registry.npmjs.org/postgres-date cache-miss
+67 silly fetch manifest postgres-interval@^3.0.0
+68 silly packumentCache full:https://registry.npmjs.org/postgres-interval cache-miss
+69 silly fetch manifest postgres-range@^1.1.1
+70 silly packumentCache full:https://registry.npmjs.org/postgres-range cache-miss
+71 http fetch GET 200 https://registry.npmjs.org/postgres-array 46ms (cache miss)
+72 silly packumentCache full:https://registry.npmjs.org/postgres-array set size:undefined disposed:false
+73 http fetch GET 200 https://registry.npmjs.org/pg-int8 53ms (cache miss)
+74 silly packumentCache full:https://registry.npmjs.org/pg-int8 set size:undefined disposed:false
+75 http fetch GET 200 https://registry.npmjs.org/postgres-date 76ms (cache miss)
+76 silly packumentCache full:https://registry.npmjs.org/postgres-date set size:undefined disposed:false
+77 http fetch GET 200 https://registry.npmjs.org/postgres-bytea 81ms (cache miss)
+78 silly packumentCache full:https://registry.npmjs.org/postgres-bytea set size:undefined disposed:false
+79 http fetch GET 200 https://registry.npmjs.org/postgres-interval 82ms (cache miss)
+80 silly packumentCache full:https://registry.npmjs.org/postgres-interval set size:undefined disposed:false
+81 http fetch GET 200 https://registry.npmjs.org/pg-numeric 144ms (cache miss)
+82 silly packumentCache full:https://registry.npmjs.org/pg-numeric set size:undefined disposed:false
+83 http fetch GET 200 https://registry.npmjs.org/postgres-range 157ms (cache miss)
+84 silly packumentCache full:https://registry.npmjs.org/postgres-range set size:undefined disposed:false
+85 silly placeDep ROOT node-gyp-build@4.8.4 OK for: bufferutil@4.1.0 want: ^4.3.0
+86 silly placeDep ROOT pg-int8@1.0.1 OK for: pg-types@4.1.0 want: 1.0.1
+87 silly placeDep ROOT pg-numeric@1.0.2 OK for: pg-types@4.1.0 want: 1.0.2
+88 silly placeDep ROOT postgres-array@3.0.4 OK for: pg-types@4.1.0 want: ~3.0.1
+89 silly placeDep ROOT postgres-bytea@3.0.0 OK for: pg-types@4.1.0 want: ~3.0.0
+90 silly placeDep ROOT postgres-date@2.1.0 OK for: pg-types@4.1.0 want: ~2.1.0
+91 silly placeDep ROOT postgres-interval@3.0.0 OK for: pg-types@4.1.0 want: ^3.0.0
+92 silly placeDep ROOT postgres-range@1.1.4 OK for: pg-types@4.1.0 want: ^1.1.1
+93 silly fetch manifest obuf@~1.1.2
+94 silly packumentCache full:https://registry.npmjs.org/obuf cache-miss
+95 http fetch GET 200 https://registry.npmjs.org/obuf 34ms (cache miss)
+96 silly packumentCache full:https://registry.npmjs.org/obuf set size:undefined disposed:false
+97 silly placeDep ROOT obuf@1.1.2 OK for: postgres-bytea@3.0.0 want: ~1.1.2
+98 silly reify moves {}
+99 silly audit bulk request {
+99 silly audit   '@alloc/quick-lru': [ '5.2.0' ],
+99 silly audit   '@emnapi/runtime': [ '1.9.0' ],
+99 silly audit   '@img/colour': [ '1.1.0' ],
+99 silly audit   '@img/sharp-darwin-arm64': [ '0.34.5' ],
+99 silly audit   '@img/sharp-darwin-x64': [ '0.34.5' ],
+99 silly audit   '@img/sharp-libvips-darwin-arm64': [ '1.2.4' ],
+99 silly audit   '@img/sharp-libvips-darwin-x64': [ '1.2.4' ],
+99 silly audit   '@img/sharp-libvips-linux-arm': [ '1.2.4' ],
+99 silly audit   '@img/sharp-libvips-linux-arm64': [ '1.2.4' ],
+99 silly audit   '@img/sharp-libvips-linux-ppc64': [ '1.2.4' ],
+99 silly audit   '@img/sharp-libvips-linux-riscv64': [ '1.2.4' ],
+99 silly audit   '@img/sharp-libvips-linux-s390x': [ '1.2.4' ],
+99 silly audit   '@img/sharp-libvips-linux-x64': [ '1.2.4' ],
+99 silly audit   '@img/sharp-libvips-linuxmusl-arm64': [ '1.2.4' ],
+99 silly audit   '@img/sharp-libvips-linuxmusl-x64': [ '1.2.4' ],
+99 silly audit   '@img/sharp-linux-arm': [ '0.34.5' ],
+99 silly audit   '@img/sharp-linux-arm64': [ '0.34.5' ],
+99 silly audit   '@img/sharp-linux-ppc64': [ '0.34.5' ],
+99 silly audit   '@img/sharp-linux-riscv64': [ '0.34.5' ],
+99 silly audit   '@img/sharp-linux-s390x': [ '0.34.5' ],
+99 silly audit   '@img/sharp-linux-x64': [ '0.34.5' ],
+99 silly audit   '@img/sharp-linuxmusl-arm64': [ '0.34.5' ],
+99 silly audit   '@img/sharp-linuxmusl-x64': [ '0.34.5' ],
+99 silly audit   '@img/sharp-wasm32': [ '0.34.5' ],
+99 silly audit   '@img/sharp-win32-arm64': [ '0.34.5' ],
+99 silly audit   '@img/sharp-win32-ia32': [ '0.34.5' ],
+99 silly audit   '@img/sharp-win32-x64': [ '0.34.5' ],
+99 silly audit   '@jridgewell/gen-mapping': [ '0.3.13' ],
+99 silly audit   '@jridgewell/remapping': [ '2.3.5' ],
+99 silly audit   '@jridgewell/resolve-uri': [ '3.1.2' ],
+99 silly audit   '@jridgewell/sourcemap-codec': [ '1.5.5' ],
+99 silly audit   '@jridgewell/trace-mapping': [ '0.3.31' ],
+99 silly audit   '@next/env': [ '15.5.12' ],
+99 silly audit   '@next/swc-darwin-arm64': [ '15.5.12' ],
+99 silly audit   '@next/swc-darwin-x64': [ '15.5.12' ],
+99 silly audit   '@next/swc-linux-arm64-gnu': [ '15.5.12' ],
+99 silly audit   '@next/swc-linux-arm64-musl': [ '15.5.12' ],
+99 silly audit   '@next/swc-linux-x64-gnu': [ '15.5.12' ],
+99 silly audit   '@next/swc-linux-x64-musl': [ '15.5.12' ],
+99 silly audit   '@next/swc-win32-arm64-msvc': [ '15.5.12' ],
+99 silly audit   '@next/swc-win32-x64-msvc': [ '15.5.12' ],
+99 silly audit   '@stripe/stripe-js': [ '4.10.0' ],
+99 silly audit   '@swc/helpers': [ '0.5.15' ],
+99 silly audit   '@tailwindcss/node': [ '4.2.1' ],
+99 silly audit   '@tailwindcss/oxide': [ '4.2.1' ],
+99 silly audit   '@tailwindcss/oxide-android-arm64': [ '4.2.1' ],
+99 silly audit   '@tailwindcss/oxide-darwin-arm64': [ '4.2.1' ],
+99 silly audit   '@tailwindcss/oxide-darwin-x64': [ '4.2.1' ],
+99 silly audit   '@tailwindcss/oxide-freebsd-x64': [ '4.2.1' ],
+99 silly audit   '@tailwindcss/oxide-linux-arm-gnueabihf': [ '4.2.1' ],
+99 silly audit   '@tailwindcss/oxide-linux-arm64-gnu': [ '4.2.1' ],
+99 silly audit   '@tailwindcss/oxide-linux-arm64-musl': [ '4.2.1' ],
+99 silly audit   '@tailwindcss/oxide-linux-x64-gnu': [ '4.2.1' ],
+99 silly audit   '@tailwindcss/oxide-linux-x64-musl': [ '4.2.1' ],
+99 silly audit   '@tailwindcss/oxide-wasm32-wasi': [ '4.2.1' ],
+99 silly audit   '@tailwindcss/oxide-win32-arm64-msvc': [ '4.2.1' ],
+99 silly audit   '@tailwindcss/oxide-win32-x64-msvc': [ '4.2.1' ],
+99 silly audit   '@tailwindcss/postcss': [ '4.2.1' ],
+99 silly audit   '@types/node': [ '22.19.15' ],
+99 silly audit   '@types/react': [ '19.2.14' ],
+99 silly audit   '@types/react-dom': [ '19.2.3' ],
+99 silly audit   'call-bind-apply-helpers': [ '1.0.2' ],
+99 silly audit   'call-bound': [ '1.0.4' ],
+99 silly audit   'caniuse-lite': [ '1.0.30001779' ],
+99 silly audit   'client-only': [ '0.0.1' ],
+99 silly audit   clsx: [ '2.1.1' ],
+99 silly audit   csstype: [ '3.2.3' ],
+99 silly audit   'detect-libc': [ '2.1.2' ],
+99 silly audit   'dunder-proto': [ '1.0.1' ],
+99 silly audit   'enhanced-resolve': [ '5.20.0' ],
+99 silly audit   'es-define-property': [ '1.0.1' ],
+99 silly audit   'es-errors': [ '1.3.0' ],
+99 silly audit   'es-object-atoms': [ '1.1.1' ],
+99 silly audit   'function-bind': [ '1.1.2' ],
+99 silly audit   'get-intrinsic': [ '1.3.0' ],
+99 silly audit   'get-proto': [ '1.0.1' ],
+99 silly audit   gopd: [ '1.2.0' ],
+99 silly audit   'graceful-fs': [ '4.2.11' ],
+99 silly audit   'has-symbols': [ '1.1.0' ],
+99 silly audit   hasown: [ '2.0.2' ],
+99 silly audit   jiti: [ '2.6.1' ],
+99 silly audit   lightningcss: [ '1.31.1' ],
+99 silly audit   'lightningcss-android-arm64': [ '1.31.1' ],
+99 silly audit   'lightningcss-darwin-arm64': [ '1.31.1' ],
+99 silly audit   'lightningcss-darwin-x64': [ '1.31.1' ],
+99 silly audit   'lightningcss-freebsd-x64': [ '1.31.1' ],
+99 silly audit   'lightningcss-linux-arm-gnueabihf': [ '1.31.1' ],
+99 silly audit   'lightningcss-linux-arm64-gnu': [ '1.31.1' ],
+99 silly audit   'lightningcss-linux-arm64-musl': [ '1.31.1' ],
+99 silly audit   'lightningcss-linux-x64-gnu': [ '1.31.1' ],
+99 silly audit   'lightningcss-linux-x64-musl': [ '1.31.1' ],
+99 silly audit   'lightningcss-win32-arm64-msvc': [ '1.31.1' ],
+99 silly audit   'lightningcss-win32-x64-msvc': [ '1.31.1' ],
+99 silly audit   'lucide-react': [ '0.511.0' ],
+99 silly audit   'magic-string': [ '0.30.21' ],
+99 silly audit   'math-intrinsics': [ '1.1.0' ],
+99 silly audit   nanoid: [ '3.3.11' ],
+99 silly audit   next: [ '15.5.12' ],
+99 silly audit   postcss: [ '8.4.31', '8.5.8' ],
+99 silly audit   'object-inspect': [ '1.13.4' ],
+99 silly audit   picocolors: [ '1.1.1' ],
+99 silly audit   qs: [ '6.15.0' ],
+99 silly audit   react: [ '19.2.4' ],
+99 silly audit   'react-dom': [ '19.2.4' ],
+99 silly audit   scheduler: [ '0.27.0' ],
+99 silly audit   semver: [ '7.7.4' ],
+99 silly audit   sharp: [ '0.34.5' ],
+99 silly audit   'side-channel': [ '1.1.0' ],
+99 silly audit   'side-channel-list': [ '1.0.0' ],
+99 silly audit   'side-channel-map': [ '1.0.1' ],
+99 silly audit   'side-channel-weakmap': [ '1.0.2' ],
+99 silly audit   'source-map-js': [ '1.2.1' ],
+99 silly audit   stripe: [ '18.5.0' ],
+99 silly audit   'styled-jsx': [ '5.1.6' ],
+99 silly audit   tailwindcss: [ '4.2.1' ],
+99 silly audit   tapable: [ '2.3.0' ],
+99 silly audit   tslib: [ '2.8.1' ],
+99 silly audit   typescript: [ '5.9.3' ],
+99 silly audit   'undici-types': [ '6.21.0' ],
+99 silly audit   '@vercel/postgres': [ '0.10.0' ],
+99 silly audit   '@neondatabase/serverless': [ '0.9.5' ],
+99 silly audit   bufferutil: [ '4.1.0' ],
+99 silly audit   ws: [ '8.19.0' ],
+99 silly audit   '@types/pg': [ '8.11.6' ],
+99 silly audit   'pg-protocol': [ '1.13.0' ],
+99 silly audit   'pg-types': [ '4.1.0' ],
+99 silly audit   'node-gyp-build': [ '4.8.4' ],
+99 silly audit   'pg-int8': [ '1.0.1' ],
+99 silly audit   'pg-numeric': [ '1.0.2' ],
+99 silly audit   'postgres-array': [ '3.0.4' ],
+99 silly audit   'postgres-bytea': [ '3.0.0' ],
+99 silly audit   'postgres-date': [ '2.1.0' ],
+99 silly audit   'postgres-interval': [ '3.0.0' ],
+99 silly audit   'postgres-range': [ '1.1.4' ],
+99 silly audit   obuf: [ '1.1.2' ]
+99 silly audit }
+100 http cache obuf@https://registry.npmjs.org/obuf/-/obuf-1.1.2.tgz 1ms (cache hit)
+101 http cache postgres-range@https://registry.npmjs.org/postgres-range/-/postgres-range-1.1.4.tgz 0ms (cache hit)
+102 http cache postgres-interval@https://registry.npmjs.org/postgres-interval/-/postgres-interval-3.0.0.tgz 0ms (cache hit)
+103 http cache postgres-date@https://registry.npmjs.org/postgres-date/-/postgres-date-2.1.0.tgz 0ms (cache hit)
+104 http cache postgres-bytea@https://registry.npmjs.org/postgres-bytea/-/postgres-bytea-3.0.0.tgz 0ms (cache hit)
+105 http cache postgres-array@https://registry.npmjs.org/postgres-array/-/postgres-array-3.0.4.tgz 0ms (cache hit)
+106 http cache pg-numeric@https://registry.npmjs.org/pg-numeric/-/pg-numeric-1.0.2.tgz 0ms (cache hit)
+107 http cache pg-int8@https://registry.npmjs.org/pg-int8/-/pg-int8-1.0.1.tgz 0ms (cache hit)
+108 http cache node-gyp-build@https://registry.npmjs.org/node-gyp-build/-/node-gyp-build-4.8.4.tgz 0ms (cache hit)
+109 http cache @types/pg@https://registry.npmjs.org/@types/pg/-/pg-8.11.6.tgz 0ms (cache hit)
+110 http cache pg-types@https://registry.npmjs.org/pg-types/-/pg-types-4.1.0.tgz 0ms (cache hit)
+111 http cache pg-protocol@https://registry.npmjs.org/pg-protocol/-/pg-protocol-1.13.0.tgz 0ms (cache hit)
+112 http cache @neondatabase/serverless@https://registry.npmjs.org/@neondatabase/serverless/-/serverless-0.9.5.tgz 0ms (cache hit)
+113 http cache ws@https://registry.npmjs.org/ws/-/ws-8.19.0.tgz 0ms (cache hit)
+114 http cache bufferutil@https://registry.npmjs.org/bufferutil/-/bufferutil-4.1.0.tgz 0ms (cache hit)
+115 http cache @vercel/postgres@https://registry.npmjs.org/@vercel/postgres/-/postgres-0.10.0.tgz 0ms (cache hit)
+116 http cache semver@https://registry.npmjs.org/semver/-/semver-7.7.4.tgz 0ms (cache hit)
+117 http cache sharp@https://registry.npmjs.org/sharp/-/sharp-0.34.5.tgz 0ms (cache hit)
+118 silly tarball no local data for obuf@https://registry.npmjs.org/obuf/-/obuf-1.1.2.tgz. Extracting by manifest.
+119 silly tarball no local data for postgres-range@https://registry.npmjs.org/postgres-range/-/postgres-range-1.1.4.tgz. Extracting by manifest.
+120 silly tarball no local data for postgres-date@https://registry.npmjs.org/postgres-date/-/postgres-date-2.1.0.tgz. Extracting by manifest.
+121 silly tarball no local data for postgres-interval@https://registry.npmjs.org/postgres-interval/-/postgres-interval-3.0.0.tgz. Extracting by manifest.
+122 silly tarball no local data for postgres-bytea@https://registry.npmjs.org/postgres-bytea/-/postgres-bytea-3.0.0.tgz. Extracting by manifest.
+123 http cache @img/sharp-win32-x64@https://registry.npmjs.org/@img/sharp-win32-x64/-/sharp-win32-x64-0.34.5.tgz 0ms (cache hit)
+124 silly tarball no local data for postgres-array@https://registry.npmjs.org/postgres-array/-/postgres-array-3.0.4.tgz. Extracting by manifest.
+125 silly tarball no local data for pg-numeric@https://registry.npmjs.org/pg-numeric/-/pg-numeric-1.0.2.tgz. Extracting by manifest.
+126 http cache @img/colour@https://registry.npmjs.org/@img/colour/-/colour-1.1.0.tgz 0ms (cache hit)
+127 silly tarball no local data for pg-int8@https://registry.npmjs.org/pg-int8/-/pg-int8-1.0.1.tgz. Extracting by manifest.
+128 silly tarball no local data for node-gyp-build@https://registry.npmjs.org/node-gyp-build/-/node-gyp-build-4.8.4.tgz. Extracting by manifest.
+129 silly tarball no local data for @types/pg@https://registry.npmjs.org/@types/pg/-/pg-8.11.6.tgz. Extracting by manifest.
+130 silly tarball no local data for pg-types@https://registry.npmjs.org/pg-types/-/pg-types-4.1.0.tgz. Extracting by manifest.
+131 silly tarball no local data for pg-protocol@https://registry.npmjs.org/pg-protocol/-/pg-protocol-1.13.0.tgz. Extracting by manifest.
+132 silly tarball no local data for @neondatabase/serverless@https://registry.npmjs.org/@neondatabase/serverless/-/serverless-0.9.5.tgz. Extracting by manifest.
+133 silly tarball no local data for ws@https://registry.npmjs.org/ws/-/ws-8.19.0.tgz. Extracting by manifest.
+134 silly tarball no local data for bufferutil@https://registry.npmjs.org/bufferutil/-/bufferutil-4.1.0.tgz. Extracting by manifest.
+135 silly tarball no local data for @vercel/postgres@https://registry.npmjs.org/@vercel/postgres/-/postgres-0.10.0.tgz. Extracting by manifest.
+136 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 803ms
+137 silly audit report {}
+138 http fetch GET 200 https://registry.npmjs.org/postgres-array/-/postgres-array-3.0.4.tgz 833ms (cache miss)
+139 http fetch GET 200 https://registry.npmjs.org/postgres-interval/-/postgres-interval-3.0.0.tgz 847ms (cache miss)
+140 http fetch GET 200 https://registry.npmjs.org/postgres-range/-/postgres-range-1.1.4.tgz 872ms (cache miss)
+141 http fetch GET 200 https://registry.npmjs.org/postgres-date/-/postgres-date-2.1.0.tgz 879ms (cache miss)
+142 http fetch GET 200 https://registry.npmjs.org/obuf/-/obuf-1.1.2.tgz 887ms (cache miss)
+143 http fetch GET 200 https://registry.npmjs.org/pg-int8/-/pg-int8-1.0.1.tgz 891ms (cache miss)
+144 http fetch GET 200 https://registry.npmjs.org/pg-numeric/-/pg-numeric-1.0.2.tgz 901ms (cache miss)
+145 http fetch GET 200 https://registry.npmjs.org/postgres-bytea/-/postgres-bytea-3.0.0.tgz 978ms (cache miss)
+146 http fetch GET 200 https://registry.npmjs.org/node-gyp-build/-/node-gyp-build-4.8.4.tgz 1022ms (cache miss)
+147 http fetch GET 200 https://registry.npmjs.org/pg-types/-/pg-types-4.1.0.tgz 1135ms (cache miss)
+148 http fetch GET 200 https://registry.npmjs.org/@types/pg/-/pg-8.11.6.tgz 1141ms (cache miss)
+149 http fetch GET 200 https://registry.npmjs.org/@vercel/postgres/-/postgres-0.10.0.tgz 1230ms (cache miss)
+150 warn deprecated @vercel/postgres@0.10.0: @vercel/postgres is deprecated. If you are setting up a new database, you can choose an alternate storage solution from the Vercel Marketplace. If you had an existing Vercel Postgres database, it should have been migrated to Neon as a native Vercel integration. You can find more details and the guide to migrate to Neon's SDKs here: https://neon.com/docs/guides/vercel-postgres-transition-guide
+151 http fetch GET 200 https://registry.npmjs.org/ws/-/ws-8.19.0.tgz 1372ms (cache miss)
+152 http fetch GET 200 https://registry.npmjs.org/bufferutil/-/bufferutil-4.1.0.tgz 1412ms (cache miss)
+153 http fetch GET 200 https://registry.npmjs.org/@neondatabase/serverless/-/serverless-0.9.5.tgz 1437ms (cache miss)
+154 http fetch GET 200 https://registry.npmjs.org/pg-protocol/-/pg-protocol-1.13.0.tgz 1602ms (cache miss)
+155 info run bufferutil@4.1.0 install node_modules/bufferutil node-gyp-build
+156 info run sharp@0.34.5 install node_modules/sharp node install/check.js || npm run build
+157 info run bufferutil@4.1.0 install { code: 'EPERM', signal: undefined }
+158 info run sharp@0.34.5 install { code: 'EPERM', signal: undefined }
+159 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\sharp
+160 silly reify mark deleted [
+160 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\sharp'
+160 silly reify ]
+161 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\colour
+162 silly reify mark deleted [
+162 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\colour'
+162 silly reify ]
+163 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\semver
+164 silly reify mark deleted [
+164 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\semver',
+164 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\.bin\\semver',
+164 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\.bin\\semver.cmd',
+164 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\.bin\\semver.ps1'
+164 silly reify ]
+165 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-darwin-arm64
+166 silly reify mark deleted [
+166 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-darwin-arm64'
+166 silly reify ]
+167 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-darwin-x64
+168 silly reify mark deleted [
+168 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-darwin-x64'
+168 silly reify ]
+169 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-libvips-darwin-arm64
+170 silly reify mark deleted [
+170 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-libvips-darwin-arm64'
+170 silly reify ]
+171 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-libvips-darwin-x64
+172 silly reify mark deleted [
+172 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-libvips-darwin-x64'
+172 silly reify ]
+173 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-libvips-linux-arm
+174 silly reify mark deleted [
+174 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-libvips-linux-arm'
+174 silly reify ]
+175 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-libvips-linux-arm64
+176 silly reify mark deleted [
+176 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-libvips-linux-arm64'
+176 silly reify ]
+177 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-libvips-linux-ppc64
+178 silly reify mark deleted [
+178 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-libvips-linux-ppc64'
+178 silly reify ]
+179 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-libvips-linux-riscv64
+180 silly reify mark deleted [
+180 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-libvips-linux-riscv64'
+180 silly reify ]
+181 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-libvips-linux-s390x
+182 silly reify mark deleted [
+182 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-libvips-linux-s390x'
+182 silly reify ]
+183 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-libvips-linux-x64
+184 silly reify mark deleted [
+184 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-libvips-linux-x64'
+184 silly reify ]
+185 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-libvips-linuxmusl-arm64
+186 silly reify mark deleted [
+186 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-libvips-linuxmusl-arm64'
+186 silly reify ]
+187 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-libvips-linuxmusl-x64
+188 silly reify mark deleted [
+188 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-libvips-linuxmusl-x64'
+188 silly reify ]
+189 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-linux-arm
+190 silly reify mark deleted [
+190 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-linux-arm'
+190 silly reify ]
+191 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-linux-arm64
+192 silly reify mark deleted [
+192 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-linux-arm64'
+192 silly reify ]
+193 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-linux-ppc64
+194 silly reify mark deleted [
+194 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-linux-ppc64'
+194 silly reify ]
+195 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-linux-riscv64
+196 silly reify mark deleted [
+196 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-linux-riscv64'
+196 silly reify ]
+197 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-linux-s390x
+198 silly reify mark deleted [
+198 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-linux-s390x'
+198 silly reify ]
+199 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-linux-x64
+200 silly reify mark deleted [
+200 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-linux-x64'
+200 silly reify ]
+201 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-linuxmusl-arm64
+202 silly reify mark deleted [
+202 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-linuxmusl-arm64'
+202 silly reify ]
+203 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-linuxmusl-x64
+204 silly reify mark deleted [
+204 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-linuxmusl-x64'
+204 silly reify ]
+205 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-wasm32
+206 silly reify mark deleted [
+206 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-wasm32'
+206 silly reify ]
+207 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-win32-arm64
+208 silly reify mark deleted [
+208 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-win32-arm64'
+208 silly reify ]
+209 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-win32-ia32
+210 silly reify mark deleted [
+210 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-win32-ia32'
+210 silly reify ]
+211 verbose reify failed optional dependency C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\node_modules\@img\sharp-win32-x64
+212 silly reify mark deleted [
+212 silly reify   'C:\\Users\\Administrator\\OneDrive\\Documents\\EchoesEngine_complete\\band-site\\node_modules\\@img\\sharp-win32-x64'
+212 silly reify ]
+213 verbose stack Error: spawn EPERM
+213 verbose stack     at ChildProcess.spawn (node:internal/child_process:420:11)
+213 verbose stack     at spawn (node:child_process:796:9)
+213 verbose stack     at promiseSpawn (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\promise-spawn\lib\index.js:39:16)
+213 verbose stack     at spawnWithShell (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\promise-spawn\lib\index.js:124:10)
+213 verbose stack     at promiseSpawn (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\promise-spawn\lib\index.js:12:12)
+213 verbose stack     at runScriptPkg (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\run-script\lib\run-script-pkg.js:79:13)
+213 verbose stack     at runScript (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\run-script\lib\run-script.js:9:12)
+213 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\rebuild.js:327:17
+213 verbose stack     at run (C:\Program Files\nodejs\node_modules\npm\node_modules\promise-call-limit\dist\commonjs\index.js:67:22)
+213 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\promise-call-limit\dist\commonjs\index.js:84:9
+214 error code EPERM
+215 error syscall spawn
+216 error errno -4048
+217 error Error: spawn EPERM
+217 error     at ChildProcess.spawn (node:internal/child_process:420:11)
+217 error     at spawn (node:child_process:796:9)
+217 error     at promiseSpawn (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\promise-spawn\lib\index.js:39:16)
+217 error     at spawnWithShell (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\promise-spawn\lib\index.js:124:10)
+217 error     at promiseSpawn (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\promise-spawn\lib\index.js:12:12)
+217 error     at runScriptPkg (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\run-script\lib\run-script-pkg.js:79:13)
+217 error     at runScript (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\run-script\lib\run-script.js:9:12)
+217 error     at C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\rebuild.js:327:17
+217 error     at run (C:\Program Files\nodejs\node_modules\npm\node_modules\promise-call-limit\dist\commonjs\index.js:67:22)
+217 error     at C:\Program Files\nodejs\node_modules\npm\node_modules\promise-call-limit\dist\commonjs\index.js:84:9 {
+217 error   errno: -4048,
+217 error   code: 'EPERM',
+217 error   syscall: 'spawn'
+217 error }
+218 error
+218 error The operation was rejected by your operating system.
+218 error It's possible that the file was already in use (by a text editor or antivirus),
+218 error or that you lack permissions to access it.
+218 error
+218 error If you believe this might be a permissions issue, please double-check the
+218 error permissions of the file and its containing directories, or try running
+218 error the command again as root/Administrator.
+219 silly unfinished npm timer reify 1773554577213
+220 silly unfinished npm timer reify:build 1773554580176
+221 silly unfinished npm timer build 1773554580177
+222 silly unfinished npm timer build:deps 1773554580177
+223 silly unfinished npm timer build:run:install 1773554580192
+224 silly unfinished npm timer build:run:install:node_modules/bufferutil 1773554580192
+225 verbose cwd C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site
+226 verbose os Windows_NT 10.0.26200
+227 verbose node v25.6.1
+228 verbose npm  v11.9.0
+229 verbose exit -4048
+230 verbose code -4048
+231 error A complete log of this run can be found in: C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site\.npm-cache\_logs\2026-03-15T06_02_56_477Z-debug-0.log

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Membership — KAMDRIDI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h2>MEMBERSHIP ACCESS</h2>
+
+<div class="card">
+<h3>FREE</h3>
+<p>Announcements & updates</p>
+</div>
+
+<div class="card">
+<h3>INNER CIRCLE — $5</h3>
+<a href="javascript:void(0)" class="btn-gold" data-checkout="price_1T0llRGTOzOcyxK46PM9Xc9G" data-mode="subscription" data-cancel="/membership.html">JOIN</a>
+</div>
+
+<div class="card">
+<h3>COLLECTOR — $25</h3>
+<a href="javascript:void(0)" data-checkout="price_1T0lspGTOzOcyxK4uS3FCvd7" data-mode="subscription" data-cancel="/membership.html" class="btn-gold">ENTER</a>
+</div>
+
+
+<script>
+document.addEventListener("click", (ev)=>{
+  const el = ev.target.closest("[data-checkout]");
+  if(!el) return;
+  const val = el.getAttribute("data-checkout");
+  if(!val) return;
+
+  if(val.startsWith("REPLACE_WITH_STRIPE_LINK")){
+    alert("Admin: add your Stripe link or Stripe price_id in membership.html (data-checkout).");
+    return;
+  }
+
+  if(val.startsWith("price_")){
+    const mode = el.getAttribute("data-mode") || "subscription";
+    const cancelPath = el.getAttribute("data-cancel") || "/membership.html";
+    fetch("/.netlify/functions/create-checkout-session", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({ priceId: val, quantity: 1, mode, cancelPath })
+    })
+    .then(r => r.json())
+    .then(({
+      url, error
+    }) => {
+      if(error || !url) throw new Error(error || "No checkout URL returned");
+      window.location.href = url;
+    })
+    .catch(()=>alert("Checkout error: please try again."));
+    return;
+  }
+
+  window.open(val, "_blank", "noopener,noreferrer");
+});
+</script>
+
+</body>
+</html>

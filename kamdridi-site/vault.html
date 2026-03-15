@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Vault — KAMDRIDI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h2>LEVEL 300 VAULT</h2>
+
+<input type="password" id="vaultPass" placeholder="Access Code">
+<button onclick="unlock()" class="btn-gold">ENTER</button>
+
+<div id="vaultContent" style="display:none;">
+<h3>CLASSIFIED ARCHIVE</h3>
+<p>Transmission unlocked.</p>
+</div>
+
+<script>
+function unlock(){
+ if(document.getElementById("vaultPass").value === "LEVEL300"){
+   document.getElementById("vaultContent").style.display="block";
+ } else {
+   alert("ACCESS DENIED");
+ }
+}
+</script>
+
+</body>
+</html>
