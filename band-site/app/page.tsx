@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Disc3, Mail, Music2, Play, Radio, Shield, Sparkles } from "lucide-react";
+import { FirstKnightEasterEgg } from "@/components/first-knight-easter-egg";
 import { CTAButton, GlassCard, Section, SectionHeading } from "@/components/ui";
 import {
   comicPages,
@@ -31,10 +32,11 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      <FirstKnightEasterEgg />
       <section className="relative isolate flex min-h-screen items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/hero.jpg"
+            src="/kamdridi-hero.jpg"
             alt="KAMDRIDI hero background"
             fill
             priority

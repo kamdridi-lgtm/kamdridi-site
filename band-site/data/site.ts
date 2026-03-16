@@ -124,8 +124,8 @@ export const socialLinks = [
   },
   {
     label: "Apple Music",
-    href: "https://music.apple.com/us/album/war-machines-radio-edit-single/1871879256",
-    handle: "War Machines"
+    href: "https://music.apple.com/us/artist/kam-dridi/1871722663",
+    handle: "Kam dridi"
   },
   { label: "Facebook", href: "https://facebook.com/kamdridi", handle: "KAMDRIDI" },
   { label: "Twitter", href: "https://x.com/kamdridi", handle: "@kamdridi" }
@@ -494,7 +494,7 @@ export const gameExperiences: GameExperience[] = [
     title: "THE GILDED NULL",
     subtitle: "Corridor Protocol",
     description: "Hold the line. Collect the gold. Outrun the darkness.",
-    poster: "/assets/images/releases/war-machines-cover.jpg",
+    poster: "/gilded-null.jpg",
     launchUrl: process.env.NEXT_PUBLIC_GAME_THE_GILDED_NULL_URL || "/games#the-gilded-null",
     membership: "Inner Circle",
     launcherLabel: "Initiate Protocol"
