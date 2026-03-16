@@ -3,21 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  ChevronRight,
-  Facebook,
-  Gamepad2,
-  Instagram,
-  Menu,
-  Music2,
-  User,
-  X,
-  Youtube
-} from "lucide-react";
+import { ChevronRight, Facebook, Gamepad2, Instagram, Menu, Music2, X, Youtube } from "lucide-react";
 import { useState } from "react";
 import clsx from "clsx";
 import { navigation, siteMeta, socialLinks } from "@/data/site";
-import { useApp } from "@/components/providers";
 
 function IconBase({
   children,
@@ -122,7 +111,6 @@ function SocialBar() {
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const { fan } = useApp();
 
   return (
     <div className="min-h-screen bg-[#090909] text-white">
@@ -176,13 +164,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link
-              href="/fan-club"
-              className="hidden rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-stone-200 transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a] md:inline-flex"
-            >
-              <User className="mr-2 h-4 w-4" />
-              {fan ? fan.name : "Fan Club"}
-            </Link>
             <Link
               href="/games"
               className="inline-flex items-center rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-stone-200 transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"

@@ -65,11 +65,12 @@ export function MusicHub() {
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <GlassCard className="overflow-hidden p-0">
-            <div className="aspect-video">
+            <div className="w-full aspect-video">
               <iframe
-                className="h-full w-full"
+                className="h-full w-full rounded-xl"
                 src={featuredVideo.embedUrl}
                 title={featuredVideo.title}
+                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />

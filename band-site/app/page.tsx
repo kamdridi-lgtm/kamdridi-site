@@ -36,21 +36,21 @@ export default function HomePage() {
       <section className="relative isolate flex min-h-screen items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <video
-            className="h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover"
             autoPlay
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             poster="/kamdridi-hero.jpg"
             aria-label="KAMDRIDI hero background video"
           >
             <source src="/kamdridi-hero.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.35),rgba(0,0,0,0.75))]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
         </div>
 
-        <div className="relative z-20 mx-auto flex min-h-screen w-full max-w-7xl items-center justify-center px-4 py-24 text-center sm:px-6">
+        <div className="absolute inset-0 z-20 flex items-end justify-center px-4 pb-24 text-center sm:px-6">
           <div className="flex flex-col items-center">
             <h1 className="max-w-full whitespace-nowrap px-2 font-display text-[clamp(0.82rem,2.35vw,3rem)] uppercase tracking-[0.08em] text-white drop-shadow-[0_12px_40px_rgba(0,0,0,0.85)] md:tracking-[0.12em]">
               MELODIC · CINEMATIC · UNEARTHED
@@ -98,11 +98,12 @@ export default function HomePage() {
         </div>
         <div className="mt-10">
           <GlassCard className="overflow-hidden p-0">
-            <div className="aspect-video">
+            <div className="w-full aspect-video">
               <iframe
-                className="h-full w-full"
+                className="h-full w-full rounded-xl"
                 src={featuredVideo.embedUrl}
                 title={featuredVideo.title}
+                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
