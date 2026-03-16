@@ -1,5 +1,5 @@
 import type Stripe from "stripe";
-import { storeProducts } from "@/data/store";
+import { printfulMappedProducts, storeProducts } from "@/data/store";
 
 type PrintfulLineItem = {
   variant_id: number;
@@ -13,7 +13,10 @@ function normalizeToken(value: string | null | undefined) {
 }
 
 function getProductById(productId: string) {
-  return storeProducts.find((product) => product.id === productId);
+  return (
+    storeProducts.find((product) => product.id === productId) ||
+    printfulMappedProducts.find((product) => product.id === productId)
+  );
 }
 
 function getVariantEnvKey(productId: string, color?: string, size?: string) {
@@ -42,6 +45,19 @@ function getPrintfulVariantId(productId: string, color?: string, size?: string) 
 
 function getPrintfulApiBase() {
   return process.env.PRINTFUL_API_BASE_URL || "https://api.printful.com";
+}
+
+function getPrintfulHeaders() {
+  const headers: Record<string, string> = {
+    Authorization: `Bearer ${process.env.PRINTFUL_API_KEY}`,
+    "Content-Type": "application/json"
+  };
+
+  if (process.env.PRINTFUL_STORE_ID) {
+    headers["X-PF-Store-Id"] = process.env.PRINTFUL_STORE_ID;
+  }
+
+  return headers;
 }
 
 function buildRecipient(session: Stripe.Checkout.Session) {
@@ -124,10 +140,7 @@ export async function createPrintfulOrderFromSession(
 
   const response = await fetch(`${getPrintfulApiBase()}/orders`, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json"
-    },
+    headers: getPrintfulHeaders(),
     body: JSON.stringify({
       external_id: `stripe_${session.id}`,
       shipping: process.env.PRINTFUL_SHIPPING_SPEED || "STANDARD",
@@ -143,4 +156,51 @@ export async function createPrintfulOrderFromSession(
   }
 
   return { skipped: false };
+}
+
+type PrintfulShipment = {
+  tracking_number?: string | null;
+  tracking_url?: string | null;
+  status?: string | null;
+  shipped_at?: string | null;
+};
+
+export async function getPrintfulTrackingForSession(sessionId: string) {
+  const apiKey = process.env.PRINTFUL_API_KEY;
+  if (!apiKey) {
+    return { configured: false, shipped: false };
+  }
+
+  const response = await fetch(`${getPrintfulApiBase()}/v2/orders/@stripe_${sessionId}/shipments`, {
+    headers: getPrintfulHeaders(),
+    cache: "no-store"
+  });
+
+  if (response.status === 404) {
+    return { configured: true, shipped: false };
+  }
+
+  if (!response.ok) {
+    const payload = await response.text();
+    throw new Error(`Printful tracking lookup failed: ${payload}`);
+  }
+
+  const payload = (await response.json()) as {
+    data?: PrintfulShipment[];
+  };
+  const shipments = payload.data ?? [];
+  const latest = shipments.find((shipment) => shipment.tracking_number || shipment.tracking_url);
+
+  if (!latest) {
+    return { configured: true, shipped: false };
+  }
+
+  return {
+    configured: true,
+    shipped: true,
+    trackingNumber: latest.tracking_number ?? null,
+    trackingUrl: latest.tracking_url ?? null,
+    status: latest.status ?? null,
+    shippedAt: latest.shipped_at ?? null
+  };
 }

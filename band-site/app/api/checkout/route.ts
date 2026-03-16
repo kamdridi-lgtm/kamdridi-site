@@ -28,13 +28,13 @@ export async function POST(request: Request) {
     if (!stripe) {
       return NextResponse.json({
         mode: "simulated",
-        url: `${siteUrl}/store?purchase=success`
+        url: `${siteUrl}/store?purchase=success&session_id=simulated_session`
       });
     }
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      success_url: `${siteUrl}/store?purchase=success`,
+      success_url: `${siteUrl}/store?purchase=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}/store?purchase=cancelled`,
       billing_address_collection: "required",
       shipping_address_collection: {

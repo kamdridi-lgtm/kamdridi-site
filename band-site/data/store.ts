@@ -20,6 +20,14 @@ export type StoreProduct = {
   printfulEnvPrefix?: string;
 };
 
+export type PrintfulMappedProduct = {
+  id: string;
+  name: string;
+  printfulEnvPrefix: string;
+  colors?: readonly StoreColor[];
+  sizes?: readonly StoreSize[];
+};
+
 export const featuredArtifact: StoreProduct & {
   kicker: string;
   ctaLabel: string;
@@ -89,4 +97,26 @@ export const autoFulfillmentProducts = [
   "War Machines Artifact Tee",
   "Echoes Unearthed Tee",
   "Posters"
+];
+
+export const printfulMappedProducts: PrintfulMappedProduct[] = [
+  {
+    id: "war-machines-artifact-tee",
+    name: "War Machines Artifact Tee",
+    printfulEnvPrefix: "WAR_MACHINES_ARTIFACT_TEE",
+    colors: teeColors,
+    sizes: storeSizes
+  },
+  {
+    id: "echoes-unearthed-tee",
+    name: "Echoes Unearthed Tee",
+    printfulEnvPrefix: "ECHOES_UNEARTHED_TEE",
+    colors: teeColors,
+    sizes: storeSizes
+  },
+  {
+    id: "posters",
+    name: "Posters",
+    printfulEnvPrefix: "POSTERS"
+  }
 ];

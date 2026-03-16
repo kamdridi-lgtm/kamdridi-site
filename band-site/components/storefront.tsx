@@ -26,6 +26,7 @@ export function Storefront() {
   const searchParams = useSearchParams();
   const { addToCart, cart, cartSubtotal, clearCart, setCartOpen } = useApp();
   const [status, setStatus] = useState<string | null>(null);
+  const [trackingStatus, setTrackingStatus] = useState<string | null>(null);
   const handledState = useRef<string | null>(null);
   const [selectedSizes, setSelectedSizes] = useState<Record<string, StoreSize | undefined>>({});
   const [selectedColors, setSelectedColors] = useState<Record<string, StoreColor | undefined>>({});
@@ -52,6 +53,47 @@ export function Storefront() {
       setStatus("Checkout was cancelled. Your merch loadout is still waiting.");
     }
   }, [clearCart, searchParams]);
+
+  useEffect(() => {
+    const purchaseState = searchParams.get("purchase") || searchParams.get("checkout");
+    const sessionId = searchParams.get("session_id");
+
+    if (purchaseState !== "success" || !sessionId || sessionId === "simulated_session") {
+      return;
+    }
+
+    let isActive = true;
+
+    void fetch(`/api/store/tracking?session_id=${encodeURIComponent(sessionId)}`, {
+      cache: "no-store"
+    })
+      .then((response) => response.json())
+      .then((payload) => {
+        if (!isActive) {
+          return;
+        }
+
+        if (payload.shipped && payload.trackingNumber) {
+          setTrackingStatus(
+            `Shipment live. Tracking number: ${payload.trackingNumber}${payload.trackingUrl ? ` - ${payload.trackingUrl}` : ""}`
+          );
+          return;
+        }
+
+        if (payload.configured) {
+          setTrackingStatus("Printful order created. Tracking will appear here after shipment.");
+        }
+      })
+      .catch(() => {
+        if (isActive) {
+          setTrackingStatus("Tracking is not available yet.");
+        }
+      });
+
+    return () => {
+      isActive = false;
+    };
+  }, [searchParams]);
 
   function getSelectedColor(product: StoreProduct) {
     return selectedColors[product.id] ?? product.colors?.[0];
@@ -163,6 +205,7 @@ export function Storefront() {
               Open Cart Drawer
             </button>
             {status ? <p className="text-sm text-emerald-200">{status}</p> : null}
+            {trackingStatus ? <p className="text-sm text-stone-300">{trackingStatus}</p> : null}
           </div>
         </GlassCard>
       </div>
