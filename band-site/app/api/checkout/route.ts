@@ -7,7 +7,10 @@ type CheckoutItem = {
   price: number;
   quantity: number;
   image?: string;
+  color?: string;
   size?: string;
+  id: string;
+  fulfillmentMode?: "printful" | "manual";
 };
 
 export async function POST(request: Request) {
@@ -25,21 +28,22 @@ export async function POST(request: Request) {
     if (!stripe) {
       return NextResponse.json({
         mode: "simulated",
-        url: `${siteUrl}/store?checkout=success`
+        url: `${siteUrl}/store?purchase=success`
       });
     }
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      success_url: `${siteUrl}/store?checkout=success`,
-      cancel_url: `${siteUrl}/store?checkout=cancelled`,
+      success_url: `${siteUrl}/store?purchase=success`,
+      cancel_url: `${siteUrl}/store?purchase=cancelled`,
       billing_address_collection: "required",
       shipping_address_collection: {
-        allowed_countries: ["US", "CA", "GB", "FR", "DE"]
+        allowed_countries: ["US", "CA", "GB", "FR", "DE", "AU"]
       },
       phone_number_collection: {
         enabled: true
       },
+      allow_promotion_codes: true,
       metadata: {
         artist: siteMeta.bandName,
         campaign: siteMeta.albumName
@@ -50,9 +54,14 @@ export async function POST(request: Request) {
           currency: "usd",
           unit_amount: Math.round(item.price * 100),
           product_data: {
-            name: item.size ? `${item.name} (${item.size})` : item.name,
+            name: [item.name, item.color, item.size].filter(Boolean).join(" / "),
             images: item.image ? [`${siteUrl}${item.image}`] : undefined,
-            metadata: item.size ? { size: item.size } : undefined
+            metadata: {
+              productId: item.id,
+              color: item.color ?? "",
+              size: item.size ?? "",
+              fulfillmentMode: item.fulfillmentMode ?? "manual"
+            }
           }
         }
       }))

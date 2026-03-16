@@ -1,18 +1,19 @@
 # KAMDRIDI Official Website
 
-Production-ready cinematic artist website for **KAMDRIDI** and **Echoes Unearthed**, built with Next.js, Tailwind CSS, Stripe hosted checkout, and Vercel-compatible server routes.
+Production-ready cinematic artist website for **KAMDRIDI** and **Echoes Unearthed**, built with Next.js, Tailwind CSS, Stripe Checkout, Printful fulfillment hooks, and Vercel-compatible server routes.
 
 ## What is included
 
 - Premium dark metal / cinematic visual design
 - Responsive pages for Home, Music, News, Band, Tour, Store, Fan Club, Games, Visual Album, Who is Kam Dridi, and Contact
-- Dropdown navigation and social media header
-- Stripe Payment Links for store products and fan-club memberships
+- Dropdown navigation, icon-based social header, and global cart drawer
+- Cart-based merch store with featured collector artifact, product grid, and Stripe Checkout
+- Stripe subscription links for fan-club memberships
+- Stripe webhook route prepared for Printful auto-fulfillment
 - Fan club signup/login with signed server-side sessions
 - Games launcher page and comic-style reader layout
 - Neon Postgres support for fan-club accounts and contact submissions
 - SEO metadata, sitemap, robots, and manifest routes
-- Placeholder images, merch art, and release artwork
 
 ## Tech stack
 
@@ -20,7 +21,8 @@ Production-ready cinematic artist website for **KAMDRIDI** and **Echoes Unearthe
 - React 19
 - Tailwind CSS v4
 - Next.js Route Handlers for backend logic
-- Stripe Payment Links / hosted checkout
+- Stripe Checkout
+- Printful API
 - Neon serverless Postgres
 
 ## Project structure
@@ -32,6 +34,7 @@ band-site/
       checkout/
       contact/
       fan-club/
+      stripe/
       tour/
     band/
     contact/
@@ -51,9 +54,11 @@ band-site/
     robots.ts
     sitemap.ts
   components/
+    cart-drawer.tsx
     contact-form.tsx
     comic-reader.tsx
     fan-club.tsx
+    first-knight-easter-egg.tsx
     games-panel.tsx
     music-hub.tsx
     providers.tsx
@@ -61,17 +66,17 @@ band-site/
     storefront.tsx
     ui.tsx
   data/
-    contact-submissions.json
-    fan-club-users.json
+    store.ts
     site.ts
   lib/
+    printful.ts
     session.ts
     storage.ts
     stripe.ts
     utils.ts
   public/
     assets/
-      images/
+    store/
   .env.example
   next.config.ts
   package.json
@@ -106,36 +111,44 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_publishable_key
 NEXT_PUBLIC_STRIPE_LINK_INNER_CIRCLE=https://buy.stripe.com/your-inner-circle-link
 NEXT_PUBLIC_STRIPE_LINK_COLLECTOR=https://buy.stripe.com/your-collector-link
-NEXT_PUBLIC_STRIPE_LINK_AI_MUSIC_VIDEO=https://buy.stripe.com/your-ai-music-video-link
-NEXT_PUBLIC_STRIPE_LINK_VISUAL_ALBUM_PRODUCTION=https://buy.stripe.com/your-visual-album-link
-NEXT_PUBLIC_STRIPE_LINK_ECHOES_UNEARTHED_DIGIPACK_CD=https://buy.stripe.com/your-digipack-link
-NEXT_PUBLIC_STRIPE_LINK_KAM_DRIDI_HOODIE=https://buy.stripe.com/your-hoodie-link
-NEXT_PUBLIC_STRIPE_LINK_KAM_DRIDI_TSHIRT=https://buy.stripe.com/your-tshirt-link
-NEXT_PUBLIC_STRIPE_LINK_WAR_MACHINES_COLLECTOR_ARTIFACT=https://buy.stripe.com/your-artifact-link
 NEXT_PUBLIC_GAME_THE_GILDED_NULL_URL=https://kamdridi.com/games/the-gilded-null
 NEXT_PUBLIC_GAME_MONSTER_SYSTEM_URL=https://kamdridi.com/games/monster-system
 STRIPE_SECRET_KEY=sk_test_your_secret_key
 STRIPE_WEBHOOK_SECRET=whsec_example
+PRINTFUL_API_KEY=printful_api_key
+PRINTFUL_SHIPPING_SPEED=STANDARD
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_BLACK_S=100001
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_BLACK_M=100002
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_BLACK_L=100003
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_BLACK_XL=100004
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_BLACK_XXL=100005
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_WHITE_S=100006
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_WHITE_M=100007
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_WHITE_L=100008
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_WHITE_XL=100009
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_WHITE_XXL=100010
 DATABASE_URL=postgres://user:password@host:5432/dbname
 CONTACT_EMAIL=management@kamdridi.com
 FAN_CLUB_SESSION_SECRET=replace-with-a-long-random-string
 ```
 
-## Stripe configuration
+## Store automation
 
-Store products and memberships use Stripe-hosted checkout through Payment Links.
+The merch store uses cart-based Stripe Checkout and a Stripe webhook for automatic fulfillment.
 
 For production:
 
-1. Create a Stripe account
-2. Paste your existing Stripe Payment Links into the `NEXT_PUBLIC_STRIPE_LINK_*` environment variables
-3. Add `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
-4. Add `STRIPE_SECRET_KEY`
-5. Set your production site URL in `NEXT_PUBLIC_SITE_URL`
-6. In Stripe, configure each Payment Link redirect URL to:
-   `/store?purchase=success` for store items
-   `/fan-club?membership=success` for memberships
-7. Test checkout in Stripe test mode before switching to live links or keys
+1. Add `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` and `STRIPE_SECRET_KEY`
+2. Set `NEXT_PUBLIC_SITE_URL` to your production domain
+3. In Stripe, create a webhook endpoint for:
+   `https://your-domain.com/api/stripe/webhook`
+4. Subscribe the webhook to `checkout.session.completed`
+5. Add `STRIPE_WEBHOOK_SECRET` from Stripe
+6. Add `PRINTFUL_API_KEY`
+7. Fill in the `PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_*` env vars with the real Printful variant IDs
+8. Test checkout in Stripe test mode before switching to live keys
+
+Apple Pay and Google Pay are surfaced automatically by Stripe Checkout when the Stripe account and production domain are configured for wallet support.
 
 ## Fan club and contact storage
 
@@ -157,7 +170,7 @@ cmd /c npm run start
 
 1. Push the `band-site` folder to a Git repository
 2. Create a new Vercel project from that repository
-3. Add a **Neon Postgres** database or another hosted Postgres database
+3. Add a hosted Postgres database
 4. Add these environment variables in Vercel Project Settings:
 
 ```text
@@ -165,14 +178,20 @@ NEXT_PUBLIC_SITE_URL
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 NEXT_PUBLIC_STRIPE_LINK_INNER_CIRCLE
 NEXT_PUBLIC_STRIPE_LINK_COLLECTOR
-NEXT_PUBLIC_STRIPE_LINK_AI_MUSIC_VIDEO
-NEXT_PUBLIC_STRIPE_LINK_VISUAL_ALBUM_PRODUCTION
-NEXT_PUBLIC_STRIPE_LINK_ECHOES_UNEARTHED_DIGIPACK_CD
-NEXT_PUBLIC_STRIPE_LINK_KAM_DRIDI_HOODIE
-NEXT_PUBLIC_STRIPE_LINK_KAM_DRIDI_TSHIRT
-NEXT_PUBLIC_STRIPE_LINK_WAR_MACHINES_COLLECTOR_ARTIFACT
 STRIPE_SECRET_KEY
 STRIPE_WEBHOOK_SECRET
+PRINTFUL_API_KEY
+PRINTFUL_SHIPPING_SPEED
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_BLACK_S
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_BLACK_M
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_BLACK_L
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_BLACK_XL
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_BLACK_XXL
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_WHITE_S
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_WHITE_M
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_WHITE_L
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_WHITE_XL
+PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_WHITE_XXL
 DATABASE_URL
 CONTACT_EMAIL
 FAN_CLUB_SESSION_SECRET
@@ -181,7 +200,7 @@ FAN_CLUB_SESSION_SECRET
 5. Set `NEXT_PUBLIC_SITE_URL` to your production domain, for example:
 
 ```text
-https://kamdridi.com
+https://kamdridi-site.vercel.app
 ```
 
 6. Redeploy the project
@@ -190,27 +209,30 @@ https://kamdridi.com
 
 - No custom server is required
 - Next.js App Router is ready for direct Vercel deployment
-- Fan club auth uses signed cookies and works on serverless routes
+- Stripe Checkout handles credit card, Apple Pay, and Google Pay when supported
+- The `/api/stripe/webhook` route is ready for Stripe webhook delivery on Vercel
+- Merch checkout is production-ready when Stripe and Printful env vars are configured
 - Contact and fan-club persistence are production-ready when `DATABASE_URL` is configured
 - SEO routes are already included: `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`
 
 ## Commercial readiness checklist
 
-- Replace placeholder social/profile URLs with real KAMDRIDI links
-- Replace the placeholder YouTube embed in `data/site.ts`
-- Replace sample ticket links with real ticketing URLs
-- Paste the real Stripe Payment Links from the Stripe dashboard
-- Point the game launcher env vars at the live game URLs when those builds are available
-- Configure a production domain in Vercel
-- Verify checkout return redirects, signup, and contact form once production env vars are set
+- Add live Stripe publishable and secret keys
+- Add the live Stripe webhook secret
+- Add Printful API credentials and real variant IDs
+- Verify checkout, webhook delivery, and fulfillment creation in test mode
+- Replace any remaining placeholder social and ticket links
+- Configure the production domain in Vercel
 
 ## Direct production status
 
-This project is ready to deploy directly to Vercel **as long as** the required production environment variables are configured, especially:
+This project is ready to deploy directly to Vercel as long as the required production environment variables are configured, especially:
 
 - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
 - `STRIPE_SECRET_KEY`
+- `STRIPE_WEBHOOK_SECRET`
+- `PRINTFUL_API_KEY`
 - `DATABASE_URL`
 - `FAN_CLUB_SESSION_SECRET`
 
-With those set, the site can be deployed to production and used commercially.
+With those set, the site can process merch orders, accept memberships, and route eligible store items into automatic fulfillment.

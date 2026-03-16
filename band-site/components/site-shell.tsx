@@ -3,10 +3,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronRight, Facebook, Gamepad2, Instagram, Menu, Music2, X, Youtube } from "lucide-react";
+import {
+  ChevronRight,
+  Facebook,
+  Gamepad2,
+  Instagram,
+  Menu,
+  Music2,
+  ShoppingBag,
+  X,
+  Youtube
+} from "lucide-react";
 import { useState } from "react";
 import clsx from "clsx";
 import { navigation, siteMeta, socialLinks } from "@/data/site";
+import { CartDrawer } from "@/components/cart-drawer";
+import { useApp } from "@/components/providers";
 
 function IconBase({
   children,
@@ -111,6 +123,7 @@ function SocialBar() {
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { cartCount, setCartOpen } = useApp();
 
   return (
     <div className="min-h-screen bg-[#090909] text-white">
@@ -164,6 +177,19 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           </nav>
 
           <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setCartOpen(true)}
+              className="relative inline-flex items-center rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-stone-200 transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"
+            >
+              <ShoppingBag className="mr-2 h-4 w-4" />
+              Cart
+              {cartCount ? (
+                <span className="ml-3 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-[#f4c66a] px-1 text-[10px] font-semibold text-black">
+                  {cartCount}
+                </span>
+              ) : null}
+            </button>
             <Link
               href="/games"
               className="inline-flex items-center rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-stone-200 transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"
@@ -216,6 +242,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       </header>
 
       <main>{children}</main>
+      <CartDrawer />
 
       <footer className="border-t border-white/10 bg-black/60">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">

@@ -4,12 +4,12 @@ import Link from "next/link";
 import { Disc3, Mail, Music2, Play, Radio, Shield, Sparkles } from "lucide-react";
 import { FirstKnightEasterEgg } from "@/components/first-knight-easter-egg";
 import { CTAButton, GlassCard, Section, SectionHeading } from "@/components/ui";
+import { storeProducts } from "@/data/store";
 import {
   comicPages,
   featuredVideo,
   gameExperiences,
   membershipTiers,
-  products,
   siteMeta,
   socialLinks,
   streamingLinks,
@@ -207,7 +207,7 @@ export default function HomePage() {
           description="Merchandise, premium formats, and collector pieces wired to hosted Stripe checkout."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {products.slice(0, 4).map((product) => (
+          {storeProducts.slice(0, 4).map((product) => (
             <GlassCard key={product.id} className="overflow-hidden p-0">
               <div className="relative h-72">
                 <Image src={product.image} alt={product.name} fill className="object-cover" />

@@ -9,6 +9,7 @@ type CartItem = {
   price: number;
   image: string;
   quantity: number;
+  color?: string;
   size?: string;
 };
 
@@ -19,10 +20,15 @@ type FanClubSession = {
 
 type AppContextValue = {
   cart: CartItem[];
+  cartCount: number;
+  cartSubtotal: number;
   fan: FanClubSession | null;
+  isCartOpen: boolean;
   addToCart: (item: Omit<CartItem, "quantity">) => void;
-  removeFromCart: (id: string, size?: string) => void;
+  removeFromCart: (id: string, size?: string, color?: string) => void;
+  updateCartQuantity: (id: string, quantity: number, size?: string, color?: string) => void;
   clearCart: () => void;
+  setCartOpen: (open: boolean) => void;
   setFan: (fan: FanClubSession | null) => void;
   checkout: () => Promise<{ ok: boolean; message?: string }>;
 };
@@ -35,9 +41,10 @@ const stripePromise = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 export function Providers({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [fan, setFanState] = useState<FanClubSession | null>(null);
+  const [isCartOpen, setCartOpen] = useState(false);
 
   useEffect(() => {
-    const cartValue = window.localStorage.getItem("iron-eclipse-cart");
+    const cartValue = window.localStorage.getItem("kamdridi-cart");
 
     if (cartValue) {
       setCart(JSON.parse(cartValue));
@@ -56,7 +63,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("iron-eclipse-cart", JSON.stringify(cart));
+    window.localStorage.setItem("kamdridi-cart", JSON.stringify(cart));
   }, [cart]);
 
   function setFan(fanValue: FanClubSession | null) {
@@ -66,12 +73,13 @@ export function Providers({ children }: { children: React.ReactNode }) {
   function addToCart(item: Omit<CartItem, "quantity">) {
     setCart((current) => {
       const existing = current.find(
-        (entry) => entry.id === item.id && entry.size === item.size
+        (entry) =>
+          entry.id === item.id && entry.size === item.size && entry.color === item.color
       );
 
       if (existing) {
         return current.map((entry) =>
-          entry.id === item.id && entry.size === item.size
+          entry.id === item.id && entry.size === item.size && entry.color === item.color
             ? { ...entry, quantity: entry.quantity + 1 }
             : entry
         );
@@ -81,9 +89,27 @@ export function Providers({ children }: { children: React.ReactNode }) {
     });
   }
 
-  function removeFromCart(id: string, size?: string) {
+  function removeFromCart(id: string, size?: string, color?: string) {
     setCart((current) =>
-      current.filter((entry) => !(entry.id === id && entry.size === size))
+      current.filter(
+        (entry) => !(entry.id === id && entry.size === size && entry.color === color)
+      )
+    );
+  }
+
+  function updateCartQuantity(id: string, quantity: number, size?: string, color?: string) {
+    setCart((current) =>
+      current.flatMap((entry) => {
+        if (entry.id !== id || entry.size !== size || entry.color !== color) {
+          return entry;
+        }
+
+        if (quantity <= 0) {
+          return [];
+        }
+
+        return { ...entry, quantity };
+      })
     );
   }
 
@@ -123,9 +149,25 @@ export function Providers({ children }: { children: React.ReactNode }) {
     return { ok: true };
   }
 
+  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+  const cartSubtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+
   return (
     <AppContext.Provider
-      value={{ cart, fan, addToCart, removeFromCart, clearCart, setFan, checkout }}
+      value={{
+        cart,
+        cartCount,
+        cartSubtotal,
+        fan,
+        isCartOpen,
+        addToCart,
+        removeFromCart,
+        updateCartQuantity,
+        clearCart,
+        setCartOpen,
+        setFan,
+        checkout
+      }}
     >
       {children}
     </AppContext.Provider>

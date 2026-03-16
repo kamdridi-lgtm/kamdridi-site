@@ -1,3 +1,5 @@
+import { storeProducts } from "@/data/store";
+
 export type NavItem = {
   label: string;
   href: string;
@@ -387,62 +389,7 @@ export const membershipTiers: MembershipTier[] = [
   }
 ];
 
-export const products: Product[] = [
-  {
-    id: "ai-music-video",
-    name: "AI MUSIC VIDEO",
-    category: "Creative Services",
-    image: "/assets/images/band/live_stage.jpg",
-    priceLabel: process.env.NEXT_PUBLIC_PRICE_AI_MUSIC_VIDEO || "Configured in Stripe",
-    description: "Hosted Stripe checkout for the AI music video production offer.",
-    checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_AI_MUSIC_VIDEO || ""
-  },
-  {
-    id: "visual-album-production",
-    name: "VISUAL ALBUM PRODUCTION",
-    category: "Creative Services",
-    image: "/assets/images/band/live3.jpg",
-    priceLabel: process.env.NEXT_PUBLIC_PRICE_VISUAL_ALBUM_PRODUCTION || "Configured in Stripe",
-    description: "Hosted Stripe checkout for full visual album production.",
-    checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_VISUAL_ALBUM_PRODUCTION || ""
-  },
-  {
-    id: "echoes-unearthed-digipack-cd",
-    name: "ECHOES UNEARTHED DIGIPACK CD",
-    category: "Music",
-    image: "/assets/images/releases/echoes-unearthed-cover.jpg",
-    priceLabel: process.env.NEXT_PUBLIC_PRICE_ECHOES_UNEARTHED_DIGIPACK_CD || "$19",
-    description: "Physical digipack edition of Echoes Unearthed.",
-    checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_ECHOES_UNEARTHED_DIGIPACK_CD || ""
-  },
-  {
-    id: "kam-dridi-hoodie",
-    name: "KAM DRIDI Hoodie",
-    category: "Merch",
-    image: "/assets/images/merch/hoodie.png",
-    priceLabel: process.env.NEXT_PUBLIC_PRICE_KAM_DRIDI_HOODIE || "$74",
-    description: "Official KAMDRIDI heavyweight hoodie.",
-    checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_KAM_DRIDI_HOODIE || ""
-  },
-  {
-    id: "kam-dridi-tshirt",
-    name: "KAM DRIDI T-shirt",
-    category: "Merch",
-    image: "/assets/images/merch/tee_black.png",
-    priceLabel: process.env.NEXT_PUBLIC_PRICE_KAM_DRIDI_TSHIRT || "$38",
-    description: "Official KAMDRIDI T-shirt.",
-    checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_KAM_DRIDI_TSHIRT || ""
-  },
-  {
-    id: "war-machines-collector-artifact",
-    name: "WAR MACHINES COLLECTOR ARTIFACT",
-    category: "Collector",
-    image: "/assets/images/merch/reg2.png",
-    priceLabel: process.env.NEXT_PUBLIC_PRICE_WAR_MACHINES_COLLECTOR_ARTIFACT || "$128",
-    description: "Premium hosted checkout for the War Machines collector piece.",
-    checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_WAR_MACHINES_COLLECTOR_ARTIFACT || ""
-  }
-];
+export const products = storeProducts;
 
 export const featuredVideo = {
   title: "War Machines - Official Audio",

@@ -5,7 +5,8 @@ import { Storefront } from "@/components/storefront";
 
 export const metadata: Metadata = {
   title: "Store",
-  description: "Shop official KAMDRIDI products and services with hosted Stripe Payment Links."
+  description:
+    "Shop the official KAMDRIDI merch store with cinematic collector products, Stripe checkout, and automated fulfillment."
 };
 
 export default function StorePage() {
@@ -13,15 +14,15 @@ export default function StorePage() {
     <>
       <PageHero
         eyebrow="Store"
-        title="Merch, music, and premium collector drops"
-        description="A full merchandise and services storefront using secure hosted Stripe Payment Links."
-        image="/assets/images/merch/tee_black.png"
+        title="Collector merch, artifact drops, and physical formats"
+        description="A cinematic KAMDRIDI merch store with featured bundles, cart-based checkout, secure Stripe payments, and automated fulfillment routing."
+        image="/store/artifact-bundle.jpg"
       />
       <Section>
         <SectionHeading
           eyebrow="Merch Store"
-          title="Hosted checkout for products and premium offers"
-          description="Every buy button opens a secure Stripe hosted checkout in a new tab for direct product and service sales."
+          title="Professional storefront for Echoes Unearthed"
+          description="Featured collector bundle, merch grid, persistent cart, Stripe-hosted checkout, and fulfillment flow prepared for automatic production and shipping."
         />
         <div className="mt-12">
           <Suspense fallback={<div className="text-sm text-stone-400">Loading storefront...</div>}>
