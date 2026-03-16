@@ -35,13 +35,18 @@ export default function HomePage() {
       <FirstKnightEasterEgg />
       <section className="relative isolate flex min-h-screen items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image
-            src="/kamdridi-hero.jpg"
-            alt="KAMDRIDI hero background"
-            fill
-            priority
-            className="object-cover"
-          />
+          <video
+            className="h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/kamdridi-hero.jpg"
+            aria-label="KAMDRIDI hero background video"
+          >
+            <source src="/kamdridi-hero.mp4" type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.35),rgba(0,0,0,0.75))]" />
         </div>
 
