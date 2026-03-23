@@ -1,63 +1,70 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Membership — KAMDRIDI</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KAM DRIDI | Membership</title>
+  <meta name="description" content="Membership tiers in the KAM DRIDI store." />
+  <link rel="icon" href="/assets/images/logo.png" />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/assets/css/site-enhancements.css" />
 </head>
-<body>
-<h2>MEMBERSHIP ACCESS</h2>
+<body data-page="merch">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/"><span class="site-brand__mark"></span><span>KAM DRIDI</span></a>
+      <nav class="site-nav" data-site-nav aria-label="Primary navigation"></nav>
+    </div>
+  </header>
+  <main id="main" class="page-shell product-detail">
+    <section class="page-hero">
+      <div class="page-kicker">Membership</div>
+      <h1>Support tiers</h1>
+      <p class="page-subtitle">Two recurring tiers for people who want ongoing access, deeper updates, and a closer relationship with the Kam Dridi release world.</p>
+    </section>
 
-<div class="card">
-<h3>FREE</h3>
-<p>Announcements & updates</p>
-</div>
+    <section class="merch-grid" style="grid-template-columns:repeat(2, minmax(0, 1fr));">
+      <article class="merch-card">
+        <div class="merch-media">
+          <img src="/assets/images/collector/collector1.jpg" alt="Inner Circle membership" data-safe-image />
+        </div>
+        <div class="merch-body">
+          <div class="tag">Entry tier</div>
+          <h3>Inner Circle Membership</h3>
+          <p>The starting point for private updates, behind-the-scenes access, and the first subscription layer in the store.</p>
+          <div class="merch-price-line">
+            <div class="merch-price">$5 / month</div>
+            <span class="pill">Recurring</span>
+          </div>
+          <div class="merch-actions">
+            <a class="btn" href="/inner-circle.html">View details</a>
+            <span class="btn is-disabled" aria-disabled="true">Stripe soon</span>
+          </div>
+        </div>
+      </article>
 
-<div class="card">
-<h3>INNER CIRCLE — $5</h3>
-<a href="javascript:void(0)" class="btn-gold" data-checkout="price_1T0llRGTOzOcyxK46PM9Xc9G" data-mode="subscription" data-cancel="/membership.html">JOIN</a>
-</div>
-
-<div class="card">
-<h3>COLLECTOR — $25</h3>
-<a href="javascript:void(0)" data-checkout="price_1T0lspGTOzOcyxK4uS3FCvd7" data-mode="subscription" data-cancel="/membership.html" class="btn-gold">ENTER</a>
-</div>
-
-
-<script>
-document.addEventListener("click", (ev)=>{
-  const el = ev.target.closest("[data-checkout]");
-  if(!el) return;
-  const val = el.getAttribute("data-checkout");
-  if(!val) return;
-
-  if(val.startsWith("REPLACE_WITH_STRIPE_LINK")){
-    alert("Admin: add your Stripe link or Stripe price_id in membership.html (data-checkout).");
-    return;
-  }
-
-  if(val.startsWith("price_")){
-    const mode = el.getAttribute("data-mode") || "subscription";
-    const cancelPath = el.getAttribute("data-cancel") || "/membership.html";
-    fetch("/.netlify/functions/create-checkout-session", {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({ priceId: val, quantity: 1, mode, cancelPath })
-    })
-    .then(r => r.json())
-    .then(({
-      url, error
-    }) => {
-      if(error || !url) throw new Error(error || "No checkout URL returned");
-      window.location.href = url;
-    })
-    .catch(()=>alert("Checkout error: please try again."));
-    return;
-  }
-
-  window.open(val, "_blank", "noopener,noreferrer");
-});
-</script>
-
+      <article class="merch-card">
+        <div class="merch-media">
+          <img src="/assets/images/collector/collector1.png" alt="Collector membership" data-safe-image />
+        </div>
+        <div class="merch-body">
+          <div class="tag">Premium tier</div>
+          <h3>Collector Membership</h3>
+          <p>The deeper membership tier for supporters who want the more serious collector-level access and presence.</p>
+          <div class="merch-price-line">
+            <div class="merch-price">$25 / month</div>
+            <span class="pill gold">Premium</span>
+          </div>
+          <div class="merch-actions">
+            <a class="btn" href="/collector-membership.html">View details</a>
+            <span class="btn is-disabled" aria-disabled="true">Stripe soon</span>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+  <script src="/assets/config.js" defer></script>
+  <script src="/assets/js/site-shell.js" defer></script>
 </body>
 </html>

@@ -30,7 +30,7 @@ const T = {"en":{"menu_home":"Home","menu_media":"Media","menu_press":"Press","m
   }, { threshold:0.55 });
   ids.forEach(id => obs.observe(document.getElementById(id)));
 
-  function applyLang(lang){
+  function applyLang(lang, persist = false){
     const dict = T[lang] || T.en;
     // Keep document language/dir consistent (prevents some browsers defaulting to Arabic)
     document.documentElement.lang = lang;
@@ -45,7 +45,12 @@ const T = {"en":{"menu_home":"Home","menu_media":"Media","menu_press":"Press","m
 
     document.querySelectorAll('.lang-switch button').forEach(btn => btn.classList.toggle('active', btn.dataset.setlang === lang));
 
-    try { localStorage.setItem('kd_lang', lang); } catch(e){}
+    if (persist) {
+      try {
+        localStorage.setItem('kd_lang_choice', lang);
+        localStorage.setItem('kd_lang', lang);
+      } catch(e){}
+    }
 
     const year = new Date().getFullYear();
     const rights = (dict.footer_rights || T.en.footer_rights).replace('{year}', year);
@@ -57,9 +62,11 @@ const T = {"en":{"menu_home":"Home","menu_media":"Media","menu_press":"Press","m
     label.textContent = dict[labelKeys[Math.max(0,activeIdx)]] || 'Section';
   }
 
-  document.querySelectorAll('.lang-switch button').forEach(btn => btn.addEventListener('click', ()=>applyLang(btn.dataset.setlang)));
-  const saved = (()=>{ try{return localStorage.getItem('kd_lang')}catch(e){return null} })();
-  // Industrial default: never auto-switch to AR based on device locale.
-  // If the user wants AR, they pick it once and it stays saved.
-  const initial = (saved && ['en','fr','es','ar'].includes(saved)) ? saved : 'en';
-  applyLang(initial);
+  document.querySelectorAll('.lang-switch button').forEach(btn => btn.addEventListener('click', ()=>applyLang(btn.dataset.setlang, true)));
+  const savedChoice = (()=>{ try{return localStorage.getItem('kd_lang_choice')}catch(e){return null} })();
+  if (!savedChoice) {
+    try { localStorage.removeItem('kd_lang'); } catch (e) {}
+  }
+  // Default to English in the US/public site unless a visitor explicitly picked another language.
+  const initial = (savedChoice && ['en','fr','es','ar'].includes(savedChoice)) ? savedChoice : 'en';
+  applyLang(initial, false);

@@ -3,117 +3,157 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KAM DRIDI | Press Kit</title>
+  <title>KAM DRIDI | Press</title>
   <meta name="description" content="Electronic press kit for KAM DRIDI, Echoes Unearthed, and War Machines." />
-  <meta property="og:image" content="assets/images/releases/echoes-unearthed-cover.jpg" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="assets/css/site-enhancements.css" />
+  <meta property="og:image" content="/assets/images/releases/echoes-unearthed-cover.jpg" />
+  <link rel="icon" href="/assets/images/logo.png" />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/assets/css/site-enhancements.css" />
 </head>
-<body>
-  <a class="skip-link" href="#epk">Skip to content</a>
+<body data-page="press">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <main id="epk" class="section">
-    <div class="container" style="max-width:1180px;">
-      <div class="section-head">
-        <div>
-          <div class="tag">EPK</div>
-          <h1 style="margin:14px 0 8px;">Electronic Press Kit</h1>
-          <p class="meta-copy">A single archive point for the artist bio, press photos, logos, press quotes, and streaming links around <strong>Echoes Unearthed</strong> and <strong>War Machines</strong>.</p>
-        </div>
-        <div class="button-row">
-          <a class="btn primary" href="downloads/press-kit.zip" target="_blank" rel="noopener">Download Press Kit ZIP</a>
-          <a class="btn" href="assets/press/kam_dridi_press_kit_deluxe.pdf" target="_blank" rel="noopener">Open PDF</a>
-        </div>
-      </div>
-
-      <div class="epk-grid">
-        <article class="card">
-          <div class="tag">BIO</div>
-          <h3>Artist Bio</h3>
-          <p>Kam Dridi is a cinematic heavy project built around long-form storytelling, industrial weight, and immersive atmosphere. <em>Echoes Unearthed</em> expands that language into a darker archive: deliberate pacing, excavation imagery, and songs engineered as environments rather than disposable singles.</p>
-        </article>
-        <article class="card">
-          <div class="tag">PRESS PHOTOS</div>
-          <h3>Press Photos</h3>
-          <ul class="epk-links">
-            <li><a href="photos.html">Open gallery</a></li>
-            <li><a href="assets/images/photos/p01_hero.jpg" target="_blank" rel="noopener">Hero portrait</a></li>
-            <li><a href="assets/images/photos/p02_live.jpg" target="_blank" rel="noopener">Live still</a></li>
-            <li><a href="assets/images/photos/p03_portrait_mic.jpg" target="_blank" rel="noopener">Portrait with mic</a></li>
-          </ul>
-        </article>
-        <article class="card">
-          <div class="tag">LOGOS</div>
-          <h3>Logo Assets</h3>
-          <ul class="epk-links">
-            <li><a href="assets/images/logo.png" target="_blank" rel="noopener">Primary logo PNG</a></li>
-            <li><a href="downloads/assets-pack.zip" target="_blank" rel="noopener">Assets pack ZIP</a></li>
-          </ul>
-        </article>
-        <article class="card">
-          <div class="tag">PRESS QUOTES</div>
-          <h3>Press Quotes</h3>
-          <ul class="micro-list">
-            <li>"Heavy music with filmic scale. Kam Dridi builds worlds, not songs."</li>
-            <li>"Echoes Unearthed sounds like a lost soundtrack to a war machine cathedral."</li>
-            <li>"Dense, patient, immersive. A project that feels engineered, not recorded."</li>
-          </ul>
-        </article>
-        <article class="card">
-          <div class="tag">STREAMING</div>
-          <h3>Listen and Watch</h3>
-          <ul class="epk-links">
-            <li><a href="https://open.spotify.com/artist/kamdridi" target="_blank" rel="noopener">Spotify</a></li>
-            <li><a href="https://www.youtube.com/@kamdridi" target="_blank" rel="noopener">YouTube</a></li>
-            <li><a href="listen.html">Streaming hub</a></li>
-          </ul>
-        </article>
-        <article class="card">
-          <div class="tag">CONTACT</div>
-          <h3>Press and Booking</h3>
-          <p>For interviews, features, festival decks, licensing, and booking requests:</p>
-          <div class="button-row" style="margin-top:14px;">
-            <a class="btn primary" href="mailto:contact@kamdridi.com?subject=KAM%20DRIDI%20Press%20Inquiry">Email Contact</a>
-            <a class="btn" href="booking.html">Structured Form</a>
-          </div>
-        </article>
-      </div>
-
-      <div class="form-shell" style="margin-top:20px;">
-        <div class="tag">PRESS CONTACT</div>
-        <h3 style="margin:14px 0 10px;">Press Submission</h3>
-        <p class="meta-copy">Media and editorial contacts can send details here for direct storage in the existing press backend.</p>
-        <form name="press-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-supabase-form="1" data-supabase-mode="press" action="/success.html?type=contact">
-          <input type="hidden" name="form-name" value="press-contact" />
-          <p hidden><label>Do not fill this out: <input name="bot-field" /></label></p>
-          <div class="form-grid two-col" style="margin-top:16px;">
-            <div class="field">
-              <label for="press-email">Email</label>
-              <input id="press-email" name="email" type="email" required placeholder="editor@media.com" />
-            </div>
-            <div class="field">
-              <label for="press-media-name">Media Name</label>
-              <input id="press-media-name" name="media_name" required placeholder="Magazine / Channel / Publication" />
-            </div>
-            <div class="field">
-              <label for="press-country">Country</label>
-              <input id="press-country" name="country" placeholder="Country" />
-            </div>
-            <div class="field">
-              <label for="press-subject">Subject</label>
-              <input id="press-subject" name="subject" placeholder="Feature / Interview / Review" />
-            </div>
-          </div>
-          <div class="button-row" style="margin-top:16px;">
-            <button class="btn primary" type="submit">Send Press Contact</button>
-          </div>
-          <p class="form-meta" data-form-status aria-live="polite"></p>
-        </form>
-      </div>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/">
+        <span class="site-brand__mark"></span>
+        <span>KAM DRIDI</span>
+      </a>
+      <nav class="site-nav" data-site-nav aria-label="Primary navigation"></nav>
     </div>
+  </header>
+
+  <main id="main" class="page-shell">
+    <section class="page-hero">
+      <div class="page-kicker">Electronic Press Kit</div>
+      <h1>Press</h1>
+      <p class="page-subtitle">A clean archive point for the artist bio, downloadable assets, streaming links, and structured press contact. Only finished public assets remain visible here.</p>
+      <div class="button-row">
+        <a class="btn primary" href="/downloads/press-kit.zip" target="_blank" rel="noopener">Download press kit ZIP</a>
+        <a class="btn" href="/assets/press/kam_dridi_press_kit_deluxe.pdf" target="_blank" rel="noopener">Open PDF</a>
+      </div>
+    </section>
+
+    <section class="epk-grid">
+      <article class="card">
+        <div class="tag">Bio</div>
+        <h3>Artist bio</h3>
+        <p>Kam Dridi is a cinematic heavy project built around long-form storytelling, industrial weight, and immersive atmosphere. <em>Echoes Unearthed</em> extends that language into a darker archive of deliberate pacing, excavation imagery, and songs engineered as environments rather than disposable singles.</p>
+      </article>
+
+      <article class="card">
+        <div class="tag">Press photos</div>
+        <h3>Photo assets</h3>
+        <ul class="epk-links">
+          <li><a href="/photos">Open official gallery</a></li>
+          <li><a href="/assets/images/present/live_stage.png" target="_blank" rel="noopener">Live stage still</a></li>
+          <li><a href="/assets/images/photos/p03_portrait_mic.jpg" target="_blank" rel="noopener">Studio mic portrait</a></li>
+          <li><a href="/assets/images/photos/p04_portrait_leather.jpg" target="_blank" rel="noopener">Leather portrait</a></li>
+          <li><a href="/assets/images/photos/p01_hero.jpg" target="_blank" rel="noopener">Band visual</a></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="tag">Logos</div>
+        <h3>Brand assets</h3>
+        <ul class="epk-links">
+          <li><a href="/assets/images/logo.png" target="_blank" rel="noopener">Primary logo PNG</a></li>
+          <li><a href="/downloads/assets-pack.zip" target="_blank" rel="noopener">Assets pack ZIP</a></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="tag">Positioning</div>
+        <h3>Editorial angles</h3>
+        <ul class="micro-list">
+          <li>Cinematic heavy music built around scale, texture, and long-form pacing.</li>
+          <li>Echoes Unearthed is framed as an archive world, not a disposable single cycle.</li>
+          <li>Kam Dridi is presented visually as premium, dark, tactile, and collector-minded.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="tag">Streaming</div>
+        <h3>Listen and watch</h3>
+        <ul class="epk-links">
+          <li><a href="https://open.spotify.com/track/1jfpUX2dXWBzwnfAhhMm7W" data-link="spotify" target="_blank" rel="noopener">Spotify</a></li>
+          <li><a href="https://www.youtube.com/@kamdridi" data-link="youtubeChannel" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="/listen">Streaming hub</a></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="tag">Contact</div>
+        <h3>Press and booking</h3>
+        <p>For interviews, features, festival decks, licensing, and booking requests, use the structured contact route below or email directly.</p>
+        <div class="button-row" style="margin-top:14px;">
+          <a class="btn primary" href="mailto:contact@kamdridi.com?subject=KAM%20DRIDI%20Press%20Inquiry">Email contact</a>
+          <a class="btn" href="/booking">Structured form</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="page-panel" style="margin-top:20px;">
+      <div class="page-kicker">Photo preview</div>
+      <h2>Current press stills</h2>
+      <p class="page-subtitle">These are the actual images currently surfaced publicly across the press and gallery routes.</p>
+      <div class="photo-preview-strip">
+        <a class="photo-preview" href="/assets/images/present/live_stage.png" target="_blank" rel="noopener">
+          <img src="/assets/images/present/live_stage.png" alt="Kam Dridi live stage still" loading="lazy" decoding="async" />
+          <span>Live stage</span>
+        </a>
+        <a class="photo-preview" href="/assets/images/photos/p03_portrait_mic.jpg" target="_blank" rel="noopener">
+          <img src="/assets/images/photos/p03_portrait_mic.jpg" alt="Kam Dridi studio mic portrait" loading="lazy" decoding="async" />
+          <span>Mic portrait</span>
+        </a>
+        <a class="photo-preview" href="/assets/images/photos/p04_portrait_leather.jpg" target="_blank" rel="noopener">
+          <img src="/assets/images/photos/p04_portrait_leather.jpg" alt="Kam Dridi leather portrait" loading="lazy" decoding="async" />
+          <span>Leather portrait</span>
+        </a>
+        <a class="photo-preview" href="/assets/images/photos/p01_hero.jpg" target="_blank" rel="noopener">
+          <img src="/assets/images/photos/p01_hero.jpg" alt="Kam Dridi band visual" loading="lazy" decoding="async" />
+          <span>Band visual</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="form-shell" style="margin-top:20px;">
+      <div class="tag">Press contact</div>
+      <h2 style="margin-top:14px;">Press submission</h2>
+      <p class="meta-copy">Media and editorial contacts can send details here for direct storage in the existing press backend.</p>
+      <form name="press-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-supabase-form="1" data-supabase-mode="press" action="/success.html?type=contact">
+        <input type="hidden" name="form-name" value="press-contact" />
+        <p hidden><label>Do not fill this out: <input name="bot-field" /></label></p>
+        <div class="form-grid two-col" style="margin-top:16px;">
+          <div class="field">
+            <label for="press-email">Email</label>
+            <input id="press-email" name="email" type="email" required placeholder="editor@media.com" />
+          </div>
+          <div class="field">
+            <label for="press-media-name">Media Name</label>
+            <input id="press-media-name" name="media_name" required placeholder="Magazine / Channel / Publication" />
+          </div>
+          <div class="field">
+            <label for="press-country">Country</label>
+            <input id="press-country" name="country" placeholder="Country" />
+          </div>
+          <div class="field">
+            <label for="press-subject">Subject</label>
+            <input id="press-subject" name="subject" placeholder="Feature / Interview / Review" />
+          </div>
+        </div>
+        <div class="button-row" style="margin-top:16px;">
+          <button class="btn primary" type="submit">Send press contact</button>
+        </div>
+        <p class="form-meta" data-form-status aria-live="polite"></p>
+      </form>
+    </section>
   </main>
 
-  <script src="assets/js/supabase-client.js" defer></script>
-  <script src="assets/js/site-core.js" defer></script>
+  <script src="/assets/config.js" defer></script>
+  <script src="/assets/apply-links.js" defer></script>
+  <script src="/assets/js/site-shell.js" defer></script>
+  <script src="/assets/js/supabase-client.js" defer></script>
+  <script src="/assets/js/site-core.js" defer></script>
 </body>
 </html>
