@@ -53,7 +53,7 @@
     }
   </script>
 </head>
-<body>
+<body data-page="home">
   <a class="skip-link" href="#home">Skip to content</a>
 
 
@@ -96,19 +96,7 @@
       </button>
     </div>
 
-    <ul class="menuList">
-      <li><a href="index.html" data-close><span data-i18n="menu_home"></span> <span class="hint">Hero</span></a></li>
-      <li><a href="media.html" data-close><span data-i18n="menu_media"></span> <span class="hint">Media</span></a></li>
-      <li><a href="press.html" data-close><span data-i18n="menu_press"></span> <span class="hint">Press</span></a></li>
-      <li><a href="/merch.html"><span data-i18n="menu_store"></span> <span class="hint">Store</span></a></li>
-            <li><a href="bundle.html"><span>Bundle</span> <span class="hint">Bundle</span></a></li>
-<li><a href="#tour" data-close><span data-i18n="menu_tour"></span> <span class="hint">Tour</span></a></li>
-      <li><a href="#contact" data-close><span data-i18n="menu_contact"></span> <span class="hint">Contact</span></a></li>
-      <li><a href="#news" data-close><span data-i18n="menu_news"></span> <span class="hint">Updates</span></a></li>
-      <li><a href="#releases" data-close><span data-i18n="menu_music"></span> <span class="hint">Music</span></a></li>
-      <li><a href="photos.html"><span data-i18n="menu_photos"></span> <span class="hint">Gallery</span></a></li>
-      <li><a href="media.html"><span data-i18n="menu_videos"></span> <span class="hint">Videos</span></a></li>
-    </ul>
+    <ul class="menuList" data-site-menu></ul>
 
     <div class="menuFooter">
       <div>© <span id="yearTop"></span> KAM DRIDI</div>
@@ -117,7 +105,7 @@
                 <a href="https://link.deezer.com/s/32vMfvEuvIO2AtxFIpupL" data-link="deezer" target="_blank" rel="noopener">Deezer</a>
         <a href="https://music.amazon.co.uk/tracks/B0GJNFV337?marketplaceId=A1F83G8C2ARO7P&musicTerritory=GB&ref=dm_sh_o7RL1FNeJ2hrMdCRhkFAVmB2c" data-link="amazonMusic" target="_blank" rel="noopener">Amazon Music</a>
 <a href="https://www.youtube.com/@kamdridi" data-link="youtubeChannel" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://instagram.com/kamdridi/kamdridi" data-link="instagram" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.instagram.com/kamdridi/" data-link="instagram" target="_blank" rel="noopener">Instagram</a>
       </div>
     </div>
   </div>
@@ -127,7 +115,6 @@
   <button class="sdot active" data-id="home" title="Home"></button>
   <button class="sdot" data-id="media" title="Media"></button>
   <button class="sdot" data-id="press" title="Press"></button>
-  <button class="sdot" data-id="store" title="Store"></button>
   <button class="sdot" data-id="tour" title="Tour"></button>
   <button class="sdot" data-id="contact" title="Contact"></button>
 </div>
@@ -142,8 +129,8 @@
       <p class="sub" data-i18n="hero_sub"></p>
       <div class="actions">
         <a class="btn primary" href="#releases" data-i18n="cta_enter"></a>
-        <a class="btn" href="/merch.html" data-i18n="cta_store"></a>
-        <a class="btn" href="media.html" data-i18n="cta_videos"></a>
+        <a class="btn" href="/merch" data-route-key="merch" data-hide-when-disabled="true" data-i18n="cta_store"></a>
+        <a class="btn" href="/media" data-route-key="media" data-i18n="cta_videos"></a>
       </div>
 
       <div class="hero-badges" aria-label="Links">
@@ -248,76 +235,33 @@
   <div class="container">
     <div class="section-head">
       <div>
-        <h2>EURO SUMMER TOUR 2026</h2>
-        <p>Limited capacity rooms.<br>Immersive production.<br>Each date treated as a controlled environment.</p>
+        <h2>LIVE STATUS</h2>
+        <p>No public dates are announced at this time. When live presentations are ready, they will appear here with full venue and ticket details.</p>
       </div>
     </div>
 
-    <div class="card">
-      <div class="body">
-        <div class="tour-grid">
-          <div class="tour-row">
-            <div class="tour-date">June 6, 2026</div>
-            <div class="tour-meta">
-              <div class="tour-venue">Rock im Park Showcase Stage</div>
-              <div class="tour-city">Nuremberg, Germany</div>
-            </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="body">
+          <div class="chip">CURRENT STATUS</div>
+          <h3 style="margin:12px 0 8px">Immersive performances in development</h3>
+          <p style="margin:0;color:rgba(245,245,245,.8)">Kam Dridi live presentations are being developed as controlled environments: minimal light, maximal weight, cinematic pacing, and deliberate staging.</p>
+          <div class="pills" style="margin-top:18px">
+            <span class="pill gold">No dates announced</span>
+            <span class="pill">Festival inquiries open</span>
+            <span class="pill">Private events by request</span>
           </div>
-          <div class="tour-row">
-            <div class="tour-date">June 10, 2026</div>
-            <div class="tour-meta">
-              <div class="tour-venue">Paris Indie Rock Nights</div>
-              <div class="tour-city">Paris, France</div>
-            </div>
-          </div>
-          <div class="tour-row">
-            <div class="tour-date">June 14, 2026</div>
-            <div class="tour-meta">
-              <div class="tour-venue">Brussels Summer Sounds</div>
-              <div class="tour-city">Brussels, Belgium</div>
-            </div>
-          </div>
-          <div class="tour-row">
-            <div class="tour-date">June 19, 2026</div>
-            <div class="tour-meta">
-              <div class="tour-venue">Amsterdam Underground Festival</div>
-              <div class="tour-city">Amsterdam, Netherlands</div>
-            </div>
-          </div>
-          <div class="tour-row">
-            <div class="tour-date">June 24, 2026</div>
-            <div class="tour-meta">
-              <div class="tour-venue">Berlin Alternative Summer Fest</div>
-              <div class="tour-city">Berlin, Germany</div>
-            </div>
-          </div>
-          <div class="tour-row">
-            <div class="tour-date">June 29, 2026</div>
-            <div class="tour-meta">
-              <div class="tour-venue">Prague Rock Collective</div>
-              <div class="tour-city">Prague, Czech Republic</div>
-            </div>
-          </div>
-          <div class="tour-row">
-            <div class="tour-date">July 4, 2026</div>
-            <div class="tour-meta">
-              <div class="tour-venue">Barcelona Summer Live Series</div>
-              <div class="tour-city">Barcelona, Spain</div>
-            </div>
-          </div>
-          <div class="tour-row">
-            <div class="tour-date">July 9, 2026</div>
-            <div class="tour-meta">
-              <div class="tour-venue">Milan Indie Showcase</div>
-              <div class="tour-city">Milan, Italy</div>
-            </div>
-          </div>
-          <div class="tour-row">
-            <div class="tour-date">July 15, 2026</div>
-            <div class="tour-meta">
-              <div class="tour-venue">London Emerging Rock Festival</div>
-              <div class="tour-city">London, UK</div>
-            </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="body">
+          <div class="chip">BOOKING</div>
+          <h3 style="margin:12px 0 8px">For promoters, festivals, and partners</h3>
+          <p style="margin:0;color:rgba(245,245,245,.8)">Use the booking page for live inquiries, collaborations, licensing conversations, and event discussions. Only confirmed information will be published publicly.</p>
+          <div class="button-row" style="margin-top:18px">
+            <a class="btn primary" href="/booking">Booking inquiries</a>
+            <a class="btn" href="/press">Press kit</a>
           </div>
         </div>
       </div>
@@ -327,20 +271,20 @@
 
 <section id="store" class="section">
   <div class="container">
-    <div class="section-head"><div><h2 data-i18n="store_title"></h2><p data-i18n="store_desc"></p></div></div>
+    <div class="section-head"><div><h2 data-i18n="store_title"></h2><p>The store now combines finished product pages with live checkout on core physical and apparel items.</p></div></div>
     <div class="card" style="margin-bottom:22px"><div class="body" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
-      <div><span class="tag" data-i18n="store_tag"></span><h3 style="margin:10px 0 6px" data-i18n="store_h3"></h3><p style="margin:0;color:rgba(245,245,245,.78)" data-i18n="store_body"></p></div>
-      <a class="btn primary" href="/merch.html" data-i18n="store_btn"></a>
+      <div><span class="tag">Collector Line</span><h3 style="margin:10px 0 6px">Store live now</h3><p style="margin:0;color:rgba(245,245,245,.78)">Core products are shoppable now, and the broader catalogue stays organized around dedicated item pages.</p></div>
+      <div class="pills"><a class="btn primary" href="/merch">Open store</a><a class="btn" href="https://buy.stripe.com/4gMbJ1eByf4w6kw0fCeEo01" target="_blank" rel="noopener">Shop bundle</a></div>
     </div></div>
         <div class="card" style="margin-bottom:22px">
       <div class="body">
         <div style="display:grid;gap:6px;color:rgba(245,245,245,.85);font-size:14px;letter-spacing:.02em">
-          <div>Secure collector checkout</div>
-          <div>Limited quantities</div>
-          <div>Archival packaging</div>
-          <div>Tracked delivery</div>
+          <div>Every core item now has its own internal product page</div>
+          <div>Public prices and direct purchase links are live on core items</div>
+          <div>Membership tiers use request access instead of fake checkout</div>
+          <div>The store can scale item by item without redoing the design</div>
         </div>
-        <p style="margin:12px 0 0;color:rgba(245,245,245,.75)">Every artifact ships as a preservation piece, not retail packaging.</p>
+        <p style="margin:12px 0 0;color:rgba(245,245,245,.75)">The result is a cleaner live store: real product pages, real purchase paths, and no placeholder buying state on public pages.</p>
       </div>
     </div>
     <div class="grid" style="grid-template-columns:1fr 1fr 1fr">
@@ -350,11 +294,8 @@
           <span class="tag" data-i18n="prod1_tag"></span>
           <h3 data-i18n="prod1_title"></h3>
           <p data-i18n="prod1_body"></p>
-          <div class="meta">$35</div>
-          <div class="pills" style="margin-top:10px">
-            <a class="btn" href="merch.html#regular">View</a>
-            <a class="btn primary" href="/merch.html" target="_blank" rel="noopener">Acquire</a>
-          </div>
+          <div class="meta">$63</div>
+          <div class="pills" style="margin-top:10px"><a class="btn" href="/tee-black">View item</a><a class="btn primary" href="https://buy.stripe.com/4gMcN5ali6y0fV60fCeEo03" target="_blank" rel="noopener">Buy now</a></div>
         </div>
       </article>
 
@@ -364,28 +305,23 @@
           <span class="tag" data-i18n="prod2_tag"></span>
           <h3 data-i18n="prod2_title"></h3>
           <p data-i18n="prod2_body"></p>
-          <div class="meta">$75</div>
-          <div class="pills" style="margin-top:10px">
-            <a class="btn" href="merch.html#regular">View</a>
-            <a class="btn primary" href="/merch.html" target="_blank" rel="noopener">Acquire</a>
-          </div>
+          <div class="meta">$113</div>
+          <div class="pills" style="margin-top:10px"><a class="btn" href="/hoodie-black">View item</a><a class="btn primary" href="https://buy.stripe.com/fZu00jeByaOg4co9QceEo04" target="_blank" rel="noopener">Buy now</a></div>
         </div>
       </article>
 
       <article class="card">
-        <div class="media" style="aspect-ratio:4/3"><img src="assets/images/collector/collector1.jpg" alt="Echoes Unearthed collector artifact" loading="lazy" decoding="async"></div>
+        <div class="media" style="aspect-ratio:4/3"><img src="assets/images/collector/collector1.jpg" alt="Empire Bundle collector artifact" loading="lazy" decoding="async"></div>
         <div class="body">
-          <span class="tag" data-i18n="prod3_tag"></span>
-          <h3 data-i18n="prod3_title"></h3>
-          <p data-i18n="prod3_body"></p>
-          <div class="meta">$15</div>
-          <div class="pills" style="margin-top:10px">
-            <a class="btn" href="merch.html#limited">View</a>
-            <a class="btn primary" href="/merch.html" target="_blank" rel="noopener">Acquire</a>
-          </div>
+          <span class="tag">Bundle</span>
+          <h3>Empire Bundle</h3>
+          <p>Flagship collector bundle with its own finished product page and price now visible to the public.</p>
+          <div class="meta">$129</div>
+          <div class="pills" style="margin-top:10px"><a class="btn" href="/bundle">View item</a><a class="btn primary" href="https://buy.stripe.com/4gMbJ1eByf4w6kw0fCeEo01" target="_blank" rel="noopener">Buy now</a></div>
         </div>
       </article>
-</div>
+    </div>
+    </div>
   </div>
 </section>
 
@@ -412,10 +348,48 @@
 <section id="photos" class="section alt cinematic-bg" data-parallax="1">
   <div class="container">
     <div class="section-head"><div><h2 data-i18n="photos_title"></h2><p data-i18n="photos_desc"></p></div></div>
-    <div class="grid" style="grid-template-columns:1fr 1fr 1fr">
-      <div class="card"><div class="media" style="aspect-ratio:1/1"><img src="assets/images/present/live1.jpg" alt="Photo 1" loading="lazy"></div></div>
-      <div class="card"><div class="media" style="aspect-ratio:1/1"><img src="assets/images/present/live2.jpg" alt="Photo 2" loading="lazy"></div></div>
-      <div class="card"><div class="media" style="aspect-ratio:1/1"><img src="assets/images/present/live3.jpg" alt="Photo 3" loading="lazy"></div></div>
+    <div class="photo-home-layout">
+      <article class="card photo-home-feature">
+        <div class="media" style="aspect-ratio:4/5"><img src="assets/images/present/live_stage.png" alt="Kam Dridi live stage performance" loading="lazy" decoding="async"></div>
+        <div class="body">
+          <span class="tag">Featured still</span>
+          <h3>Actual visuals, not filler</h3>
+          <p>The site now surfaces real imagery already in the archive: a large live-stage frame, sharp studio portraiture, and a stronger band visual instead of empty or broken placeholders.</p>
+          <div class="pills" style="margin-top:14px">
+            <a class="btn primary" href="/photos">Open photo gallery</a>
+            <a class="btn" href="/press">Open press page</a>
+          </div>
+        </div>
+      </article>
+
+      <div class="photo-home-stack">
+        <article class="card">
+          <div class="media" style="aspect-ratio:4/5"><img src="assets/images/photos/p03_portrait_mic.jpg" alt="Kam Dridi studio portrait with microphone" loading="lazy" decoding="async"></div>
+          <div class="body">
+            <span class="tag">Studio</span>
+            <h3>Mic portrait</h3>
+            <p>Press-ready solo frame.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="media" style="aspect-ratio:4/5"><img src="assets/images/photos/p04_portrait_leather.jpg" alt="Kam Dridi leather jacket portrait" loading="lazy" decoding="async"></div>
+          <div class="body">
+            <span class="tag">Portrait</span>
+            <h3>Leather portrait</h3>
+            <p>Sharper solo visual for editorials and banners.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="media" style="aspect-ratio:16/10"><img src="assets/images/photos/p01_hero.jpg" alt="Kam Dridi band visual on rooftop under glowing logo" loading="lazy" decoding="async"></div>
+          <div class="body">
+            <span class="tag">Band visual</span>
+            <h3>Current world image</h3>
+            <p>A stronger group visual for the Echoes Unearthed era.</p>
+          </div>
+        </article>
+      </div>
     </div>
   </div>
 </section>
@@ -425,7 +399,7 @@
     <div class="section-head"><div><h2 data-i18n="videos_title"></h2><p data-i18n="videos_desc"></p></div></div>
     <div class="grid" style="grid-template-columns:1.2fr .8fr">
       <div class="card"><div class="body"><span class="tag" data-i18n="videos_tag"></span><h3 data-i18n="videos_h3"></h3><p data-i18n="videos_body"></p>
-        <div class="pills"><a class="btn primary" href="https://www.youtube.com/@kamdridi" data-link="youtubeChannel" target="_blank" rel="noopener" data-i18n="videos_open"></a><a class="btn" href="photos.html" data-i18n="menu_photos"></a></div>
+        <div class="pills"><a class="btn primary" href="https://www.youtube.com/@kamdridi" data-link="youtubeChannel" target="_blank" rel="noopener" data-i18n="videos_open"></a><a class="btn" href="/photos" data-i18n="menu_photos"></a></div>
       </div></div>
       <div class="card"><div class="media"><img src="assets/images/releases/war-machines-cover.jpg" alt="Video still" loading="lazy" decoding="async"></div>
         <div class="body"><span class="tag">Official</span><h3 data-i18n="videos_alt"></h3><p data-i18n="videos_alt_body"></p></div>
@@ -439,50 +413,38 @@
   <div class="container">
     <div class="section-head">
       <div class="chip">PRESS</div>
-      <h2>Press quotes</h2>
-      <p class="muted">Short featured reviews for banners, highlight cards, and festival decks.</p>
+      <h2>Press room</h2>
+      <p class="muted">Official materials only: finished assets, artist copy, and contact routes for media and partners.</p>
     </div>
 
     <div class="quote-grid">
-      <figure class="quote-card">
-        <blockquote>“Heavy music with filmic scale — Kam Dridi builds worlds, not songs.”</blockquote>
-        <figcaption>— Obsidian Sound Review</figcaption>
-      </figure>
+      <article class="quote-card">
+        <h3 style="margin:0 0 10px">Press kit</h3>
+        <p style="margin:0;color:rgba(245,245,245,.8)">Artist bio, release framing, brand language, and official links gathered in one place for editors, promoters, and curators.</p>
+      </article>
 
-      <figure class="quote-card">
-        <blockquote>“A project that feels engineered, not recorded. Dense, patient, immersive.”</blockquote>
-        <figcaption>— Modern Metal Journal</figcaption>
-      </figure>
+      <article class="quote-card">
+        <h3 style="margin:0 0 10px">Official visuals</h3>
+        <p style="margin:0;color:rgba(245,245,245,.8)">Photography, artwork, and presentation assets are kept consistent across the press page and gallery so media teams get the correct materials.</p>
+      </article>
 
-      <figure class="quote-card">
-        <blockquote>“Echoes Unearthed sounds like a lost soundtrack to a war machine cathedral.”</blockquote>
-        <figcaption>— Continental Noise Press</figcaption>
-      </figure>
-
-      <figure class="quote-card">
-        <blockquote>“Long-form composition with the confidence of classic albums — rare in modern metal.”</blockquote>
-        <figcaption>— European Underground Review</figcaption>
-      </figure>
-
-      <figure class="quote-card">
-        <blockquote>“Weight, dust, atmosphere. Kam Dridi understands pacing better than most bands twice the size.”</blockquote>
-        <figcaption>— Dark Circuit Magazine</figcaption>
-      </figure>
+      <article class="quote-card">
+        <h3 style="margin:0 0 10px">Booking and licensing</h3>
+        <p style="margin:0;color:rgba(245,245,245,.8)">Interviews, festival decks, booking requests, and licensing conversations route through a single finished contact flow.</p>
+      </article>
     </div>
 
     <div class="feature-review">
-      <div class="chip">FEATURED REVIEW</div>
+      <div class="chip">EDITORIAL NOTE</div>
       <p>
-        Kam Dridi operates in a space between album and architecture. <strong>Echoes Unearthed</strong> is less a collection of tracks
-        than a controlled environment — slow-burning builds, mechanical weight, and cinematic silence used as a weapon.
-        The production leans massive without becoming sterile, letting textures breathe. It’s heavy music that respects patience.
+        Kam Dridi is presented publicly as a complete artist world: cinematic heavy music, deliberate visual language, and only finished materials exposed to the public.
+        For coverage, programming, or industry conversations, use the official press page rather than scattered prototype pages or incomplete links.
       </p>
-      <p class="muted">— Modern Metal Journal</p>
 
       <div class="cta-row">
-        \1
-        <a class="btn" href="presskit.html">Presskit downloads</a>
-        <a class="btn" href="press.html">Full press page</a>
+        <a class="btn" href="/press">Press kit downloads</a>
+        <a class="btn" href="/photos">Official photos</a>
+        <a class="btn" href="/booking">Booking contact</a>
       </div>
     </div>
   </div>
@@ -500,12 +462,13 @@
     <div class="grid-2">
       <div class="panel">
         <div class="chip">LISTEN</div>
-        <h3 style="margin-top:10px;">Ambient transmission</h3>
-        <p class="muted">Low-level atmosphere for browsing (you can replace the audio any time).</p>
-        <audio controls preload="none" style="width:100%; margin-top:12px;">
-          <source src="assets/audio/ambient.mp3" type="audio/mpeg">
-        </audio>
-        <p class="muted" style="margin-top:10px;">Tip: keep this subtle—it's about mood, not distraction.</p>
+        <h3 style="margin-top:10px;">Streaming hub</h3>
+        <p class="muted">Finished public links only. No silent players or missing audio files.</p>
+        <div class="button-row" style="margin-top:12px;">
+          <a class="btn primary" href="/listen">Open listening hub</a>
+          <a class="btn" href="https://open.spotify.com/track/1jfpUX2dXWBzwnfAhhMm7W" data-link="spotify" target="_blank" rel="noopener">Spotify</a>
+        </div>
+        <p class="muted" style="margin-top:10px;">Use the listening hub for the core release and finished platform links only.</p>
       </div>
 
       <div class="panel">
@@ -549,7 +512,7 @@
         <p>Press kit, assets, and booking details.</p>
       </div>
       <div class="actions">
-        <a class="btn primary" href="press.html">Open Press Page</a>
+        <a class="btn primary" href="/press">Open Press Page</a>
         <a class="btn" href="assets/press/KAM_DRIDI_PRESS_KIT_DELUXE.pdf" target="_blank" rel="noopener">Download Press Kit</a>
       </div>
     </div>
@@ -568,27 +531,27 @@
       </div>
 
       <div class="card">
-        <div class="media"><img src="assets/images/present/live1.jpg" alt="Press photo" loading="lazy" decoding="async"></div>
+        <div class="media"><img src="assets/images/photos/p03_portrait_mic.jpg" alt="Kam Dridi press portrait with microphone" loading="lazy" decoding="async"></div>
         <div class="body">
           <span class="tag">Assets</span>
           <h3>Photos & Logos</h3>
           <p>High-resolution visuals and branding files inside the press kit.</p>
           <div class="pills">
             <a class="pill gold" href="assets/press/KAM_DRIDI_PRESS_KIT_DELUXE.pdf" target="_blank" rel="noopener">Download</a>
-            <a class="pill" href="press.html">Details</a>
+            <a class="pill" href="/press">Details</a>
           </div>
         </div>
       </div>
     </div>
   
-    <div class="section-head" style="margin-top:24px"><div><h3 style="margin:0">Press Quotes</h3></div></div>
+    <div class="section-head" style="margin-top:24px"><div><h3 style="margin:0">Press Materials</h3></div></div>
     <div class="grid" style="grid-template-columns:1fr 1fr;gap:16px">
-      <article class="card"><div class="body"><p style="margin:0;color:rgba(245,245,245,.85);line-height:1.55">“A crushing cinematic statement — Kam Dridi builds worlds, not songs. Echoes Unearthed feels less like an album and more like a monument.”</p></div></article>
-      <article class="card"><div class="body"><p style="margin:0;color:rgba(245,245,245,.85);line-height:1.55">“Heavy music with museum-scale ambition.”</p></div></article>
-      <article class="card"><div class="body"><p style="margin:0;color:rgba(245,245,245,.85);line-height:1.55">“A record built like a cathedral of sound.”</p></div></article>
-      <article class="card"><div class="body"><p style="margin:0;color:rgba(245,245,245,.85);line-height:1.55">“Dense, cinematic, and unapologetically grand.”</p></div></article>
-      <article class="card"><div class="body"><p style="margin:0;color:rgba(245,245,245,.85);line-height:1.55">“Kam Dridi treats distortion like a filmmaker treats light.”</p></div></article>
-      <article class="card"><div class="body"><p style="margin:0;color:rgba(245,245,245,.85);line-height:1.55">“Monolithic production and slow-burning tension.”</p></div></article>
+      <article class="card"><div class="body"><p style="margin:0;color:rgba(245,245,245,.85);line-height:1.55">Short bio and release framing prepared for editors, promoters, and festival programmers.</p></div></article>
+      <article class="card"><div class="body"><p style="margin:0;color:rgba(245,245,245,.85);line-height:1.55">Official photography and artwork gathered in one finished visual package.</p></div></article>
+      <article class="card"><div class="body"><p style="margin:0;color:rgba(245,245,245,.85);line-height:1.55">Direct access to booking, licensing, and collaboration contact channels.</p></div></article>
+      <article class="card"><div class="body"><p style="margin:0;color:rgba(245,245,245,.85);line-height:1.55">Clean public navigation that exposes only pages that are complete and functioning.</p></div></article>
+      <article class="card"><div class="body"><p style="margin:0;color:rgba(245,245,245,.85);line-height:1.55">Media and gallery pages that show only working embeds and valid image assets.</p></div></article>
+      <article class="card"><div class="body"><p style="margin:0;color:rgba(245,245,245,.85);line-height:1.55">A collector-line preview that keeps the aesthetic visible without exposing unfinished checkout flows.</p></div></article>
     </div>
   </div>
 </section>
@@ -601,7 +564,7 @@
         <p>Press kit, assets, booking & licensing.</p>
       </div>
       <div class="actions">
-        <a class="btn primary" href="press.html">Press page</a>
+        <a class="btn primary" href="/press">Press page</a>
         <a class="btn" href="#contact" data-close>Contact</a>
       </div>
     </div>
@@ -619,14 +582,14 @@
         <h3 style="margin:8px 0 6px">Assets</h3>
         <p style="margin:0;color:rgba(245,245,245,.78)">Photos, logo, and visuals for promoters and press.</p>
         <div style="height:10px"></div>
-        <a class="btn" href="photos.html">Photos</a>
+        <a class="btn" href="/photos">Photos</a>
       </div>
       <div class="card" style="padding:18px">
-        <div class="tag">STORE</div>
-        <h3 style="margin:8px 0 6px">Merch</h3>
-        <p style="margin:0;color:rgba(245,245,245,.78)">Artifacts, bundles and limited drops.</p>
+        <div class="tag">ARCHIVE</div>
+        <h3 style="margin:8px 0 6px">Collector line</h3>
+        <p style="margin:0;color:rgba(245,245,245,.78)">Official store route, collector bundle checkout, and premium merch access.</p>
         <div style="height:10px"></div>
-        <a class="btn" href="/merch.html">Enter store</a>
+        <a class="btn" href="/merch">Open store</a>
       </div>
     </div>
   </div>
@@ -656,8 +619,8 @@
         <p class="meta-copy" style="max-width:54ch">Route messages by category so booking, press, business requests, and fan messages stay clearly separated without changing the site atmosphere.</p>
         <div class="pills" style="margin-top:18px">
           <a class="btn primary" href="mailto:contact@kamdridi.com">contact@kamdridi.com</a>
-          <a class="btn" href="press.html">Press kit</a>
-          <a class="btn" href="booking.html">Booking form</a>
+          <a class="btn" href="/press">Press kit</a>
+          <a class="btn" href="/booking">Booking form</a>
         </div>
       </div>
       <form id="contactForm" class="form-shell" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-supabase-form="1" action="/success.html?type=contact">
@@ -717,18 +680,19 @@
       <div class="social">
         <a href="https://open.spotify.com/artist/kamdridi" data-link="spotify" title="Spotify">Spotify</a>
         <a href="https://www.youtube.com/@kamdridi" data-link="youtubeChannel" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://instagram.com/kamdridi/kamdridi" data-link="instagram" title="Instagram">Instagram</a>
+        <a href="https://www.instagram.com/kamdridi/" data-link="instagram" title="Instagram">Instagram</a>
       </div>
     </div>
     <p class="small" id="rights"></p>
   </div>
 </footer>
 
-<script src="assets/js/index.js" defer></script>
+<script src="assets/config.js" defer></script>
+  <script src="assets/apply-links.js" defer></script>
+  <script src="assets/js/site-shell.js" defer></script>
+  <script src="assets/js/index.js" defer></script>
   <script src="assets/js/supabase-client.js" defer></script>
   <script src="assets/js/site-core.js" defer></script>
-  <script src="assets/config.js" defer></script>
-  <script src="assets/apply-links.js" defer></script>
   <script src="assets/site-audit.js" defer></script>
   <script src="phase2.js" defer></script>
 </body>

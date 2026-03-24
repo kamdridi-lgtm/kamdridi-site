@@ -1,40 +1,67 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Artifact — KAMDRIDI</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KAM DRIDI | War Machines Collector Artifact</title>
+  <meta name="description" content="War Machines Collector Artifact from the KAM DRIDI store." />
+  <link rel="icon" href="/assets/images/logo.png" />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/assets/css/site-enhancements.css" />
 </head>
-<body>
-<h2>WAR MACHINES — ARTIFACT I</h2>
+<body data-page="merch">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/"><span class="site-brand__mark"></span><span>KAM DRIDI</span></a>
+      <nav class="site-nav" data-site-nav aria-label="Primary navigation"></nav>
+    </div>
+  </header>
+  <main id="main" class="page-shell product-detail">
+    <section class="page-hero">
+      <div class="page-kicker">Collector</div>
+      <h1>War Machines Collector Artifact</h1>
+      <p class="page-subtitle">A numbered archival object tied to the cinematic version of War Machines. It is treated as an artifact, not a casual merch drop.</p>
+    </section>
 
-<div class="card">
-<span class="badge">HAND NUMBERED • 100 WORLDWIDE</span>
-<p>Forged under industrial resonance.</p>
-<p id="stock">47 REMAINING</p>
-<div id="countdown"></div>
-<a href="https://buy.stripe.com/4gMbJ1eByf4w6kw0fCeEo01" class="btn-gold" target="_blank" rel="noopener">ACQUIRE</a>
-</div>
+    <section class="product-detail__layout">
+      <div class="product-frame">
+        <img src="/assets/images/collector/collector1.png" alt="War Machines Collector Artifact visual" data-safe-image />
+      </div>
+      <article class="product-card">
+        <div class="tag">Limited edition</div>
+        <div class="price-stack">
+          <div class="price-stack__value">$125</div>
+          <span class="pill gold">Numbered</span>
+        </div>
+        <p class="product-card__lede">This page gives the artifact its own gravity. It is positioned as a finite object with narrative weight, not a standard add-on product.</p>
+        <ul class="store-facts">
+          <li>No restocks planned</li>
+          <li>No second edition promised</li>
+          <li>Checkout: direct purchase available</li>
+        </ul>
+        <div class="button-row">
+          <a class="btn primary" href="https://buy.stripe.com/6oUdR9eByf4w7oA6E0eEo00" target="_blank" rel="noopener">Buy collector edition</a>
+          <a class="btn" href="/merch.html">Back to store</a>
+          <a class="btn" href="/assets/images/collector/collector1.png" target="_blank" rel="noopener">Open image</a>
+        </div>
+      </article>
+    </section>
 
-<script>
-const endDate = new Date();
-endDate.setHours(endDate.getHours() + 48);
-const countdownEl = document.getElementById("countdown");
-function updateCountdown(){
- const now = new Date().getTime();
- const distance = endDate - now;
- if(distance < 0){
-   countdownEl.innerHTML = "ARCHIVE CLOSED";
-   return;
- }
- const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
- const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
- const seconds = Math.floor((distance % (1000*60)) / 1000);
- countdownEl.innerHTML = hours + "H " + minutes + "M " + seconds + "S";
-}
-setInterval(updateCountdown, 1000);
-updateCountdown();
-</script>
-
+    <section class="detail-grid">
+      <article class="page-panel">
+        <div class="chip">Collector note</div>
+        <h2 style="margin:12px 0 8px;">Archival, not disposable</h2>
+        <p>The point of this page is to let the object breathe on its own. It should read like something scarce, ceremonial, and sealed in a specific era of the catalogue.</p>
+      </article>
+      <article class="page-panel">
+        <div class="chip">Public state</div>
+        <h2 style="margin:12px 0 8px;">Live in the collector line</h2>
+        <p>The artifact now keeps its scarce collector framing while sending buyers directly into checkout instead of a placeholder contact step.</p>
+      </article>
+    </section>
+  </main>
+  <script src="/assets/config.js" defer></script>
+  <script src="/assets/js/site-shell.js" defer></script>
 </body>
 </html>
