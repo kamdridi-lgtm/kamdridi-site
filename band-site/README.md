@@ -1,18 +1,19 @@
 # KAMDRIDI Official Website
 
-Production-ready cinematic artist website for **KAMDRIDI** and **Echoes Unearthed**, built with Next.js, Tailwind CSS, Stripe Checkout, Printful fulfillment hooks, and Vercel-compatible server routes.
+Dark cinematic artist website for **KAMDRIDI** and **Echoes Unearthed**, built with Next.js, Tailwind CSS, hosted checkout support, fan-club flows, and Vercel-compatible server routes.
 
 ## What is included
 
 - Premium dark metal / cinematic visual design
 - Responsive pages for Home, Music, News, Band, Tour, Store, Fan Club, Games, Visual Album, Who is Kam Dridi, and Contact
 - Dropdown navigation, icon-based social header, and global cart drawer
-- Cart-based merch store with featured collector artifact, product grid, and Stripe Checkout
-- Stripe subscription links for fan-club memberships
+- Cart-based merch store with featured collector artifact, product grid, and hosted checkout support
+- Membership tier links for fan-club access when live checkout links are configured
 - Stripe webhook route prepared for Printful auto-fulfillment
 - Fan club signup/login with signed server-side sessions
 - Games launcher page and comic-style reader layout
 - Neon Postgres support for fan-club accounts and contact submissions
+- Multi-agent orchestration layer with local JSON fallback and optional Supabase persistence
 - SEO metadata, sitemap, robots, and manifest routes
 
 ## Tech stack
@@ -21,7 +22,7 @@ Production-ready cinematic artist website for **KAMDRIDI** and **Echoes Unearthe
 - React 19
 - Tailwind CSS v4
 - Next.js Route Handlers for backend logic
-- Stripe Checkout
+- Hosted checkout support
 - Printful API
 - Neon serverless Postgres
 
@@ -86,7 +87,7 @@ band-site/
 
 ## Local installation
 
-1. Open a terminal in `C:\Users\Administrator\OneDrive\Documents\EchoesEngine_complete\band-site`
+1. Open a terminal in `C:\Users\Administrator\.openclaw\tmp\kamdridi-site-deploy\band-site`
 2. Copy `.env.example` to `.env.local`
 3. Install dependencies:
 
@@ -111,8 +112,6 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_publishable_key
 NEXT_PUBLIC_STRIPE_LINK_INNER_CIRCLE=https://buy.stripe.com/your-inner-circle-link
 NEXT_PUBLIC_STRIPE_LINK_COLLECTOR=https://buy.stripe.com/your-collector-link
-NEXT_PUBLIC_GAME_THE_GILDED_NULL_URL=https://kamdridi.com/games/the-gilded-null
-NEXT_PUBLIC_GAME_MONSTER_SYSTEM_URL=https://kamdridi.com/games/monster-system
 STRIPE_SECRET_KEY=sk_test_your_secret_key
 STRIPE_WEBHOOK_SECRET=whsec_example
 PRINTFUL_API_KEY=printful_api_key
@@ -128,13 +127,49 @@ PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_WHITE_L=100008
 PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_WHITE_XL=100009
 PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_WHITE_XXL=100010
 DATABASE_URL=postgres://user:password@host:5432/dbname
-CONTACT_EMAIL=management@kamdridi.com
 FAN_CLUB_SESSION_SECRET=replace-with-a-long-random-string
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 ```
+
+## Agent system
+
+The recovered advanced site now includes the autonomous agent layer directly inside the Next.js app.
+
+Core files:
+
+- `ops/agent-manifest.json`
+- `lib/agents/store.ts`
+- `lib/agents/system.ts`
+- `app/api/agents/intake/route.ts`
+- `app/api/agents/status/route.ts`
+- `app/api/agents/reset/route.ts`
+- `app/api/agents/orchestrator/route.ts`
+- `app/agents/page.tsx`
+- `supabase/multi-agent-system.sql`
+- `supabase/verify-agent-system.sql`
+
+How it runs:
+
+- Local with no Supabase env vars: persists to `data/agent-system.json`
+- With `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`: persists to Supabase through REST
+- On Vercel: `vercel.json` schedules `/api/agents/orchestrator` every 5 minutes
+
+Manual endpoints:
+
+- `POST /api/agents/intake`
+- `GET /api/agents/status`
+- `POST /api/agents/restart`
+- `GET /api/agents/orchestrator`
+
+Control page:
+
+- `/agents`
 
 ## Store automation
 
-The merch store uses cart-based Stripe Checkout and a Stripe webhook for automatic fulfillment.
+The merch store uses a cart-based hosted checkout flow and a Stripe webhook for automatic fulfillment when live credentials are configured.
 
 For production:
 
@@ -149,8 +184,8 @@ For production:
 8. Fill in the `PRINTFUL_VARIANT_WAR_MACHINES_ARTIFACT_TEE_*`, `PRINTFUL_VARIANT_ECHOES_UNEARTHED_TEE_*`, and `PRINTFUL_VARIANT_POSTERS_DEFAULT_DEFAULT` env vars with the real Printful variant IDs
 9. Test checkout in Stripe test mode before switching to live keys
 
-Apple Pay and Google Pay are surfaced automatically by Stripe Checkout when the Stripe account and production domain are configured for wallet support.
-After Stripe completes payment, the webhook creates the Printful order automatically, and `/api/store/tracking?session_id=...` can return shipment tracking once Printful ships the order.
+Apple Pay and Google Pay are surfaced automatically by hosted checkout when the Stripe account and production domain are configured for wallet support.
+After Stripe completes payment, the webhook can create the Printful order automatically, and `/api/store/tracking?session_id=...` can return shipment tracking once Printful ships the order.
 
 ## Fan club and contact storage
 
@@ -207,7 +242,6 @@ PRINTFUL_VARIANT_ECHOES_UNEARTHED_TEE_WHITE_XL
 PRINTFUL_VARIANT_ECHOES_UNEARTHED_TEE_WHITE_XXL
 PRINTFUL_VARIANT_POSTERS_DEFAULT_DEFAULT
 DATABASE_URL
-CONTACT_EMAIL
 FAN_CLUB_SESSION_SECRET
 ```
 
@@ -223,10 +257,10 @@ https://kamdridi-site.vercel.app
 
 - No custom server is required
 - Next.js App Router is ready for direct Vercel deployment
-- Stripe Checkout handles credit card, Apple Pay, and Google Pay when supported
+- Hosted checkout handles credit card, Apple Pay, and Google Pay when supported
 - The `/api/stripe/webhook` route is ready for Stripe webhook delivery on Vercel
-- Merch checkout is production-ready when Stripe and Printful env vars are configured
-- Contact and fan-club persistence are production-ready when `DATABASE_URL` is configured
+- Merch checkout becomes live when Stripe and Printful env vars are configured
+- Contact and fan-club persistence become durable when `DATABASE_URL` is configured
 - SEO routes are already included: `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`
 
 ## Commercial readiness checklist
@@ -240,7 +274,7 @@ https://kamdridi-site.vercel.app
 
 ## Direct production status
 
-This project is ready to deploy directly to Vercel as long as the required production environment variables are configured, especially:
+This project can deploy directly to Vercel as long as the required production environment variables are configured, especially:
 
 - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
 - `STRIPE_SECRET_KEY`
@@ -249,4 +283,4 @@ This project is ready to deploy directly to Vercel as long as the required produ
 - `DATABASE_URL`
 - `FAN_CLUB_SESSION_SECRET`
 
-With those set, the site can process merch orders, accept memberships, and route eligible store items into automatic fulfillment.
+With those set, the site can process merch orders through live hosted checkout, accept memberships through live links, and route eligible store items into automatic fulfillment.

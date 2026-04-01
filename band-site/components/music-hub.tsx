@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Disc3, Music2, Play, Radio } from "lucide-react";
 import { GlassCard, Section, SectionHeading } from "@/components/ui";
-import { albumTimeline, featuredVideo, streamingLinks } from "@/data/site";
+import { albumTimeline, featuredVideo, streamingLinks, warMachinesCover } from "@/data/site";
 
 const galleryImages = [
   "/assets/images/gallery/p01_hero.jpg",
@@ -24,14 +24,21 @@ export function MusicHub() {
     <>
       <Section id="listen-now">
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <GlassCard>
-            <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Listen Now</p>
-            <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.08em] text-white">
-              War Machines is live
-            </h2>
-            <p className="mt-4 text-sm leading-7 text-stone-400">
-              Stream the current KAMDRIDI single across the official platform links below.
-            </p>
+          <GlassCard className="overflow-hidden p-0">
+            <div className="grid h-full gap-0 md:grid-cols-[0.54fr_0.46fr]">
+              <div className="relative min-h-80">
+                <Image src={warMachinesCover} alt="War Machines single cover" fill className="object-cover" />
+              </div>
+              <div className="flex flex-col justify-center p-6">
+                <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Listen Now</p>
+                <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.08em] text-white">
+                  War Machines is live
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-stone-400">
+                  Stream the current KAMDRIDI single across the official platform links below.
+                </p>
+              </div>
+            </div>
           </GlassCard>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {streamingLinks.map((link) => (

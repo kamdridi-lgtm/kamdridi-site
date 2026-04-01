@@ -1,7 +1,6 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
 
 type CartItem = {
   id: string;
@@ -34,9 +33,6 @@ type AppContextValue = {
 };
 
 const AppContext = createContext<AppContextValue | undefined>(undefined);
-const stripePromise = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-  ? loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
-  : Promise.resolve(null);
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -118,6 +114,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
   }
 
   async function checkout() {
+    window.localStorage.setItem(
+      "kamdridi-pending-checkout",
+      JSON.stringify(cart.map((item) => item.id))
+    );
+
     const response = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -127,6 +128,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     const payload = await response.json();
 
     if (!response.ok) {
+      window.localStorage.removeItem("kamdridi-pending-checkout");
       return { ok: false, message: payload.error ?? "Checkout failed." };
     }
 
@@ -135,18 +137,18 @@ export function Providers({ children }: { children: React.ReactNode }) {
       return { ok: true };
     }
 
-    const stripe = await stripePromise;
-    if (!stripe) {
-      return { ok: false, message: "Stripe.js did not load." };
+    if (payload.url) {
+      window.location.href = payload.url;
+      return { ok: true };
     }
 
-    const result = await stripe.redirectToCheckout({ sessionId: payload.sessionId });
-
-    if (result.error) {
-      return { ok: false, message: result.error.message };
+    if (!payload.sessionId) {
+      window.localStorage.removeItem("kamdridi-pending-checkout");
+      return { ok: false, message: "Checkout redirect is unavailable." };
     }
 
-    return { ok: true };
+    window.localStorage.removeItem("kamdridi-pending-checkout");
+    return { ok: false, message: "Checkout link is unavailable." };
   }
 
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);

@@ -11,6 +11,14 @@ function getSecret() {
   return process.env.FAN_CLUB_SESSION_SECRET || "dev-fallback-secret-change-me";
 }
 
+function shouldUseSecureCookies() {
+  if (process.env.NEXT_PUBLIC_SITE_URL) {
+    return process.env.NEXT_PUBLIC_SITE_URL.startsWith("https://");
+  }
+
+  return process.env.NODE_ENV === "production" && Boolean(process.env.VERCEL_URL);
+}
+
 function sign(value: string) {
   return crypto.createHmac("sha256", getSecret()).update(value).digest("hex");
 }
@@ -59,8 +67,15 @@ export const sessionCookie = {
   options: {
     httpOnly: true,
     sameSite: "lax" as const,
-    secure: process.env.NODE_ENV === "production",
+    secure: shouldUseSecureCookies(),
     path: "/",
     maxAge: 60 * 60 * 24 * 30
   }
 };
+
+export function getSessionCookieOptions(requestUrl?: string) {
+  return {
+    ...sessionCookie.options,
+    secure: requestUrl ? requestUrl.startsWith("https://") : sessionCookie.options.secure
+  };
+}

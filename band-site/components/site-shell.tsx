@@ -95,6 +95,36 @@ const socialIcons: Record<string, React.ReactNode> = {
   Twitter: <XIcon />
 };
 
+const footerRoutes = [
+  { label: "News", href: "/news" },
+  { label: "Media", href: "/media" },
+  { label: "Band", href: "/band" },
+  { label: "Tour", href: "/tour" }
+];
+
+function isActivePath(pathname: string, href: string) {
+  if (href === "/") {
+    return pathname === "/";
+  }
+
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function stripHash(href: string) {
+  return href.split("#")[0] || href;
+}
+
+function isNavItemActive(pathname: string, item: (typeof navigation)[number]) {
+  if (isActivePath(pathname, item.href)) {
+    return true;
+  }
+
+  return item.children?.some((child) => {
+    const childPath = stripHash(child.href);
+    return childPath.startsWith("/") ? isActivePath(pathname, childPath) : false;
+  });
+}
+
 function SocialBar() {
   return (
     <div className="border-b border-white/10 bg-black/30">
@@ -151,7 +181,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   href={item.href}
                   className={clsx(
                     "text-sm uppercase tracking-[0.28em] text-stone-200 transition hover:text-[#f4c66a]",
-                    pathname === item.href && "text-[#f4c66a]"
+                    isNavItemActive(pathname, item) && "text-[#f4c66a]"
                   )}
                 >
                   {item.label}
@@ -236,29 +266,79 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   ) : null}
                 </div>
               ))}
+              <div className="rounded-2xl border border-white/5 bg-white/[0.03] p-3">
+                <p className="text-xs uppercase tracking-[0.28em] text-stone-500">Explore</p>
+                <div className="mt-3 grid gap-2">
+                  {footerRoutes.map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className={clsx(
+                        "text-sm text-stone-400 transition hover:text-[#f4c66a]",
+                        isActivePath(pathname, item.href) && "text-[#f4c66a]"
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         ) : null}
+
+        <div className="hidden border-t border-white/5 bg-black/25 lg:block">
+          <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 py-3 text-[11px] uppercase tracking-[0.3em] text-stone-400 sm:px-6">
+            <span className="text-stone-500">Explore</span>
+            {footerRoutes.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={clsx(
+                  "rounded-full border border-white/10 px-4 py-2 transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a]",
+                  isActivePath(pathname, item.href) && "border-[#f4c66a]/35 bg-[#f4c66a]/10 text-[#f4c66a]"
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
       </header>
 
       <main>{children}</main>
       <CartDrawer />
 
       <footer className="border-t border-white/10 bg-black/60">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.1fr_0.8fr_0.8fr_0.8fr]">
           <div>
             <p className="font-display text-3xl uppercase tracking-[0.24em] text-[#f4c66a]">
               {siteMeta.bandName}
             </p>
             <p className="mt-3 max-w-xl text-sm leading-7 text-stone-400">
               {siteMeta.tagline} Built as a living fan universe with music, games, visual-album
-              layers, collector drops, and fan-club access ready for expansion.
+              layers, collector drops, and fan-club access under one cinematic identity.
             </p>
           </div>
           <div>
             <p className="text-sm uppercase tracking-[0.3em] text-stone-500">Navigate</p>
             <div className="mt-4 grid gap-2">
               {navigation.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="text-sm text-stone-300 transition hover:text-[#f4c66a]"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className="text-sm uppercase tracking-[0.3em] text-stone-500">Explore</p>
+            <div className="mt-4 grid gap-2">
+              {footerRoutes.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}

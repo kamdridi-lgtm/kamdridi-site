@@ -20,6 +20,7 @@ export type TourDate = {
   venue: string;
   date: string;
   ticketLink: string;
+  actionLabel?: string;
   vip: string;
   status: string;
 };
@@ -41,6 +42,9 @@ export type MembershipTier = {
   priceLabel: string;
   description: string;
   checkoutUrl: string;
+  checkoutLabel?: string;
+  requestUrl: string;
+  requestLabel?: string;
   features: string[];
 };
 
@@ -68,6 +72,7 @@ export type VisualAlbumScene = {
   title: string;
   image: string;
   description: string;
+  href?: string;
 };
 
 export type StreamingLink = {
@@ -99,7 +104,7 @@ export const siteMeta = {
     "Official cinematic artist website for KAMDRIDI featuring Echoes Unearthed music, visual album content, games, memberships, merchandise, and fan-universe access.",
   heroVideo:
     "https://cdn.coverr.co/videos/coverr-stage-lights-1565701223930?download=1080p",
-  email: "management@kamdridi.com",
+  email: "contact@kamdridi.com",
   domain: "https://kamdridi.com",
   keywords: [
     "KAMDRIDI",
@@ -137,7 +142,7 @@ export const streamingLinks: StreamingLink[] = [
   {
     label: "Apple Music",
     href: "https://music.apple.com/us/album/war-machines-radio-edit-single/1871879256",
-    note: "War Machines (Radio Edit)"
+    note: "War Machines"
   },
   {
     label: "Spotify",
@@ -157,12 +162,17 @@ export const streamingLinks: StreamingLink[] = [
 ];
 
 export const navigation: NavItem[] = [
-  { label: "Home", href: "/" },
+  {
+    label: "Home",
+    href: "/",
+    children: [{ label: "Latest News", href: "/news#latest-headlines" }]
+  },
   {
     label: "Music",
     href: "/music",
     children: [
-      { label: "Latest Video", href: "/music#videos" },
+      { label: "Featured Video", href: "/music#videos" },
+      { label: "Media Hub", href: "/media#featured-video" },
       { label: "Discography", href: "/music#discography" },
       { label: "Tour Dates", href: "/tour#dates" }
     ]
@@ -172,7 +182,7 @@ export const navigation: NavItem[] = [
     href: "/store",
     children: [
       { label: "Featured Merch", href: "/store#featured" },
-      { label: "Collector Drops", href: "/store#featured" }
+      { label: "Collector Artifact", href: "/store#collector-artifact" }
     ]
   },
   {
@@ -181,7 +191,8 @@ export const navigation: NavItem[] = [
     children: [
       { label: "Membership Levels", href: "/fan-club#membership" },
       { label: "Games Access", href: "/fan-club#game-access" },
-      { label: "Fan Vault", href: "/fan-club#vault" }
+      { label: "Fan Vault", href: "/fan-club#vault" },
+      { label: "Member Login", href: "/fan-club#account-access" }
     ]
   },
   {
@@ -189,13 +200,15 @@ export const navigation: NavItem[] = [
     href: "/games",
     children: [
       { label: "Games Protocol", href: "/games#games-protocol" },
-      { label: "The Gilded Null", href: "/games#the-gilded-null" }
+      { label: "The Gilded Null", href: "/games/the-gilded-null" },
+      { label: "Vault Sequence", href: "/games/vault-sequence" }
     ]
   },
   {
     label: "Visual Album",
     href: "/visual-album",
     children: [
+      { label: "Featured Sequence", href: "/visual-album#featured-sequence" },
       { label: "Scene Archive", href: "/visual-album#scene-archive" },
       { label: "Album World", href: "/visual-album#album-world" }
     ]
@@ -205,7 +218,8 @@ export const navigation: NavItem[] = [
     href: "/who-is-kam-dridi",
     children: [
       { label: "Comic Reader", href: "/who-is-kam-dridi#comic-reader" },
-      { label: "Lore Archive", href: "/who-is-kam-dridi#lore-archive" }
+      { label: "Lore Archive", href: "/who-is-kam-dridi#lore-archive" },
+      { label: "Band Story", href: "/band#biography" }
     ]
   },
   {
@@ -234,9 +248,9 @@ export const newsPosts: NewsPost[] = [
   },
   {
     slug: "war-machines-out-now",
-    title: "War Machines is out now with the radio edit and the full album version",
+    title: "War Machines is out now",
     date: "2026-02-19",
-    image: "/assets/images/releases/war-machines-cover.jpg",
+    image: "/assets/images/releases/war-machines-cover.png",
     excerpt:
       "The lead single opens the Echoes Unearthed campaign with metallic weight, widescreen atmosphere, and a long-form album cut.",
     content: [
@@ -317,7 +331,7 @@ export const albumTimeline: AlbumEntry[] = [
     year: "2026",
     title: "War Machines",
     type: "Lead Single",
-    art: "/assets/images/releases/war-machines-cover.jpg",
+    art: "/assets/images/releases/war-machines-cover.png",
     description: "A metallic centerpiece of the album world, available in both radio and extended versions."
   }
 ];
@@ -327,31 +341,35 @@ export const tourDates: TourDate[] = [
     city: "Toronto, ON",
     venue: "The Danforth Music Hall",
     date: "2026-05-08",
-    ticketLink: "https://example.com/kamdridi/toronto",
+    ticketLink: `mailto:${siteMeta.email}?subject=KAMDRIDI%20Toronto%20Ticket%20Request`,
+    actionLabel: "Request Tickets",
     vip: "Early entry + signed poster",
-    status: "On Sale"
+    status: "Tickets on request"
   },
   {
     city: "Montreal, QC",
     venue: "MTELUS",
     date: "2026-05-14",
-    ticketLink: "https://example.com/kamdridi/montreal",
+    ticketLink: `mailto:${siteMeta.email}?subject=KAMDRIDI%20Montreal%20Ticket%20Request`,
+    actionLabel: "Request Tickets",
     vip: "Q&A + exclusive merch pack",
-    status: "On Sale"
+    status: "Tickets on request"
   },
   {
     city: "Los Angeles, CA",
     venue: "The Fonda Theatre",
     date: "2026-05-24",
-    ticketLink: "https://example.com/kamdridi/los-angeles",
+    ticketLink: `mailto:${siteMeta.email}?subject=KAMDRIDI%20Los%20Angeles%20Ticket%20Request`,
+    actionLabel: "Request Access",
     vip: "Backstage photo + laminate",
-    status: "Low Tickets"
+    status: "Priority requests"
   },
   {
     city: "Paris, FR",
     venue: "L'Olympia",
     date: "2026-06-12",
-    ticketLink: "https://example.com/kamdridi/paris",
+    ticketLink: `mailto:${siteMeta.email}?subject=KAMDRIDI%20Paris%20VIP%20Request`,
+    actionLabel: "Join Waitlist",
     vip: "Acoustic preview + early merch access",
     status: "VIP Waitlist"
   }
@@ -365,6 +383,9 @@ export const membershipTiers: MembershipTier[] = [
     description:
       "For fans who want a direct line into the Echoes Unearthed universe with private updates, first-wave access, and the first protocol unlocked.",
     checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_INNER_CIRCLE || "",
+    checkoutLabel: "Join Inner Circle",
+    requestUrl: `mailto:${siteMeta.email}?subject=Inner%20Circle%20Membership%20Request`,
+    requestLabel: "Request Inner Circle Access",
     features: [
       "Access to the first game in Games Protocol",
       "Partial fan vault access",
@@ -379,6 +400,9 @@ export const membershipTiers: MembershipTier[] = [
     description:
       "For collectors who want full universe access, deeper vault unlocks, rare drops, and the most complete KAMDRIDI membership tier.",
     checkoutUrl: process.env.NEXT_PUBLIC_STRIPE_LINK_COLLECTOR || "",
+    checkoutLabel: "Join Collector",
+    requestUrl: `mailto:${siteMeta.email}?subject=Collector%20Membership%20Request`,
+    requestLabel: "Request Collector Access",
     features: [
       "Everything in Inner Circle",
       "Access to both games",
@@ -391,9 +415,13 @@ export const membershipTiers: MembershipTier[] = [
 
 export const products = storeProducts;
 
+const officialGamePoster = "/official-game-poster.png";
+const vaultSequencePoster = "/assets/images/games/vault-sequence-poster.png";
+export const warMachinesCover = "/assets/images/releases/war-machines-cover.png";
+
 export const featuredVideo = {
-  title: "War Machines - Official Audio",
-  embedUrl: "https://www.youtube.com/embed/hzIVyLQN6a8",
+  title: "War Machines | Official Audio",
+  embedUrl: "https://www.youtube.com/embed/hzlVyLQN6a8",
   description:
     "Official audio for War Machines, presented as the current featured media release inside the Echoes Unearthed campaign."
 };
@@ -402,17 +430,17 @@ export const socialFeed = [
   {
     platform: "Instagram",
     caption: "Echoes Unearthed visual world tests are in motion. Dust, steel, and black-gold light.",
-    date: "2 days ago"
+    date: "March 29, 2026"
   },
   {
     platform: "TikTok",
     caption: "Stage atmospheres and heavy transitions from rehearsals.",
-    date: "5 days ago"
+    date: "March 26, 2026"
   },
   {
     platform: "YouTube",
     caption: "A new behind-the-scenes visual teaser is live now.",
-    date: "1 week ago"
+    date: "March 22, 2026"
   }
 ];
 
@@ -441,22 +469,21 @@ export const gameExperiences: GameExperience[] = [
     title: "THE GILDED NULL",
     subtitle: "Corridor Protocol",
     description: "Hold the line. Collect the gold. Outrun the darkness.",
-    poster: "/gilded-null.jpg",
-    launchUrl: process.env.NEXT_PUBLIC_GAME_THE_GILDED_NULL_URL || "/games#the-gilded-null",
+    poster: officialGamePoster,
+    launchUrl: "/games/the-gilded-null",
     membership: "Inner Circle",
     launcherLabel: "Initiate Protocol"
   },
   {
-    id: "monster-system",
-    title: "MONSTER SYSTEM",
+    id: "vault-sequence",
+    title: "THE GILDED NULL PART II",
     subtitle: "Vault Sequence",
     description:
-      "Enter the archive, track your score, and push deeper into the premium layer of the Echoes Unearthed world.",
-    poster: "/assets/images/band/live3.jpg",
-    launchUrl: process.env.NEXT_PUBLIC_GAME_MONSTER_SYSTEM_URL || "/games#games-protocol",
+      "Push into Chapter II, recover 10 memory fragments, and survive the Monster System inside the archive.",
+    poster: vaultSequencePoster,
+    launchUrl: "/games/vault-sequence",
     membership: "Collector",
-    launcherLabel: "Launch Sequence",
-    comingSoon: true
+    launcherLabel: "Enter Vault Sequence"
   }
 ];
 
@@ -491,20 +518,23 @@ export const visualAlbumScenes: VisualAlbumScene[] = [
   {
     id: "war-machines",
     title: "War Machines",
-    image: "/assets/images/releases/war-machines-cover.jpg",
-    description: "Industrial pressure, scorched light, and the first rupture in the campaign world."
+    image: warMachinesCover,
+    description: "Industrial pressure, scorched light, and the first rupture in the campaign world.",
+    href: "/music#videos"
   },
   {
     id: "echoes-unearthed",
     title: "Echoes Unearthed",
     image: "/assets/images/releases/echoes-unearthed-cover.jpg",
-    description: "The central record as a visual ruin: heavy, haunted, and cinematic."
+    description: "The central record as a visual ruin: heavy, haunted, and cinematic.",
+    href: "/media#press-stills"
   },
   {
     id: "live-stage",
     title: "Stage Transmission",
     image: "/assets/images/band/live_stage.jpg",
-    description: "Live performance reframed as a cinematic corridor between album scenes."
+    description: "Live performance reframed as a cinematic corridor between album scenes.",
+    href: "/games#the-gilded-null"
   }
 ];
 

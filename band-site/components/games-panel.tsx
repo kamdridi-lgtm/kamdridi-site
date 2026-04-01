@@ -6,17 +6,27 @@ import { gameExperiences } from "@/data/site";
 export function GamesPanel() {
   const gildedNull = gameExperiences.find((game) => game.id === "the-gilded-null");
 
+  function getStoreHref(gameId: string) {
+    return gameId === "vault-sequence"
+      ? "/store#vault-sequence-license"
+      : "/store#the-gilded-null-license";
+  }
+
   return (
     <>
       <Section id="games-protocol">
         <SectionHeading
           eyebrow="Games Protocol"
           title="Launcher access for the Echoes Unearthed fan universe"
-          description="Two protocol entries, clean launch actions, and membership-aware access notes built to slot directly into the live fan-club ecosystem."
+          description="Two protocol entries, clean launch actions, and clear access paths for public visitors, members, and collectors."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           {gameExperiences.map((game) => (
-            <GlassCard key={game.id} className="overflow-hidden p-0">
+            <GlassCard
+              key={game.id}
+              id={game.id === "vault-sequence" ? "vault-sequence" : undefined}
+              className="overflow-hidden p-0"
+            >
               <div className="relative h-80">
                 <Image
                   src={game.poster}
@@ -58,10 +68,16 @@ export function GamesPanel() {
                     {game.launcherLabel}
                   </a>
                   <Link
-                    href="/fan-club"
+                    href="/fan-club#membership"
                     className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 text-xs uppercase tracking-[0.25em] text-white transition hover:border-[#f4c66a]/60 hover:text-[#f4c66a]"
                   >
                     Unlock Access
+                  </Link>
+                  <Link
+                    href={getStoreHref(game.id)}
+                    className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 text-xs uppercase tracking-[0.25em] text-white transition hover:border-[#f4c66a]/60 hover:text-[#f4c66a]"
+                  >
+                    Buy License
                   </Link>
                 </div>
               </div>
@@ -97,14 +113,12 @@ export function GamesPanel() {
                   Hold the line. Collect the gold. Outrun the darkness.
                 </p>
                 <div className="mt-10">
-                  <a
+                  <Link
                     href={gildedNull.launchUrl}
-                    target={gildedNull.launchUrl.startsWith("/") ? undefined : "_blank"}
-                    rel={gildedNull.launchUrl.startsWith("/") ? undefined : "noreferrer"}
                     className="inline-flex items-center justify-center rounded-full bg-[#f4c66a] px-6 py-3 text-sm uppercase tracking-[0.25em] text-black transition duration-300 hover:-translate-y-0.5 hover:bg-[#ffd989]"
                   >
                     INITIATE PROTOCOL
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

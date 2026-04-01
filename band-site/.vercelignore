@@ -1,0 +1,17 @@
+.git
+.next
+node_modules
+.npm-cache
+.edge-shot-profile
+*.log
+*.err.log
+*.png
+*.tsbuildinfo
+codex-dev-3000.log
+codex-dev-3000.err.log
+dev_local.log
+dev_visual_album_3006.log
+start_*.log
+start_*.err.log
+.next-start-*.log
+.next-start-*.err.log

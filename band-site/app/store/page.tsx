@@ -1,32 +1,113 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { PageHero, Section, SectionHeading } from "@/components/ui";
+import Image from "next/image";
+import { CTAButton, Section, SectionHeading } from "@/components/ui";
 import { Storefront } from "@/components/storefront";
 
 export const metadata: Metadata = {
   title: "Store",
   description:
-    "Shop the official KAMDRIDI merch store with cinematic collector products, Stripe checkout, and automated fulfillment."
+    "Shop the official KAMDRIDI merch store with cinematic collector products, hosted checkout support, and direct order capture."
 };
 
 export default function StorePage() {
+  const checkoutEnabled = Boolean(process.env.STRIPE_SECRET_KEY);
+
   return (
     <>
-      <PageHero
-        eyebrow="Store"
-        title="Collector merch, artifact drops, and physical formats"
-        description="A cinematic KAMDRIDI merch store with featured bundles, cart-based checkout, secure Stripe payments, and automated fulfillment routing."
-        image="/store/artifact-bundle.jpg"
-      />
+      <section id="collector-artifact" className="overflow-hidden border-b border-white/10">
+        <Section className="relative py-14 md:py-18">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.14),transparent_26%),linear-gradient(180deg,rgba(11,10,8,0.65),rgba(11,10,8,0.96))]" />
+          <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Store</p>
+              <h1 className="mt-5 font-display text-5xl uppercase leading-none tracking-[0.08em] text-white md:text-7xl">
+                Gold-logo merch, Echoes Unearthed capsule, and premium drops
+              </h1>
+              <p className="mt-6 max-w-3xl text-base leading-8 text-stone-300">
+                The real KAMDRIDI merch wall: gold-logo essentials, Echoes Unearthed capsule
+                tees, War Machines print pieces, collector apparel, and one clean cart flow.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <CTAButton href="#featured">Browse the Drop</CTAButton>
+                <CTAButton href="/fan-club" tone="secondary">
+                  Enter Fan Club
+                </CTAButton>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.28em] text-stone-400">
+                <span className="rounded-full border border-[#f4c66a]/35 bg-[#f4c66a]/10 px-4 py-2 text-[#f4c66a]">
+                  Gold Logo Capsule
+                </span>
+                <span className="rounded-full border border-white/10 px-4 py-2">
+                  {checkoutEnabled ? "Hosted Checkout Live" : "Local Demo Checkout"}
+                </span>
+                <span className="rounded-full border border-white/10 px-4 py-2">Tees</span>
+                <span className="rounded-full border border-white/10 px-4 py-2">Hoodie</span>
+                <span className="rounded-full border border-white/10 px-4 py-2">Cap</span>
+                <span className="rounded-full border border-white/10 px-4 py-2">Mug</span>
+                <span className="rounded-full border border-white/10 px-4 py-2">Poster</span>
+              </div>
+            </div>
+
+            <div className="relative grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="relative min-h-[460px] overflow-hidden rounded-[34px] border border-[#f4c66a]/20 bg-black shadow-[0_35px_90px_rgba(0,0,0,0.45)]">
+                <Image
+                  src="/store/merch/signal-target-collection.png"
+                  alt="Signal Target capsule merchandise board"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.06),rgba(0,0,0,0.56))]" />
+                <div className="absolute left-5 top-5 rounded-full border border-[#f4c66a]/35 bg-black/55 px-4 py-2 text-[11px] uppercase tracking-[0.28em] text-[#f4c66a] backdrop-blur">
+                  Signal Target Capsule
+                </div>
+              </div>
+
+              <div className="grid gap-4">
+                <div className="relative min-h-[220px] overflow-hidden rounded-[30px] border border-white/10 bg-black shadow-[0_30px_70px_rgba(0,0,0,0.4)]">
+                  <Image
+                    src="/store/merch/echoes-crest-tee-duo.png"
+                    alt="Echoes Unearthed crest tee variants"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.04),rgba(0,0,0,0.6))]" />
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="relative min-h-[220px] overflow-hidden rounded-[28px] border border-white/10 bg-black shadow-[0_30px_70px_rgba(0,0,0,0.4)]">
+                    <Image
+                      src="/store/merch/echoes-wordmark-tee-duo.png"
+                      alt="Echoes Unearthed wordmark tee variants"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.04),rgba(0,0,0,0.62))]" />
+                  </div>
+                  <div className="rounded-[28px] border border-white/10 bg-white/[0.04] p-5 backdrop-blur">
+                    <p className="text-xs uppercase tracking-[0.35em] text-stone-500">Checkout</p>
+                    <p className="mt-3 text-lg text-white">
+                      {checkoutEnabled ? "Hosted Stripe checkout is active" : "Local demo checkout is active"}
+                    </p>
+                    <p className="mt-4 text-sm leading-7 text-stone-400">
+                      Sizes and variants stay in the cart, then move into one direct KAMDRIDI
+                      checkout flow.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Section>
+      </section>
       <Section>
         <SectionHeading
           eyebrow="Merch Store"
-          title="Professional storefront for Echoes Unearthed"
-          description="Featured collector bundle, merch grid, persistent cart, Stripe-hosted checkout, and fulfillment flow prepared for automatic production and shipping."
+          title="KAMDRIDI merch capsule and collector access"
+          description="Gold-logo essentials, Echoes Unearthed apparel, Signal Target variants, print pieces, collector bundle, persistent cart, and one coherent storefront."
         />
         <div className="mt-12">
           <Suspense fallback={<div className="text-sm text-stone-400">Loading storefront...</div>}>
-            <Storefront />
+            <Storefront checkoutEnabled={checkoutEnabled} />
           </Suspense>
         </div>
       </Section>

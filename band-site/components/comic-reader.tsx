@@ -38,7 +38,7 @@ export function ComicReader() {
           </h2>
           <p className="mt-4 text-sm leading-7 text-stone-400">
             Navigate the pages like an archive viewer. The reader is responsive, touch-friendly,
-            and ready for the final comic assets when they are dropped into the project.
+            and built to expand into deeper chapters of the Echoes Unearthed story.
           </p>
         </div>
 

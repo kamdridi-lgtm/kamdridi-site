@@ -6,3 +6,8 @@ dist
 coverage
 data/contact-submissions.json
 data/fan-club-users.json
+.vercel
+.npm-cache
+*.log
+*.err.log
+.edge-shot-profile

@@ -95,7 +95,7 @@ export function ContactForm() {
                 rel="noreferrer"
                 className="text-sm text-stone-300 transition hover:text-[#f4c66a]"
               >
-                {link.label} · {link.handle}
+                {`${link.label} · ${link.handle}`}
               </a>
             ))}
           </div>

@@ -22,13 +22,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Your cart is empty." }, { status: 400 });
     }
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || new URL(request.url).origin;
     const stripe = getStripeServer();
 
     if (!stripe) {
       return NextResponse.json({
         mode: "simulated",
-        url: `${siteUrl}/store?purchase=success&session_id=simulated_session`
+        message: "Stripe is not configured. Redirecting to local demo checkout.",
+        url: `${siteUrl}/store?purchase=demo&session_id=simulated_session`
       });
     }
 
@@ -51,7 +52,7 @@ export async function POST(request: Request) {
       line_items: items.map((item) => ({
         quantity: item.quantity,
         price_data: {
-          currency: "usd",
+          currency: "cad",
           unit_amount: Math.round(item.price * 100),
           product_data: {
             name: [item.name, item.color, item.size].filter(Boolean).join(" / "),
@@ -67,7 +68,7 @@ export async function POST(request: Request) {
       }))
     });
 
-    return NextResponse.json({ sessionId: session.id });
+    return NextResponse.json({ sessionId: session.id, url: session.url });
   } catch (error) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Unable to start checkout." },

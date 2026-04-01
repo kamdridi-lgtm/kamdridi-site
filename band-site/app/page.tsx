@@ -13,6 +13,7 @@ import {
   siteMeta,
   socialLinks,
   streamingLinks,
+  warMachinesCover,
   visualAlbumScenes
 } from "@/data/site";
 
@@ -69,32 +70,39 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Music"
           title="Stream War Machines"
-          description="Official streaming links for War Machines (Radio Edit) across the live platforms."
+          description="Official streaming links for War Machines across the live platforms."
           align="center"
         />
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {streamingLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center justify-between rounded-[28px] border border-white/10 bg-white/[0.04] px-6 py-5 shadow-[0_35px_80px_rgba(0,0,0,0.35)] backdrop-blur transition hover:-translate-y-1 hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"
-            >
-              <div className="flex items-center gap-4">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/30">
-                  {streamIcons[link.label] ?? <Music2 className="h-5 w-5" />}
-                </span>
-                <div>
-                  <p className="text-sm uppercase tracking-[0.3em] text-white">{link.label}</p>
-                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-stone-500">
-                    {link.note}
-                  </p>
+        <div className="mt-10 grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
+          <GlassCard className="overflow-hidden p-0">
+            <div className="relative h-full min-h-80">
+              <Image src={warMachinesCover} alt="War Machines single cover" fill className="object-cover" />
+            </div>
+          </GlassCard>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {streamingLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-between rounded-[28px] border border-white/10 bg-white/[0.04] px-6 py-5 shadow-[0_35px_80px_rgba(0,0,0,0.35)] backdrop-blur transition hover:-translate-y-1 hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"
+              >
+                <div className="flex items-center gap-4">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/30">
+                    {streamIcons[link.label] ?? <Music2 className="h-5 w-5" />}
+                  </span>
+                  <div>
+                    <p className="text-sm uppercase tracking-[0.3em] text-white">{link.label}</p>
+                    <p className="mt-1 text-xs uppercase tracking-[0.2em] text-stone-500">
+                      {link.note}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <span className="text-xs uppercase tracking-[0.25em] text-stone-300">Open</span>
-            </a>
-          ))}
+                <span className="text-xs uppercase tracking-[0.25em] text-stone-300">Open</span>
+              </a>
+            ))}
+          </div>
         </div>
         <div className="mt-10">
           <GlassCard className="overflow-hidden p-0">
@@ -204,7 +212,7 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Store"
           title="Collector merch and official releases"
-          description="Merchandise, premium formats, and collector pieces wired to hosted Stripe checkout."
+          description="Merchandise, premium formats, and collector pieces organized inside the official KAMDRIDI store flow."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {storeProducts.slice(0, 4).map((product) => (

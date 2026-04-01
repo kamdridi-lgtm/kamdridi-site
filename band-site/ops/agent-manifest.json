@@ -1,0 +1,129 @@
+[
+  {
+    "id": "orchestrator_agent",
+    "name": "Orchestrator Agent",
+    "group": "leadership",
+    "isChief": true,
+    "description": "Controls all agents, routes work, validates output, and restarts failed agents."
+  },
+  {
+    "id": "cto_agent",
+    "name": "CTO Agent",
+    "group": "direction",
+    "description": "Owns technical architecture, technology choices, and system strategy."
+  },
+  {
+    "id": "project_manager_agent",
+    "name": "Project Manager Agent",
+    "group": "direction",
+    "description": "Breaks initiatives into tickets, sequences delivery, and maintains execution plans."
+  },
+  {
+    "id": "code_builder_agent",
+    "name": "Code Builder Agent",
+    "group": "development",
+    "description": "Builds new code, pages, and product features."
+  },
+  {
+    "id": "code_repair_agent",
+    "name": "Code Repair Agent",
+    "group": "development",
+    "description": "Fixes bugs, regressions, and JS/CSS/backend errors."
+  },
+  {
+    "id": "refactor_agent",
+    "name": "Refactor Agent",
+    "group": "development",
+    "description": "Improves structure, reduces debt, and keeps the codebase maintainable."
+  },
+  {
+    "id": "performance_agent",
+    "name": "Performance Agent",
+    "group": "development",
+    "description": "Optimizes loading speed, assets, and runtime efficiency."
+  },
+  {
+    "id": "security_agent",
+    "name": "Security Agent",
+    "group": "development",
+    "description": "Audits vulnerabilities, secrets, and API protection."
+  },
+  {
+    "id": "database_agent",
+    "name": "Database Agent",
+    "group": "backend",
+    "description": "Maintains Supabase schema, migrations, and data organization."
+  },
+  {
+    "id": "api_agent",
+    "name": "API Agent",
+    "group": "backend",
+    "description": "Builds endpoints and connects frontend with backend services."
+  },
+  {
+    "id": "automation_agent",
+    "name": "Automation Agent",
+    "group": "backend",
+    "description": "Builds scheduled scripts, cron flows, and workflow automations."
+  },
+  {
+    "id": "radio_finder_agent",
+    "name": "Radio Finder Agent",
+    "group": "research",
+    "description": "Finds rock and heavy radios and gathers contact channels."
+  },
+  {
+    "id": "festival_finder_agent",
+    "name": "Festival Finder Agent",
+    "group": "research",
+    "description": "Finds festivals, deadlines, and relevant booking contacts."
+  },
+  {
+    "id": "press_finder_agent",
+    "name": "Press Finder Agent",
+    "group": "research",
+    "description": "Finds music blogs, magazines, and editorial opportunities."
+  },
+  {
+    "id": "playlist_finder_agent",
+    "name": "Playlist Finder Agent",
+    "group": "research",
+    "description": "Finds playlist curators, Spotify opportunities, and rock playlists."
+  },
+  {
+    "id": "email_outreach_agent",
+    "name": "Email Outreach Agent",
+    "group": "outreach",
+    "description": "Builds outreach emails, follow-ups, and communication sequences."
+  },
+  {
+    "id": "social_media_agent",
+    "name": "Social Media Agent",
+    "group": "outreach",
+    "description": "Prepares automated announcements and social publication plans."
+  },
+  {
+    "id": "fan_growth_agent",
+    "name": "Fan Growth Agent",
+    "group": "outreach",
+    "description": "Captures fan leads, newsletter growth, and conversion opportunities."
+  },
+  {
+    "id": "content_writer_agent",
+    "name": "Content Writer Agent",
+    "group": "content",
+    "description": "Writes bios, press releases, newsletters, and campaign copy."
+  },
+  {
+    "id": "visual_creator_agent",
+    "name": "Visual Creator Agent",
+    "group": "content",
+    "description": "Plans promo visuals and image deliverables without altering site identity."
+  },
+  {
+    "id": "analytics_agent",
+    "name": "Analytics Agent",
+    "group": "content",
+    "description": "Measures traffic, conversions, and growth performance."
+  }
+]

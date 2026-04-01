@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { GlassCard, PageHero, Section, SectionHeading } from "@/components/ui";
+import Link from "next/link";
+import { CTAButton, GlassCard, PageHero, Section, SectionHeading } from "@/components/ui";
 import { albumTimeline, bandBio, members } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export default function BandPage() {
       <PageHero
         eyebrow="Band"
         title="The story, the members, and the records"
-        description="A professional biography page that balances press-ready storytelling with fan-focused detail."
+        description="The official KAMDRIDI story page, built around the biography, live roles, and release timeline behind Echoes Unearthed."
         image="/assets/images/band/live_stage.jpg"
       />
 
@@ -22,13 +23,19 @@ export default function BandPage() {
         <SectionHeading
           eyebrow="Band History"
           title="Built for records, films, and cinematic stages"
-          description="Tell the origin story, define the sound, and position the artist like a serious modern entertainment project."
+          description="The project history, sonic identity, and visual direction that shape KAMDRIDI as a single coherent universe."
         />
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <GlassCard className="grid gap-5 text-sm leading-8 text-stone-300">
             {bandBio.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
+            <div className="flex flex-wrap gap-3 pt-3">
+              <CTAButton href="/music#discography">Open Music</CTAButton>
+              <CTAButton href="/who-is-kam-dridi#lore-archive" tone="secondary">
+                Open Lore
+              </CTAButton>
+            </div>
           </GlassCard>
           <GlassCard className="overflow-hidden p-0">
             <div className="relative h-full min-h-96">
@@ -36,13 +43,27 @@ export default function BandPage() {
             </div>
           </GlassCard>
         </div>
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          <Link href="/music#videos" className="rounded-[24px] border border-white/10 bg-black/30 p-5 text-sm text-stone-300 transition hover:border-[#f4c66a]/40 hover:text-[#f4c66a]">
+            <span className="block text-xs uppercase tracking-[0.35em] text-[#f4c66a]">Music</span>
+            <span className="mt-3 block leading-7">Follow the project from band story into the current featured release and video hub.</span>
+          </Link>
+          <Link href="/tour#dates" className="rounded-[24px] border border-white/10 bg-black/30 p-5 text-sm text-stone-300 transition hover:border-[#f4c66a]/40 hover:text-[#f4c66a]">
+            <span className="block text-xs uppercase tracking-[0.35em] text-[#f4c66a]">Tour</span>
+            <span className="mt-3 block leading-7">Move from the artist profile into the live campaign dates and VIP routes.</span>
+          </Link>
+          <Link href="/contact#management" className="rounded-[24px] border border-white/10 bg-black/30 p-5 text-sm text-stone-300 transition hover:border-[#f4c66a]/40 hover:text-[#f4c66a]">
+            <span className="block text-xs uppercase tracking-[0.35em] text-[#f4c66a]">Contact</span>
+            <span className="mt-3 block leading-7">Booking, press, and licensing requests continue through the direct contact page.</span>
+          </Link>
+        </div>
       </Section>
 
       <Section id="members">
         <SectionHeading
           eyebrow="Members"
           title="Profiles for the live and creative roles"
-          description="Feature core identities, collaborators, and live-performance contributors."
+          description="Core identities, collaborators, and performance roles that carry the project on stage and in production."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {members.map((member) => (
@@ -62,9 +83,9 @@ export default function BandPage() {
 
       <Section id="timeline">
         <SectionHeading
-          eyebrow="Timeline of Albums"
+          eyebrow="Discography"
           title="Discography milestones"
-          description="Map the journey from earlier releases to Echoes Unearthed and the War Machines campaign."
+          description="From the earlier fragments to the Echoes Unearthed rollout and the War Machines campaign centerpiece."
         />
         <div className="mt-12 grid gap-6">
           {albumTimeline.map((album) => (

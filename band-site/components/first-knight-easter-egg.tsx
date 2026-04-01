@@ -79,7 +79,7 @@ export function FirstKnightEasterEgg() {
                   {isPlaying ? "PLAYING" : "PLAY TRANSMISSION"}
                 </button>
                 <Link
-                  href="/store"
+                  href="/store#collector-artifact"
                   className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 text-xs uppercase tracking-[0.25em] text-white transition hover:border-[#f4c66a]/60 hover:text-[#f4c66a]"
                 >
                   ENTER THE ARMORY

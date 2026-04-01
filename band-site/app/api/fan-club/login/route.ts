@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { validateFanClubUser } from "@/lib/storage";
-import { createSessionToken, sessionCookie } from "@/lib/session";
+import { createSessionToken, getSessionCookieOptions, sessionCookie } from "@/lib/session";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
   cookieStore.set(
     sessionCookie.name,
     createSessionToken({ name: user.name, email: user.email }),
-    sessionCookie.options
+    getSessionCookieOptions(request.url)
   );
 
   return NextResponse.json({

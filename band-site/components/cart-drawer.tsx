@@ -8,7 +8,7 @@ import { useApp } from "@/components/providers";
 function formatCurrency(value: number) {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "USD"
+    currency: "CAD"
   }).format(value);
 }
 
@@ -128,7 +128,7 @@ export function CartDrawer() {
                 Cart is empty
               </h3>
               <p className="mt-4 max-w-sm text-sm leading-7 text-stone-400">
-                Add KAMDRIDI merch, vinyl, or the collector artifact to begin secure checkout.
+                Add KAMDRIDI merch, physical music, or the collector artifact to start the checkout flow.
               </p>
             </div>
           )}
@@ -140,7 +140,7 @@ export function CartDrawer() {
             <span className="text-lg text-[#f4c66a]">{formatCurrency(cartSubtotal)}</span>
           </div>
           <p className="mt-3 text-xs leading-6 text-stone-500">
-            Stripe hosted checkout supports credit card, Apple Pay, and Google Pay when available.
+            Hosted checkout supports card and wallet payment methods when live payment credentials are available. Otherwise the site falls back to a local confirmation path for testing.
           </p>
           {message ? <p className="mt-3 text-sm text-rose-300">{message}</p> : null}
           <div className="mt-5 grid gap-3">
@@ -150,7 +150,7 @@ export function CartDrawer() {
               disabled={!cart.length || isLoading}
               className="inline-flex items-center justify-center rounded-full bg-[#f4c66a] px-6 py-4 text-sm uppercase tracking-[0.25em] text-black transition hover:-translate-y-0.5 hover:bg-[#ffd989] disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {isLoading ? "Opening Checkout..." : "Secure Checkout"}
+              {isLoading ? "Opening Checkout..." : "Open Checkout"}
             </button>
             <button
               type="button"
