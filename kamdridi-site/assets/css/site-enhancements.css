@@ -838,3 +838,40 @@ body {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* JAPANESE SPECIAL BUTTON - PREMIUM FEATURED */
+.btn-jp-red {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 22px;
+    border-radius: 999px;
+    font-weight: 900 !important;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(180deg, #ff2a1b, #a31108) !important;
+    border: 1px solid #ff5a47 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(255, 42, 27, 0.4), 0 8px 25px rgba(0, 0, 0, 0.45);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    margin: 0 8px;
+}
+
+.btn-jp-red:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: linear-gradient(180deg, #ff4c3d, #ba150c) !important;
+    border-color: #ff8e83 !important;
+    box-shadow: 0 0 25px rgba(255, 42, 27, 0.65), 0 12px 35px rgba(0, 0, 0, 0.55);
+}
+
+@media (max-width: 900px) {
+    .btn-jp-red {
+        margin: 10px 0;
+        width: 100%;
+    }
+}
