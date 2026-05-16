@@ -1,22 +1,47 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
-import { GlassCard, PageHero, Section, SectionHeading } from "@/components/ui";
+import { GlassCard, Section, SectionHeading } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Contact",
   description: "Contact KAMDRIDI for management, booking, press, licensing, and general inquiries."
 };
 
+const contactHeroVideo = "/videos/contact-hero-kamdrid.mp4";
+
 export default function ContactPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Contact"
-        title="Contact, management, and social channels"
-        description="Use the direct contact route for booking, press, licensing, brand work, and official KAMDRIDI inquiries."
-        image="/assets/images/press-bio-bg.jpg"
-      />
+      <section className="relative h-[62svh] min-h-[420px] overflow-hidden border-b border-white/10 md:h-[74svh]">
+        <video
+          className="absolute inset-0 h-full w-full object-cover object-top"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/assets/images/press-bio-bg.jpg"
+          aria-label="KAMDRIDI contact hero video"
+        >
+          <source src={contactHeroVideo} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,5,4,0.03),rgba(6,5,4,0.16))]" />
+      </section>
+
+      <Section className="py-12 md:py-16">
+        <div className="mx-auto max-w-4xl">
+          <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Contact</p>
+          <h1 className="mt-5 font-display text-4xl uppercase leading-none tracking-[0.08em] text-white sm:text-5xl md:text-7xl">
+            Contact, management, and social channels
+          </h1>
+          <p className="mt-6 max-w-3xl text-base leading-8 text-stone-300">
+            Use the direct contact route for booking, press, licensing, brand work, and official
+            KAMDRIDI inquiries.
+          </p>
+        </div>
+      </Section>
+
       <Section>
         <SectionHeading
           eyebrow="Get in touch"
