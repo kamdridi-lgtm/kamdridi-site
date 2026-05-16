@@ -10,18 +10,33 @@ export const metadata: Metadata = {
     "Shop the official KAMDRIDI merch store with cinematic collector products, hosted checkout support, and direct order capture."
 };
 
+const storeHeroVideo = "/videos/store-hero-grok.mp4";
+
 export default function StorePage() {
   const checkoutEnabled = Boolean(process.env.STRIPE_SECRET_KEY);
 
   return (
     <>
       <section id="collector-artifact" className="overflow-hidden border-b border-white/10">
-        <Section className="relative py-14 md:py-18">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.14),transparent_26%),linear-gradient(180deg,rgba(11,10,8,0.65),rgba(11,10,8,0.96))]" />
-          <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div>
+        <section className="relative min-h-[calc(100svh-120px)] overflow-hidden">
+          <video
+            className="absolute inset-0 h-full w-full object-cover object-top"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/store/merch/signal-target-collection.png"
+            aria-label="KAMDRIDI store hero video"
+          >
+            <source src={storeHeroVideo} type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,6,5,0.08)_0%,rgba(7,6,5,0.1)_34%,rgba(7,6,5,0.7)_76%,rgba(7,6,5,0.96)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_72%,rgba(244,198,106,0.18),transparent_32%)]" />
+          <div className="relative mx-auto flex min-h-[calc(100svh-120px)] max-w-7xl items-end px-4 pb-14 pt-[46svh] sm:px-6 lg:pb-20 lg:pt-[42svh]">
+            <div className="max-w-4xl">
               <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Store</p>
-              <h1 className="mt-5 font-display text-5xl uppercase leading-none tracking-[0.08em] text-white md:text-7xl">
+              <h1 className="mt-5 font-display text-4xl uppercase leading-none tracking-[0.08em] text-white sm:text-5xl md:text-7xl">
                 Gold-logo merch, Echoes Unearthed capsule, and premium drops
               </h1>
               <p className="mt-6 max-w-3xl text-base leading-8 text-stone-300">
@@ -48,7 +63,22 @@ export default function StorePage() {
                 <span className="rounded-full border border-white/10 px-4 py-2">Poster</span>
               </div>
             </div>
+          </div>
+        </section>
 
+        <Section className="relative py-14 md:py-18">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.14),transparent_26%),linear-gradient(180deg,rgba(11,10,8,0.65),rgba(11,10,8,0.96))]" />
+          <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Featured Drop</p>
+              <h2 className="mt-5 font-display text-4xl uppercase leading-none tracking-[0.08em] text-white md:text-6xl">
+                Collector merch wall
+              </h2>
+              <p className="mt-6 max-w-3xl text-base leading-8 text-stone-300">
+                Browse the current KAMDRIDI merch capsule, collector apparel, and physical release
+                products in the official store flow.
+              </p>
+            </div>
             <div className="relative grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
               <div className="relative min-h-[460px] overflow-hidden rounded-[34px] border border-[#f4c66a]/20 bg-black shadow-[0_35px_90px_rgba(0,0,0,0.45)]">
                 <Image
