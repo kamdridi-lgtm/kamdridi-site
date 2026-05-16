@@ -57,6 +57,18 @@ export const featuredArtifact: StoreProduct & {
 };
 
 export const storeProducts: StoreProduct[] = [
+  {
+    id: "echoes-unearthed-collector-cd",
+    name: "Echoes Unearthed - Collector CD",
+    category: "Physical Collector Edition",
+    image: "/store/cd-product.jpg",
+    price: 34,
+    priceLabel: "$34",
+    description:
+      "Physical collector CD edition with 9 official tracks, hidden bonus archive track, premium booklet, and collector artwork.",
+    badge: "Available Now",
+    fulfillmentMode: "manual"
+  },
   featuredArtifact,
   {
     id: "the-gilded-null-license",
