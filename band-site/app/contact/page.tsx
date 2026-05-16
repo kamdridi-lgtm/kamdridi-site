@@ -15,7 +15,7 @@ export default function ContactPage() {
     <>
       <section className="relative h-[62svh] min-h-[420px] overflow-hidden border-b border-white/10 md:h-[74svh]">
         <video
-          className="absolute inset-0 h-full w-full object-cover object-top"
+          className="absolute inset-0 h-full w-full object-cover object-[center_18%]"
           autoPlay
           muted
           loop
