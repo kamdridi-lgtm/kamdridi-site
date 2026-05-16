@@ -5,7 +5,6 @@ node_modules
 .edge-shot-profile
 *.log
 *.err.log
-*.png
 *.tsbuildinfo
 codex-dev-3000.log
 codex-dev-3000.err.log
