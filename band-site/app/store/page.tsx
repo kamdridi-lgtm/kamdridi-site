@@ -18,7 +18,7 @@ export default function StorePage() {
   return (
     <>
       <section id="collector-artifact" className="overflow-hidden border-b border-white/10">
-        <section className="relative min-h-[calc(100svh-120px)] overflow-hidden">
+        <section className="relative h-[62svh] min-h-[420px] overflow-hidden md:h-[74svh]">
           <video
             className="absolute inset-0 h-full w-full object-cover object-top"
             autoPlay
@@ -31,9 +31,11 @@ export default function StorePage() {
           >
             <source src={storeHeroVideo} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,6,5,0.08)_0%,rgba(7,6,5,0.1)_34%,rgba(7,6,5,0.7)_76%,rgba(7,6,5,0.96)_100%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_72%,rgba(244,198,106,0.18),transparent_32%)]" />
-          <div className="relative mx-auto flex min-h-[calc(100svh-120px)] max-w-7xl items-end px-4 pb-14 pt-[46svh] sm:px-6 lg:pb-20 lg:pt-[42svh]">
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,6,5,0.03),rgba(7,6,5,0.16))]" />
+        </section>
+
+        <Section className="py-12 md:py-16">
+          <div className="mx-auto max-w-7xl">
             <div className="max-w-4xl">
               <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Store</p>
               <h1 className="mt-5 font-display text-4xl uppercase leading-none tracking-[0.08em] text-white sm:text-5xl md:text-7xl">
@@ -64,7 +66,7 @@ export default function StorePage() {
               </div>
             </div>
           </div>
-        </section>
+        </Section>
 
         <Section className="relative py-14 md:py-18">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.14),transparent_26%),linear-gradient(180deg,rgba(11,10,8,0.65),rgba(11,10,8,0.96))]" />

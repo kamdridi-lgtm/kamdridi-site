@@ -246,7 +246,7 @@ export default function HomePage() {
         </div>
 
         <section className="relative z-10 border-b border-[#a86225]/25">
-          <div className="absolute inset-0">
+          <div className="relative h-[62svh] min-h-[420px] overflow-hidden md:h-[74svh]">
             <video
               className="absolute inset-0 h-full w-full object-cover object-top"
               autoPlay
@@ -259,10 +259,10 @@ export default function HomePage() {
             >
               <source src={heroVideo} type="video/mp4" />
             </video>
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,3,2,0.12)_0%,rgba(4,3,2,0.12)_34%,rgba(4,3,2,0.68)_72%,rgba(4,3,2,0.94)_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_82%,rgba(220,91,18,0.24),transparent_34%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,3,2,0.03),rgba(4,3,2,0.16))]" />
           </div>
-          <div className="relative mx-auto grid min-h-[calc(100svh-58px)] max-w-7xl items-end gap-5 px-4 pb-10 pt-[42svh] sm:px-6 sm:pb-14 sm:pt-[44svh] lg:grid-cols-[0.58fr_1.42fr] lg:pb-16 lg:pt-[38svh]">
+
+          <div className="mx-auto grid max-w-7xl items-center gap-6 px-4 py-12 sm:px-6 md:py-16 lg:grid-cols-[0.58fr_1.42fr]">
             <div className="mx-auto w-full max-w-[190px] sm:max-w-[250px] lg:max-w-[300px]">
               <div className="relative aspect-square border border-[#d08a43]/35 bg-black shadow-[0_35px_120px_rgba(0,0,0,0.68)]">
                 <Image src={albumCover} alt="Echoes Unearthed album cover" fill priority className="object-cover" />
