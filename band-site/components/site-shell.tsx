@@ -156,28 +156,29 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const { cartCount, setCartOpen } = useApp();
+  const isHome = pathname === "/";
 
   return (
     <div className="min-h-screen bg-[#090909] text-white">
-      <SocialBar />
-      <header className="sticky top-0 z-[1000] border-b border-white/10 bg-[#090909]/85 backdrop-blur-xl">
-        <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+      {!isHome ? <SocialBar /> : null}
+      <header className="sticky top-0 z-[1000] border-b border-white/10 bg-[#090909]/88 backdrop-blur-xl">
+        <div className="relative mx-auto flex max-w-[1500px] items-center justify-between gap-3 px-4 py-2.5 sm:px-6">
           <Link href="/" className="flex min-w-0 items-center gap-3">
-            <div className="relative h-14 w-40 shrink-0 sm:w-48">
+            <div className="relative h-12 w-32 shrink-0 sm:w-40 xl:w-44">
               <Image src={brandLogo} alt="KAMDRIDI logo" fill priority className="object-contain object-left" />
             </div>
-            <p className="hidden text-xs uppercase tracking-[0.28em] text-stone-400 xl:block">
+            <p className="hidden text-[10px] uppercase leading-4 tracking-[0.28em] text-stone-400 2xl:block">
               echoes unearthed universe
             </p>
           </Link>
 
-          <nav className="hidden items-center gap-6 lg:flex">
+          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-3 lg:flex xl:gap-4">
             {navigation.map((item) => (
               <div key={item.label} className="group relative">
                 <Link
                   href={item.href}
                   className={clsx(
-                    "text-sm uppercase tracking-[0.28em] text-stone-200 transition hover:text-[#f4c66a]",
+                    "block whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-200 transition hover:text-[#f4c66a] xl:text-xs xl:tracking-[0.24em]",
                     isNavItemActive(pathname, item) && "text-[#f4c66a]"
                   )}
                 >
@@ -203,26 +204,28 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex shrink-0 items-center gap-2">
             <button
               type="button"
               onClick={() => setCartOpen(true)}
-              className="relative inline-flex items-center rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-stone-200 transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"
+              className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-stone-200 transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"
+              aria-label="Open cart"
+              title="Cart"
             >
-              <ShoppingBag className="mr-2 h-4 w-4" />
-              Cart
+              <ShoppingBag className="h-4 w-4" />
               {cartCount ? (
-                <span className="ml-3 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-[#f4c66a] px-1 text-[10px] font-semibold text-black">
+                <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-[#f4c66a] px-1 text-[10px] font-semibold text-black">
                   {cartCount}
                 </span>
               ) : null}
             </button>
             <Link
               href="/games"
-              className="inline-flex items-center rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-stone-200 transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"
+              className="hidden h-10 w-10 items-center justify-center rounded-full border border-white/10 text-stone-200 transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a] xl:inline-flex"
+              aria-label="Games"
+              title="Games"
             >
-              <Gamepad2 className="mr-2 h-4 w-4" />
-              Games
+              <Gamepad2 className="h-4 w-4" />
             </Link>
             <button
               type="button"
@@ -285,7 +288,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           </div>
         ) : null}
 
-        <div className="hidden border-t border-white/5 bg-black/25 lg:block">
+        <div className={clsx("hidden border-t border-white/5 bg-black/25 lg:block", isHome && "lg:hidden")}>
           <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 py-3 text-[11px] uppercase tracking-[0.3em] text-stone-400 sm:px-6">
             <span className="text-stone-500">Explore</span>
             {footerRoutes.map((item) => (

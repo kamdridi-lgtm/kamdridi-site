@@ -262,30 +262,30 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,3,2,0.12)_0%,rgba(4,3,2,0.12)_34%,rgba(4,3,2,0.68)_72%,rgba(4,3,2,0.94)_100%)]" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_82%,rgba(220,91,18,0.24),transparent_34%)]" />
           </div>
-          <div className="relative mx-auto grid min-h-[calc(100svh-120px)] max-w-7xl items-end gap-6 px-4 pb-12 pt-[38svh] sm:px-6 sm:pb-16 sm:pt-[42svh] lg:grid-cols-[0.72fr_1.28fr] lg:pb-20 lg:pt-[36svh]">
-            <div className="mx-auto w-full max-w-[230px] sm:max-w-[300px] lg:max-w-[360px]">
+          <div className="relative mx-auto grid min-h-[calc(100svh-58px)] max-w-7xl items-end gap-5 px-4 pb-10 pt-[42svh] sm:px-6 sm:pb-14 sm:pt-[44svh] lg:grid-cols-[0.58fr_1.42fr] lg:pb-16 lg:pt-[38svh]">
+            <div className="mx-auto w-full max-w-[190px] sm:max-w-[250px] lg:max-w-[300px]">
               <div className="relative aspect-square border border-[#d08a43]/35 bg-black shadow-[0_35px_120px_rgba(0,0,0,0.68)]">
                 <Image src={albumCover} alt="Echoes Unearthed album cover" fill priority className="object-cover" />
               </div>
             </div>
             <div className="text-center lg:text-left">
-              <div className="relative mx-auto h-20 w-full max-w-[380px] sm:h-24 lg:mx-0">
+              <div className="relative mx-auto h-16 w-full max-w-[330px] sm:h-20 lg:mx-0">
                 <Image src={brandLogo} alt="KAMDRIDI logo" fill priority className="object-contain lg:object-left" />
               </div>
-              <h1 className="mt-3 font-display text-[clamp(2.7rem,8.4vw,7rem)] uppercase leading-[0.8] tracking-[0.08em] text-stone-100">
+              <h1 className="mt-2 font-display text-[clamp(2.45rem,7vw,5.8rem)] uppercase leading-[0.82] tracking-[0.08em] text-stone-100">
                 Echoes
                 <br />
                 Unearthed
               </h1>
-              <p className="mt-5 max-w-2xl text-base font-semibold leading-7 text-stone-200 sm:text-lg">
+              <p className="mt-4 max-w-2xl text-sm font-semibold leading-7 text-stone-200 sm:text-base">
                 The full cinematic rock album is available now. Stream the record, enter the Echoes
                 Unearthed universe, and collect the physical edition.
               </p>
-              <p className="mt-3 max-w-2xl text-sm leading-7 text-stone-400">
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-stone-400">
                 Stream the full album now. Explore the official tracklist, collector editions,
                 Japan campaign page, and the Echoes Unearthed universe.
               </p>
-              <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
                 <PremiumButton href="#listen-now">Stream Full Album</PremiumButton>
                 <PremiumButton href="#collector-products" tone="secondary">
                   Collector CD
@@ -297,7 +297,7 @@ export default function HomePage() {
                   Japan Page
                 </PremiumButton>
               </div>
-              <div className="mt-5 grid gap-3 text-xs uppercase tracking-[0.2em] text-stone-300 sm:grid-cols-3">
+              <div className="mt-4 grid gap-3 text-xs uppercase tracking-[0.18em] text-stone-300 sm:grid-cols-3">
                 <Link href="#video" className="inline-flex items-center justify-center gap-3 py-2 hover:text-[#f4c66a]">
                   <Play className="h-4 w-4" /> Watch War Machines
                 </Link>
