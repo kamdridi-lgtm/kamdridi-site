@@ -17,6 +17,7 @@ import { featuredVideo, gameExperiences, socialFeed, streamingLinks, visualAlbum
 
 const albumCover = "/assets/images/releases/echoes-unearthed-cover.jpg";
 const albumCoverPng = "/assets/images/releases/echoes-unearthed-cover.png";
+const heroVideo = "/videos/hero-page-video-generation-2.mp4";
 const warMachinesCover = "/assets/images/releases/war-machines-cover.png";
 const collectorCdImage = "/store/cd-product.jpg";
 const vinylImage = "/store/vinyl-product.jpg";
@@ -246,33 +247,45 @@ export default function HomePage() {
 
         <section className="relative z-10 border-b border-[#a86225]/25">
           <div className="absolute inset-0">
-            <Image src={albumCover} alt="" fill priority className="object-cover opacity-20 blur-[1px]" />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,3,2,0.94),rgba(4,3,2,0.72),rgba(4,3,2,0.92)),radial-gradient(circle_at_82%_82%,rgba(220,91,18,0.32),transparent_34%)]" />
+            <video
+              className="absolute inset-0 h-full w-full object-cover object-top"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="/kamdridi-hero.jpg"
+              aria-label="Echoes Unearthed hero video"
+            >
+              <source src={heroVideo} type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,3,2,0.12)_0%,rgba(4,3,2,0.12)_34%,rgba(4,3,2,0.68)_72%,rgba(4,3,2,0.94)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_82%,rgba(220,91,18,0.24),transparent_34%)]" />
           </div>
-          <div className="relative mx-auto grid min-h-[calc(100svh-140px)] max-w-7xl items-center gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:py-16">
-            <div className="mx-auto w-full max-w-[360px] lg:max-w-[500px]">
+          <div className="relative mx-auto grid min-h-[calc(100svh-120px)] max-w-7xl items-end gap-6 px-4 pb-12 pt-[38svh] sm:px-6 sm:pb-16 sm:pt-[42svh] lg:grid-cols-[0.72fr_1.28fr] lg:pb-20 lg:pt-[36svh]">
+            <div className="mx-auto w-full max-w-[230px] sm:max-w-[300px] lg:max-w-[360px]">
               <div className="relative aspect-square border border-[#d08a43]/35 bg-black shadow-[0_35px_120px_rgba(0,0,0,0.68)]">
                 <Image src={albumCover} alt="Echoes Unearthed album cover" fill priority className="object-cover" />
               </div>
             </div>
             <div className="text-center lg:text-left">
-              <div className="relative mx-auto h-28 w-full max-w-[460px] lg:mx-0">
+              <div className="relative mx-auto h-20 w-full max-w-[380px] sm:h-24 lg:mx-0">
                 <Image src={brandLogo} alt="KAMDRIDI logo" fill priority className="object-contain lg:object-left" />
               </div>
-              <h1 className="mt-4 font-display text-[clamp(3.2rem,10vw,8.8rem)] uppercase leading-[0.78] tracking-[0.08em] text-stone-100">
+              <h1 className="mt-3 font-display text-[clamp(2.7rem,8.4vw,7rem)] uppercase leading-[0.8] tracking-[0.08em] text-stone-100">
                 Echoes
                 <br />
                 Unearthed
               </h1>
-              <p className="mt-6 max-w-2xl text-base font-semibold leading-8 text-stone-200 sm:text-lg">
+              <p className="mt-5 max-w-2xl text-base font-semibold leading-7 text-stone-200 sm:text-lg">
                 The full cinematic rock album is available now. Stream the record, enter the Echoes
                 Unearthed universe, and collect the physical edition.
               </p>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-400">
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-stone-400">
                 Stream the full album now. Explore the official tracklist, collector editions,
                 Japan campaign page, and the Echoes Unearthed universe.
               </p>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
                 <PremiumButton href="#listen-now">Stream Full Album</PremiumButton>
                 <PremiumButton href="#collector-products" tone="secondary">
                   Collector CD
@@ -284,7 +297,7 @@ export default function HomePage() {
                   Japan Page
                 </PremiumButton>
               </div>
-              <div className="mt-7 grid gap-3 text-xs uppercase tracking-[0.2em] text-stone-300 sm:grid-cols-3">
+              <div className="mt-5 grid gap-3 text-xs uppercase tracking-[0.2em] text-stone-300 sm:grid-cols-3">
                 <Link href="#video" className="inline-flex items-center justify-center gap-3 py-2 hover:text-[#f4c66a]">
                   <Play className="h-4 w-4" /> Watch War Machines
                 </Link>
