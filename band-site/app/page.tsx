@@ -3,15 +3,11 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Apple,
   ArrowRight,
   Box,
-  Disc3,
   Eye,
   Film,
-  Music2,
   Play,
-  Radio,
   Share2,
   Sparkles,
   Youtube
@@ -27,6 +23,9 @@ const vinylImage = "/store/vinyl-product.jpg";
 const cassetteImage = "/store/war-machines-helmet.jpg";
 const japanHref = "/app/war-machines-jp";
 const brandLogo = "/assets/images/kamdridi-logo-hd.png";
+const spotifyAlbumHref =
+  "https://open.spotify.com/album/4rrOMu0BIhzJt1ElOfgXZu?si=a6eAct6jQl6BapO1_Zm4gA";
+const youtubeWatchHref = "https://www.youtube.com/watch?v=hzlVyLQN6a8";
 
 const tracks = [
   ["01", "War Machines"],
@@ -116,12 +115,22 @@ const products = [
   }
 ];
 
-const platformIcons: Record<string, ReactNode> = {
-  Spotify: <Music2 className="h-5 w-5" />,
-  "Apple Music": <Apple className="h-5 w-5" />,
-  "Amazon Music": <Radio className="h-5 w-5" />,
-  Deezer: <Disc3 className="h-5 w-5" />
-};
+const listenLinks = [
+  { label: "Spotify", href: spotifyAlbumHref, brandClass: "text-[#1DB954]", logo: <SpotifyLogo /> },
+  {
+    label: "Apple Music",
+    href: streamingLinks.find((link) => link.label === "Apple Music")?.href || "",
+    brandClass: "text-white",
+    logo: <AppleMusicLogo />
+  },
+  { label: "YouTube", href: youtubeWatchHref, brandClass: "text-[#ff0000]", logo: <YouTubeLogo /> },
+  {
+    label: "Amazon Music",
+    href: streamingLinks.find((link) => link.label === "Amazon Music")?.href || "",
+    brandClass: "text-[#25d1da]",
+    logo: <AmazonMusicLogo />
+  }
+].filter((link) => link.href);
 
 export const metadata: Metadata = {
   title: "Echoes Unearthed - Official Album Hub",
@@ -163,6 +172,64 @@ function SectionTitle({ eyebrow, title }: { eyebrow?: string; title: string }) {
       <h2 className="font-display text-3xl uppercase tracking-[0.12em] text-[#e8b777] sm:text-4xl">
         {title}
       </h2>
+    </div>
+  );
+}
+
+function SpotifyLogo() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5 fill-current">
+      <path d="M12 1.8a10.2 10.2 0 1 0 0 20.4 10.2 10.2 0 0 0 0-20.4Zm4.68 14.72a.64.64 0 0 1-.88.2c-2.42-1.48-5.46-1.81-9.04-.99a.64.64 0 0 1-.28-1.25c3.92-.89 7.28-.51 9.99 1.15.3.19.4.58.21.89Zm1.25-2.77a.8.8 0 0 1-1.1.26c-2.77-1.7-7-2.2-10.28-1.2a.8.8 0 0 1-.47-1.53c3.74-1.14 8.4-.58 11.59 1.37.38.23.5.72.26 1.1Zm.11-2.89C14.72 8.89 9.25 8.7 6.08 9.67a.96.96 0 1 1-.56-1.84c3.64-1.1 9.68-.88 13.5 1.4a.96.96 0 0 1-.98 1.64Z" />
+    </svg>
+  );
+}
+
+function AppleMusicLogo() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5 fill-current">
+      <path d="M16.7 2.5c.08.9-.24 1.78-.92 2.53-.7.77-1.62 1.22-2.5 1.15-.1-.86.27-1.78.9-2.48.7-.78 1.8-1.35 2.52-1.2ZM19.55 17.35c-.4.94-.6 1.36-1.12 2.18-.72 1.1-1.73 2.47-2.98 2.48-1.1.02-1.39-.72-2.9-.71-1.5 0-1.82.73-2.92.71-1.25-.01-2.2-1.25-2.92-2.36-2-3.08-2.21-6.69-.98-8.61.88-1.36 2.26-2.16 3.56-2.16 1.32 0 2.15.73 3.24.73 1.06 0 1.7-.73 3.23-.73 1.15 0 2.38.63 3.25 1.72-2.85 1.56-2.39 5.62.54 6.75Z" />
+    </svg>
+  );
+}
+
+function YouTubeLogo() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5 fill-current">
+      <path d="M21.58 7.2a2.72 2.72 0 0 0-1.9-1.92C18 4.83 12 4.83 12 4.83s-6 0-7.68.45A2.72 2.72 0 0 0 2.42 7.2C2 8.9 2 12.43 2 12.43s0 3.53.42 5.23a2.72 2.72 0 0 0 1.9 1.92c1.68.45 7.68.45 7.68.45s6 0 7.68-.45a2.72 2.72 0 0 0 1.9-1.92c.42-1.7.42-5.23.42-5.23s0-3.53-.42-5.23ZM10 15.65V9.2l5.24 3.22L10 15.65Z" />
+    </svg>
+  );
+}
+
+function AmazonMusicLogo() {
+  return (
+    <span className="inline-flex items-center gap-1.5 text-[13px] font-bold lowercase leading-none tracking-[-0.02em]">
+      amazon
+      <span className="font-semibold">music</span>
+    </span>
+  );
+}
+
+function PlatformLinks({ compact = false }: { compact?: boolean }) {
+  return (
+    <div className={compact ? "flex flex-wrap items-center gap-2" : "grid gap-4 sm:grid-cols-2 lg:grid-cols-4"}>
+      {listenLinks.map((link) => (
+        <a
+          key={link.label}
+          href={link.href}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Listen on ${link.label}`}
+          title={`Listen on ${link.label}`}
+          className={
+            compact
+              ? `inline-flex h-10 min-w-10 items-center justify-center border border-white/10 bg-black/45 px-3 transition hover:-translate-y-0.5 hover:border-[#f4c66a]/60 ${link.brandClass}`
+              : `flex min-h-16 items-center justify-center gap-3 border border-white/10 bg-black/45 px-5 text-lg font-semibold text-stone-100 shadow-[0_18px_60px_rgba(0,0,0,0.28)] transition hover:-translate-y-0.5 hover:border-[#f4c66a]/60 ${link.brandClass}`
+          }
+        >
+          {link.logo}
+          {compact ? <span className="sr-only">{link.label}</span> : <span>{link.label}</span>}
+        </a>
+      ))}
     </div>
   );
 }
@@ -237,19 +304,8 @@ export default function HomePage() {
 
         <section id="listen-now" className="relative z-10 border-b border-[#a86225]/20 px-4 py-9 sm:px-6">
           <SectionTitle title="Listen Now" />
-          <div className="mx-auto mt-7 grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {streamingLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noreferrer"
-                className="flex min-h-16 items-center justify-center gap-3 border border-white/10 bg-black/45 px-5 text-lg font-semibold text-stone-100 shadow-[0_18px_60px_rgba(0,0,0,0.28)] transition hover:-translate-y-0.5 hover:border-[#f4c66a]/60 hover:text-[#f4c66a]"
-              >
-                {platformIcons[link.label] ?? <Music2 className="h-5 w-5" />}
-                {link.label}
-              </a>
-            ))}
+          <div className="mx-auto mt-7 max-w-7xl">
+            <PlatformLinks />
           </div>
         </section>
 
@@ -259,15 +315,22 @@ export default function HomePage() {
             {tracks.map(([number, title]) => (
               <div
                 key={number}
-                className="grid gap-3 border-b border-white/10 px-4 py-4 last:border-b-0 sm:grid-cols-[70px_1fr_auto] sm:items-center"
+                className="grid gap-3 border-b border-white/10 px-4 py-4 last:border-b-0 md:grid-cols-[70px_1fr_auto] md:items-center"
               >
                 <span className="font-display text-2xl text-[#c98542]">{number}</span>
-                <h3 className="font-semibold text-stone-100">{title}</h3>
-                <div className="flex items-center gap-3 text-stone-500">
+                <a
+                  href={spotifyAlbumHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-stone-100 transition hover:text-[#f4c66a]"
+                >
+                  {title}
+                </a>
+                <div className="flex flex-wrap items-center gap-3">
                   <span className="rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.2em]">
                     Album
                   </span>
-                  <Share2 className="h-4 w-4" />
+                  <PlatformLinks compact />
                 </div>
               </div>
             ))}
