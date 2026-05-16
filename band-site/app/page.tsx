@@ -29,15 +29,15 @@ const japanHref = "/app/war-machines-jp";
 const brandLogo = "/assets/images/kamdridi-logo-hd.png";
 
 const tracks = [
-  ["01", "War Machines", "The battle begins. Machines awaken."],
-  ["02", "Too Fast Too Young", "Time burns everything."],
-  ["03", "Our Lost Dreams", "Echoes of what we could not save."],
-  ["04", "Junction Ahead (New Heaven's Odyssey)", "A door opens beyond the stars."],
-  ["05", "17 For Ever", "Seventeen and immortal."],
-  ["06", "The Victory Goes On", "The fight remains."],
-  ["07", "Alone Apart / One Apart", "Two souls, one silence."],
-  ["08", "Michael Remembers", "He remembers everything."],
-  ["09", "The Fall of the First Knight", "The legend dies. The story begins."]
+  ["01", "War Machines"],
+  ["02", "Too Fast Too Young"],
+  ["03", "Our Lost Dreams"],
+  ["04", "Junction Ahead (New Heaven's Odyssey)"],
+  ["05", "17 For Ever"],
+  ["06", "The Victory Goes On"],
+  ["07", "Alone Apart / One Apart"],
+  ["08", "Michael Remembers"],
+  ["09", "The Fall of the First Knight"]
 ];
 
 const universeCards = [
@@ -256,14 +256,13 @@ export default function HomePage() {
         <section id="tracklist" className="relative z-10 border-b border-[#a86225]/20 px-4 py-10 sm:px-6">
           <SectionTitle title="Tracklist" />
           <div className="mx-auto mt-8 max-w-7xl overflow-hidden border border-[#8f5728]/35 bg-black/48">
-            {tracks.map(([number, title, description]) => (
+            {tracks.map(([number, title]) => (
               <div
                 key={number}
-                className="grid gap-3 border-b border-white/10 px-4 py-4 last:border-b-0 sm:grid-cols-[70px_1.1fr_1.4fr_auto] sm:items-center"
+                className="grid gap-3 border-b border-white/10 px-4 py-4 last:border-b-0 sm:grid-cols-[70px_1fr_auto] sm:items-center"
               >
                 <span className="font-display text-2xl text-[#c98542]">{number}</span>
                 <h3 className="font-semibold text-stone-100">{title}</h3>
-                <p className="text-sm text-stone-400">{description}</p>
                 <div className="flex items-center gap-3 text-stone-500">
                   <span className="rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.2em]">
                     Album
@@ -272,12 +271,11 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
-            <div className="grid gap-3 bg-[#140d08] px-4 py-5 sm:grid-cols-[70px_1.1fr_1.4fr_auto] sm:items-center">
+            <div className="grid gap-3 bg-[#140d08] px-4 py-5 sm:grid-cols-[70px_1fr_auto] sm:items-center">
               <span className="font-display text-2xl text-[#f4c66a]">Bonus</span>
               <h3 className="font-semibold text-stone-100">Echoes of Our Youth</h3>
-              <p className="text-sm text-stone-400">Physical Collector Edition Bonus Track.</p>
               <span className="rounded-full border border-[#f4c66a]/30 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[#f4c66a]">
-                Collector only
+                Physical Collector Edition Bonus Track
               </span>
             </div>
           </div>

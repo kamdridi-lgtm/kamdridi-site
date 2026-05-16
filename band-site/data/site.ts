@@ -126,8 +126,8 @@ export const socialLinks = [
   { label: "TikTok", href: "https://tiktok.com/@kamdridi", handle: "@kamdridi" },
   {
     label: "Spotify",
-    href: "https://open.spotify.com/track/1jfpUX2dXWBzwnfAhhMm7W?si=c07e266c25314fc8",
-    handle: "War Machines"
+    href: "https://open.spotify.com/album/4rrOMu0BIhzJt1ElOfgXZu?si=a6eAct6jQl6BapO1_Zm4gA",
+    handle: "Echoes Unearthed"
   },
   {
     label: "Apple Music",
@@ -146,8 +146,8 @@ export const streamingLinks: StreamingLink[] = [
   },
   {
     label: "Spotify",
-    href: "https://open.spotify.com/track/1jfpUX2dXWBzwnfAhhMm7W?si=c07e266c25314fc8",
-    note: "War Machines"
+    href: "https://open.spotify.com/album/4rrOMu0BIhzJt1ElOfgXZu?si=a6eAct6jQl6BapO1_Zm4gA",
+    note: "Echoes Unearthed"
   },
   {
     label: "Amazon Music",
