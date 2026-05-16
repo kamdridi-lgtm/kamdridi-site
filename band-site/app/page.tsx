@@ -1,303 +1,411 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Disc3, Mail, Music2, Play, Radio, Shield, Sparkles } from "lucide-react";
-import { FirstKnightEasterEgg } from "@/components/first-knight-easter-egg";
-import { CTAButton, GlassCard, Section, SectionHeading } from "@/components/ui";
-import { storeProducts } from "@/data/store";
 import {
-  comicPages,
-  featuredVideo,
-  gameExperiences,
-  membershipTiers,
-  siteMeta,
-  socialLinks,
-  streamingLinks,
-  warMachinesCover,
-  visualAlbumScenes
-} from "@/data/site";
+  Apple,
+  ArrowRight,
+  Box,
+  Disc3,
+  Eye,
+  Film,
+  Music2,
+  Play,
+  Radio,
+  Share2,
+  Sparkles,
+  Youtube
+} from "lucide-react";
+import { FirstKnightEasterEgg } from "@/components/first-knight-easter-egg";
+import { featuredVideo, gameExperiences, socialFeed, streamingLinks, visualAlbumScenes } from "@/data/site";
 
-const streamIcons: Record<string, React.ReactNode> = {
+const albumCover = "/assets/images/releases/echoes-unearthed-cover.jpg";
+const albumCoverPng = "/assets/images/releases/echoes-unearthed-cover.png";
+const warMachinesCover = "/assets/images/releases/war-machines-cover.png";
+const collectorCdImage = "/store/cd-product.jpg";
+const vinylImage = "/store/vinyl-product.jpg";
+const cassetteImage = "/store/war-machines-helmet.jpg";
+const japanHref = "/app/war-machines-jp";
+
+const tracks = [
+  ["01", "War Machines", "The battle begins. Machines awaken."],
+  ["02", "Too Fast Too Young", "Time burns everything."],
+  ["03", "Our Lost Dreams", "Echoes of what we could not save."],
+  ["04", "Junction Ahead (New Heaven's Odyssey)", "A door opens beyond the stars."],
+  ["05", "17 For Ever", "Seventeen and immortal."],
+  ["06", "The Victory Goes On", "The fight remains."],
+  ["07", "Alone Apart / One Apart", "Two souls, one silence."],
+  ["08", "Michael Remembers", "He remembers everything."],
+  ["09", "The Fall of the First Knight", "The legend dies. The story begins."]
+];
+
+const universeCards = [
+  {
+    title: "Visual Album",
+    text: "Watch the cinematic experience.",
+    image: visualAlbumScenes[0]?.image || warMachinesCover,
+    href: "/visual-album"
+  },
+  {
+    title: "The Gilded Null",
+    text: "Discover the story and the game.",
+    image: gameExperiences[0]?.poster || "/official-game-poster.png",
+    href: "/games/the-gilded-null"
+  },
+  {
+    title: "The Fall of the First Knight",
+    text: "The novel rescue story.",
+    image: "/first-knight.jpg",
+    href: "/who-is-kam-dridi"
+  },
+  {
+    title: "Archive / Comic",
+    text: "Comics, archive and lore.",
+    image: "/assets/images/comic/page-grunge-split.png",
+    href: "/who-is-kam-dridi#comic-reader"
+  },
+  {
+    title: "Fan Club",
+    text: "Join the community and get exclusive access.",
+    image: "/assets/images/gallery/p04_portrait_leather.jpg",
+    href: "/fan-club"
+  }
+];
+
+const products = [
+  {
+    status: "Available now",
+    title: "Echoes Unearthed - Collector CD",
+    text: "Physical collector CD edition with 9 official tracks, hidden bonus archive track, premium booklet, and collector artwork.",
+    price: "$34",
+    image: collectorCdImage,
+    href: "/store",
+    cta: "Buy Collector CD",
+    live: true
+  },
+  {
+    status: "Coming soon",
+    title: "Special Collector Edition",
+    text: "Expanded collector edition with exclusive archive material and premium physical packaging.",
+    price: "Future edition",
+    image: albumCoverPng,
+    href: "/store",
+    cta: "Coming Soon",
+    live: false
+  },
+  {
+    status: "Coming soon",
+    title: "Echoes Unearthed - Vinyl Edition",
+    text: "Collector vinyl edition currently in preparation. No preorder, stock count, or release date is shown until confirmed.",
+    price: "Future edition",
+    image: vinylImage,
+    href: "/store",
+    cta: "Coming Soon",
+    live: false
+  },
+  {
+    status: "Coming soon",
+    title: "Archive Cassette",
+    text: "Limited cassette edition inspired by underground sci-fi rock archive transmissions.",
+    price: "Future edition",
+    image: cassetteImage,
+    href: "/store",
+    cta: "Coming Soon",
+    live: false
+  }
+];
+
+const platformIcons: Record<string, ReactNode> = {
   Spotify: <Music2 className="h-5 w-5" />,
-  "Apple Music": <Play className="h-5 w-5" />,
+  "Apple Music": <Apple className="h-5 w-5" />,
   "Amazon Music": <Radio className="h-5 w-5" />,
   Deezer: <Disc3 className="h-5 w-5" />
 };
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "Echoes Unearthed - Official Album Hub",
   description:
-    "Official KAMDRIDI website with music, visual album content, games, merch, tour dates, fan club, and news."
+    "Official KAMDRIDI album headquarters for Echoes Unearthed with streaming links, tracklist, collector editions, video, and the cinematic universe."
 };
+
+function PremiumButton({
+  href,
+  children,
+  tone = "primary"
+}: {
+  href: string;
+  children: ReactNode;
+  tone?: "primary" | "secondary" | "red";
+}) {
+  const classes = {
+    primary:
+      "border-[#f4a33f]/70 bg-[linear-gradient(180deg,#d66a16,#8f3208)] text-white shadow-[0_18px_55px_rgba(201,82,16,0.32)] hover:border-[#ffd18a]",
+    secondary:
+      "border-[#c57b32]/45 bg-black/35 text-stone-100 hover:border-[#f4c66a]/70 hover:text-[#f4c66a]",
+    red: "border-red-500/50 bg-[linear-gradient(180deg,#d71920,#8d0508)] text-white shadow-[0_18px_55px_rgba(170,10,10,0.3)] hover:border-red-300"
+  };
+
+  return (
+    <Link
+      href={href}
+      className={`inline-flex min-h-12 items-center justify-center border px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.18em] transition duration-300 hover:-translate-y-0.5 sm:px-7 ${classes[tone]}`}
+    >
+      {children}
+    </Link>
+  );
+}
+
+function SectionTitle({ eyebrow, title }: { eyebrow?: string; title: string }) {
+  return (
+    <div className="mx-auto max-w-4xl text-center">
+      {eyebrow ? <p className="text-xs uppercase tracking-[0.38em] text-[#c98542]">{eyebrow}</p> : null}
+      <h2 className="font-display text-3xl uppercase tracking-[0.12em] text-[#e8b777] sm:text-4xl">
+        {title}
+      </h2>
+    </div>
+  );
+}
 
 export default function HomePage() {
   return (
     <>
       <FirstKnightEasterEgg />
-      <section className="relative isolate flex min-h-screen items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <video
-            className="absolute inset-0 h-full w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster="/kamdridi-hero.jpg"
-            aria-label="KAMDRIDI hero background video"
-          >
-            <source src="/kamdridi-hero.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+      <div className="relative overflow-hidden bg-[#050403] text-white">
+        <div className="pointer-events-none fixed inset-0 z-0 opacity-55">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(209,91,18,0.18),transparent_30%),radial-gradient(circle_at_86%_12%,rgba(244,198,106,0.13),transparent_28%),linear-gradient(180deg,#050403,#090604_42%,#030303)]" />
+          <div className="absolute inset-0 bg-[url('/assets/images/band/live_stage.jpg')] bg-cover bg-fixed bg-center opacity-[0.16]" />
         </div>
 
-        <div className="absolute inset-0 z-20 flex items-end justify-center px-4 pb-24 text-center sm:px-6">
-          <div className="flex flex-col items-center">
-            <h1 className="max-w-full whitespace-nowrap px-2 font-display text-[clamp(0.82rem,2.35vw,3rem)] uppercase tracking-[0.08em] text-white drop-shadow-[0_12px_40px_rgba(0,0,0,0.85)] md:tracking-[0.12em]">
-              MELODIC · CINEMATIC · UNEARTHED
-            </h1>
-            <a
-              href="#stream-war-machines"
-              className="mt-8 inline-flex items-center justify-center rounded-full bg-[#f4c66a] px-7 py-4 text-sm uppercase tracking-[0.25em] text-black transition duration-300 hover:-translate-y-0.5 hover:bg-[#ffd989]"
-            >
-              LISTEN TO WAR MACHINES
-            </a>
+        <section className="relative z-10 border-b border-[#a86225]/25">
+          <div className="absolute inset-0">
+            <Image src={albumCover} alt="" fill priority className="object-cover opacity-20 blur-[1px]" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,3,2,0.94),rgba(4,3,2,0.72),rgba(4,3,2,0.92)),radial-gradient(circle_at_82%_82%,rgba(220,91,18,0.32),transparent_34%)]" />
           </div>
-        </div>
-      </section>
-
-      <Section id="stream-war-machines">
-        <SectionHeading
-          eyebrow="Music"
-          title="Stream War Machines"
-          description="Official streaming links for War Machines across the live platforms."
-          align="center"
-        />
-        <div className="mt-10 grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
-          <GlassCard className="overflow-hidden p-0">
-            <div className="relative h-full min-h-80">
-              <Image src={warMachinesCover} alt="War Machines single cover" fill className="object-cover" />
+          <div className="relative mx-auto grid min-h-[calc(100svh-140px)] max-w-7xl items-center gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:py-16">
+            <div className="mx-auto w-full max-w-[360px] lg:max-w-[500px]">
+              <div className="relative aspect-square border border-[#d08a43]/35 bg-black shadow-[0_35px_120px_rgba(0,0,0,0.68)]">
+                <Image src={albumCover} alt="Echoes Unearthed album cover" fill priority className="object-cover" />
+              </div>
             </div>
-          </GlassCard>
-          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="text-center lg:text-left">
+              <p className="font-display text-4xl uppercase tracking-[0.18em] text-[#d47b2f] sm:text-5xl">
+                KAM DRIDI
+              </p>
+              <h1 className="mt-4 font-display text-[clamp(3.2rem,10vw,8.8rem)] uppercase leading-[0.78] tracking-[0.08em] text-stone-100">
+                Echoes
+                <br />
+                Unearthed
+              </h1>
+              <p className="mt-6 max-w-2xl text-base font-semibold leading-8 text-stone-200 sm:text-lg">
+                The full cinematic rock album is available now. Stream the record, enter the Echoes
+                Unearthed universe, and collect the physical edition.
+              </p>
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-400">
+                Stream the full album now. Explore the official tracklist, collector editions,
+                Japan campaign page, and the Echoes Unearthed universe.
+              </p>
+              <div className="mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                <PremiumButton href="#listen-now">Stream Full Album</PremiumButton>
+                <PremiumButton href="#collector-products" tone="secondary">
+                  Collector CD
+                </PremiumButton>
+                <PremiumButton href="#collector-products" tone="secondary">
+                  Special Edition
+                </PremiumButton>
+                <PremiumButton href={japanHref} tone="red">
+                  Japan Page
+                </PremiumButton>
+              </div>
+              <div className="mt-7 grid gap-3 text-xs uppercase tracking-[0.2em] text-stone-300 sm:grid-cols-3">
+                <Link href="#video" className="inline-flex items-center justify-center gap-3 py-2 hover:text-[#f4c66a]">
+                  <Play className="h-4 w-4" /> Watch War Machines
+                </Link>
+                <Link href="#universe" className="inline-flex items-center justify-center gap-3 py-2 hover:text-[#f4c66a]">
+                  <Eye className="h-4 w-4" /> Enter the Universe
+                </Link>
+                <a
+                  href="https://kamdridi.com"
+                  className="inline-flex items-center justify-center gap-3 py-2 hover:text-[#f4c66a]"
+                >
+                  <Share2 className="h-4 w-4" /> Share Album
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="listen-now" className="relative z-10 border-b border-[#a86225]/20 px-4 py-9 sm:px-6">
+          <SectionTitle title="Listen Now" />
+          <div className="mx-auto mt-7 grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {streamingLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-between rounded-[28px] border border-white/10 bg-white/[0.04] px-6 py-5 shadow-[0_35px_80px_rgba(0,0,0,0.35)] backdrop-blur transition hover:-translate-y-1 hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"
+                className="flex min-h-16 items-center justify-center gap-3 border border-white/10 bg-black/45 px-5 text-lg font-semibold text-stone-100 shadow-[0_18px_60px_rgba(0,0,0,0.28)] transition hover:-translate-y-0.5 hover:border-[#f4c66a]/60 hover:text-[#f4c66a]"
               >
-                <div className="flex items-center gap-4">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/30">
-                    {streamIcons[link.label] ?? <Music2 className="h-5 w-5" />}
-                  </span>
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.3em] text-white">{link.label}</p>
-                    <p className="mt-1 text-xs uppercase tracking-[0.2em] text-stone-500">
-                      {link.note}
-                    </p>
-                  </div>
-                </div>
-                <span className="text-xs uppercase tracking-[0.25em] text-stone-300">Open</span>
+                {platformIcons[link.label] ?? <Music2 className="h-5 w-5" />}
+                {link.label}
               </a>
             ))}
           </div>
-        </div>
-        <div className="mt-10">
-          <GlassCard className="overflow-hidden p-0">
-            <div className="w-full aspect-video">
-              <iframe
-                className="h-full w-full rounded-xl"
-                src={featuredVideo.embedUrl}
-                title={featuredVideo.title}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </GlassCard>
-        </div>
-      </Section>
+        </section>
 
-      <Section id="visual-album-home">
-        <SectionHeading
-          eyebrow="Visual Album"
-          title="The Echoes Unearthed world in motion"
-          description="Cinematic fragments, visual scenes, and atmosphere from the album campaign."
-        />
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {visualAlbumScenes.map((scene) => (
-            <GlassCard key={scene.id} className="overflow-hidden p-0">
-              <div className="relative h-80">
-                <Image src={scene.image} alt={scene.title} fill className="object-cover" />
-              </div>
-              <div className="p-6">
-                <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">{scene.title}</p>
-                <p className="mt-4 text-sm leading-7 text-stone-400">{scene.description}</p>
-              </div>
-            </GlassCard>
-          ))}
-        </div>
-        <div className="mt-8">
-          <CTAButton href="/visual-album">Open Visual Album</CTAButton>
-        </div>
-      </Section>
-
-      <Section id="games-home">
-        <SectionHeading
-          eyebrow="Games"
-          title="Protocols inside the fan universe"
-          description="Launch cinematic game experiences tied directly to the Echoes Unearthed campaign."
-        />
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {gameExperiences.map((game) => (
-            <GlassCard key={game.id} className="overflow-hidden p-0">
-              <div className="relative h-80">
-                <Image src={game.poster} alt={game.title} fill className="object-cover" />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.12),rgba(0,0,0,0.88))]" />
-                <div className="absolute inset-x-0 bottom-0 p-6">
-                  <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">
-                    {game.subtitle}
-                  </p>
-                  <h3 className="mt-3 font-display text-4xl uppercase tracking-[0.08em] text-white">
-                    {game.title}
-                  </h3>
+        <section id="tracklist" className="relative z-10 border-b border-[#a86225]/20 px-4 py-10 sm:px-6">
+          <SectionTitle title="Tracklist" />
+          <div className="mx-auto mt-8 max-w-7xl overflow-hidden border border-[#8f5728]/35 bg-black/48">
+            {tracks.map(([number, title, description]) => (
+              <div
+                key={number}
+                className="grid gap-3 border-b border-white/10 px-4 py-4 last:border-b-0 sm:grid-cols-[70px_1.1fr_1.4fr_auto] sm:items-center"
+              >
+                <span className="font-display text-2xl text-[#c98542]">{number}</span>
+                <h3 className="font-semibold text-stone-100">{title}</h3>
+                <p className="text-sm text-stone-400">{description}</p>
+                <div className="flex items-center gap-3 text-stone-500">
+                  <span className="rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.2em]">
+                    Album
+                  </span>
+                  <Share2 className="h-4 w-4" />
                 </div>
               </div>
-              <div className="flex items-center justify-between gap-4 p-6">
-                <span className="text-xs uppercase tracking-[0.25em] text-stone-400">
-                  {game.membership}
-                </span>
-                <CTAButton href="/games" tone="secondary">
-                  Open Games
-                </CTAButton>
-              </div>
-            </GlassCard>
-          ))}
-        </div>
-      </Section>
+            ))}
+            <div className="grid gap-3 bg-[#140d08] px-4 py-5 sm:grid-cols-[70px_1.1fr_1.4fr_auto] sm:items-center">
+              <span className="font-display text-2xl text-[#f4c66a]">Bonus</span>
+              <h3 className="font-semibold text-stone-100">Echoes of Our Youth</h3>
+              <p className="text-sm text-stone-400">Physical Collector Edition Bonus Track.</p>
+              <span className="rounded-full border border-[#f4c66a]/30 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[#f4c66a]">
+                Collector only
+              </span>
+            </div>
+          </div>
+        </section>
 
-      <Section id="fan-club-home">
-        <SectionHeading
-          eyebrow="Fan Club"
-          title="Membership access for the inner campaign"
-          description="Private updates, game access, collector drops, and locked archive material."
-        />
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {membershipTiers.map((tier) => (
-            <GlassCard key={tier.id}>
-              <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">{tier.name}</p>
-              <h3 className="mt-4 font-display text-4xl uppercase tracking-[0.08em] text-white">
-                {tier.priceLabel}
-              </h3>
-              <p className="mt-4 text-sm leading-7 text-stone-400">{tier.description}</p>
-              <div className="mt-6 grid gap-2">
-                {tier.features.slice(0, 4).map((feature) => (
-                  <div key={feature} className="flex items-start gap-3 text-sm text-stone-300">
-                    <Shield className="mt-0.5 h-4 w-4 text-[#f4c66a]" />
-                    <span>{feature}</span>
+        <section id="collector-products" className="relative z-10 border-b border-[#a86225]/20 px-4 py-10 sm:px-6">
+          <SectionTitle eyebrow="Official Store" title="Collector Products" />
+          <div className="mx-auto mt-9 grid max-w-7xl gap-5 lg:grid-cols-4">
+            {products.map((product) => (
+              <article key={product.title} className="border border-[#8f5728]/35 bg-black/52">
+                <div className="relative aspect-[4/3] overflow-hidden border-b border-white/10 bg-[#120b07]">
+                  <Image src={product.image} alt={product.title} fill className="object-cover" />
+                </div>
+                <div className="p-5">
+                  <p className={product.live ? "text-xs uppercase tracking-[0.25em] text-[#f4c66a]" : "text-xs uppercase tracking-[0.25em] text-stone-500"}>
+                    {product.status}
+                  </p>
+                  <h3 className="mt-3 min-h-16 font-display text-2xl uppercase tracking-[0.08em] text-stone-100">
+                    {product.title}
+                  </h3>
+                  <p className="mt-3 min-h-28 text-sm leading-6 text-stone-400">{product.text}</p>
+                  <p className="mt-5 text-lg font-semibold text-[#e8b777]">{product.price}</p>
+                  <div className="mt-5">
+                    {product.live ? (
+                      <PremiumButton href={product.href}>{product.cta}</PremiumButton>
+                    ) : (
+                      <span className="inline-flex min-h-12 items-center justify-center border border-white/10 px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-stone-500">
+                        {product.cta}
+                      </span>
+                    )}
                   </div>
-                ))}
-              </div>
-            </GlassCard>
-          ))}
-        </div>
-        <div className="mt-8">
-          <CTAButton href="/fan-club">Enter Fan Club</CTAButton>
-        </div>
-      </Section>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
 
-      <Section id="store-home">
-        <SectionHeading
-          eyebrow="Store"
-          title="Collector merch and official releases"
-          description="Merchandise, premium formats, and collector pieces organized inside the official KAMDRIDI store flow."
-        />
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {storeProducts.slice(0, 4).map((product) => (
-            <GlassCard key={product.id} className="overflow-hidden p-0">
-              <div className="relative h-72">
-                <Image src={product.image} alt={product.name} fill className="object-cover" />
-              </div>
-              <div className="p-6">
-                <p className="text-xs uppercase tracking-[0.35em] text-stone-500">{product.category}</p>
-                <h3 className="mt-3 text-2xl text-white">{product.name}</h3>
-                <p className="mt-4 text-sm leading-7 text-stone-400">{product.description}</p>
-              </div>
-            </GlassCard>
-          ))}
-        </div>
-        <div className="mt-8">
-          <CTAButton href="/store">Open Store</CTAButton>
-        </div>
-      </Section>
-
-      <Section id="comic-home">
-        <SectionHeading
-          eyebrow="Who Is Kam Dridi"
-          title="Comic reader and artist mythology"
-          description="A responsive comic experience built into the world of KAMDRIDI."
-        />
-        <div className="mt-12 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-          <GlassCard>
-            <p className="text-sm leading-7 text-stone-400">
-              Move through the visual story, uncover the character arc, and enter the mythology
-              behind Echoes Unearthed through the built-in comic reader.
-            </p>
-            <div className="mt-8">
-              <CTAButton href="/who-is-kam-dridi">Open Comic Reader</CTAButton>
-            </div>
-          </GlassCard>
-          <GlassCard className="overflow-hidden p-0">
-            <div className="relative aspect-[4/3]">
-              <Image
-                src={comicPages[0]?.image || "/assets/images/gallery/p01_hero.jpg"}
-                alt="Who is Kam Dridi preview"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </GlassCard>
-        </div>
-      </Section>
-
-      <Section id="contact-home">
-        <SectionHeading
-          eyebrow="Contact"
-          title="Press, booking, and management"
-          description="Reach the KAMDRIDI team for management, booking, licensing, and official contact."
-        />
-        <div className="mt-12 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-          <GlassCard>
-            <div className="flex items-start gap-4">
-              <Mail className="mt-1 h-5 w-5 text-[#f4c66a]" />
-              <div>
-                <p className="text-sm uppercase tracking-[0.3em] text-stone-500">Email</p>
-                <p className="mt-3 text-lg text-white">{siteMeta.email}</p>
+        <section className="relative z-10 border-b border-[#a86225]/20 px-4 py-10 sm:px-6">
+          <div className="mx-auto grid max-w-7xl items-center gap-6 overflow-hidden border border-[#8f5728]/35 bg-black/50 p-6 lg:grid-cols-[0.95fr_1.05fr]">
+            <div>
+              <p className="text-xs uppercase tracking-[0.32em] text-[#c98542]">Japan Campaign</p>
+              <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.1em] text-stone-100 sm:text-5xl">
+                War Machines / ウォー・マシーンズ
+              </h2>
+              <p className="mt-5 max-w-xl text-sm leading-7 text-stone-300">
+                Official Japanese campaign page for the Echoes Unearthed universe.
+              </p>
+              <p className="mt-2 text-sm text-stone-500">ダークで映画的なSFロック。</p>
+              <div className="mt-7">
+                <PremiumButton href={japanHref} tone="red">
+                  Japan Page
+                </PremiumButton>
               </div>
             </div>
-          </GlassCard>
-          <GlassCard>
-            <p className="text-sm leading-7 text-stone-400">
-              Follow KAMDRIDI across the active platforms and use the contact page for direct
-              submissions and official inquiries.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <CTAButton href="/contact">Open Contact Page</CTAButton>
-              <a
-                href={socialLinks[0]?.href || "https://youtube.com/@kamdridi"}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 text-sm uppercase tracking-[0.25em] text-white transition hover:border-[#f4c66a]/60 hover:text-[#f4c66a]"
+            <div className="relative min-h-72 overflow-hidden">
+              <Image src="/assets/images/gallery/p03_portrait_mic.jpg" alt="War Machines Japan campaign" fill className="object-cover" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,transparent,rgba(0,0,0,0.78))]" />
+            </div>
+          </div>
+        </section>
+
+        <section id="universe" className="relative z-10 border-b border-[#a86225]/20 px-4 py-10 sm:px-6">
+          <SectionTitle title="Enter The Echoes Unearthed Universe" />
+          <div className="mx-auto mt-8 grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {universeCards.map((card) => (
+              <Link
+                key={card.title}
+                href={card.href}
+                className="group overflow-hidden border border-white/10 bg-black/50 transition hover:-translate-y-1 hover:border-[#f4c66a]/50"
               >
-                <Sparkles className="mr-2 h-4 w-4" />
-                Follow KAMDRIDI
-              </a>
+                <div className="relative aspect-[16/10]">
+                  <Image src={card.image} alt={card.title} fill className="object-cover transition duration-500 group-hover:scale-105" />
+                </div>
+                <div className="p-4 text-center">
+                  <h3 className="font-display text-xl uppercase tracking-[0.08em] text-[#e8b777]">{card.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-stone-400">{card.text}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section id="video" className="relative z-10 px-4 py-10 sm:px-6">
+          <SectionTitle eyebrow="News / Video" title="Active Signals" />
+          <div className="mx-auto mt-8 grid max-w-7xl gap-6 lg:grid-cols-[1.25fr_0.75fr]">
+            <div className="overflow-hidden border border-[#8f5728]/35 bg-black/55">
+              <div className="aspect-video">
+                <iframe
+                  className="h-full w-full"
+                  src={featuredVideo.embedUrl}
+                  title={featuredVideo.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
             </div>
-          </GlassCard>
-        </div>
-      </Section>
+            <div className="grid gap-4">
+              {socialFeed.map((item) => (
+                <div key={`${item.platform}-${item.date}`} className="border border-white/10 bg-black/50 p-5">
+                  <div className="flex items-center gap-3 text-[#f4c66a]">
+                    {item.platform === "YouTube" ? <Youtube className="h-5 w-5" /> : item.platform === "TikTok" ? <Film className="h-5 w-5" /> : <Sparkles className="h-5 w-5" />}
+                    <p className="text-xs uppercase tracking-[0.28em]">{item.platform}</p>
+                  </div>
+                  <p className="mt-4 text-sm leading-7 text-stone-300">{item.caption}</p>
+                  <p className="mt-3 text-xs uppercase tracking-[0.22em] text-stone-600">{item.date}</p>
+                </div>
+              ))}
+              <Link
+                href="/news"
+                className="inline-flex items-center justify-center gap-3 border border-[#8f5728]/45 bg-black/50 px-5 py-4 text-xs font-semibold uppercase tracking-[0.22em] text-stone-200 transition hover:border-[#f4c66a]/60 hover:text-[#f4c66a]"
+              >
+                News / Video <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="relative z-10 border-t border-[#a86225]/20 px-4 py-12 text-center sm:px-6">
+          <div className="mx-auto flex max-w-5xl flex-col items-center gap-5 sm:flex-row sm:justify-center">
+            <PremiumButton href="#listen-now">Stream the Album</PremiumButton>
+            <PremiumButton href="#universe" tone="secondary">
+              Enter the Universe
+            </PremiumButton>
+            <PremiumButton href="#collector-products" tone="secondary">
+              <Box className="mr-2 h-4 w-4" /> Collect the Physical Edition
+            </PremiumButton>
+          </div>
+        </section>
+      </div>
     </>
   );
 }
