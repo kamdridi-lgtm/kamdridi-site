@@ -11,7 +11,7 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#090909",
     icons: [
       {
-        src: "/assets/images/logo.png",
+        src: "/assets/images/kamdridi-logo-hd.png",
         sizes: "512x512",
         type: "image/png"
       }

@@ -26,6 +26,7 @@ const collectorCdImage = "/store/cd-product.jpg";
 const vinylImage = "/store/vinyl-product.jpg";
 const cassetteImage = "/store/war-machines-helmet.jpg";
 const japanHref = "/app/war-machines-jp";
+const brandLogo = "/assets/images/kamdridi-logo-hd.png";
 
 const tracks = [
   ["01", "War Machines", "The battle begins. Machines awaken."],
@@ -188,9 +189,9 @@ export default function HomePage() {
               </div>
             </div>
             <div className="text-center lg:text-left">
-              <p className="font-display text-4xl uppercase tracking-[0.18em] text-[#d47b2f] sm:text-5xl">
-                KAM DRIDI
-              </p>
+              <div className="relative mx-auto h-28 w-full max-w-[460px] lg:mx-0">
+                <Image src={brandLogo} alt="KAMDRIDI logo" fill priority className="object-contain lg:object-left" />
+              </div>
               <h1 className="mt-4 font-display text-[clamp(3.2rem,10vw,8.8rem)] uppercase leading-[0.78] tracking-[0.08em] text-stone-100">
                 Echoes
                 <br />

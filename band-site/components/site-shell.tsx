@@ -20,6 +20,8 @@ import { navigation, siteMeta, socialLinks } from "@/data/site";
 import { CartDrawer } from "@/components/cart-drawer";
 import { useApp } from "@/components/providers";
 
+const brandLogo = "/assets/images/kamdridi-logo-hd.png";
+
 function IconBase({
   children,
   viewBox = "0 0 24 24"
@@ -160,18 +162,13 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <SocialBar />
       <header className="sticky top-0 z-[1000] border-b border-white/10 bg-[#090909]/85 backdrop-blur-xl">
         <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="relative h-11 w-11 overflow-hidden rounded-full border border-[#f4c66a]/40 bg-[#111] shadow-[0_0_30px_rgba(244,198,106,0.15)]">
-              <Image src="/assets/images/logo.png" alt="KAMDRIDI logo" fill className="object-contain p-1.5" />
+          <Link href="/" className="flex min-w-0 items-center gap-3">
+            <div className="relative h-14 w-40 shrink-0 sm:w-48">
+              <Image src={brandLogo} alt="KAMDRIDI logo" fill priority className="object-contain object-left" />
             </div>
-            <div>
-              <p className="font-display text-2xl uppercase tracking-[0.25em] text-[#f4c66a]">
-                {siteMeta.bandName}
-              </p>
-              <p className="text-xs uppercase tracking-[0.35em] text-stone-400">
-                echoes unearthed universe
-              </p>
-            </div>
+            <p className="hidden text-xs uppercase tracking-[0.28em] text-stone-400 xl:block">
+              echoes unearthed universe
+            </p>
           </Link>
 
           <nav className="hidden items-center gap-6 lg:flex">
@@ -313,9 +310,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <footer className="border-t border-white/10 bg-black/60">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.1fr_0.8fr_0.8fr_0.8fr]">
           <div>
-            <p className="font-display text-3xl uppercase tracking-[0.24em] text-[#f4c66a]">
-              {siteMeta.bandName}
-            </p>
+            <div className="relative h-20 w-64">
+              <Image src={brandLogo} alt="KAMDRIDI logo" fill className="object-contain object-left" />
+            </div>
             <p className="mt-3 max-w-xl text-sm leading-7 text-stone-400">
               {siteMeta.tagline} Built as a living fan universe with music, games, visual-album
               layers, collector drops, and fan-club access under one cinematic identity.
@@ -354,7 +351,12 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <div className="mt-4 grid gap-2 text-sm text-stone-300">
               <p>{siteMeta.email}</p>
               <p>Booking, press, management, licensing</p>
-              <p className="text-stone-500">(c) 2026 KAMDRIDI</p>
+              <div className="flex items-center gap-3 text-stone-500">
+                <span>(c) 2026</span>
+                <span className="relative inline-block h-7 w-24">
+                  <Image src={brandLogo} alt="KAMDRIDI logo" fill className="object-contain object-left" />
+                </span>
+              </div>
             </div>
           </div>
         </div>
