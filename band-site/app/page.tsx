@@ -23,6 +23,7 @@ const collectorCdImage = "/store/cd-product.jpg";
 const vinylImage = "/store/vinyl-product.jpg";
 const cassetteImage = "/store/war-machines-helmet.jpg";
 const japanHref = "/app/war-machines-jp";
+const japanQr = "/assets/images/kamdridi-japan-page-qr.svg";
 const brandLogo = "/assets/images/kamdridi-logo-hd.png";
 const spotifyAlbumHref =
   "https://open.spotify.com/album/4rrOMu0BIhzJt1ElOfgXZu?si=a6eAct6jQl6BapO1_Zm4gA";
@@ -389,8 +390,8 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="relative z-10 border-b border-[#a86225]/20 px-4 py-10 sm:px-6">
-          <div className="mx-auto grid max-w-7xl items-center gap-6 overflow-hidden border border-[#8f5728]/35 bg-black/50 p-6 lg:grid-cols-[0.95fr_1.05fr]">
+        <section id="japan" className="relative z-10 border-b border-[#a86225]/20 px-4 py-10 sm:px-6">
+          <div className="mx-auto grid max-w-7xl items-center gap-6 overflow-hidden border border-[#8f5728]/35 bg-black/50 p-5 sm:p-6 lg:grid-cols-[0.9fr_0.32fr_1fr]">
             <div>
               <p className="text-xs uppercase tracking-[0.32em] text-[#c98542]">Japan Campaign</p>
               <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.1em] text-stone-100 sm:text-5xl">
@@ -406,6 +407,16 @@ export default function HomePage() {
                 </PremiumButton>
               </div>
             </div>
+            <Link
+              href={japanHref}
+              className="mx-auto w-full max-w-[180px] border border-[#f4c66a]/35 bg-stone-100 p-3 text-center shadow-[0_24px_70px_rgba(0,0,0,0.45)] transition hover:-translate-y-1 hover:border-[#f4c66a]"
+              aria-label="Open KAMDRIDI Japan Page QR code"
+            >
+              <Image src={japanQr} alt="QR code for KAMDRIDI Japan Page" width={420} height={420} className="h-auto w-full" />
+              <span className="mt-3 block text-[10px] font-semibold uppercase tracking-[0.18em] text-[#140d08]">
+                Scan Japan Page
+              </span>
+            </Link>
             <div className="relative min-h-72 overflow-hidden">
               <Image src="/assets/images/gallery/p03_portrait_mic.jpg" alt="War Machines Japan campaign" fill className="object-cover" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,transparent,rgba(0,0,0,0.78))]" />

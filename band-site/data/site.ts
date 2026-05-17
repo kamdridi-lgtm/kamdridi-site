@@ -186,6 +186,14 @@ export const navigation: NavItem[] = [
     ]
   },
   {
+    label: "Japan",
+    href: "/app/war-machines-jp",
+    children: [
+      { label: "War Machines / ウォー・マシーンズ", href: "/app/war-machines-jp" },
+      { label: "Back to Album Hub", href: "/#listen-now" }
+    ]
+  },
+  {
     label: "Fan Club",
     href: "/fan-club",
     children: [
