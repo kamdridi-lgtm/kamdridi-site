@@ -157,6 +157,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const { cartCount, setCartOpen } = useApp();
   const isHome = pathname === "/";
+  const isStandalonePoster = pathname === "/app/war-machines-jp";
+
+  if (isStandalonePoster) {
+    return <>{children}</>;
+  }
 
   return (
     <div className="min-h-screen bg-[#090909] text-white">
