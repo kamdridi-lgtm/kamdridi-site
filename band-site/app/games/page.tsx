@@ -3,6 +3,8 @@ import Link from "next/link";
 import { GamesPanel } from "@/components/games-panel";
 import { Section } from "@/components/ui";
 
+const gamesHeroVideo = "/videos/games-hero-20260516.mp4";
+
 export const metadata: Metadata = {
   title: "Games",
   description:
@@ -24,7 +26,7 @@ export default function GamesPage() {
             poster="/official-game-poster.png"
             aria-label="KAMDRIDI games trailer"
           >
-            <source src="/videos/games_top_2026-03-30.mp4" type="video/mp4" />
+            <source src={gamesHeroVideo} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.22)_38%,rgba(0,0,0,0.64))]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.16),transparent_28%)]" />
