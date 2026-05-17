@@ -33,6 +33,8 @@ const visualRoutes = [
   }
 ];
 
+const visualAlbumHeroVideo = "/videos/visual-album-hero-grok.mp4";
+
 export default function VisualAlbumPage() {
   return (
     <>
@@ -48,7 +50,7 @@ export default function VisualAlbumPage() {
             poster="/assets/images/releases/echoes-unearthed-cover.jpg"
             aria-label="KAMDRIDI visual album trailer"
           >
-            <source src="/videos/visual_album_top_2026-03-30.mp4" type="video/mp4" />
+            <source src={visualAlbumHeroVideo} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.04),rgba(0,0,0,0.22))]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.12),transparent_30%)]" />
