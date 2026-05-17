@@ -10,11 +10,16 @@ const LINKS = {
   apple: "https://music.apple.com/us/album/war-machines-radio-edit-single/1871879256",
   youtubeMusic: "https://www.youtube.com/watch?v=hzlVyLQN6a8",
   amazonMusic: "https://amazon.com/music/player/tracks/B0GJN46NSS",
+  amazonMusicJapan: "https://music.amazon.co.jp/",
+  lineMusic: "https://music.line.me/",
+  awa: "https://awa.fm/",
+  recochoku: "https://recochoku.jp/",
+  mora: "https://mora.jp/",
   teaser: "https://www.youtube.com/watch?v=hzlVyLQN6a8"
 } as const;
 
-const LOGO = "/assets/images/kamdridi-logo-hd.png";
-const COVER = "/assets/images/releases/war-machines-cover.png";
+const LOGO = "/assets/images/war-machines-jp-logo.png";
+const COVER = "/assets/images/war-machines-jp-cover.png";
 const FALLBACK_BUY_LINK =
   "mailto:contact@kamdridi.com?subject=War%20Machines%20Japanese%20Edition%20Purchase";
 
@@ -41,7 +46,11 @@ const platforms = [
   { label: "Spotify", href: LINKS.spotify, logo: <SpotifyLogo /> },
   { label: "Apple Music", href: LINKS.apple, logo: <AppleLogo /> },
   { label: "YouTube Music", href: LINKS.youtubeMusic, logo: <YouTubeLogo /> },
-  { label: "Amazon Music", href: LINKS.amazonMusic, logo: <AmazonLogo /> }
+  { label: "Amazon Music Japan", href: LINKS.amazonMusicJapan, logo: <AmazonLogo /> },
+  { label: "LINE MUSIC", href: LINKS.lineMusic, logo: <PlatformWordmark text="LINE MUSIC" /> },
+  { label: "AWA", href: LINKS.awa, logo: <PlatformWordmark text="AWA" /> },
+  { label: "RecoChoku", href: LINKS.recochoku, logo: <PlatformWordmark text="RecoChoku" /> },
+  { label: "mora", href: LINKS.mora, logo: <PlatformWordmark text="mora" /> }
 ];
 
 function SpotifyLogo() {
@@ -69,7 +78,11 @@ function YouTubeLogo() {
 }
 
 function AmazonLogo() {
-  return <span className="text-lg font-black lowercase tracking-[-0.05em] text-white">amazon music</span>;
+  return <span className="text-base font-black lowercase tracking-[-0.05em] text-white">amazon music</span>;
+}
+
+function PlatformWordmark({ text }: { text: string }) {
+  return <span className="text-sm font-black tracking-[0.05em] text-white">{text}</span>;
 }
 
 function Panel({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -123,32 +136,33 @@ export default function WarMachinesJapanPage() {
   return (
     <main className="min-h-screen overflow-hidden bg-black text-white">
       <div className="relative mx-auto max-w-[980px] overflow-hidden bg-[#050505] shadow-[0_0_90px_rgba(0,0,0,0.9)]">
+        <Image src={COVER} alt="" fill priority className="pointer-events-none object-cover opacity-[0.16] blur-[2px] saturate-125" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_7%,rgba(255,86,24,0.25),transparent_18%),radial-gradient(circle_at_50%_42%,rgba(255,19,12,0.18),transparent_26%),linear-gradient(180deg,#050506_0%,#0a0a0b_38%,#020202_100%)]" />
         <div className="absolute inset-0 opacity-[0.22] [background-image:linear-gradient(115deg,transparent_0,transparent_44%,rgba(255,50,20,0.22)_45%,transparent_47%),radial-gradient(circle,rgba(255,80,34,0.42)_1px,transparent_1.5px)] [background-size:170px_220px,31px_31px]" />
         <div className="absolute inset-x-0 top-0 h-[360px] bg-[radial-gradient(ellipse_at_top,rgba(255,72,20,0.32),transparent_58%)]" />
 
-        <section className="relative px-5 pb-7 pt-8 sm:px-10 sm:pt-10">
-          <div className="mx-auto max-w-[820px] text-center">
-            <div className="relative mx-auto h-32 w-full overflow-visible sm:h-48">
+        <section className="relative px-3 pb-6 pt-12 sm:px-8 sm:pt-14">
+          <div className="mx-auto max-w-[940px] text-center">
+            <div className="relative mx-auto h-44 w-full overflow-visible sm:h-64">
               <Image
                 src={LOGO}
                 alt="KAMDRIDI"
                 fill
                 priority
-                className="scale-[2.15] object-contain drop-shadow-[0_0_26px_rgba(255,54,18,0.75)] sm:scale-[1.85]"
+                className="scale-[1.04] object-contain drop-shadow-[0_0_34px_rgba(255,54,18,0.85)] sm:scale-[1.08]"
               />
             </div>
-            <p className="-mt-2 text-base font-black tracking-[0.16em] text-stone-200 drop-shadow-[0_0_12px_rgba(255,255,255,0.35)] sm:text-xl">
+            <p className="-mt-4 text-base font-black tracking-[0.16em] text-stone-200 drop-shadow-[0_0_12px_rgba(255,255,255,0.35)] sm:text-xl">
               公式シングル・プレゼンテーション
             </p>
             <div className="mx-auto mt-7 h-px w-3/5 bg-[linear-gradient(90deg,transparent,#b01210,#ffefef,#b01210,transparent)]" />
           </div>
         </section>
 
-        <section className="relative px-5 sm:px-10">
-          <div className="mx-auto max-w-[790px] border border-[#7e261d] bg-black/70 p-2 shadow-[0_0_45px_rgba(255,40,16,0.22)]">
+        <section className="relative px-3 sm:px-8">
+          <div className="mx-auto max-w-[880px] border border-[#7e261d] bg-black/80 p-2 shadow-[0_0_55px_rgba(255,40,16,0.32)]">
             <div className="relative aspect-square border border-[#9a6b3a]/70 bg-black">
-              <Image src={COVER} alt="War Machines cover" fill priority className="object-contain" />
+              <Image src={COVER} alt="War Machines Japan cover" fill priority className="object-cover" />
             </div>
           </div>
         </section>
@@ -236,10 +250,10 @@ export default function WarMachinesJapanPage() {
                 href={platform.href}
                 target="_blank"
                 rel="noreferrer"
-                className="flex min-h-12 items-center justify-center gap-2 border border-[#3b1613] bg-black/35 px-2 text-sm font-black text-white transition hover:border-[#ff321d]"
+                className="flex min-h-12 items-center justify-center gap-2 border border-[#3b1613] bg-black/35 px-2 text-center text-sm font-black text-white transition hover:border-[#ff321d]"
               >
                 {platform.logo}
-                <span>{platform.label}</span>
+                <span className="sr-only">{platform.label}</span>
               </a>
             ))}
           </Panel>
