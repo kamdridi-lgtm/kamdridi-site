@@ -442,7 +442,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
           </span>
           <span className="rounded-full border border-white/10 px-4 py-2">Tees $38-$52</span>
           <span className="rounded-full border border-white/10 px-4 py-2">Hoodie $78</span>
-          <span className="rounded-full border border-white/10 px-4 py-2">Accessories $24-$32</span>
+          <span className="rounded-full border border-white/10 px-4 py-2">Accessories $18-$32</span>
         </div>
         <div className="mt-10 grid gap-4 rounded-[28px] border border-white/10 bg-black/25 p-6 md:grid-cols-[1fr_auto] md:items-center">
           <div className="flex flex-wrap items-center justify-between gap-3">

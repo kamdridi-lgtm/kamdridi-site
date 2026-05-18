@@ -57,7 +57,7 @@ export default function StorePage() {
                 </span>
                 <span className="border border-white/10 bg-black/35 px-4 py-3">Tees from $38</span>
                 <span className="border border-white/10 bg-black/35 px-4 py-3">Hoodie $78</span>
-                <span className="border border-white/10 bg-black/35 px-4 py-3">Accessories from $24</span>
+                <span className="border border-white/10 bg-black/35 px-4 py-3">Accessories from $18</span>
               </div>
             </div>
 

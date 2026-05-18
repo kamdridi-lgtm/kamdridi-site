@@ -127,6 +127,18 @@ export const storeProducts: StoreProduct[] = [
     fulfillmentMode: "manual"
   },
   {
+    id: "kamdridi-logo-keychain",
+    name: "KAMDRIDI Logo Keychain",
+    category: "Accessories",
+    image: "/store/merch/logo-essentials-grid.png",
+    imagePosition: "25% 75%",
+    price: 18,
+    priceLabel: "$18",
+    description: "Small black-and-gold KAMDRIDI logo keychain for bags, cases, keys, and collector bundles.",
+    badge: "Add-On",
+    fulfillmentMode: "manual"
+  },
+  {
     id: "echoes-unearthed-crest-tee",
     name: "Echoes Unearthed Crest Tee",
     category: "Apparel",
