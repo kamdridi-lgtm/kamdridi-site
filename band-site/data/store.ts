@@ -128,14 +128,14 @@ export const storeProducts: StoreProduct[] = [
   },
   {
     id: "kamdridi-logo-keychain",
-    name: "KAMDRIDI Logo Keychain",
+    name: "KAMDRIDI Boxed Logo Keychain",
     category: "Accessories",
     image: "/store/merch/logo-essentials-grid.png",
     imagePosition: "25% 75%",
-    price: 18,
-    priceLabel: "$18",
-    description: "Small black-and-gold KAMDRIDI logo keychain for bags, cases, keys, and collector bundles.",
-    badge: "Add-On",
+    price: 36,
+    priceLabel: "$36",
+    description: "Premium black-and-gold KAMDRIDI logo keychain presented in a collector box for bags, cases, keys, and bundles.",
+    badge: "Boxed Accessory",
     fulfillmentMode: "manual"
   },
   {

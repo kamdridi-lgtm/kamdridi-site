@@ -57,7 +57,7 @@ export default function StorePage() {
                 </span>
                 <span className="border border-white/10 bg-black/35 px-4 py-3">Tees from $38</span>
                 <span className="border border-white/10 bg-black/35 px-4 py-3">Hoodie $78</span>
-                <span className="border border-white/10 bg-black/35 px-4 py-3">Accessories from $18</span>
+                <span className="border border-white/10 bg-black/35 px-4 py-3">Boxed keychain $36</span>
               </div>
             </div>
 
@@ -82,8 +82,8 @@ export default function StorePage() {
                   href: "#signal-target-tee-collection"
                 },
                 {
-                  title: "Logo Keychain",
-                  price: "$18",
+                  title: "Boxed Keychain",
+                  price: "$36",
                   image: "/store/merch/logo-essentials-grid.png",
                   href: "#kamdridi-logo-keychain"
                 }
