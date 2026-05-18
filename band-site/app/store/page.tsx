@@ -61,7 +61,7 @@ export default function StorePage() {
               </div>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
               {[
                 {
                   title: "Gold Logo Tee",
@@ -80,6 +80,12 @@ export default function StorePage() {
                   price: "$44",
                   image: "/store/merch/signal-target-collection.png",
                   href: "#signal-target-tee-collection"
+                },
+                {
+                  title: "Logo Keychain",
+                  price: "$18",
+                  image: "/store/merch/logo-essentials-grid.png",
+                  href: "#kamdridi-logo-keychain"
                 }
               ].map((item) => (
                 <a
