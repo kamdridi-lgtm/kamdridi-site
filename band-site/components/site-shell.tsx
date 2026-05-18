@@ -5,14 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   ChevronRight,
-  Facebook,
   Gamepad2,
-  Instagram,
   Menu,
   Music2,
   ShoppingBag,
   X,
-  Youtube
 } from "lucide-react";
 import { useState } from "react";
 import clsx from "clsx";
@@ -22,79 +19,130 @@ import { useApp } from "@/components/providers";
 
 const brandLogo = "/assets/images/kamdridi-logo-hd.png";
 
-function IconBase({
-  children,
-  viewBox = "0 0 24 24"
-}: {
-  children: React.ReactNode;
-  viewBox?: string;
-}) {
-  return (
-    <svg viewBox={viewBox} aria-hidden="true" className="h-4 w-4 fill-none stroke-current">
-      {children}
-    </svg>
-  );
-}
-
 function SpotifyIcon() {
   return (
-    <IconBase>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M8 10.2c2.8-1 5.9-.8 8.3.5" strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M8.8 13c2.1-.7 4.4-.6 6.2.4" strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M9.6 15.6c1.5-.4 3-.3 4.2.3" strokeWidth="1.8" strokeLinecap="round" />
-    </IconBase>
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+      <circle cx="12" cy="12" r="10" fill="#1DB954" />
+      <path
+        d="M7.3 9.65c3.15-.92 6.4-.68 9.34.98M7.8 12.45c2.55-.73 5.08-.54 7.42.77M8.45 15.05c1.78-.47 3.7-.35 5.38.54"
+        fill="none"
+        stroke="#0b0b0b"
+        strokeLinecap="round"
+        strokeWidth="1.55"
+      />
+    </svg>
   );
 }
 
 function TikTokIcon() {
   return (
-    <IconBase>
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
       <path
-        d="M14 4v8.3a3.2 3.2 0 1 1-2.4-3.1"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        d="M15.45 4.15v8.05a4.35 4.35 0 1 1-3.7-4.3v2.7a1.68 1.68 0 1 0 1.1 1.58V4.15h2.6Z"
+        fill="#25F4EE"
       />
       <path
-        d="M14 4c.6 1.8 2 3.2 3.8 3.8"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        d="M16.75 5.42c.86 1.34 2.05 2.1 3.45 2.28v2.7c-1.6-.08-2.78-.5-3.45-1.05v3.68a4.35 4.35 0 0 1-6.45 3.82 4.35 4.35 0 0 0 7.76-2.68V9.9c.67.55 1.85.97 3.45 1.05V8.25c-1.4-.18-2.6-.94-3.45-2.28-.44-.25-.86-.43-1.31-.55Z"
+        fill="#FE2C55"
       />
-    </IconBase>
+      <path
+        d="M14.3 4.15v8.03a1.68 1.68 0 1 1-1.1-1.58V7.9a4.35 4.35 0 1 0 3.7 4.3V4.15h-2.6Zm2.6 0c.56 1.95 1.74 3.22 3.3 3.55v2.7c-1.5-.1-2.62-.5-3.3-1.05v-5.2Z"
+        fill="#fff"
+      />
+    </svg>
   );
 }
 
 function AppleMusicIcon() {
   return (
-    <IconBase>
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+      <defs>
+        <linearGradient id="apple-music-gradient" x1="5" x2="19" y1="19" y2="5" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#FA233B" />
+          <stop offset="0.5" stopColor="#FB5C74" />
+          <stop offset="1" stopColor="#A64DFF" />
+        </linearGradient>
+      </defs>
+      <rect width="20" height="20" x="2" y="2" rx="5" fill="url(#apple-music-gradient)" />
       <path
-        d="M15 5v9.5a2.5 2.5 0 1 1-1.8-2.4V7.2L9 8.2v7.3a2.5 2.5 0 1 1-1.8-2.4V6.8L15 5Z"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        d="M16.2 6.15v8.02a2.38 2.38 0 1 1-1.55-2.23V8.4l-5.05.95v6.1a2.38 2.38 0 1 1-1.55-2.24V7.6l8.15-1.45Z"
+        fill="#fff"
       />
-    </IconBase>
+    </svg>
   );
 }
 
 function XIcon() {
   return (
-    <IconBase>
-      <path d="M5 5l14 14M19 5 5 19" strokeWidth="1.8" strokeLinecap="round" />
-    </IconBase>
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+      <rect width="20" height="20" x="2" y="2" rx="10" fill="#fff" />
+      <path
+        d="M13.9 10.6 19.1 4.6h-1.24l-4.5 5.16-3.59-5.16H5.6l5.45 7.82-5.45 6.23h1.24l4.76-5.43 3.8 5.43h4.17l-5.67-8.05Zm-1.69 1.93-.55-.78-4.4-6.22h1.92l3.54 5 .55.78 4.62 6.54h-1.92l-3.76-5.32Z"
+        fill="#000"
+      />
+    </svg>
+  );
+}
+
+function YouTubeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+      <rect width="21" height="15" x="1.5" y="4.5" rx="4" fill="#FF0000" />
+      <path d="m10 8.35 6 3.65-6 3.65v-7.3Z" fill="#fff" />
+    </svg>
+  );
+}
+
+function InstagramIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+      <defs>
+        <radialGradient id="instagram-gradient" cx="30%" cy="107%" r="130%">
+          <stop offset="0" stopColor="#fdf497" />
+          <stop offset="0.2" stopColor="#fdf497" />
+          <stop offset="0.45" stopColor="#fd5949" />
+          <stop offset="0.65" stopColor="#d6249f" />
+          <stop offset="1" stopColor="#285AEB" />
+        </radialGradient>
+      </defs>
+      <rect width="20" height="20" x="2" y="2" rx="5.5" fill="url(#instagram-gradient)" />
+      <circle cx="12" cy="12" r="4" fill="none" stroke="#fff" strokeWidth="1.8" />
+      <circle cx="17.2" cy="6.8" r="1.2" fill="#fff" />
+    </svg>
+  );
+}
+
+function FacebookIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+      <circle cx="12" cy="12" r="10" fill="#1877F2" />
+      <path
+        d="M13.35 18v-5.48h1.85l.28-2.14h-2.13V9.02c0-.62.17-1.04 1.06-1.04h1.14V6.06c-.2-.03-.87-.08-1.66-.08-1.64 0-2.76 1-2.76 2.84v1.56H9.28v2.14h1.85V18h2.22Z"
+        fill="#fff"
+      />
+    </svg>
   );
 }
 
 const socialIcons: Record<string, React.ReactNode> = {
-  YouTube: <Youtube className="h-4 w-4" />,
-  Instagram: <Instagram className="h-4 w-4" />,
+  YouTube: <YouTubeIcon />,
+  Instagram: <InstagramIcon />,
   TikTok: <TikTokIcon />,
   Spotify: <SpotifyIcon />,
   "Apple Music": <AppleMusicIcon />,
-  Facebook: <Facebook className="h-4 w-4" />,
+  Facebook: <FacebookIcon />,
   Twitter: <XIcon />
+};
+
+const socialBrandClasses: Record<string, string> = {
+  YouTube: "border-[#ff0000]/35 bg-[#ff0000]/10 hover:border-[#ff0000]/70 hover:bg-[#ff0000]/18",
+  Instagram:
+    "border-[#d6249f]/35 bg-[radial-gradient(circle_at_28%_110%,rgba(253,244,151,0.18),rgba(253,89,73,0.14)_36%,rgba(214,36,159,0.12)_58%,rgba(40,90,235,0.12))] hover:border-[#fd5949]/70",
+  TikTok: "border-[#25f4ee]/35 bg-[#fe2c55]/10 hover:border-[#25f4ee]/70 hover:bg-[#fe2c55]/16",
+  Spotify: "border-[#1db954]/35 bg-[#1db954]/10 hover:border-[#1db954]/70 hover:bg-[#1db954]/16",
+  "Apple Music": "border-[#fa233b]/35 bg-[#fa233b]/10 hover:border-[#fb5c74]/70 hover:bg-[#fa233b]/16",
+  Facebook: "border-[#1877f2]/35 bg-[#1877f2]/10 hover:border-[#1877f2]/70 hover:bg-[#1877f2]/16",
+  Twitter: "border-white/35 bg-white/10 hover:border-white/70 hover:bg-white/16"
 };
 
 const footerRoutes = [
@@ -141,7 +189,10 @@ function SocialBar() {
               rel="noreferrer"
               aria-label={link.label}
               title={link.label}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"
+              className={clsx(
+                "inline-flex h-9 w-9 items-center justify-center rounded-full border text-white shadow-[0_10px_30px_rgba(0,0,0,0.24)] transition hover:-translate-y-0.5",
+                socialBrandClasses[link.label] ?? "border-white/10 bg-black/40 hover:border-[#f4c66a]/50"
+              )}
             >
               {socialIcons[link.label] ?? <Music2 className="h-4 w-4" />}
             </a>
@@ -165,7 +216,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-[#090909] text-white">
-      {!isHome ? <SocialBar /> : null}
+      <SocialBar />
       <header className="sticky top-0 z-[1000] border-b border-white/10 bg-[#090909]/88 backdrop-blur-xl">
         <div className="relative mx-auto flex max-w-[1500px] items-center justify-between gap-3 px-4 py-2.5 sm:px-6">
           <Link href="/" className="flex min-w-0 items-center gap-3">
