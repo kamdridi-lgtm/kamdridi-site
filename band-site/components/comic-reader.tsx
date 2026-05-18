@@ -22,7 +22,7 @@ export function ComicReader() {
     <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
       <GlassCard id="comic-reader" className="overflow-hidden p-0">
         <div className="relative aspect-[4/5] w-full bg-black">
-          <Image src={page.image} alt={page.title} fill className="object-cover" />
+          <Image src={page.image} alt={page.title} fill className="object-contain" />
           <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent,rgba(0,0,0,0.85))] p-6">
             <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">{page.title}</p>
             <p className="mt-3 text-sm leading-7 text-stone-300">{page.caption}</p>

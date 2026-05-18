@@ -499,26 +499,32 @@ export const comicPages: ComicPage[] = [
   {
     id: "page-1",
     title: "Page 01",
-    image: "/assets/images/gallery/p01_hero.jpg",
-    caption: "The first signals surface through dust, floodlights, and a city still waking up."
+    image: "/assets/images/comic/who-is-kam-dridi-page-01.jpg",
+    caption: "The logo breaks over the roofline as the early band myth begins."
   },
   {
     id: "page-2",
     title: "Page 02",
-    image: "/assets/images/gallery/p02_live.jpg",
-    caption: "The stage becomes a threshold where memory, pressure, and performance collide."
+    image: "/assets/images/comic/who-is-kam-dridi-page-02.jpg",
+    caption: "Our Lost Dreams opens the story with school days, garage rehearsals, and first riffs."
   },
   {
     id: "page-3",
     title: "Page 03",
-    image: "/assets/images/gallery/p03_portrait_mic.jpg",
-    caption: "A voice emerges from the static with fragments of the Echoes Unearthed story."
+    image: "/assets/images/comic/who-is-kam-dridi-page-03.jpg",
+    caption: "April 28, 1993: the first real show turns the dream into something real."
   },
   {
     id: "page-4",
     title: "Page 04",
-    image: "/assets/images/gallery/p04_portrait_leather.jpg",
-    caption: "The figure behind the signal steps fully into the frame: Kam Dridi."
+    image: "/assets/images/comic/who-is-kam-dridi-page-04.jpg",
+    caption: "The hallway years hold the jokes, the sketches, and the first pieces of the story."
+  },
+  {
+    id: "page-5",
+    title: "Page 05",
+    image: "/assets/images/comic/who-is-kam-dridi-page-05.jpg",
+    caption: "The flash catches the room as the live signal breaks open around Kam Dridi."
   }
 ];
 
