@@ -34,41 +34,76 @@ export default function StorePage() {
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,6,5,0.03),rgba(7,6,5,0.16))]" />
         </section>
 
-        <Section className="py-12 md:py-16">
-          <div className="mx-auto max-w-7xl">
-            <div className="max-w-4xl">
-              <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Store</p>
-              <h1 className="mt-5 font-display text-4xl uppercase leading-none tracking-[0.08em] text-white sm:text-5xl md:text-7xl">
-                Gold-logo merch, Echoes Unearthed capsule, and premium drops
+        <Section className="py-8 md:py-10">
+          <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
+            <div className="border border-[#f4c66a]/30 bg-[linear-gradient(135deg,rgba(244,198,106,0.16),rgba(0,0,0,0.35))] p-6 md:p-8">
+              <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Official Store</p>
+              <h1 className="mt-4 font-display text-4xl uppercase leading-none tracking-[0.08em] text-white sm:text-5xl md:text-6xl">
+                Shop the drop
               </h1>
-              <p className="mt-6 max-w-3xl text-base leading-8 text-stone-300">
-                The real KAMDRIDI merch wall: gold-logo essentials, Echoes Unearthed capsule
-                tees, War Machines print pieces, collector apparel, and one clean cart flow.
+              <p className="mt-5 max-w-2xl text-base leading-8 text-stone-300">
+                Best sellers first, prices visible, variants clear, and the cart always one click away.
+                Start with the logo tee, Echoes crest tee, or Signal Target capsule.
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <CTAButton href="#featured">Browse the Drop</CTAButton>
-                <CTAButton href="/fan-club" tone="secondary">
-                  Enter Fan Club
+              <div className="mt-7 flex flex-wrap gap-3">
+                <CTAButton href="#featured">Shop Best Sellers</CTAButton>
+                <CTAButton href="#collector-artifact-pack" tone="secondary">
+                  Collector Bundle
                 </CTAButton>
               </div>
-              <div className="mt-8 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.28em] text-stone-400">
-                <span className="rounded-full border border-[#f4c66a]/35 bg-[#f4c66a]/10 px-4 py-2 text-[#f4c66a]">
-                  Gold Logo Capsule
+              <div className="mt-7 grid gap-3 text-[11px] uppercase tracking-[0.26em] text-stone-300 sm:grid-cols-2">
+                <span className="border border-[#f4c66a]/35 bg-[#f4c66a]/10 px-4 py-3 text-[#f4c66a]">
+                  {checkoutEnabled ? "Hosted checkout live" : "Demo checkout active"}
                 </span>
-                <span className="rounded-full border border-white/10 px-4 py-2">
-                  {checkoutEnabled ? "Hosted Checkout Live" : "Local Demo Checkout"}
-                </span>
-                <span className="rounded-full border border-white/10 px-4 py-2">Tees</span>
-                <span className="rounded-full border border-white/10 px-4 py-2">Hoodie</span>
-                <span className="rounded-full border border-white/10 px-4 py-2">Cap</span>
-                <span className="rounded-full border border-white/10 px-4 py-2">Mug</span>
-                <span className="rounded-full border border-white/10 px-4 py-2">Poster</span>
+                <span className="border border-white/10 bg-black/35 px-4 py-3">Tees from $38</span>
+                <span className="border border-white/10 bg-black/35 px-4 py-3">Hoodie $78</span>
+                <span className="border border-white/10 bg-black/35 px-4 py-3">Accessories from $24</span>
               </div>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-3">
+              {[
+                {
+                  title: "Gold Logo Tee",
+                  price: "$38",
+                  image: "/store/merch/gold-logo-tee-glow.png",
+                  href: "#kamdridi-gold-logo-tee"
+                },
+                {
+                  title: "Echoes Crest Tee",
+                  price: "$46",
+                  image: "/store/merch/echoes-crest-tee-duo.png",
+                  href: "#echoes-unearthed-crest-tee"
+                },
+                {
+                  title: "Signal Target",
+                  price: "$44",
+                  image: "/store/merch/signal-target-collection.png",
+                  href: "#signal-target-tee-collection"
+                }
+              ].map((item) => (
+                <a
+                  key={item.title}
+                  href={item.href}
+                  className="group relative min-h-[300px] overflow-hidden border border-white/10 bg-black"
+                >
+                  <Image src={item.image} alt={item.title} fill className="object-cover transition duration-500 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.05),rgba(0,0,0,0.78))]" />
+                  <div className="absolute inset-x-0 bottom-0 p-4">
+                    <p className="text-[10px] uppercase tracking-[0.28em] text-[#f4c66a]">Best Seller</p>
+                    <h2 className="mt-2 text-xl text-white">{item.title}</h2>
+                    <p className="mt-2 text-lg text-[#f4c66a]">{item.price}</p>
+                    <p className="mt-3 text-[10px] uppercase tracking-[0.24em] text-stone-400">
+                      Choose variant
+                    </p>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
         </Section>
 
-        <Section className="relative py-14 md:py-18">
+        <Section id="collector-artifact-pack" className="relative py-14 md:py-18">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.14),transparent_26%),linear-gradient(180deg,rgba(11,10,8,0.65),rgba(11,10,8,0.96))]" />
           <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
