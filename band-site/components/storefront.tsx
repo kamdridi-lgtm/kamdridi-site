@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ShoppingBag, ShieldCheck, Sparkles, Truck } from "lucide-react";
+import { ArrowRight, PackageCheck, ShoppingBag, ShieldCheck, Sparkles, Star, Truck } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useApp } from "@/components/providers";
@@ -37,6 +37,14 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
   );
   const merchProducts = storefrontGrid.filter((product) => product.category !== "Digital Access");
   const digitalAccessProducts = storefrontGrid.filter((product) => product.category === "Digital Access");
+  const bestSellerIds = [
+    "kamdridi-gold-logo-tee",
+    "echoes-unearthed-crest-tee",
+    "signal-target-tee-collection"
+  ];
+  const heroProducts = merchProducts
+    .filter((product) => bestSellerIds.includes(product.id))
+    .sort((a, b) => bestSellerIds.indexOf(a.id) - bestSellerIds.indexOf(b.id));
 
   useEffect(() => {
     const purchaseState = searchParams.get("purchase") || searchParams.get("checkout");
@@ -160,24 +168,30 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
 
   function renderProductCard(product: StoreProduct) {
     return (
-      <GlassCard key={product.id} id={product.id} className="overflow-hidden p-0 scroll-mt-28">
+      <GlassCard key={product.id} id={product.id} className="group overflow-hidden p-0 scroll-mt-28">
         <div className="relative h-80 bg-black/40">
           <Image
             src={product.image}
             alt={product.name}
             fill
-            className="object-cover transition duration-500 hover:scale-105"
+            className="object-cover transition duration-500 group-hover:scale-105"
             style={{ objectPosition: product.imagePosition ?? "center" }}
           />
-        </div>
-        <div className="p-6">
-          <p className="text-xs uppercase tracking-[0.35em] text-stone-500">{product.category}</p>
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.45))]" />
+          <div className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/60 px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-stone-200 backdrop-blur">
+            {product.category}
+          </div>
           {product.badge ? (
-            <div className="mt-3 inline-flex rounded-full border border-[#f4c66a]/35 bg-[#f4c66a]/10 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-[#f4c66a]">
+            <div className="absolute bottom-4 left-4 rounded-full border border-[#f4c66a]/45 bg-[#f4c66a]/15 px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-[#f4c66a] backdrop-blur">
               {product.badge}
             </div>
           ) : null}
-          <h3 className="mt-3 text-2xl text-white">{product.name}</h3>
+        </div>
+        <div className="flex min-h-[430px] flex-col p-6">
+          <div className="flex items-start justify-between gap-4">
+            <h3 className="text-2xl leading-tight text-white">{product.name}</h3>
+            <span className="shrink-0 text-xl text-[#f4c66a]">{product.priceLabel}</span>
+          </div>
           <p className="mt-4 text-sm leading-7 text-stone-400">{product.description}</p>
           {product.colors?.length ? (
             <div className="mt-6">
@@ -225,14 +239,16 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
               </div>
             </div>
           ) : null}
-          <div className="mt-6 flex items-center justify-between gap-4">
-            <span className="text-lg text-[#f4c66a]">{product.priceLabel}</span>
+          <div className="mt-auto flex items-center justify-between gap-4 pt-6">
+            <span className="text-[11px] uppercase tracking-[0.24em] text-stone-500">
+              {product.fulfillmentMode === "manual" ? "KAMDRIDI packed" : "Print partner"}
+            </span>
             <button
               type="button"
               onClick={() => handleAddToCart(product)}
-              className="rounded-full bg-[#f4c66a] px-5 py-3 text-xs uppercase tracking-[0.25em] text-black transition hover:bg-[#ffd989]"
+              className="inline-flex items-center gap-2 rounded-full bg-[#f4c66a] px-5 py-3 text-xs uppercase tracking-[0.22em] text-black transition hover:-translate-y-0.5 hover:bg-[#ffd989]"
             >
-              Add to Cart
+              Add <ShoppingBag className="h-4 w-4" />
             </button>
           </div>
         </div>
@@ -242,6 +258,57 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
 
   return (
     <div className="grid gap-14">
+      <div className="grid gap-4 rounded-[30px] border border-[#f4c66a]/20 bg-[linear-gradient(135deg,rgba(244,198,106,0.13),rgba(0,0,0,0.38))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.34)] lg:grid-cols-[1fr_auto] lg:items-center">
+        <div>
+          <p className="text-xs uppercase tracking-[0.35em] text-[#f4c66a]">Start here</p>
+          <h2 className="mt-3 font-display text-3xl uppercase tracking-[0.08em] text-white md:text-4xl">
+            Best sellers first. Build the cart fast.
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-300">
+            The strongest merch is now up front: logo tee, Echoes crest tee, and Signal Target capsule.
+            Pick a size, add it, then checkout from the drawer.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={() => setCartOpen(true)}
+          className="inline-flex items-center justify-center rounded-full border border-[#f4c66a]/45 bg-black/35 px-6 py-4 text-xs uppercase tracking-[0.24em] text-[#f4c66a] transition hover:-translate-y-0.5 hover:bg-[#f4c66a] hover:text-black"
+        >
+          Cart {cart.length ? `(${cart.length})` : ""} <ArrowRight className="ml-2 h-4 w-4" />
+        </button>
+      </div>
+
+      <div className="grid gap-4 lg:grid-cols-3">
+        {heroProducts.map((product) => (
+          <button
+            key={product.id}
+            type="button"
+            onClick={() => handleAddToCart(product)}
+            className="group grid grid-cols-[116px_1fr] overflow-hidden rounded-[26px] border border-white/10 bg-black/35 text-left transition hover:-translate-y-1 hover:border-[#f4c66a]/55"
+          >
+            <span className="relative min-h-[140px]">
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                className="object-cover transition duration-500 group-hover:scale-105"
+                style={{ objectPosition: product.imagePosition ?? "center" }}
+              />
+            </span>
+            <span className="flex min-w-0 flex-col justify-center p-4">
+              <span className="inline-flex w-fit items-center gap-2 rounded-full border border-[#f4c66a]/35 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[#f4c66a]">
+                <Star className="h-3 w-3 fill-current" /> Best Seller
+              </span>
+              <span className="mt-3 text-lg leading-tight text-white">{product.name}</span>
+              <span className="mt-2 flex items-center justify-between gap-3 text-sm">
+                <span className="text-[#f4c66a]">{product.priceLabel}</span>
+                <span className="text-[10px] uppercase tracking-[0.22em] text-stone-500">Quick add</span>
+              </span>
+            </span>
+          </button>
+        ))}
+      </div>
+
       <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
         <GlassCard className="overflow-hidden p-0">
           <div className="grid gap-0 lg:grid-cols-[0.95fr_1.05fr]">
@@ -268,6 +335,11 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
               <p className="mt-5 text-sm leading-7 text-stone-400">
                 {featuredArtifact.description}
               </p>
+              <div className="mt-5 grid gap-3 rounded-[24px] border border-[#f4c66a]/20 bg-[#f4c66a]/8 p-4 text-sm text-stone-200 sm:grid-cols-3">
+                <span>Vinyl set</span>
+                <span>Signed poster</span>
+                <span>Numbered seal</span>
+              </div>
               <div className="mt-6 grid gap-3 text-sm text-stone-300">
                 {featuredArtifact.includes.map((item) => (
                   <div key={item} className="flex items-start gap-3">
@@ -296,11 +368,11 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
           <div>
             <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Cart + Checkout</p>
             <h3 className="mt-4 font-display text-4xl uppercase tracking-[0.08em] text-white">
-              Checkout control
+              Your order
             </h3>
             <p className="mt-4 text-sm leading-7 text-stone-400">
-              Review your loadout, confirm the current merch mix, and move into the hosted payment
-              flow when checkout is enabled.
+              Keep the cart visible while browsing. The buyer always knows what is selected, what it
+              costs, and where to finish.
             </p>
             <div
               className={`mt-6 rounded-[24px] border px-5 py-4 text-sm leading-7 ${
@@ -330,6 +402,18 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
                 )}
               </div>
             </div>
+            <div className="mt-5 grid gap-3 text-sm text-stone-300 sm:grid-cols-3 lg:grid-cols-1">
+              {[
+                ["Secure cart", "Selections persist in this browser."],
+                ["Variants saved", "Size and color stay attached."],
+                ["Collector flow", "Physical and digital items share one cart."]
+              ].map(([title, text]) => (
+                <div key={title} className="rounded-[20px] border border-white/10 bg-black/25 p-4">
+                  <p className="text-xs uppercase tracking-[0.24em] text-[#f4c66a]">{title}</p>
+                  <p className="mt-2 leading-6 text-stone-400">{text}</p>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="mt-8 grid gap-3">
             <button
@@ -348,9 +432,9 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
 
       <div id="featured" className="scroll-mt-28">
         <SectionHeading
-          eyebrow="Product Grid"
-          title="Collector apparel and physical formats"
-          description="Official KAMDRIDI merch first, with the Echoes Unearthed capsule, gold-logo essentials, and collector pieces grouped cleanly before game-access licenses."
+          eyebrow="Shop Merch"
+          title="Pick the piece. Choose the variant. Add to cart."
+          description="The catalog now behaves like a real merch wall: strongest apparel first, clear prices, visible variants, and direct add-to-cart buttons on every product."
         />
         <div className="mt-6 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.28em] text-stone-400">
           <span className="rounded-full border border-[#f4c66a]/35 bg-[#f4c66a]/10 px-4 py-2 text-[#f4c66a]">
@@ -360,21 +444,22 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
           <span className="rounded-full border border-white/10 px-4 py-2">Hoodie $78</span>
           <span className="rounded-full border border-white/10 px-4 py-2">Accessories $24-$32</span>
         </div>
-        <div className="mt-10 grid gap-4 rounded-[28px] border border-white/10 bg-black/25 p-6">
+        <div className="mt-10 grid gap-4 rounded-[28px] border border-white/10 bg-black/25 p-6 md:grid-cols-[1fr_auto] md:items-center">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <p className="text-xs uppercase tracking-[0.35em] text-[#f4c66a]">Merch Capsule</p>
-              <h3 className="mt-3 text-3xl text-white">Echoes Unearthed and gold-logo drop</h3>
-            </div>
-            <div className="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.24em] text-stone-400">
-              <span className="rounded-full border border-white/10 px-4 py-2">Black</span>
-              <span className="rounded-full border border-white/10 px-4 py-2">White</span>
-              <span className="rounded-full border border-white/10 px-4 py-2">Sand</span>
+              <h3 className="mt-3 text-3xl text-white">Logo essentials, Echoes tees, collector prints</h3>
             </div>
           </div>
-          <p className="max-w-4xl text-sm leading-7 text-stone-400">
+          <div className="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.24em] text-stone-400">
+            <span className="rounded-full border border-white/10 px-4 py-2">Black</span>
+            <span className="rounded-full border border-white/10 px-4 py-2">White</span>
+            <span className="rounded-full border border-white/10 px-4 py-2">Sand</span>
+          </div>
+          <p className="max-w-4xl text-sm leading-7 text-stone-400 md:col-span-2">
             Crest tees, wordmark tees, signal-target variants, and the core KAMDRIDI essentials now
-            sit together as the main merch wall instead of being mixed with browser-game licenses.
+            sit together as the main merch wall, with lower-priced accessories and prints supporting
+            the bigger apparel sale.
           </p>
         </div>
         <div className="mt-10 grid gap-6 lg:grid-cols-3">
@@ -411,9 +496,9 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
                   : "This environment stays in local demo mode until live checkout credentials are connected."
               },
               {
-                icon: Sparkles,
-                title: "Order captured",
-                text: "Completed merch, artifact, and game-access orders keep the selected product details attached to the order."
+                icon: PackageCheck,
+                title: "Variants captured",
+                text: "Size, color, and product details travel into the cart so orders are clean."
               },
               {
                 icon: Truck,
