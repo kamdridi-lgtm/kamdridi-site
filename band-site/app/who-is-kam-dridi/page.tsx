@@ -1,252 +1,223 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowDown, BookOpen, Disc3, LockKeyhole, Mic2 } from "lucide-react";
 import { ComicReader } from "@/components/comic-reader";
-import { CTAButton, GlassCard, Section, SectionHeading } from "@/components/ui";
+import { CTAButton, GlassCard, Section } from "@/components/ui";
 import { comicPages } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Who is Kam Dridi",
+  title: "Who is Kam Dridi | KAMDRIDI",
   description:
-    "Read the comic-style archive for Who is Kam Dridi with responsive page navigation and lore framing."
+    "Read the cinematic comic origin of Kam Dridi through school days, first riffs, first shows, and the Echoes Unearthed mythology."
 };
 
-const loreRoutes = [
+const storyBeats = [
   {
-    title: "Band Story",
-    description: "Follow the live and recorded project history behind the character framing.",
-    href: "/band#biography"
+    label: "1993",
+    title: "School hallways",
+    copy: "The first jokes, notebooks, band shirts, sketches, and riffs start turning into a private universe.",
+    icon: BookOpen
   },
   {
-    title: "Visual Album",
-    description: "Move from the comic archive into the cinematic scenes driving the campaign world.",
-    href: "/visual-album#album-world"
+    label: "First show",
+    title: "The room wakes up",
+    copy: "A small stage becomes the proof that the dream is not just talk anymore. It has volume.",
+    icon: Mic2
   },
   {
-    title: "Fan Vault",
-    description: "Private drops, account access, and deeper archive layers continue inside the fan club.",
-    href: "/fan-club#vault"
+    label: "Archive",
+    title: "Lost dreams",
+    copy: "The pages keep the rough edges: garage light, cracked paper, old friends, and the spark before the myth.",
+    icon: LockKeyhole
+  },
+  {
+    label: "Now",
+    title: "Echoes Unearthed",
+    copy: "The comic connects the origin story to the album world, the fan vault, and the visual campaign.",
+    icon: Disc3
   }
 ];
 
+const doors = [
+  { href: "/band#biography", label: "Band Story", image: comicPages[1].image },
+  { href: "/visual-album", label: "Visual Album", image: comicPages[0].image },
+  { href: "/fan-club#vault", label: "Fan Vault", image: comicPages[4].image }
+];
+
 export default function WhoIsKamDridiPage() {
+  const feature = comicPages[4];
+
   return (
-    <>
-      <section className="overflow-hidden border-b border-white/10">
-        <div className="relative isolate">
-          <div className="pointer-events-none absolute inset-0">
-            <div className="absolute -left-[8%] top-4 hidden h-[84%] w-[24%] rotate-[-7deg] overflow-hidden rounded-[34px] border border-[#f4c66a]/18 opacity-42 shadow-[0_28px_70px_rgba(0,0,0,0.35)] lg:block">
-              <Image
-                src="/assets/images/comic/page-grunge-split.png"
-                alt="Comic collage background panel split"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="absolute left-[14%] top-[-2%] hidden h-[92%] w-[19%] rotate-[-2deg] overflow-hidden rounded-[34px] border border-[#f4c66a]/16 opacity-34 shadow-[0_28px_70px_rgba(0,0,0,0.35)] lg:block">
-              <Image
-                src="/assets/images/comic/page-studio-victor.png"
-                alt="Comic collage background panel studio"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="absolute left-[31%] top-[7%] hidden h-[80%] w-[15%] rotate-[4deg] overflow-hidden rounded-[34px] border border-white/10 opacity-30 shadow-[0_28px_70px_rgba(0,0,0,0.35)] xl:block">
-              <video
-                className="h-full w-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-label="Comic collage motion panel"
-              >
-                <source src="/videos/comic_wall_2026-03-31.mp4" type="video/mp4" />
-              </video>
-            </div>
-            <div className="absolute right-[29%] top-6 hidden h-[84%] w-[17%] rotate-[3deg] overflow-hidden rounded-[34px] border border-[#f4c66a]/14 opacity-30 shadow-[0_28px_70px_rgba(0,0,0,0.35)] xl:block">
-              <Image
-                src={comicPages[0]?.image || "/assets/images/gallery/p01_hero.jpg"}
-                alt="Comic collage background panel live show"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="absolute right-[10%] top-[10%] hidden h-[76%] w-[14%] rotate-[-5deg] overflow-hidden rounded-[34px] border border-white/10 opacity-22 shadow-[0_28px_70px_rgba(0,0,0,0.35)] xl:block">
-              <Image
-                src={comicPages[1]?.image || "/assets/images/gallery/p02_live.jpg"}
-                alt="Comic collage crowd panel"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="absolute right-[-7%] bottom-4 hidden h-[84%] w-[24%] rotate-[8deg] overflow-hidden rounded-[34px] border border-[#f4c66a]/18 opacity-42 shadow-[0_28px_70px_rgba(0,0,0,0.35)] lg:block">
-              <Image
-                src={comicPages[1]?.image || "/assets/images/gallery/p02_live.jpg"}
-                alt="Comic collage background panel crowd"
-                fill
-                className="object-cover"
-              />
+    <main className="overflow-hidden bg-[#050403] text-white">
+      <section className="relative isolate min-h-[92vh] overflow-hidden border-b border-white/10">
+        <div className="absolute inset-0">
+          <Image
+            src={feature.image}
+            alt={feature.title}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-75"
+          />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(244,198,106,0.32),transparent_26%),linear-gradient(90deg,rgba(5,4,3,0.96),rgba(5,4,3,0.72)_42%,rgba(5,4,3,0.2)),linear-gradient(180deg,rgba(5,4,3,0.15),#050403_96%)]" />
+        </div>
+
+        <div className="relative mx-auto grid min-h-[92vh] max-w-7xl content-end gap-10 px-4 pb-10 pt-28 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-end lg:pb-16">
+          <div className="max-w-3xl">
+            <p className="text-xs uppercase tracking-[0.5em] text-[#f4c66a]">Origin comic</p>
+            <h1 className="mt-5 font-display text-5xl uppercase leading-none tracking-[0.08em] text-white sm:text-6xl lg:text-8xl">
+              Who is Kam Dridi
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-8 text-stone-200 sm:text-lg">
+              A loud, dirty, cinematic memory wall: school corridors, first riffs, first show,
+              camera flash, and the moment the Kam Dridi legend starts to feel real.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <CTAButton href="#comic-reader">Open the reader</CTAButton>
+              <CTAButton href="#chapter-wall" tone="secondary">
+                See all pages
+              </CTAButton>
             </div>
           </div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.14),transparent_24%),linear-gradient(180deg,rgba(0,0,0,0.18),rgba(0,0,0,0.78)_58%,rgba(0,0,0,0.9))]" />
-          <Section className="relative py-14 md:py-18">
-            <div className="grid gap-10 lg:grid-cols-[0.74fr_1.26fr] lg:items-center">
-              <div>
-                <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">
-                  Who is Kam Dridi
-                </p>
-                <h1 className="mt-5 font-display text-5xl uppercase leading-none tracking-[0.08em] text-white md:text-7xl">
-                  A comic archive inside the Echoes Unearthed world
-                </h1>
-                <p className="mt-6 max-w-2xl text-base leading-8 text-stone-300">
-                  Read through the responsive comic-style presentation and move through the
-                  artist mythology with a clean page viewer.
-                </p>
-                <div className="mt-8 flex flex-wrap gap-4">
-                  <CTAButton href="#comic-reader">Open Comic Reader</CTAButton>
-                  <CTAButton href="#lore-archive" tone="secondary">
-                    Open Lore Archive
-                  </CTAButton>
-                </div>
-              </div>
 
-              <div className="relative">
-                <div className="pointer-events-none absolute -left-8 top-8 hidden h-40 w-40 rounded-full bg-[#f4c66a]/10 blur-3xl md:block" />
-                <div className="pointer-events-none absolute -right-10 bottom-0 hidden h-56 w-56 rounded-full bg-red-500/10 blur-3xl md:block" />
-                <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-black shadow-[0_45px_110px_rgba(0,0,0,0.55)]">
-                  <div className="pointer-events-none absolute left-5 top-5 z-20 rounded-full border border-white/15 bg-black/55 px-4 py-2 text-[11px] uppercase tracking-[0.34em] text-stone-200 backdrop-blur">
-                    Motion Archive
-                  </div>
-                  <div className="relative aspect-[4/5] min-h-[420px] w-full md:aspect-[16/10] lg:aspect-[5/4]">
-                    <video
-                      className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-center"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                      aria-label="Who is Kam Dridi comic hero video"
-                    >
-                      <source src="/videos/comic_wall_2026-03-31.mp4" type="video/mp4" />
-                    </video>
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_34%,rgba(0,0,0,0.18)_72%,rgba(0,0,0,0.48)_100%)]" />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.14),rgba(0,0,0,0.02)_32%,rgba(0,0,0,0.12)_62%,rgba(0,0,0,0.72))]" />
-                    <div className="absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.88))]" />
-                    <div className="pointer-events-none absolute inset-0 opacity-[0.08] mix-blend-screen [background-image:linear-gradient(rgba(255,255,255,0.7)_1px,transparent_1px)] [background-size:100%_16px]" />
-                    <div className="absolute inset-x-0 bottom-0 z-20 p-6 md:p-8">
-                      <p className="text-xs uppercase tracking-[0.42em] text-[#f4c66a]">
-                        Who is Kam Dridi
-                      </p>
-                      <p className="mt-3 max-w-xl text-sm leading-7 text-stone-200">
-                        Comic-world motion fragment, framed as a cinematic prelude before the
-                        reader opens.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Section>
+          <div className="grid gap-3 sm:grid-cols-5 lg:mb-2">
+            {comicPages.map((page, index) => (
+              <a
+                key={page.id}
+                href="#comic-reader"
+                className="group relative aspect-[3/4] overflow-hidden rounded-lg border border-white/15 bg-black/50 shadow-[0_24px_60px_rgba(0,0,0,0.45)] transition duration-300 hover:-translate-y-2 hover:border-[#f4c66a]/70"
+              >
+                <Image
+                  src={page.image}
+                  alt={page.title}
+                  fill
+                  sizes="(min-width: 1024px) 12vw, 18vw"
+                  className="object-cover transition duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                <span className="absolute bottom-3 left-3 text-xs uppercase tracking-[0.3em] text-[#f4c66a]">
+                  0{index + 1}
+                </span>
+              </a>
+            ))}
+          </div>
         </div>
+
+        <a
+          href="#comic-reader"
+          className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-xs uppercase tracking-[0.35em] text-stone-300 md:inline-flex"
+        >
+          Scroll
+          <ArrowDown className="h-4 w-4" />
+        </a>
       </section>
 
-      <Section id="comic-reader" className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.08),transparent_26%),linear-gradient(180deg,rgba(10,8,6,0.2),rgba(10,8,6,0.88))]" />
-          <div className="absolute left-[-6%] top-12 hidden h-[78%] w-[28%] rotate-[-7deg] overflow-hidden rounded-[30px] border border-white/10 opacity-32 shadow-[0_30px_70px_rgba(0,0,0,0.4)] lg:block">
-            <Image
-              src="/assets/images/comic/page-studio-victor.png"
-              alt="Comic collage panel studio"
-              fill
-              className="object-cover"
-            />
+      <Section className="grid gap-5 py-14 md:grid-cols-4 md:py-20">
+        {storyBeats.map((beat) => {
+          const Icon = beat.icon;
+
+          return (
+            <div key={beat.title} className="border-l border-white/10 pl-5">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f4c66a] text-black">
+                <Icon className="h-5 w-5" />
+              </div>
+              <p className="mt-5 text-xs uppercase tracking-[0.35em] text-[#f4c66a]">{beat.label}</p>
+              <h2 className="mt-3 font-display text-2xl uppercase tracking-[0.08em]">{beat.title}</h2>
+              <p className="mt-3 text-sm leading-7 text-stone-400">{beat.copy}</p>
+            </div>
+          );
+        })}
+      </Section>
+
+      <section className="relative isolate border-y border-white/10 py-20 md:py-28">
+        <div className="absolute inset-0">
+          <Image
+            src={comicPages[2].image}
+            alt={comicPages[2].title}
+            fill
+            sizes="100vw"
+            className="object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,#050403,rgba(5,4,3,0.8),#050403)]" />
+        </div>
+        <Section className="relative py-0">
+          <div className="mb-10 max-w-3xl">
+            <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Comic reader</p>
+            <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.08em] text-white md:text-6xl">
+              Read it like a wall of memory
+            </h2>
+            <p className="mt-5 text-base leading-8 text-stone-300">
+              The page stays dark and cinematic so the art takes over. Switch chapters, scan the
+              thumbnails, and let the origin story sit beside the album world.
+            </p>
           </div>
-          <div className="absolute left-[35%] top-6 hidden h-[74%] w-[24%] rotate-[-1.5deg] overflow-hidden rounded-[30px] border border-white/10 opacity-24 shadow-[0_30px_70px_rgba(0,0,0,0.38)] lg:block">
-            <video
-              className="h-full w-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-label="Comic collage center motion panel"
-            >
-              <source src="/videos/comic_top_2026-03-30.mp4" type="video/mp4" />
-            </video>
+          <ComicReader />
+        </Section>
+      </section>
+
+      <Section id="chapter-wall">
+        <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div>
+            <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Chapter wall</p>
+            <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.08em] text-white md:text-6xl">
+              Five pages, one origin
+            </h2>
           </div>
-          <div className="absolute right-[24%] top-16 hidden h-[70%] w-[18%] rotate-[4deg] overflow-hidden rounded-[30px] border border-white/10 opacity-18 shadow-[0_30px_70px_rgba(0,0,0,0.36)] xl:block">
-            <Image
-              src={comicPages[1]?.image || "/assets/images/gallery/p02_live.jpg"}
-              alt="Comic collage side panel"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="absolute right-[-5%] top-16 hidden h-[76%] w-[29%] rotate-[6deg] overflow-hidden rounded-[30px] border border-white/10 opacity-32 shadow-[0_30px_70px_rgba(0,0,0,0.4)] lg:block">
-            <Image
-              src="/assets/images/comic/page-grunge-split.png"
-              alt="Comic collage panel band split"
-              fill
-              className="object-cover"
-            />
-          </div>
+          <p className="max-w-xl text-sm leading-7 text-stone-400">
+            Every panel is treated as a poster: big enough to feel collectible, tight enough to
+            move fast on desktop and mobile.
+          </p>
         </div>
 
-        <div className="relative">
-          <SectionHeading
-            eyebrow="Comic Reader"
-            title="Who is Kam Dridi"
-            description="A responsive reader layout with sequential navigation, built to support the comic pages already tied into the project structure."
-          />
-          <div className="mt-12">
-            <ComicReader />
-          </div>
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-5">
+          {comicPages.map((page, index) => (
+            <GlassCard key={page.id} className="group overflow-hidden p-0">
+              <div className="relative aspect-[3/4] overflow-hidden bg-black">
+                <Image
+                  src={page.image}
+                  alt={page.title}
+                  fill
+                  sizes="(min-width: 1024px) 18vw, (min-width: 768px) 45vw, 100vw"
+                  className="object-cover transition duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <p className="text-xs uppercase tracking-[0.35em] text-[#f4c66a]">Page 0{index + 1}</p>
+                  <p className="mt-3 text-sm leading-6 text-stone-200">{page.caption}</p>
+                </div>
+              </div>
+            </GlassCard>
+          ))}
         </div>
       </Section>
 
       <Section id="lore-archive" className="pt-0">
-        <SectionHeading
-          eyebrow="Lore Archive"
-          title="Signal fragments around the character"
-          description="The comic archive now connects directly to the live campaign layers already present on the site instead of ending on an empty promise."
-        />
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
-          <div className="grid gap-6">
-            {comicPages.map((page) => (
-              <GlassCard key={page.id} className="grid gap-6 md:grid-cols-[0.3fr_0.7fr]">
-                <div className="relative h-48 overflow-hidden rounded-2xl">
-                  <Image src={page.image} alt={page.title} fill className="object-cover" />
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-[0.35em] text-[#f4c66a]">{page.title}</p>
-                  <p className="mt-4 text-sm leading-7 text-stone-300">{page.caption}</p>
-                </div>
-              </GlassCard>
-            ))}
-          </div>
-          <GlassCard>
-            <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Connected Routes</p>
-            <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.08em] text-white">
-              Move deeper into the archive
-            </h2>
-            <div className="mt-8 grid gap-3">
-              {loreRoutes.map((route) => (
-                <Link
-                  key={route.title}
-                  href={route.href}
-                  className="rounded-[22px] border border-white/10 bg-black/30 px-5 py-4 text-sm text-stone-300 transition hover:border-[#f4c66a]/40 hover:text-[#f4c66a]"
-                >
-                  <span className="block text-xs uppercase tracking-[0.35em] text-[#f4c66a]">
-                    {route.title}
-                  </span>
-                  <span className="mt-3 block leading-7">{route.description}</span>
-                </Link>
-              ))}
-            </div>
-          </GlassCard>
+        <div className="grid gap-5 lg:grid-cols-3">
+          {doors.map((door) => (
+            <Link
+              key={door.href}
+              href={door.href}
+              className="group relative min-h-[320px] overflow-hidden rounded-lg border border-white/10 bg-black"
+            >
+              <Image
+                src={door.image}
+                alt={door.label}
+                fill
+                sizes="(min-width: 1024px) 30vw, 100vw"
+                className="object-cover opacity-60 transition duration-500 group-hover:scale-105 group-hover:opacity-80"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-6">
+                <p className="text-xs uppercase tracking-[0.4em] text-[#f4c66a]">Enter</p>
+                <h3 className="mt-3 font-display text-3xl uppercase tracking-[0.08em] text-white">
+                  {door.label}
+                </h3>
+              </div>
+            </Link>
+          ))}
         </div>
       </Section>
-    </>
+    </main>
   );
 }
