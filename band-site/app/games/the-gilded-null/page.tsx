@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { CTAButton, Section } from "@/components/ui";
 
@@ -16,6 +17,16 @@ export default function TheGildedNullPage() {
       <section className="overflow-hidden border-b border-white/10">
         <Section className="py-14 md:py-18">
           <div className="mx-auto max-w-5xl">
+            <div className="relative mb-8 max-w-4xl">
+              <Image
+                src="/assets/images/games/gilded-null-logo.png"
+                alt="KAMDRIDI - The Gilded Null"
+                width={1672}
+                height={941}
+                priority
+                className="h-auto w-full max-w-4xl object-contain drop-shadow-[0_24px_45px_rgba(0,0,0,0.72)]"
+              />
+            </div>
             <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">
               Corridor Protocol
             </p>
