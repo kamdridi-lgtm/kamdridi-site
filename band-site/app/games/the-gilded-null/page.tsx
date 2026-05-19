@@ -15,9 +15,17 @@ export default function TheGildedNullPage() {
   return (
     <>
       <section className="overflow-hidden border-b border-white/10">
-        <Section className="py-14 md:py-18">
-          <div className="mx-auto max-w-5xl">
-            <div className="relative mb-8 max-w-4xl">
+        <div className="relative min-h-[76svh] overflow-hidden">
+          <Image
+            src="/assets/images/games/gilded-null-hero.png"
+            alt="The Gilded Null corridor protocol hero"
+            fill
+            priority
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.05),rgba(0,0,0,0.2)_42%,rgba(0,0,0,0.86))]" />
+          <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-4 pb-10 sm:px-6 md:pb-14">
+            <div className="max-w-4xl">
               <Image
                 src="/assets/images/games/gilded-null-logo.png"
                 alt="KAMDRIDI - The Gilded Null"
@@ -27,6 +35,10 @@ export default function TheGildedNullPage() {
                 className="h-auto w-full max-w-4xl object-contain drop-shadow-[0_24px_45px_rgba(0,0,0,0.72)]"
               />
             </div>
+          </div>
+        </div>
+        <Section className="py-10 md:py-12">
+          <div className="mx-auto max-w-5xl">
             <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">
               Corridor Protocol
             </p>
