@@ -45,7 +45,7 @@ export default function GamesPage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
-                href="/games/the-gilded-null"
+                href="/play/the-gilded-null/index.html"
                 className="inline-flex items-center justify-center rounded-full bg-[#f4c66a] px-6 py-3 text-sm uppercase tracking-[0.25em] text-black transition hover:-translate-y-0.5 hover:bg-[#ffd989]"
               >
                 Launch The Gilded Null

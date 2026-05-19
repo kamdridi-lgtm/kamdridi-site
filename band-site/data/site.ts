@@ -478,7 +478,7 @@ export const gameExperiences: GameExperience[] = [
     subtitle: "Corridor Protocol",
     description: "Hold the line. Collect the gold. Outrun the darkness.",
     poster: officialGamePoster,
-    launchUrl: "/games/the-gilded-null",
+    launchUrl: "/play/the-gilded-null/index.html",
     membership: "Inner Circle",
     launcherLabel: "Initiate Protocol"
   },
