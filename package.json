@@ -1,0 +1,9 @@
+{
+  "name": "kamdridi-site-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix band-site run build",
+    "vercel-build": "npm --prefix band-site install && npm --prefix band-site run build"
+  }
+}
