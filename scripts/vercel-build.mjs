@@ -19,6 +19,8 @@ const sourceNext = path.join(appRoot, ".next");
 const targetNext = path.join(root, ".next");
 const sourcePublic = path.join(appRoot, "public");
 const targetPublic = path.join(root, "public");
+const sourceData = path.join(appRoot, "data");
+const targetData = path.join(root, "data");
 
 if (!existsSync(path.join(sourceNext, "routes-manifest.json"))) {
   console.error("Missing band-site .next/routes-manifest.json after build.");
@@ -31,6 +33,11 @@ cpSync(sourceNext, targetNext, { recursive: true });
 if (existsSync(sourcePublic)) {
   rmSync(targetPublic, { recursive: true, force: true });
   cpSync(sourcePublic, targetPublic, { recursive: true });
+}
+
+if (existsSync(sourceData)) {
+  rmSync(targetData, { recursive: true, force: true });
+  cpSync(sourceData, targetData, { recursive: true });
 }
 
 console.log("Mirrored band-site build output to repository root for Vercel.");
