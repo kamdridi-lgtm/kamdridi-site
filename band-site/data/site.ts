@@ -172,6 +172,7 @@ export const navigation: NavItem[] = [
     href: "/music",
     children: [
       { label: "Featured Video", href: "/music#videos" },
+      { label: "Releases → Salieri’s Hands", href: "/releases/salieris-hands" },
       { label: "Media Hub", href: "/media#featured-video" },
       { label: "Discography", href: "/music#discography" },
       { label: "Tour Dates", href: "/tour#dates" }
