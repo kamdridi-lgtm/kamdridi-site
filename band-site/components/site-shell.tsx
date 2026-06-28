@@ -19,6 +19,7 @@ import { CartDrawer } from "@/components/cart-drawer";
 import { useApp } from "@/components/providers";
 
 const brandLogo = "/assets/images/kamdridi-logo-hd.png";
+const salieriReleaseHref = "/releases/salieris-hands";
 
 function SpotifyIcon() {
   return (
@@ -165,6 +166,7 @@ const mobileRoutes = [
   { label: "Label", href: "/label" },
   { label: "Roster", href: "/roster" },
   { label: "Releases", href: "/releases" },
+  { label: "NEW · SALIERI’S HANDS", href: salieriReleaseHref, special: true },
   { label: "Submit Music", href: "/submit" },
   { label: "IRON COUNTY GHOSTS", href: "/iron-county-ghosts" },
   { label: "Contact", href: "/contact" }
@@ -194,6 +196,27 @@ function isNavItemActive(pathname: string, item: (typeof navigation)[number]) {
     const childPath = stripHash(child.href);
     return childPath.startsWith("/") ? isActivePath(pathname, childPath) : false;
   });
+}
+
+function SalieriNavTab({
+  mobile = false,
+  active = false,
+  onClick
+}: {
+  mobile?: boolean;
+  active?: boolean;
+  onClick?: () => void;
+}) {
+  return (
+    <Link
+      href={salieriReleaseHref}
+      onClick={onClick}
+      className={clsx("nav-salieri-special", mobile && "nav-salieri-special-mobile", active && "is-active")}
+    >
+      <span className="nav-salieri-badge">NEW</span>
+      <span>SALIERI’S HANDS</span>
+    </Link>
+  );
 }
 
 function SocialBar() {
@@ -283,7 +306,17 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   </div>
                 ) : null}
               </div>
-            ))}
+            )).flatMap((node, index) => {
+              const item = primaryNavItems[index];
+              return item?.label === "Releases"
+                ? [
+                    node,
+                    <div key="salieris-hands-special" className="shrink-0">
+                      <SalieriNavTab active={isActivePath(pathname, salieriReleaseHref)} />
+                    </div>
+                  ]
+                : [node];
+            })}
 
             <div className="group relative shrink-0">
               <button
@@ -355,17 +388,26 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <div className="border-t border-white/10 px-4 py-4 xl:hidden">
             <div className="flex flex-col gap-2">
               {mobileRoutes.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={clsx(
-                    "rounded-2xl border border-white/5 bg-white/[0.03] px-4 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-white transition hover:border-[#f4c66a]/45 hover:text-[#f4c66a]",
-                    isActivePath(pathname, item.href) && "border-[#f4c66a]/35 bg-[#f4c66a]/10 text-[#f4c66a]"
-                  )}
-                >
-                  {item.label}
-                </Link>
+                item.special ? (
+                  <SalieriNavTab
+                    key={item.label}
+                    mobile
+                    active={isActivePath(pathname, item.href)}
+                    onClick={() => setOpen(false)}
+                  />
+                ) : (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className={clsx(
+                      "rounded-2xl border border-white/5 bg-white/[0.03] px-4 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-white transition hover:border-[#f4c66a]/45 hover:text-[#f4c66a]",
+                      isActivePath(pathname, item.href) && "border-[#f4c66a]/35 bg-[#f4c66a]/10 text-[#f4c66a]"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                )
               ))}
             </div>
           </div>
