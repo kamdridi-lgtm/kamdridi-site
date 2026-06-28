@@ -1,0 +1,9 @@
+{
+  "name": "kamdridi-site-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/vercel-build.mjs",
+    "vercel-build": "node scripts/vercel-build.mjs"
+  }
+}
