@@ -258,6 +258,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const primaryNavItems = navigation.filter((item) => primaryNavLabels.has(item.label));
   const moreNavItems = navigation.filter((item) => lowerPriorityNavLabels.has(item.label));
   const isMoreActive = moreNavItems.some((item) => isNavItemActive(pathname, item));
+  const showSecondaryExplore = !isHome && pathname !== salieriReleaseHref;
 
   if (isStandalonePoster || isStandaloneArtistSite) {
     return <>{children}</>;
@@ -413,7 +414,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           </div>
         ) : null}
 
-        <div className={clsx("hidden border-t border-white/5 bg-black/25 xl:block", isHome && "xl:hidden")}>
+        {showSecondaryExplore ? (
+          <div className="hidden border-t border-white/5 bg-black/25 xl:block">
           <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 py-3 text-[11px] uppercase tracking-[0.3em] text-stone-400 sm:px-6">
             <span className="text-stone-500">Explore</span>
             {footerRoutes.map((item) => (
@@ -428,8 +430,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 {item.label}
               </Link>
             ))}
+            </div>
           </div>
-        </div>
+        ) : null}
       </header>
 
       <main>{children}</main>
