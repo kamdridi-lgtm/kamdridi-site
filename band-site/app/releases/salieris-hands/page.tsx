@@ -16,6 +16,7 @@ const approvedAssets = {
   jewelcase: `${assetBase}/jewelcase-mockup.png`,
   miniCard: `${assetBase}/mini-card-mockup.png`,
   operaTeaser: `${assetBase}/opera-teaser.png`,
+  operaHallHero: `${assetBase}/salieri-opera-hall-hero.png`,
   vertical: `${assetBase}/salieri-vertical-official.png`,
   wide: `${assetBase}/salieri-wide-official.png`,
   vienna: `${assetBase}/vienna-walking-official.png`
@@ -246,11 +247,11 @@ export default function SalierisHandsPage() {
     <main className="overflow-hidden bg-[#040302] text-stone-100">
       <section className="relative isolate border-b border-[#8a642f]/25">
         <div className="absolute inset-0 hidden md:block">
-          <Image src={approvedAssets.wide} alt="" fill priority className="object-cover opacity-42" sizes="100vw" />
+          <Image src={approvedAssets.operaHallHero} alt="" fill priority className="object-cover object-center opacity-46" sizes="100vw" />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,#040302_0%,rgba(4,3,2,0.88)_30%,rgba(4,3,2,0.68)_58%,#040302_100%),linear-gradient(180deg,rgba(4,3,2,0.08),#040302_94%)]" />
         </div>
         <div className="absolute inset-0 md:hidden">
-          <Image src={approvedAssets.vertical} alt="" fill priority className="object-cover object-top opacity-34" sizes="100vw" />
+          <Image src={approvedAssets.operaHallHero} alt="" fill priority className="object-cover object-center opacity-36" sizes="100vw" />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,3,2,0.2),rgba(4,3,2,0.78)_44%,#040302_94%)]" />
         </div>
         <div className="absolute inset-0 opacity-[0.18] [background-image:linear-gradient(115deg,transparent_0,transparent_44%,rgba(214,173,104,0.3)_45%,transparent_47%),radial-gradient(circle_at_30%_20%,rgba(244,198,106,0.2),transparent_28%)] [background-size:220px_260px,100%_100%]" />
