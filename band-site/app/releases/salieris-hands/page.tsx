@@ -216,6 +216,77 @@ function ProductCard({
 export default function SalierisHandsPage() {
   return (
     <main className="overflow-hidden bg-[#050302] text-[#f4e4c4]">
+      <style>{`
+        .salieri-hero-copy {
+          font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .salieri-hero-reveal {
+          opacity: 0;
+          transform: translateY(14px);
+          filter: blur(4px);
+          animation: salieriReveal 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .salieri-hero-title {
+          font-family: Georgia, "Times New Roman", serif;
+          letter-spacing: 0.12em;
+          color: #ffe7b8;
+          text-shadow:
+            0 0 10px rgba(198, 143, 72, 0.2),
+            0 0 24px rgba(198, 143, 72, 0.12),
+            0 18px 48px rgba(0, 0, 0, 0.72);
+          animation:
+            salieriReveal 950ms cubic-bezier(0.22, 1, 0.36, 1) forwards,
+            candleGlow 5.8s ease-in-out 1.2s infinite;
+        }
+
+        .salieri-hero-line-1 { animation-delay: 420ms; }
+        .salieri-hero-line-2 { animation-delay: 780ms; }
+        .salieri-hero-line-3 { animation-delay: 1120ms; }
+        .salieri-hero-line-4 { animation-delay: 1460ms; }
+        .salieri-hero-line-5 { animation-delay: 1800ms; }
+        .salieri-hero-actions { animation-delay: 2180ms; }
+
+        @keyframes salieriReveal {
+          from {
+            opacity: 0;
+            transform: translateY(14px);
+            filter: blur(4px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+          }
+        }
+
+        @keyframes candleGlow {
+          0%, 100% {
+            text-shadow:
+              0 0 10px rgba(198, 143, 72, 0.18),
+              0 0 22px rgba(198, 143, 72, 0.1),
+              0 18px 48px rgba(0, 0, 0, 0.72);
+          }
+          50% {
+            text-shadow:
+              0 0 16px rgba(226, 178, 98, 0.34),
+              0 0 34px rgba(198, 143, 72, 0.18),
+              0 18px 48px rgba(0, 0, 0, 0.72);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .salieri-hero-reveal,
+          .salieri-hero-title {
+            opacity: 1;
+            transform: none;
+            filter: none;
+            animation: none;
+            transition: none;
+          }
+        }
+      `}</style>
       <section className="relative isolate min-h-[88svh] overflow-hidden border-b border-[#9a7134]/35">
         <Image
           src={assets.hero}
@@ -229,19 +300,27 @@ export default function SalierisHandsPage() {
         <div className="absolute inset-0 opacity-[0.13] [background-image:linear-gradient(115deg,transparent_0,transparent_45%,rgba(244,198,106,0.26)_46%,transparent_48%)] [background-size:230px_260px]" />
 
         <div className="relative mx-auto flex min-h-[88svh] max-w-7xl items-end px-4 pb-14 pt-24 sm:px-6 md:pb-20">
-          <div className="max-w-3xl border-l border-[#e0b46a]/55 bg-[linear-gradient(90deg,rgba(5,3,2,0.68),rgba(5,3,2,0.16))] px-5 py-6 backdrop-blur-[2px] sm:px-7 sm:py-8">
-            <Eyebrow>New release</Eyebrow>
-            <h1 className="mt-4 font-display text-[clamp(3rem,10vw,8.6rem)] uppercase leading-[0.82] tracking-[0.06em] text-[#ffe6b7] drop-shadow-[0_18px_48px_rgba(0,0,0,0.75)]">
-              SALIERI'S
-              <br />
-              HANDS
+          <div className="salieri-hero-copy max-w-3xl border-l border-[#e0b46a]/55 bg-[linear-gradient(90deg,rgba(5,3,2,0.58),rgba(5,3,2,0.12))] px-5 py-5 backdrop-blur-[1.5px] sm:px-7 sm:py-7">
+            <p className="salieri-hero-reveal text-[11px] font-semibold uppercase tracking-[0.34em] text-[#d8aa5d]">New release</p>
+            <h1 className="salieri-hero-title mt-4 text-[clamp(2.75rem,8.5vw,7.4rem)] uppercase leading-[0.9]">
+              SALIERI’S HANDS
             </h1>
-            <p className="mt-5 max-w-xl text-base leading-8 text-[#f6dfb8] sm:text-lg">A special off-series KAMDRIDI release.</p>
-            <p className="mt-3 text-sm font-semibold uppercase tracking-[0.22em] text-[#e0b46a]">
-              Vienna, 1791. Faith. Envy. Confession.
+            <p className="salieri-hero-reveal salieri-hero-line-1 mt-5 max-w-xl text-base leading-8 text-[#f6dfb8] sm:text-lg">
+              A special off-series KAMDRIDI release
             </p>
-            <p className="mt-3 text-sm font-semibold uppercase tracking-[0.22em] text-[#f1d49b]">Album release: July 2026</p>
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            <p className="salieri-hero-reveal salieri-hero-line-2 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#e0b46a]">
+              Limited release
+            </p>
+            <p className="salieri-hero-reveal salieri-hero-line-3 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#f1d49b]">
+              Vienna, 1791
+            </p>
+            <p className="salieri-hero-reveal salieri-hero-line-4 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#f6dfb8]">
+              Faith. Envy. Confession.
+            </p>
+            <p className="salieri-hero-reveal salieri-hero-line-5 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#f1d49b]">
+              Album release: July 2026
+            </p>
+            <div className="salieri-hero-reveal salieri-hero-actions mt-6 grid gap-3 sm:grid-cols-3">
               <ActionLink href={teaserUrl}>
                 <Play className="h-4 w-4" />
                 Watch Teaser
