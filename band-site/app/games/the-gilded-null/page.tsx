@@ -17,7 +17,7 @@ export default function TheGildedNullPage() {
       <section className="overflow-hidden border-b border-white/10">
         <div className="relative min-h-[76svh] overflow-hidden">
           <Image
-            src="/assets/images/games/gilded-null-hero.png"
+            src="/assets/images/games/gilded-null-master.png"
             alt="The Gilded Null corridor protocol hero"
             fill
             priority

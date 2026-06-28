@@ -13,3 +13,4 @@ data/fan-club-users.json
 .edge-shot-profile
 
 .vercel
+.env*

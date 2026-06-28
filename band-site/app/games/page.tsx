@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { GamesPanel } from "@/components/games-panel";
-import { Section } from "@/components/ui";
 
 const gamesHeroVideo = "/videos/games-hero-20260516.mp4";
 
@@ -17,64 +17,96 @@ export default function GamesPage() {
       <section className="overflow-hidden border-b border-white/10">
         <div className="relative isolate">
           <video
-            className="h-[56vh] min-h-[420px] w-full object-cover object-[center_28%] brightness-[0.82] contrast-[1.08] saturate-[0.92] md:h-[74vh] lg:h-[80vh]"
+            className="h-[56vh] min-h-[420px] w-full object-cover object-[center_28%] brightness-[1.02] contrast-[1.04] saturate-[1.02] md:h-[74vh] lg:h-[80vh]"
             autoPlay
             muted
             loop
             playsInline
             preload="metadata"
-            poster="/official-game-poster.png"
+            poster="/assets/images/games/gilded-null-master.png"
             aria-label="KAMDRIDI games trailer"
           >
             <source src={gamesHeroVideo} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.22)_38%,rgba(0,0,0,0.64))]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.16),transparent_28%)]" />
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.65))]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.08),transparent_30%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.18))]" />
         </div>
 
-        <Section className="py-12 md:py-16">
-          <div className="mx-auto max-w-4xl">
-            <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Games</p>
-            <h1 className="mt-5 font-display text-5xl uppercase leading-none tracking-[0.08em] text-white md:text-7xl">
-              Protocols, launchers, and fan-universe game access
-            </h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-stone-300">
-              A clean launcher interface for the interactive side of Echoes Unearthed,
-              including The Gilded Null and deeper collector protocol access.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href="/play/the-gilded-null/index.html"
-                className="inline-flex items-center justify-center rounded-full bg-[#f4c66a] px-6 py-3 text-sm uppercase tracking-[0.25em] text-black transition hover:-translate-y-0.5 hover:bg-[#ffd989]"
-              >
-                Launch The Gilded Null
-              </Link>
-              <Link
-                href="/games/vault-sequence"
-                className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 text-sm uppercase tracking-[0.25em] text-white transition hover:border-[#f4c66a]/60 hover:text-[#f4c66a]"
-              >
-                Open Vault Sequence
-              </Link>
-              <Link
-                href="/visual-album#featured-sequence"
-                className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 text-sm uppercase tracking-[0.25em] text-white transition hover:border-[#f4c66a]/60 hover:text-[#f4c66a]"
-              >
-                View Visual Album
-              </Link>
-            </div>
-            <div className="mt-6 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.28em] text-stone-400">
-              <span className="rounded-full border border-[#f4c66a]/35 bg-[#f4c66a]/10 px-4 py-2 text-[#f4c66a]">
-                Browser game access
-              </span>
-              <span className="rounded-full border border-white/10 px-4 py-2">Public preview</span>
-              <span className="rounded-full border border-white/10 px-4 py-2">Member unlock</span>
-              <span className="rounded-full border border-white/10 px-4 py-2">Store license</span>
+        <div className="relative overflow-hidden border-t border-white/10 bg-black">
+          <div className="relative aspect-[16/9] min-h-[320px] w-full md:min-h-[520px]">
+            <Image
+              src="/assets/images/games/act-ii-war-machines-wide.png"
+              alt="Act II War Machines"
+              fill
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+          </div>
+          <div className="border-t border-[#f4c66a]/20 bg-[linear-gradient(180deg,#080604,#020202)] px-5 py-9 md:px-10 md:py-11">
+            <div className="mx-auto grid max-w-6xl gap-7 lg:grid-cols-[1fr_0.9fr] lg:items-end">
+              <div className="max-w-3xl">
+                <p className="text-xs uppercase tracking-[0.42em] text-[#f4c66a]">
+                  New upcoming KAMDRIDI video game
+                </p>
+                <h2 className="mt-4 font-display text-4xl uppercase leading-none tracking-[0.06em] text-[#f3dfb6] md:text-6xl">
+                  Play the signal. Survive the machine.
+                </h2>
+                <p className="mt-5 max-w-2xl text-sm leading-7 text-stone-300 md:text-base">
+                  A new KAMDRIDI video game is coming with exclusive music made
+                  and available only for this release. Until then, compare the
+                  Codex and Qwen War Machines builds, then enter The Gilded Null.
+                </p>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                <Link
+                  href="/games/war-machines"
+                  className="group border border-[#f4c66a]/35 bg-black/45 p-4 transition hover:-translate-y-0.5 hover:border-[#f4c66a] hover:bg-[#f4c66a]/10"
+                >
+                  <span className="text-[10px] uppercase tracking-[0.28em] text-[#00f5ff]">
+                    Version Codex
+                  </span>
+                  <span className="mt-2 block font-display text-2xl uppercase leading-none tracking-[0.08em] text-[#f3dfb6]">
+                    Epic v7
+                  </span>
+                  <span className="mt-3 block text-xs leading-5 text-stone-300">
+                    3 bosses, progression, audio reactive, ecosystem sync, overdrive and victory ranks.
+                  </span>
+                  <span className="mt-4 inline-flex min-h-10 items-center justify-center bg-[#f4c66a] px-4 text-[10px] font-bold uppercase tracking-[0.22em] text-black transition group-hover:bg-[#ffd989]">
+                    Open Codex
+                  </span>
+                </Link>
+
+                <Link
+                  href="/games/war-machines-qwen"
+                  className="group border border-[#00f5ff]/30 bg-black/45 p-4 transition hover:-translate-y-0.5 hover:border-[#00f5ff] hover:bg-[#00f5ff]/10"
+                >
+                  <span className="text-[10px] uppercase tracking-[0.28em] text-[#f4c66a]">
+                    Version Qwen
+                  </span>
+                  <span className="mt-2 block font-display text-2xl uppercase leading-none tracking-[0.08em] text-[#f3dfb6]">
+                    Original Juice v4
+                  </span>
+                  <span className="mt-3 block text-xs leading-5 text-stone-300">
+                    Qwen original file: title screen, dash, hitstop, dynamic audio, minions and powerups. Separate from Codex.
+                  </span>
+                  <span className="mt-4 inline-flex min-h-10 items-center justify-center bg-[#00f5ff] px-4 text-[10px] font-bold uppercase tracking-[0.22em] text-black transition group-hover:bg-[#8ff9ff]">
+                    Open Qwen
+                  </span>
+                </Link>
+
+                <Link
+                  href="/play/the-gilded-null/index.html"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#f4c66a] px-7 py-3 text-sm uppercase tracking-[0.24em] text-black transition hover:-translate-y-0.5 hover:bg-[#ffd989] sm:col-span-2 lg:col-span-1 xl:col-span-2"
+                >
+                  Play Free Game
+                </Link>
+              </div>
             </div>
           </div>
-        </Section>
+        </div>
       </section>
       <GamesPanel />
     </>
   );
 }
+

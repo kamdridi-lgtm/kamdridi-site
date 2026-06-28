@@ -1,0 +1,3 @@
+campaign_id,release_id,release_title,artist_name,announcement_date,release_date,status,teaser_assets,release_day_posts,newsletter,press_outreach,website_update,notes
+campaign_001,release_001,Dust on the Altar,IRON COUNTY GHOSTS,,2026-05-23,active,to_confirm,to_confirm,to_confirm,to_confirm,live,Initial campaign record
+campaign_002,release_002,War Machines,KAM DRIDI,,,"to_confirm",to_confirm,to_confirm,to_confirm,to_confirm,to_confirm,Featured release campaign details need confirmation

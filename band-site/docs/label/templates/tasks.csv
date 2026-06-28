@@ -1,0 +1,3 @@
+task_id,project,category,title,owner,status,priority,due_date,related_artist,related_release,notes
+task_001,KAMDRIDI RECORDS,operations,Verify imported templates,Kam,not_started,high,,,,Confirm fields before building dashboard
+task_002,IRON COUNTY GHOSTS,rights,Confirm Dust on the Altar rights,KAMDRIDI RECORDS,not_started,high,,IRON COUNTY GHOSTS,Dust on the Altar,Confirm ownership splits and agreement status before sync or licensing

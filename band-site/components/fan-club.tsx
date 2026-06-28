@@ -120,56 +120,87 @@ export function FanClubPanel({
 
   return (
     <div className="grid gap-6">
+      <div className="overflow-hidden border border-[#f4c66a]/20 bg-[linear-gradient(135deg,rgba(244,198,106,0.12),rgba(255,255,255,0.035)_42%,rgba(139,26,26,0.12))] p-6 md:p-8">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">
+              Membership
+            </p>
+            <h2 className="mt-4 font-display text-4xl uppercase leading-none tracking-[0.08em] text-white md:text-5xl">
+              Two tiers. One private universe.
+            </h2>
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-stone-300">
+              Inner Circle is the first door into KAMDRIDI access. Collector is
+              the complete archive tier for fans who want every protocol,
+              private drop, and premium update.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.24em] text-stone-300">
+            <span className="border border-[#f4c66a]/35 bg-[#f4c66a]/10 px-4 py-2 text-[#f4c66a]">
+              Private vault
+            </span>
+            <span className="border border-white/10 px-4 py-2">Game access</span>
+            <span className="border border-white/10 px-4 py-2">Early merch</span>
+          </div>
+        </div>
+      </div>
+
       <div id="membership" className="grid gap-6 md:grid-cols-2">
-        {membershipTiers.map((tier) => (
-          <GlassCard key={tier.id} className="flex h-full flex-col">
+        {membershipTiers.map((tier, index) => (
+          <GlassCard
+            key={tier.id}
+            className={`relative flex h-full flex-col overflow-hidden p-0 ${
+              tier.id === "collector-membership" ? "border-[#f4c66a]/35" : ""
+            }`}
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(244,198,106,0.14),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.035),rgba(0,0,0,0))]" />
+            <div className="relative flex h-full flex-col p-6 md:p-8">
             <div className="flex flex-wrap items-start justify-between gap-3">
-              <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">{tier.name}</p>
+              <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">
+                {tier.name}
+              </p>
               <div className="flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.24em]">
-                <span className="rounded-full border border-[#f4c66a]/30 bg-[#f4c66a]/10 px-3 py-1 text-[#f4c66a]">
-                  {tier.id === "collector-membership" ? "Full Archive" : "First Protocol"}
+                <span className="border border-[#f4c66a]/30 bg-[#f4c66a]/10 px-3 py-1 text-[#f4c66a]">
+                  {tier.id === "collector-membership" ? "Complete Archive" : "First Access"}
                 </span>
-                <span
-                  className={`rounded-full border px-3 py-1 ${
-                    tier.checkoutUrl
-                      ? "border-emerald-500/25 bg-emerald-500/10 text-emerald-100"
-                      : "border-white/10 text-stone-400"
-                  }`}
-                >
-                  {tier.checkoutUrl ? "Hosted Checkout" : "Direct Request"}
-                </span>
+                {index === 1 ? (
+                  <span className="border border-white/10 bg-white/[0.04] px-3 py-1 text-stone-200">
+                    Full Tier
+                  </span>
+                ) : null}
               </div>
             </div>
-            <p className="mt-4 font-display text-5xl uppercase tracking-[0.08em] text-white">
+            <p className="mt-7 font-display text-6xl uppercase tracking-[0.06em] text-white">
               {tier.priceLabel}
             </p>
-            <p className="mt-4 text-sm leading-7 text-stone-400">{tier.description}</p>
-            <div className="mt-6 grid gap-2">
+            <p className="mt-5 text-sm leading-7 text-stone-300">{tier.description}</p>
+            <div className="mt-7 grid gap-3">
               {tier.features.map((feature) => (
                 <div key={feature} className="flex items-start gap-3 text-sm text-stone-300">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-[#f4c66a]" />
+                  <span className="mt-1.5 h-2 w-2 shrink-0 bg-[#f4c66a]" />
                   <p>{feature}</p>
                 </div>
               ))}
             </div>
-            <div className="mt-8">
+            <div className="mt-auto pt-8">
               {tier.checkoutUrl ? (
                 <a
                   href={tier.checkoutUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex rounded-full bg-[#f4c66a] px-6 py-4 text-xs uppercase tracking-[0.25em] text-black transition hover:bg-[#ffd989]"
+                  className="inline-flex w-full justify-center bg-[#f4c66a] px-6 py-4 text-xs uppercase tracking-[0.25em] text-black transition hover:bg-[#ffd989]"
                 >
                   {tier.checkoutLabel ?? "Join via Checkout"}
                 </a>
               ) : (
                 <a
                   href={tier.requestUrl}
-                  className="inline-flex rounded-full border border-white/10 px-5 py-3 text-xs uppercase tracking-[0.25em] text-stone-300 transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"
+                  className="inline-flex w-full justify-center border border-[#f4c66a]/35 bg-[#f4c66a]/10 px-5 py-4 text-xs uppercase tracking-[0.25em] text-[#f4c66a] transition hover:border-[#f4c66a] hover:bg-[#f4c66a]/15"
                 >
                   {tier.requestLabel ?? "Request Access"}
                 </a>
               )}
+            </div>
             </div>
           </GlassCard>
         ))}
@@ -185,11 +216,11 @@ export function FanClubPanel({
       </div>
 
       <GlassCard>
-        <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Membership Checkout</p>
+        <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Membership Access</p>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-stone-400">
           {membershipCheckoutLive
             ? "Membership tiers use secure hosted checkout when a live payment link is available. If a tier is temporarily closed, use the direct request link shown on that membership card."
-            : `Hosted membership billing is not active in this environment. Use the request links on each tier or email ${siteMeta.email} directly while site accounts remain active for vault and preview access.`}
+            : `Membership requests are handled directly right now. Use the request links on each tier or email ${siteMeta.email} while site accounts remain active for vault and preview access.`}
         </p>
         <div className="mt-6 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.24em] text-stone-400">
           <span className="rounded-full border border-[#f4c66a]/35 bg-[#f4c66a]/10 px-4 py-2 text-[#f4c66a]">

@@ -1,0 +1,247 @@
+/* KAMDRIDI INTRO — ATMOSPHERIC CINEMA */
+
+#intro-screen {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+#intro-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#intro-layers {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+/* Pure black beginning */
+.intro-el {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease-in-out;
+    font-family: 'Share Tech Mono', monospace;
+    color: #C9952A;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.intro-el.show { opacity: 1; }
+
+/* KAMDRIDI PRESENTS - minimal, distant */
+#intro-presents {
+    font-size: clamp(8px, 1vw, 11px);
+    letter-spacing: 0.2em;
+    color: #C9952A;
+    opacity: 0;
+    animation: fadeInDistant 1.2s ease-out forwards;
+}
+
+@keyframes fadeInDistant {
+    0% { opacity: 0; filter: blur(4px); }
+    100% { opacity: 0.35; filter: blur(0); }
+}
+
+/* SIGNAL LINES - stuttering appearance */
+#intro-signal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+}
+
+#intro-signal.show {
+    opacity: 1;
+}
+
+.signal-line {
+    font-size: clamp(7px, 0.9vw, 10px);
+    color: #C9952A;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    transform: translateY(2px);
+    animation: signalGlitch 0.5s ease-out forwards;
+    line-height: 1.4;
+}
+
+.signal-line:nth-child(1) { animation-delay: 0s; }
+.signal-line:nth-child(2) { animation-delay: 0.3s; }
+.signal-line:nth-child(3) { animation-delay: 0.6s; }
+.signal-line:nth-child(4) { animation-delay: 0.9s; }
+
+@keyframes signalGlitch {
+    0% { opacity: 0; transform: translateY(2px) scaleX(0.95); }
+    100% { opacity: 0.4; transform: translateY(0) scaleX(1); }
+}
+
+/* LOGO - sacred reveal */
+#intro-logo {
+    position: relative;
+    margin: 40px 0;
+    opacity: 0;
+    animation: logoReveal 3s ease-out forwards;
+}
+
+#logo-img {
+    width: clamp(180px, 35vw, 400px);
+    height: auto;
+    filter: brightness(0) drop-shadow(0 20px 40px rgba(0,0,0,0.9));
+    transition: filter 2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#logo-img.revealed {
+    filter: brightness(1) contrast(1.1) drop-shadow(0 10px 30px rgba(201, 149, 42, 0.4));
+}
+
+#logo-glow {
+    position: absolute;
+    inset: -40%;
+    background: radial-gradient(ellipse at center, rgba(201, 149, 42, 0.08) 0%, transparent 70%);
+    opacity: 0;
+    pointer-events: none;
+    animation: glowAwaken 3s ease-out forwards;
+}
+
+@keyframes logoReveal {
+    0% { opacity: 0; transform: scale(0.95) translateY(20px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes glowAwaken {
+    0% { opacity: 0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; animation: glowBreathing 2.5s ease-in-out infinite; }
+}
+
+@keyframes glowBreathing {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.08); opacity: 1; }
+}
+
+/* TITLE - reveal after logo */
+#intro-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: 30px 0;
+    opacity: 0;
+}
+
+#intro-title.show { opacity: 1; }
+
+#title-main {
+    font-size: clamp(28px, 5vw, 48px);
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.12em;
+    color: #C9952A;
+    font-weight: 300;
+    text-shadow: 0 0 30px rgba(201, 149, 42, 0.25), 0 0 60px rgba(201, 149, 42, 0.1);
+    animation: titleGlide 1s ease-out forwards;
+}
+
+#intro-title.show #title-main { animation: titleStay 0.5s ease-out; }
+
+@keyframes titleGlide {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes titleStay {
+    0% { text-shadow: 0 0 30px rgba(201, 149, 42, 0.25), 0 0 60px rgba(201, 149, 42, 0.1); }
+    100% { text-shadow: 0 0 20px rgba(201, 149, 42, 0.15), 0 0 40px rgba(201, 149, 42, 0.05); }
+}
+
+#title-sub {
+    font-size: clamp(9px, 1.2vw, 12px);
+    letter-spacing: 0.2em;
+    color: #A89878;
+    opacity: 0.35;
+    font-weight: 300;
+}
+
+/* SYSTEM LINES - minimal */
+#intro-system {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-top: 30px;
+    opacity: 0;
+}
+
+#intro-system.show { opacity: 1; }
+
+.sys-line {
+    font-size: clamp(7px, 0.9vw, 9px);
+    color: #C9952A;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    animation: sysAppear 0.4s ease-out forwards;
+}
+
+.sys-line:nth-child(1) { animation-delay: 0s; }
+.sys-line:nth-child(2) { animation-delay: 0.2s; }
+.sys-line:nth-child(3) { animation-delay: 0.4s; }
+.sys-line:nth-child(4) { animation-delay: 0.6s; }
+
+@keyframes sysAppear {
+    0% { opacity: 0; }
+    100% { opacity: 0.3; }
+}
+
+/* BUTTON - final activation */
+#btn-start {
+    margin-top: 40px;
+    padding: 12px 32px;
+    background: transparent;
+    border: 1px solid rgba(201, 149, 42, 0.25);
+    color: #C9952A;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(9px, 1.1vw, 11px);
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity: 0;
+    pointer-events: none;
+    text-transform: uppercase;
+    background-clip: padding-box;
+}
+
+#btn-start.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#btn-start:hover {
+    background: rgba(201, 149, 42, 0.04);
+    border-color: #C9952A;
+    box-shadow: 0 0 20px rgba(201, 149, 42, 0.2), inset 0 0 20px rgba(201, 149, 42, 0.05);
+}
+
+#btn-start:active {
+    transform: scale(0.98);
+}
+
+/* ATMOSPHERE - fade to game */
+@keyframes fadeToGame {
+    0% { opacity: 1; }
+    100% { opacity: 0; pointer-events: none; }
+}
+
+#intro-screen.exit-protocol {
+    animation: fadeToGame 0.8s ease-out forwards;
+}

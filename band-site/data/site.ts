@@ -165,7 +165,7 @@ export const navigation: NavItem[] = [
   {
     label: "Home",
     href: "/",
-    children: [{ label: "Latest News", href: "/news#latest-headlines" }]
+    children: [{ label: "Active Signals", href: "/#video" }]
   },
   {
     label: "Music",
@@ -183,6 +183,45 @@ export const navigation: NavItem[] = [
     children: [
       { label: "Featured Merch", href: "/store#featured" },
       { label: "Collector Artifact", href: "/store#collector-artifact" }
+    ]
+  },
+  {
+    label: "Label",
+    href: "/label",
+    children: [
+      { label: "KAMDRIDI Records", href: "/label" },
+      { label: "Roster", href: "/roster" },
+      { label: "Releases", href: "/releases" },
+      { label: "Submit Music", href: "/submit" },
+      { label: "IRON COUNTY GHOSTS", href: "/iron-county-ghosts" },
+    ]
+  },
+  {
+    label: "Roster",
+    href: "/roster",
+    children: [
+      { label: "KAM DRIDI", href: "/" },
+      { label: "IRON COUNTY GHOSTS", href: "/iron-county-ghosts" },
+      { label: "Submit Music", href: "/submit" }
+    ]
+  },
+  {
+    label: "Releases",
+    href: "/releases",
+    children: [
+      { label: "Dust on the Altar", href: "/iron-county-ghosts/music" },
+      { label: "War Machines", href: "/music" },
+      { label: "Salieri's Hands", href: "/releases/salieris-hands" },
+      { label: "Submit Music", href: "/submit" }
+    ]
+  },
+  {
+    label: "Submit",
+    href: "/submit",
+    children: [
+      { label: "Artist Submissions", href: "/submit" },
+      { label: "Label Packages", href: "/label" },
+      { label: "Licensing Inquiry", href: "mailto:kamdridi@proton.me?subject=Licensing Inquiry - KAMDRIDI RECORDS" }
     ]
   },
   {
@@ -423,7 +462,7 @@ export const membershipTiers: MembershipTier[] = [
 
 export const products = storeProducts;
 
-const officialGamePoster = "/official-game-poster.png";
+const officialGamePoster = "/assets/images/games/gilded-null-master.png";
 const vaultSequencePoster = "/assets/images/games/vault-sequence-poster.png";
 export const warMachinesCover = "/assets/images/releases/war-machines-cover.png";
 

@@ -8,11 +8,15 @@ import {
   Eye,
   Film,
   Play,
+  QrCode,
   Share2,
   Sparkles,
+  Smartphone,
   Youtube
 } from "lucide-react";
-import { FirstKnightEasterEgg } from "@/components/first-knight-easter-egg";
+import { HomeCinematicIntro } from "@/components/home-cinematic-intro";
+import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
+import { SignalRadio } from "@/components/signal-radio";
 import { featuredVideo, gameExperiences, socialFeed, streamingLinks, visualAlbumScenes } from "@/data/site";
 
 const albumCover = "/assets/images/releases/echoes-unearthed-cover.jpg";
@@ -25,6 +29,9 @@ const cassetteImage = "/store/war-machines-helmet.jpg";
 const japanHref = "/app/war-machines-jp";
 const japanQr = "/assets/images/kamdridi-japan-page-qr.svg";
 const brandLogo = "/assets/images/kamdridi-logo-hd.png";
+const mobileAppHref = "/mobile";
+const mobileAppQr = "/assets/images/kamdridi-app-qr.png";
+const mobileAppLogo = "/assets/images/kamdridi-app-logo-blue.png";
 const spotifyAlbumHref =
   "https://open.spotify.com/album/4rrOMu0BIhzJt1ElOfgXZu?si=a6eAct6jQl6BapO1_Zm4gA";
 const youtubeWatchHref = "https://www.youtube.com/watch?v=hzlVyLQN6a8";
@@ -38,7 +45,7 @@ const tracks = [
   ["06", "The Victory Goes On"],
   ["07", "Alone Apart / One Apart"],
   ["08", "Michael Remembers"],
-  ["09", "The Fall of the First Knight"]
+  ["09", "The Fall of the First Knight demo"]
 ];
 
 const universeCards = [
@@ -147,14 +154,15 @@ function PremiumButton({
 }: {
   href: string;
   children: ReactNode;
-  tone?: "primary" | "secondary" | "red";
+  tone?: "primary" | "secondary" | "red" | "blue";
 }) {
   const classes = {
     primary:
       "border-[#f4a33f]/70 bg-[linear-gradient(180deg,#d66a16,#8f3208)] text-white shadow-[0_18px_55px_rgba(201,82,16,0.32)] hover:border-[#ffd18a]",
     secondary:
       "border-[#c57b32]/45 bg-black/35 text-stone-100 hover:border-[#f4c66a]/70 hover:text-[#f4c66a]",
-    red: "border-red-500/50 bg-[linear-gradient(180deg,#d71920,#8d0508)] text-white shadow-[0_18px_55px_rgba(170,10,10,0.3)] hover:border-red-300"
+    red: "border-red-500/50 bg-[linear-gradient(180deg,#d71920,#8d0508)] text-white shadow-[0_18px_55px_rgba(170,10,10,0.3)] hover:border-red-300",
+    blue: "border-[#39b7ff]/55 bg-[linear-gradient(180deg,#0b86ff,#06327a)] text-white shadow-[0_18px_55px_rgba(0,119,255,0.28)] hover:border-[#9be8ff]"
   };
 
   return (
@@ -239,7 +247,7 @@ function PlatformLinks({ compact = false }: { compact?: boolean }) {
 export default function HomePage() {
   return (
     <>
-      <FirstKnightEasterEgg />
+      <HomeCinematicIntro />
       <div className="relative overflow-hidden bg-[#050403] text-white">
         <div className="pointer-events-none fixed inset-0 z-0 opacity-55">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(209,91,18,0.18),transparent_30%),radial-gradient(circle_at_86%_12%,rgba(244,198,106,0.13),transparent_28%),linear-gradient(180deg,#050403,#090604_42%,#030303)]" />
@@ -270,8 +278,33 @@ export default function HomePage() {
               </div>
             </div>
             <div className="text-center lg:text-left">
-              <div className="relative mx-auto h-16 w-full max-w-[330px] sm:h-20 lg:mx-0">
-                <Image src={brandLogo} alt="KAMDRIDI logo" fill priority className="object-contain lg:object-left" />
+              <div className="mx-auto grid max-w-[720px] items-center gap-4 lg:mx-0 lg:grid-cols-[minmax(250px,330px)_minmax(280px,360px)]">
+                <div className="relative h-16 w-full sm:h-20">
+                  <Image src={brandLogo} alt="KAMDRIDI logo" fill priority className="object-contain lg:object-left" />
+                </div>
+                <Link
+                  href={mobileAppHref}
+                  className="group relative overflow-hidden border border-[#2eb8ff]/40 bg-[linear-gradient(135deg,rgba(5,17,36,0.92),rgba(0,0,0,0.78))] p-3 text-left shadow-[0_22px_70px_rgba(0,87,255,0.24)] transition duration-300 hover:-translate-y-1 hover:border-[#8eeaff]"
+                  aria-label="Get the KAMDRIDI mobile app"
+                >
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_18%,rgba(57,183,255,0.28),transparent_34%),radial-gradient(circle_at_88%_80%,rgba(9,74,188,0.34),transparent_42%)] opacity-90" />
+                  <div className="relative grid grid-cols-[1fr_74px] items-center gap-3">
+                    <div>
+                      <div className="relative h-11 w-full max-w-[168px]">
+                        <Image src={mobileAppLogo} alt="KAMDRIDI app logo" fill className="object-contain object-left" />
+                      </div>
+                      <div className="mt-2 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#9be8ff]">
+                        <Smartphone className="h-3.5 w-3.5" />
+                        Get the mobile app
+                      </div>
+                      <p className="mt-1 text-xs leading-5 text-blue-100/80">Scan the companion hub.</p>
+                    </div>
+                    <div className="bg-white p-2 shadow-[0_0_32px_rgba(87,198,255,0.28)]">
+                      <Image src={mobileAppQr} alt="QR code for KAMDRIDI mobile app" width={220} height={220} className="h-auto w-full" />
+                    </div>
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 h-px bg-[linear-gradient(90deg,transparent,#7de7ff,transparent)] opacity-70 transition group-hover:opacity-100" />
+                </Link>
               </div>
               <h1 className="mt-2 font-display text-[clamp(2.45rem,7vw,5.8rem)] uppercase leading-[0.82] tracking-[0.08em] text-stone-100">
                 Echoes
@@ -286,7 +319,7 @@ export default function HomePage() {
                 Stream the full album now. Explore the official tracklist, collector editions,
                 Japan campaign page, and the Echoes Unearthed universe.
               </p>
-              <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
                 <PremiumButton href="#listen-now">Stream Full Album</PremiumButton>
                 <PremiumButton href="#collector-products" tone="secondary">
                   Collector CD
@@ -297,7 +330,14 @@ export default function HomePage() {
                 <PremiumButton href={japanHref} tone="red">
                   Japan Page
                 </PremiumButton>
+                <PremiumButton href={mobileAppHref} tone="blue">
+                  <span className="inline-flex items-center gap-2">
+                    <QrCode className="h-4 w-4" />
+                    Mobile App
+                  </span>
+                </PremiumButton>
               </div>
+              <SignalRadio />
               <div className="mt-4 grid gap-3 text-xs uppercase tracking-[0.18em] text-stone-300 sm:grid-cols-3">
                 <Link href="#video" className="inline-flex items-center justify-center gap-3 py-2 hover:text-[#f4c66a]">
                   <Play className="h-4 w-4" /> Watch War Machines
@@ -477,6 +517,32 @@ export default function HomePage() {
                 News / Video <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
+          </div>
+        </section>
+
+        <section id="kamdridi-records" className="relative z-10 border-b border-[#a86225]/20 px-4 py-10 sm:px-6">
+          <div className="mx-auto grid max-w-7xl gap-6 overflow-hidden border border-[#8f5728]/40 bg-[radial-gradient(circle_at_16%_0%,rgba(244,198,106,0.12),transparent_30%),linear-gradient(135deg,rgba(16,9,5,0.96),rgba(0,0,0,0.82))] p-5 shadow-[0_30px_90px_rgba(0,0,0,0.48)] md:grid-cols-[1fr_0.78fr] md:p-7">
+            <div className="flex flex-col justify-center">
+              <KamdridiRecordsLogo size="compact" className="mx-0" />
+              <p className="mt-5 text-xs uppercase tracking-[0.3em] text-[#c98542]">KAMDRIDI RECORDS</p>
+              <h2 className="mt-4 font-display text-3xl uppercase leading-none tracking-[0.06em] text-[#e8b777] sm:text-5xl">A boutique label operation for serious artists, releases, and story-driven music projects.</h2>
+              <p className="mt-5 max-w-3xl text-sm leading-7 text-stone-300 sm:text-base">
+                KAMDRIDI RECORDS supports selected artist development, release planning, EPK preparation, rollout strategy, and label partnership review. The focus is practical work, clear communication, and music with a strong identity.
+              </p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <PremiumButton href="/label">Explore the Label</PremiumButton>
+                <PremiumButton href="/label/artist-services" tone="secondary">Artist Services</PremiumButton>
+                <PremiumButton href="/submit" tone="secondary">Submit Music</PremiumButton>
+              </div>
+            </div>
+            <Link href="/label" className="group relative min-h-[260px] overflow-hidden border border-[#d9a95d]/20 bg-black/55 transition hover:-translate-y-1 hover:border-[#f4c66a]/55" aria-label="Explore KAMDRIDI RECORDS">
+              <Image src="/assets/images/band/live_stage.jpg" alt="KAMDRIDI RECORDS cinematic stage atmosphere" fill className="object-cover object-center opacity-80 transition duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 35vw" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.1),rgba(0,0,0,0.75)),radial-gradient(circle_at_25%_18%,rgba(244,198,106,0.18),transparent_34%)]" />
+              <div className="absolute inset-x-4 bottom-4 border border-[#f4c66a]/20 bg-black/62 p-4 backdrop-blur-sm">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-[#f4c66a]">Label / releases / artist development</p>
+                <p className="mt-2 text-sm leading-6 text-stone-200">Artist development, release support, and selected label partnerships.</p>
+              </div>
+            </Link>
           </div>
         </section>
 

@@ -11,6 +11,7 @@ Dark cinematic artist website for **KAMDRIDI** and **Echoes Unearthed**, built w
 - Membership tier links for fan-club access when live checkout links are configured
 - Stripe webhook route prepared for Printful auto-fulfillment
 - Fan club signup/login with signed server-side sessions
+- KAMDRIDI RECORDS label system with applications, admin review, artist dashboard, release workflow, contracts, royalties, payouts, analytics, messaging, and simulation-safe email automation
 - Games launcher page and comic-style reader layout
 - Neon Postgres support for fan-club accounts and contact submissions
 - Multi-agent orchestration layer with local JSON fallback and optional Supabase persistence
@@ -186,6 +187,53 @@ For production:
 
 Apple Pay and Google Pay are surfaced automatically by hosted checkout when the Stripe account and production domain are configured for wallet support.
 After Stripe completes payment, the webhook can create the Printful order automatically, and `/api/store/tracking?session_id=...` can return shipment tracking once Printful ships the order.
+
+## KAMDRIDI RECORDS label system
+
+Routes:
+
+- `/label` public label page
+- `/label/apply` artist application portal
+- `/label/admin` private admin dashboard v2
+- `/label/artist` signed artist dashboard
+- `/label/artist/[slug]` public artist profile
+
+Included modules:
+
+- `label/analytics/advanced_stats.ts`: platform stream tracking, royalty reports, CSV/PDF text export, annual projections, Chart.js-ready payloads
+- `label/releases/manager.ts`: release workflow, metadata, ISRC/UPC auto-generation, artwork and audio quality checks
+- `label/notifications/email_system.ts`: bilingual simulated email automation with Resend/SendGrid readiness
+- `label/messaging/chat.ts`: internal admin/artist conversations, attachments, unread tracking
+- `label/legal/advanced_contracts.ts`: distribution, license, split sheet, and NDA contract templates with digital acceptance
+- `label/codes/isrc_generator.ts`: unique ISRC and UPC/EAN generation
+- `label/finance/payouts.ts`: royalty payable calculation, threshold checks, payout history, Stripe Connect bridge
+- `label/mobile/responsive.ts`: PWA/mobile capability helpers
+- `label/security/backup.ts`: activity logs, rate limits, encryption helpers, backup snapshots, 2FA/recaptcha simulation gates
+- `label/marketing/automation.ts`: pre-save links, social campaigns, milestones, QR payloads
+- `label/promo/playlist_pitching.ts`: playlist database, pitch templates, submission status
+- `label/i18n/translations.ts`: FR/EN strings and language detection
+- `label/branding/customization.ts`: label branding configuration
+- `label/public/seo_pages.tsx`: SEO helpers and public label sections
+
+Simulation is the default. With no Stripe, Resend, SendGrid, Blob, or database credentials, the system records local JSON files under `data/label/` for development. For Vercel production persistence, configure `DATABASE_URL` and run `scripts/label-migration.sql` against the database. Real demo, master, cover, attachment, and generated-contract files are stored through Vercel Blob when `BLOB_READ_WRITE_TOKEN` is configured. Without that token, local dev writes to `public/uploads/label/...`; Vercel production falls back to `simulation://` URLs so workflows stay testable without pretending files were permanently stored.
+
+Label env vars:
+
+```env
+LABEL_ADMIN_EMAILS=contact@kamdridi.com
+LABEL_APPLICATION_FEE_CENTS=2000
+LABEL_PAYOUT_THRESHOLD_CENTS=5000
+LABEL_ISRC_REGISTRANT=KDR
+LABEL_UPC_PREFIX=628011
+LABEL_EMAIL_MODE=simulation
+RESEND_API_KEY=
+SENDGRID_API_KEY=
+LABEL_RECAPTCHA_MODE=simulation
+LABEL_2FA_MODE=simulation
+LABEL_ADMIN_2FA_CODE=
+LABEL_ENCRYPTION_SECRET=replace-with-a-long-random-label-secret
+BLOB_READ_WRITE_TOKEN=vercel_blob_rw_token_for_real_label_file_uploads
+```
 
 ## Fan club and contact storage
 

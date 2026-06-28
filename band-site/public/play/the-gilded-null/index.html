@@ -1,95 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>KAMDRIDI - THE GILDED NULL</title>
-<link rel="stylesheet" href="styles/game.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+    <title>KAMDRIDI — THE GILDED NULL</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/intro.css">
+    <link rel="stylesheet" href="styles/game.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<!-- INTRO SCREEN -->
 <div id="intro-screen">
-<canvas id="intro-canvas"></canvas>
-<div id="intro-layers">
-<div id="intro-presents" class="intro-el">KAMDRIDI PRESENTS</div>
-<div id="intro-signal" class="intro-el">
-<div class="signal-line">SIGNAL RECOVERY IN PROGRESS</div>
-<div class="signal-line">CORRIDOR LINK UNSTABLE</div>
-<div class="signal-line">ARCHIVE DAMAGE DETECTED</div>
-<div class="signal-line">THREAT ANALYSIS ACTIVE</div>
+    <canvas id="intro-canvas"></canvas>
+    <div id="intro-layers">
+        <div class="intro-el" id="intro-presents">KAMDRIDI PRESENTS</div>
+        <div class="intro-el" id="intro-signal">
+            <div class="signal-line">SIGNAL RECOVERY IN PROGRESS</div>
+            <div class="signal-line">CORRIDOR LINK UNSTABLE</div>
+            <div class="signal-line">ARCHIVE DAMAGE DETECTED</div>
+            <div class="signal-line">THREAT ANALYSIS ACTIVE</div>
+        </div>
+        <div class="intro-el" id="intro-logo">
+            <img id="logo-img" src="assets/images/kamdridi-logo.webp" alt="KAMDRIDI">
+            <div id="logo-glow"></div>
+        </div>
+        <div class="intro-el" id="intro-title">
+            <div id="title-main">THE GILDED NULL</div>
+            <div id="title-sub">CORRIDOR PROTOCOL</div>
+        </div>
+        <div class="intro-el" id="intro-system">
+            <div class="sys-line">OPERATOR DETECTED</div>
+            <div class="sys-line">NEURAL LINK UNSTABLE</div>
+            <div class="sys-line">ECHOES ENGINE CONNECTED</div>
+            <div class="sys-line">PROTOCOL ACTIVE</div>
+        </div>
+        <button id="btn-start" class="intro-el">ENABLE AUDIO / START PROTOCOL</button>
+    </div>
 </div>
-<div id="intro-logo" class="intro-el">
-<img src="assets/images/gilded-null-logo.png" alt="KAMDRIDI - The Gilded Null" id="logo-img">
-<div id="logo-glow"></div>
-</div>
-<div id="intro-title" class="intro-el">
-<div id="title-main">THE GILDED NULL</div>
-<div id="title-sub">CORRIDOR PROTOCOL</div>
-</div>
-<div id="intro-system" class="intro-el">
-<div class="sys-line">OPERATOR DETECTED</div>
-<div class="sys-line">NEURAL LINK UNSTABLE</div>
-<div class="sys-line">ECHOES ENGINE CONNECTED</div>
-<div class="sys-line">PROTOCOL ACTIVE</div>
-</div>
-<button id="btn-start" class="intro-el">ENABLE AUDIO / START PROTOCOL</button>
-</div>
-</div>
+
+<!-- GAME SCREEN -->
 <div id="game-screen" class="hidden">
-<canvas id="game-canvas"></canvas>
-<canvas id="fx-canvas"></canvas>
-<div id="hud">
-<div id="hud-top">
-<span id="hud-score">0</span>
-<span id="hud-depth">0m</span>
-<span id="hud-mult">1.0x</span>
+    <canvas id="game-canvas"></canvas>
+    <canvas id="fx-canvas"></canvas>
+    <div id="hud">
+        <div id="hud-top">
+            <div id="hud-score">0</div>
+            <div id="hud-depth">0m</div>
+            <div id="hud-mult">1.0x</div>
+        </div>
+        <div id="hud-left">
+            <div id="hud-shields"></div>
+            <div class="bar-wrap danger">
+                <div id="danger-fill" class="bar-fill"></div>
+            </div>
+            <div id="hud-corruption-label">CORRUPTION</div>
+            <div class="bar-wrap">
+                <div id="corruption-fill" class="bar-fill"></div>
+            </div>
+        </div>
+        <div id="hud-right">
+            <div class="bar-wrap dash">
+                <div id="dash-fill" class="bar-fill"></div>
+            </div>
+        </div>
+        <div id="hud-bottom">
+            <div id="hud-warning"></div>
+            <div id="hud-message"></div>
+            <div id="hud-nearmiss"></div>
+            <div id="hud-transmission"></div>
+            <div id="hud-extraction" class="hidden">
+                <div id="ext-label">EXTRACTION — HOLD [E]</div>
+                <div class="bar-wrap ext">
+                    <div id="ext-fill" class="bar-fill"></div>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-ext" class="hidden">HOLD TO EXTRACT</div>
+    </div>
 </div>
-<div id="hud-left">
-<div id="hud-shields"></div>
-<div class="bar-wrap"><div id="corruption-fill" class="bar-fill"></div></div>
-<div id="hud-corruption-label">CORRUPTION</div>
-</div>
-<div id="hud-right">
-<div class="bar-wrap danger"><div id="danger-fill" class="bar-fill"></div></div>
-<div class="bar-wrap dash"><div id="dash-fill" class="bar-fill"></div></div>
-</div>
-<div id="hud-bottom">
-<div id="hud-warning"></div>
-<div id="hud-message"></div>
-<div id="hud-nearmiss"></div>
-<div id="hud-transmission"></div>
-</div>
-<div id="hud-extraction" class="hidden">
-<div id="ext-label">EXTRACTION - HOLD [E]</div>
-<div class="bar-wrap ext"><div id="ext-fill" class="bar-fill"></div></div>
-</div>
-<div id="mobile-ext" class="hidden">HOLD TO EXTRACT</div>
-</div>
-</div>
+
+<!-- GAME OVER SCREEN -->
 <div id="gameover-screen" class="hidden">
-<div class="end-content">
-<h2 id="go-title">PROTOCOL TERMINATED</h2>
-<div id="go-stats"></div>
-<input id="go-name" type="text" placeholder="OPERATOR NAME" maxlength="12">
-<button id="go-save">SAVE SCORE</button>
-<button id="go-restart">REINITIALIZE</button>
-<div id="go-leaderboard"></div>
+    <div class="end-content">
+        <div id="go-title">PROTOCOL TERMINATED</div>
+        <div id="go-stats"></div>
+        <input id="go-name" type="text" placeholder="Enter name...">
+        <button id="go-save">SAVE SCORE</button>
+        <button id="go-restart">REINITIALIZE</button>
+        <div id="go-leaderboard"></div>
+    </div>
 </div>
-</div>
+
+<!-- EXTRACTION SCREEN -->
 <div id="extract-screen" class="hidden">
-<div class="end-content">
-<h2 id="ext-title">EXTRACTION SUCCESSFUL</h2>
-<div id="ext-stats"></div>
-<button id="ext-restart">RETURN TO CORRIDOR</button>
+    <div class="end-content">
+        <div id="ext-title">EXTRACTION SUCCESSFUL</div>
+        <div id="ext-stats"></div>
+        <button id="ext-restart">RETURN TO CORRIDOR</button>
+    </div>
 </div>
-</div>
+
+<!-- OVERLAYS -->
 <div id="overlay-scanlines"></div>
 <div id="overlay-vignette"></div>
 <div id="overlay-danger"></div>
+
+<!-- SCRIPTS — LOAD ORDER CRITICAL -->
 <script src="scripts/storage.js"></script>
 <script src="scripts/audio-manager.js"></script>
 <script src="scripts/effects.js"></script>
 <script src="scripts/ui-manager.js"></script>
+<script src="scripts/performance-monitor.js"></script>
+<script src="scripts/act-system.js"></script>
+<script src="scripts/anomaly-engine.js"></script>
+<script src="scripts/transmission-system.js"></script>
+<script src="scripts/extraction-tension.js"></script>
+<script src="scripts/psychological-engine.js"></script>
+<script src="scripts/game-feel.js"></script>
 <script src="scripts/gilded-null.js"></script>
 <script src="scripts/app.js"></script>
+
 </body>
 </html>

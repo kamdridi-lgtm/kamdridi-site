@@ -1,0 +1,3 @@
+release_id,artist_id,artist_name,title,type,status,release_date,genre,distributor,upc,cover_art_status,master_status,epk_status,website_status,promo_status,notes
+release_001,artist_002,IRON COUNTY GHOSTS,Dust on the Altar,Single,released,2026-05-23,Dark Country/Outlaw Americana,,,approved,approved,live,live,active,First single
+release_002,artist_001,KAM DRIDI,War Machines,Single,released,,Rock/Cinematic,,,,,,,,Featured KAM DRIDI release

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  ChevronDown,
   ChevronRight,
   Gamepad2,
   Menu,
@@ -146,11 +147,31 @@ const socialBrandClasses: Record<string, string> = {
 };
 
 const footerRoutes = [
-  { label: "News", href: "/news" },
-  { label: "Media", href: "/media" },
-  { label: "Band", href: "/band" },
-  { label: "Tour", href: "/tour" }
+  { label: "Home", href: "/" },
+  { label: "Music", href: "/music" },
+  { label: "Label", href: "/label" },
+  { label: "Roster", href: "/roster" },
+  { label: "Releases", href: "/releases" },
+  { label: "Submit", href: "/submit" },
+  { label: "Store", href: "/store" },
+  { label: "Contact", href: "/contact" }
 ];
+
+
+const mobileRoutes = [
+  { label: "Home", href: "/" },
+  { label: "Music", href: "/music" },
+  { label: "Store", href: "/store" },
+  { label: "Label", href: "/label" },
+  { label: "Roster", href: "/roster" },
+  { label: "Releases", href: "/releases" },
+  { label: "Submit Music", href: "/submit" },
+  { label: "IRON COUNTY GHOSTS", href: "/iron-county-ghosts" },
+  { label: "Contact", href: "/contact" }
+];
+
+const primaryNavLabels = new Set(["Home", "Music", "Store", "Label", "Roster", "Releases", "Submit", "Contact"]);
+const lowerPriorityNavLabels = new Set(["Japan", "Fan Club", "Games", "Visual Album", "Who is Kam Dridi"]);
 
 function isActivePath(pathname: string, href: string) {
   if (href === "/") {
@@ -209,8 +230,13 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const { cartCount, setCartOpen } = useApp();
   const isHome = pathname === "/";
   const isStandalonePoster = pathname === "/app/war-machines-jp";
+  const isStandaloneArtistSite = pathname.startsWith("/iron-county-ghosts");
+  const showCart = pathname === "/" || pathname.startsWith("/store");
+  const primaryNavItems = navigation.filter((item) => primaryNavLabels.has(item.label));
+  const moreNavItems = navigation.filter((item) => lowerPriorityNavLabels.has(item.label));
+  const isMoreActive = moreNavItems.some((item) => isNavItemActive(pathname, item));
 
-  if (isStandalonePoster) {
+  if (isStandalonePoster || isStandaloneArtistSite) {
     return <>{children}</>;
   }
 
@@ -218,23 +244,23 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen bg-[#090909] text-white">
       <SocialBar />
       <header className="sticky top-0 z-[1000] border-b border-white/10 bg-[#090909]/88 backdrop-blur-xl">
-        <div className="relative mx-auto flex max-w-[1500px] items-center justify-between gap-3 px-4 py-2.5 sm:px-6">
-          <Link href="/" className="flex min-w-0 items-center gap-3">
-            <div className="relative h-12 w-32 shrink-0 sm:w-40 xl:w-44">
+        <div className="relative mx-auto flex max-w-[1500px] items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
+          <Link href="/" className="flex shrink-0 items-center gap-3">
+            <div className="relative h-12 w-32 shrink-0 sm:w-36 2xl:w-44">
               <Image src={brandLogo} alt="KAMDRIDI logo" fill priority className="object-contain object-left" />
             </div>
-            <p className="hidden text-[10px] uppercase leading-4 tracking-[0.28em] text-stone-400 2xl:block">
+            <p className="hidden max-w-[170px] text-[10px] uppercase leading-4 tracking-[0.2em] text-stone-400 2xl:block">
               echoes unearthed universe
             </p>
           </Link>
 
-          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-3 lg:flex xl:gap-4">
-            {navigation.map((item) => (
-              <div key={item.label} className="group relative">
+          <nav className="hidden min-w-0 flex-1 items-center justify-end gap-2 xl:flex 2xl:gap-3">
+            {primaryNavItems.map((item) => (
+              <div key={item.label} className="group relative shrink-0">
                 <Link
                   href={item.href}
                   className={clsx(
-                    "block whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-200 transition hover:text-[#f4c66a] xl:text-xs xl:tracking-[0.24em]",
+                    "block whitespace-nowrap px-1 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-200 transition hover:text-[#f4c66a] 2xl:text-[11px] 2xl:tracking-[0.18em]",
                     isNavItemActive(pathname, item) && "text-[#f4c66a]"
                   )}
                 >
@@ -258,13 +284,44 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 ) : null}
               </div>
             ))}
+
+            <div className="group relative shrink-0">
+              <button
+                type="button"
+                className={clsx(
+                  "inline-flex items-center gap-1 whitespace-nowrap px-1 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-200 transition hover:text-[#f4c66a] 2xl:text-[11px] 2xl:tracking-[0.18em]",
+                  isMoreActive && "text-[#f4c66a]"
+                )}
+                aria-label="More navigation links"
+              >
+                More
+                <ChevronDown className="h-3.5 w-3.5" />
+              </button>
+              <div className="invisible absolute right-0 top-full z-[2000] pt-4 opacity-0 transition duration-300 group-hover:visible group-hover:opacity-100">
+                <div className="pointer-events-auto w-72 rounded-2xl border border-white/10 bg-black/92 p-3 shadow-2xl shadow-black/40">
+                  {moreNavItems.map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      className={clsx(
+                        "flex items-center justify-between rounded-xl px-3 py-2 text-sm text-stone-300 transition hover:bg-white/5 hover:text-[#f4c66a]",
+                        isNavItemActive(pathname, item) && "bg-[#f4c66a]/10 text-[#f4c66a]"
+                      )}
+                    >
+                      {item.label}
+                      <ChevronRight className="h-4 w-4 opacity-50" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
           </nav>
 
           <div className="flex shrink-0 items-center gap-2">
             <button
               type="button"
               onClick={() => setCartOpen(true)}
-              className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-stone-200 transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"
+              className={clsx("relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-stone-200 transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a]", !showCart && "hidden")}
               aria-label="Open cart"
               title="Cart"
             >
@@ -286,7 +343,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <button
               type="button"
               onClick={() => setOpen((value) => !value)}
-              className="inline-flex rounded-full border border-white/10 p-3 text-stone-200 transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a] lg:hidden"
+              className="inline-flex rounded-full border border-white/10 p-3 text-stone-200 transition hover:border-[#f4c66a]/50 hover:text-[#f4c66a] xl:hidden"
               aria-label="Toggle menu"
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -295,56 +352,26 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         </div>
 
         {open ? (
-          <div className="border-t border-white/10 px-4 py-4 lg:hidden">
+          <div className="border-t border-white/10 px-4 py-4 xl:hidden">
             <div className="flex flex-col gap-2">
-              {navigation.map((item) => (
-                <div key={item.label} className="rounded-2xl border border-white/5 bg-white/[0.03] p-3">
-                  <Link
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="block text-sm uppercase tracking-[0.28em] text-white"
-                  >
-                    {item.label}
-                  </Link>
-                  {item.children ? (
-                    <div className="mt-3 grid gap-2">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.label}
-                          href={child.href}
-                          onClick={() => setOpen(false)}
-                          className="text-sm text-stone-400 transition hover:text-[#f4c66a]"
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
+              {mobileRoutes.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className={clsx(
+                    "rounded-2xl border border-white/5 bg-white/[0.03] px-4 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-white transition hover:border-[#f4c66a]/45 hover:text-[#f4c66a]",
+                    isActivePath(pathname, item.href) && "border-[#f4c66a]/35 bg-[#f4c66a]/10 text-[#f4c66a]"
+                  )}
+                >
+                  {item.label}
+                </Link>
               ))}
-              <div className="rounded-2xl border border-white/5 bg-white/[0.03] p-3">
-                <p className="text-xs uppercase tracking-[0.28em] text-stone-500">Explore</p>
-                <div className="mt-3 grid gap-2">
-                  {footerRoutes.map((item) => (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      onClick={() => setOpen(false)}
-                      className={clsx(
-                        "text-sm text-stone-400 transition hover:text-[#f4c66a]",
-                        isActivePath(pathname, item.href) && "text-[#f4c66a]"
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         ) : null}
 
-        <div className={clsx("hidden border-t border-white/5 bg-black/25 lg:block", isHome && "lg:hidden")}>
+        <div className={clsx("hidden border-t border-white/5 bg-black/25 xl:block", isHome && "xl:hidden")}>
           <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 py-3 text-[11px] uppercase tracking-[0.3em] text-stone-400 sm:px-6">
             <span className="text-stone-500">Explore</span>
             {footerRoutes.map((item) => (

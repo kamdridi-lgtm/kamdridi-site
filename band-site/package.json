@@ -7,11 +7,13 @@
     "build": "next build",
     "vercel-build": "node scripts/vercel-build.mjs",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "node scripts/lint.mjs",
+    "test:label": "node --test tests/label-critical.test.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.1",
     "@stripe/stripe-js": "^4.2.0",
+    "@vercel/blob": "^2.4.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.511.0",
     "next": "^15.3.0",

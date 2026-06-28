@@ -37,12 +37,12 @@ export default function FanClubPage() {
         <div className="mx-auto max-w-4xl">
           <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Fan Club</p>
           <h1 className="mt-5 font-display text-4xl uppercase leading-none tracking-[0.08em] text-white sm:text-5xl md:text-7xl">
-            Memberships, protocols, and exclusive universe access
+            Choose your access level
           </h1>
           <p className="mt-6 max-w-3xl text-base leading-8 text-stone-300">
             {membershipCheckoutLive
-              ? "Fans can join the available membership tiers, then sign up or log in for exclusive content, game access, comic access, vault drops, and early merch access."
-              : "Membership checkout is not open in this environment yet, so fans can request access directly while still using site accounts for game previews, comic access, vault drops, and updates."}
+              ? "Join the KAMDRIDI member world for private updates, game access, vault material, comic drops, and early merch access."
+              : "Membership access is handled directly right now. Request your tier, then use your site account for game previews, comic access, vault drops, and updates."}
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <CTAButton href="#membership-area">Membership Area</CTAButton>
@@ -59,8 +59,8 @@ export default function FanClubPage() {
           title="The Echoes Unearthed member hub"
           description={
             membershipCheckoutLive
-              ? "Choose an available membership tier, then use your site account for private access across games, comic drops, vault material, and member updates."
-              : "Request membership access directly, then use your site account for private access across games, comic drops, vault material, and member updates."
+              ? "Pick the tier that fits your access level. Inner Circle opens the first protocol; Collector opens the deeper archive."
+              : "Pick the tier that fits your access level. Requests are handled directly, while site accounts keep your private access organized."
           }
         />
         <div className="mt-12">

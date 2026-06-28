@@ -3,6 +3,7 @@ import "./globals.css";
 import { siteMeta } from "@/data/site";
 import { Providers } from "@/components/providers";
 import { SiteShell } from "@/components/site-shell";
+import { UnLetterHighlighter } from "@/components/un-letter-highlighter";
 
 const metadataBase = new URL(process.env.NEXT_PUBLIC_SITE_URL || siteMeta.domain);
 
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body>
         <Providers>
+          <UnLetterHighlighter />
           <SiteShell>{children}</SiteShell>
         </Providers>
       </body>

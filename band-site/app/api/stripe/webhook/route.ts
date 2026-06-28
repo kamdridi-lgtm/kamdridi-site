@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getStripeServer } from "@/lib/stripe";
 import { createPrintfulOrderFromSession } from "@/lib/printful";
+import { updateLabelApplication } from "@/lib/label-storage";
 
 export async function POST(request: Request) {
   const stripe = getStripeServer();
@@ -34,6 +35,15 @@ export async function POST(request: Request) {
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
+
+    if (session.metadata?.type === "label_application" && session.metadata.labelApplicationId) {
+      await updateLabelApplication(session.metadata.labelApplicationId, {
+        paymentStatus: "paid",
+        status: "pending_review",
+        stripeSessionId: session.id
+      });
+      return NextResponse.json({ received: true });
+    }
 
     const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
       expand: ["data.price.product"]
