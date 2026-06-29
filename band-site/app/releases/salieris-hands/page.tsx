@@ -221,69 +221,109 @@ export default function SalierisHandsPage() {
           font-family: Georgia, "Times New Roman", serif;
         }
 
-        .salieri-hero-reveal {
+        .hero-kicker,
+        .hero-title,
+        .hero-subtitle,
+        .hero-line-1,
+        .hero-line-2,
+        .hero-line-3,
+        .hero-line-4,
+        .hero-actions {
           opacity: 0;
-          transform: translateY(14px);
-          filter: blur(4px);
-          animation: salieriReveal 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          transform: translateY(18px);
+          filter: blur(5px);
         }
 
-        .salieri-hero-title {
+        .hero-kicker {
+          animation: salieriReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          animation-delay: 0.1s;
+        }
+
+        .hero-title {
           font-family: Georgia, "Times New Roman", serif;
           letter-spacing: 0.12em;
           color: #ffe7b8;
           text-shadow:
-            0 0 10px rgba(198, 143, 72, 0.2),
-            0 0 24px rgba(198, 143, 72, 0.12),
+            0 0 8px rgba(210, 155, 80, 0.22),
+            0 0 18px rgba(210, 155, 80, 0.12),
             0 18px 48px rgba(0, 0, 0, 0.72);
           animation:
-            salieriReveal 950ms cubic-bezier(0.22, 1, 0.36, 1) forwards,
-            candleGlow 5.8s ease-in-out 1.2s infinite;
+            salieriReveal 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.45s,
+            salieriGlow 4.5s ease-in-out infinite 1.5s;
         }
 
-        .salieri-hero-line-1 { animation-delay: 420ms; }
-        .salieri-hero-line-2 { animation-delay: 780ms; }
-        .salieri-hero-line-3 { animation-delay: 1120ms; }
-        .salieri-hero-line-4 { animation-delay: 1460ms; }
-        .salieri-hero-line-5 { animation-delay: 1800ms; }
-        .salieri-hero-actions { animation-delay: 2180ms; }
+        .hero-subtitle {
+          animation: salieriReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          animation-delay: 0.9s;
+        }
+
+        .hero-line-1 {
+          animation: salieriReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          animation-delay: 1.25s;
+        }
+
+        .hero-line-2 {
+          animation: salieriReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          animation-delay: 1.55s;
+        }
+
+        .hero-line-3 {
+          animation: salieriReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          animation-delay: 1.85s;
+        }
+
+        .hero-line-4 {
+          animation: salieriReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          animation-delay: 2.15s;
+        }
+
+        .hero-actions {
+          animation: salieriReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          animation-delay: 2.55s;
+        }
 
         @keyframes salieriReveal {
-          from {
+          0% {
             opacity: 0;
-            transform: translateY(14px);
-            filter: blur(4px);
+            transform: translateY(18px);
+            filter: blur(5px);
           }
-          to {
+          100% {
             opacity: 1;
             transform: translateY(0);
             filter: blur(0);
           }
         }
 
-        @keyframes candleGlow {
+        @keyframes salieriGlow {
           0%, 100% {
             text-shadow:
-              0 0 10px rgba(198, 143, 72, 0.18),
-              0 0 22px rgba(198, 143, 72, 0.1),
+              0 0 8px rgba(210, 155, 80, 0.22),
+              0 0 18px rgba(210, 155, 80, 0.12),
               0 18px 48px rgba(0, 0, 0, 0.72);
           }
           50% {
             text-shadow:
-              0 0 16px rgba(226, 178, 98, 0.34),
-              0 0 34px rgba(198, 143, 72, 0.18),
+              0 0 16px rgba(240, 190, 110, 0.42),
+              0 0 34px rgba(210, 155, 80, 0.22),
               0 18px 48px rgba(0, 0, 0, 0.72);
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .salieri-hero-reveal,
-          .salieri-hero-title {
-            opacity: 1;
-            transform: none;
-            filter: none;
-            animation: none;
-            transition: none;
+          .hero-kicker,
+          .hero-title,
+          .hero-subtitle,
+          .hero-line-1,
+          .hero-line-2,
+          .hero-line-3,
+          .hero-line-4,
+          .hero-actions {
+            opacity: 1 !important;
+            animation: none !important;
+            transform: none !important;
+            filter: none !important;
+            transition: none !important;
           }
         }
       `}</style>
@@ -301,26 +341,26 @@ export default function SalierisHandsPage() {
 
         <div className="relative mx-auto flex min-h-[88svh] max-w-7xl items-end px-4 pb-14 pt-24 sm:px-6 md:pb-20">
           <div className="salieri-hero-copy max-w-3xl border-l border-[#e0b46a]/55 bg-[linear-gradient(90deg,rgba(5,3,2,0.58),rgba(5,3,2,0.12))] px-5 py-5 backdrop-blur-[1.5px] sm:px-7 sm:py-7">
-            <p className="salieri-hero-reveal text-[11px] font-semibold uppercase tracking-[0.34em] text-[#d8aa5d]">New release</p>
-            <h1 className="salieri-hero-title mt-4 text-[clamp(2.75rem,8.5vw,7.4rem)] uppercase leading-[0.9]">
-              SALIERI’S HANDS
+            <p className="hero-kicker text-[11px] font-semibold uppercase tracking-[0.34em] text-[#d8aa5d]">NEW RELEASE</p>
+            <h1 className="hero-title mt-4 text-[clamp(2.75rem,8.5vw,7.4rem)] uppercase leading-[0.9]">
+              {"SALIERI\u2019S HANDS"}
             </h1>
-            <p className="salieri-hero-reveal salieri-hero-line-1 mt-5 max-w-xl text-base leading-8 text-[#f6dfb8] sm:text-lg">
+            <p className="hero-subtitle mt-5 max-w-xl text-base leading-8 text-[#f6dfb8] sm:text-lg">
               A special off-series KAMDRIDI release
             </p>
-            <p className="salieri-hero-reveal salieri-hero-line-2 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#e0b46a]">
-              Limited release
+            <p className="hero-line-1 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#e0b46a]">
+              LIMITED RELEASE
             </p>
-            <p className="salieri-hero-reveal salieri-hero-line-3 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#f1d49b]">
-              Vienna, 1791
+            <p className="hero-line-2 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#f1d49b]">
+              VIENNA, 1791
             </p>
-            <p className="salieri-hero-reveal salieri-hero-line-4 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#f6dfb8]">
-              Faith. Envy. Confession.
+            <p className="hero-line-3 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#f6dfb8]">
+              FAITH. ENVY. CONFESSION.
             </p>
-            <p className="salieri-hero-reveal salieri-hero-line-5 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#f1d49b]">
-              Album release: July 2026
+            <p className="hero-line-4 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#f1d49b]">
+              ALBUM RELEASE: JULY 2026
             </p>
-            <div className="salieri-hero-reveal salieri-hero-actions mt-6 grid gap-3 sm:grid-cols-3">
+            <div className="hero-actions mt-6 grid gap-3 sm:grid-cols-3">
               <ActionLink href={teaserUrl}>
                 <Play className="h-4 w-4" />
                 Watch Teaser
@@ -467,7 +507,7 @@ export default function SalierisHandsPage() {
           <div className="border border-[#a97a35]/45 bg-[radial-gradient(circle_at_10%_0%,rgba(244,198,106,0.16),transparent_34%),linear-gradient(180deg,rgba(20,12,7,0.94),rgba(7,4,3,0.97))] p-6 sm:p-8">
             <Eyebrow>Release update</Eyebrow>
             <h2 className="mt-4 font-display text-4xl uppercase leading-tight tracking-[0.1em] text-[#f7deb0] sm:text-5xl">
-              SALIERI'S HANDS
+              {"SALIERI\u2019S HANDS"}
             </h2>
             <p className="mt-4 text-lg text-[#f4e4c4]">Official teaser out now. Album release: July 2026.</p>
             <div className="mt-7 flex flex-wrap gap-3">
