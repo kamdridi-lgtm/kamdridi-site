@@ -253,10 +253,10 @@ export default function SalierisHandsPage() {
           left: clamp(20px, 3vw, 34px);
           top: clamp(20px, 3vw, 34px);
           opacity: 0;
-          transform: translateY(24px);
-          filter: blur(8px);
+          transform: translateY(30px);
+          filter: blur(10px);
           text-transform: uppercase;
-          letter-spacing: 0.08em;
+          letter-spacing: 0.11em;
           color: #f4e6c8;
           text-shadow:
             0 0 10px rgba(222, 175, 96, 0.22),
@@ -284,21 +284,21 @@ export default function SalierisHandsPage() {
         }
 
         .word-envy {
-          animation: salieriWordInOut 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.4s;
+          animation: salieriWordInOut 3.1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
         }
 
         .word-jealousy {
-          animation: salieriWordInOut 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards 1.9s;
+          animation: salieriWordInOut 3.1s cubic-bezier(0.16, 1, 0.3, 1) forwards 3.6s;
         }
 
         .word-confession {
-          animation: salieriWordInOut 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards 3.5s;
+          animation: salieriWordInOut 3.1s cubic-bezier(0.16, 1, 0.3, 1) forwards 6.5s;
         }
 
         .word-title {
           animation:
-            salieriFinalIn 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards 5.1s,
-            salieriGlow 4.5s ease-in-out infinite 6.3s;
+            salieriFinalIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 9.5s,
+            salieriGlow 6.5s ease-in-out infinite 11.1s;
         }
 
         .salieri-hero-meta,
@@ -306,46 +306,46 @@ export default function SalierisHandsPage() {
           opacity: 0;
           transform: translateY(16px);
           filter: blur(4px);
-          animation: salieriFinalIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          animation: salieriFinalIn 1.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .salieri-hero-meta {
-          animation-delay: 5.8s;
+          animation-delay: 11.2s;
         }
 
         .salieri-hero-actions {
-          animation-delay: 6.3s;
+          animation-delay: 12.3s;
           pointer-events: auto;
         }
 
         @keyframes salieriWordInOut {
           0% {
             opacity: 0;
-            transform: translateY(24px);
-            filter: blur(8px);
+            transform: translateY(30px);
+            filter: blur(10px);
           }
-          12% {
+          18% {
             opacity: 1;
             transform: translateY(0);
             filter: blur(0);
           }
-          70% {
+          76% {
             opacity: 1;
             transform: translateY(0);
             filter: blur(0);
           }
           100% {
             opacity: 0;
-            transform: translateY(-10px);
-            filter: blur(6px);
+            transform: translateY(-14px);
+            filter: blur(7px);
           }
         }
 
         @keyframes salieriFinalIn {
           0% {
             opacity: 0;
-            transform: translateY(28px);
-            filter: blur(8px);
+            transform: translateY(34px);
+            filter: blur(10px);
           }
           100% {
             opacity: 1;
@@ -428,7 +428,7 @@ export default function SalierisHandsPage() {
             <div className="salieri-hero-word word-confession">CONFESSION</div>
             <div className="salieri-hero-word final word-title">{"SALIERI\u2019S HANDS"}</div>
 
-            <div className="salieri-hero-meta mt-5 space-y-1 text-sm font-semibold uppercase tracking-[0.18em] text-[#f4d9a7] sm:text-base">
+            <div className="salieri-hero-meta mt-5 space-y-1 text-sm font-semibold uppercase tracking-[0.18em] text-[#f6dfb8] drop-shadow-[0_10px_32px_rgba(0,0,0,0.7)] sm:text-base">
               <p>A special off-series KAMDRIDI release</p>
               <p>Vienna, 1791</p>
               <p>Faith. Envy. Confession.</p>
