@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Bell, ExternalLink, ListMusic, Package, Play, Radio, Sparkles } from "lucide-react";
+import { ArrowRight, Bell, Play, Radio } from "lucide-react";
 
 const assetBase = "/assets/images/salieris-hands";
 const teaserUrl = "https://youtu.be/wDOu7-krT8s";
+const heroVideo = "/assets/video/salieris-hands/salieri-hero.mp4";
 
 const assets = {
   hero: `${assetBase}/salieri-opera-hall-hero.png`,
@@ -216,168 +217,20 @@ function ProductCard({
 export default function SalierisHandsPage() {
   return (
     <main className="overflow-hidden bg-[#050302] text-[#f4e4c4]">
-      <style>{`
-        .salieri-hero-copy {
-          font-family: Georgia, "Times New Roman", serif;
-        }
 
-        .hero-kicker,
-        .hero-title,
-        .hero-subtitle,
-        .hero-line-1,
-        .hero-line-2,
-        .hero-line-3,
-        .hero-line-4,
-        .hero-actions {
-          opacity: 0;
-          transform: translateY(18px);
-          filter: blur(5px);
-        }
-
-        .hero-kicker {
-          animation: salieriReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-          animation-delay: 0.1s;
-        }
-
-        .hero-title {
-          font-family: Georgia, "Times New Roman", serif;
-          letter-spacing: 0.12em;
-          color: #ffe7b8;
-          text-shadow:
-            0 0 8px rgba(210, 155, 80, 0.22),
-            0 0 18px rgba(210, 155, 80, 0.12),
-            0 18px 48px rgba(0, 0, 0, 0.72);
-          animation:
-            salieriReveal 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.45s,
-            salieriGlow 4.5s ease-in-out infinite 1.5s;
-        }
-
-        .hero-subtitle {
-          animation: salieriReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-          animation-delay: 0.9s;
-        }
-
-        .hero-line-1 {
-          animation: salieriReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-          animation-delay: 1.25s;
-        }
-
-        .hero-line-2 {
-          animation: salieriReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-          animation-delay: 1.55s;
-        }
-
-        .hero-line-3 {
-          animation: salieriReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-          animation-delay: 1.85s;
-        }
-
-        .hero-line-4 {
-          animation: salieriReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-          animation-delay: 2.15s;
-        }
-
-        .hero-actions {
-          animation: salieriReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-          animation-delay: 2.55s;
-        }
-
-        @keyframes salieriReveal {
-          0% {
-            opacity: 0;
-            transform: translateY(18px);
-            filter: blur(5px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-            filter: blur(0);
-          }
-        }
-
-        @keyframes salieriGlow {
-          0%, 100% {
-            text-shadow:
-              0 0 8px rgba(210, 155, 80, 0.22),
-              0 0 18px rgba(210, 155, 80, 0.12),
-              0 18px 48px rgba(0, 0, 0, 0.72);
-          }
-          50% {
-            text-shadow:
-              0 0 16px rgba(240, 190, 110, 0.42),
-              0 0 34px rgba(210, 155, 80, 0.22),
-              0 18px 48px rgba(0, 0, 0, 0.72);
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .hero-kicker,
-          .hero-title,
-          .hero-subtitle,
-          .hero-line-1,
-          .hero-line-2,
-          .hero-line-3,
-          .hero-line-4,
-          .hero-actions {
-            opacity: 1 !important;
-            animation: none !important;
-            transform: none !important;
-            filter: none !important;
-            transition: none !important;
-          }
-        }
-      `}</style>
-      <section className="relative isolate min-h-[88svh] overflow-hidden border-b border-[#9a7134]/35">
-        <Image
-          src={assets.hero}
-          alt="Candlelit baroque orchestra hall with conductor at the manuscript desk"
-          fill
-          priority
-          className="object-cover object-center brightness-[1.22] contrast-[1.08] saturate-[1.08]"
-          sizes="100vw"
+      <section className="relative isolate overflow-hidden border-b border-[#9a7134]/35 bg-black">
+        <video
+          className="block h-[82svh] min-h-[520px] w-full object-cover object-center sm:h-[88svh]"
+          src={heroVideo}
+          poster={assets.hero}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_54%,rgba(255,209,126,0.09),transparent_38%),linear-gradient(90deg,rgba(0,0,0,0.34),rgba(0,0,0,0.08)_42%,rgba(0,0,0,0.34)),linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.2)_62%,#050302_100%)]" />
-        <div className="absolute inset-0 opacity-[0.13] [background-image:linear-gradient(115deg,transparent_0,transparent_45%,rgba(244,198,106,0.26)_46%,transparent_48%)] [background-size:230px_260px]" />
-
-        <div className="relative mx-auto flex min-h-[88svh] max-w-7xl items-end px-4 pb-14 pt-24 sm:px-6 md:pb-20">
-          <div className="salieri-hero-copy max-w-3xl border-l border-[#e0b46a]/55 bg-[linear-gradient(90deg,rgba(5,3,2,0.58),rgba(5,3,2,0.12))] px-5 py-5 backdrop-blur-[1.5px] sm:px-7 sm:py-7">
-            <p className="hero-kicker text-[11px] font-semibold uppercase tracking-[0.34em] text-[#d8aa5d]">NEW RELEASE</p>
-            <h1 className="hero-title mt-4 text-[clamp(2.75rem,8.5vw,7.4rem)] uppercase leading-[0.9]">
-              {"SALIERI\u2019S HANDS"}
-            </h1>
-            <p className="hero-subtitle mt-5 max-w-xl text-base leading-8 text-[#f6dfb8] sm:text-lg">
-              A special off-series KAMDRIDI release
-            </p>
-            <p className="hero-line-1 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#e0b46a]">
-              LIMITED RELEASE
-            </p>
-            <p className="hero-line-2 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#f1d49b]">
-              VIENNA, 1791
-            </p>
-            <p className="hero-line-3 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#f6dfb8]">
-              FAITH. ENVY. CONFESSION.
-            </p>
-            <p className="hero-line-4 mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#f1d49b]">
-              ALBUM RELEASE: JULY 2026
-            </p>
-            <div className="hero-actions mt-6 grid gap-3 sm:grid-cols-3">
-              <ActionLink href={teaserUrl}>
-                <Play className="h-4 w-4" />
-                Watch Teaser
-              </ActionLink>
-              <ActionLink href="#tracklist" tone="ghost">
-                <ListMusic className="h-4 w-4" />
-                Tracklist
-              </ActionLink>
-              <ActionLink href="#collector" tone="ghost">
-                <Package className="h-4 w-4" />
-                Collector Edition
-              </ActionLink>
-            </div>
-          </div>
-        </div>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#050302] to-transparent" />
       </section>
-
       <section className="border-b border-[#9a7134]/25 px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.48fr_0.52fr] lg:items-center">
           <div className="mx-auto w-full max-w-[520px]">
