@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Bell, Play, Radio } from "lucide-react";
+import { ArrowRight, Bell, ListMusic, Package, Play, Radio } from "lucide-react";
 
 const assetBase = "/assets/images/salieris-hands";
 const teaserUrl = "https://youtu.be/wDOu7-krT8s";
@@ -218,10 +218,200 @@ export default function SalierisHandsPage() {
   return (
     <main className="overflow-hidden bg-[#050302] text-[#f4e4c4]">
 
-      <section className="relative isolate overflow-hidden border-b border-[#9a7134]/35 bg-black">
+      <style>{`
+        .salieri-hero-stage {
+          min-height: 82svh;
+        }
+
+        .salieri-hero-video {
+          filter: brightness(1.08) contrast(1.08) saturate(1.06);
+        }
+
+        .salieri-hero-overlay {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          padding: clamp(24px, 5vw, 80px);
+          pointer-events: none;
+        }
+
+        .salieri-hero-sequence {
+          position: relative;
+          width: min(760px, 100%);
+          min-height: clamp(330px, 44vw, 500px);
+          border-left: 1px solid rgba(224, 180, 106, 0.58);
+          padding: clamp(20px, 3vw, 34px);
+          background: linear-gradient(90deg, rgba(5, 3, 2, 0.52), rgba(5, 3, 2, 0.12) 72%, transparent);
+          box-shadow: 0 0 70px rgba(0, 0, 0, 0.28);
+        }
+
+        .salieri-hero-word {
+          position: absolute;
+          left: clamp(20px, 3vw, 34px);
+          top: clamp(20px, 3vw, 34px);
+          opacity: 0;
+          transform: translateY(24px);
+          filter: blur(8px);
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: #f4e6c8;
+          text-shadow:
+            0 0 10px rgba(222, 175, 96, 0.22),
+            0 0 28px rgba(222, 175, 96, 0.12),
+            0 18px 48px rgba(0, 0, 0, 0.78);
+        }
+
+        .salieri-hero-word:not(.final) {
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(2.4rem, 6.2vw, 5rem);
+          font-weight: 700;
+          line-height: 0.92;
+        }
+
+        .salieri-hero-word.final {
+          position: relative;
+          left: auto;
+          top: auto;
+          display: block;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(3.25rem, 8.4vw, 7rem);
+          line-height: 0.9;
+          letter-spacing: 0.055em;
+          color: #ffe7b8;
+        }
+
+        .word-envy {
+          animation: salieriWordInOut 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.4s;
+        }
+
+        .word-jealousy {
+          animation: salieriWordInOut 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards 1.9s;
+        }
+
+        .word-confession {
+          animation: salieriWordInOut 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards 3.5s;
+        }
+
+        .word-title {
+          animation:
+            salieriFinalIn 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards 5.1s,
+            salieriGlow 4.5s ease-in-out infinite 6.3s;
+        }
+
+        .salieri-hero-meta,
+        .salieri-hero-actions {
+          opacity: 0;
+          transform: translateY(16px);
+          filter: blur(4px);
+          animation: salieriFinalIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .salieri-hero-meta {
+          animation-delay: 5.8s;
+        }
+
+        .salieri-hero-actions {
+          animation-delay: 6.3s;
+          pointer-events: auto;
+        }
+
+        @keyframes salieriWordInOut {
+          0% {
+            opacity: 0;
+            transform: translateY(24px);
+            filter: blur(8px);
+          }
+          12% {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+          }
+          70% {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(-10px);
+            filter: blur(6px);
+          }
+        }
+
+        @keyframes salieriFinalIn {
+          0% {
+            opacity: 0;
+            transform: translateY(28px);
+            filter: blur(8px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+          }
+        }
+
+        @keyframes salieriGlow {
+          0%, 100% {
+            text-shadow:
+              0 0 12px rgba(222, 175, 96, 0.2),
+              0 0 30px rgba(222, 175, 96, 0.1),
+              0 18px 48px rgba(0, 0, 0, 0.78);
+          }
+          50% {
+            text-shadow:
+              0 0 18px rgba(245, 205, 130, 0.35),
+              0 0 44px rgba(222, 175, 96, 0.18),
+              0 18px 48px rgba(0, 0, 0, 0.78);
+          }
+        }
+
+        @media (max-width: 640px) {
+          .salieri-hero-stage {
+            min-height: 78svh;
+          }
+
+          .salieri-hero-overlay {
+            align-items: flex-end;
+            padding: 88px 18px 42px;
+          }
+
+          .salieri-hero-sequence {
+            min-height: 380px;
+            padding: 20px;
+          }
+
+          .salieri-hero-word {
+            left: 20px;
+            top: 20px;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .salieri-hero-word,
+          .salieri-hero-meta,
+          .salieri-hero-actions {
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+            filter: none !important;
+          }
+
+          .word-envy,
+          .word-jealousy,
+          .word-confession {
+            display: none;
+          }
+        }
+      `}</style>
+
+      <section className="salieri-hero-stage relative isolate overflow-hidden border-b border-[#9a7134]/35 bg-black">
         <video
           id="salieri-hero-video"
-          className="block h-[82svh] min-h-[520px] w-full object-cover object-center sm:h-[88svh]"
+          className="salieri-hero-video block h-[82svh] min-h-[540px] w-full object-cover object-center sm:h-[88svh]"
           src={heroVideo}
           poster={assets.hero}
           autoPlay
@@ -230,7 +420,37 @@ export default function SalierisHandsPage() {
           playsInline
           preload="metadata"
         />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#050302] to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_58%_48%,rgba(255,209,126,0.08),transparent_36%),linear-gradient(90deg,rgba(0,0,0,0.56),rgba(0,0,0,0.12)_52%,rgba(0,0,0,0.28)),linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.18)_64%,#050302_100%)]" />
+        <div className="salieri-hero-overlay">
+          <div className="salieri-hero-sequence">
+            <div className="salieri-hero-word word-envy">ENVY</div>
+            <div className="salieri-hero-word word-jealousy">JEALOUSY</div>
+            <div className="salieri-hero-word word-confession">CONFESSION</div>
+            <div className="salieri-hero-word final word-title">{"SALIERI\u2019S HANDS"}</div>
+
+            <div className="salieri-hero-meta mt-5 space-y-1 text-sm font-semibold uppercase tracking-[0.18em] text-[#f4d9a7] sm:text-base">
+              <p>A special off-series KAMDRIDI release</p>
+              <p>Vienna, 1791</p>
+              <p>Faith. Envy. Confession.</p>
+              <p>Album release: July 2026</p>
+            </div>
+
+            <div className="salieri-hero-actions mt-7 grid gap-3 sm:grid-cols-3">
+              <ActionLink href={teaserUrl}>
+                <Play className="h-4 w-4" />
+                Watch Teaser
+              </ActionLink>
+              <ActionLink href="#tracklist" tone="ghost">
+                <ListMusic className="h-4 w-4" />
+                Tracklist
+              </ActionLink>
+              <ActionLink href="#collector" tone="ghost">
+                <Package className="h-4 w-4" />
+                Collector Edition
+              </ActionLink>
+            </div>
+          </div>
+        </div>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -238,8 +458,8 @@ export default function SalierisHandsPage() {
                 var video = document.getElementById("salieri-hero-video");
                 if (!video) return;
                 var setSlowMotion = function () {
-                  video.defaultPlaybackRate = 0.5;
-                  video.playbackRate = 0.5;
+                  video.defaultPlaybackRate = 0.4;
+                  video.playbackRate = 0.4;
                 };
                 setSlowMotion();
                 video.addEventListener("loadedmetadata", setSlowMotion);
