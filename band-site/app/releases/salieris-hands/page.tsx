@@ -220,6 +220,7 @@ export default function SalierisHandsPage() {
 
       <section className="relative isolate overflow-hidden border-b border-[#9a7134]/35 bg-black">
         <video
+          id="salieri-hero-video"
           className="block h-[82svh] min-h-[520px] w-full object-cover object-center sm:h-[88svh]"
           src={heroVideo}
           poster={assets.hero}
@@ -230,6 +231,23 @@ export default function SalierisHandsPage() {
           preload="metadata"
         />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#050302] to-transparent" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                var video = document.getElementById("salieri-hero-video");
+                if (!video) return;
+                var setSlowMotion = function () {
+                  video.defaultPlaybackRate = 0.5;
+                  video.playbackRate = 0.5;
+                };
+                setSlowMotion();
+                video.addEventListener("loadedmetadata", setSlowMotion);
+                video.addEventListener("play", setSlowMotion);
+              })();
+            `
+          }}
+        />
       </section>
       <section className="border-b border-[#9a7134]/25 px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.48fr_0.52fr] lg:items-center">
