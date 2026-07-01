@@ -4,6 +4,7 @@ import { Disc3, ListMusic, Package, Play, Shirt, Sparkles } from "lucide-react";
 
 const assetBase = "/assets/images/salieris-hands";
 const teaserUrl = "https://youtu.be/wDOu7-krT8s";
+const teaserVideo = "/assets/video/salieris-hands/official-teaser.mp4";
 
 const assets = {
   hero: `${assetBase}/salieri-opera-hall-hero.png`,
@@ -329,18 +330,23 @@ export default function SalierisHandsPage() {
           <SectionIntro title="Official Teaser" align="center">
             <p>Watch the first glimpse.</p>
           </SectionIntro>
-          <a href={teaserUrl} target="_blank" rel="noreferrer" className="group relative mt-9 block min-h-[320px] overflow-hidden border border-[#bd8b45]/55 bg-black shadow-[0_34px_110px_rgba(0,0,0,0.5)] sm:min-h-[500px]">
-            <ImagePanel src={assets.operaTeaser} alt="Official teaser still with conductor and orchestra" priority />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.32)),radial-gradient(circle_at_50%_44%,transparent,rgba(0,0,0,0.32)_74%)]" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="inline-flex h-24 w-24 items-center justify-center rounded-full border border-[#ffd98b]/80 bg-black/40 text-[#ffe7bd] shadow-[0_0_64px_rgba(226,173,82,0.34)] transition group-hover:scale-105 group-hover:border-[#ffe2a6]">
-                <Play className="ml-1 h-10 w-10 fill-current" />
-              </span>
-            </div>
-            <span className="absolute bottom-5 left-5 inline-flex border border-[#efc36f]/70 bg-black/50 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.18em] text-[#ffe7bd]">
+          <div className="mt-9 overflow-hidden border border-[#bd8b45]/55 bg-black shadow-[0_34px_110px_rgba(0,0,0,0.5)]">
+            <video
+              className="block aspect-video w-full bg-black object-cover"
+              controls
+              playsInline
+              preload="metadata"
+              poster={assets.operaTeaser}
+            >
+              <source src={teaserVideo} type="video/mp4" />
+            </video>
+          </div>
+          <div className="mt-5 flex justify-center">
+            <ActionLink href={teaserUrl}>
+              <Play className="h-4 w-4" />
               Watch Teaser
-            </span>
-          </a>
+            </ActionLink>
+          </div>
         </div>
       </section>
 
