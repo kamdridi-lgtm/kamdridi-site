@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Disc3, ListMusic, Package, Play, Shirt, Sparkles } from "lucide-react";
 
 const assetBase = "/assets/images/salieris-hands";
-const teaserUrl = "https://youtu.be/wDOu7-krT8s";
+const teaserUrl = "https://youtu.be/wD0u7-krT8s?si=4a1J1siTwJV9bGCI";
 const teaserVideo = "/assets/video/salieris-hands/official-teaser.mp4";
 
 const assets = {
