@@ -5,6 +5,7 @@ import { Disc3, ListMusic, Package, Play, Shirt, Sparkles } from "lucide-react";
 const assetBase = "/assets/images/salieris-hands";
 const teaserUrl = "https://youtu.be/wD0u7-krT8s?si=4a1J1siTwJV9bGCI";
 const teaserVideo = "/assets/video/salieris-hands/official-teaser.mp4";
+const heroVideo = "/assets/video/salieris-hands/salieri-hero-slow.mp4";
 
 const assets = {
   hero: `${assetBase}/salieri-opera-hall-hero.png`,
@@ -217,8 +218,24 @@ export default function SalierisHandsPage() {
           font-family: Georgia, "Times New Roman", serif;
         }
 
+        .salieri-hero-media {
+          position: absolute;
+          inset: 0;
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+
         .salieri-hero-image {
           filter: brightness(1.1) contrast(1.08) saturate(1.08);
+          transform: scale(1.03);
+        }
+
+        .salieri-hero-video {
+          z-index: 1;
+          opacity: 0.92;
+          filter: brightness(1.18) contrast(1.08) saturate(1.06);
           transform: scale(1.03);
           animation: salieriBreath 18s ease-in-out infinite;
         }
@@ -266,6 +283,7 @@ export default function SalierisHandsPage() {
 
         @media (prefers-reduced-motion: reduce) {
           .salieri-hero-image,
+          .salieri-hero-video,
           .salieri-candle-glow,
           .salieri-animated-word {
             animation: none !important;
@@ -274,13 +292,46 @@ export default function SalierisHandsPage() {
           .salieri-animated-word {
             display: none;
           }
+
+          .salieri-hero-video {
+            display: none;
+          }
         }
       `}</style>
 
       <section className="relative isolate min-h-[82svh] overflow-hidden border-b border-[#a67938]/35 bg-black">
-        <Image src={assets.hero} alt="Conductor and orchestra in a dark opera hall" fill priority className="salieri-hero-image object-cover object-center" sizes="100vw" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_58%_44%,rgba(255,215,138,0.18),transparent_34%),linear-gradient(90deg,rgba(0,0,0,0.62),rgba(0,0,0,0.22)_52%,rgba(0,0,0,0.3)),linear-gradient(180deg,rgba(0,0,0,0.04),rgba(0,0,0,0.18)_62%,#070403_100%)]" />
-        <div className="salieri-candle-glow absolute left-[8%] top-[24%] h-48 w-48 rounded-full bg-[#f2b45b]/18 blur-3xl" />
+        <Image src={assets.hero} alt="Conductor and orchestra in a dark opera hall" fill priority className="salieri-hero-media salieri-hero-image object-cover object-center" sizes="100vw" />
+        <video
+          id="salieri-hero-slow-video"
+          className="salieri-hero-media salieri-hero-video"
+          src={heroVideo}
+          poster={assets.hero}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                var video = document.getElementById("salieri-hero-slow-video");
+                if (!video) return;
+                var setSlowMotion = function () {
+                  video.defaultPlaybackRate = 0.35;
+                  video.playbackRate = 0.35;
+                };
+                setSlowMotion();
+                video.addEventListener("loadedmetadata", setSlowMotion);
+                video.addEventListener("play", setSlowMotion);
+              })();
+            `
+          }}
+        />
+        <div className="absolute inset-0 z-[2] bg-[radial-gradient(circle_at_58%_44%,rgba(255,215,138,0.18),transparent_34%),linear-gradient(90deg,rgba(0,0,0,0.62),rgba(0,0,0,0.22)_52%,rgba(0,0,0,0.3)),linear-gradient(180deg,rgba(0,0,0,0.04),rgba(0,0,0,0.18)_62%,#070403_100%)]" />
+        <div className="salieri-candle-glow absolute left-[8%] z-[3] top-[24%] h-48 w-48 rounded-full bg-[#f2b45b]/18 blur-3xl" />
         <div className="relative z-10 flex min-h-[82svh] items-end px-4 pb-12 pt-28 sm:px-6 lg:items-center lg:pb-20">
           <div className="mx-auto w-full max-w-7xl">
             <div className="max-w-4xl border-l border-[#e2ad52]/60 bg-gradient-to-r from-black/48 via-black/18 to-transparent px-5 py-6 sm:px-8 sm:py-8">
