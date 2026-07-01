@@ -1,24 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, Bell, ListMusic, Package, Play, Radio } from "lucide-react";
+import { Disc3, ListMusic, Package, Play, Shirt, Sparkles } from "lucide-react";
 
 const assetBase = "/assets/images/salieris-hands";
 const teaserUrl = "https://youtu.be/wDOu7-krT8s";
-const heroVideo = "/assets/video/salieris-hands/salieri-hero.mp4";
 
 const assets = {
   hero: `${assetBase}/salieri-opera-hall-hero.png`,
   frontCover: `${assetBase}/front-cover-approved.png`,
-  backCover: `${assetBase}/back-cover-approved.png`,
   collectorPack: `${assetBase}/full-collector-pack.png`,
-  packLineup: `${assetBase}/pack-back-front-spine.png`,
-  disc: `${assetBase}/disc-mockup.png`,
   booklet: `${assetBase}/booklet-mockup.png`,
   jewelcase: `${assetBase}/jewelcase-mockup.png`,
-  miniCard: `${assetBase}/mini-card-mockup.png`,
   operaTeaser: `${assetBase}/opera-teaser.png`,
-  vertical: `${assetBase}/salieri-vertical-official.png`,
   wide: `${assetBase}/salieri-wide-official.png`,
   vienna: `${assetBase}/vienna-walking-official.png`
 };
@@ -45,117 +38,114 @@ const bonusTracks = [
 const editionCards = [
   {
     title: "Digital Release",
+    status: "Teaser out now",
     text: "High-resolution audio and digital booklet prepared for the July 2026 release.",
-    status: "Official teaser out now",
     image: assets.frontCover,
-    alt: "Official square front cover artwork"
+    alt: "Official album front cover artwork"
   },
   {
     title: "Collector CD",
-    text: "Digipak / jewel case concept with printed booklet, disc art, and back cover treatment.",
     status: "Pre-order soon",
+    text: "Digipak / jewel case concept with printed booklet, disc art, and back cover treatment.",
     image: assets.jewelcase,
-    alt: "Collector CD jewelcase mockup"
+    alt: "Collector CD jewel case concept"
   },
   {
     title: "Vinyl Edition",
-    text: "Premium vinyl release concept for the physical campaign.",
-    status: "Coming soon"
-  },
-  {
-    title: "Special Edition Box",
-    text: "Includes CD, vinyl, booklet, coin, art print, and special edition packaging concept.",
-    status: "Pre-order soon",
-    image: assets.collectorPack,
-    alt: "Special edition collector pack mockup"
+    status: "Coming soon",
+    text: "Premium vinyl release concept for the physical campaign."
   },
   {
     title: "Hardcover Booklet",
+    status: "In preparation",
     text: "Liner notes and story presentation by KAMDRIDI.",
-    status: "Coming soon",
     image: assets.booklet,
-    alt: "Hardcover booklet concept mockup"
+    alt: "Hardcover booklet concept"
   },
   {
-    title: "Art Print",
-    text: "Vienna 1791 exclusive artwork prepared for collector presentation.",
-    status: "Coming soon",
-    image: assets.vienna,
-    alt: "Vienna 1791 cloaked figure artwork"
+    title: "Special Edition Box",
+    status: "Pre-order soon",
+    text: "Collector package concept including CD, booklet, art print, and premium packaging.",
+    image: assets.collectorPack,
+    alt: "Special edition collector package concept"
   },
   {
     title: "Collector Coin",
-    text: "Antique bronze finish collector item for the special edition world.",
-    status: "Collector item"
+    status: "Collector item",
+    text: "Antique bronze finish collector item for the special edition world."
   }
 ];
 
-const merchItems = [
-  { title: "Salieri's Hands Tee", status: "Coming soon", image: assets.miniCard, alt: "Mini card artwork used for apparel concept" },
-  { title: "Salieri's Hands Hoodie", status: "Coming soon", image: assets.frontCover, alt: "Official cover artwork for hoodie concept" },
-  { title: "Poster", status: "Coming soon", image: assets.vertical, alt: "Vertical Salieri artwork poster" },
-  { title: "Mug", status: "Coming soon" },
-  { title: "Collector Bundle", status: "Coming soon", image: assets.packLineup, alt: "Collector bundle packaging lineup" }
-];
-
-const streamingItems = [
-  { label: "Spotify", status: "Coming soon" },
-  { label: "Apple Music", status: "Coming soon" },
-  { label: "Amazon", status: "Coming soon" }
-];
+const merchItems = ["Tee", "Hoodie", "Mug", "Poster", "Collector Bundle"];
+const streamingItems = ["Spotify", "Apple Music", "Amazon", "Instagram"];
 
 export const metadata: Metadata = {
-  title: "SALIERI'S HANDS - Official Release Page",
+  title: "Salieri's Hands - KAMDRIDI",
   description:
-    "SALIERI'S HANDS is a special off-series KAMDRIDI release. Vienna, 1791. Faith. Envy. Confession. Album release: July 2026."
+    "Salieri's Hands is a special off-series KAMDRIDI release. Vienna, 1791. Faith. Envy. Confession. Album release: July 2026."
 };
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
-  return <p className="text-[11px] font-semibold uppercase tracking-[0.34em] text-[#d8aa5d]">{children}</p>;
+  return <p className="text-[11px] font-bold uppercase tracking-[0.34em] text-[#e3b86a]">{children}</p>;
 }
 
 function SectionIntro({
-  eyebrow,
   title,
   children,
   align = "left"
 }: {
-  eyebrow: string;
   title: string;
   children?: React.ReactNode;
   align?: "left" | "center";
 }) {
   return (
     <div className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
-      <Eyebrow>{eyebrow}</Eyebrow>
-      <h2 className="mt-3 font-display text-3xl uppercase leading-tight tracking-[0.1em] text-[#f7deb0] sm:text-4xl">
+      <h2 className="font-serif text-[clamp(2rem,5vw,3.6rem)] uppercase leading-[0.95] text-[#ffe3ad]">
         {title}
       </h2>
-      {children ? <div className="mt-4 text-sm leading-7 text-[#d9c5a3] sm:text-base">{children}</div> : null}
+      {children ? <div className="mt-4 text-sm leading-7 text-[#ead4ad] sm:text-base">{children}</div> : null}
     </div>
   );
 }
 
-function ActionLink({ href, children, tone = "solid" }: { href: string; children: React.ReactNode; tone?: "solid" | "ghost" }) {
+function ActionLink({
+  href,
+  children,
+  tone = "solid"
+}: {
+  href: string;
+  children: React.ReactNode;
+  tone?: "solid" | "ghost";
+}) {
   const isExternal = href.startsWith("http");
   const classes =
     tone === "solid"
-      ? "border-[#e2b765] bg-[#d8a850] text-[#140d07] shadow-[0_18px_50px_rgba(216,168,80,0.22)] hover:bg-[#f0c878]"
-      : "border-[#c79a4f]/65 bg-black/28 text-[#f6dfb8] hover:border-[#f0c878] hover:text-white";
+      ? "border-[#efc36f] bg-[#e2ad52] text-[#140b05] shadow-[0_20px_56px_rgba(226,173,82,0.22)] hover:bg-[#ffd98b]"
+      : "border-[#d7a75d]/70 bg-black/34 text-[#ffe7bd] hover:border-[#ffd98b] hover:bg-[#e2ad52]/10 hover:text-white";
 
   return (
     <a
       href={href}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noreferrer" : undefined}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 border px-4 py-3 text-center text-[11px] font-bold uppercase tracking-[0.18em] transition duration-300 hover:-translate-y-0.5 sm:px-5 ${classes}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 border px-4 py-3 text-center text-[11px] font-bold uppercase tracking-[0.16em] transition duration-300 hover:-translate-y-0.5 ${classes}`}
     >
       {children}
     </a>
   );
 }
 
-function ImagePanel({ src, alt, contain = false, priority = false }: { src: string; alt: string; contain?: boolean; priority?: boolean }) {
+function ImagePanel({
+  src,
+  alt,
+  contain = false,
+  priority = false
+}: {
+  src: string;
+  alt: string;
+  contain?: boolean;
+  priority?: boolean;
+}) {
   return (
     <Image
       src={src}
@@ -163,52 +153,49 @@ function ImagePanel({ src, alt, contain = false, priority = false }: { src: stri
       fill
       priority={priority}
       className={contain ? "object-contain p-4" : "object-cover"}
-      sizes="(max-width: 768px) 100vw, 42vw"
+      sizes="(max-width: 768px) 100vw, 45vw"
     />
   );
 }
 
-function ComingSoonCard({ title, status, text }: { title: string; status: string; text?: string }) {
+function TextOnlyCard({ title, status, text }: { title: string; status: string; text: string }) {
   return (
-    <article className="flex min-h-[260px] flex-col justify-between border border-[#a97a35]/45 bg-[radial-gradient(circle_at_28%_0%,rgba(244,198,106,0.14),transparent_36%),linear-gradient(180deg,rgba(22,13,7,0.94),rgba(7,4,3,0.95))] p-5 shadow-[inset_0_1px_0_rgba(255,226,164,0.08)]">
+    <article className="flex min-h-[230px] flex-col justify-between border border-[#bd8b45]/45 bg-[radial-gradient(circle_at_20%_0%,rgba(255,210,126,0.15),transparent_38%),linear-gradient(180deg,rgba(28,16,8,0.94),rgba(9,5,3,0.96))] p-5 shadow-[inset_0_1px_0_rgba(255,235,185,0.1)]">
       <div>
-        <p className="text-[10px] font-bold uppercase tracking-[0.26em] text-[#d8aa5d]">{status}</p>
-        <h3 className="mt-4 font-display text-2xl uppercase leading-tight tracking-[0.09em] text-[#f4d9a7]">{title}</h3>
-        {text ? <p className="mt-4 text-sm leading-7 text-[#cdb58f]">{text}</p> : null}
+        <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#e3b86a]">{status}</p>
+        <h3 className="mt-4 font-serif text-2xl uppercase leading-tight text-[#ffe0aa]">{title}</h3>
+        <p className="mt-4 text-sm leading-7 text-[#d9c09a]">{text}</p>
       </div>
-      <span className="mt-6 inline-flex w-fit border border-[#d8aa5d]/35 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#d8aa5d]">
-        Coming soon
-      </span>
     </article>
   );
 }
 
-function ProductCard({
+function EditionCard({
   title,
-  text,
   status,
+  text,
   image,
   alt
 }: {
   title: string;
-  text: string;
   status: string;
+  text: string;
   image?: string;
   alt?: string;
 }) {
   if (!image || !alt) {
-    return <ComingSoonCard title={title} status={status} text={text} />;
+    return <TextOnlyCard title={title} status={status} text={text} />;
   }
 
   return (
-    <article className="group border border-[#a97a35]/45 bg-[#0b0604]/72 shadow-[inset_0_1px_0_rgba(255,226,164,0.08)] transition duration-300 hover:-translate-y-1 hover:border-[#e0b46a]/75">
-      <div className="relative aspect-[4/3] overflow-hidden border-b border-[#a97a35]/25 bg-[#090604]">
+    <article className="group overflow-hidden border border-[#bd8b45]/45 bg-[#0d0704]/78 shadow-[inset_0_1px_0_rgba(255,235,185,0.08)] transition duration-300 hover:-translate-y-1 hover:border-[#efc36f]/80">
+      <div className="relative aspect-[4/3] border-b border-[#bd8b45]/25 bg-[#090604]">
         <ImagePanel src={image} alt={alt} contain />
       </div>
       <div className="p-5">
-        <p className="text-[10px] font-bold uppercase tracking-[0.26em] text-[#d8aa5d]">{status}</p>
-        <h3 className="mt-3 min-h-14 font-display text-2xl uppercase leading-tight tracking-[0.08em] text-[#f4d9a7]">{title}</h3>
-        <p className="mt-3 text-sm leading-7 text-[#cdb58f]">{text}</p>
+        <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#e3b86a]">{status}</p>
+        <h3 className="mt-3 font-serif text-2xl uppercase leading-tight text-[#ffe0aa]">{title}</h3>
+        <p className="mt-3 text-sm leading-7 text-[#d9c09a]">{text}</p>
       </div>
     </article>
   );
@@ -216,424 +203,258 @@ function ProductCard({
 
 export default function SalierisHandsPage() {
   return (
-    <main className="overflow-hidden bg-[#050302] text-[#f4e4c4]">
-
+    <main className="salieri-page overflow-hidden bg-[#070403] text-[#f7e7c8]">
       <style>{`
-        .salieri-hero-stage {
-          min-height: 82svh;
+        .salieri-page {
+          --salieri-gold: #e2ad52;
+          --salieri-ivory: #ffe3ad;
+          font-family: "Segoe UI", system-ui, sans-serif;
         }
 
-        .salieri-hero-video {
-          filter: brightness(1.08) contrast(1.08) saturate(1.06);
+        .salieri-hero-title,
+        .salieri-animated-word {
+          font-family: Georgia, "Times New Roman", serif;
         }
 
-        .salieri-hero-overlay {
+        .salieri-hero-image {
+          filter: brightness(1.1) contrast(1.08) saturate(1.08);
+          transform: scale(1.03);
+          animation: salieriBreath 18s ease-in-out infinite;
+        }
+
+        .salieri-candle-glow {
+          animation: salieriCandle 5.8s ease-in-out infinite;
+        }
+
+        .salieri-animated-word {
           position: absolute;
           inset: 0;
-          z-index: 2;
           display: flex;
           align-items: center;
-          justify-content: flex-start;
-          padding: clamp(24px, 5vw, 80px);
-          pointer-events: none;
-        }
-
-        .salieri-hero-sequence {
-          position: relative;
-          width: min(760px, 100%);
-          min-height: clamp(330px, 44vw, 500px);
-          border-left: 1px solid rgba(224, 180, 106, 0.58);
-          padding: clamp(20px, 3vw, 34px);
-          background: linear-gradient(90deg, rgba(5, 3, 2, 0.52), rgba(5, 3, 2, 0.12) 72%, transparent);
-          box-shadow: 0 0 70px rgba(0, 0, 0, 0.28);
-        }
-
-        .salieri-hero-word {
-          position: absolute;
-          left: clamp(20px, 3vw, 34px);
-          top: clamp(20px, 3vw, 34px);
           opacity: 0;
-          transform: translateY(30px);
+          transform: translateY(22px);
           filter: blur(10px);
+          color: #ffe8bd;
           text-transform: uppercase;
-          letter-spacing: 0.11em;
-          color: #f4e6c8;
-          text-shadow:
-            0 0 10px rgba(222, 175, 96, 0.22),
-            0 0 28px rgba(222, 175, 96, 0.12),
-            0 18px 48px rgba(0, 0, 0, 0.78);
+          text-shadow: 0 0 18px rgba(226, 173, 82, 0.28), 0 18px 54px rgba(0, 0, 0, 0.88);
+          animation: salieriWordCycle 19s cubic-bezier(0.16, 1, 0.3, 1) infinite;
         }
 
-        .salieri-hero-word:not(.final) {
-          font-family: Georgia, "Times New Roman", serif;
-          font-size: clamp(2.4rem, 6.2vw, 5rem);
-          font-weight: 700;
-          line-height: 0.92;
+        .salieri-animated-word:nth-child(2) { animation-delay: 3.4s; }
+        .salieri-animated-word:nth-child(3) { animation-delay: 6.8s; }
+        .salieri-animated-word:nth-child(4) { animation-delay: 10.2s; }
+        .salieri-animated-word:nth-child(5) { animation-delay: 13.6s; }
+
+        @keyframes salieriBreath {
+          0%, 100% { transform: scale(1.03); filter: brightness(1.06) contrast(1.08) saturate(1.06); }
+          50% { transform: scale(1.085) translate3d(-0.8%, -0.5%, 0); filter: brightness(1.18) contrast(1.1) saturate(1.12); }
         }
 
-        .salieri-hero-word.final {
-          position: relative;
-          left: auto;
-          top: auto;
-          display: block;
-          font-family: Georgia, "Times New Roman", serif;
-          font-size: clamp(3.25rem, 8.4vw, 7rem);
-          line-height: 0.9;
-          letter-spacing: 0.055em;
-          color: #ffe7b8;
+        @keyframes salieriCandle {
+          0%, 100% { opacity: 0.45; transform: scale(1); }
+          44% { opacity: 0.78; transform: scale(1.08); }
+          52% { opacity: 0.55; transform: scale(1.02); }
+          62% { opacity: 0.72; transform: scale(1.06); }
         }
 
-        .word-envy {
-          animation: salieriWordInOut 3.1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
-        }
-
-        .word-jealousy {
-          animation: salieriWordInOut 3.1s cubic-bezier(0.16, 1, 0.3, 1) forwards 3.6s;
-        }
-
-        .word-confession {
-          animation: salieriWordInOut 3.1s cubic-bezier(0.16, 1, 0.3, 1) forwards 6.5s;
-        }
-
-        .word-title {
-          animation:
-            salieriFinalIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 9.5s,
-            salieriGlow 6.5s ease-in-out infinite 11.1s;
-        }
-
-        .salieri-hero-meta,
-        .salieri-hero-actions {
-          opacity: 0;
-          transform: translateY(16px);
-          filter: blur(4px);
-          animation: salieriFinalIn 1.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .salieri-hero-meta {
-          animation-delay: 11.2s;
-        }
-
-        .salieri-hero-actions {
-          animation-delay: 12.3s;
-          pointer-events: auto;
-        }
-
-        @keyframes salieriWordInOut {
-          0% {
-            opacity: 0;
-            transform: translateY(30px);
-            filter: blur(10px);
-          }
-          18% {
-            opacity: 1;
-            transform: translateY(0);
-            filter: blur(0);
-          }
-          76% {
-            opacity: 1;
-            transform: translateY(0);
-            filter: blur(0);
-          }
-          100% {
-            opacity: 0;
-            transform: translateY(-14px);
-            filter: blur(7px);
-          }
-        }
-
-        @keyframes salieriFinalIn {
-          0% {
-            opacity: 0;
-            transform: translateY(34px);
-            filter: blur(10px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-            filter: blur(0);
-          }
-        }
-
-        @keyframes salieriGlow {
-          0%, 100% {
-            text-shadow:
-              0 0 12px rgba(222, 175, 96, 0.2),
-              0 0 30px rgba(222, 175, 96, 0.1),
-              0 18px 48px rgba(0, 0, 0, 0.78);
-          }
-          50% {
-            text-shadow:
-              0 0 18px rgba(245, 205, 130, 0.35),
-              0 0 44px rgba(222, 175, 96, 0.18),
-              0 18px 48px rgba(0, 0, 0, 0.78);
-          }
-        }
-
-        @media (max-width: 640px) {
-          .salieri-hero-stage {
-            min-height: 78svh;
-          }
-
-          .salieri-hero-overlay {
-            align-items: flex-end;
-            padding: 88px 18px 42px;
-          }
-
-          .salieri-hero-sequence {
-            min-height: 380px;
-            padding: 20px;
-          }
-
-          .salieri-hero-word {
-            left: 20px;
-            top: 20px;
-          }
+        @keyframes salieriWordCycle {
+          0% { opacity: 0; transform: translateY(24px); filter: blur(10px); }
+          8%, 18% { opacity: 1; transform: translateY(0); filter: blur(0); }
+          28%, 100% { opacity: 0; transform: translateY(-16px); filter: blur(8px); }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .salieri-hero-word,
-          .salieri-hero-meta,
-          .salieri-hero-actions {
+          .salieri-hero-image,
+          .salieri-candle-glow,
+          .salieri-animated-word {
             animation: none !important;
-            opacity: 1 !important;
-            transform: none !important;
-            filter: none !important;
           }
 
-          .word-envy,
-          .word-jealousy,
-          .word-confession {
+          .salieri-animated-word {
             display: none;
           }
         }
       `}</style>
 
-      <section className="salieri-hero-stage relative isolate overflow-hidden border-b border-[#9a7134]/35 bg-black">
-        <video
-          id="salieri-hero-video"
-          className="salieri-hero-video block h-[82svh] min-h-[540px] w-full object-cover object-center sm:h-[88svh]"
-          src={heroVideo}
-          poster={assets.hero}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_58%_48%,rgba(255,209,126,0.08),transparent_36%),linear-gradient(90deg,rgba(0,0,0,0.56),rgba(0,0,0,0.12)_52%,rgba(0,0,0,0.28)),linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.18)_64%,#050302_100%)]" />
-        <div className="salieri-hero-overlay">
-          <div className="salieri-hero-sequence">
-            <div className="salieri-hero-word word-envy">ENVY</div>
-            <div className="salieri-hero-word word-jealousy">JEALOUSY</div>
-            <div className="salieri-hero-word word-confession">CONFESSION</div>
-            <div className="salieri-hero-word final word-title">{"SALIERI\u2019S HANDS"}</div>
-
-            <div className="salieri-hero-meta mt-5 space-y-1 text-sm font-semibold uppercase tracking-[0.18em] text-[#f6dfb8] drop-shadow-[0_10px_32px_rgba(0,0,0,0.7)] sm:text-base">
-              <p>A special off-series KAMDRIDI release</p>
-              <p>Vienna, 1791</p>
-              <p>Faith. Envy. Confession.</p>
-              <p>Album release: July 2026</p>
-            </div>
-
-            <div className="salieri-hero-actions mt-7 grid gap-3 sm:grid-cols-3">
-              <ActionLink href={teaserUrl}>
-                <Play className="h-4 w-4" />
-                Watch Teaser
-              </ActionLink>
-              <ActionLink href="#tracklist" tone="ghost">
-                <ListMusic className="h-4 w-4" />
-                Tracklist
-              </ActionLink>
-              <ActionLink href="#collector" tone="ghost">
-                <Package className="h-4 w-4" />
-                Collector Edition
-              </ActionLink>
-            </div>
-          </div>
-        </div>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function () {
-                var video = document.getElementById("salieri-hero-video");
-                if (!video) return;
-                var setSlowMotion = function () {
-                  video.defaultPlaybackRate = 0.4;
-                  video.playbackRate = 0.4;
-                };
-                setSlowMotion();
-                video.addEventListener("loadedmetadata", setSlowMotion);
-                video.addEventListener("play", setSlowMotion);
-              })();
-            `
-          }}
-        />
-      </section>
-      <section className="border-b border-[#9a7134]/25 px-4 py-12 sm:px-6 md:py-16">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.48fr_0.52fr] lg:items-center">
-          <div className="mx-auto w-full max-w-[520px]">
-            <div className="relative aspect-square overflow-hidden border border-[#e0b46a]/65 bg-[#090604] shadow-[0_34px_120px_rgba(0,0,0,0.68),0_0_70px_rgba(224,180,106,0.14)]">
-              <Image src={assets.frontCover} alt="Official front cover artwork for SALIERI'S HANDS" fill priority className="object-contain" sizes="(max-width: 768px) 92vw, 520px" />
-            </div>
-          </div>
-          <div>
-            <SectionIntro eyebrow="Official front cover" title="The approved album artwork">
-              <p>The square front cover remains the primary release artwork, framed cleanly without heavy overlay or cropping.</p>
-            </SectionIntro>
-            <div className="mt-7 grid gap-4 sm:grid-cols-2">
-              <div className="relative aspect-[4/3] overflow-hidden border border-[#a97a35]/45 bg-[#090604]">
-                <ImagePanel src={assets.backCover} alt="Official back cover and tracklist artwork" contain />
+      <section className="relative isolate min-h-[82svh] overflow-hidden border-b border-[#a67938]/35 bg-black">
+        <Image src={assets.hero} alt="Conductor and orchestra in a dark opera hall" fill priority className="salieri-hero-image object-cover object-center" sizes="100vw" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_58%_44%,rgba(255,215,138,0.18),transparent_34%),linear-gradient(90deg,rgba(0,0,0,0.62),rgba(0,0,0,0.22)_52%,rgba(0,0,0,0.3)),linear-gradient(180deg,rgba(0,0,0,0.04),rgba(0,0,0,0.18)_62%,#070403_100%)]" />
+        <div className="salieri-candle-glow absolute left-[8%] top-[24%] h-48 w-48 rounded-full bg-[#f2b45b]/18 blur-3xl" />
+        <div className="relative z-10 flex min-h-[82svh] items-end px-4 pb-12 pt-28 sm:px-6 lg:items-center lg:pb-20">
+          <div className="mx-auto w-full max-w-7xl">
+            <div className="max-w-4xl border-l border-[#e2ad52]/60 bg-gradient-to-r from-black/48 via-black/18 to-transparent px-5 py-6 sm:px-8 sm:py-8">
+              <Eyebrow>New Release</Eyebrow>
+              <div className="relative mt-5 h-[88px] sm:h-[124px] lg:h-[146px]">
+                <div className="salieri-animated-word text-[clamp(2.7rem,10vw,7rem)] leading-none">Envy</div>
+                <div className="salieri-animated-word text-[clamp(2.45rem,9vw,6.4rem)] leading-none">Jealousy</div>
+                <div className="salieri-animated-word text-[clamp(2.1rem,8vw,5.7rem)] leading-none">Confession</div>
+                <div className="salieri-animated-word text-[clamp(2rem,7.4vw,5.2rem)] leading-none">Vienna, 1791</div>
+                <div className="salieri-animated-word text-[clamp(2rem,7.4vw,5.2rem)] leading-none">Salieri&apos;s Hands</div>
               </div>
-              <div className="relative aspect-[4/3] overflow-hidden border border-[#a97a35]/45 bg-[#090604]">
-                <ImagePanel src={assets.disc} alt="Official collector disc mockup" contain />
+              <h1 className="salieri-hero-title text-[clamp(3rem,10vw,7.6rem)] uppercase leading-[0.9] text-[#ffe3ad] drop-shadow-[0_18px_48px_rgba(0,0,0,0.86)]">
+                Salieri&apos;s Hands
+              </h1>
+              <div className="mt-5 grid max-w-2xl gap-1 text-sm font-semibold uppercase tracking-[0.16em] text-[#ffe7bd] sm:text-base">
+                <p>A special off-series KAMDRIDI release</p>
+                <p>Limited release</p>
+                <p>Vienna, 1791</p>
+                <p>Faith. Envy. Confession.</p>
+                <p>Album release: July 2026</p>
+              </div>
+              <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                <ActionLink href={teaserUrl}>
+                  <Play className="h-4 w-4" />
+                  Watch Teaser
+                </ActionLink>
+                <ActionLink href="#tracklist" tone="ghost">
+                  <ListMusic className="h-4 w-4" />
+                  Tracklist
+                </ActionLink>
+                <ActionLink href="#collector-editions" tone="ghost">
+                  <Package className="h-4 w-4" />
+                  Collector Edition
+                </ActionLink>
+                <ActionLink href="#merch" tone="ghost">
+                  <Shirt className="h-4 w-4" />
+                  Merch
+                </ActionLink>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="teaser" className="border-b border-[#9a7134]/25 px-4 py-12 sm:px-6 md:py-16">
+      <section id="teaser" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-7xl">
-          <SectionIntro eyebrow="Official teaser" title="Watch the first glimpse" align="center">
-            <p>The only live media link on this page is the official YouTube teaser.</p>
+          <SectionIntro title="Official Teaser" align="center">
+            <p>Watch the first glimpse.</p>
           </SectionIntro>
-          <a href={teaserUrl} target="_blank" rel="noreferrer" className="group relative mt-9 block min-h-[340px] overflow-hidden border border-[#a97a35]/55 bg-black shadow-[0_32px_100px_rgba(0,0,0,0.48)] sm:min-h-[500px]">
-            <ImagePanel src={assets.operaTeaser} alt="Official cinematic teaser artwork" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.04),rgba(0,0,0,0.38)),radial-gradient(circle_at_50%_45%,transparent,rgba(0,0,0,0.34)_70%)]" />
+          <a href={teaserUrl} target="_blank" rel="noreferrer" className="group relative mt-9 block min-h-[320px] overflow-hidden border border-[#bd8b45]/55 bg-black shadow-[0_34px_110px_rgba(0,0,0,0.5)] sm:min-h-[500px]">
+            <ImagePanel src={assets.operaTeaser} alt="Official teaser still with conductor and orchestra" priority />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.32)),radial-gradient(circle_at_50%_44%,transparent,rgba(0,0,0,0.32)_74%)]" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="inline-flex h-24 w-24 items-center justify-center rounded-full border border-[#e8c47e]/75 bg-black/42 text-[#ffe6b7] shadow-[0_0_60px_rgba(224,180,106,0.3)] transition group-hover:scale-105 group-hover:border-[#ffe0a0]">
+              <span className="inline-flex h-24 w-24 items-center justify-center rounded-full border border-[#ffd98b]/80 bg-black/40 text-[#ffe7bd] shadow-[0_0_64px_rgba(226,173,82,0.34)] transition group-hover:scale-105 group-hover:border-[#ffe2a6]">
                 <Play className="ml-1 h-10 w-10 fill-current" />
               </span>
             </div>
+            <span className="absolute bottom-5 left-5 inline-flex border border-[#efc36f]/70 bg-black/50 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.18em] text-[#ffe7bd]">
+              Watch Teaser
+            </span>
           </a>
         </div>
       </section>
 
-      <section className="border-b border-[#9a7134]/25 px-4 py-12 sm:px-6 md:py-16">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
-          <div className="relative min-h-[420px] overflow-hidden border border-[#a97a35]/45 bg-black">
-            <ImagePanel src={assets.vertical} alt="Salieri hands candle manuscript Requiem artwork" />
+      <section className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
+        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
+          <div className="relative min-h-[360px] overflow-hidden border border-[#bd8b45]/45 bg-black sm:min-h-[460px]">
+            <ImagePanel src={assets.wide} alt="Hands over manuscript in warm candlelight" />
           </div>
-          <div className="flex flex-col justify-center border border-[#a97a35]/45 bg-[radial-gradient(circle_at_10%_0%,rgba(244,198,106,0.16),transparent_35%),linear-gradient(180deg,rgba(20,12,7,0.94),rgba(8,5,3,0.96))] p-6 sm:p-9">
-            <SectionIntro eyebrow="Concept" title="A confession written in silence">
-              <p>Vienna, 1791.</p>
-              <p className="mt-4">In the shadow of genius, faith turns into envy. A man writes not for glory, but for absolution.</p>
+          <div className="flex flex-col justify-center border border-[#bd8b45]/45 bg-[radial-gradient(circle_at_12%_0%,rgba(255,210,126,0.16),transparent_36%),linear-gradient(180deg,rgba(28,16,8,0.94),rgba(9,5,3,0.96))] p-6 sm:p-9">
+            <SectionIntro title="A Confession Written In Silence">
+              <p>Vienna, 1791. In the shadow of genius, faith turns into envy. A man writes not for glory, but for absolution.</p>
               <p className="mt-4">Dark orchestration. Haunting choirs. Crushing riffs. A requiem for the man history misunderstood.</p>
             </SectionIntro>
           </div>
         </div>
       </section>
 
-      <section id="tracklist" className="border-b border-[#9a7134]/25 px-4 py-12 sm:px-6 md:py-16">
+      <section id="tracklist" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-7xl">
-          <SectionIntro eyebrow="Full tracklist" title="Main album and bonus tracks" />
+          <SectionIntro title="Full Tracklist" />
           <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_0.54fr]">
-            <div className="overflow-hidden border border-[#a97a35]/45 bg-[#0b0604]/72">
+            <div className="overflow-hidden border border-[#bd8b45]/45 bg-[#0d0704]/78">
               {mainTracks.map((track, index) => (
-                <div key={track} className="grid grid-cols-[56px_1fr] items-center border-b border-[#a97a35]/18 px-4 py-4 last:border-b-0 sm:grid-cols-[78px_1fr]">
-                  <span className="font-display text-2xl text-[#d8aa5d] sm:text-3xl">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="text-base font-semibold text-[#f7e3c2]">{track}</span>
+                <div key={track} className="grid grid-cols-[56px_1fr] items-center border-b border-[#bd8b45]/18 px-4 py-4 last:border-b-0 sm:grid-cols-[78px_1fr]">
+                  <span className="font-serif text-2xl text-[#e3b86a] sm:text-3xl">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="text-base font-semibold text-[#f9e3bd]">{track}</span>
                 </div>
               ))}
             </div>
-            <div className="border border-[#a97a35]/45 bg-[linear-gradient(180deg,rgba(24,14,8,0.92),rgba(10,6,4,0.96))] p-5 sm:p-6">
-              <h3 className="text-xs font-bold uppercase tracking-[0.28em] text-[#e0b46a]">Bonus tracks</h3>
+            <div className="border border-[#bd8b45]/45 bg-[linear-gradient(180deg,rgba(28,16,8,0.92),rgba(10,6,4,0.96))] p-5 sm:p-6">
+              <h3 className="text-xs font-bold uppercase tracking-[0.28em] text-[#e3b86a]">Bonus tracks</h3>
               <div className="mt-5 space-y-5">
                 {bonusTracks.map((track, index) => (
                   <div key={track} className="grid grid-cols-[44px_1fr] gap-3">
-                    <span className="font-display text-2xl text-[#d8aa5d]">{index + 11}</span>
-                    <span className="text-sm leading-6 text-[#f0d8ad]">{track}</span>
+                    <span className="font-serif text-2xl text-[#e3b86a]">{index + 11}</span>
+                    <span className="text-sm leading-6 text-[#f1d8ac]">{track}</span>
                   </div>
                 ))}
               </div>
-              <p className="mt-7 border-t border-[#a97a35]/20 pt-5 text-sm leading-7 text-[#cdb58f]">
-                From the forthcoming KAMDRIDI album TWICE UPON A TIME.
+              <p className="mt-7 border-t border-[#bd8b45]/22 pt-5 text-sm leading-7 text-[#d9c09a]">
+                Bonus tracks include material connected to the forthcoming KAMDRIDI album TWICE UPON A TIME.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="collector" className="border-b border-[#9a7134]/25 px-4 py-12 sm:px-6 md:py-16">
+      <section id="collector-editions" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-7xl">
-          <SectionIntro eyebrow="Editions / collector" title="Exclusive releases and collectibles" align="center">
-            <p>No fake checkout, no unapproved prices, and no invented platform links.</p>
+          <SectionIntro title="Collector Editions" align="center">
+            <p>Physical concepts prepared for the July 2026 campaign.</p>
           </SectionIntro>
-          <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {editionCards.map((edition) => (
-              <ProductCard key={edition.title} {...edition} />
+              <EditionCard key={edition.title} {...edition} />
             ))}
-          </div>
-          <div className="mt-8 text-center">
-            <span className="inline-flex min-h-12 items-center justify-center border border-[#e0b46a]/60 bg-[#d8a850]/10 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.18em] text-[#f6dfb8]">
-              Pre-order collector edition - coming soon
-            </span>
           </div>
         </div>
       </section>
 
-      <section id="merch" className="border-b border-[#9a7134]/25 px-4 py-12 sm:px-6 md:py-16">
+      <section id="merch" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-7xl">
-          <SectionIntro eyebrow="Merch" title="Derived products" align="center">
-            <p>Merch concepts are held as coming soon until final products are approved.</p>
+          <SectionIntro title="Merch" align="center">
+            <p>Campaign items in preparation.</p>
           </SectionIntro>
           <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
             {merchItems.map((item) => (
-              <ProductCard key={item.title} title={item.title} text="Collector campaign item in preparation." status={item.status} image={item.image} alt={item.alt} />
+              <article key={item} className="min-h-[190px] border border-[#bd8b45]/45 bg-[radial-gradient(circle_at_28%_0%,rgba(255,210,126,0.14),transparent_40%),linear-gradient(180deg,rgba(27,15,8,0.94),rgba(9,5,3,0.96))] p-5">
+                <Shirt className="h-5 w-5 text-[#e3b86a]" />
+                <h3 className="mt-8 font-serif text-2xl uppercase leading-tight text-[#ffe0aa]">{item}</h3>
+                <p className="mt-5 inline-flex border border-[#e3b86a]/40 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e3b86a]">
+                  Coming soon
+                </p>
+              </article>
             ))}
-          </div>
-          <div className="mt-8 text-center">
-            <span className="inline-flex min-h-12 items-center justify-center border border-[#e0b46a]/60 bg-black/26 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.18em] text-[#f6dfb8]">
-              View all merch - coming soon
-            </span>
           </div>
         </div>
       </section>
 
       <section className="px-4 py-12 sm:px-6 md:py-16">
-        <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.68fr_1fr]">
-          <div className="relative min-h-[360px] overflow-hidden border border-[#a97a35]/45 bg-black">
-            <ImagePanel src={assets.vienna} alt="Vienna 1791 cloaked figure artwork" />
+        <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.7fr_1fr]">
+          <div className="relative min-h-[340px] overflow-hidden border border-[#bd8b45]/45 bg-black sm:min-h-[440px]">
+            <ImagePanel src={assets.vienna} alt="Vienna 1791 figure walking through the street" />
           </div>
-          <div className="border border-[#a97a35]/45 bg-[radial-gradient(circle_at_10%_0%,rgba(244,198,106,0.16),transparent_34%),linear-gradient(180deg,rgba(20,12,7,0.94),rgba(7,4,3,0.97))] p-6 sm:p-8">
-            <Eyebrow>Release update</Eyebrow>
-            <h2 className="mt-4 font-display text-4xl uppercase leading-tight tracking-[0.1em] text-[#f7deb0] sm:text-5xl">
-              {"SALIERI\u2019S HANDS"}
-            </h2>
-            <p className="mt-4 text-lg text-[#f4e4c4]">Official teaser out now. Album release: July 2026.</p>
+          <div className="border border-[#bd8b45]/45 bg-[radial-gradient(circle_at_12%_0%,rgba(255,210,126,0.16),transparent_34%),linear-gradient(180deg,rgba(28,16,8,0.94),rgba(8,5,3,0.97))] p-6 sm:p-8">
+            <SectionIntro title="Release Updates">
+              <p>Official teaser out now.</p>
+              <p>Album release: July 2026.</p>
+            </SectionIntro>
             <div className="mt-7 flex flex-wrap gap-3">
               <ActionLink href={teaserUrl}>
                 <Play className="h-4 w-4" />
-                Watch Teaser
+                YouTube
               </ActionLink>
-              <Link href="/contact" className="inline-flex min-h-12 items-center justify-center gap-2 border border-[#c79a4f]/65 bg-black/28 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.18em] text-[#f6dfb8] transition hover:-translate-y-0.5 hover:border-[#f0c878]">
-                <Bell className="h-4 w-4" />
-                Join Release Updates
-              </Link>
             </div>
             <div className="mt-8 grid gap-3">
               {streamingItems.map((platform) => (
-                <div key={platform.label} className="flex items-center justify-between gap-4 border border-[#a97a35]/25 bg-black/28 px-4 py-3">
-                  <span className="text-sm font-semibold text-[#f7e3c2]">{platform.label}</span>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#d8aa5d]">{platform.status}</span>
+                <div key={platform} className="flex items-center justify-between gap-4 border border-[#bd8b45]/28 bg-black/30 px-4 py-3">
+                  <span className="text-sm font-semibold text-[#f9e3bd]">{platform}</span>
+                  <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e3b86a]">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    Coming soon
+                  </span>
                 </div>
               ))}
-              <a href={teaserUrl} target="_blank" rel="noreferrer" className="flex items-center justify-between gap-4 border border-[#e0b46a]/50 bg-[#d8a850]/10 px-4 py-3 text-sm font-semibold text-[#f6dfb8] transition hover:border-[#f0c878]">
+              <a href={teaserUrl} target="_blank" rel="noreferrer" className="flex items-center justify-between gap-4 border border-[#efc36f]/55 bg-[#e2ad52]/10 px-4 py-3 text-sm font-semibold text-[#ffe7bd] transition hover:border-[#ffd98b]">
                 <span>YouTube</span>
                 <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em]">
-                  Teaser live <Radio className="h-4 w-4" />
+                  Teaser live <Disc3 className="h-4 w-4" />
                 </span>
               </a>
             </div>
           </div>
         </div>
-      </section>
-
-      <section className="border-t border-[#9a7134]/25 px-4 py-10 text-center sm:px-6">
-        <Link href="/releases" className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-[#d8aa5d] transition hover:text-[#f7deb0]">
-          More releases
-          <ArrowRight className="h-4 w-4" />
-        </Link>
       </section>
     </main>
   );
