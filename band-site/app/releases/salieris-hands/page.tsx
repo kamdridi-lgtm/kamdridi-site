@@ -260,12 +260,35 @@ function ImagePanel({
 
 export default function SalierisHandsPage() {
   return (
-    <main className="salieri-page overflow-hidden bg-[#070403] text-[#f7e7c8]">
+    <main className="salieri-page relative overflow-hidden bg-[#070403] text-[#f7e7c8]">
       <style>{`
         .salieri-page {
           --salieri-gold: #e2ad52;
           --salieri-ivory: #ffe3ad;
           font-family: "Segoe UI", system-ui, sans-serif;
+          background-image: linear-gradient(180deg, rgba(7, 4, 3, 0.82), rgba(7, 4, 3, 0.76)), url("/assets/images/salieris-hands/salieri-manuscript-background.jpg");
+          background-size: cover;
+          background-position: center top;
+          background-attachment: fixed;
+        }
+
+        .salieri-page::before {
+          content: "";
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          z-index: 0;
+          background: radial-gradient(circle at 14% 18%, rgba(238, 174, 81, 0.18), transparent 26%), radial-gradient(circle at 78% 6%, rgba(255, 220, 150, 0.08), transparent 32%), linear-gradient(90deg, rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.42));
+        }
+
+        .salieri-page > section {
+          position: relative;
+          z-index: 1;
+        }
+
+        .salieri-page > section:not(:first-of-type) {
+          background: linear-gradient(180deg, rgba(7, 4, 3, 0.78), rgba(7, 4, 3, 0.84));
+          backdrop-filter: blur(1px);
         }
 
         .salieri-hero-title,
