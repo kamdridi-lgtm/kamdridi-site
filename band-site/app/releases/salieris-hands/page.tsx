@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Suspense } from "react";
 import { Disc3, ListMusic, Package, Play, Shirt, Sparkles } from "lucide-react";
-import { SalieriCheckoutStatus, SalieriProductCard } from "@/components/salieri-product-card";
+import { SalieriCheckoutStatus, SalieriProductCard, SalieriQuickBuy } from "@/components/salieri-product-card";
 
 const assetBase = "/assets/images/salieris-hands";
 const teaserUrl = "https://youtu.be/wD0u7-krT8s?si=4a1J1siTwJV9bGCI";
@@ -482,6 +482,11 @@ export default function SalierisHandsPage() {
                   <Shirt className="h-4 w-4" />
                   Merch
                 </ActionLink>
+              </div>
+              <div className="mt-5 grid gap-3 lg:grid-cols-3">
+                <SalieriQuickBuy id="salieri-collector-bundle" name="Collector Bundle" price={119} image={assets.collectorPack} />
+                <SalieriQuickBuy id="salieri-tee" name="Salieri Tee" price={38} image="/assets/images/merch/tee_black.png" color="Black" size="L" />
+                <SalieriQuickBuy id="salieri-special-edition-box" name="Special Edition Box" price={89} image={assets.collectorPack} />
               </div>
             </div>
           </div>

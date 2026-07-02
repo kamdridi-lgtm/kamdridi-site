@@ -153,3 +153,46 @@ export function SalieriCheckoutStatus() {
     </div>
   );
 }
+export function SalieriQuickBuy({
+  id,
+  name,
+  price,
+  image,
+  color,
+  size
+}: {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  color?: string;
+  size?: string;
+}) {
+  const { addToCart, setCartOpen } = useApp();
+
+  function handleQuickBuy() {
+    addToCart({
+      id,
+      name,
+      price,
+      image,
+      color,
+      size
+    });
+    setCartOpen(true);
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={handleQuickBuy}
+      className="group flex min-h-16 items-center justify-between gap-4 border border-[#efc36f]/45 bg-black/42 px-4 py-3 text-left transition hover:-translate-y-0.5 hover:border-[#ffd98b] hover:bg-[#e2ad52]/16"
+    >
+      <span>
+        <span className="block text-[10px] font-black uppercase tracking-[0.24em] text-[#e3b86a]">Quick Add</span>
+        <span className="mt-1 block font-serif text-lg uppercase leading-tight text-[#ffe0aa]">{name}</span>
+      </span>
+      <span className="shrink-0 text-sm font-black text-[#ffd98b]">{formatCurrency(price)}</span>
+    </button>
+  );
+}
