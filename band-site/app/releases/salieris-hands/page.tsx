@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Suspense } from "react";
 import { Disc3, ListMusic, Package, Play, Shirt, Sparkles } from "lucide-react";
+import { SalieriCheckoutStatus, SalieriProductCard } from "@/components/salieri-product-card";
 
 const assetBase = "/assets/images/salieris-hands";
 const teaserUrl = "https://youtu.be/wD0u7-krT8s?si=4a1J1siTwJV9bGCI";
@@ -15,6 +17,8 @@ const assets = {
   collectorPack: `${assetBase}/full-collector-pack.png`,
   booklet: `${assetBase}/booklet-mockup.png`,
   jewelcase: `${assetBase}/jewelcase-mockup.png`,
+  packBack: `${assetBase}/pack-back-front-spine.png`,
+  miniCard: `${assetBase}/mini-card-mockup.png`,
   operaTeaser: `${assetBase}/opera-teaser.png`,
   wide: `${assetBase}/salieri-wide-official.png`,
   vienna: `${assetBase}/vienna-walking-official.png`
@@ -39,48 +43,114 @@ const bonusTracks = [
   "The Prism - Grand Opera Version"
 ];
 
-const editionCards = [
+const collectorProducts = [
   {
-    title: "Digital Release",
-    status: "Teaser out now",
-    text: "High-resolution audio and digital booklet prepared for the July 2026 release.",
+    id: "salieri-digital-release",
+    name: "Digital Release",
+    status: "Pre-order",
+    description: "High-resolution audio and digital booklet prepared for the July 2026 release.",
+    price: 12,
     image: assets.frontCover,
     alt: "Official album front cover artwork"
   },
   {
-    title: "Collector CD",
+    id: "salieri-collector-cd",
+    name: "Collector CD",
     status: "Pre-order soon",
-    text: "Digipak / jewel case concept with printed booklet, disc art, and back cover treatment.",
+    description: "Digipak / jewel case edition with printed booklet, disc art, and back cover treatment.",
+    price: 28,
     image: assets.jewelcase,
     alt: "Collector CD jewel case concept"
   },
   {
-    title: "Vinyl Edition",
-    status: "Coming soon",
-    text: "Premium vinyl release concept for the physical campaign."
+    id: "salieri-vinyl-edition",
+    name: "Vinyl Edition",
+    status: "Pre-order soon",
+    description: "Premium vinyl release for the physical campaign.",
+    price: 48,
+    image: assets.packBack,
+    alt: "Vinyl and physical package artwork"
   },
   {
-    title: "Hardcover Booklet",
-    status: "In preparation",
-    text: "Liner notes and story presentation by KAMDRIDI.",
+    id: "salieri-hardcover-booklet",
+    name: "Hardcover Booklet",
+    status: "Pre-order",
+    description: "Liner notes and story presentation by KAMDRIDI.",
+    price: 34,
     image: assets.booklet,
     alt: "Hardcover booklet concept"
   },
   {
-    title: "Special Edition Box",
+    id: "salieri-special-edition-box",
+    name: "Special Edition Box",
     status: "Pre-order soon",
-    text: "Collector package concept including CD, booklet, art print, and premium packaging.",
+    description: "Collector package including CD, booklet, art print, and premium packaging.",
+    price: 89,
     image: assets.collectorPack,
-    alt: "Special edition collector package concept"
+    alt: "Special edition collector package"
   },
   {
-    title: "Collector Coin",
+    id: "salieri-collector-coin",
+    name: "Collector Coin",
     status: "Collector item",
-    text: "Antique bronze finish collector item for the special edition world."
+    description: "Antique bronze finish collector item for the special edition world.",
+    price: 24,
+    image: assets.miniCard,
+    alt: "Salieri collector item artwork"
   }
 ];
 
-const merchItems = ["Tee", "Hoodie", "Mug", "Poster", "Collector Bundle"];
+const merchProducts = [
+  {
+    id: "salieri-tee",
+    name: "Salieri Tee",
+    status: "Available",
+    description: "Black or white campaign tee with the Salieri's Hands release mark.",
+    price: 38,
+    image: "/assets/images/merch/tee_black.png",
+    alt: "Salieri campaign tee",
+    colors: ["Black", "White"],
+    sizes: ["S", "M", "L", "XL", "2XL"]
+  },
+  {
+    id: "salieri-hoodie",
+    name: "Salieri Hoodie",
+    status: "Available",
+    description: "Heavyweight campaign hoodie for the dark baroque release world.",
+    price: 72,
+    image: "/assets/images/merch/hoodie.png",
+    alt: "Salieri campaign hoodie",
+    colors: ["Black"],
+    sizes: ["S", "M", "L", "XL", "2XL"]
+  },
+  {
+    id: "salieri-mug",
+    name: "Salieri Mug",
+    status: "Available",
+    description: "Ceramic mug using the official Salieri's Hands artwork treatment.",
+    price: 22,
+    image: assets.frontCover,
+    alt: "Salieri artwork mug design"
+  },
+  {
+    id: "salieri-poster",
+    name: "Salieri Poster",
+    status: "Available",
+    description: "Premium poster print built from the official social preview artwork.",
+    price: 28,
+    image: "/assets/images/salieris-hands/salieri-social-preview.jpg",
+    alt: "Salieri's Hands poster artwork"
+  },
+  {
+    id: "salieri-collector-bundle",
+    name: "Collector Bundle",
+    status: "Bundle",
+    description: "Collector bundle with tee, poster, CD concept, booklet, and campaign extras.",
+    price: 119,
+    image: assets.collectorPack,
+    alt: "Salieri collector bundle"
+  }
+];
 const streamingItems = ["Spotify", "Apple Music", "Amazon", "Instagram"];
 
 export const metadata: Metadata = {
@@ -185,49 +255,6 @@ function ImagePanel({
       className={contain ? "object-contain p-4" : "object-cover"}
       sizes="(max-width: 768px) 100vw, 45vw"
     />
-  );
-}
-
-function TextOnlyCard({ title, status, text }: { title: string; status: string; text: string }) {
-  return (
-    <article className="flex min-h-[230px] flex-col justify-between border border-[#bd8b45]/45 bg-[radial-gradient(circle_at_20%_0%,rgba(255,210,126,0.15),transparent_38%),linear-gradient(180deg,rgba(28,16,8,0.94),rgba(9,5,3,0.96))] p-5 shadow-[inset_0_1px_0_rgba(255,235,185,0.1)]">
-      <div>
-        <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#e3b86a]">{status}</p>
-        <h3 className="mt-4 font-serif text-2xl uppercase leading-tight text-[#ffe0aa]">{title}</h3>
-        <p className="mt-4 text-sm leading-7 text-[#d9c09a]">{text}</p>
-      </div>
-    </article>
-  );
-}
-
-function EditionCard({
-  title,
-  status,
-  text,
-  image,
-  alt
-}: {
-  title: string;
-  status: string;
-  text: string;
-  image?: string;
-  alt?: string;
-}) {
-  if (!image || !alt) {
-    return <TextOnlyCard title={title} status={status} text={text} />;
-  }
-
-  return (
-    <article className="group overflow-hidden border border-[#bd8b45]/45 bg-[#0d0704]/78 shadow-[inset_0_1px_0_rgba(255,235,185,0.08)] transition duration-300 hover:-translate-y-1 hover:border-[#efc36f]/80">
-      <div className="relative aspect-[4/3] border-b border-[#bd8b45]/25 bg-[#090604]">
-        <ImagePanel src={image} alt={alt} contain />
-      </div>
-      <div className="p-5">
-        <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#e3b86a]">{status}</p>
-        <h3 className="mt-3 font-serif text-2xl uppercase leading-tight text-[#ffe0aa]">{title}</h3>
-        <p className="mt-3 text-sm leading-7 text-[#d9c09a]">{text}</p>
-      </div>
-    </article>
   );
 }
 
@@ -493,11 +520,11 @@ export default function SalierisHandsPage() {
       <section id="collector-editions" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionIntro title="Collector Editions" align="center">
-            <p>Physical concepts prepared for the July 2026 campaign.</p>
+            <p>Physical editions and collector items prepared for the July 2026 campaign.</p>
           </SectionIntro>
           <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {editionCards.map((edition) => (
-              <EditionCard key={edition.title} {...edition} />
+            {collectorProducts.map((product) => (
+              <SalieriProductCard key={product.id} {...product} />
             ))}
           </div>
         </div>
@@ -506,17 +533,11 @@ export default function SalierisHandsPage() {
       <section id="merch" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionIntro title="Merch" align="center">
-            <p>Campaign items in preparation.</p>
+            <p>Campaign items available through the KAMDRIDI cart.</p>
           </SectionIntro>
-          <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-            {merchItems.map((item) => (
-              <article key={item} className="min-h-[190px] border border-[#bd8b45]/45 bg-[radial-gradient(circle_at_28%_0%,rgba(255,210,126,0.14),transparent_40%),linear-gradient(180deg,rgba(27,15,8,0.94),rgba(9,5,3,0.96))] p-5">
-                <Shirt className="h-5 w-5 text-[#e3b86a]" />
-                <h3 className="mt-8 font-serif text-2xl uppercase leading-tight text-[#ffe0aa]">{item}</h3>
-                <p className="mt-5 inline-flex border border-[#e3b86a]/40 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e3b86a]">
-                  Coming soon
-                </p>
-              </article>
+          <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {merchProducts.map((product) => (
+              <SalieriProductCard key={product.id} {...product} />
             ))}
           </div>
         </div>
@@ -532,6 +553,9 @@ export default function SalierisHandsPage() {
               <p>Official teaser out now.</p>
               <p>Album release: July 2026.</p>
             </SectionIntro>
+            <Suspense fallback={null}>
+              <SalieriCheckoutStatus />
+            </Suspense>
             <div className="mt-7 flex flex-wrap gap-3">
               <ActionLink href={teaserUrl}>
                 <Play className="h-4 w-4" />

@@ -254,7 +254,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isHome = pathname === "/";
   const isStandalonePoster = pathname === "/app/war-machines-jp";
   const isStandaloneArtistSite = pathname.startsWith("/iron-county-ghosts");
-  const showCart = pathname === "/" || pathname.startsWith("/store");
+  const showCart = pathname === "/" || pathname.startsWith("/store") || pathname === salieriReleaseHref;
   const primaryNavItems = navigation.filter((item) => primaryNavLabels.has(item.label));
   const moreNavItems = navigation.filter((item) => lowerPriorityNavLabels.has(item.label));
   const isMoreActive = moreNavItems.some((item) => isNavItemActive(pathname, item));

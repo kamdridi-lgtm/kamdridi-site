@@ -122,7 +122,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     const response = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: cart })
+      body: JSON.stringify({ items: cart, returnPath: window.location.pathname })
     });
 
     const payload = await response.json();
