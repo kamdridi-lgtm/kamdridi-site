@@ -266,7 +266,8 @@ export default function SalierisHandsPage() {
           --salieri-gold: #e2ad52;
           --salieri-ivory: #ffe3ad;
           font-family: "Segoe UI", system-ui, sans-serif;
-          background-image: linear-gradient(180deg, rgba(7, 4, 3, 0.82), rgba(7, 4, 3, 0.76)), url("/assets/images/salieris-hands/salieri-manuscript-background.jpg");
+          background-color: #070403;
+          background-image: linear-gradient(180deg, rgba(7, 4, 3, 0.38), rgba(7, 4, 3, 0.5)), url("/assets/images/salieris-hands/salieri-manuscript-background.jpg");
           background-size: cover;
           background-position: center top;
           background-attachment: fixed;
@@ -278,7 +279,7 @@ export default function SalierisHandsPage() {
           inset: 0;
           pointer-events: none;
           z-index: 0;
-          background: radial-gradient(circle at 14% 18%, rgba(238, 174, 81, 0.18), transparent 26%), radial-gradient(circle at 78% 6%, rgba(255, 220, 150, 0.08), transparent 32%), linear-gradient(90deg, rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.42));
+          background: radial-gradient(circle at 14% 18%, rgba(238, 174, 81, 0.14), transparent 28%), radial-gradient(circle at 78% 6%, rgba(255, 220, 150, 0.07), transparent 34%), linear-gradient(90deg, rgba(0, 0, 0, 0.24), rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.32));
         }
 
         .salieri-page > section {
@@ -287,8 +288,24 @@ export default function SalierisHandsPage() {
         }
 
         .salieri-page > section:not(:first-of-type) {
-          background: linear-gradient(180deg, rgba(7, 4, 3, 0.78), rgba(7, 4, 3, 0.84));
-          backdrop-filter: blur(1px);
+          background-color: rgba(7, 4, 3, 0.56);
+          background-image: linear-gradient(180deg, rgba(7, 4, 3, 0.46), rgba(7, 4, 3, 0.58)), url("/assets/images/salieris-hands/salieri-manuscript-background.jpg");
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
+          backdrop-filter: blur(0.5px);
+        }
+
+        .salieri-page > section:nth-of-type(3n + 2):not(:first-of-type) {
+          background-image: linear-gradient(180deg, rgba(7, 4, 3, 0.44), rgba(7, 4, 3, 0.56)), url("/assets/images/salieris-hands/salieri-manuscript-background-2.jpg");
+        }
+
+        .salieri-page > section:nth-of-type(3n):not(:first-of-type) {
+          background-image: linear-gradient(180deg, rgba(7, 4, 3, 0.48), rgba(7, 4, 3, 0.6)), url("/assets/images/salieris-hands/salieri-manuscript-background-3.jpg");
+        }
+
+        .salieri-page > section:nth-of-type(3n + 1):not(:first-of-type) {
+          background-image: linear-gradient(180deg, rgba(7, 4, 3, 0.46), rgba(7, 4, 3, 0.58)), url("/assets/images/salieris-hands/salieri-manuscript-background.jpg");
         }
 
         .salieri-hero-title,
