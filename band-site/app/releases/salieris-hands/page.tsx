@@ -6,6 +6,7 @@ const assetBase = "/assets/images/salieris-hands";
 const teaserUrl = "https://youtu.be/wD0u7-krT8s?si=4a1J1siTwJV9bGCI";
 const teaserVideo = "/assets/video/salieris-hands/official-teaser.mp4";
 const heroVideo = "/assets/video/salieris-hands/salieri-hero-slow.mp4";
+const heroVideoWebm = "/assets/video/salieris-hands/salieri-hero-slow.webm";
 
 const assets = {
   hero: `${assetBase}/salieri-opera-hall-hero.png`,
@@ -346,7 +347,6 @@ export default function SalierisHandsPage() {
         <video
           id="salieri-hero-slow-video"
           className="salieri-hero-media salieri-hero-video"
-          src={heroVideo}
           poster={assets.heroPoster}
           autoPlay
           muted
@@ -354,7 +354,10 @@ export default function SalierisHandsPage() {
           playsInline
           preload="metadata"
           aria-hidden="true"
-        />
+        >
+          <source src={heroVideoWebm} type="video/webm" />
+          <source src={heroVideo} type="video/mp4" />
+        </video>
         <script
           dangerouslySetInnerHTML={{
             __html: `
