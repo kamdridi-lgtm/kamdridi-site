@@ -9,6 +9,7 @@ const heroVideo = "/assets/video/salieris-hands/salieri-hero-slow.mp4";
 
 const assets = {
   hero: `${assetBase}/salieri-opera-hall-hero.png`,
+  heroPoster: `${assetBase}/hero-video-poster.jpg`,
   frontCover: `${assetBase}/front-cover-approved.png`,
   collectorPack: `${assetBase}/full-collector-pack.png`,
   booklet: `${assetBase}/booklet-mockup.png`,
@@ -82,9 +83,35 @@ const merchItems = ["Tee", "Hoodie", "Mug", "Poster", "Collector Bundle"];
 const streamingItems = ["Spotify", "Apple Music", "Amazon", "Instagram"];
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://kamdridi.com"),
   title: "Salieri's Hands - KAMDRIDI",
   description:
-    "Salieri's Hands is a special off-series KAMDRIDI release. Vienna, 1791. Faith. Envy. Confession. Album release: July 2026."
+    "Salieri's Hands is a special off-series KAMDRIDI release. Vienna, 1791. Faith. Envy. Confession. Album release: July 2026.",
+  alternates: {
+    canonical: "/releases/salieris-hands"
+  },
+  openGraph: {
+    title: "Salieri's Hands - KAMDRIDI",
+    description:
+      "A special off-series KAMDRIDI release. Vienna, 1791. Faith. Envy. Confession. Album release: July 2026.",
+    url: "/releases/salieris-hands",
+    siteName: "KAMDRIDI",
+    images: [
+      {
+        url: "/assets/images/salieris-hands/hero-video-poster.jpg",
+        width: 1280,
+        height: 721,
+        alt: "Salieri's Hands official cinematic teaser frame"
+      }
+    ],
+    type: "music.album"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Salieri's Hands - KAMDRIDI",
+    description: "Official teaser out now. Album release: July 2026.",
+    images: ["/assets/images/salieris-hands/hero-video-poster.jpg"]
+  }
 };
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -224,7 +251,7 @@ export default function SalierisHandsPage() {
           height: 100%;
           width: 100%;
           object-fit: cover;
-          object-position: center;
+          object-position: center 42%;
         }
 
         .salieri-hero-image {
@@ -235,7 +262,7 @@ export default function SalierisHandsPage() {
         .salieri-hero-video {
           z-index: 1;
           opacity: 0.92;
-          filter: brightness(1.18) contrast(1.08) saturate(1.06);
+          filter: brightness(1.2) contrast(1.08) saturate(1.06);
           transform: scale(1.03);
           animation: salieriBreath 18s ease-in-out infinite;
         }
@@ -281,6 +308,21 @@ export default function SalierisHandsPage() {
           28%, 100% { opacity: 0; transform: translateY(-16px); filter: blur(8px); }
         }
 
+
+        @media (max-width: 640px) {
+          .salieri-hero-media {
+            object-position: 58% center;
+          }
+
+          .salieri-hero-video {
+            opacity: 0.86;
+          }
+
+          .salieri-animated-word {
+            align-items: flex-start;
+            padding-top: 4px;
+          }
+        }
         @media (prefers-reduced-motion: reduce) {
           .salieri-hero-image,
           .salieri-hero-video,
@@ -305,7 +347,7 @@ export default function SalierisHandsPage() {
           id="salieri-hero-slow-video"
           className="salieri-hero-media salieri-hero-video"
           src={heroVideo}
-          poster={assets.hero}
+          poster={assets.heroPoster}
           autoPlay
           muted
           loop
@@ -354,7 +396,7 @@ export default function SalierisHandsPage() {
                 <p>Album release: July 2026</p>
               </div>
               <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                <ActionLink href={teaserUrl}>
+                <ActionLink href="#teaser">
                   <Play className="h-4 w-4" />
                   Watch Teaser
                 </ActionLink>
@@ -491,6 +533,10 @@ export default function SalierisHandsPage() {
               <ActionLink href={teaserUrl}>
                 <Play className="h-4 w-4" />
                 YouTube
+              </ActionLink>
+              <ActionLink href="/contact#management" tone="ghost">
+                <Sparkles className="h-4 w-4" />
+                Release Updates
               </ActionLink>
             </div>
             <div className="mt-8 grid gap-3">
