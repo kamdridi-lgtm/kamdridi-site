@@ -153,6 +153,13 @@ const merchProducts = [
 ];
 const streamingItems = ["Spotify", "Apple Music", "Amazon", "Instagram"];
 
+const trustNotes = [
+  { title: "Pre-order campaign", text: "Physical items ship when July 2026 campaign inventory is confirmed." },
+  { title: "Secure checkout", text: "Payments use hosted Stripe checkout with card and wallet support." },
+  { title: "Shipping and taxes", text: "Final shipping and taxes are calculated during checkout." },
+  { title: "Support", text: "Questions route through the official KAMDRIDI contact page." }
+];
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://kamdridi.com"),
   title: "Salieri's Hands - KAMDRIDI",
@@ -235,6 +242,18 @@ function ActionLink({
   );
 }
 
+function CampaignTrustNotes() {
+  return (
+    <div className="mt-9 grid gap-3 border border-[#bd8b45]/35 bg-black/36 p-4 sm:grid-cols-2 lg:grid-cols-4">
+      {trustNotes.map((note) => (
+        <div key={note.title} className="border border-[#bd8b45]/24 bg-[#100905]/62 p-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#e3b86a]">{note.title}</p>
+          <p className="mt-3 text-sm leading-6 text-[#e8d1aa]">{note.text}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
 function ImagePanel({
   src,
   alt,
@@ -567,6 +586,7 @@ export default function SalierisHandsPage() {
           <SectionIntro title="Collector Editions" align="center">
             <p>Physical editions and collector items prepared for the July 2026 campaign.</p>
           </SectionIntro>
+          <CampaignTrustNotes />
           <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {collectorProducts.map((product) => (
               <SalieriProductCard key={product.id} {...product} />
@@ -580,6 +600,7 @@ export default function SalierisHandsPage() {
           <SectionIntro title="Merch" align="center">
             <p>Campaign items available through the KAMDRIDI cart.</p>
           </SectionIntro>
+          <CampaignTrustNotes />
           <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {merchProducts.map((product) => (
               <SalieriProductCard key={product.id} {...product} />
