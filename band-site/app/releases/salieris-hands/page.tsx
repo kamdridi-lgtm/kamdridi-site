@@ -98,10 +98,10 @@ export const metadata: Metadata = {
     siteName: "KAMDRIDI",
     images: [
       {
-        url: "/assets/images/salieris-hands/hero-video-poster.jpg",
-        width: 1280,
-        height: 721,
-        alt: "Salieri's Hands official cinematic teaser frame"
+        url: "/assets/images/salieris-hands/salieri-social-preview.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Salieri's Hands official social preview artwork"
       }
     ],
     type: "music.album"
@@ -110,7 +110,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Salieri's Hands - KAMDRIDI",
     description: "Official teaser out now. Album release: July 2026.",
-    images: ["/assets/images/salieris-hands/hero-video-poster.jpg"]
+    images: ["/assets/images/salieris-hands/salieri-social-preview.jpg"]
   }
 };
 
