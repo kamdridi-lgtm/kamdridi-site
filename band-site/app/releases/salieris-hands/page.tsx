@@ -537,10 +537,13 @@ export default function SalierisHandsPage() {
                 <Play className="h-4 w-4" />
                 YouTube
               </ActionLink>
-              <ActionLink href="/contact#management" tone="ghost">
+              <ActionLink href="/contact" tone="ghost">
                 <Sparkles className="h-4 w-4" />
-                Release Updates
+                Notify Me
               </ActionLink>
+            </div>
+            <div className="mt-6 border border-[#bd8b45]/35 bg-black/30 p-4 text-sm leading-7 text-stone-300">
+              Request the July 2026 release alert through the official contact route and mention Salieri's Hands.
             </div>
             <div className="mt-8 grid gap-3">
               {streamingItems.map((platform) => (
