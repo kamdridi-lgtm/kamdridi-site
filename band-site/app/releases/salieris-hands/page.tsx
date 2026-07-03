@@ -138,10 +138,10 @@ const merchProducts = [
     id: "salieri-poster",
     name: "Salieri Poster",
     status: "Available",
-    description: "Premium poster print built from the official social preview artwork.",
+    description: "Premium poster print featuring the Vienna 1791 Salieri's Hands artwork.",
     price: 28,
-    image: "/assets/images/salieris-hands/salieri-social-preview.jpg",
-    alt: "Salieri's Hands poster artwork"
+    image: "/assets/images/salieris-hands/salieri-poster-mockup.jpg",
+    alt: "Salieri's Hands Vienna 1791 poster artwork"
   },
   {
     id: "salieri-collector-bundle",
