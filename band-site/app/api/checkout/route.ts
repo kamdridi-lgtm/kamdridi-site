@@ -115,13 +115,16 @@ export async function POST(request: Request) {
     const returnPath = requestedReturnPath.startsWith("/") && !requestedReturnPath.startsWith("//") ? requestedReturnPath : "/store";
     const stripe = getStripeServer();
     const checkoutItems = items.map(resolveCheckoutItem);
+    const checkoutTotal = checkoutItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    const checkoutProductIds = checkoutItems.map((item) => item.id).join(",").slice(0, 500);
 
     if (!stripe) {
       return NextResponse.json({
         mode: "simulated",
         message: "Stripe is not configured. Redirecting to local demo checkout.",
         url: `${siteUrl}${returnPath}?purchase=demo&session_id=simulated_session`,
-        items: checkoutItems.map((item) => ({ id: item.id, name: item.name, price: item.price, quantity: item.quantity }))
+        items: checkoutItems.map((item) => ({ id: item.id, name: item.name, price: item.price, quantity: item.quantity })),
+        total: checkoutTotal
       });
     }
 
@@ -136,10 +139,20 @@ export async function POST(request: Request) {
       phone_number_collection: {
         enabled: true
       },
+      customer_creation: "always",
       allow_promotion_codes: true,
+      custom_text: {
+        submit: {
+          message: "Salieri's Hands is a July 2026 collector campaign. Physical fulfillment begins after campaign inventory is confirmed."
+        }
+      },
       metadata: {
         artist: siteMeta.bandName,
-        campaign: siteMeta.albumName
+        campaign: siteMeta.albumName,
+        campaignPage: returnPath,
+        campaignType: "salieri-collector-campaign",
+        productIds: checkoutProductIds,
+        orderTotalCad: checkoutTotal.toFixed(2)
       },
       line_items: checkoutItems.map((item) => ({
         quantity: item.quantity,

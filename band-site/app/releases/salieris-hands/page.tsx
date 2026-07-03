@@ -155,6 +155,31 @@ const merchProducts = [
 ];
 const streamingItems = ["Spotify", "Apple Music", "Amazon", "Instagram"];
 
+const orderInfoItems = [
+  {
+    title: "Pre-orders",
+    text: "Physical collector items are part of the July 2026 campaign and move into fulfillment after inventory is confirmed."
+  },
+  {
+    title: "Digital delivery",
+    text: "Digital Deluxe orders are prepared as a high-resolution audio package with booklet and two exclusive bonus tracks."
+  },
+  {
+    title: "Shipping",
+    text: "Checkout collects delivery details so KAMDRIDI can confirm the correct fulfillment path for physical items."
+  },
+  {
+    title: "Refunds and support",
+    text: "Questions about an order, address change, or refund request should go through the official contact route with the order email."
+  }
+];
+
+const fulfillmentItems = [
+  ["Digital Deluxe Release", "High-resolution files, digital booklet, and exclusive bonus track package."],
+  ["Collector formats", "CD, vinyl, booklet, box, and coin items are prepared for campaign fulfillment after production confirmation."],
+  ["Merch", "Apparel, mug, and poster orders use the selected size, color, and delivery details from checkout."],
+  ["Collector Bundle", "Bundle contents are confirmed as one campaign package before fulfillment begins."]
+];
 const trustNotes = [
   { title: "Pre-order campaign", text: "Physical collector items are prepared for the July 2026 campaign and ship when inventory is confirmed." },
   { title: "Secure checkout", text: "Payments use hosted Stripe checkout with card and wallet support." },
@@ -503,6 +528,10 @@ export default function SalierisHandsPage() {
                   <Shirt className="h-4 w-4" />
                   Merch
                 </ActionLink>
+                <ActionLink href="#order-info" tone="ghost">
+                  <Package className="h-4 w-4" />
+                  Order Info
+                </ActionLink>
               </div>
               <div className="mt-5 grid gap-3 lg:grid-cols-3">
                 <SalieriQuickBuy id="salieri-collector-bundle" name="Collector Bundle" price={349} image={assets.collectorPack} />
@@ -611,6 +640,36 @@ export default function SalierisHandsPage() {
         </div>
       </section>
 
+      <section id="order-info" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
+        <div className="mx-auto max-w-7xl">
+          <SectionIntro title="Order Info" align="center">
+            <p>Campaign terms, fulfillment notes, and delivery expectations for Salieri's Hands orders.</p>
+          </SectionIntro>
+          <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {orderInfoItems.map((item) => (
+              <div key={item.title} className="border border-[#bd8b45]/35 bg-[#100905]/72 p-5 shadow-[0_24px_80px_rgba(0,0,0,0.34)]">
+                <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#e3b86a]">{item.title}</p>
+                <p className="mt-3 text-sm leading-6 text-[#e8d1aa]">{item.text}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 grid gap-5 lg:grid-cols-[0.78fr_1.22fr]">
+            <div className="border border-[#efc36f]/45 bg-[#e2ad52]/10 p-5">
+              <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#f4c66a]">Limited July 2026 Campaign</p>
+              <p className="mt-3 font-serif text-3xl text-[#fff0cf]">Collector allocation may close without notice.</p>
+              <p className="mt-4 text-sm leading-6 text-[#e8d1aa]">The premium formats are campaign items, not permanent mass-market inventory.</p>
+            </div>
+            <div className="grid gap-3 border border-[#bd8b45]/35 bg-black/32 p-4 sm:grid-cols-2">
+              {fulfillmentItems.map(([title, text]) => (
+                <div key={title} className="border border-[#bd8b45]/24 bg-black/28 p-4">
+                  <p className="text-sm font-semibold text-[#ffe7bd]">{title}</p>
+                  <p className="mt-2 text-sm leading-6 text-stone-300">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
       <section className="px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.7fr_1fr]">
           <div className="relative min-h-[340px] overflow-hidden border border-[#bd8b45]/45 bg-black sm:min-h-[440px]">
