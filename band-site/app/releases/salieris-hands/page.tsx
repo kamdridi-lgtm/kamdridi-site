@@ -95,8 +95,10 @@ const collectorProducts = [
     status: "Collector item",
     description: "Antique bronze finish collector item for the special edition world.",
     price: 24,
-    image: assets.miniCard,
-    alt: "Salieri collector item artwork"
+    image: "/assets/images/salieris-hands/salieri-collector-coin-box.jpg",
+    alt: "Salieri collector coin boxed set",
+    secondaryImage: "/assets/images/salieris-hands/salieri-coin-closeup.jpg",
+    secondaryAlt: "Salieri collector coin closeup"
   }
 ];
 

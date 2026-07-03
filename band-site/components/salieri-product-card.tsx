@@ -14,6 +14,8 @@ type SalieriProductCardProps = {
   price: number;
   image: string;
   alt: string;
+    secondaryImage?: string;
+  secondaryAlt?: string;
   colors?: string[];
   sizes?: string[];
 };
@@ -33,6 +35,8 @@ export function SalieriProductCard({
   price,
   image,
   alt,
+    secondaryImage,
+  secondaryAlt,
   colors,
   sizes
 }: SalieriProductCardProps) {
@@ -54,8 +58,13 @@ export function SalieriProductCard({
 
   return (
     <article className="flex min-h-full flex-col overflow-hidden border border-[#bd8b45]/45 bg-[radial-gradient(circle_at_28%_0%,rgba(255,210,126,0.14),transparent_40%),linear-gradient(180deg,rgba(27,15,8,0.94),rgba(9,5,3,0.96))]">
-      <div className="relative aspect-[4/3] border-b border-[#bd8b45]/25 bg-black">
-        <Image src={image} alt={alt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+      <div className="relative aspect-[4/3] border-b border-[#bd8b45]/25 bg-[radial-gradient(circle_at_50%_34%,rgba(226,173,82,0.1),transparent_48%),#050403]">
+        <Image src={image} alt={alt} fill className="object-contain p-3" sizes="(max-width: 768px) 100vw, 33vw" />
+        {secondaryImage && secondaryAlt ? (
+          <div className="absolute bottom-3 right-3 h-20 w-20 overflow-hidden border border-[#efc36f]/50 bg-black/78 shadow-[0_12px_30px_rgba(0,0,0,0.55)] sm:h-24 sm:w-24">
+            <Image src={secondaryImage} alt={secondaryAlt} fill className="object-cover" sizes="96px" />
+          </div>
+        ) : null}
       </div>
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-4">
