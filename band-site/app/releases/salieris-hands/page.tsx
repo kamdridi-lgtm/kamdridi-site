@@ -107,7 +107,7 @@ const merchProducts = [
     status: "Available",
     description: "Black or white campaign tee with the Salieri's Hands release mark.",
     price: 38,
-    image: "/assets/images/merch/tee_black.png",
+    image: "/assets/images/salieris-hands/salieri-tee-mockup.jpg",
     alt: "Salieri campaign tee",
     colors: ["Black", "White"],
     sizes: ["S", "M", "L", "XL", "2XL"]
@@ -118,7 +118,7 @@ const merchProducts = [
     status: "Available",
     description: "Heavyweight campaign hoodie for the dark baroque release world.",
     price: 72,
-    image: "/assets/images/merch/hoodie.png",
+    image: "/assets/images/salieris-hands/salieri-hoodie-mockup.jpg",
     alt: "Salieri campaign hoodie",
     colors: ["Black"],
     sizes: ["S", "M", "L", "XL", "2XL"]
@@ -129,8 +129,8 @@ const merchProducts = [
     status: "Available",
     description: "Ceramic mug using the official Salieri's Hands artwork treatment.",
     price: 22,
-    image: assets.frontCover,
-    alt: "Salieri artwork mug design"
+    image: "/assets/images/salieris-hands/salieri-mug-mockup.jpg",
+    alt: "Salieri artwork mug mockup"
   },
   {
     id: "salieri-poster",
@@ -504,7 +504,7 @@ export default function SalierisHandsPage() {
               </div>
               <div className="mt-5 grid gap-3 lg:grid-cols-3">
                 <SalieriQuickBuy id="salieri-collector-bundle" name="Collector Bundle" price={119} image={assets.collectorPack} />
-                <SalieriQuickBuy id="salieri-tee" name="Salieri Tee" price={38} image="/assets/images/merch/tee_black.png" color="Black" size="L" />
+                <SalieriQuickBuy id="salieri-tee" name="Salieri Tee" price={38} image="/assets/images/salieris-hands/salieri-tee-mockup.jpg" color="Black" size="L" />
                 <SalieriQuickBuy id="salieri-special-edition-box" name="Special Edition Box" price={89} image={assets.collectorPack} />
               </div>
             </div>
