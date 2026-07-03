@@ -45,40 +45,13 @@ const bonusTracks = [
 
 const collectorProducts = [
   {
-    id: "salieri-digital-release",
-    name: "Digital Deluxe Release",
-    status: "Pre-order",
-    description: "High-resolution audio package with digital booklet and 2 exclusive bonus tracks unavailable on streaming platforms.",
-    price: 16,
-    image: assets.frontCover,
-    alt: "Official album front cover artwork"
-  },
-  {
-    id: "salieri-collector-cd",
-    name: "Collector CD",
-    status: "Pre-order soon",
-    description: "Digipak / jewel case edition with printed booklet, disc art, and back cover treatment.",
-    price: 49,
-    image: assets.jewelcase,
-    alt: "Collector CD jewel case concept"
-  },
-  {
-    id: "salieri-vinyl-edition",
-    name: "Limited Vinyl Edition",
-    status: "Pre-order soon",
-    description: "Premium limited vinyl edition prepared for the physical collector campaign.",
-    price: 199,
-    image: assets.packBack,
-    alt: "Vinyl and physical package artwork"
-  },
-  {
-    id: "salieri-hardcover-booklet",
-    name: "Hardcover Booklet",
-    status: "Pre-order",
-    description: "Liner notes and story presentation by KAMDRIDI.",
-    price: 69,
-    image: assets.booklet,
-    alt: "Hardcover booklet concept"
+    id: "salieri-collector-bundle",
+    name: "Collector Bundle",
+    status: "Bundle",
+    description: "Collector package including selected physical formats, merch, art print, booklet, and campaign extras.",
+    price: 349,
+    image: assets.collectorPack,
+    alt: "Salieri collector bundle"
   },
   {
     id: "salieri-special-edition-box",
@@ -90,6 +63,15 @@ const collectorProducts = [
     alt: "Special edition collector package"
   },
   {
+    id: "salieri-vinyl-edition",
+    name: "Limited Vinyl Edition",
+    status: "Limited collector item",
+    description: "Premium limited vinyl edition prepared for the physical collector campaign.",
+    price: 199,
+    image: assets.packBack,
+    alt: "Vinyl and physical package artwork"
+  },
+  {
     id: "salieri-collector-coin",
     name: "Collector Coin - Box Edition",
     status: "Collector item",
@@ -99,21 +81,37 @@ const collectorProducts = [
     alt: "Salieri collector coin boxed set",
     secondaryImage: "/assets/images/salieris-hands/salieri-coin-closeup.jpg",
     secondaryAlt: "Salieri collector coin closeup"
+  },
+  {
+    id: "salieri-hardcover-booklet",
+    name: "Hardcover Booklet",
+    status: "Pre-order",
+    description: "Liner notes and story presentation by KAMDRIDI.",
+    price: 69,
+    image: assets.booklet,
+    alt: "Hardcover booklet concept"
+  },
+  {
+    id: "salieri-collector-cd",
+    name: "Collector CD",
+    status: "Pre-order soon",
+    description: "Digipak / jewel case edition with printed booklet, disc art, and back cover treatment.",
+    price: 49,
+    image: assets.jewelcase,
+    alt: "Collector CD jewel case concept"
+  },
+  {
+    id: "salieri-digital-release",
+    name: "Digital Deluxe Release",
+    status: "Pre-order",
+    description: "High-resolution audio package with digital booklet and 2 exclusive bonus tracks unavailable on streaming platforms.",
+    price: 16,
+    image: assets.frontCover,
+    alt: "Official album front cover artwork"
   }
 ];
 
 const merchProducts = [
-  {
-    id: "salieri-tee",
-    name: "Salieri Tee",
-    status: "Available",
-    description: "Black or white campaign tee with the Salieri's Hands release mark.",
-    price: 59,
-    image: "/assets/images/salieris-hands/salieri-tee-mockup.jpg",
-    alt: "Salieri campaign tee",
-    colors: ["Black", "White"],
-    sizes: ["S", "M", "L", "XL", "2XL"]
-  },
   {
     id: "salieri-hoodie",
     name: "Salieri Hoodie",
@@ -123,6 +121,17 @@ const merchProducts = [
     image: "/assets/images/salieris-hands/salieri-hoodie-mockup.jpg",
     alt: "Salieri campaign hoodie",
     colors: ["Black"],
+    sizes: ["S", "M", "L", "XL", "2XL"]
+  },
+  {
+    id: "salieri-tee",
+    name: "Salieri Tee",
+    status: "Available",
+    description: "Black or white campaign tee with the Salieri's Hands release mark.",
+    price: 59,
+    image: "/assets/images/salieris-hands/salieri-tee-mockup.jpg",
+    alt: "Salieri campaign tee",
+    colors: ["Black", "White"],
     sizes: ["S", "M", "L", "XL", "2XL"]
   },
   {
@@ -142,24 +151,15 @@ const merchProducts = [
     price: 49,
     image: "/assets/images/salieris-hands/salieri-poster-mockup.jpg",
     alt: "Salieri's Hands Vienna 1791 poster artwork"
-  },
-  {
-    id: "salieri-collector-bundle",
-    name: "Collector Bundle",
-    status: "Bundle",
-    description: "Collector package including selected physical formats, merch, art print, booklet, and campaign extras.",
-    price: 349,
-    image: assets.collectorPack,
-    alt: "Salieri collector bundle"
   }
 ];
 const streamingItems = ["Spotify", "Apple Music", "Amazon", "Instagram"];
 
 const trustNotes = [
-  { title: "Pre-order campaign", text: "Physical items ship when July 2026 campaign inventory is confirmed." },
+  { title: "Pre-order campaign", text: "Physical collector items are prepared for the July 2026 campaign and ship when inventory is confirmed." },
   { title: "Secure checkout", text: "Payments use hosted Stripe checkout with card and wallet support." },
-  { title: "Shipping and taxes", text: "Final shipping and taxes are calculated during checkout." },
-  { title: "Support", text: "Questions route through the official KAMDRIDI contact page." }
+  { title: "Shipping details", text: "Checkout collects the delivery details needed to confirm campaign fulfillment." },
+  { title: "Limited campaign", text: "Collector formats may close once the campaign allocation is filled." }
 ];
 
 export const metadata: Metadata = {
@@ -586,7 +586,7 @@ export default function SalierisHandsPage() {
       <section id="collector-editions" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionIntro title="Collector Editions" align="center">
-            <p>Physical editions and collector items prepared for the July 2026 campaign.</p>
+            <p>Premium physical editions and limited collector items prepared for the July 2026 campaign.</p>
           </SectionIntro>
           <CampaignTrustNotes />
           <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -600,7 +600,7 @@ export default function SalierisHandsPage() {
       <section id="merch" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionIntro title="Merch" align="center">
-            <p>Campaign items available through the KAMDRIDI cart.</p>
+            <p>Campaign apparel, print pieces, and accessories available through the KAMDRIDI cart.</p>
           </SectionIntro>
           <CampaignTrustNotes />
           <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
