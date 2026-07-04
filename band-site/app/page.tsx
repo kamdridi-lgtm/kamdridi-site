@@ -15,6 +15,7 @@ import {
   Youtube
 } from "lucide-react";
 import { HomeCinematicIntro } from "@/components/home-cinematic-intro";
+import { SalieriCinematicIntro } from "@/components/salieri-cinematic-intro";
 import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
 import { SignalRadio } from "@/components/signal-radio";
 import { featuredVideo, gameExperiences, socialFeed, streamingLinks, visualAlbumScenes } from "@/data/site";
@@ -247,7 +248,9 @@ function PlatformLinks({ compact = false }: { compact?: boolean }) {
 export default function HomePage() {
   return (
     <>
+
       <HomeCinematicIntro />
+      <SalieriCinematicIntro />
       <div className="relative overflow-hidden bg-[#050403] text-white">
         <div className="pointer-events-none fixed inset-0 z-0 opacity-55">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(209,91,18,0.18),transparent_30%),radial-gradient(circle_at_86%_12%,rgba(244,198,106,0.13),transparent_28%),linear-gradient(180deg,#050403,#090604_42%,#030303)]" />
