@@ -22,6 +22,7 @@ import { featuredVideo, gameExperiences, socialFeed, streamingLinks, visualAlbum
 const albumCover = "/assets/images/releases/echoes-unearthed-cover.jpg";
 const albumCoverPng = "/assets/images/releases/echoes-unearthed-cover.png";
 const heroVideo = "/videos/hero-page-video-generation-2.mp4";
+const salieriSignalCard = "/assets/images/releases/salieri-signal-card.jpg";
 const warMachinesCover = "/assets/images/releases/war-machines-cover.png";
 const collectorCdImage = "/store/cd-product.jpg";
 const vinylImage = "/store/vinyl-product.jpg";
@@ -248,6 +249,64 @@ export default function HomePage() {
   return (
     <>
       <HomeCinematicIntro />
+      <section className="relative z-10 border-b border-[#a86225]/25 px-4 py-6 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <Link
+            href="/releases/salieris-hands"
+            className="group grid overflow-hidden border border-[#f0c06d]/60 bg-[linear-gradient(180deg,rgba(30,18,8,0.98),rgba(10,6,4,0.98))] shadow-[0_34px_110px_rgba(0,0,0,0.58)] transition duration-300 hover:-translate-y-1 hover:border-[#ffd98b] lg:grid-cols-[0.9fr_1.1fr]"
+            aria-label="Open Salieri's Hands release page"
+          >
+            <div className="relative min-h-[280px] overflow-hidden bg-black sm:min-h-[340px] lg:min-h-[390px]">
+              <Image
+                src={salieriSignalCard}
+                alt="Salieri's Hands musical manuscript signal"
+                fill
+                sizes="(max-width: 1024px) 100vw, 46vw"
+                className="object-cover object-center transition duration-700 group-hover:scale-[1.03]"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,6,3,0.28),rgba(10,6,3,0.72)_68%,rgba(10,6,3,0.9)),radial-gradient(circle_at_18%_18%,rgba(255,229,173,0.18),transparent_28%),radial-gradient(circle_at_82%_78%,rgba(0,0,0,0.25),transparent_34%)]" />
+            </div>
+            <div className="relative flex flex-col justify-center gap-5 px-6 py-6 sm:px-8 sm:py-8 lg:px-10">
+              <div className="inline-flex w-fit items-center gap-2 border border-[#f0c06d]/35 bg-black/30 px-3 py-1 text-[10px] font-black uppercase tracking-[0.28em] text-[#f4c66a]">
+                <Sparkles className="h-3.5 w-3.5" />
+                New signal
+              </div>
+              <div>
+                <p className="text-[11px] font-black uppercase tracking-[0.34em] text-[#e0ab5e]">After ACT II War Machines</p>
+                <h2 className="mt-3 max-w-xl font-display text-[clamp(2rem,4.4vw,4.35rem)] uppercase leading-[0.92] tracking-[0.08em] text-[#fff0cf]">
+                  Salieri&apos;s Hands
+                </h2>
+                <p className="mt-4 max-w-2xl text-sm leading-7 text-[#f1dfc0] sm:text-base">
+                  A premium collector release from Vienna, 1791. Faith, envy, confession, and a
+                  dark baroque campaign now live in one dedicated page.
+                </p>
+              </div>
+              <div className="grid gap-3 text-sm text-[#e8d1aa] sm:grid-cols-3">
+                <div className="border border-[#f0c06d]/20 bg-black/24 px-4 py-3">
+                  <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#f4c66a]">Limited</p>
+                  <p className="mt-2 leading-6">Collector editions and merch.</p>
+                </div>
+                <div className="border border-[#f0c06d]/20 bg-black/24 px-4 py-3">
+                  <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#f4c66a]">Featured</p>
+                  <p className="mt-2 leading-6">Digital Deluxe and vinyl.</p>
+                </div>
+                <div className="border border-[#f0c06d]/20 bg-black/24 px-4 py-3">
+                  <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#f4c66a]">Direct</p>
+                  <p className="mt-2 leading-6">Open the release page now.</p>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <span className="inline-flex min-h-12 items-center justify-center border border-[#f4a33f]/70 bg-[linear-gradient(180deg,#d66a16,#8f3208)] px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-[0_18px_55px_rgba(201,82,16,0.32)]">
+                  Open Release
+                </span>
+                <span className="inline-flex min-h-12 items-center justify-center border border-[#f0c06d]/45 bg-black/35 px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#f1dfc0] transition group-hover:border-[#ffd98b] group-hover:text-[#ffd98b]">
+                  View Collector Page <ArrowRight className="ml-2 h-4 w-4" />
+                </span>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </section>
       <div className="relative overflow-hidden bg-[#050403] text-white">
         <div className="pointer-events-none fixed inset-0 z-0 opacity-55">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(209,91,18,0.18),transparent_30%),radial-gradient(circle_at_86%_12%,rgba(244,198,106,0.13),transparent_28%),linear-gradient(180deg,#050403,#090604_42%,#030303)]" />
