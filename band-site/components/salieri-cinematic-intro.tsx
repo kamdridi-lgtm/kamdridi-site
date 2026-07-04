@@ -1,11 +1,11 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties, MouseEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 
-const poster = "/assets/images/salieris-hands/mini-card-mockup.png";
+const poster = "/assets/images/salieris-hands/partition-card.png";
 
 const embers = Array.from({ length: 8 }, (_, index) => ({
   id: index,
@@ -55,7 +55,7 @@ export function SalieriCinematicIntro() {
   }
 
   return (
-    <aside className="home-cinematic-intro" aria-label="Salieri's Hands promo">
+    <aside className="home-cinematic-intro salieri-promo-intro" aria-label="Salieri's Hands promo">
       <div className="home-cinematic-shake home-promo-card">
         <div className="home-promo-float">
           <div className="home-cinematic-electric-field">

@@ -1856,3 +1856,21 @@ textarea:focus {
     animation: none;
   }
 }
+
+.home-cinematic-intro.salieri-promo-intro {
+  left: auto;
+  right: 26px;
+  top: 132px;
+  bottom: auto;
+  width: min(242px, calc(100vw - 52px));
+}
+
+@media (max-width: 700px) {
+  .home-cinematic-intro.salieri-promo-intro {
+    left: auto;
+    right: 12px;
+    top: auto;
+    bottom: 16px;
+    width: min(172px, calc(100vw - 24px));
+  }
+}
