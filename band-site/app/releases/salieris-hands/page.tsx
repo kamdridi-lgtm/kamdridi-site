@@ -180,11 +180,21 @@ const fulfillmentItems = [
   ["Merch", "Apparel, mug, and poster orders use the selected size, color, and delivery details from checkout."],
   ["Collector Bundle", "Bundle contents are confirmed as one campaign package before fulfillment begins."]
 ];
+
 const trustNotes = [
   { title: "Pre-order campaign", text: "Physical collector items are prepared for the July 2026 campaign and ship when inventory is confirmed." },
   { title: "Secure checkout", text: "Payments use hosted Stripe checkout with card and wallet support." },
   { title: "Shipping details", text: "Checkout collects the delivery details needed to confirm campaign fulfillment." },
   { title: "Limited campaign", text: "Collector formats may close once the campaign allocation is filled." }
+];
+
+const sectionNavItems = [
+  { href: "#teaser", label: "Teaser" },
+  { href: "#tracklist", label: "Tracklist" },
+  { href: "#collector-editions", label: "Collector Editions" },
+  { href: "#merch", label: "Merch" },
+  { href: "#order-info", label: "Order Info" },
+  { href: "#release-updates", label: "Release Updates" }
 ];
 
 export const metadata: Metadata = {
@@ -278,6 +288,34 @@ function CampaignTrustNotes() {
           <p className="mt-3 text-sm leading-6 text-[#e8d1aa]">{note.text}</p>
         </div>
       ))}
+    </div>
+  );
+}
+
+function SectionRailLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a
+      href={href}
+      className="inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full border border-[#bd8b45]/45 bg-black/42 px-4 py-2 text-[10px] font-black uppercase tracking-[0.22em] text-[#f5dfb4] transition hover:-translate-y-0.5 hover:border-[#ffd98b] hover:text-white"
+    >
+      {children}
+    </a>
+  );
+}
+
+function SectionNavRail() {
+  return (
+    <div className="sticky top-[78px] z-30 border-b border-[#bd8b45]/25 bg-[#090504]/84 backdrop-blur-xl">
+      <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6">
+        <div className="flex items-center gap-3 overflow-x-auto pb-1">
+          <span className="shrink-0 text-[10px] font-black uppercase tracking-[0.28em] text-[#c99951]">On this page</span>
+          {sectionNavItems.map((item) => (
+            <SectionRailLink key={item.href} href={item.href}>
+              {item.label}
+            </SectionRailLink>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
@@ -528,12 +566,9 @@ export default function SalierisHandsPage() {
                   <Shirt className="h-4 w-4" />
                   Merch
                 </ActionLink>
-                <ActionLink href="#order-info" tone="ghost">
-                  <Package className="h-4 w-4" />
-                  Order Info
-                </ActionLink>
+
               </div>
-              <div className="mt-5 grid gap-3 lg:grid-cols-3">
+              <div className="mt-5 hidden gap-3 lg:grid lg:grid-cols-3">
                 <SalieriQuickBuy id="salieri-collector-bundle" name="Collector Bundle" price={349} image={assets.collectorPack} />
                 <SalieriQuickBuy id="salieri-tee" name="Salieri Tee" price={59} image="/assets/images/salieris-hands/salieri-tee-mockup.jpg" color="Black" size="L" />
                 <SalieriQuickBuy id="salieri-special-edition-box" name="Special Edition Box" price={249} image={assets.collectorPack} />
@@ -542,6 +577,8 @@ export default function SalierisHandsPage() {
           </div>
         </div>
       </section>
+
+      <SectionNavRail />
 
       <section id="teaser" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-7xl">
@@ -617,8 +654,8 @@ export default function SalierisHandsPage() {
           <SectionIntro title="Collector Editions" align="center">
             <p>Premium physical editions and limited collector items prepared for the July 2026 campaign.</p>
           </SectionIntro>
-          <CampaignTrustNotes />
           <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+
             {collectorProducts.map((product) => (
               <SalieriProductCard key={product.id} {...product} />
             ))}
@@ -631,8 +668,8 @@ export default function SalierisHandsPage() {
           <SectionIntro title="Merch" align="center">
             <p>Campaign apparel, print pieces, and accessories available through the KAMDRIDI cart.</p>
           </SectionIntro>
-          <CampaignTrustNotes />
           <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+
             {merchProducts.map((product) => (
               <SalieriProductCard key={product.id} {...product} />
             ))}
@@ -670,7 +707,7 @@ export default function SalierisHandsPage() {
           </div>
         </div>
       </section>
-      <section className="px-4 py-12 sm:px-6 md:py-16">
+      <section id="release-updates" className="px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.7fr_1fr]">
           <div className="relative min-h-[340px] overflow-hidden border border-[#bd8b45]/45 bg-black sm:min-h-[440px]">
             <ImagePanel src={assets.vienna} alt="Vienna 1791 figure walking through the street" />

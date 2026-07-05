@@ -66,15 +66,15 @@ export function SalieriProductCard({
           </div>
         ) : null}
       </div>
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#e3b86a]">{status}</p>
-            <h3 className="mt-4 font-serif text-2xl uppercase leading-tight text-[#ffe0aa]">{name}</h3>
+            <h3 className="mt-3 font-serif text-xl uppercase leading-tight text-[#ffe0aa] sm:mt-4 sm:text-2xl">{name}</h3>
           </div>
           <p className="shrink-0 text-lg font-semibold text-[#ffd98b]">{formatCurrency(price)}</p>
         </div>
-        <p className="mt-4 text-sm leading-7 text-[#d9c09a]">{description}</p>
+        <p className="mt-3 text-sm leading-6 text-[#d9c09a] sm:mt-4 sm:leading-7">{description}</p>
 
         {colors?.length ? (
           <div className="mt-5">
