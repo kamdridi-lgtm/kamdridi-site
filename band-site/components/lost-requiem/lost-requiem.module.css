@@ -1,0 +1,583 @@
+.routeScope {
+  --lr-black: #050505;
+  --lr-parchment: #e6dfd3;
+  --lr-gold: #c9a86a;
+  --lr-walnut: #1a1410;
+  --lr-wax-red: #8b1e15;
+  --lr-brass: #4a4232;
+  font-family: var(--lr-body-font), Georgia, serif;
+}
+
+.museum {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow: clip;
+  color: var(--lr-parchment);
+  background:
+    radial-gradient(circle at 50% -10%, rgba(201, 168, 106, 0.13), transparent 34rem),
+    linear-gradient(180deg, #0a0807 0%, var(--lr-black) 38%, #080604 100%);
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+}
+
+.ambientGlow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  background:
+    radial-gradient(circle at 72% 20%, rgba(201, 168, 106, 0.08), transparent 26rem),
+    radial-gradient(circle at 20% 70%, rgba(139, 30, 21, 0.05), transparent 28rem);
+}
+
+.skipLink {
+  position: fixed;
+  top: 0.75rem;
+  left: 50%;
+  z-index: 100;
+  padding: 0.7rem 1rem;
+  color: var(--lr-black);
+  background: var(--lr-gold);
+  transform: translate(-50%, -180%);
+  transition: transform 180ms ease;
+}
+
+.skipLink:focus {
+  transform: translate(-50%, 0);
+}
+
+.returnLink {
+  position: fixed;
+  top: clamp(5rem, 8vw, 7rem);
+  left: clamp(1rem, 3vw, 3rem);
+  z-index: 20;
+  display: inline-flex;
+  gap: 0.65rem;
+  align-items: center;
+  color: var(--lr-parchment);
+  font-size: 0.76rem;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  text-transform: uppercase;
+  opacity: 0.78;
+}
+
+.returnLink:hover {
+  color: var(--lr-gold);
+  opacity: 1;
+}
+
+.hero {
+  position: relative;
+  display: grid;
+  min-height: 100svh;
+  grid-template-columns: minmax(0, 0.92fr) minmax(20rem, 1.08fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  align-items: center;
+  padding: clamp(8rem, 14vw, 12rem) clamp(1.25rem, 8vw, 9rem) clamp(6rem, 10vw, 9rem);
+}
+
+.heroCopy {
+  max-width: 44rem;
+}
+
+.eyebrow {
+  margin: 0 0 1.25rem;
+  color: var(--lr-gold);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  max-width: 11ch;
+  margin: 0;
+  font-family: var(--lr-display-font), Georgia, serif;
+  font-size: clamp(3.7rem, 8vw, 8.8rem);
+  font-weight: 400;
+  line-height: 0.84;
+  letter-spacing: 0.035em;
+}
+
+.heroSubtitle {
+  margin: 2rem 0 0;
+  color: var(--lr-gold);
+  font-family: var(--lr-display-font), Georgia, serif;
+  font-size: clamp(1.25rem, 2.4vw, 2rem);
+}
+
+.heroDescription {
+  max-width: 36rem;
+  margin: 1.25rem 0 0;
+  color: rgba(230, 223, 211, 0.78);
+  font-size: clamp(1.05rem, 1.5vw, 1.28rem);
+  line-height: 1.7;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2.4rem;
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.25rem;
+  border: 1px solid var(--lr-brass);
+  color: var(--lr-parchment);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    color 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease;
+}
+
+.primaryButton {
+  border-color: var(--lr-gold);
+  color: var(--lr-black);
+  background: var(--lr-gold);
+}
+
+.primaryButton:hover {
+  background: #dfc48b;
+}
+
+.secondaryButton:hover {
+  border-color: var(--lr-gold);
+  color: var(--lr-gold);
+}
+
+.artworkFrame {
+  position: relative;
+  display: grid;
+  min-height: 26rem;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(201, 168, 106, 0.34);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.025), transparent 50%),
+    radial-gradient(circle at 50% 35%, rgba(201, 168, 106, 0.12), transparent 48%),
+    rgba(26, 20, 16, 0.62);
+  box-shadow:
+    0 3rem 8rem rgba(0, 0, 0, 0.62),
+    inset 0 0 0 0.6rem rgba(74, 66, 50, 0.12);
+}
+
+.artworkFrame::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(112deg, transparent 20%, rgba(255, 255, 255, 0.07) 47%, transparent 60%);
+  transform: translateX(-70%);
+}
+
+.heroArtwork {
+  min-height: min(72svh, 52rem);
+}
+
+.placeholderPaper {
+  display: grid;
+  width: min(72%, 28rem);
+  aspect-ratio: 0.73;
+  place-content: start center;
+  padding-top: 20%;
+  border: 1px solid rgba(88, 60, 34, 0.35);
+  color: #37271b;
+  text-align: center;
+  background:
+    linear-gradient(105deg, transparent 46%, rgba(83, 54, 31, 0.1) 49%, transparent 52%),
+    radial-gradient(circle at 22% 18%, rgba(100, 67, 36, 0.14), transparent 14%),
+    #cdbf9e;
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.44);
+  transform: rotate(-0.8deg);
+}
+
+.placeholderPaper span {
+  font-family: var(--lr-display-font), Georgia, serif;
+  font-size: clamp(2rem, 4vw, 4.2rem);
+  letter-spacing: 0.06em;
+}
+
+.placeholderPaper small {
+  margin-top: 0.6rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+}
+
+.assetLabel {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.75rem;
+  margin: 0;
+  color: rgba(230, 223, 211, 0.48);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.scrollCue {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: center;
+  color: rgba(230, 223, 211, 0.58);
+  font-size: 0.67rem;
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+}
+
+.manifesto {
+  position: relative;
+  display: grid;
+  max-width: 96rem;
+  grid-template-columns: minmax(0, 0.8fr) minmax(24rem, 1.2fr);
+  gap: clamp(3rem, 8vw, 8rem);
+  margin: 0 auto;
+  padding: clamp(8rem, 14vw, 14rem) clamp(1.25rem, 8vw, 8rem);
+}
+
+.sectionMarker {
+  position: absolute;
+  top: 7rem;
+  left: clamp(1.25rem, 4vw, 4rem);
+  color: rgba(201, 168, 106, 0.19);
+  font-family: var(--lr-display-font), Georgia, serif;
+  font-size: clamp(6rem, 14vw, 13rem);
+  line-height: 1;
+}
+
+.manifestoText {
+  position: relative;
+  z-index: 1;
+  align-self: center;
+}
+
+.manifestoText h2 {
+  max-width: 12ch;
+  margin: 0;
+  font-family: var(--lr-display-font), Georgia, serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 400;
+  line-height: 0.98;
+}
+
+.manifestoText > p:not(.eyebrow) {
+  max-width: 40rem;
+  margin: 2rem 0 0;
+  color: rgba(230, 223, 211, 0.76);
+  font-size: clamp(1.05rem, 1.45vw, 1.25rem);
+  line-height: 1.75;
+}
+
+.objectDetails {
+  display: grid;
+  gap: 1rem;
+  margin: 3rem 0 0;
+}
+
+.objectDetails div {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(74, 66, 50, 0.75);
+}
+
+.objectDetails dt {
+  color: var(--lr-gold);
+  font-size: 0.7rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.objectDetails dd {
+  margin: 0;
+  color: rgba(230, 223, 211, 0.82);
+}
+
+.manifestoGallery {
+  display: grid;
+  gap: 2rem;
+}
+
+.manifestoArtwork {
+  margin: 0;
+}
+
+.manifestoArtwork:nth-child(2) {
+  width: 82%;
+  margin-left: auto;
+}
+
+.manifestoArtwork .artworkFrame {
+  min-height: 30rem;
+}
+
+.manifestoArtwork figcaption {
+  margin-top: 0.75rem;
+  color: rgba(230, 223, 211, 0.52);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.progress {
+  position: fixed;
+  top: 50%;
+  right: 1.4rem;
+  z-index: 30;
+  transform: translateY(-50%);
+}
+
+.progress ol {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.progress li > a,
+.progress li > span {
+  display: grid;
+  grid-template-columns: 1.6rem auto;
+  gap: 0.6rem;
+  align-items: center;
+  color: rgba(230, 223, 211, 0.3);
+  font-size: 0.64rem;
+  letter-spacing: 0.11em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.progress li > a {
+  color: rgba(230, 223, 211, 0.72);
+}
+
+.progress strong {
+  font-weight: 500;
+}
+
+.progressActive a:hover {
+  color: var(--lr-gold);
+}
+
+.audioGuide {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 40;
+  width: min(34rem, calc(100vw - 2.5rem));
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(74, 66, 50, 0.8);
+  background: rgba(15, 12, 10, 0.92);
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.48);
+  backdrop-filter: blur(14px);
+}
+
+.audioHeading {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.audioHeading > div {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.audioHeading strong {
+  font-family: var(--lr-display-font), Georgia, serif;
+  font-weight: 500;
+}
+
+.audioHeading span {
+  color: rgba(230, 223, 211, 0.5);
+  font-size: 0.72rem;
+}
+
+.audioStatus {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--lr-wax-red);
+  box-shadow: 0 0 1rem rgba(139, 30, 21, 0.55);
+}
+
+.audioControls {
+  display: grid;
+  grid-template-columns: auto minmax(5rem, 1fr) auto auto;
+  gap: 0.65rem;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.audioControls button {
+  min-height: 2.25rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--lr-brass);
+  color: var(--lr-parchment);
+  background: transparent;
+  cursor: pointer;
+}
+
+.audioControls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.34;
+}
+
+.progressLabel {
+  display: flex;
+}
+
+.progressLabel input {
+  width: 100%;
+  accent-color: var(--lr-gold);
+}
+
+.audioTime {
+  color: rgba(230, 223, 211, 0.54);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.7rem;
+}
+
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible,
+.returnLink:focus-visible,
+.scrollCue:focus-visible,
+.progress a:focus-visible,
+.audioControls button:focus-visible,
+.progressLabel input:focus-visible {
+  outline: 2px solid var(--lr-gold);
+  outline-offset: 3px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding-top: 9rem;
+  }
+
+  .heroArtwork {
+    min-height: 34rem;
+  }
+
+  .manifesto {
+    grid-template-columns: 1fr;
+    padding-bottom: 12rem;
+  }
+
+  .progress {
+    display: none;
+  }
+
+  .returnLink {
+    position: absolute;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .heroTitle {
+    font-size: clamp(3.3rem, 17vw, 5.2rem);
+  }
+
+  .heroActions {
+    display: grid;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+
+  .heroArtwork {
+    min-height: 27rem;
+  }
+
+  .scrollCue {
+    display: none;
+  }
+
+  .manifesto {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .manifestoArtwork:nth-child(2) {
+    width: 100%;
+  }
+
+  .manifestoArtwork .artworkFrame {
+    min-height: 25rem;
+  }
+
+  .audioGuide {
+    right: 0.65rem;
+    bottom: 0.65rem;
+    width: calc(100vw - 1.3rem);
+  }
+
+  .audioHeading > div {
+    display: grid;
+    gap: 0.1rem;
+  }
+
+  .audioControls {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .audioControls button:last-child {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .routeScope *,
+  .routeScope *::before,
+  .routeScope *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
