@@ -57,13 +57,27 @@ export default function EchoesBrasilProductPage({ product }: { product: EchoesDr
             </div>
 
             <div className="mt-12 grid gap-6 rounded-[24px] border border-white/5 bg-white/[0.02] p-6 backdrop-blur">
-              <div className="flex items-center justify-between">
-                <span className="text-xs uppercase tracking-[0.2em] text-stone-500">Preço</span>
-                <span className="font-mono text-lg text-[#f4c66a]">À CONFIRMER</span>
+              <div className="flex flex-col gap-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs uppercase tracking-[0.2em] text-stone-500">Preço</span>
+                  <span className="font-mono text-lg text-[#f4c66a]">
+                    {product.priceCents
+                      ? new Intl.NumberFormat("fr-CA", {
+                          style: "currency",
+                          currency: product.currency || "CAD",
+                        }).format(product.priceCents / 100) + " CAD"
+                      : "À CONFIRMER"}
+                  </span>
+                </div>
+                <div className="text-right text-[10px] text-stone-500 uppercase tracking-widest">
+                  Frete calculado separadamente.
+                </div>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-xs uppercase tracking-[0.2em] text-stone-500">Estoque</span>
-                <span className="font-mono text-sm text-stone-400">À CONFIRMER</span>
+                <span className="font-mono text-sm text-stone-400">
+                  {product.inventoryStatus === "preorder" ? "PRÉ-VENDA" : "À CONFIRMER"}
+                </span>
               </div>
               
               <button

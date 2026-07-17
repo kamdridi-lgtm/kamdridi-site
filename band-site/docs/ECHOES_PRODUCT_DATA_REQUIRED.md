@@ -6,9 +6,13 @@ Voici le récapitulatif des données nécessaires pour finaliser les fiches et a
 
 | Produit | Prix requis | Devise | Stock ou précommande | Livret indépendant ? | Contenu à confirmer | Stripe Price ID |
 |---|---|---|---|---|---|---|
-| **Expanded Edition** (`echoes-brasil-expanded`) | À CONFIRMER | À CONFIRMER | À CONFIRMER | N/A | À CONFIRMER | À CONFIRMER |
-| **Collector Booklet** (`echoes-brasil-livreto`) | À CONFIRMER | À CONFIRMER | À CONFIRMER | À CONFIRMER | À CONFIRMER | À CONFIRMER |
-| **Deluxe Box + Vinyl** (`echoes-brasil-deluxe`) | À CONFIRMER | À CONFIRMER | À CONFIRMER | N/A | À CONFIRMER | À CONFIRMER |
+| **Expanded Edition** (`echoes-brasil-expanded`) | **Confirmé pour le brouillon (69.00)** | **CAD** | **Prévente** | N/A | À CONFIRMER | Toujours à confirmer |
+| **Collector Booklet** (`echoes-brasil-livreto`) | **Confirmé pour le brouillon (39.00)** | **CAD** | **Prévente** | À CONFIRMER | À CONFIRMER | Toujours à confirmer |
+| **Deluxe Box + Vinyl** (`echoes-brasil-deluxe`) | **Confirmé pour le brouillon (229.00)** | **CAD** | **Prévente** | N/A | À CONFIRMER | Toujours à confirmer |
+
+*Coût de production :* Toujours à confirmer.
+*Date d'expédition :* Toujours à confirmer.
+
 
 *Note de conflit :* Le livret est présenté comme une édition à part, mais pourrait être inclus ou dépendre d'autres bundles. Il est actuellement conservé séparé. Il faudra confirmer s'il s'agit bien d'un produit achetable séparément.
 

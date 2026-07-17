@@ -30,10 +30,10 @@ export const echoesDraftProducts: EchoesDraftProduct[] = [
     project: "ECHOES UN LIVE IN BRASIL",
     active: false,
     visible: false,
-    priceCents: null,
-    currency: null,
+    priceCents: 6900,
+    currency: "CAD",
     stripePriceId: null,
-    inventoryStatus: "unconfirmed"
+    inventoryStatus: "preorder"
   },
   {
     id: "echoes-brasil-livreto-2026",
@@ -48,10 +48,10 @@ export const echoesDraftProducts: EchoesDraftProduct[] = [
     project: "ECHOES UN LIVE IN BRASIL",
     active: false,
     visible: false,
-    priceCents: null,
-    currency: null,
+    priceCents: 3900,
+    currency: "CAD",
     stripePriceId: null,
-    inventoryStatus: "unconfirmed"
+    inventoryStatus: "preorder"
   },
   {
     id: "echoes-brasil-deluxe-2026",
@@ -66,9 +66,9 @@ export const echoesDraftProducts: EchoesDraftProduct[] = [
     project: "ECHOES UN LIVE IN BRASIL",
     active: false,
     visible: false,
-    priceCents: null,
-    currency: null,
+    priceCents: 22900,
+    currency: "CAD",
     stripePriceId: null,
-    inventoryStatus: "unconfirmed"
+    inventoryStatus: "preorder"
   }
 ];
