@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getAiArtist } from "@/data/ai-artists";
@@ -74,6 +74,32 @@ export default function ReleasesPage() {
             <div className="mt-7 flex flex-wrap gap-3">
               <ActionLink href="/music" primary>Listen</ActionLink>
               <ActionLink href="/">KAM DRIDI Home</ActionLink>
+            </div>
+          </div>
+        </article>
+
+        <article className="overflow-hidden rounded-[2rem] border border-[#f4c66a]/20 bg-[radial-gradient(circle_at_18%_0%,rgba(244,198,106,0.10),transparent_34%),rgba(8,6,4,0.72)] shadow-[0_30px_100px_rgba(0,0,0,0.32)]">
+          <div className="relative bg-black p-4">
+            <div className="relative mx-auto aspect-square max-w-[520px]">
+              <Image
+                src="/echoes-un-live-in-brasil/assets/images/front-cover.webp"
+                alt="ECHOES UN LIVE IN BRASIL front cover"
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 48vw"
+              />
+            </div>
+          </div>
+          <div className="p-6 md:p-8">
+            <p className="text-[10px] uppercase tracking-[0.28em] text-[#f4c66a]">EXPANDED LIVE EDITION · 2026</p>
+            <h2 className="mt-4 text-3xl font-black uppercase tracking-[0.06em] text-white">ECHOES UN LIVE IN BRASIL</h2>
+            <p className="mt-3 text-sm leading-7 text-stone-300">KAM DRIDI</p>
+            <p className="mt-2 text-sm leading-7 text-stone-400">
+              A warm semi-acoustic melodic rock performance shaped around the Brazilian audience, expanded editions, live-session arrangements, and the visual world of ECHOES UN LIVE IN BRASIL.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <ActionLink href="/releases/echoes-un-live-in-brasil" primary>OPEN RELEASE</ActionLink>
+              <ActionLink href="/store">STORE</ActionLink>
             </div>
           </div>
         </article>
