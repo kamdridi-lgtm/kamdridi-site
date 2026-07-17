@@ -6,6 +6,7 @@ import {
   defaultEchoesCostPlans,
   calculateFinancials,
   costPlanFieldDefinitions,
+  validateCostPlanField,
 } from "@/data/echoes-brasil-cost-planning";
 
 const LOCAL_STORAGE_KEY = "kamdridi_echoes_brasil_cost_plan_v1";
@@ -23,19 +24,22 @@ export default function EchoesBrasilMarginPlanner() {
 
   useEffect(() => {
     const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+    let initialPlans = [...defaultEchoesCostPlans];
+
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length === 3) {
-          // Merge with default to ensure structure, reset invalid fields to null
-          const mergedPlans = defaultEchoesCostPlans.map((defaultPlan) => {
+        if (Array.isArray(parsed)) {
+          initialPlans = defaultEchoesCostPlans.map((defaultPlan) => {
             const savedPlan = parsed.find((p: any) => p.productSlug === defaultPlan.productSlug);
             if (!savedPlan) return defaultPlan;
             
             const newPlan = { ...defaultPlan };
             costPlanFieldDefinitions.forEach((def) => {
               const val = savedPlan[def.key];
-              if (typeof val === "number" && !isNaN(val)) {
+              const validation = validateCostPlanField(def, val);
+              
+              if (validation.isValid) {
                 (newPlan as any)[def.key] = val;
               } else {
                 (newPlan as any)[def.key] = null;
@@ -43,16 +47,12 @@ export default function EchoesBrasilMarginPlanner() {
             });
             return newPlan;
           });
-          setPlans(mergedPlans);
-        } else {
-          setPlans(defaultEchoesCostPlans);
         }
       } catch (e) {
-        setPlans(defaultEchoesCostPlans);
+        // Fall back to defaults
       }
-    } else {
-      setPlans(defaultEchoesCostPlans);
     }
+    setPlans(initialPlans);
     setMounted(true);
   }, []);
 
@@ -64,9 +64,10 @@ export default function EchoesBrasilMarginPlanner() {
   const updatePlan = (slug: string, field: keyof EchoesCostPlan, value: string) => {
     const newPlans = plans.map((p) => {
       if (p.productSlug === slug) {
+        const numValue = Number(value);
         return {
           ...p,
-          [field]: value === "" ? null : Number(value),
+          [field]: value === "" || isNaN(numValue) ? null : numValue,
         };
       }
       return p;
@@ -120,7 +121,7 @@ function PlanSection({
   plan: EchoesCostPlan;
   updatePlan: (s: string, f: keyof EchoesCostPlan, v: string) => void;
 }) {
-  const result = calculateFinancials(plan);
+  const result = calculateFinancials(plan) as any; // Allow the new fields since they are not strictly in an interface yet
 
   const productTitles: Record<string, string> = {
     "echoes-brasil-expanded": "ECHOES UN LIVE IN BRASIL — EXPANDED EDITION",
@@ -185,7 +186,7 @@ function PlanSection({
                   <div className="mt-4">
                     <p className="text-xs text-red-400">Missing values:</p>
                     <ul className="mt-2 list-inside list-disc text-xs text-stone-400">
-                      {result.missingFields.map((f) => (
+                      {result.missingFields.map((f: string) => (
                         <li key={f}>{f}</li>
                       ))}
                     </ul>
@@ -195,7 +196,7 @@ function PlanSection({
                   <div className="mt-4 border-t border-red-900/30 pt-4">
                     <p className="text-xs text-red-400">Invalid values:</p>
                     <ul className="mt-2 list-inside list-disc text-xs text-stone-400">
-                      {result.invalidFields.map((f) => (
+                      {result.invalidFields.map((f: string) => (
                         <li key={f}>{f}</li>
                       ))}
                     </ul>
@@ -203,23 +204,25 @@ function PlanSection({
                 )}
               </div>
             </div>
-          ) : result.profitPerUnit! <= 0 ? (
+          ) : result.profitPerUnit <= 0 ? (
             <div className="space-y-6 rounded-lg border border-red-900/30 bg-black/30 p-6">
                <div className="mb-4 rounded border border-red-900/50 bg-red-950/30 p-3 text-center">
                  <span className="font-mono text-sm font-bold text-red-500">NEGATIVE UNIT ECONOMICS</span>
                </div>
                <ResultRow label="Sale Price" value={formatCAD(plan.salePriceCents)} />
-               <ResultRow label="Variable Cost" value={formatCAD(result.variableCost!)} />
-               <ResultRow label="Gross Profit / Unit" value={formatCAD(result.profitPerUnit!)} />
+               <ResultRow label="Payment Fee" value={formatCAD(result.paymentFee)} />
+               <ResultRow label="Returns Reserve" value={formatCAD(result.returnsReserve)} />
+               <ResultRow label="Variable Cost" value={formatCAD(result.variableCost)} />
+               <ResultRow label="Gross Profit / Unit" value={formatCAD(result.profitPerUnit)} />
                <div className="flex items-center justify-between border-b border-white/10 pb-4">
                  <span className="text-xs uppercase tracking-widest text-stone-400">Gross Margin</span>
                  <span className="font-mono text-lg text-red-500">
-                   {result.grossMarginPercent!.toFixed(2)}%
+                   {result.grossMarginPercent.toFixed(2)}%
                  </span>
                </div>
-               <ResultRow label="Fixed Costs" value={formatCAD(result.fixedCosts!)} />
+               <ResultRow label="Fixed Costs" value={formatCAD(result.fixedCosts)} />
                <ResultRow label="Planned Quantity" value={plan.plannedQuantity?.toString() || "0"} />
-               <ResultRow label="Total Est. Profit" value={formatCAD(result.totalProfit!)} />
+               <ResultRow label="Total Est. Profit" value={formatCAD(result.totalProfit)} />
                <div className="flex items-center justify-between border-b border-white/5 pb-2">
                  <span className="text-xs uppercase tracking-widest text-stone-400">Break-Even Units</span>
                  <span className="font-mono text-sm font-bold text-red-500">NOT REACHABLE</span>
@@ -228,19 +231,21 @@ function PlanSection({
           ) : (
             <div className="space-y-6 rounded-lg border border-white/10 bg-black/30 p-6">
               <ResultRow label="Sale Price" value={formatCAD(plan.salePriceCents)} />
-              <ResultRow label="Variable Cost" value={formatCAD(result.variableCost!)} />
-              <ResultRow label="Gross Profit / Unit" value={formatCAD(result.profitPerUnit!)} />
+              <ResultRow label="Payment Fee" value={formatCAD(result.paymentFee)} />
+              <ResultRow label="Returns Reserve" value={formatCAD(result.returnsReserve)} />
+              <ResultRow label="Variable Cost" value={formatCAD(result.variableCost)} />
+              <ResultRow label="Gross Profit / Unit" value={formatCAD(result.profitPerUnit)} />
               
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <span className="text-xs uppercase tracking-widest text-stone-400">Gross Margin</span>
-                <span className={`font-mono text-lg ${result.grossMarginPercent! < 30 ? 'text-amber-500' : 'text-green-500'}`}>
-                  {result.grossMarginPercent!.toFixed(2)}%
+                <span className={`font-mono text-lg ${result.grossMarginPercent < 30 ? 'text-amber-500' : 'text-green-500'}`}>
+                  {result.grossMarginPercent.toFixed(2)}%
                 </span>
               </div>
 
-              <ResultRow label="Fixed Costs" value={formatCAD(result.fixedCosts!)} />
+              <ResultRow label="Fixed Costs" value={formatCAD(result.fixedCosts)} />
               <ResultRow label="Planned Quantity" value={plan.plannedQuantity?.toString() || "0"} />
-              <ResultRow label="Total Est. Profit" value={formatCAD(result.totalProfit!)} />
+              <ResultRow label="Total Est. Profit" value={formatCAD(result.totalProfit)} />
               <ResultRow label="Break-Even Units" value={result.breakEvenUnits?.toString() || "0"} />
             </div>
           )}

@@ -21,23 +21,60 @@ export type EchoesCostPlan = {
   plannedQuantity: number | null;
 };
 
-export const costPlanFieldDefinitions = [
-  { key: "manufacturingCostCents", label: "Manufacturing cost", type: "cents" },
-  { key: "printingCostCents", label: "Printing cost", type: "cents" },
-  { key: "packagingCostCents", label: "Packaging cost", type: "cents" },
-  { key: "inboundFreightCents", label: "Inbound freight", type: "cents" },
-  { key: "assemblyCostCents", label: "Assembly cost", type: "cents" },
-  { key: "paymentFeePercent", label: "Payment fee (%)", type: "percent" },
-  { key: "paymentFeeFixedCents", label: "Payment fixed fee", type: "cents" },
-  { key: "shippingSubsidyCents", label: "Shipping subsidy", type: "cents" },
-  { key: "returnsReservePercent", label: "Returns reserve (%)", type: "percent" },
-  { key: "marketingCostPerUnitCents", label: "Marketing / unit", type: "cents" },
-  { key: "otherVariableCostCents", label: "Other variable cost", type: "cents" },
-  { key: "oneTimeArtworkCostCents", label: "Artwork cost", type: "cents" },
-  { key: "oneTimeSetupCostCents", label: "Setup cost", type: "cents" },
-  { key: "oneTimePrototypeCostCents", label: "Prototype cost", type: "cents" },
-  { key: "plannedQuantity", label: "Planned quantity", type: "quantity" },
+export type CostPlanFieldDefinition = {
+  key: keyof EchoesCostPlan;
+  label: string;
+  type: "cents" | "percent" | "quantity";
+  required: boolean;
+  minimum: number;
+  maximum: number | null;
+  integer: boolean;
+};
+
+export const costPlanFieldDefinitions: CostPlanFieldDefinition[] = [
+  { key: "manufacturingCostCents", label: "Manufacturing cost", type: "cents", required: true, minimum: 0, maximum: null, integer: true },
+  { key: "printingCostCents", label: "Printing cost", type: "cents", required: true, minimum: 0, maximum: null, integer: true },
+  { key: "packagingCostCents", label: "Packaging cost", type: "cents", required: true, minimum: 0, maximum: null, integer: true },
+  { key: "inboundFreightCents", label: "Inbound freight", type: "cents", required: true, minimum: 0, maximum: null, integer: true },
+  { key: "assemblyCostCents", label: "Assembly cost", type: "cents", required: true, minimum: 0, maximum: null, integer: true },
+  { key: "paymentFeePercent", label: "Payment fee (%)", type: "percent", required: true, minimum: 0, maximum: 100, integer: false },
+  { key: "paymentFeeFixedCents", label: "Payment fixed fee", type: "cents", required: true, minimum: 0, maximum: null, integer: true },
+  { key: "shippingSubsidyCents", label: "Shipping subsidy", type: "cents", required: true, minimum: 0, maximum: null, integer: true },
+  { key: "returnsReservePercent", label: "Returns reserve (%)", type: "percent", required: true, minimum: 0, maximum: 100, integer: false },
+  { key: "marketingCostPerUnitCents", label: "Marketing / unit", type: "cents", required: true, minimum: 0, maximum: null, integer: true },
+  { key: "otherVariableCostCents", label: "Other variable cost", type: "cents", required: true, minimum: 0, maximum: null, integer: true },
+  { key: "oneTimeArtworkCostCents", label: "Artwork cost", type: "cents", required: true, minimum: 0, maximum: null, integer: true },
+  { key: "oneTimeSetupCostCents", label: "Setup cost", type: "cents", required: true, minimum: 0, maximum: null, integer: true },
+  { key: "oneTimePrototypeCostCents", label: "Prototype cost", type: "cents", required: true, minimum: 0, maximum: null, integer: true },
+  { key: "plannedQuantity", label: "Planned quantity", type: "quantity", required: true, minimum: 1, maximum: null, integer: true },
 ];
+
+export function validateCostPlanField(def: CostPlanFieldDefinition, value: any): { isValid: boolean; error: string | null } {
+  if (value === null || value === undefined) {
+    if (def.required) {
+      return { isValid: false, error: `${def.label} is required.` };
+    }
+    return { isValid: true, error: null };
+  }
+
+  if (typeof value !== "number" || isNaN(value) || !Number.isFinite(value)) {
+    return { isValid: false, error: `${def.label} must be a valid finite number.` };
+  }
+
+  if (value < def.minimum) {
+    return { isValid: false, error: `${def.label} must be at least ${def.minimum}.` };
+  }
+
+  if (def.maximum !== null && value > def.maximum) {
+    return { isValid: false, error: `${def.label} must be at most ${def.maximum}.` };
+  }
+
+  if (def.integer && !Number.isInteger(value)) {
+    return { isValid: false, error: `${def.label} must be an integer.` };
+  }
+
+  return { isValid: true, error: null };
+}
 
 export function validateCostPlan(plan: EchoesCostPlan) {
   const missingFields: string[] = [];
@@ -52,29 +89,14 @@ export function validateCostPlan(plan: EchoesCostPlan) {
   }
 
   costPlanFieldDefinitions.forEach((def) => {
-    const val = plan[def.key as keyof EchoesCostPlan];
-
-    if (val === null || val === undefined) {
-      missingFields.push(def.label);
-      return;
-    }
-
-    if (typeof val !== "number" || isNaN(val) || !isFinite(val)) {
-      invalidFields.push(`${def.label} must be a valid number.`);
-      return;
-    }
-
-    if (def.type === "cents") {
-      if (val < 0 || !Number.isInteger(val)) {
-        invalidFields.push(`${def.label} must be a positive integer or zero.`);
-      }
-    } else if (def.type === "percent") {
-      if (val < 0 || val > 100) {
-        invalidFields.push(`${def.label} must be between 0 and 100.`);
-      }
-    } else if (def.type === "quantity") {
-      if (val <= 0 || !Number.isInteger(val)) {
-        invalidFields.push(`${def.label} must be an integer greater than zero.`);
+    const val = plan[def.key];
+    const validation = validateCostPlanField(def, val);
+    
+    if (!validation.isValid) {
+      if (val === null || val === undefined || val === "") {
+        missingFields.push(def.label);
+      } else {
+        invalidFields.push(validation.error!);
       }
     }
   });
@@ -97,12 +119,16 @@ export function calculateFinancials(plan: EchoesCostPlan) {
     };
   }
 
-  const paymentFee =
-    plan.salePriceCents * (plan.paymentFeePercent! / 100) + plan.paymentFeeFixedCents!;
+  const paymentFee = Math.round(
+    plan.salePriceCents * (plan.paymentFeePercent! / 100) +
+    plan.paymentFeeFixedCents!
+  );
 
-  const returnsReserve = plan.salePriceCents * (plan.returnsReservePercent! / 100);
+  const returnsReserve = Math.round(
+    plan.salePriceCents * (plan.returnsReservePercent! / 100)
+  );
 
-  const variableCost =
+  const variableCost = Math.round(
     plan.manufacturingCostCents! +
     plan.printingCostCents! +
     plan.packagingCostCents! +
@@ -112,32 +138,44 @@ export function calculateFinancials(plan: EchoesCostPlan) {
     plan.shippingSubsidyCents! +
     returnsReserve +
     plan.marketingCostPerUnitCents! +
-    plan.otherVariableCostCents!;
+    plan.otherVariableCostCents!
+  );
 
-  const profitPerUnit = plan.salePriceCents - variableCost;
-  const grossMarginPercent = (profitPerUnit / plan.salePriceCents) * 100;
+  const profitPerUnit = Math.round(
+    plan.salePriceCents - variableCost
+  );
 
-  const fixedCosts =
+  const fixedCosts = Math.round(
     plan.oneTimeArtworkCostCents! +
     plan.oneTimeSetupCostCents! +
-    plan.oneTimePrototypeCostCents!;
+    plan.oneTimePrototypeCostCents!
+  );
 
-  const totalProfit = profitPerUnit * plan.plannedQuantity! - fixedCosts;
+  const totalProfit = Math.round(
+    profitPerUnit * plan.plannedQuantity! - fixedCosts
+  );
 
-  let breakEvenUnits: number | null = null;
-  if (profitPerUnit > 0) {
-    breakEvenUnits = fixedCosts === 0 ? 0 : Math.ceil(fixedCosts / profitPerUnit);
-  }
+  const grossMarginPercent =
+    (profitPerUnit / plan.salePriceCents) * 100;
+
+  const breakEvenUnits =
+    profitPerUnit > 0
+      ? fixedCosts === 0
+        ? 0
+        : Math.ceil(fixedCosts / profitPerUnit)
+      : null;
 
   return {
     isComplete: true,
     missingFields: [],
     invalidFields: [],
-    variableCost: Math.round(variableCost),
-    profitPerUnit: Math.round(profitPerUnit),
+    paymentFee,
+    returnsReserve,
+    variableCost,
+    profitPerUnit,
     grossMarginPercent,
-    fixedCosts: Math.round(fixedCosts),
-    totalProfit: Math.round(totalProfit),
+    fixedCosts,
+    totalProfit,
     breakEvenUnits,
   };
 }
