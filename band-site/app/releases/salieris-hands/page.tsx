@@ -580,7 +580,7 @@ export default function SalierisHandsPage() {
 
       <SectionNavRail />
 
-      <section id="teaser" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
+      <section id="teaser" className="scroll-mt-28 border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:scroll-mt-32 md:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionIntro title="Official Teaser" align="center">
             <p>Watch the first glimpse.</p>
@@ -605,7 +605,7 @@ export default function SalierisHandsPage() {
         </div>
       </section>
 
-      <section className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
+      <section className="scroll-mt-28 border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:scroll-mt-32 md:py-16">
         <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
           <div className="relative min-h-[360px] overflow-hidden border border-[#bd8b45]/45 bg-black sm:min-h-[460px]">
             <ImagePanel src={assets.wide} alt="Hands over manuscript in warm candlelight" />
@@ -619,7 +619,7 @@ export default function SalierisHandsPage() {
         </div>
       </section>
 
-      <section id="tracklist" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
+      <section id="tracklist" className="scroll-mt-28 border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:scroll-mt-32 md:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionIntro title="Full Tracklist" />
           <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_0.54fr]">
@@ -649,7 +649,7 @@ export default function SalierisHandsPage() {
         </div>
       </section>
 
-      <section id="collector-editions" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
+      <section id="collector-editions" className="scroll-mt-28 border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:scroll-mt-32 md:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionIntro title="Collector Editions" align="center">
             <p>Premium physical editions and limited collector items prepared for the July 2026 campaign.</p>
@@ -663,7 +663,7 @@ export default function SalierisHandsPage() {
         </div>
       </section>
 
-      <section id="merch" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
+      <section id="merch" className="scroll-mt-28 border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:scroll-mt-32 md:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionIntro title="Merch" align="center">
             <p>Campaign apparel, print pieces, and accessories available through the KAMDRIDI cart.</p>
@@ -677,7 +677,7 @@ export default function SalierisHandsPage() {
         </div>
       </section>
 
-      <section id="order-info" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
+      <section id="order-info" className="scroll-mt-28 border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:scroll-mt-32 md:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionIntro title="Order Info" align="center">
             <p>Campaign terms, fulfillment notes, and delivery expectations for Salieri's Hands orders.</p>
@@ -707,7 +707,7 @@ export default function SalierisHandsPage() {
           </div>
         </div>
       </section>
-      <section id="release-updates" className="px-4 py-12 sm:px-6 md:py-16">
+      <section id="release-updates" className="scroll-mt-28 px-4 py-12 sm:px-6 md:scroll-mt-32 md:py-16">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.7fr_1fr]">
           <div className="relative min-h-[340px] overflow-hidden border border-[#bd8b45]/45 bg-black sm:min-h-[440px]">
             <ImagePanel src={assets.vienna} alt="Vienna 1791 figure walking through the street" />
