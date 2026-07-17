@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function EchoesBrasilPlanningPage() {
-  if (process.env.NEXT_PUBLIC_ENABLE_ECHOES_STORE_DRAFTS !== "true") {
+  if (process.env.ENABLE_ECHOES_INTERNAL_PLANNER !== "true") {
     notFound();
   }
 

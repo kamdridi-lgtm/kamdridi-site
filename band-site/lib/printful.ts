@@ -21,7 +21,7 @@ function getProductById(productId: string) {
 
 function getVariantEnvKey(productId: string, color?: string, size?: string) {
   const product = getProductById(productId);
-  if (!product?.printfulEnvPrefix) {
+  if (!product || !('printfulEnvPrefix' in product) || !product.printfulEnvPrefix) {
     return null;
   }
 

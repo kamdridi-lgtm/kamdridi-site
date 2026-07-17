@@ -1,3 +1,5 @@
+import { getVisibleCommerceProducts } from "./commerce-products";
+
 export type EchoesDraftProduct = {
   id: string;
   slug: string;
@@ -16,59 +18,33 @@ export type EchoesDraftProduct = {
   inventoryStatus: "unconfirmed" | "in_stock" | "preorder" | "sold_out";
 };
 
-export const echoesDraftProducts: EchoesDraftProduct[] = [
-  {
-    id: "echoes-brasil-expanded-2026",
-    slug: "echoes-brasil-expanded",
-    title: "ECHOES UN LIVE IN BRASIL",
-    subtitle: "Expanded Edition",
-    description:
-      "Apresentação refinada do álbum com visual principal, faixas bônus incluídas e pedido direto.",
-    images: ["/echoes-un-live-in-brasil/assets/images/edition-expanded.webp"],
-    includedItems: ["Versão padrão + bônus"],
-    category: "Physical Music",
-    project: "ECHOES UN LIVE IN BRASIL",
-    active: false,
-    visible: false,
-    priceCents: 6900,
-    currency: "CAD",
-    stripePriceId: null,
-    inventoryStatus: "preorder"
-  },
-  {
-    id: "echoes-brasil-livreto-2026",
-    slug: "echoes-brasil-livreto",
-    title: "ECHOES UN LIVE IN BRASIL",
-    subtitle: "Collector Booklet",
-    description:
-      "Páginas internas com imagens ao vivo, créditos e o universo visual da Edição Expandida.",
-    images: ["/echoes-un-live-in-brasil/assets/images/edition-livret.webp"],
-    includedItems: ["Livreto de colecionador"],
-    category: "Collector Item",
-    project: "ECHOES UN LIVE IN BRASIL",
-    active: false,
-    visible: false,
-    priceCents: 3900,
-    currency: "CAD",
-    stripePriceId: null,
-    inventoryStatus: "preorder"
-  },
-  {
-    id: "echoes-brasil-deluxe-2026",
-    slug: "echoes-brasil-deluxe",
-    title: "ECHOES UN LIVE IN BRASIL",
-    subtitle: "Deluxe Edition",
-    description:
-      "Apresentação de coleção com estojo premium, disco preto e cartão da edição.",
-    images: ["/echoes-un-live-in-brasil/assets/images/edition-deluxe.webp"],
-    includedItems: ["Box deluxe + vinil"],
-    category: "Physical Music",
-    project: "ECHOES UN LIVE IN BRASIL",
-    active: false,
-    visible: false,
-    priceCents: 22900,
-    currency: "CAD",
-    stripePriceId: null,
-    inventoryStatus: "preorder"
+const echoesCommerceProducts = getVisibleCommerceProducts().filter(p => p.projectSlug === "echoes-un-live-in-brasil");
+
+export const echoesDraftProducts: EchoesDraftProduct[] = echoesCommerceProducts.map(p => {
+  let includedItems: string[] = [];
+  if (p.slug === "echoes-brasil-expanded") {
+    includedItems = ["Versão padrão + bônus"];
+  } else if (p.slug === "echoes-brasil-livreto") {
+    includedItems = ["Livreto de colecionador"];
+  } else if (p.slug === "echoes-brasil-deluxe") {
+    includedItems = ["Box deluxe + vinil"];
   }
-];
+
+  return {
+    id: p.id,
+    slug: p.slug,
+    title: p.name,
+    subtitle: p.subtitle,
+    description: p.description,
+    images: [...p.images],
+    includedItems,
+    category: p.category,
+    project: p.project,
+    active: true,
+    visible: p.visible,
+    priceCents: p.priceCents,
+    currency: p.currency,
+    stripePriceId: null,
+    inventoryStatus: p.saleMode === "preorder" ? "preorder" : "unconfirmed"
+  };
+});

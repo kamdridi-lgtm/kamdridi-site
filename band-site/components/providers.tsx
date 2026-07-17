@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
+import { getCommerceProductById } from "@/data/commerce-products";
 
 type CartItem = {
   id: string;
@@ -40,10 +41,53 @@ export function Providers({ children }: { children: React.ReactNode }) {
   const [isCartOpen, setCartOpen] = useState(false);
 
   useEffect(() => {
-    const cartValue = window.localStorage.getItem("kamdridi-cart");
-
-    if (cartValue) {
-      setCart(JSON.parse(cartValue));
+    try {
+      const cartValue = window.localStorage.getItem("kamdridi-cart");
+      if (cartValue) {
+        const parsed = JSON.parse(cartValue);
+        if (Array.isArray(parsed)) {
+          const validatedCart: CartItem[] = [];
+          
+          for (const item of parsed) {
+            if (!item || !item.id) continue;
+            const product = getCommerceProductById(item.id);
+            if (!product || !product.visible || product.saleMode === "sold_out") continue;
+            
+            // Validate variants
+            let validColor = item.color;
+            if (product.colors?.length) {
+              if (!validColor || !product.colors.includes(validColor)) validColor = product.colors[0];
+            } else {
+              validColor = undefined;
+            }
+            
+            let validSize = item.size;
+            if (product.sizes?.length) {
+              if (!validSize || !product.sizes.includes(validSize)) validSize = product.sizes[0];
+            } else {
+              validSize = undefined;
+            }
+            
+            let qty = Math.max(1, Math.floor(Number(item.quantity) || 1));
+            if (product.quantityLimit) qty = Math.min(qty, product.quantityLimit);
+            qty = Math.min(qty, 20); // Hard cap
+            
+            validatedCart.push({
+              id: product.id,
+              name: product.name,
+              price: product.priceCents / 100, // Price in display CAD dollars
+              image: product.images?.[0] || item.image || "",
+              quantity: qty,
+              color: validColor,
+              size: validSize
+            });
+          }
+          
+          setCart(validatedCart);
+        }
+      }
+    } catch (e) {
+      console.error("Failed to parse cart from local storage", e);
     }
 
     void fetch("/api/fan-club/session", { cache: "no-store" })
@@ -66,7 +110,19 @@ export function Providers({ children }: { children: React.ReactNode }) {
     setFanState(fanValue);
   }
 
-  function addToCart(item: Omit<CartItem, "quantity">) {
+  function addToCart(rawItem: Omit<CartItem, "quantity">) {
+    const product = getCommerceProductById(rawItem.id);
+    if (!product || !product.visible || product.saleMode === "sold_out") return;
+    
+    const item = {
+      id: product.id,
+      name: product.name,
+      price: product.priceCents / 100,
+      image: product.images?.[0] || "",
+      color: rawItem.color,
+      size: rawItem.size
+    };
+    
     setCart((current) => {
       const existing = current.find(
         (entry) =>

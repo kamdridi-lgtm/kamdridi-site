@@ -1,18 +1,18 @@
+"use client";
+
 import Image from "next/image";
-import { notFound } from "next/navigation";
 import { EchoesDraftProduct } from "@/data/echoes-brasil-products";
+import { useApp } from "@/components/providers";
 
 export default function EchoesBrasilProductPage({ product }: { product: EchoesDraftProduct }) {
-  if (process.env.NEXT_PUBLIC_ENABLE_ECHOES_STORE_DRAFTS !== "true") {
-    notFound();
-  }
+  const { addToCart, setCartOpen } = useApp();
 
   return (
     <div className="min-h-screen bg-[#080604] font-sans text-stone-300">
       <div className="mx-auto max-w-6xl px-6 py-12 md:py-24">
-        <div className="mb-6">
-          <span className="inline-block rounded-full border border-red-900/50 bg-red-950/30 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-red-400">
-            DRAFT PREVIEW
+        <div className="mb-6 flex gap-3">
+          <span className="inline-block rounded-full border border-amber-900/50 bg-amber-950/30 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-amber-500">
+            PRE-ORDER
           </span>
         </div>
 
@@ -76,15 +76,27 @@ export default function EchoesBrasilProductPage({ product }: { product: EchoesDr
               <div className="flex items-center justify-between">
                 <span className="text-xs uppercase tracking-[0.2em] text-stone-500">Estoque</span>
                 <span className="font-mono text-sm text-stone-400">
-                  {product.inventoryStatus === "preorder" ? "PRÉ-VENDA" : "À CONFIRMER"}
+                  ON-DEMAND
                 </span>
               </div>
               
+              <div className="rounded border border-amber-900/30 bg-black p-3 text-[10px] leading-relaxed text-amber-500/80">
+                <p><strong>Artisanal Production:</strong> Please allow 2 to 3 weeks for manufacturing before shipping. Every item is individually crafted upon order.</p>
+              </div>
+              
               <button
-                disabled
-                className="mt-4 w-full cursor-not-allowed rounded-full border border-stone-800 bg-stone-900 py-4 text-xs uppercase tracking-[0.2em] text-stone-500 transition-colors"
+                onClick={() => {
+                  addToCart({
+                    id: product.id,
+                    name: product.title,
+                    price: (product.priceCents || 0) / 100,
+                    image: product.images[0]
+                  });
+                  setCartOpen(true);
+                }}
+                className="mt-4 w-full rounded-full bg-[#f4c66a] py-4 text-xs font-bold uppercase tracking-[0.2em] text-black transition-colors hover:bg-amber-400"
               >
-                CHECKOUT DISABLED — DRAFT
+                PRE-ORDER
               </button>
             </div>
           </div>

@@ -5,6 +5,7 @@ import { ShoppingBag } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useApp } from "@/components/providers";
+import { getCommerceProductById } from "@/data/commerce-products";
 
 type SalieriProductCardProps = {
   id: string;
@@ -164,27 +165,24 @@ export function SalieriCheckoutStatus() {
 }
 export function SalieriQuickBuy({
   id,
-  name,
-  price,
-  image,
   color,
   size
 }: {
   id: string;
-  name: string;
-  price: number;
-  image: string;
   color?: string;
   size?: string;
 }) {
   const { addToCart, setCartOpen } = useApp();
+  const product = getCommerceProductById(id);
+
+  if (!product) return null;
 
   function handleQuickBuy() {
     addToCart({
       id,
-      name,
-      price,
-      image,
+      name: product!.name,
+      price: product!.priceCents / 100,
+      image: product!.images[0],
       color,
       size
     });
@@ -199,9 +197,9 @@ export function SalieriQuickBuy({
     >
       <span>
         <span className="block text-[10px] font-black uppercase tracking-[0.24em] text-[#e3b86a]">Quick Add</span>
-        <span className="mt-1 block font-serif text-lg uppercase leading-tight text-[#ffe0aa]">{name}</span>
+        <span className="mt-1 block font-serif text-lg uppercase leading-tight text-[#ffe0aa]">{product.name}</span>
       </span>
-      <span className="shrink-0 text-sm font-black text-[#ffd98b]">{formatCurrency(price)}</span>
+      <span className="shrink-0 text-sm font-black text-[#ffd98b]">{formatCurrency(product.priceCents / 100)}</span>
     </button>
   );
 }
