@@ -3,31 +3,44 @@
 **STATUS: DRAFT — NOT SENT**
 
 ## VINYL PRESSING
-**To:** OFFICIAL CONTACT FORM / VinylPressing.ca  
+**To:** info@vinylpressing.ca  
+*(Official contact form available on VinylPressing.ca)*  
 **Subject:** Request for quotation — KAM DRIDI — ECHOES UN LIVE IN BRASIL vinyl production
 
 Hello,
 
-My name is Kam Dridi, an independent music artist based in Montreal, Canada. I am currently preparing the physical release for my upcoming project, "ECHOES UN LIVE IN BRASIL", and I am gathering comparative quotes for vinyl production.
+My name is Kam Dridi, an independent music artist based in Montreal, Canada. I am preparing the physical release for my upcoming project, "ECHOES UN LIVE IN BRASIL", and I am gathering comparative quotes for vinyl production.
 
-Could you please provide a quotation for a 12-inch LP with the following quantities: 50, 100, and 250 units?
+Could you please provide a quotation for the following quantities: 50, 100, and 250 units?
+*(If 250 units is not a standard production tier, please quote the most economical comparable tier, such as 200 or 300 units).*
 
-We would like to compare two options:
-- Option A: 140 g black vinyl
-- Option B: 180 g black vinyl
+As the final album duration is not yet confirmed, we are comparing two main scenarios:
+- **Option 1:** Single 12-inch LP
+- **Option 2:** Double 12-inch LP
 
-Additionally, please provide separate itemized costs for the following options:
-- Printed standard jacket vs. Gatefold jacket
-- Standard inner sleeve vs. Printed inner sleeve
+For both scenarios, please provide pricing for:
+- 150 g black vinyl vs. 180 g black vinyl
+- Standard custom printed jacket vs. Gatefold jacket
+
+Please include an itemized breakdown of costs including:
+- Setup (lacquers, stampers)
+- Vinyl pressing unit cost
+- Printed vs standard inner sleeves
+- Test pressings
 - Shrink-wrap
-- Test pressing
-- Assembly and delivery to Montreal, QC
+- Assembly (including inserting a booklet and an edition card)
+- Delivery to Montreal, QC
+- Taxes
 
-Please include a full breakdown of costs (setup, mastering/cutting, printing, unit cost, taxes, shipping, etc.), required specifications for audio and artwork, and your current turnaround times. Also, please specify the validity period of your quote. 
+We would also like to clarify:
+- Is vinyl mastering included, or do you require vinyl-specific pre-mastered WAV files?
+- What are your recommended max playing times per side, and how do longer durations affect volume/quality?
+- Please explain your over-run and under-run policy, the expected production tolerance, and how additional or missing units are reflected on the final invoice.
+- What are your current turnaround times and the validity period of this quote?
 
-Please note that no order is confirmed yet, and final artwork files are still in preparation.
+Please note that no order is confirmed yet, and final audio/artwork files are still in preparation.
 
-Thank you for your time.
+Thank you for your time and assistance.
 
 Best regards,  
 Kam Dridi

@@ -16,13 +16,13 @@
 ## Suivi des fournisseurs
 
 ### VinylPressing.ca (VINYL PRESSING)
-- **Statut actuel :** DRAFT READY
+- **Statut actuel :** READY FOR REVIEW
 - **Date de préparation :** [Date]
 - **Date d'approbation :** [À CONFIRMER]
 - **Date d'envoi :** [À CONFIRMER]
 - **Date de réponse :** [À CONFIRMER]
-- **Personne contactée :** [À CONFIRMER]
-- **Prochaine action :** Attendre validation finale du dossier de devis.
+- **Personne contactée :** VinylPressing.ca quotation team (info@vinylpressing.ca)
+- **Prochaine action :** Create and review Gmail draft — do not send
 - **Notes :** [Aucune note pour le moment]
 
 ### CDM Print Montréal (COLLECTOR BOOKLET)

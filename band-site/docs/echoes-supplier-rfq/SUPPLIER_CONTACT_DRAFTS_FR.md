@@ -5,29 +5,44 @@
 *(Note : Pour les fournisseurs montréalais, utiliser d'abord cette version française. Garder la version anglaise disponible en dessous dans le corps du courriel).*
 
 ## PRESSAGE VINYLE
-**À :** FORMULAIRE DE CONTACT OFFICIEL / VinylPressing.ca  
+**ENGLISH VERSION RECOMMENDED FOR INITIAL CONTACT**
+
+**À :** info@vinylpressing.ca  
+*(Official contact form available on VinylPressing.ca)*  
 **Objet :** Demande de devis — KAM DRIDI — Production vinyle ECHOES UN LIVE IN BRASIL
 
 Bonjour,
 
 Je m'appelle Kam Dridi, artiste musical indépendant basé à Montréal. Je prépare actuellement la sortie physique de mon prochain projet, "ECHOES UN LIVE IN BRASIL", et je rassemble des devis comparatifs pour la production vinyle.
 
-Pourriez-vous me fournir une estimation pour un format LP 12 pouces, pour les quantités suivantes : 50, 100 et 250 exemplaires ?
+Pourriez-vous me fournir une estimation pour les quantités suivantes : 50, 100 et 250 exemplaires ?
+*(Si 250 exemplaires ne correspondent pas à un palier de production standard, merci de chiffrer le palier comparable le plus économique, par exemple 200 ou 300 exemplaires).*
 
-Nous souhaiterions comparer deux options :
-- Option A : vinyle noir 140 g
-- Option B : vinyle noir 180 g
+La durée finale de l'album n'étant pas encore confirmée, nous comparons deux scénarios principaux :
+- **Option 1 :** Single LP 12 pouces
+- **Option 2 :** Double LP 12 pouces
 
-De plus, pourriez-vous chiffrer séparément les options suivantes :
-- Pochette simple imprimée vs Pochette gatefold
-- Sous-pochette standard vs Sous-pochette imprimée
+Pour les deux scénarios, veuillez chiffrer :
+- Vinyle noir 150 g vs Vinyle noir 180 g
+- Pochette imprimée standard vs Pochette gatefold
+
+Merci d'inclure une ventilation détaillée des coûts comprenant :
+- Préparation (lacquers, stampers)
+- Coût unitaire du pressage
+- Sous-pochettes standard vs imprimées
+- Test pressings
 - Shrink-wrap
-- Test pressing
-- Assemblage et livraison à Montréal (QC)
+- Assemblage (incluant l'insertion d'un livret et d'une carte d'édition)
+- Livraison à Montréal (QC)
+- Taxes
 
-Merci d'inclure une ventilation complète des coûts (préparation, mastering/coupe, impression, coût unitaire, taxes, transport, etc.), les spécifications techniques requises pour l'audio et les visuels, ainsi que vos délais actuels. Veuillez également préciser la durée de validité de ce devis.
+Nous aimerions également clarifier les points suivants :
+- Le mastering vinyle est-il inclus ou nécessitez-vous des fichiers WAV pré-masterisés spécifiquement pour le vinyle ?
+- Quelle est la durée maximale recommandée par face, et comment des durées plus longues affectent-elles le volume et la qualité ?
+- Merci de préciser votre politique de surproduction et de sous-production (over-run/under-run), la tolérance habituelle et la façon dont les unités supplémentaires ou manquantes sont ajustées sur la facture finale.
+- Quels sont vos délais actuels et la durée de validité de ce devis ?
 
-Veuillez noter qu'aucune commande n'est encore confirmée et que les fichiers finaux sont toujours en préparation.
+Veuillez noter qu'aucune commande n'est encore confirmée et que les fichiers audio et graphiques sont toujours en préparation.
 
 Je vous remercie pour votre temps.
 
