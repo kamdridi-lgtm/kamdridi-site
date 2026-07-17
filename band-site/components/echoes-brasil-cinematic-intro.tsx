@@ -22,7 +22,7 @@ export function EchoesBrasilCinematicIntro() {
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const showDelay = prefersReduced ? 100 : 16400;
-    const hideDelay = prefersReduced ? 8000 : 23800;
+    const hideDelay = prefersReduced ? 12000 : 31500;
 
     const showTimer = window.setTimeout(() => setMounted(true), showDelay);
     const hideTimer = window.setTimeout(() => setMounted(false), hideDelay);
@@ -89,6 +89,9 @@ export function EchoesBrasilCinematicIntro() {
             <div className="home-promo-copy echoes-brasil-promo-copy">
               <p>EXPANDED LIVE EDITION · BRASIL 2026</p>
               <span>ECHOES UN LIVE IN BRASIL</span>
+              <strong className="echoes-brasil-cta">
+                OPEN RELEASE
+              </strong>
             </div>
           </Link>
           <div className="home-cinematic-embers echoes-brasil-embers">

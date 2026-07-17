@@ -2150,3 +2150,57 @@ textarea:focus {
   }
 }
 
+.echoes-brasil-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  min-height: 28px;
+  padding: 6px 11px;
+  border: 1px solid rgba(255, 190, 82, 0.48);
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(207, 91, 12, 0.92),
+      rgba(128, 38, 4, 0.94)
+    );
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.34),
+    0 0 18px rgba(220, 105, 14, 0.18);
+  color: #fff4dc;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.echoes-brasil-promo-intro .home-promo-link:hover .echoes-brasil-cta,
+.echoes-brasil-promo-intro .home-promo-link:focus-visible .echoes-brasil-cta {
+  transform: translateY(-1px);
+  border-color: rgba(255, 220, 145, 0.9);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.42),
+    0 0 26px rgba(240, 135, 28, 0.32);
+}
+
+@media (max-width: 700px) {
+  .echoes-brasil-cta {
+    margin-top: 6px;
+    min-height: 25px;
+    padding: 5px 9px;
+    font-size: 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .echoes-brasil-cta {
+    transition: none;
+  }
+}
+
