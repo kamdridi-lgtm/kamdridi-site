@@ -5,6 +5,7 @@ import {
   EchoesCostPlan,
   defaultEchoesCostPlans,
   calculateFinancials,
+  costPlanFieldDefinitions,
 } from "@/data/echoes-brasil-cost-planning";
 
 const LOCAL_STORAGE_KEY = "kamdridi_echoes_brasil_cost_plan_v1";
@@ -24,7 +25,28 @@ export default function EchoesBrasilMarginPlanner() {
     const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (saved) {
       try {
-        setPlans(JSON.parse(saved));
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length === 3) {
+          // Merge with default to ensure structure, reset invalid fields to null
+          const mergedPlans = defaultEchoesCostPlans.map((defaultPlan) => {
+            const savedPlan = parsed.find((p: any) => p.productSlug === defaultPlan.productSlug);
+            if (!savedPlan) return defaultPlan;
+            
+            const newPlan = { ...defaultPlan };
+            costPlanFieldDefinitions.forEach((def) => {
+              const val = savedPlan[def.key];
+              if (typeof val === "number" && !isNaN(val)) {
+                (newPlan as any)[def.key] = val;
+              } else {
+                (newPlan as any)[def.key] = null;
+              }
+            });
+            return newPlan;
+          });
+          setPlans(mergedPlans);
+        } else {
+          setPlans(defaultEchoesCostPlans);
+        }
       } catch (e) {
         setPlans(defaultEchoesCostPlans);
       }
@@ -100,51 +122,52 @@ function PlanSection({
 }) {
   const result = calculateFinancials(plan);
 
-  const getMissingFields = () => {
-    const missing = [];
-    if (plan.manufacturingCostCents === null) missing.push("Manufacturing cost");
-    if (plan.packagingCostCents === null) missing.push("Packaging cost");
-    if (plan.paymentFeePercent === null || plan.paymentFeeFixedCents === null)
-      missing.push("Payment fee");
-    if (plan.plannedQuantity === null) missing.push("Planned quantity");
-    return missing;
+  const productTitles: Record<string, string> = {
+    "echoes-brasil-expanded": "ECHOES UN LIVE IN BRASIL — EXPANDED EDITION",
+    "echoes-brasil-livreto": "ECHOES UN LIVE IN BRASIL — COLLECTOR BOOKLET",
+    "echoes-brasil-deluxe": "ECHOES UN LIVE IN BRASIL — DELUXE BOX + VINYL",
   };
 
-  const missingFields = getMissingFields();
+  const title = productTitles[plan.productSlug] || plan.productSlug;
 
   return (
     <div className="rounded-[20px] border border-white/5 bg-white/[0.02] p-6 lg:p-10">
       <div className="mb-8 border-b border-white/5 pb-4">
         <h3 className="text-2xl uppercase tracking-[0.1em] text-white">
-          {plan.productSlug}
+          {title}
         </h3>
-        <p className="mt-2 text-lg text-amber-500">{formatCAD(plan.salePriceCents)}</p>
+        <p className="mt-1 font-mono text-xs text-stone-500">{plan.productSlug}</p>
+        <p className="mt-4 text-lg text-amber-500">{formatCAD(plan.salePriceCents)}</p>
       </div>
 
       <div className="grid gap-12 lg:grid-cols-2">
         {/* INPUTS */}
         <div className="space-y-6">
-          <h4 className="text-sm uppercase tracking-widest text-stone-500">Estimates (Input Cents / %)</h4>
+          <div className="flex items-center justify-between">
+            <h4 className="text-sm uppercase tracking-widest text-stone-500">Estimates (Input)</h4>
+            <span className="text-[10px] text-stone-500">Enter 0 only when the cost has been confirmed as not applicable.</span>
+          </div>
           
           <div className="grid gap-4 sm:grid-cols-2">
-            <InputField label="Manufacturing (cents)" value={plan.manufacturingCostCents} onChange={(v) => updatePlan(plan.productSlug, "manufacturingCostCents", v)} />
-            <InputField label="Packaging (cents)" value={plan.packagingCostCents} onChange={(v) => updatePlan(plan.productSlug, "packagingCostCents", v)} />
-            <InputField label="Printing (cents)" value={plan.printingCostCents} onChange={(v) => updatePlan(plan.productSlug, "printingCostCents", v)} />
-            <InputField label="Inbound Freight (cents)" value={plan.inboundFreightCents} onChange={(v) => updatePlan(plan.productSlug, "inboundFreightCents", v)} />
-            <InputField label="Assembly (cents)" value={plan.assemblyCostCents} onChange={(v) => updatePlan(plan.productSlug, "assemblyCostCents", v)} />
-            <InputField label="Payment Fee (%)" value={plan.paymentFeePercent} onChange={(v) => updatePlan(plan.productSlug, "paymentFeePercent", v)} />
-            <InputField label="Payment Fixed (cents)" value={plan.paymentFeeFixedCents} onChange={(v) => updatePlan(plan.productSlug, "paymentFeeFixedCents", v)} />
-            <InputField label="Shipping Subsidy (cents)" value={plan.shippingSubsidyCents} onChange={(v) => updatePlan(plan.productSlug, "shippingSubsidyCents", v)} />
-            <InputField label="Returns Reserve (%)" value={plan.returnsReservePercent} onChange={(v) => updatePlan(plan.productSlug, "returnsReservePercent", v)} />
-            <InputField label="Marketing / Unit (cents)" value={plan.marketingCostPerUnitCents} onChange={(v) => updatePlan(plan.productSlug, "marketingCostPerUnitCents", v)} />
+            <InputField label="Manufacturing (cents)" value={plan.manufacturingCostCents} onChange={(v) => updatePlan(plan.productSlug, "manufacturingCostCents", v)} type="cents" />
+            <InputField label="Packaging (cents)" value={plan.packagingCostCents} onChange={(v) => updatePlan(plan.productSlug, "packagingCostCents", v)} type="cents" />
+            <InputField label="Printing (cents)" value={plan.printingCostCents} onChange={(v) => updatePlan(plan.productSlug, "printingCostCents", v)} type="cents" />
+            <InputField label="Inbound Freight (cents)" value={plan.inboundFreightCents} onChange={(v) => updatePlan(plan.productSlug, "inboundFreightCents", v)} type="cents" />
+            <InputField label="Assembly (cents)" value={plan.assemblyCostCents} onChange={(v) => updatePlan(plan.productSlug, "assemblyCostCents", v)} type="cents" />
+            <InputField label="Payment Fee (%)" value={plan.paymentFeePercent} onChange={(v) => updatePlan(plan.productSlug, "paymentFeePercent", v)} type="percent" />
+            <InputField label="Payment Fixed (cents)" value={plan.paymentFeeFixedCents} onChange={(v) => updatePlan(plan.productSlug, "paymentFeeFixedCents", v)} type="cents" />
+            <InputField label="Shipping Subsidy (cents)" value={plan.shippingSubsidyCents} onChange={(v) => updatePlan(plan.productSlug, "shippingSubsidyCents", v)} type="cents" />
+            <InputField label="Returns Reserve (%)" value={plan.returnsReservePercent} onChange={(v) => updatePlan(plan.productSlug, "returnsReservePercent", v)} type="percent" />
+            <InputField label="Marketing / Unit (cents)" value={plan.marketingCostPerUnitCents} onChange={(v) => updatePlan(plan.productSlug, "marketingCostPerUnitCents", v)} type="cents" />
+            <InputField label="Other Variable Cost (cents)" value={plan.otherVariableCostCents} onChange={(v) => updatePlan(plan.productSlug, "otherVariableCostCents", v)} type="cents" />
             
             <div className="col-span-full mt-4">
               <h4 className="mb-4 text-xs uppercase tracking-widest text-stone-500">Fixed Costs & Volume</h4>
               <div className="grid gap-4 sm:grid-cols-2">
-                <InputField label="Artwork (cents)" value={plan.oneTimeArtworkCostCents} onChange={(v) => updatePlan(plan.productSlug, "oneTimeArtworkCostCents", v)} />
-                <InputField label="Setup (cents)" value={plan.oneTimeSetupCostCents} onChange={(v) => updatePlan(plan.productSlug, "oneTimeSetupCostCents", v)} />
-                <InputField label="Prototype (cents)" value={plan.oneTimePrototypeCostCents} onChange={(v) => updatePlan(plan.productSlug, "oneTimePrototypeCostCents", v)} />
-                <InputField label="Planned Quantity" value={plan.plannedQuantity} onChange={(v) => updatePlan(plan.productSlug, "plannedQuantity", v)} />
+                <InputField label="Artwork (cents)" value={plan.oneTimeArtworkCostCents} onChange={(v) => updatePlan(plan.productSlug, "oneTimeArtworkCostCents", v)} type="cents" />
+                <InputField label="Setup (cents)" value={plan.oneTimeSetupCostCents} onChange={(v) => updatePlan(plan.productSlug, "oneTimeSetupCostCents", v)} type="cents" />
+                <InputField label="Prototype (cents)" value={plan.oneTimePrototypeCostCents} onChange={(v) => updatePlan(plan.productSlug, "oneTimePrototypeCostCents", v)} type="cents" />
+                <InputField label="Planned Quantity" value={plan.plannedQuantity} onChange={(v) => updatePlan(plan.productSlug, "plannedQuantity", v)} type="quantity" />
               </div>
             </div>
           </div>
@@ -155,14 +178,52 @@ function PlanSection({
           <h4 className="mb-6 text-sm uppercase tracking-widest text-stone-500">Financial Projection</h4>
           
           {!result.isComplete ? (
-            <div className="rounded-lg border border-red-900/50 bg-red-950/20 p-6">
-              <p className="font-mono text-sm font-bold text-red-500">CALCULATION INCOMPLETE</p>
-              <p className="mt-2 text-xs text-red-400">Missing:</p>
-              <ul className="mt-2 list-inside list-disc text-xs text-stone-400">
-                {missingFields.map((f) => (
-                  <li key={f}>{f}</li>
-                ))}
-              </ul>
+            <div className="space-y-4">
+              <div className="rounded-lg border border-red-900/50 bg-red-950/20 p-6">
+                <p className="font-mono text-sm font-bold text-red-500">CALCULATION INCOMPLETE</p>
+                {result.missingFields && result.missingFields.length > 0 && (
+                  <div className="mt-4">
+                    <p className="text-xs text-red-400">Missing values:</p>
+                    <ul className="mt-2 list-inside list-disc text-xs text-stone-400">
+                      {result.missingFields.map((f) => (
+                        <li key={f}>{f}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {result.invalidFields && result.invalidFields.length > 0 && (
+                  <div className="mt-4 border-t border-red-900/30 pt-4">
+                    <p className="text-xs text-red-400">Invalid values:</p>
+                    <ul className="mt-2 list-inside list-disc text-xs text-stone-400">
+                      {result.invalidFields.map((f) => (
+                        <li key={f}>{f}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : result.profitPerUnit! <= 0 ? (
+            <div className="space-y-6 rounded-lg border border-red-900/30 bg-black/30 p-6">
+               <div className="mb-4 rounded border border-red-900/50 bg-red-950/30 p-3 text-center">
+                 <span className="font-mono text-sm font-bold text-red-500">NEGATIVE UNIT ECONOMICS</span>
+               </div>
+               <ResultRow label="Sale Price" value={formatCAD(plan.salePriceCents)} />
+               <ResultRow label="Variable Cost" value={formatCAD(result.variableCost!)} />
+               <ResultRow label="Gross Profit / Unit" value={formatCAD(result.profitPerUnit!)} />
+               <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                 <span className="text-xs uppercase tracking-widest text-stone-400">Gross Margin</span>
+                 <span className="font-mono text-lg text-red-500">
+                   {result.grossMarginPercent!.toFixed(2)}%
+                 </span>
+               </div>
+               <ResultRow label="Fixed Costs" value={formatCAD(result.fixedCosts!)} />
+               <ResultRow label="Planned Quantity" value={plan.plannedQuantity?.toString() || "0"} />
+               <ResultRow label="Total Est. Profit" value={formatCAD(result.totalProfit!)} />
+               <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                 <span className="text-xs uppercase tracking-widest text-stone-400">Break-Even Units</span>
+                 <span className="font-mono text-sm font-bold text-red-500">NOT REACHABLE</span>
+               </div>
             </div>
           ) : (
             <div className="space-y-6 rounded-lg border border-white/10 bg-black/30 p-6">
@@ -172,7 +233,7 @@ function PlanSection({
               
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <span className="text-xs uppercase tracking-widest text-stone-400">Gross Margin</span>
-                <span className={`font-mono text-lg ${result.grossMarginPercent! < 0 ? 'text-red-500' : result.grossMarginPercent! < 30 ? 'text-amber-500' : 'text-green-500'}`}>
+                <span className={`font-mono text-lg ${result.grossMarginPercent! < 30 ? 'text-amber-500' : 'text-green-500'}`}>
                   {result.grossMarginPercent!.toFixed(2)}%
                 </span>
               </div>
@@ -180,7 +241,7 @@ function PlanSection({
               <ResultRow label="Fixed Costs" value={formatCAD(result.fixedCosts!)} />
               <ResultRow label="Planned Quantity" value={plan.plannedQuantity?.toString() || "0"} />
               <ResultRow label="Total Est. Profit" value={formatCAD(result.totalProfit!)} />
-              <ResultRow label="Break-Even Units" value={result.breakEvenUnits?.toString() || "N/A"} />
+              <ResultRow label="Break-Even Units" value={result.breakEvenUnits?.toString() || "0"} />
             </div>
           )}
 
@@ -221,12 +282,19 @@ function PlanSection({
   );
 }
 
-function InputField({ label, value, onChange }: { label: string; value: number | null; onChange: (v: string) => void }) {
+function InputField({ label, value, onChange, type }: { label: string; value: number | null; onChange: (v: string) => void; type: "cents" | "percent" | "quantity" }) {
+  const min = type === "quantity" ? "1" : "0";
+  const step = type === "percent" ? "0.01" : "1";
+  const max = type === "percent" ? "100" : undefined;
+
   return (
     <div className="flex flex-col gap-1">
       <label className="text-[10px] uppercase tracking-widest text-stone-500">{label}</label>
       <input
         type="number"
+        min={min}
+        max={max}
+        step={step}
         className="rounded border border-white/10 bg-transparent px-3 py-2 font-mono text-sm text-white placeholder-stone-700 outline-none focus:border-amber-500"
         placeholder="À CONFIRMER"
         value={value === null ? "" : value}
