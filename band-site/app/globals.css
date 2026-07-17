@@ -1874,3 +1874,279 @@ textarea:focus {
     width: min(172px, calc(100vw - 24px));
   }
 }
+
+/* ============================================================
+   ECHOES UN LIVE IN BRASIL — FEATURED CARD PREMIUM STYLES
+   Isolated to .echoes-brasil-* — no impact on other cards
+   ============================================================ */
+
+/* Position: bottom-center, larger than ACT II and Salieri */
+.home-cinematic-intro.echoes-brasil-promo-intro {
+  left: 50%;
+  right: auto;
+  top: auto;
+  bottom: 22px;
+  transform: translateX(-50%);
+  width: min(278px, calc(100vw - 32px));
+  z-index: 52; /* Below salieri (55) so they don't overlap on small screens */
+}
+
+/* Override animation transform-origin for centered card */
+.echoes-brasil-promo-intro .home-cinematic-shake {
+  transform-origin: center bottom;
+}
+
+/* Premium card wrapper — amber glow, richer shadow, breathing border */
+.echoes-brasil-promo-card {
+  filter: blur(0);
+  transform-origin: center bottom;
+  will-change: transform, opacity, filter;
+  animation: homePromoCard 7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Outer ambient glow ring around the card */
+.echoes-brasil-promo-card::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  z-index: -1;
+  border-radius: 20px;
+  background: transparent;
+  box-shadow:
+    0 0 38px 8px rgba(201, 97, 14, 0.28),
+    0 0 80px 16px rgba(244, 148, 32, 0.14),
+    0 28px 80px rgba(0, 0, 0, 0.72);
+  animation: echoesBrasilGlowPulse 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Override the promo link for the Echoes card */
+.echoes-brasil-promo-intro .home-promo-link {
+  border-color: rgba(228, 132, 28, 0.72);
+  background: linear-gradient(
+    175deg,
+    rgba(24, 14, 6, 0.82),
+    rgba(10, 5, 2, 0.92)
+  );
+  box-shadow:
+    0 22px 64px rgba(0, 0, 0, 0.64),
+    0 0 0 1px rgba(244, 172, 56, 0.12),
+    0 0 32px rgba(186, 90, 8, 0.18);
+  transition:
+    transform 0.28s ease,
+    border-color 0.32s ease,
+    box-shadow 0.32s ease;
+}
+
+/* Premium animated border shimmer (::before) */
+.echoes-brasil-promo-intro .home-promo-link::before {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(244, 162, 32, 0.58),
+      transparent 28%,
+      rgba(212, 88, 12, 0.38)
+    ),
+    radial-gradient(
+      circle at 18% 10%,
+      rgba(255, 182, 72, 0.62),
+      transparent 34%
+    );
+  opacity: 0.36;
+  border-radius: 15px;
+  animation: echoesBrasilBorderPulse 5s ease-in-out infinite;
+}
+
+/* Shimmer sweep overlay (::after) — slow diagonal light sweep */
+.echoes-brasil-promo-intro .home-promo-link::after {
+  background: linear-gradient(
+    118deg,
+    transparent 0%,
+    transparent 38%,
+    rgba(255, 210, 120, 0.18) 50%,
+    transparent 62%,
+    transparent 100%
+  );
+  opacity: 0;
+  border: 1px solid rgba(255, 200, 100, 0.14);
+  animation: echoesBrasilShimmer 6s ease-in-out infinite;
+}
+
+/* Stronger hover — more elevation, brighter border, richer glow */
+.echoes-brasil-promo-intro .home-promo-link:hover {
+  --promo-hover-scale: 1.032;
+  border-color: rgba(255, 195, 80, 0.95);
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.72),
+    0 0 0 1px rgba(255, 198, 90, 0.16),
+    0 0 48px rgba(210, 110, 14, 0.32),
+    0 0 96px rgba(186, 74, 8, 0.16);
+}
+
+.echoes-brasil-promo-intro .home-promo-link:hover::before {
+  opacity: 0.68;
+  transform: translate3d(0, 0, 0) scale(1.02);
+}
+
+/* Poster glow — warm amber/red tones instead of blue */
+.echoes-brasil-poster-glow {
+  background:
+    radial-gradient(circle at 26% 36%, rgba(230, 108, 18, 0.26), transparent 24%),
+    radial-gradient(circle at 74% 18%, rgba(255, 172, 56, 0.18), transparent 28%),
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.36),
+      transparent 22%,
+      transparent 76%,
+      rgba(0, 0, 0, 0.44)
+    );
+  mix-blend-mode: screen;
+  animation:
+    homePromoGlow 3.6s ease-in-out infinite,
+    echoesBrasilGlowPulse 5s ease-in-out infinite;
+}
+
+/* Copy strip — warmer tones */
+.echoes-brasil-promo-copy {
+  border-color: rgba(220, 130, 28, 0.44) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 6, 3, 0.52),
+    rgba(10, 5, 2, 0.88)
+  ) !important;
+}
+
+/* CTA label inside copy — brighter amber */
+.echoes-brasil-promo-copy p {
+  color: rgba(255, 185, 72, 0.92) !important;
+  letter-spacing: 0.17em;
+}
+
+.echoes-brasil-promo-copy span {
+  color: #fff8ee !important;
+  text-shadow: 0 0 18px rgba(244, 172, 48, 0.42);
+}
+
+/* NEW RELEASE badge */
+.echoes-brasil-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 8;
+  padding: 3px 8px;
+  background: linear-gradient(135deg, rgba(196, 68, 10, 0.92), rgba(148, 38, 4, 0.88));
+  border: 1px solid rgba(255, 140, 60, 0.62);
+  box-shadow: 0 2px 14px rgba(180, 60, 8, 0.36);
+  color: #ffe8c0;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  pointer-events: none;
+  border-radius: 2px;
+  animation: echoesBrasilBadgePulse 4s ease-in-out infinite;
+}
+
+/* Particle embers — warmer amber/orange colour override */
+.echoes-brasil-embers span {
+  background: radial-gradient(
+    circle,
+    rgba(255, 172, 56, 0.9),
+    rgba(220, 88, 12, 0.6),
+    transparent
+  ) !important;
+}
+
+/* --- KEYFRAMES --- */
+
+/* Breathing glow pulse — very slow, elegant */
+@keyframes echoesBrasilGlowPulse {
+  0%, 100% {
+    opacity: 0.72;
+    box-shadow:
+      0 0 38px 8px rgba(201, 97, 14, 0.28),
+      0 0 80px 16px rgba(244, 148, 32, 0.14),
+      0 28px 80px rgba(0, 0, 0, 0.72);
+  }
+  50% {
+    opacity: 1;
+    box-shadow:
+      0 0 52px 12px rgba(218, 108, 14, 0.38),
+      0 0 100px 22px rgba(244, 162, 42, 0.2),
+      0 34px 96px rgba(0, 0, 0, 0.78);
+  }
+}
+
+/* Border slow pulse */
+@keyframes echoesBrasilBorderPulse {
+  0%, 100% {
+    opacity: 0.36;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    opacity: 0.58;
+    transform: translate3d(0, 0, 0) scale(1.012);
+  }
+}
+
+/* Diagonal shimmer sweep — one pass every 6s */
+@keyframes echoesBrasilShimmer {
+  0%, 48%, 100% {
+    opacity: 0;
+    transform: translate3d(-32%, 0, 0);
+  }
+  62%, 78% {
+    opacity: 1;
+    transform: translate3d(28%, 0, 0);
+  }
+  88% {
+    opacity: 0;
+    transform: translate3d(46%, 0, 0);
+  }
+}
+
+/* Badge soft pulse */
+@keyframes echoesBrasilBadgePulse {
+  0%, 100% { box-shadow: 0 2px 14px rgba(180, 60, 8, 0.36); }
+  50% { box-shadow: 0 2px 22px rgba(220, 80, 10, 0.54); }
+}
+
+/* ---- MOBILE (≤700px) ---- */
+@media (max-width: 700px) {
+  .home-cinematic-intro.echoes-brasil-promo-intro {
+    left: 50%;
+    right: auto;
+    bottom: 100px; /* Sit above salieri which is at bottom: 16px on mobile */
+    transform: translateX(-50%);
+    width: min(196px, calc(100vw - 24px));
+    z-index: 52;
+  }
+}
+
+/* ---- SMALL DESKTOP < 900px: stack below salieri ---- */
+@media (min-width: 701px) and (max-width: 900px) {
+  .home-cinematic-intro.echoes-brasil-promo-intro {
+    left: 50%;
+    bottom: 18px;
+    width: min(254px, calc(50vw - 32px));
+  }
+}
+
+/* ---- PREFERS-REDUCED-MOTION ---- */
+@media (prefers-reduced-motion: reduce) {
+  .echoes-brasil-promo-card::after,
+  .echoes-brasil-promo-intro .home-promo-link::before,
+  .echoes-brasil-promo-intro .home-promo-link::after,
+  .echoes-brasil-poster-glow,
+  .echoes-brasil-badge {
+    animation: none !important;
+  }
+
+  .echoes-brasil-promo-card::after {
+    opacity: 0.5;
+    box-shadow:
+      0 0 38px 8px rgba(201, 97, 14, 0.22),
+      0 28px 60px rgba(0, 0, 0, 0.6);
+  }
+}
+

@@ -80,10 +80,11 @@ export function EchoesBrasilCinematicIntro() {
                 alt="ECHOES UN LIVE IN BRASIL — front cover"
                 fill
                 priority
-                sizes="(max-width: 700px) 180px, 260px"
+                sizes="(max-width: 700px) 196px, 278px"
                 className="home-cinematic-poster"
               />
               <div className="home-cinematic-poster-glow echoes-brasil-poster-glow" />
+              <span className="echoes-brasil-badge" aria-hidden="true">NEW RELEASE</span>
             </div>
             <div className="home-promo-copy echoes-brasil-promo-copy">
               <p>EXPANDED LIVE EDITION · BRASIL 2026</p>
