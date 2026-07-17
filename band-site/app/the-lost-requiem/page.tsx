@@ -4,6 +4,7 @@ import {
   AudioGuidePlayer,
   LostRequiemHero,
   LostRequiemManifesto,
+  LostRequiemPhaseTwo,
   MuseumLayout,
   MuseumProgress
 } from "@/components/lost-requiem";
@@ -39,12 +40,34 @@ export const metadata: Metadata = {
 
 export default function LostRequiemPage() {
   return (
-    <div className={`${styles.routeScope} ${displayFont.variable} ${bodyFont.variable}`}>
+    <div
+      className={`${styles.routeScope} ${displayFont.variable} ${bodyFont.variable}`}
+      data-lost-requiem-route
+    >
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            body:has([data-lost-requiem-route]) header,
+            body:has([data-lost-requiem-route]) > header,
+            body:has([data-lost-requiem-route]) [class~="min-h-screen"] > header,
+            body:has([data-lost-requiem-route]) [class~="min-h-screen"] > div:first-child:has(a[target="_blank"]),
+            body:has([data-lost-requiem-route]) > div > div > div:first-child:has(a[target="_blank"]),
+            body:has([data-lost-requiem-route]) [data-site-header],
+            body:has([data-lost-requiem-route]) [data-global-nav],
+            body:has([data-lost-requiem-route]) .site-header,
+            body:has([data-lost-requiem-route]) .global-nav {
+              display: none !important;
+            }
+          `
+        }}
+      />
       <MuseumLayout>
         <MuseumProgress />
         <main id="lost-requiem-content" className={styles.main}>
           <LostRequiemHero />
           <LostRequiemManifesto />
+          <LostRequiemPhaseTwo />
+          <div className={styles.footerFade} aria-hidden="true" />
         </main>
         <AudioGuidePlayer />
       </MuseumLayout>

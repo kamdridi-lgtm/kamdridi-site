@@ -35,57 +35,63 @@ export function AudioGuidePlayer() {
 
   return (
     <aside id="audio-guide" className={styles.audioGuide} aria-label="Audioguide">
-      <div className={styles.audioHeading}>
-        <span className={styles.audioStatus} aria-hidden="true" />
-        <div>
-          <strong>Audio Guide</strong>
-          <span>{available ? "Requiem" : "Audio demnächst verfügbar"}</span>
-        </div>
-      </div>
+      {!available ? (
+        <p className={styles.audioUnavailable}>
+          <span className={styles.audioStatus} aria-hidden="true" />
+          <span>Audio Guide — Demnächst verfügbar</span>
+        </p>
+      ) : (
+        <>
+          <div className={styles.audioHeading}>
+            <span className={styles.audioStatus} aria-hidden="true" />
+            <div>
+              <strong>Audio Guide</strong>
+              <span>Requiem</span>
+            </div>
+          </div>
 
-      <div className={styles.audioControls}>
-        <button
-          type="button"
-          onClick={togglePlayback}
-          disabled={!available}
-          aria-label={playing ? "Audio pausieren" : "Audio abspielen"}
-        >
-          {playing ? "Pause" : "Play"}
-        </button>
+          <div className={styles.audioControls}>
+            <button
+              type="button"
+              onClick={togglePlayback}
+              aria-label={playing ? "Audio pausieren" : "Audio abspielen"}
+            >
+              {playing ? "Pause" : "Play"}
+            </button>
 
-        <label className={styles.progressLabel}>
-          <span className={styles.srOnly}>Fortschritt</span>
-          <input
-            type="range"
-            min="0"
-            max={duration || 0}
-            value={Math.min(currentTime, duration || 0)}
-            disabled={!available}
-            onChange={(event) => {
-              const nextTime = Number(event.target.value);
-              if (audioRef.current) audioRef.current.currentTime = nextTime;
-              setCurrentTime(nextTime);
-            }}
-          />
-        </label>
+            <label className={styles.progressLabel}>
+              <span className={styles.srOnly}>Fortschritt</span>
+              <input
+                type="range"
+                min="0"
+                max={duration || 0}
+                value={Math.min(currentTime, duration || 0)}
+                onChange={(event) => {
+                  const nextTime = Number(event.target.value);
+                  if (audioRef.current) audioRef.current.currentTime = nextTime;
+                  setCurrentTime(nextTime);
+                }}
+              />
+            </label>
 
-        <span className={styles.audioTime}>
-          {formatTime(currentTime)} / {formatTime(duration)}
-        </span>
+            <span className={styles.audioTime}>
+              {formatTime(currentTime)} / {formatTime(duration)}
+            </span>
 
-        <button
-          type="button"
-          disabled={!available}
-          onClick={() => {
-            const nextMuted = !muted;
-            setMuted(nextMuted);
-            if (audioRef.current) audioRef.current.muted = nextMuted;
-          }}
-          aria-label={muted ? "Ton einschalten" : "Ton stummschalten"}
-        >
-          {muted ? "Ton an" : "Stumm"}
-        </button>
-      </div>
+            <button
+              type="button"
+              onClick={() => {
+                const nextMuted = !muted;
+                setMuted(nextMuted);
+                if (audioRef.current) audioRef.current.muted = nextMuted;
+              }}
+              aria-label={muted ? "Ton einschalten" : "Ton stummschalten"}
+            >
+              {muted ? "Ton an" : "Stumm"}
+            </button>
+          </div>
+        </>
+      )}
 
       {available ? (
         <audio
