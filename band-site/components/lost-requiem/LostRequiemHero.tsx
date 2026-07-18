@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./lost-requiem.module.css";
 
 export function LostRequiemHero() {
@@ -20,16 +21,15 @@ export function LostRequiemHero() {
         </div>
       </div>
 
-      <div
-        className={`${styles.artworkFrame} ${styles.heroArtwork}`}
-        role="img"
-        aria-label="Reservierter Ausstellungsrahmen für das zentrale Manuskript von The Lost Requiem"
-      >
-        <div className={styles.placeholderPaper} aria-hidden="true">
-          <span>REQUIEM</span>
-          <small>Für Klavier · K. Dridi</small>
-        </div>
-        <p className={styles.assetLabel}>Mockup 19 · Hero-Vitrine</p>
+      <div className={styles.heroArtworkWrapper}>
+        <Image
+          src="/the-lost-requiem/images/02-museum-case-hero.webp"
+          alt="Reservierter Ausstellungsrahmen für das zentrale Manuskript von The Lost Requiem"
+          fill
+          priority
+          sizes="(max-width: 900px) 100vw, 50vw"
+          className={styles.sceneImage}
+        />
       </div>
 
       <a className={styles.scrollCue} href="#werk" aria-label="Zum Werk weitergehen">

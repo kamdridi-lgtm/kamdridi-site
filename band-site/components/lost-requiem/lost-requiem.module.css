@@ -394,6 +394,25 @@
   background: rgba(15, 12, 10, 0.92);
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.48);
   backdrop-filter: blur(14px);
+  transition: width 0.3s ease, padding 0.3s ease, border-radius 0.3s ease;
+}
+
+.audioGuideCollapsed {
+  width: auto;
+  border-radius: 2rem;
+  padding: 0.5rem 1.2rem;
+}
+
+.audioGuideToggle {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
 }
 
 .audioHeading {
@@ -590,9 +609,10 @@
 }
 
 .finalFade {
-  height: 30rem;
-  background: linear-gradient(to bottom, transparent, #000);
+  height: 40rem;
+  background: linear-gradient(to bottom, transparent, var(--lr-black) 80%);
   pointer-events: none;
+  margin-bottom: -1px;
 }
 
 .archivePlaceholder .placeholderPaper {
@@ -619,8 +639,8 @@
 .museumScene {
   position: relative;
   display: grid;
-  gap: clamp(3rem, 8vw, 8rem);
-  margin: clamp(6rem, 15vw, 15rem) auto;
+  gap: clamp(2rem, 4vw, 4rem);
+  margin: clamp(4rem, 8vw, 8rem) auto;
   align-items: center;
 }
 
@@ -649,11 +669,11 @@
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 50vh;
+  min-height: 70vh;
 }
 
 .sceneFull .sceneImageWrapper {
-  min-height: 85vh;
+  min-height: 95vh;
 }
 
 .sceneImage {
@@ -676,7 +696,7 @@
 .sceneTextInner h2 {
   margin: 0;
   font-family: var(--lr-display-font), Georgia, serif;
-  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-size: clamp(3rem, 8vw, 5rem);
   font-weight: 400;
   line-height: 0.98;
 }
@@ -684,7 +704,7 @@
 .sceneDescription {
   margin: 1.5rem 0 0;
   color: rgba(230, 223, 211, 0.76);
-  font-size: clamp(1.05rem, 1.45vw, 1.25rem);
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
   line-height: 1.75;
 }
 
@@ -722,8 +742,8 @@
 @media (max-width: 900px) {
   .sceneCase {
     grid-template-columns: 1fr;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
   .sceneCase:nth-child(even) .sceneImageWrapper {
@@ -731,6 +751,6 @@
   }
 
   .sceneImageWrapper {
-    min-height: 40vh;
+    min-height: 60vh;
   }
 }
