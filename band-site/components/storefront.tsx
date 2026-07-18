@@ -32,6 +32,25 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
     } else if (purchaseState === "cancelled") {
       setStatus("Checkout cancelled.");
     }
+    
+    const filterParam = searchParams.get("filter");
+    if (filterParam) {
+      setActiveFilter(filterParam);
+    }
+    
+    const hash = window.location.hash;
+    if (hash) {
+      setTimeout(() => {
+        const el = document.querySelector(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+          el.classList.add("ring-2", "ring-[#f4c66a]", "ring-offset-4", "ring-offset-black", "transition-all", "duration-1000");
+          setTimeout(() => {
+            el.classList.remove("ring-2", "ring-[#f4c66a]", "ring-offset-4", "ring-offset-black");
+          }, 3000);
+        }
+      }, 300);
+    }
   }, [clearCart, searchParams]);
 
   const allProducts = getVisibleCommerceProducts();
@@ -60,7 +79,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
     const isSoldOut = product.saleMode === "sold_out";
 
     return (
-      <div key={product.id} className="group relative flex flex-col overflow-hidden rounded-[24px] border border-white/10 bg-black/40">
+      <div key={product.id} id={product.id} className="group relative flex flex-col overflow-hidden rounded-[24px] border border-white/10 bg-black/40">
         <div className="relative aspect-square overflow-hidden bg-black/60">
           <Image
             src={product.images[0]}
@@ -139,7 +158,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
 
   const filters = [
     { label: "ALL", value: "ALL" },
-    { label: "ECHOES BRASIL", value: "echoes-brasil" },
+    { label: "ECHOES BRASIL", value: "echoes-un-live-in-brasil" },
     { label: "SALIERI", value: "salieris-hands" },
     { label: "ECHOES UNEARTHED", value: "echoes-unearthed" },
     { label: "KAMDRIDI", value: "kamdridi-core" },
@@ -152,8 +171,8 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
     return p.projectSlug === activeFilter;
   });
 
-  const featured = filteredProducts.filter(p => p.id === "kamdridi-gold-logo-tee" || p.id === "echoes-unearthed-crest-tee" || p.id === "echoes-brasil-expanded");
-  const echoesBrasil = filteredProducts.filter(p => p.projectSlug === "echoes-brasil" && !featured.includes(p));
+  const featured = filteredProducts.filter(p => p.id === "kamdridi-gold-logo-tee" || p.id === "echoes-unearthed-crest-tee" || p.id === "echoes-brasil-expanded-2026");
+  const echoesBrasil = filteredProducts.filter(p => p.projectSlug === "echoes-un-live-in-brasil" && !featured.includes(p));
   const salieri = filteredProducts.filter(p => p.projectSlug === "salieris-hands");
   const echoesUnearthed = filteredProducts.filter(p => p.projectSlug === "echoes-unearthed" && !featured.includes(p));
   const kamdridiCore = filteredProducts.filter(p => p.projectSlug === "kamdridi-core" && !featured.includes(p) && p.category !== "Digital Access");
