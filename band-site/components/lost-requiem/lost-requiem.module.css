@@ -581,3 +581,37 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+.cinematicTransition {
+  height: 24rem;
+  background: linear-gradient(to bottom, transparent, rgba(20, 15, 10, 0.4), transparent);
+  margin: 4rem 0;
+  pointer-events: none;
+}
+
+.finalFade {
+  height: 30rem;
+  background: linear-gradient(to bottom, transparent, #000);
+  pointer-events: none;
+}
+
+.archivePlaceholder .placeholderPaper {
+  background:
+    linear-gradient(105deg, transparent 46%, rgba(83, 54, 31, 0.15) 49%, transparent 52%),
+    radial-gradient(circle at 80% 20%, rgba(100, 67, 36, 0.2), transparent 20%),
+    #d4c8b2;
+}
+
+.genesisPlaceholder .placeholderPaper {
+  background:
+    linear-gradient(45deg, transparent 20%, rgba(83, 54, 31, 0.1) 25%, transparent 30%),
+    radial-gradient(circle at 10% 90%, rgba(100, 67, 36, 0.25), transparent 25%),
+    #c4b69d;
+}
+
+.concertPlaceholder .placeholderPaper {
+  background:
+    linear-gradient(160deg, transparent 60%, rgba(83, 54, 31, 0.1) 65%, transparent 70%),
+    radial-gradient(circle at 50% 50%, rgba(100, 67, 36, 0.15), transparent 30%),
+    #e1d7c3;
+}

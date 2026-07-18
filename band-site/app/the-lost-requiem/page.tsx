@@ -5,7 +5,8 @@ import {
   LostRequiemHero,
   LostRequiemManifesto,
   MuseumLayout,
-  MuseumProgress
+  MuseumProgress,
+  LostRequiemPhaseTwo
 } from "@/components/lost-requiem";
 import styles from "@/components/lost-requiem/lost-requiem.module.css";
 
@@ -45,6 +46,7 @@ export default function LostRequiemPage() {
         <main id="lost-requiem-content" className={styles.main}>
           <LostRequiemHero />
           <LostRequiemManifesto />
+          <LostRequiemPhaseTwo />
         </main>
         <AudioGuidePlayer />
       </MuseumLayout>
