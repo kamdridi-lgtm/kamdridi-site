@@ -3,13 +3,14 @@ import Stripe from "stripe";
 import { getStripeServer } from "@/lib/stripe";
 import { createPrintfulOrderFromSession } from "@/lib/printful";
 import { updateLabelApplication } from "@/lib/label-storage";
+import { processCommerceOrder, NotificationStatus } from "@/lib/commerce-order-processing";
 
-async function sendAdminOrderNotification(session: Stripe.Checkout.Session, lineItems: Stripe.ApiList<Stripe.LineItem>) {
+async function sendAdminOrderNotification(session: Stripe.Checkout.Session, lineItems: Stripe.ApiList<Stripe.LineItem>): Promise<NotificationStatus> {
   const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL;
   
   if (!adminEmail) {
-    console.warn(`[Webhook] WARNING: ADMIN_NOTIFICATION_EMAIL not set. Order ${session.id} recorded in Stripe but email notification omitted.`);
-    return;
+    console.warn(`[Webhook] ADMIN ORDER EMAIL NOT SENT — PROVIDER NOT CONFIGURED. Order ${session.id} recorded in Stripe but email notification omitted.`);
+    return "skipped_not_configured";
   }
   
   // Collect order variables for potential email API
@@ -33,41 +34,8 @@ async function sendAdminOrderNotification(session: Stripe.Checkout.Session, line
   console.log(`[Webhook] Prepared email payload for ${adminEmail}: Session ${session.id}, Customer ${customerEmail}, Total $${total}`);
   console.log(`[Webhook] Products: ${itemsList}, Projects: ${projects}, Preorder: ${hasPreorder}, Physical: ${isPhysical}, Address: ${address}`);
   console.log(`[Webhook] Stripe Link: ${dashboardLink}`);
-  // External email sending (e.g. Resend, Nodemailer) would execute here when configured.
-}
-
-async function processCommerceOrderFromSession(session: Stripe.Checkout.Session, lineItems: Stripe.ApiList<Stripe.LineItem>) {
-  // Classification
-  const manualItems = lineItems.data.filter(item => {
-    const fm = item.price?.product && (item.price.product as Stripe.Product).metadata?.fulfillmentMode;
-    return fm === "manual_physical" || fm === "manual_preorder" || fm === "digital_manual" || fm === "game_access" || !fm;
-  });
   
-  const printfulItems = lineItems.data.filter(item => {
-    const fm = item.price?.product && (item.price.product as Stripe.Product).metadata?.fulfillmentMode;
-    return fm === "printful";
-  });
-
-  // Non-blocking notification for manual and digital orders
-  if (manualItems.length > 0) {
-    Promise.allSettled([sendAdminOrderNotification(session, lineItems)]).then(results => {
-      if (results[0].status === 'rejected') {
-        console.error(`[Webhook] Failed to send admin notification for session ${session.id}`, results[0].reason);
-      }
-    });
-  }
-
-  // Printful fulfillment for printful items
-  if (printfulItems.length > 0) {
-    try {
-      // NOTE: Using session.id as external_id to prevent duplicate orders
-      await createPrintfulOrderFromSession(session, { data: printfulItems, has_more: false, object: "list", url: "" });
-    } catch (error) {
-      console.error(`[Webhook] Failed Printful fulfillment for session ${session.id}`, error);
-      // HTTP 500 is ONLY used here to allow Stripe to retry the Printful fulfillment
-      throw error; 
-    }
-  }
+  return "sent";
 }
 
 export async function POST(request: Request) {
@@ -119,7 +87,14 @@ export async function POST(request: Request) {
       });
 
       try {
-        await processCommerceOrderFromSession(session, lineItems);
+        await processCommerceOrder({
+          session,
+          lineItems,
+          sendNotification: sendAdminOrderNotification,
+          createPrintfulOrder: async (sess, items) => {
+            await createPrintfulOrderFromSession(sess, { ...items, has_more: false, object: "list", url: "" });
+          }
+        });
       } catch (error) {
         return NextResponse.json(
           {

@@ -1,4 +1,6 @@
 import { commerceProducts, buildCommerceCheckoutPlan } from "../data/commerce-products";
+import { processCommerceOrder } from "../lib/commerce-order-processing";
+import Stripe from "stripe";
 
 async function runTests() {
   console.log("Starting Hardened Commerce Tests...\n");
@@ -73,10 +75,8 @@ async function runTests() {
 
   // 10. INVALID_FORMAT
   try {
-    buildCommerceCheckoutPlan([{ id: "salieri-collector-bundle", quantity: 1, format: "Digital" }]);
-    // If format is not in product (which has none), the rule says it should be stripped or rejected.
-    // Our logic strips it if product has no formats.
-    assert(true, "INVALID_FORMAT handled (stripped or rejected)");
+    const formatPlan = buildCommerceCheckoutPlan([{ id: "salieri-collector-bundle", quantity: 1, format: "Digital" }]);
+    assert(formatPlan.resolvedItems[0].format === undefined && formatPlan.lineItems[0].price_data.product_data.metadata.format === "", "INVALID_FORMAT réel : format supprimé car non défini dans le produit");
   } catch (err: any) {
     assert(err.message === "INVALID_FORMAT", "INVALID_FORMAT handled (stripped or rejected)");
   }
@@ -106,10 +106,65 @@ async function runTests() {
   ]);
   assert(mixPlan.requiresShipping === true && mixPlan.containsDigital === true, "panier mixte");
 
-  // 15, 16, 17 - Mocking webhook behavior manually since we cannot easily test the live endpoint in this script
-  assert(true, "notification non configurée sans échec");
-  assert(true, "erreur simulée de notification sans HTTP 500");
-  assert(true, "aucun appel Printful sans produit Printful");
+  // 15, 16, 17 - Mocking webhook behavior
+  const mockSession = { id: "cs_test_123" } as Stripe.Checkout.Session;
+  
+  // TEST A — NOTIFICATION NON CONFIGURÉE
+  const resA = await processCommerceOrder({
+    session: mockSession,
+    lineItems: { data: [{ price: { product: { metadata: { fulfillmentMode: "manual_physical" } } } }] } as any,
+    sendNotification: async () => "skipped_not_configured",
+    createPrintfulOrder: async () => {}
+  });
+  assert(resA.notificationStatus === "skipped_not_configured", "notification non configurée sans échec");
+
+  // TEST B — ERREUR DE NOTIFICATION
+  const resB = await processCommerceOrder({
+    session: mockSession,
+    lineItems: { data: [{ price: { product: { metadata: { fulfillmentMode: "manual_physical" } } } }] } as any,
+    sendNotification: async () => { throw new Error("Mock Email Error"); },
+    createPrintfulOrder: async () => {}
+  });
+  assert(resB.notificationStatus === "failed" && resB.printfulStatus === "not_required", "erreur simulée de notification sans HTTP 500");
+
+  // TEST C — AUCUN PRODUIT PRINTFUL
+  let printfulCallsC = 0;
+  const resC = await processCommerceOrder({
+    session: mockSession,
+    lineItems: { data: [
+      { price: { product: { metadata: { fulfillmentMode: "manual_preorder" } } } },
+      { price: { product: { metadata: { fulfillmentMode: "digital_manual" } } } }
+    ] } as any,
+    sendNotification: async () => "sent",
+    createPrintfulOrder: async () => { printfulCallsC++; }
+  });
+  assert(printfulCallsC === 0 && resC.printfulStatus === "not_required", "aucun appel Printful sans produit Printful");
+
+  // TEST D — PRODUIT PRINTFUL SIMULÉ
+  let printfulCallsD = 0;
+  const resD = await processCommerceOrder({
+    session: mockSession,
+    lineItems: { data: [{ price: { product: { metadata: { fulfillmentMode: "printful" } } } }] } as any,
+    sendNotification: async () => "sent",
+    createPrintfulOrder: async (sess) => {
+      assert(sess.id === "cs_test_123", "session.id transmis");
+      printfulCallsD++; 
+    }
+  });
+  assert(printfulCallsD === 1 && resD.printfulStatus === "created", "appel Printful avec produit Printful simulé");
+
+  // TEST E — ERREUR PRINTFUL
+  try {
+    await processCommerceOrder({
+      session: mockSession,
+      lineItems: { data: [{ price: { product: { metadata: { fulfillmentMode: "printful" } } } }] } as any,
+      sendNotification: async () => "sent",
+      createPrintfulOrder: async () => { throw new Error("Printful 500"); }
+    });
+    assert(false, "Printful error should throw");
+  } catch (err: any) {
+    assert(err.message === "Printful 500", "erreur Printful lève exception pour HTTP 500 Stripe retry");
+  }
 
   console.log(`\nTests finished: ${passed} passed, ${failed} failed.`);
   if (failed > 0) process.exit(1);
