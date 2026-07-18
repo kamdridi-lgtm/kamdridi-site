@@ -725,13 +725,12 @@
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  
+
   .sceneCase:nth-child(even) .sceneImageWrapper {
     order: 0;
   }
-  
+
   .sceneImageWrapper {
     min-height: 40vh;
   }
 }
-

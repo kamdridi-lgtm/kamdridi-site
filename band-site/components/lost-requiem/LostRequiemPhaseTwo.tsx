@@ -14,7 +14,7 @@ export function LostRequiemPhaseTwo() {
       {acts.map((actName) => {
         const scenesInAct = museumScenes.filter(s => s.act === actName);
         if (scenesInAct.length === 0) return null;
-        
+
         return (
           <article key={actName} id={actName} className={styles.actGroup}>
             {scenesInAct.map((scene, index) => (
@@ -31,9 +31,9 @@ export function LostRequiemPhaseTwo() {
       </div>
 
       <div className={styles.returnAction}>
-        <a 
-          href="#master-manuscript" 
-          className={styles.audioTriggerButton} 
+        <a
+          href="#master-manuscript"
+          className={styles.audioTriggerButton}
           onClick={(e) => {
             e.preventDefault();
             document.getElementById("master-manuscript")?.scrollIntoView({ behavior: "smooth" });

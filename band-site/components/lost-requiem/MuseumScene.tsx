@@ -9,7 +9,7 @@ type MuseumSceneProps = {
 
 export function MuseumScene({ scene, priority = false }: MuseumSceneProps) {
   const isCase = scene.variant === "case";
-  const imagePath = scene.image === "placeholder-orchestra" 
+  const imagePath = scene.image === "placeholder-orchestra"
     ? "/assets/images/placeholder.png" // We don't have this, let's just make it a generic CSS placeholder if it's the orchestra
     : `/the-lost-requiem/images/${scene.image}.webp`;
 
@@ -34,7 +34,7 @@ export function MuseumScene({ scene, priority = false }: MuseumSceneProps) {
           />
         )}
       </div>
-      
+
       <div className={styles.sceneText}>
         <div className={styles.sceneTextInner}>
           <p className={styles.eyebrow}>{scene.eyebrow}</p>
