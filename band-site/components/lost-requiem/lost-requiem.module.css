@@ -581,3 +581,157 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+.cinematicTransition {
+  height: 24rem;
+  background: linear-gradient(to bottom, transparent, rgba(20, 15, 10, 0.4), transparent);
+  margin: 4rem 0;
+  pointer-events: none;
+}
+
+.finalFade {
+  height: 30rem;
+  background: linear-gradient(to bottom, transparent, #000);
+  pointer-events: none;
+}
+
+.archivePlaceholder .placeholderPaper {
+  background:
+    linear-gradient(105deg, transparent 46%, rgba(83, 54, 31, 0.15) 49%, transparent 52%),
+    radial-gradient(circle at 80% 20%, rgba(100, 67, 36, 0.2), transparent 20%),
+    #d4c8b2;
+}
+
+.genesisPlaceholder .placeholderPaper {
+  background:
+    linear-gradient(45deg, transparent 20%, rgba(83, 54, 31, 0.1) 25%, transparent 30%),
+    radial-gradient(circle at 10% 90%, rgba(100, 67, 36, 0.25), transparent 25%),
+    #c4b69d;
+}
+
+.concertPlaceholder .placeholderPaper {
+  background:
+    linear-gradient(160deg, transparent 60%, rgba(83, 54, 31, 0.1) 65%, transparent 70%),
+    radial-gradient(circle at 50% 50%, rgba(100, 67, 36, 0.15), transparent 30%),
+    #e1d7c3;
+}
+
+.museumScene {
+  position: relative;
+  display: grid;
+  gap: clamp(3rem, 8vw, 8rem);
+  margin: clamp(6rem, 15vw, 15rem) auto;
+  align-items: center;
+}
+
+.sceneFull {
+  grid-template-columns: 1fr;
+  max-width: 100%;
+}
+
+.sceneCase {
+  grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
+  max-width: 96rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 clamp(1.25rem, 8vw, 8rem);
+}
+
+.sceneCase:nth-child(even) {
+  grid-template-columns: minmax(20rem, 0.8fr) minmax(0, 1.2fr);
+}
+
+.sceneCase:nth-child(even) .sceneImageWrapper {
+  order: 2;
+}
+
+.sceneImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 50vh;
+}
+
+.sceneFull .sceneImageWrapper {
+  min-height: 85vh;
+}
+
+.sceneImage {
+  object-fit: contain;
+  object-position: center;
+}
+
+.sceneText {
+  position: relative;
+  z-index: 2;
+}
+
+.sceneFull .sceneText {
+  max-width: 44rem;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 1.25rem;
+}
+
+.sceneTextInner h2 {
+  margin: 0;
+  font-family: var(--lr-display-font), Georgia, serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 400;
+  line-height: 0.98;
+}
+
+.sceneDescription {
+  margin: 1.5rem 0 0;
+  color: rgba(230, 223, 211, 0.76);
+  font-size: clamp(1.05rem, 1.45vw, 1.25rem);
+  line-height: 1.75;
+}
+
+.sceneFull .sceneDescription {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inventoryBadge {
+  display: inline-flex;
+  margin-top: 2rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(201, 168, 106, 0.25);
+  color: rgba(201, 168, 106, 0.6);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.fictionalArchiveDisclaimer {
+  text-align: center;
+  color: rgba(230, 223, 211, 0.3);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 6rem;
+}
+
+.returnAction {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+@media (max-width: 900px) {
+  .sceneCase {
+    grid-template-columns: 1fr;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .sceneCase:nth-child(even) .sceneImageWrapper {
+    order: 0;
+  }
+  
+  .sceneImageWrapper {
+    min-height: 40vh;
+  }
+}
+
