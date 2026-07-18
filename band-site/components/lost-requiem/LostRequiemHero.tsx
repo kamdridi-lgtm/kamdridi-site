@@ -14,11 +14,8 @@ export function LostRequiemHero() {
         </p>
 
         <div className={styles.heroActions}>
-          <a className={styles.primaryButton} href="#audio-guide">
-            Werk anhören
-          </a>
-          <a className={styles.secondaryButton} href="#werk">
-            Ausstellung betreten
+          <a className={styles.primaryButton} href="#master-manuscript">
+            ENTER THE ARCHIVE
           </a>
         </div>
       </div>

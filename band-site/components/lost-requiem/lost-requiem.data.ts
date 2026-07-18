@@ -1,12 +1,9 @@
 export const museumStops = [
-  { id: "eingang", label: "Eingang", active: true },
-  { id: "werk", label: "Werk", active: true },
-  { id: "archiv", label: "Archiv", active: true },
-  { id: "materie", label: "Materie", active: false },
-  { id: "entstehung", label: "Entstehung", active: true },
-  { id: "galerie", label: "Galerie", active: false },
-  { id: "konzert", label: "Konzert", active: true },
-  { id: "edition", label: "Edition", active: false }
+  { id: "discovery", label: "I — Discovery", active: true },
+  { id: "authentication", label: "II — Authentication", active: true },
+  { id: "preservation", label: "III — Preservation", active: true },
+  { id: "exhibition", label: "IV — Exhibition", active: true },
+  { id: "resurrection", label: "V — Resurrection", active: true }
 ] as const;
 
 export const manifestoText =
