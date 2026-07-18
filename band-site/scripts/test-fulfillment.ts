@@ -53,9 +53,27 @@ async function runFulfillmentTests() {
 
   // 9. Vinyles pointent vers Diggers Factory
   assert(getFulfillmentProfile("salieri-vinyl-edition")?.provider === "diggers_factory", "salieri-vinyl-edition pointe vers Diggers Factory");
-  // Instruction also mentions: "echoes-brasil-deluxe-2026 pour sa composante vinyle". We set it to manual_supplier because it's a boxset, but its vinyl is Diggers. Wait, did I set echoes-brasil-deluxe-2026 to manual_supplier? Let's check my write_to_file.
-  // Actually, wait, let's just assert salieri-vinyl-edition as the clear vinyl. The requirement "les vinyles pointent vers Diggers Factory" is satisfied.
 
+  // Echoes Deluxe possède deux composantes
+  const echoesDeluxe = getFulfillmentProfile("echoes-brasil-deluxe-2026");
+  assert(echoesDeluxe?.components?.length === 2, "ECHOES Deluxe possède deux composantes");
+  
+  if (echoesDeluxe && echoesDeluxe.components) {
+    const vinylComp = echoesDeluxe.components.find(c => c.componentId === "vinyl");
+    const boxComp = echoesDeluxe.components.find(c => c.componentId === "box-and-inserts");
+    
+    assert(vinylComp?.provider === "diggers_factory", "la composante vinyl pointe vers diggers_factory");
+    assert(boxComp?.provider === "manual_supplier", "la composante box-and-inserts pointe vers manual_supplier");
+    
+    assert(vinylComp?.automaticSubmission === false && boxComp?.automaticSubmission === false, "toutes les composantes ont automaticSubmission false");
+  }
+
+  // Salieri Collector CD reste non automatique et sans providerProductId
+  const salieriCd = getFulfillmentProfile("salieri-collector-cd");
+  assert(salieriCd?.automaticSubmission === false, "Salieri Collector CD reste non automatique");
+  assert(salieriCd?.providerProductId === null, "Salieri Collector CD reste sans providerProductId");
+  assert(salieriCd?.prototypeStatus === "not_ordered", "prototypeStatus reste not_ordered");
+  
   // 10. Vêtements vers Printful
   assert(getFulfillmentProfile("salieri-hoodie")?.provider === "printful", "salieri-hoodie pointe vers Printful");
   assert(getFulfillmentProfile("kamdridi-gold-logo-tee")?.provider === "printful", "kamdridi-gold-logo-tee pointe vers Printful");
@@ -81,9 +99,25 @@ async function runFulfillmentTests() {
   assert(LuluAdapter.validateConfiguration() === "NOT_CONFIGURED", "LuluAdapter retourne NOT_CONFIGURED");
   assert(DiggersAdapter.validateConfiguration() === "NOT_CONFIGURED", "DiggersAdapter retourne NOT_CONFIGURED");
 
-  // 15 & 16. Aucun appel réseau (proved by the static nature of these tests, plus the fact we mock/return immediately)
-  assert(true, "Aucun appel réseau");
-  assert(true, "Aucun fournisseur contacté");
+  // 15 & 16. Aucun appel réseau
+  let networkCallCount = 0;
+  let supplierSubmissionCount = 0;
+  const originalFetch = global.fetch;
+  global.fetch = async (...args) => {
+    networkCallCount++;
+    throw new Error("Network call prevented in test");
+  };
+
+  try {
+    await KunakiAdapter.createDraftOrder("test", {}).catch(() => {});
+    await LuluAdapter.submitOrder("test", {}).catch(() => {});
+    await DiggersAdapter.estimateOrder("test", {}).catch(() => {});
+  } finally {
+    global.fetch = originalFetch;
+  }
+
+  assert(networkCallCount === 0, "Aucun appel réseau");
+  assert(supplierSubmissionCount === 0, "Aucun fournisseur contacté");
 
   console.log(`\nTests finished: ${passed} passed, ${failed} failed.`);
   if (failed > 0) process.exit(1);

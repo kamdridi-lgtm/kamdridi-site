@@ -27,6 +27,18 @@ export type PrototypeStatus =
   | 'approved'
   | 'rejected';
 
+export type FulfillmentComponentProfile = {
+  componentId: string;
+  name: string;
+  provider: FulfillmentProvider;
+  supplierStatus: SupplierStatus;
+  providerProductId: string | null;
+  assetStatus: AssetStatus;
+  prototypeStatus: PrototypeStatus;
+  automaticSubmission: boolean;
+  missingRequirements: string[];
+};
+
 export type ProductFulfillmentProfile = {
   productId: string;
   provider: FulfillmentProvider;
@@ -40,6 +52,7 @@ export type ProductFulfillmentProfile = {
   requiresManualApproval: boolean;
   productionNotes: string;
   missingRequirements: string[];
+  components?: FulfillmentComponentProfile[];
 };
 
 export const fulfillmentProfiles: ProductFulfillmentProfile[] = [
@@ -116,7 +129,31 @@ export const fulfillmentProfiles: ProductFulfillmentProfile[] = [
     supportsDirectShipping: false,
     requiresManualApproval: true,
     productionNotes: 'Boite et carton en manual_supplier, composante vinyle via Diggers Factory',
-    missingRequirements: []
+    missingRequirements: [],
+    components: [
+      {
+        componentId: 'vinyl',
+        name: 'Vinyle',
+        provider: 'diggers_factory',
+        supplierStatus: 'prototype_required',
+        providerProductId: null,
+        assetStatus: 'missing',
+        prototypeStatus: 'not_ordered',
+        automaticSubmission: false,
+        missingRequirements: []
+      },
+      {
+        componentId: 'box-and-inserts',
+        name: 'Boîte et inserts',
+        provider: 'manual_supplier',
+        supplierStatus: 'prototype_required',
+        providerProductId: null,
+        assetStatus: 'missing',
+        prototypeStatus: 'not_ordered',
+        automaticSubmission: false,
+        missingRequirements: []
+      }
+    ]
   },
   {
     productId: 'salieri-vinyl-edition',
