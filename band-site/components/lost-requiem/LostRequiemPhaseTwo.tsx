@@ -12,7 +12,7 @@ export function LostRequiemPhaseTwo() {
       <div className={styles.cinematicTransition} aria-hidden="true" />
 
       {acts.map((actName) => {
-        const scenesInAct = museumScenes.filter(s => s.act === actName);
+        const scenesInAct = museumScenes.filter(s => s.act === actName && s.image !== "placeholder-orchestra");
         if (scenesInAct.length === 0) return null;
 
         return (

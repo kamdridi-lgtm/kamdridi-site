@@ -22,6 +22,8 @@ export function AudioGuidePlayer() {
   const [duration, setDuration] = useState(0);
   const available = Boolean(audioSource);
 
+  const [collapsed, setCollapsed] = useState(true);
+
   const togglePlayback = async () => {
     const audio = audioRef.current;
     if (!audio || !available) return;
@@ -34,58 +36,67 @@ export function AudioGuidePlayer() {
   };
 
   return (
-    <aside id="audio-guide" className={styles.audioGuide} aria-label="Audioguide">
-      <div className={styles.audioHeading}>
-        <span className={styles.audioStatus} aria-hidden="true" />
-        <div>
-          <strong>Audio Guide</strong>
-          <span>{available ? "Requiem" : "Audio demnächst verfügbar"}</span>
+    <aside id="audio-guide" className={`${styles.audioGuide} ${collapsed ? styles.audioGuideCollapsed : ""}`} aria-label="Audioguide">
+      <button 
+        type="button" 
+        className={styles.audioGuideToggle}
+        onClick={() => setCollapsed(!collapsed)}
+        aria-expanded={!collapsed}
+      >
+        <div className={styles.audioHeading}>
+          <span className={styles.audioStatus} aria-hidden="true" />
+          <div>
+            <strong>Audio Guide</strong>
+            <span>{available ? (collapsed ? "Open Player" : "Close Player") : "Audio demnächst verfügbar"}</span>
+          </div>
         </div>
-      </div>
+      </button>
 
-      <div className={styles.audioControls}>
-        <button
-          type="button"
-          onClick={togglePlayback}
-          disabled={!available}
-          aria-label={playing ? "Audio pausieren" : "Audio abspielen"}
-        >
-          {playing ? "Pause" : "Play"}
-        </button>
-
-        <label className={styles.progressLabel}>
-          <span className={styles.srOnly}>Fortschritt</span>
-          <input
-            type="range"
-            min="0"
-            max={duration || 0}
-            value={Math.min(currentTime, duration || 0)}
+      {!collapsed && (
+        <div className={styles.audioControls}>
+          <button
+            type="button"
+            onClick={togglePlayback}
             disabled={!available}
-            onChange={(event) => {
-              const nextTime = Number(event.target.value);
-              if (audioRef.current) audioRef.current.currentTime = nextTime;
-              setCurrentTime(nextTime);
+            aria-label={playing ? "Audio pausieren" : "Audio abspielen"}
+          >
+            {playing ? "Pause" : "Play"}
+          </button>
+
+          <label className={styles.progressLabel}>
+            <span className={styles.srOnly}>Fortschritt</span>
+            <input
+              type="range"
+              min="0"
+              max={duration || 0}
+              value={Math.min(currentTime, duration || 0)}
+              disabled={!available}
+              onChange={(event) => {
+                const nextTime = Number(event.target.value);
+                if (audioRef.current) audioRef.current.currentTime = nextTime;
+                setCurrentTime(nextTime);
+              }}
+            />
+          </label>
+
+          <span className={styles.audioTime}>
+            {formatTime(currentTime)} / {formatTime(duration)}
+          </span>
+
+          <button
+            type="button"
+            disabled={!available}
+            onClick={() => {
+              const nextMuted = !muted;
+              setMuted(nextMuted);
+              if (audioRef.current) audioRef.current.muted = nextMuted;
             }}
-          />
-        </label>
-
-        <span className={styles.audioTime}>
-          {formatTime(currentTime)} / {formatTime(duration)}
-        </span>
-
-        <button
-          type="button"
-          disabled={!available}
-          onClick={() => {
-            const nextMuted = !muted;
-            setMuted(nextMuted);
-            if (audioRef.current) audioRef.current.muted = nextMuted;
-          }}
-          aria-label={muted ? "Ton einschalten" : "Ton stummschalten"}
-        >
-          {muted ? "Ton an" : "Stumm"}
-        </button>
-      </div>
+            aria-label={muted ? "Ton einschalten" : "Ton stummschalten"}
+          >
+            {muted ? "Ton an" : "Stumm"}
+          </button>
+        </div>
+      )}
 
       {available ? (
         <audio
