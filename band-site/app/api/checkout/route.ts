@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getStripeServer } from "@/lib/stripe";
 import { siteMeta } from "@/data/site";
-import { resolveCommerceCheckoutItems, RawCheckoutItem } from "@/data/commerce-products";
+import { buildCommerceCheckoutPlan, RawCheckoutItem } from "@/data/commerce-products";
 
 export async function POST(request: Request) {
   try {
@@ -18,40 +18,36 @@ export async function POST(request: Request) {
     const returnPath = requestedReturnPath.startsWith("/") && !requestedReturnPath.startsWith("//") ? requestedReturnPath : "/store";
     const stripe = getStripeServer();
 
-    // 1. RESOLVE AND VALIDATE (Throws Error if unknown or disabled product)
-    let checkoutItems;
+    let plan;
     try {
-      checkoutItems = resolveCommerceCheckoutItems(rawItems);
+      plan = buildCommerceCheckoutPlan(rawItems);
     } catch (err: any) {
-      if (["UNKNOWN_PRODUCT", "EXCESSIVE_QUANTITY", "INVALID_QUANTITY", "INVALID_VARIANT"].includes(err.message)) {
+      if (["UNKNOWN_PRODUCT", "EXCESSIVE_QUANTITY", "INVALID_QUANTITY", "INVALID_COLOR", "INVALID_SIZE", "INVALID_FORMAT"].includes(err.message)) {
         return NextResponse.json({ error: err.message }, { status: 400 });
       }
       throw err;
     }
 
-    if (!checkoutItems || checkoutItems.length === 0) {
+    if (!plan.resolvedItems || plan.resolvedItems.length === 0) {
       return NextResponse.json({ error: "No valid items found." }, { status: 400 });
     }
-
-    const checkoutTotal = checkoutItems.reduce((total, item) => total + (item.product.priceCents * item.quantity), 0);
-    const checkoutProductIds = checkoutItems.map((item) => item.product.id).join(",").slice(0, 500);
-    const projects = Array.from(new Set(checkoutItems.map((item) => item.product.project))).join(",").slice(0, 500);
-
-    const containsPreorder = checkoutItems.some(item => item.product.saleMode === "preorder");
-    const containsDigital = checkoutItems.some(item => item.product.saleMode === "digital");
-    const containsPhysical = checkoutItems.some(item => item.product.requiresShipping);
 
     if (!stripe) {
       return NextResponse.json({
         mode: "simulated",
         message: "Stripe is not configured. Redirecting to local demo checkout.",
         url: `${siteUrl}${returnPath}?purchase=demo&session_id=simulated_session`,
-        items: checkoutItems.map((item) => ({ id: item.product.id, name: item.product.name, price: item.product.priceCents, quantity: item.quantity })),
-        total: checkoutTotal
+        items: plan.lineItems.map(li => ({
+          id: li.price_data.product_data.metadata.productId,
+          name: li.price_data.product_data.name,
+          price: li.price_data.unit_amount,
+          quantity: li.quantity
+        })),
+        total: plan.checkoutTotal
       });
     }
 
-    const submitMessage = containsPreorder 
+    const submitMessage = plan.containsPreorder 
       ? "This order includes pre-order items. Production and fulfillment details are shown on the corresponding product pages."
       : "Official KAMDRIDI order.";
 
@@ -60,11 +56,11 @@ export async function POST(request: Request) {
       success_url: `${siteUrl}${returnPath}?purchase=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}${returnPath}?purchase=cancelled`,
       billing_address_collection: "required",
-      shipping_address_collection: containsPhysical ? {
+      shipping_address_collection: plan.requiresShipping ? {
         allowed_countries: ["US", "CA", "GB", "FR", "DE", "AU"]
       } : undefined,
       phone_number_collection: {
-        enabled: containsPhysical
+        enabled: plan.requiresShipping
       },
       customer_creation: "always",
       allow_promotion_codes: true,
@@ -75,30 +71,18 @@ export async function POST(request: Request) {
       },
       metadata: {
         artist: siteMeta.bandName,
-        orderType: "kamdridi-commerce",
-        productIds: checkoutProductIds,
-        projects: projects,
-        containsPreorder: containsPreorder ? "true" : "false",
-        containsDigital: containsDigital ? "true" : "false",
-        containsPhysical: containsPhysical ? "true" : "false",
+        ...plan.metadata,
+        productIds: plan.resolvedItems.map(i => i.product.id).join(",").slice(0, 500),
         returnPath: returnPath,
-        orderTotalCad: (checkoutTotal / 100).toFixed(2)
+        orderTotalCad: (plan.checkoutTotal / 100).toFixed(2)
       },
-      line_items: checkoutItems.map((item) => ({
+      line_items: plan.lineItems.map(item => ({
         quantity: item.quantity,
         price_data: {
-          currency: "cad",
-          unit_amount: item.product.priceCents,
+          ...item.price_data,
           product_data: {
-            name: [item.product.name, item.color, item.size, item.format].filter(Boolean).join(" / "),
-            images: item.product.images[0] ? [`${siteUrl}${item.product.images[0]}`] : undefined,
-            metadata: {
-              productId: item.product.id,
-              color: item.color ?? "",
-              size: item.size ?? "",
-              format: item.format ?? "",
-              fulfillmentMode: item.product.fulfillmentMode
-            }
+            ...item.price_data.product_data,
+            images: item.price_data.product_data.images?.[0] ? [`${siteUrl}${item.price_data.product_data.images[0]}`] : undefined
           }
         }
       }))

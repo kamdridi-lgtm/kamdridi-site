@@ -645,7 +645,7 @@ export function resolveCommerceCheckoutItems(items: RawCheckoutItem[]): Resolved
     let validColor = item.color;
     if (product.colors && product.colors.length > 0) {
       if (validColor && !product.colors.includes(validColor)) {
-        throw new Error(`INVALID_VARIANT`);
+        throw new Error(`INVALID_COLOR`);
       }
       validColor = validColor || product.colors[0];
     } else {
@@ -655,11 +655,21 @@ export function resolveCommerceCheckoutItems(items: RawCheckoutItem[]): Resolved
     let validSize = item.size;
     if (product.sizes && product.sizes.length > 0) {
       if (validSize && !product.sizes.includes(validSize)) {
-        throw new Error(`INVALID_VARIANT`);
+        throw new Error(`INVALID_SIZE`);
       }
       validSize = validSize || product.sizes[0];
     } else {
       validSize = undefined;
+    }
+
+    let validFormat = item.format;
+    if (product.formats && product.formats.length > 0) {
+      if (validFormat && !product.formats.includes(validFormat)) {
+        throw new Error(`INVALID_FORMAT`);
+      }
+      validFormat = validFormat || product.formats[0];
+    } else {
+      validFormat = undefined;
     }
 
     // Limit quantity
@@ -676,9 +686,87 @@ export function resolveCommerceCheckoutItems(items: RawCheckoutItem[]): Resolved
       quantity,
       color: validColor,
       size: validSize,
-      format: item.format // future use
+      format: validFormat
     });
   }
 
   return resolved;
 }
+
+export function buildCommerceCheckoutPlan(rawItems: RawCheckoutItem[]) {
+  const resolvedItems = resolveCommerceCheckoutItems(rawItems);
+
+  let requiresShipping = false;
+  let containsPhysical = false;
+  let containsDigital = false;
+  let containsPreorder = false;
+  let checkoutTotal = 0;
+
+  const projects = new Set<string>();
+
+  const lineItems = resolvedItems.map((item) => {
+    const product = item.product;
+
+    if (product.requiresShipping) requiresShipping = true;
+    if (product.saleMode === "digital") containsDigital = true;
+    else containsPhysical = true;
+    if (product.saleMode === "preorder") containsPreorder = true;
+
+    projects.add(product.project);
+    checkoutTotal += product.priceCents * item.quantity;
+
+    const attributes = [];
+    if (item.color) attributes.push(item.color);
+    if (item.size) attributes.push(item.size);
+    if (item.format) attributes.push(item.format);
+
+    let name = product.name;
+    if (product.subtitle) {
+      name += ` - ${product.subtitle}`;
+    }
+    if (attributes.length > 0) {
+      name += ` (${attributes.join(", ")})`;
+    }
+
+    return {
+      price_data: {
+        currency: product.currency.toLowerCase(),
+        product_data: {
+          name,
+          images: product.images && product.images.length > 0 ? [product.images[0]] : undefined,
+          metadata: {
+            productId: product.id,
+            fulfillmentMode: product.fulfillmentMode,
+            requiresShipping: product.requiresShipping ? "true" : "false",
+            color: item.color || "",
+            size: item.size || "",
+            format: item.format || ""
+          }
+        },
+        unit_amount: product.priceCents
+      },
+      quantity: item.quantity
+    };
+  });
+
+  const metadata = {
+    orderType: "kamdridi-commerce",
+    projects: Array.from(projects).join(","),
+    containsPhysical: containsPhysical ? "true" : "false",
+    containsPreorder: containsPreorder ? "true" : "false",
+    containsDigital: containsDigital ? "true" : "false"
+  };
+
+  return {
+    resolvedItems,
+    lineItems,
+    checkoutTotal,
+    requiresShipping,
+    containsPhysical,
+    containsDigital,
+    containsPreorder,
+    projects: Array.from(projects),
+    metadata
+  };
+}
+

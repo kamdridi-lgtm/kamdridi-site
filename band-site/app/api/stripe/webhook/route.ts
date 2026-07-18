@@ -5,23 +5,42 @@ import { createPrintfulOrderFromSession } from "@/lib/printful";
 import { updateLabelApplication } from "@/lib/label-storage";
 
 async function sendAdminOrderNotification(session: Stripe.Checkout.Session, lineItems: Stripe.ApiList<Stripe.LineItem>) {
-  // Try to use a configured email system, otherwise log
-  // If no email configured, do not fail webhook.
   const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL;
+  
   if (!adminEmail) {
-    console.warn("[Webhook] ADMIN_NOTIFICATION_EMAIL not set. Order recorded in Stripe but email omitted for session:", session.id);
+    console.warn(`[Webhook] WARNING: ADMIN_NOTIFICATION_EMAIL not set. Order ${session.id} recorded in Stripe but email notification omitted.`);
     return;
   }
   
-  // Implementation of email sending goes here (using Resend, SendGrid, etc if available in kamdridi-site)
-  console.log(`[Webhook] Sending admin notification to ${adminEmail} for session ${session.id}...`);
+  // Collect order variables for potential email API
+  const customerEmail = session.customer_details?.email || "Unknown";
+  const total = session.amount_total ? (session.amount_total / 100).toFixed(2) : "0.00";
+  const projects = session.metadata?.projects || "Unknown";
+  const hasPreorder = session.metadata?.containsPreorder === "true";
+  const isPhysical = session.metadata?.containsPhysical === "true";
+  const dashboardLink = `https://dashboard.stripe.com/payments/${session.payment_intent || session.id}`;
+  
+  const sessionAny = session as any;
+  const address = sessionAny.shipping_details?.address 
+    ? `${sessionAny.shipping_details.address.line1}, ${sessionAny.shipping_details.address.city}, ${sessionAny.shipping_details.address.country}` 
+    : (session.customer_details?.address ? `${session.customer_details.address.line1}, ${session.customer_details.address.city}, ${session.customer_details.address.country}` : "No address");
+  
+  const itemsList = lineItems.data.map(item => {
+    const p = item.price?.product as Stripe.Product;
+    return `${item.quantity}x ${p.name}`;
+  }).join(", ");
+
+  console.log(`[Webhook] Prepared email payload for ${adminEmail}: Session ${session.id}, Customer ${customerEmail}, Total $${total}`);
+  console.log(`[Webhook] Products: ${itemsList}, Projects: ${projects}, Preorder: ${hasPreorder}, Physical: ${isPhysical}, Address: ${address}`);
+  console.log(`[Webhook] Stripe Link: ${dashboardLink}`);
+  // External email sending (e.g. Resend, Nodemailer) would execute here when configured.
 }
 
 async function processCommerceOrderFromSession(session: Stripe.Checkout.Session, lineItems: Stripe.ApiList<Stripe.LineItem>) {
   // Classification
   const manualItems = lineItems.data.filter(item => {
     const fm = item.price?.product && (item.price.product as Stripe.Product).metadata?.fulfillmentMode;
-    return fm === "manual_physical" || fm === "manual_preorder" || fm === "digital_manual" || fm === "game_access";
+    return fm === "manual_physical" || fm === "manual_preorder" || fm === "digital_manual" || fm === "game_access" || !fm;
   });
   
   const printfulItems = lineItems.data.filter(item => {
@@ -29,25 +48,23 @@ async function processCommerceOrderFromSession(session: Stripe.Checkout.Session,
     return fm === "printful";
   });
 
-  // Non-blocking notification for manual orders
+  // Non-blocking notification for manual and digital orders
   if (manualItems.length > 0) {
-    try {
-      await sendAdminOrderNotification(session, lineItems);
-    } catch (error) {
-      console.error("[Webhook] Failed to send admin notification for session", session.id, error);
-      // DO NOT throw error, Stripe is the official register.
-    }
+    Promise.allSettled([sendAdminOrderNotification(session, lineItems)]).then(results => {
+      if (results[0].status === 'rejected') {
+        console.error(`[Webhook] Failed to send admin notification for session ${session.id}`, results[0].reason);
+      }
+    });
   }
 
   // Printful fulfillment for printful items
   if (printfulItems.length > 0) {
-    // We only send the printful items to Printful
     try {
+      // NOTE: Using session.id as external_id to prevent duplicate orders
       await createPrintfulOrderFromSession(session, { data: printfulItems, has_more: false, object: "list", url: "" });
     } catch (error) {
-      console.error("[Webhook] Failed Printful fulfillment for session", session.id, error);
-      // Stripe will retry if we throw, but we should decide if we block webhook completion.
-      // Usually, printful errors can be retried. Throwing here might retry the entire webhook.
+      console.error(`[Webhook] Failed Printful fulfillment for session ${session.id}`, error);
+      // HTTP 500 is ONLY used here to allow Stripe to retry the Printful fulfillment
       throw error; 
     }
   }
