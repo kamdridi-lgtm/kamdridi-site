@@ -35,6 +35,60 @@
     radial-gradient(circle at 20% 70%, rgba(139, 30, 21, 0.05), transparent 28rem);
 }
 
+.languageSelector {
+  position: absolute;
+  top: clamp(1rem, 3vw, 2rem);
+  right: clamp(1rem, 3vw, 3rem);
+  z-index: 100;
+  display: flex;
+  gap: 1rem;
+  background: rgba(15, 12, 10, 0.6);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid rgba(201, 168, 106, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+.langBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: rgba(230, 223, 211, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--lr-body-font), Georgia, serif;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.langBtn[aria-pressed="true"] {
+  color: var(--lr-gold);
+}
+
+.langBtn:hover {
+  color: var(--lr-parchment);
+}
+
+.langFlag {
+  font-size: 0.9rem;
+}
+
+.langText {
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 600px) {
+  .langText {
+    display: none;
+  }
+  .languageSelector {
+    gap: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
 .skipLink {
   position: fixed;
   top: 0.75rem;

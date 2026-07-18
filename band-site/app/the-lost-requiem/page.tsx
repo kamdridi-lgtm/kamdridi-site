@@ -6,7 +6,9 @@ import {
   LostRequiemManifesto,
   MuseumLayout,
   MuseumProgress,
-  LostRequiemPhaseTwo
+  LostRequiemPhaseTwo,
+  LostRequiemLanguageProvider,
+  LanguageSelector
 } from "@/components/lost-requiem";
 import styles from "@/components/lost-requiem/lost-requiem.module.css";
 
@@ -41,15 +43,18 @@ export const metadata: Metadata = {
 export default function LostRequiemPage() {
   return (
     <div className={`${styles.routeScope} ${displayFont.variable} ${bodyFont.variable}`}>
-      <MuseumLayout>
-        <MuseumProgress />
-        <main id="lost-requiem-content" className={styles.main}>
-          <LostRequiemHero />
-          <LostRequiemManifesto />
-          <LostRequiemPhaseTwo />
-        </main>
-        <AudioGuidePlayer />
-      </MuseumLayout>
+      <LostRequiemLanguageProvider>
+        <MuseumLayout>
+          <LanguageSelector />
+          <MuseumProgress />
+          <main id="lost-requiem-content" className={styles.main}>
+            <LostRequiemHero />
+            <LostRequiemManifesto />
+            <LostRequiemPhaseTwo />
+          </main>
+          <AudioGuidePlayer />
+        </MuseumLayout>
+      </LostRequiemLanguageProvider>
     </div>
   );
 }

@@ -1,7 +1,8 @@
-import { manifestoText } from "./lost-requiem.data";
-import styles from "./lost-requiem.module.css";
+"use client";
 
+import styles from "./lost-requiem.module.css";
 import Image from "next/image";
+import { useLostRequiemLanguage } from "./lost-requiem-translations";
 
 function ArtworkPlaceholder({
   number,
@@ -24,13 +25,15 @@ function ArtworkPlaceholder({
         />
       </div>
       <figcaption>
-        Fig. {number} · {label}
+        {label}
       </figcaption>
     </figure>
   );
 }
 
 export function LostRequiemManifesto() {
+  const { t } = useLostRequiemLanguage();
+
   return (
     <section id="werk" className={styles.manifesto} aria-labelledby="manifesto-title">
       <div className={styles.sectionMarker} aria-hidden="true">
@@ -38,29 +41,29 @@ export function LostRequiemManifesto() {
       </div>
 
       <div className={styles.manifestoText}>
-        <p className={styles.eyebrow}>Das Werk</p>
-        <h2 id="manifesto-title">Eine neue Komposition. Eine zeitlose Inszenierung.</h2>
-        <p>{manifestoText}</p>
+        <p className={styles.eyebrow}>{t.manifesto.eyebrow}</p>
+        <h2 id="manifesto-title">{t.manifesto.title}</h2>
+        <p>{t.manifesto.description}</p>
 
         <dl className={styles.objectDetails}>
           <div>
-            <dt>Komposition</dt>
-            <dd>K. Dridi</dd>
+            <dt>{t.manifesto.compositionLabel}</dt>
+            <dd>{t.manifesto.compositionValue}</dd>
           </div>
           <div>
-            <dt>Form</dt>
-            <dd>Für Klavier und Orchester</dd>
+            <dt>{t.manifesto.formLabel}</dt>
+            <dd>{t.manifesto.formValue}</dd>
           </div>
           <div>
-            <dt>Inszenierung</dt>
-            <dd>Wiener Manuskriptästhetik, 1791</dd>
+            <dt>{t.manifesto.stagingLabel}</dt>
+            <dd>{t.manifesto.stagingValue}</dd>
           </div>
         </dl>
       </div>
 
       <div className={styles.manifestoGallery}>
-        <ArtworkPlaceholder number="01" label="Das Originalmanuskript" imageSrc="01-master-manuscript-final" />
-        <ArtworkPlaceholder number="02" label="Das Manuskript unter Glas" imageSrc="10-museum-case-close" />
+        <ArtworkPlaceholder number="01" label={t.manifesto.artwork1Caption} imageSrc="01-master-manuscript-final" />
+        <ArtworkPlaceholder number="02" label={t.manifesto.artwork2Caption} imageSrc="10-museum-case-close" />
       </div>
     </section>
   );
