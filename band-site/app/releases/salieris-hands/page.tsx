@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Suspense } from "react";
 import { Disc3, ListMusic, Package, Play, Shirt, Sparkles } from "lucide-react";
 import { SalieriCheckoutStatus, SalieriProductCard, SalieriQuickBuy } from "@/components/salieri-product-card";
+import { getCommerceProductById } from "@/data/commerce-products";
 
 const assetBase = "/assets/images/salieris-hands";
 const teaserUrl = "https://youtu.be/wD0u7-krT8s?si=4a1J1siTwJV9bGCI";
@@ -43,40 +44,28 @@ const bonusTracks = [
   "The Prism - Grand Opera Version"
 ];
 
-const collectorProducts = [
+const collectorProductsData = [
   {
     id: "salieri-collector-bundle",
-    name: "Collector Bundle",
-    status: "Bundle",
     description: "Collector package including selected physical formats, merch, art print, booklet, and campaign extras.",
-    price: 349,
     image: assets.collectorPack,
     alt: "Salieri collector bundle"
   },
   {
     id: "salieri-special-edition-box",
-    name: "Special Edition Box",
-    status: "Pre-order soon",
     description: "Collector package including selected physical formats, merch, art print, booklet, and campaign extras.",
-    price: 249,
     image: assets.collectorPack,
     alt: "Special edition collector package"
   },
   {
     id: "salieri-vinyl-edition",
-    name: "Limited Vinyl Edition",
-    status: "Limited collector item",
     description: "Premium limited vinyl edition prepared for the physical collector campaign.",
-    price: 199,
     image: assets.packBack,
     alt: "Vinyl and physical package artwork"
   },
   {
     id: "salieri-collector-coin",
-    name: "Collector Coin - Box Edition",
-    status: "Collector item",
     description: "Antique bronze finish collector item for the special edition world.",
-    price: 89,
     image: "/assets/images/salieris-hands/salieri-collector-coin-box.jpg",
     alt: "Salieri collector coin boxed set",
     secondaryImage: "/assets/images/salieris-hands/salieri-coin-closeup.jpg",
@@ -84,71 +73,46 @@ const collectorProducts = [
   },
   {
     id: "salieri-hardcover-booklet",
-    name: "Hardcover Booklet",
-    status: "Pre-order",
     description: "Liner notes and story presentation by KAMDRIDI.",
-    price: 69,
     image: assets.booklet,
     alt: "Hardcover booklet concept"
   },
   {
     id: "salieri-collector-cd",
-    name: "Collector CD",
-    status: "Pre-order soon",
     description: "Digipak / jewel case edition with printed booklet, disc art, and back cover treatment.",
-    price: 49,
     image: assets.jewelcase,
     alt: "Collector CD jewel case concept"
   },
   {
     id: "salieri-digital-release",
-    name: "Digital Deluxe Release",
-    status: "Pre-order",
     description: "High-resolution audio package with digital booklet and 2 exclusive bonus tracks unavailable on streaming platforms.",
-    price: 16,
     image: assets.frontCover,
     alt: "Official album front cover artwork"
   }
 ];
 
-const merchProducts = [
+const merchProductsData = [
   {
     id: "salieri-hoodie",
-    name: "Salieri Hoodie",
-    status: "Available",
     description: "Heavyweight campaign hoodie for the dark baroque release world.",
-    price: 119,
     image: "/assets/images/salieris-hands/salieri-hoodie-mockup.jpg",
-    alt: "Salieri campaign hoodie",
-    colors: ["Black"],
-    sizes: ["S", "M", "L", "XL", "2XL"]
+    alt: "Salieri campaign hoodie"
   },
   {
     id: "salieri-tee",
-    name: "Salieri Tee",
-    status: "Available",
     description: "Black or white campaign tee with the Salieri's Hands release mark.",
-    price: 59,
     image: "/assets/images/salieris-hands/salieri-tee-mockup.jpg",
-    alt: "Salieri campaign tee",
-    colors: ["Black", "White"],
-    sizes: ["S", "M", "L", "XL", "2XL"]
+    alt: "Salieri campaign tee"
   },
   {
     id: "salieri-mug",
-    name: "Salieri Mug",
-    status: "Available",
     description: "Ceramic mug using the official Salieri's Hands artwork treatment.",
-    price: 39,
     image: "/assets/images/salieris-hands/salieri-mug-mockup.jpg",
     alt: "Salieri artwork mug mockup"
   },
   {
     id: "salieri-poster",
-    name: "Salieri Poster",
-    status: "Available",
     description: "Premium poster print featuring the Vienna 1791 Salieri's Hands artwork.",
-    price: 49,
     image: "/assets/images/salieris-hands/salieri-poster-mockup.jpg",
     alt: "Salieri's Hands Vienna 1791 poster artwork"
   }
@@ -343,6 +307,39 @@ function ImagePanel({
 }
 
 export default function SalierisHandsPage() {
+  const getStatus = (mode: string) => {
+    switch(mode) {
+      case "preorder": return "PRE-ORDER";
+      case "digital": return "DIGITAL ORDER";
+      case "buy_now": return "AVAILABLE";
+      case "sold_out": return "SOLD OUT";
+      default: return "PRE-ORDER";
+    }
+  };
+
+  const collectorProducts = collectorProductsData.map(item => {
+    const product = getCommerceProductById(item.id);
+    return {
+      ...item,
+      name: product?.name || item.id,
+      price: (product?.priceCents || 0) / 100,
+      status: getStatus(product?.saleMode || "preorder"),
+      colors: product?.colors ? [...product.colors] : undefined,
+      sizes: product?.sizes ? [...product.sizes] : undefined
+    };
+  });
+
+  const merchProducts = merchProductsData.map(item => {
+    const product = getCommerceProductById(item.id);
+    return {
+      ...item,
+      name: product?.name || item.id,
+      price: (product?.priceCents || 0) / 100,
+      status: getStatus(product?.saleMode || "preorder"),
+      colors: product?.colors ? [...product.colors] : undefined,
+      sizes: product?.sizes ? [...product.sizes] : undefined
+    };
+  });
   return (
     <main className="salieri-page relative overflow-hidden bg-[#070403] text-[#f7e7c8]">
       <style>{`
@@ -569,9 +566,9 @@ export default function SalierisHandsPage() {
 
               </div>
               <div className="mt-5 hidden gap-3 lg:grid lg:grid-cols-3">
-                <SalieriQuickBuy id="salieri-collector-bundle" name="Collector Bundle" price={349} image={assets.collectorPack} />
-                <SalieriQuickBuy id="salieri-tee" name="Salieri Tee" price={59} image="/assets/images/salieris-hands/salieri-tee-mockup.jpg" color="Black" size="L" />
-                <SalieriQuickBuy id="salieri-special-edition-box" name="Special Edition Box" price={249} image={assets.collectorPack} />
+                <SalieriQuickBuy id="salieri-collector-bundle" />
+                <SalieriQuickBuy id="salieri-tee" color="Black" size="L" />
+                <SalieriQuickBuy id="salieri-special-edition-box" />
               </div>
             </div>
           </div>
