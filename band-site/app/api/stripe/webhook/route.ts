@@ -8,34 +8,16 @@ import { processCommerceOrder, NotificationStatus } from "@/lib/commerce-order-p
 async function sendAdminOrderNotification(session: Stripe.Checkout.Session, lineItems: Stripe.ApiList<Stripe.LineItem>): Promise<NotificationStatus> {
   const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL;
   
-  if (!adminEmail) {
-    console.warn(`[Webhook] ADMIN ORDER EMAIL NOT SENT — PROVIDER NOT CONFIGURED. Order ${session.id} recorded in Stripe but email notification omitted.`);
-    return "skipped_not_configured";
+  if (adminEmail) {
+    // We would prepare the payload here, but no real provider is connected yet.
+    const customerEmail = session.customer_details?.email || "Unknown";
+    const total = session.amount_total ? (session.amount_total / 100).toFixed(2) : "0.00";
+    console.log(`[Webhook] Prepared email payload for ${adminEmail}: Session ${session.id}, Customer ${customerEmail}, Total $${total}`);
   }
-  
-  // Collect order variables for potential email API
-  const customerEmail = session.customer_details?.email || "Unknown";
-  const total = session.amount_total ? (session.amount_total / 100).toFixed(2) : "0.00";
-  const projects = session.metadata?.projects || "Unknown";
-  const hasPreorder = session.metadata?.containsPreorder === "true";
-  const isPhysical = session.metadata?.containsPhysical === "true";
-  const dashboardLink = `https://dashboard.stripe.com/payments/${session.payment_intent || session.id}`;
-  
-  const sessionAny = session as any;
-  const address = sessionAny.shipping_details?.address 
-    ? `${sessionAny.shipping_details.address.line1}, ${sessionAny.shipping_details.address.city}, ${sessionAny.shipping_details.address.country}` 
-    : (session.customer_details?.address ? `${session.customer_details.address.line1}, ${session.customer_details.address.city}, ${session.customer_details.address.country}` : "No address");
-  
-  const itemsList = lineItems.data.map(item => {
-    const p = item.price?.product as Stripe.Product;
-    return `${item.quantity}x ${p.name}`;
-  }).join(", ");
 
-  console.log(`[Webhook] Prepared email payload for ${adminEmail}: Session ${session.id}, Customer ${customerEmail}, Total $${total}`);
-  console.log(`[Webhook] Products: ${itemsList}, Projects: ${projects}, Preorder: ${hasPreorder}, Physical: ${isPhysical}, Address: ${address}`);
-  console.log(`[Webhook] Stripe Link: ${dashboardLink}`);
+  console.warn(`[Webhook] ADMIN ORDER EMAIL NOT SENT — PROVIDER NOT CONFIGURED`);
   
-  return "sent";
+  return "skipped_not_configured";
 }
 
 export async function POST(request: Request) {
