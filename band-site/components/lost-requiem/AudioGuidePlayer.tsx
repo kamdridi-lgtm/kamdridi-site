@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import styles from "./lost-requiem.module.css";
 
-const audioSource = "";
+const audioSource = "/the-lost-requiem/audio/the-lost-requiem-complete.mp3";
 
 function formatTime(value: number) {
   if (!Number.isFinite(value)) return "0:00";
