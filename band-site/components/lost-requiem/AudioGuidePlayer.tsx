@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import styles from "./lost-requiem.module.css";
+import { useLostRequiemLanguage } from "./lost-requiem-translations";
 
 const audioSource = "/the-lost-requiem/audio/the-lost-requiem-complete.mp3";
 
@@ -15,6 +16,7 @@ function formatTime(value: number) {
 }
 
 export function AudioGuidePlayer() {
+  const { t } = useLostRequiemLanguage();
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
@@ -36,7 +38,7 @@ export function AudioGuidePlayer() {
   };
 
   return (
-    <aside id="audio-guide" className={`${styles.audioGuide} ${collapsed ? styles.audioGuideCollapsed : ""}`} aria-label="Audioguide">
+    <aside id="audio-guide" className={`${styles.audioGuide} ${collapsed ? styles.audioGuideCollapsed : ""}`} aria-label={t.audioGuide.label}>
       <button 
         type="button" 
         className={styles.audioGuideToggle}
@@ -46,8 +48,8 @@ export function AudioGuidePlayer() {
         <div className={styles.audioHeading}>
           <span className={styles.audioStatus} aria-hidden="true" />
           <div>
-            <strong>Audio Guide</strong>
-            <span>{available ? (collapsed ? "Open Player" : "Close Player") : "Audio demnächst verfügbar"}</span>
+            <strong>{t.audioGuide.label}</strong>
+            <span>{available ? (collapsed ? t.audioGuide.openPlayer : t.audioGuide.closePlayer) : "Audio unavailable"}</span>
           </div>
         </div>
       </button>
@@ -58,13 +60,13 @@ export function AudioGuidePlayer() {
             type="button"
             onClick={togglePlayback}
             disabled={!available}
-            aria-label={playing ? "Audio pausieren" : "Audio abspielen"}
+            aria-label={playing ? t.audioGuide.pause : t.audioGuide.play}
           >
-            {playing ? "Pause" : "Play"}
+            {playing ? t.audioGuide.pause : t.audioGuide.play}
           </button>
 
           <label className={styles.progressLabel}>
-            <span className={styles.srOnly}>Fortschritt</span>
+            <span className={styles.srOnly}>{t.audioGuide.label}</span>
             <input
               type="range"
               min="0"
@@ -91,9 +93,9 @@ export function AudioGuidePlayer() {
               setMuted(nextMuted);
               if (audioRef.current) audioRef.current.muted = nextMuted;
             }}
-            aria-label={muted ? "Ton einschalten" : "Ton stummschalten"}
+            aria-label={muted ? t.audioGuide.unmute : t.audioGuide.mute}
           >
-            {muted ? "Ton an" : "Stumm"}
+            {muted ? t.audioGuide.unmute : t.audioGuide.mute}
           </button>
         </div>
       )}

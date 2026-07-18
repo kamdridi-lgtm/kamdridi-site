@@ -3,8 +3,10 @@
 import styles from "./lost-requiem.module.css";
 import { museumScenes } from "./lost-requiem-scenes.data";
 import { MuseumScene } from "./MuseumScene";
+import { useLostRequiemLanguage } from "./lost-requiem-translations";
 
 export function LostRequiemPhaseTwo() {
+  const { t } = useLostRequiemLanguage();
   const acts = ["discovery", "authentication", "preservation", "exhibition", "resurrection"];
 
   return (
@@ -27,7 +29,7 @@ export function LostRequiemPhaseTwo() {
       })}
 
       <div className={styles.fictionalArchiveDisclaimer}>
-        A fictional artistic archive by KAMDRIDI.
+        {t.footer.disclaimer}
       </div>
 
       <div className={styles.returnAction}>
@@ -39,7 +41,7 @@ export function LostRequiemPhaseTwo() {
             document.getElementById("master-manuscript")?.scrollIntoView({ behavior: "smooth" });
           }}
         >
-          RETURN TO THE MANUSCRIPT
+          {t.footer.returnButton}
         </a>
       </div>
 
