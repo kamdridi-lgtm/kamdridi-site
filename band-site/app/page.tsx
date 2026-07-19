@@ -19,6 +19,7 @@ import { SalieriCinematicIntro } from "@/components/salieri-cinematic-intro";
 import { EchoesBrasilCinematicIntro } from "@/components/echoes-brasil-cinematic-intro";
 import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
 import { SignalRadio } from "@/components/signal-radio";
+import { LostRequiemUniverseCard } from "@/components/lost-requiem-universe-card";
 import { featuredVideo, gameExperiences, socialFeed, streamingLinks, visualAlbumScenes } from "@/data/site";
 
 const albumCover = "/assets/images/releases/echoes-unearthed-cover.jpg";
@@ -471,7 +472,8 @@ export default function HomePage() {
 
         <section id="universe" className="relative z-10 border-b border-[#a86225]/20 px-4 py-10 sm:px-6">
           <SectionTitle title="Enter The Echoes Unearthed Universe" />
-          <div className="mx-auto mt-8 grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mx-auto mt-8 grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+            <LostRequiemUniverseCard />
             {universeCards.map((card) => (
               <Link
                 key={card.title}

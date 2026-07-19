@@ -252,6 +252,13 @@ export const navigation: NavItem[] = [
     ]
   },
   {
+    label: "Lost Requiem",
+    href: "/the-lost-requiem",
+    children: [
+      { label: "The Museum", href: "/the-lost-requiem" }
+    ]
+  },
+  {
     label: "Visual Album",
     href: "/visual-album",
     children: [
