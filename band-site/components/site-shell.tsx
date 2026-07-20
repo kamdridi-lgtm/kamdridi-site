@@ -402,16 +402,30 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               .map((item) => (
                 <div key={item.label} className="group relative shrink-0">
                   {" "}
-                  <Link
-                    href={item.href}
-                    className={clsx(
-                      "block whitespace-nowrap px-1 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-200 transition hover:text-[#f4c66a] 2xl:text-[11px] 2xl:tracking-[0.18em]",
-                      isNavItemActive(pathname, item) && "text-[#f4c66a]",
-                    )}
-                  >
-                    {" "}
-                    {item.label}{" "}
-                  </Link>{" "}
+                  {item.label === "Lost Requiem" ? (
+                    <Link
+                      href={item.href}
+                      className={clsx(
+                        "relative block whitespace-nowrap px-1 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#d49a5b] transition hover:text-[#f4c66a] 2xl:text-[11px] 2xl:tracking-[0.18em]",
+                        isNavItemActive(pathname, item) && "text-[#f4c66a]"
+                      )}
+                    >
+                      <span aria-hidden="true" className="mr-1.5 inline-block h-1 w-1 -translate-y-0.5 rounded-full bg-[#d49a5b] transition group-hover:bg-[#f4c66a]" />
+                      {item.label}
+                      <span className="absolute bottom-1 left-1/2 h-[1px] w-[60%] -translate-x-1/2 bg-[#c98542]/40 transition group-hover:bg-[#f4c66a]/80" />
+                    </Link>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className={clsx(
+                        "block whitespace-nowrap px-1 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-200 transition hover:text-[#f4c66a] 2xl:text-[11px] 2xl:tracking-[0.18em]",
+                        isNavItemActive(pathname, item) && "text-[#f4c66a]",
+                      )}
+                    >
+                      {" "}
+                      {item.label}{" "}
+                    </Link>
+                  )}{" "}
                   {item.children ? (
                     <div className="invisible absolute left-0 top-full z-[2000] pt-4 opacity-0 transition duration-300 group-hover:visible group-hover:opacity-100">
                       {" "}

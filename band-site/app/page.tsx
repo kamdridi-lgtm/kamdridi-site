@@ -472,9 +472,10 @@ export default function HomePage() {
 
         <section id="universe" className="relative z-10 border-b border-[#a86225]/20 px-4 py-10 sm:px-6">
           <SectionTitle title="Enter The Echoes Unearthed Universe" />
-          <div className="mx-auto mt-8 grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          <div className="mx-auto mt-8 max-w-7xl">
             <LostRequiemUniverseCard />
-            {universeCards.map((card) => (
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+              {universeCards.map((card) => (
               <Link
                 key={card.title}
                 href={card.href}
@@ -489,6 +490,7 @@ export default function HomePage() {
                 </div>
               </Link>
             ))}
+            </div>
           </div>
         </section>
 
