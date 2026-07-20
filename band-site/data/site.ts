@@ -197,6 +197,15 @@ export const navigation: NavItem[] = [
     ]
   },
   {
+    label: "Submit",
+    href: "/submit",
+    children: [
+      { label: "Artist Submissions", href: "/submit" },
+      { label: "Label Packages", href: "/label" },
+      { label: "Licensing Inquiry", href: "mailto:kamdridi@proton.me?subject=Licensing Inquiry - KAMDRIDI RECORDS" }
+    ]
+  },
+  {
     label: "Roster",
     href: "/roster",
     children: [
@@ -216,12 +225,10 @@ export const navigation: NavItem[] = [
     ]
   },
   {
-    label: "Submit",
-    href: "/submit",
+    label: "Lost Requiem",
+    href: "/the-lost-requiem",
     children: [
-      { label: "Artist Submissions", href: "/submit" },
-      { label: "Label Packages", href: "/label" },
-      { label: "Licensing Inquiry", href: "mailto:kamdridi@proton.me?subject=Licensing Inquiry - KAMDRIDI RECORDS" }
+      { label: "The Museum", href: "/the-lost-requiem" }
     ]
   },
   {
@@ -249,13 +256,6 @@ export const navigation: NavItem[] = [
       { label: "Games Protocol", href: "/games#games-protocol" },
       { label: "The Gilded Null", href: "/games/the-gilded-null" },
       { label: "Vault Sequence", href: "/games/vault-sequence" }
-    ]
-  },
-  {
-    label: "Lost Requiem",
-    href: "/the-lost-requiem",
-    children: [
-      { label: "The Museum", href: "/the-lost-requiem" }
     ]
   },
   {
