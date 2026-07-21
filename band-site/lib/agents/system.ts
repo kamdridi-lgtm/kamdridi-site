@@ -47,7 +47,10 @@ const AGENT_FOR_TASK: Record<string, string> = {
   fan_growth: "fan_growth_agent",
   content_writing: "content_writer_agent",
   visual_brief: "visual_creator_agent",
-  analytics: "analytics_agent"
+  analytics: "analytics_agent",
+  tiktok_distribution: "tiktok_agent",
+  instagram_distribution: "instagram_agent",
+  spotify_pitching: "spotify_agent"
 };
 
 function now() {
@@ -437,7 +440,30 @@ async function runSpecialist(task: AgentTaskRecord, agentId: string) {
         requested_by: task.requested_by
       },
       next_actions: ["Track conversions", "Compare campaign performance"]
-    })
+    }),
+    tiktok_agent: async () => {
+      const track = payload.track || "Too Fast Too Young";
+      const price = "$249.00 CAD";
+      return {
+        summary: `${baseSummary}: Deployed 15s snippet of '${track}'. Attached CD image, price tag (${price}), and 'CLICK HERE BUY NOW' CTA linking to checkout.`,
+        next_actions: ["Monitor TikTok algorithm engagement", "Measure link clicks to store"]
+      };
+    },
+    instagram_agent: async () => {
+      const track = payload.track || "Our Lost Dreams";
+      const price = "$249.00 CAD";
+      return {
+        summary: `${baseSummary}: Deployed 15s audio of '${track}' to IG Reels and Stories. Embedded Collector Box image, price (${price}), and 'BUY NOW' product tag.`,
+        next_actions: ["Check Instagram Story views", "Review direct message replies"]
+      };
+    },
+    spotify_agent: async () => {
+      const track = payload.track || "Too Fast Too Young";
+      return {
+        summary: `${baseSummary}: Pitched 15s focus segment of '${track}' to Spotify curators. Updated Canvas with 'BUY NOW' physical edition visuals.`,
+        next_actions: ["Track Spotify playlist adds", "Review Canvas engagement"]
+      };
+    }
   };
 
   return (handlers[agentId] || handlers.project_manager_agent)();

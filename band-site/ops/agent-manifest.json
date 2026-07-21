@@ -125,5 +125,23 @@
     "name": "Analytics Agent",
     "group": "content",
     "description": "Measures traffic, conversions, and growth performance."
+  },
+  {
+    "id": "tiktok_agent",
+    "name": "TikTok Robot",
+    "group": "outreach",
+    "description": "Publishes 15s song snippets, CD visuals, pricing, and 'Buy Now' links to TikTok."
+  },
+  {
+    "id": "instagram_agent",
+    "name": "Instagram Robot",
+    "group": "outreach",
+    "description": "Publishes 15s audio, product images, pricing, and checkout links to IG Reels and Stories."
+  },
+  {
+    "id": "spotify_agent",
+    "name": "Spotify Robot",
+    "group": "outreach",
+    "description": "Pitches 15s audio of 'Too Fast Too Young' and 'Our Lost Dreams' to playlists and updates Canvas."
   }
 ]

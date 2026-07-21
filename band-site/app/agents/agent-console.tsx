@@ -135,6 +135,30 @@ export function AgentConsole({ initialStatus }: { initialStatus: AgentStatusPayl
             >
               Queue analytics
             </button>
+            <button
+              type="button"
+              onClick={() => createTask("tiktok_distribution", "Publish TikTok Snippet (Too Fast Too Young)")}
+              disabled={pending}
+              className="rounded-full border border-fuchsia-500/50 bg-fuchsia-500/10 px-5 py-3 text-xs uppercase tracking-[0.28em] text-fuchsia-300 disabled:opacity-60"
+            >
+              Queue TikTok 15s
+            </button>
+            <button
+              type="button"
+              onClick={() => createTask("instagram_distribution", "Publish IG Snippet (Our Lost Dreams)")}
+              disabled={pending}
+              className="rounded-full border border-pink-500/50 bg-pink-500/10 px-5 py-3 text-xs uppercase tracking-[0.28em] text-pink-300 disabled:opacity-60"
+            >
+              Queue Instagram 15s
+            </button>
+            <button
+              type="button"
+              onClick={() => createTask("spotify_pitching", "Pitch Spotify Canvas & Audio")}
+              disabled={pending}
+              className="rounded-full border border-emerald-500/50 bg-emerald-500/10 px-5 py-3 text-xs uppercase tracking-[0.28em] text-emerald-300 disabled:opacity-60"
+            >
+              Queue Spotify 15s
+            </button>
           </div>
         </div>
         {actionState.message ? (
