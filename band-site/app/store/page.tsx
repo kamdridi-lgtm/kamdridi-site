@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const storeHeroVideo = "/videos/store-hero-grok.mp4";
 
 export default function StorePage() {
-  const checkoutEnabled = Boolean(process.env.STRIPE_SECRET_KEY);
+  const checkoutEnabled = Boolean(process.env.NEXT_PUBLIC_STRIPE_LINK_COLLECTOR || process.env.STRIPE_SECRET_KEY);
 
   return (
     <>

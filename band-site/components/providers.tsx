@@ -175,36 +175,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
       JSON.stringify(cart.map((item) => item.id))
     );
 
-    const response = await fetch("/api/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: cart, returnPath: window.location.pathname })
-    });
-
-    const payload = await response.json();
-
-    if (!response.ok) {
-      window.localStorage.removeItem("kamdridi-pending-checkout");
-      return { ok: false, message: payload.error ?? "Checkout failed." };
-    }
-
-    if (payload.mode === "simulated") {
-      window.location.href = payload.url;
-      return { ok: true };
-    }
-
-    if (payload.url) {
-      window.location.href = payload.url;
-      return { ok: true };
-    }
-
-    if (!payload.sessionId) {
-      window.localStorage.removeItem("kamdridi-pending-checkout");
-      return { ok: false, message: "Checkout redirect is unavailable." };
-    }
-
-    window.localStorage.removeItem("kamdridi-pending-checkout");
-    return { ok: false, message: "Checkout link is unavailable." };
+    // Fallback to static Stripe Payment link if dynamic checkout is not configured
+    const stripeLink = process.env.NEXT_PUBLIC_STRIPE_LINK_COLLECTOR || "https://buy.stripe.com/test_...";
+    window.location.href = stripeLink;
+    return { ok: true };
   }
 
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
