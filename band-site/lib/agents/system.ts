@@ -445,15 +445,15 @@ async function runSpecialist(task: AgentTaskRecord, agentId: string) {
       const track = payload.track || "Too Fast Too Young";
       const price = "$249.00 CAD";
       return {
-        summary: `${baseSummary}: Deployed 15s snippet of '${track}'. Attached CD image, price tag (${price}), and 'CLICK HERE BUY NOW' CTA linking to checkout.`,
+        summary: `${baseSummary}: Deployed snippet of '${track}' (using /videos/too-fast-too-young.mp4). Attached CD image, price tag (${price}), and 'CLICK HERE BUY NOW' CTA linking to checkout.`,
         next_actions: ["Monitor TikTok algorithm engagement", "Measure link clicks to store"]
       };
     },
     instagram_agent: async () => {
-      const track = payload.track || "Our Lost Dreams";
+      const track = payload.track || "Too Fast Too Young";
       const price = "$249.00 CAD";
       return {
-        summary: `${baseSummary}: Deployed 15s audio of '${track}' to IG Reels and Stories. Embedded Collector Box image, price (${price}), and 'BUY NOW' product tag.`,
+        summary: `${baseSummary}: Deployed audio of '${track}' (using /videos/too-fast-too-young.mp4) to IG Reels and Stories. Embedded Collector Box image, price (${price}), and 'BUY NOW' product tag.`,
         next_actions: ["Check Instagram Story views", "Review direct message replies"]
       };
     },
