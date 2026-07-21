@@ -588,6 +588,24 @@ export async function seedRecurringTasks() {
       description: "Review traffic, conversions, and growth signals.",
       task_type: "analytics",
       priority: 62
+    },
+    {
+      title: "Continuous TikTok distribution",
+      description: "Automatically distribute 15s snippets and store links to TikTok.",
+      task_type: "tiktok_distribution",
+      priority: 60
+    },
+    {
+      title: "Continuous Instagram distribution",
+      description: "Automatically distribute 15s snippets and store links to Instagram.",
+      task_type: "instagram_distribution",
+      priority: 59
+    },
+    {
+      title: "Continuous Spotify pitching",
+      description: "Automatically pitch 15s snippets to Spotify playlists.",
+      task_type: "spotify_pitching",
+      priority: 58
     }
   ];
 
