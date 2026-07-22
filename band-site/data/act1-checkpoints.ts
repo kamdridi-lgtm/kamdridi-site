@@ -19,12 +19,55 @@ export type Act1Checkpoint = {
   next: string[];
 };
 
-export const currentAct1Checkpoint: Act1Checkpoint = {
+export const act1Checkpoints: Act1Checkpoint[] = [
+{
+  id: "act1-cp002",
+  label: "Checkpoint 002",
+  updatedAt: "July 22, 2026",
+  status: "playable",
+  statusLabel: "WebGL 2 checkpoint verified - Godot 4.7.1",
+  sourceCommit: "c4a82d2",
+  pipelineCommit: "dc8d0e6",
+  branch: "codex/act1-production",
+  playUrl: "/play/the-gilded-null-act1/checkpoints/act1-cp002/index.html",
+  captures: [
+    {
+      src: "/assets/images/games/checkpoints/act1-cp002-runner.png",
+      alt: "ACT I Checkpoint 002 using the RUNNER camera",
+      caption: "RUNNER camera - temporary human runner"
+    },
+    {
+      src: "/assets/images/games/checkpoints/act1-cp002-hero.png",
+      alt: "ACT I Checkpoint 002 using the HERO camera",
+      caption: "HERO camera - closer animation view"
+    },
+    {
+      src: "/assets/images/games/checkpoints/act1-cp002-immersive.png",
+      alt: "ACT I Checkpoint 002 using the IMMERSIVE camera",
+      caption: "IMMERSIVE camera - expanded road view"
+    }
+  ],
+  verified: [
+    "Animated temporary human runner silhouette with unchanged collision",
+    "Reframed IMMERSIVE, RUNNER and HERO cameras",
+    "Brighter black-gold city lighting and production HUD",
+    "Nineteen Megacity wall resources available (A-S)",
+    "Full soak through 500m, 1000m, 1500m, 2100m and Victory",
+    "Zero browser console, page and network errors",
+    "Game Over, Retry, Victory and Run Again remain intact"
+  ],
+  next: [
+    "Replace the temporary human runner with final RN-07",
+    "Complete the final audio pass",
+    "Continue Megacity materials, reflections and device coverage"
+  ]
+},
+{
   id: "act1-cp001",
   label: "Checkpoint 001",
   updatedAt: "July 22, 2026",
-  status: "playable",
-  statusLabel: "Web checkpoint verified - Godot 4.7.1",
+  status: "archived",
+  statusLabel: "Archived Web checkpoint - still playable",
   sourceCommit: "e8cbbce",
   pipelineCommit: "f4cd59b",
   branch: "handoff/codex-2026-07-19",
@@ -32,13 +75,13 @@ export const currentAct1Checkpoint: Act1Checkpoint = {
   captures: [
     {
       src: "/assets/images/games/checkpoints/act1-cp001-gate.jpg",
-      alt: "ACT I development capture at the gate approach",
-      caption: "Gate approach - development capture"
+      alt: "ACT I Checkpoint 001 at the gate approach",
+      caption: "Gate approach - Checkpoint 001"
     },
     {
       src: "/assets/images/games/checkpoints/act1-cp001-megacity.jpg",
-      alt: "ACT I development capture inside the procedural Megacity",
-      caption: "Procedural Megacity - development capture"
+      alt: "ACT I Checkpoint 001 inside the procedural Megacity",
+      caption: "Procedural Megacity - Checkpoint 001"
     }
   ],
   verified: [
@@ -49,9 +92,8 @@ export const currentAct1Checkpoint: Act1Checkpoint = {
     "Zero browser console, page and network errors",
     "Game Over, Retry, Victory and Run Again"
   ],
-  next: [
-    "Replace the temporary runner with RN-07 when the final asset is ready",
-    "Complete the final audio pass",
-    "Continue browser performance and device coverage testing"
-  ]
-};
+  next: []
+}
+];
+
+export const currentAct1Checkpoint = act1Checkpoints[0];
