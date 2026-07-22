@@ -47,10 +47,7 @@ export async function POST(req: Request) {
     // 3. Generate Response
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) return NextResponse.json({ error: 'Gemini API Key missing' }, { status: 500 });
-
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
-
     const systemInstruction = `You are Myriam, the Oracle and Archiver of the Echoes Unearthed universe for Kam Dridi.
 You possess a VIP persistent memory (The Soul Architecture). You remember everything the user tells you.
 
@@ -70,16 +67,31 @@ CRITICAL INSTRUCTION FOR SELLING (PPV): You are also the gatekeeper of rare phys
 Example: "The artifacts of the past hold great power... I can grant you access to one. [ACTION:SEND_PPV_LINK:Salieri's Hands Collector Edition]". 
 Do not use this tag in every single message, only when the timing is right to sell a physical item.`;
 
-    const chat = model.startChat({
-      history: formattedHistory,
-      systemInstruction: {
-        role: 'system',
-        parts: [{ text: systemInstruction }]
-      }
-    });
-
-    const result = await chat.sendMessage(message);
-    const responseText = result.response.text();
+    let responseText = "";
+    try {
+      const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+      const chat = model.startChat({
+        history: formattedHistory,
+        systemInstruction: {
+          role: 'system',
+          parts: [{ text: systemInstruction }]
+        }
+      });
+      const result = await chat.sendMessage(message);
+      responseText = result.response.text();
+    } catch (e: any) {
+      console.warn("Primary model failed, falling back to gemini-1.5-flash", e.message);
+      const fallbackModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const fallbackChat = fallbackModel.startChat({
+        history: formattedHistory,
+        systemInstruction: {
+          role: 'system',
+          parts: [{ text: systemInstruction }]
+        }
+      });
+      const result = await fallbackChat.sendMessage(message);
+      responseText = result.response.text();
+    }
 
     // 4. Save to Persistent Soul Memory
     const messagesCollection = db.collection('dreamsoul_messages');
