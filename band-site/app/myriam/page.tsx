@@ -177,9 +177,9 @@ export default function MyriamChat() {
       </header>
 
       {/* Chat Area */}
-      <div className="relative z-10 flex-1 overflow-y-auto p-4 sm:p-8">
-        {/* Online Status Indicator aligned to the left */}
-        <div className="mb-6 flex flex-col items-start justify-start max-w-xl">
+      <div className="relative z-10 flex-1 flex flex-col overflow-y-auto p-4 sm:p-8">
+        {/* Online Status Indicator aligned to the left and pushed to bottom */}
+        <div className="mt-auto mb-6 flex flex-col items-start justify-start max-w-xl">
           <div className="flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-4 py-1.5 backdrop-blur-md">
             <span className="relative flex h-2 w-2">
               <span className={`absolute inline-flex h-full w-full rounded-full bg-[#f4c66a] opacity-75 ${isSpeaking ? 'animate-ping' : ''}`}></span>
@@ -229,7 +229,7 @@ export default function MyriamChat() {
       </div>
 
       {/* Input Area */}
-      <div className="relative z-10 border-t border-[#f4c66a]/30 bg-black/80 p-6 backdrop-blur-xl">
+      <div className="relative z-10 border-t border-[#f4c66a]/30 bg-black/80 p-4 pb-28 sm:p-6 sm:pb-6 backdrop-blur-xl">
         <div className="mx-auto flex max-w-3xl items-center gap-3 relative rounded-xl">
           {/* Golden Flashy Haze Effect */}
           <div className="absolute inset-[-10px] rounded-2xl bg-[#f4a33f] opacity-30 blur-2xl animate-pulse pointer-events-none"></div>
