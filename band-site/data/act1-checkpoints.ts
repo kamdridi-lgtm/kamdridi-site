@@ -26,7 +26,7 @@ export const currentAct1Checkpoint: Act1Checkpoint = {
   status: "exporting",
   statusLabel: "Source archived - browser export in validation",
   sourceCommit: "51cb426",
-  pipelineCommit: "acd763ce",
+  pipelineCommit: "3d509ae",
   branch: "handoff/codex-2026-07-19",
   playUrl: null,
   captures: [
