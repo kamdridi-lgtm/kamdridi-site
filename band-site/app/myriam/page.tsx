@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Send, Lock, ShoppingCart, Volume2, VolumeX } from 'lucide-react';
+import { Send, Lock, ShoppingCart, Volume2, VolumeX, Mic, Keyboard } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -13,8 +13,12 @@ export default function MyriamChat() {
   const [showPaywall, setShowPaywall] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [inputMode, setInputMode] = useState<'text' | 'voice'>('text');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const synth = typeof window !== 'undefined' ? window.speechSynthesis : null;
+
+  // Import VoiceTransceiver dynamically to avoid SSR issues with window.SpeechRecognition
+  const VoiceTransceiver = require('@/components/myriam/voice-transceiver').VoiceTransceiver;
 
   useEffect(() => {
     let sid = localStorage.getItem('kam_oracle_session');
@@ -40,13 +44,21 @@ export default function MyriamChat() {
     const cleanText = text.replace(/\[ACTION:SEND_PPV_LINK:(.*?)\]/g, "I have secured a collector's item for you.");
     const utterance = new SpeechSynthesisUtterance(cleanText);
     
-    // Try to find a good female/mysterious voice
-    const voices = synth.getVoices();
-    const femaleVoice = voices.find(v => 
-      v.name.includes('Female') || v.name.includes('Samantha') || v.name.includes('Google UK English Female') || v.name.includes('Zira')
-    );
-    if (femaleVoice) utterance.voice = femaleVoice;
+    // Ensure voices are loaded (sometimes they load async)
+    let voices = synth.getVoices();
     
+    // Fallback wait if voices are empty (Chrome bug on first load)
+    if (voices.length === 0) {
+      synth.onvoiceschanged = () => {
+         const reloadedVoices = synth.getVoices();
+         assignFemaleVoice(utterance, reloadedVoices);
+         synth.speak(utterance);
+      };
+      return;
+    }
+
+    assignFemaleVoice(utterance, voices);
+
     utterance.pitch = 0.8;
     utterance.rate = 0.9; // Slightly slower, more deliberate
 
@@ -57,6 +69,24 @@ export default function MyriamChat() {
     synth.speak(utterance);
   };
 
+  const assignFemaleVoice = (utterance: SpeechSynthesisUtterance, voices: SpeechSynthesisVoice[]) => {
+    // Priorities for a feminine, mysterious voice
+    const femaleVoice = voices.find(v => 
+      v.name.includes('Zira') || // Windows default female
+      v.name.includes('Hazel') || // Windows UK female
+      v.name.includes('Catherine') || // Windows AU female
+      v.name.includes('Samantha') || // macOS default female
+      v.name.includes('Google UK English Female') ||
+      v.name.includes('Google US English Female') ||
+      v.name.includes('Female') ||
+      v.name.includes('Amelie') ||
+      v.name.includes('Kyoko')
+    ) || voices.find(v => v.lang.startsWith('en') && v.name.includes('Female')) || voices[0];
+    
+    if (femaleVoice) utterance.voice = femaleVoice;
+  };
+
+
   const toggleVoice = () => {
     setVoiceEnabled(!voiceEnabled);
     if (voiceEnabled && synth) {
@@ -65,17 +95,18 @@ export default function MyriamChat() {
     }
   };
 
-  const sendMessage = async () => {
-    if (!input.trim() || showPaywall) return;
-    const userText = input;
+  const sendMessage = async (overrideText?: string) => {
+    const textToSend = overrideText || input;
+    if (!textToSend.trim() || showPaywall) return;
+    
     setInput('');
-    setMessages(prev => [...prev, { role: 'user', text: userText }]);
+    setMessages(prev => [...prev, { role: 'user', text: textToSend }]);
 
     try {
       const res = await fetch('/api/myriam', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userText, sessionId })
+        body: JSON.stringify({ message: textToSend, sessionId })
       });
 
       const data = await res.json();
@@ -88,6 +119,8 @@ export default function MyriamChat() {
         setShowPaywall(true);
         if (voiceEnabled && synth) {
            const utterance = new SpeechSynthesisUtterance("The signal is encrypted. You must unlock the VIP Vault to continue.");
+           let voices = synth.getVoices();
+           assignFemaleVoice(utterance, voices);
            synth.speak(utterance);
         }
         return;
@@ -229,27 +262,65 @@ export default function MyriamChat() {
       </div>
 
       {/* Input Area */}
-      <div className="relative z-10 border-t border-[#f4c66a]/30 bg-black/80 p-4 pb-28 sm:p-6 sm:pb-6 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-3xl items-center gap-3 relative rounded-xl">
-          {/* Golden Flashy Haze Effect */}
-          <div className="absolute inset-[-10px] rounded-2xl bg-[#f4a33f] opacity-30 blur-2xl animate-pulse pointer-events-none"></div>
-          
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyPress}
-            disabled={showPaywall}
-            placeholder="Transmit message to Myriam..."
-            className="relative z-10 flex-1 rounded-xl border-2 border-[#f4c66a]/60 bg-black/80 p-4 text-sm font-medium text-stone-100 placeholder:text-stone-400 focus:border-[#f4c66a] focus:bg-black focus:outline-none focus:ring-4 focus:ring-[#f4c66a]/30 shadow-[0_0_20px_rgba(244,198,106,0.3)] transition-all"
-          />
-          <button
-            onClick={sendMessage}
-            disabled={showPaywall || !input.trim()}
-            className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border-2 border-[#f4c66a]/60 bg-black/80 text-[#f4c66a] transition-all hover:border-[#f4c66a] hover:bg-[#f4c66a] hover:text-black hover:shadow-[0_0_30px_rgba(244,198,106,0.8)] disabled:opacity-50 shadow-[0_0_20px_rgba(244,198,106,0.3)]"
-          >
-            <Send className="h-6 w-6 ml-1" />
-          </button>
+      <div className="relative z-10 border-t border-[#f4c66a]/30 bg-black/80 p-4 pb-28 sm:p-6 sm:pb-6 backdrop-blur-xl transition-all duration-500">
+        <div className="mx-auto max-w-3xl">
+          {/* Mode Toggle */}
+          <div className="mb-4 flex justify-center gap-4">
+            <button
+              onClick={() => setInputMode('text')}
+              className={`flex items-center gap-2 rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest transition-all ${
+                inputMode === 'text' 
+                  ? 'bg-[#f4c66a] text-black shadow-[0_0_15px_rgba(244,198,106,0.5)]' 
+                  : 'border border-white/20 text-stone-400 hover:text-white'
+              }`}
+            >
+              <Keyboard className="h-3.5 w-3.5" /> Text
+            </button>
+            <button
+              onClick={() => {
+                setInputMode('voice');
+                setVoiceEnabled(true); // Auto-enable TTS when switching to voice input
+              }}
+              className={`flex items-center gap-2 rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest transition-all ${
+                inputMode === 'voice' 
+                  ? 'bg-[#f4c66a] text-black shadow-[0_0_15px_rgba(244,198,106,0.5)]' 
+                  : 'border border-white/20 text-stone-400 hover:text-white'
+              }`}
+            >
+              <Mic className="h-3.5 w-3.5" /> Voice
+            </button>
+          </div>
+
+          {inputMode === 'text' ? (
+            <div className="flex items-center gap-3 relative rounded-xl">
+              {/* Golden Flashy Haze Effect */}
+              <div className="absolute inset-[-10px] rounded-2xl bg-[#f4a33f] opacity-30 blur-2xl animate-pulse pointer-events-none"></div>
+              
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyPress}
+                disabled={showPaywall}
+                placeholder="Transmit message to Myriam..."
+                className="relative z-10 flex-1 rounded-xl border-2 border-[#f4c66a]/60 bg-black/80 p-4 text-sm font-medium text-stone-100 placeholder:text-stone-400 focus:border-[#f4c66a] focus:bg-black focus:outline-none focus:ring-4 focus:ring-[#f4c66a]/30 shadow-[0_0_20px_rgba(244,198,106,0.3)] transition-all"
+              />
+              <button
+                onClick={() => sendMessage()}
+                disabled={showPaywall || !input.trim()}
+                className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border-2 border-[#f4c66a]/60 bg-black/80 text-[#f4c66a] transition-all hover:border-[#f4c66a] hover:bg-[#f4c66a] hover:text-black hover:shadow-[0_0_30px_rgba(244,198,106,0.8)] disabled:opacity-50 shadow-[0_0_20px_rgba(244,198,106,0.3)]"
+              >
+                <Send className="h-6 w-6 ml-1" />
+              </button>
+            </div>
+          ) : (
+            <div className="relative z-10 rounded-xl border-2 border-[#f4c66a]/30 bg-black/40">
+              <VoiceTransceiver 
+                disabled={showPaywall} 
+                onTranscript={(text: string) => sendMessage(text)}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
