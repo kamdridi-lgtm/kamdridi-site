@@ -6,76 +6,59 @@ import { RenderPipeline, RenderTask } from "./render-pipeline";
 import { Globe, Share2, Eye, Brain } from "lucide-react";
 import clsx from "clsx";
 
-const MOCK_AGENTS: AgentData[] = [
-  {
-    id: "myriam-01",
-    name: "Myriam",
-    role: "The Oracle / Sentience",
-    status: "online",
-    lastPing: "Just now",
-    uptime: "99.9%",
-    icon: <Brain className="h-5 w-5" />
-  },
-  {
-    id: "orchestrator-01",
-    name: "Echoes Engine",
-    role: "Pipeline Orchestrator",
-    status: "rendering",
-    lastPing: "2s ago",
-    uptime: "100%",
-    icon: <Globe className="h-5 w-5" />
-  },
-  {
-    id: "social-01",
-    name: "Social Bot (TikTok)",
-    role: "Distribution",
-    status: "sleeping",
-    lastPing: "45m ago",
-    uptime: "98.5%",
-    icon: <Share2 className="h-5 w-5" />
-  }
-];
-
-const MOCK_TASKS: RenderTask[] = [
-  {
-    id: "TRK-9921",
-    type: "TikTok",
-    subject: "Salieri's Hands - Drop Teaser",
-    status: "rendering",
-    progress: 78,
-    timeAdded: "2m ago"
-  },
-  {
-    id: "TRK-9920",
-    type: "Instagram",
-    subject: "Echoes Unearthed - Lore Snippet",
-    status: "completed",
-    progress: 100,
-    timeAdded: "45m ago"
-  }
-];
-
 export function CommandCenter() {
-  const [agents, setAgents] = useState<AgentData[]>(MOCK_AGENTS);
-  const [tasks, setTasks] = useState<RenderTask[]>(MOCK_TASKS);
-  const [activeUsers, setActiveUsers] = useState(1337);
+  const [agents, setAgents] = useState<AgentData[]>([]);
+  const [tasks, setTasks] = useState<RenderTask[]>([]);
+  const [activeUsers, setActiveUsers] = useState(0);
 
-  // Simulate real-time updates
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTasks(prev => prev.map(task => {
-        if (task.status === "rendering") {
-          const newProgress = task.progress + Math.floor(Math.random() * 5);
-          if (newProgress >= 100) {
-            return { ...task, progress: 100, status: "completed" };
-          }
-          return { ...task, progress: newProgress };
-        }
-        return task;
-      }));
+    async function fetchData() {
+      try {
+        // Fetch Agent Status
+        const statusRes = await fetch("/api/agents/status");
+        if (statusRes.ok) {
+          const statusData = await statusRes.json();
+          if (statusData.ok) {
+            // Map Agents
+            const mappedAgents: AgentData[] = (statusData.agents || []).map((a: any) => ({
+              id: a.id,
+              name: a.name,
+              role: a.description || "Node",
+              status: (a.status === "running" ? "rendering" : a.status === "offline" ? "offline" : a.status === "sleeping" ? "sleeping" : "online") as any,
+              lastPing: a.last_seen ? new Date(a.last_seen).toLocaleTimeString() : "Just now",
+              uptime: "99.9%",
+              icon: a.is_chief ? <Brain className="h-5 w-5" /> : a.name.includes("Social") ? <Share2 className="h-5 w-5" /> : <Globe className="h-5 w-5" />
+            }));
+            setAgents(mappedAgents);
 
-      setActiveUsers(prev => prev + Math.floor(Math.random() * 11) - 5);
-    }, 2000);
+            // Map Tasks
+            const mappedTasks: RenderTask[] = (statusData.tasks || []).map((t: any) => ({
+              id: t.id.split("-")[0], // Short ID
+              type: t.task_type || "Task",
+              subject: t.title || "Unknown Task",
+              status: (t.status === "running" ? "rendering" : t.status) as any,
+              progress: t.status === "completed" ? 100 : t.status === "running" ? 45 : 0,
+              timeAdded: new Date(t.created_at).toLocaleTimeString()
+            }));
+            setTasks(mappedTasks);
+          }
+        }
+
+        // Fetch Demographics (Active Users)
+        const demoRes = await fetch("/api/track/stats");
+        if (demoRes.ok) {
+          const demoData = await demoRes.json();
+          // Active users could be represented by total distinct sessions or visits today
+          // We'll just use total logs length for now to show real activity
+          setActiveUsers(demoData.totalLogs || demoData.logs?.length || 0);
+        }
+      } catch (err) {
+        console.error("Failed to fetch command center data", err);
+      }
+    }
+
+    fetchData();
+    const interval = setInterval(fetchData, 5000); // Poll every 5s
 
     return () => clearInterval(interval);
   }, []);
