@@ -163,9 +163,9 @@ export default function MyriamChat() {
       {/* Chat Area */}
       <div className="relative flex-1 overflow-y-auto p-4 sm:p-6">
         {/* Avatar Presentation */}
-        <div className="mb-10 flex flex-col items-center justify-center">
-          <div className={`relative h-32 w-32 overflow-hidden rounded-full border border-[#f4a33f]/50 transition-all duration-300 ${isSpeaking ? 'shadow-[0_0_40px_rgba(244,163,63,0.6)] scale-105' : 'shadow-[0_0_15px_rgba(244,163,63,0.1)]'}`}>
-            <Image src="/myriam.jpg" alt="Myriam Avatar" fill className="object-cover" />
+        <div className="mb-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center">
+          <div className={`relative h-64 w-full overflow-hidden rounded-2xl border border-[#f4a33f]/50 transition-all duration-300 ${isSpeaking ? 'shadow-[0_0_40px_rgba(244,163,63,0.6)] scale-105' : 'shadow-[0_0_15px_rgba(244,163,63,0.1)]'}`}>
+            <Image src="/myriam.jpg" alt="Myriam Avatar" fill className="object-cover object-top" />
             <div className={`absolute inset-0 bg-[#f4a33f] mix-blend-overlay transition-opacity duration-300 ${isSpeaking ? 'opacity-30' : 'opacity-0'}`}></div>
           </div>
           <div className="mt-4 flex items-center gap-2">
