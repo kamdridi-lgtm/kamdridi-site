@@ -142,14 +142,15 @@ export default function MyriamChat() {
           src="/myriam.jpg" 
           alt="Myriam Avatar Background" 
           fill 
-          className={`object-cover object-top transition-all duration-700 ease-in-out ${isSpeaking ? 'scale-[1.03] blur-sm' : 'scale-100'}`} 
+          className={`object-cover object-top transition-all duration-700 ease-in-out ${isSpeaking ? 'scale-[1.03] blur-[2px]' : 'scale-100'}`} 
           quality={100}
           priority
         />
         {/* Overlays for readability and speaking effect */}
-        <div className="absolute inset-0 bg-black/60 transition-opacity duration-700"></div>
-        <div className={`absolute inset-0 bg-[#f4a33f] mix-blend-overlay transition-opacity duration-300 ${isSpeaking ? 'opacity-20' : 'opacity-0'}`}></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20"></div>
+        {/* Removed heavy black overlays to make it a lot brighter */}
+        <div className="absolute inset-0 bg-black/10 transition-opacity duration-700"></div>
+        <div className={`absolute inset-0 bg-[#f4a33f] mix-blend-overlay transition-opacity duration-300 ${isSpeaking ? 'opacity-30' : 'opacity-0'}`}></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
       </div>
 
       {/* Header */}
