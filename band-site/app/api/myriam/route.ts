@@ -28,7 +28,7 @@ export async function POST(req: Request) {
 
     const messageCount = await db.collection('dreamsoul_messages').countDocuments({ sessionId, role: 'user' });
 
-    if (!isVip && messageCount >= 5) {
+    if (!isVip && messageCount >= 50) {
       return NextResponse.json({ error: 'PAYWALL', isVip: false }, { status: 403 });
     }
 

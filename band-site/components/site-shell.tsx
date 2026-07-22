@@ -355,6 +355,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const { cartCount, setCartOpen } = useApp();
   const isHome = pathname === "/";
   const isStandalonePoster = pathname === "/app/war-machines-jp";
+  const isStandaloneMyriam = pathname === "/myriam";
   const isStandaloneArtistSite = pathname.startsWith("/iron-county-ghosts");
   const showCart =
     pathname === "/" ||
@@ -370,7 +371,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     isNavItemActive(pathname, item),
   );
   const showSecondaryExplore = !isHome && pathname !== salieriReleaseHref;
-  if (isStandalonePoster || isStandaloneArtistSite) {
+  if (isStandalonePoster || isStandaloneArtistSite || isStandaloneMyriam) {
     return <>{children}</>;
   }
   return (
