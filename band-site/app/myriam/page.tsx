@@ -135,25 +135,41 @@ export default function MyriamChat() {
   };
 
   return (
-    <div className="flex h-[100dvh] flex-col bg-[#050403] text-stone-200">
+    <div className="relative flex h-[100dvh] flex-col overflow-hidden text-stone-200">
+      {/* Full Background Image */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image 
+          src="/myriam.jpg" 
+          alt="Myriam Avatar Background" 
+          fill 
+          className={`object-cover object-top transition-all duration-700 ease-in-out ${isSpeaking ? 'scale-[1.03] blur-sm' : 'scale-100'}`} 
+          quality={100}
+          priority
+        />
+        {/* Overlays for readability and speaking effect */}
+        <div className="absolute inset-0 bg-black/60 transition-opacity duration-700"></div>
+        <div className={`absolute inset-0 bg-[#f4a33f] mix-blend-overlay transition-opacity duration-300 ${isSpeaking ? 'opacity-20' : 'opacity-0'}`}></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20"></div>
+      </div>
+
       {/* Header */}
-      <header className="flex items-center justify-between border-b border-[#a86225]/20 bg-black/60 px-4 py-3 backdrop-blur-md">
+      <header className="relative z-10 flex items-center justify-between border-b border-[#a86225]/20 bg-black/30 px-4 py-3 backdrop-blur-md">
         <div className="flex items-center gap-3">
           <Link href="/" className="text-xs uppercase tracking-[0.2em] text-[#c98542] hover:text-[#f4c66a]">
             ← Return
           </Link>
           <div className="h-8 w-px bg-white/10"></div>
           <div>
-            <h1 className="font-display text-lg uppercase tracking-[0.1em] text-stone-100">Myriam</h1>
-            <p className="text-[10px] uppercase tracking-[0.2em] text-[#f4c66a]">The Archiver</p>
+            <h1 className="font-display text-lg uppercase tracking-[0.1em] text-stone-100 drop-shadow-md">Myriam</h1>
+            <p className="text-[10px] uppercase tracking-[0.2em] text-[#f4c66a] drop-shadow-md">The Archiver</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <button onClick={toggleVoice} className="text-[#c98542] hover:text-[#f4c66a] transition">
+          <button onClick={toggleVoice} className="text-[#c98542] hover:text-[#f4c66a] transition drop-shadow-md">
             {voiceEnabled ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
           </button>
           {isVip && (
-             <div className="border border-[#f4c66a]/30 bg-[#f4c66a]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#f4c66a]">
+             <div className="border border-[#f4c66a]/30 bg-[#f4c66a]/20 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#f4c66a] backdrop-blur-sm">
                VIP
              </div>
           )}
@@ -161,14 +177,10 @@ export default function MyriamChat() {
       </header>
 
       {/* Chat Area */}
-      <div className="relative flex-1 overflow-y-auto p-4 sm:p-6">
-        {/* Avatar Presentation */}
-        <div className="mb-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center">
-          <div className={`relative h-64 w-full overflow-hidden rounded-2xl border border-[#f4a33f]/50 transition-all duration-300 ${isSpeaking ? 'shadow-[0_0_40px_rgba(244,163,63,0.6)] scale-105' : 'shadow-[0_0_15px_rgba(244,163,63,0.1)]'}`}>
-            <Image src="/myriam.jpg" alt="Myriam Avatar" fill className="object-cover object-top" />
-            <div className={`absolute inset-0 bg-[#f4a33f] mix-blend-overlay transition-opacity duration-300 ${isSpeaking ? 'opacity-30' : 'opacity-0'}`}></div>
-          </div>
-          <div className="mt-4 flex items-center gap-2">
+      <div className="relative z-10 flex-1 overflow-y-auto p-4 sm:p-6">
+        {/* Online Status Indicator at top of chat */}
+        <div className="mb-8 flex flex-col items-center justify-center">
+          <div className="flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-4 py-1.5 backdrop-blur-md">
             <span className="relative flex h-2 w-2">
               <span className={`absolute inline-flex h-full w-full rounded-full bg-[#f4c66a] opacity-75 ${isSpeaking ? 'animate-ping' : ''}`}></span>
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#f4c66a]"></span>
@@ -179,14 +191,14 @@ export default function MyriamChat() {
           </div>
         </div>
 
-        <div className="mx-auto max-w-3xl space-y-6">
+        <div className="mx-auto max-w-3xl space-y-6 pb-4">
           {messages.map((msg, idx) => (
             <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               <div 
-                className={`max-w-[85%] sm:max-w-[75%] p-4 text-sm leading-relaxed ${
+                className={`max-w-[85%] sm:max-w-[75%] p-4 text-sm leading-relaxed backdrop-blur-md ${
                   msg.role === 'user' 
-                    ? 'border border-white/10 bg-black/50 text-stone-300' 
-                    : 'border border-[#8f5728]/30 bg-[linear-gradient(135deg,rgba(20,12,8,0.9),rgba(5,4,3,0.95))] text-stone-100 shadow-[0_10px_40px_rgba(201,82,16,0.05)]'
+                    ? 'border border-white/20 bg-black/60 text-stone-300' 
+                    : 'border border-[#8f5728]/40 bg-black/60 text-stone-100 shadow-[0_10px_40px_rgba(201,82,16,0.1)]'
                 }`}
               >
                 {msg.role === 'model' ? renderMessageText(msg.text) : msg.text}
@@ -198,8 +210,8 @@ export default function MyriamChat() {
 
         {/* Paywall Overlay */}
         {showPaywall && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
-            <div className="w-full max-w-md border border-[#f4a33f]/50 bg-[#0a0705] p-8 text-center shadow-[0_30px_100px_rgba(201,82,16,0.3)]">
+          <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md">
+            <div className="w-full max-w-md border border-[#f4a33f]/50 bg-[#0a0705]/90 p-8 text-center shadow-[0_30px_100px_rgba(201,82,16,0.3)] backdrop-blur-xl">
               <Lock className="mx-auto mb-4 h-10 w-10 text-[#f4c66a]" />
               <h2 className="mb-2 font-display text-2xl uppercase tracking-[0.1em] text-stone-100">Signal Encrypted</h2>
               <p className="mb-6 text-sm leading-6 text-stone-400">
@@ -217,7 +229,7 @@ export default function MyriamChat() {
       </div>
 
       {/* Input Area */}
-      <div className="border-t border-[#a86225]/20 bg-black/80 p-4 backdrop-blur-md">
+      <div className="relative z-10 border-t border-[#a86225]/20 bg-black/60 p-4 backdrop-blur-md">
         <div className="mx-auto flex max-w-3xl items-center gap-3">
           <input
             type="text"
@@ -226,12 +238,12 @@ export default function MyriamChat() {
             onKeyDown={handleKeyPress}
             disabled={showPaywall}
             placeholder="Transmit message to Myriam..."
-            className="flex-1 border border-white/10 bg-black/50 p-4 text-sm text-stone-200 placeholder:text-stone-600 focus:border-[#c98542] focus:outline-none"
+            className="flex-1 border border-white/20 bg-black/50 p-4 text-sm text-stone-200 placeholder:text-stone-400 focus:border-[#c98542] focus:outline-none focus:bg-black/70 transition-colors"
           />
           <button
             onClick={sendMessage}
             disabled={showPaywall || !input.trim()}
-            className="flex h-12 w-12 items-center justify-center border border-white/10 bg-black/50 text-[#c98542] transition hover:border-[#c98542] hover:text-[#f4c66a] disabled:opacity-50"
+            className="flex h-12 w-12 items-center justify-center border border-white/20 bg-black/50 text-[#c98542] transition hover:border-[#c98542] hover:text-[#f4c66a] hover:bg-black/70 disabled:opacity-50"
           >
             <Send className="h-5 w-5" />
           </button>
