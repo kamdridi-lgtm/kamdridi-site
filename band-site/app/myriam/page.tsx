@@ -147,30 +147,29 @@ export default function MyriamChat() {
           priority
         />
         {/* Overlays for readability and speaking effect */}
-        {/* Removed heavy black overlays to make it a lot brighter */}
-        <div className="absolute inset-0 bg-black/10 transition-opacity duration-700"></div>
+        {/* Removed heavy black overlays completely so image is 100% bright */}
         <div className={`absolute inset-0 bg-[#f4a33f] mix-blend-overlay transition-opacity duration-300 ${isSpeaking ? 'opacity-30' : 'opacity-0'}`}></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent h-48 mt-auto"></div>
       </div>
 
       {/* Header */}
-      <header className="relative z-10 flex items-center justify-between border-b border-[#a86225]/20 bg-black/30 px-4 py-3 backdrop-blur-md">
+      <header className="relative z-10 flex items-center justify-between border-b border-[#a86225]/20 bg-black/10 px-4 py-3 backdrop-blur-sm">
         <div className="flex items-center gap-3">
-          <Link href="/" className="text-xs uppercase tracking-[0.2em] text-[#c98542] hover:text-[#f4c66a]">
+          <Link href="/" className="text-xs uppercase tracking-[0.2em] text-[#c98542] hover:text-[#f4c66a] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
             ← Return
           </Link>
           <div className="h-8 w-px bg-white/10"></div>
           <div>
-            <h1 className="font-display text-lg uppercase tracking-[0.1em] text-stone-100 drop-shadow-md">Myriam</h1>
-            <p className="text-[10px] uppercase tracking-[0.2em] text-[#f4c66a] drop-shadow-md">The Archiver</p>
+            <h1 className="font-display text-lg uppercase tracking-[0.1em] text-stone-100 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Myriam</h1>
+            <p className="text-[10px] uppercase tracking-[0.2em] text-[#f4c66a] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">The Archiver</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <button onClick={toggleVoice} className="text-[#c98542] hover:text-[#f4c66a] transition drop-shadow-md">
+          <button onClick={toggleVoice} className="text-[#c98542] hover:text-[#f4c66a] transition drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
             {voiceEnabled ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
           </button>
           {isVip && (
-             <div className="border border-[#f4c66a]/30 bg-[#f4c66a]/20 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#f4c66a] backdrop-blur-sm">
+             <div className="border border-[#f4c66a]/30 bg-[#f4c66a]/20 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#f4c66a] backdrop-blur-md">
                VIP
              </div>
           )}
@@ -178,9 +177,9 @@ export default function MyriamChat() {
       </header>
 
       {/* Chat Area */}
-      <div className="relative z-10 flex-1 overflow-y-auto p-4 sm:p-6">
-        {/* Online Status Indicator at top of chat */}
-        <div className="mb-8 flex flex-col items-center justify-center">
+      <div className="relative z-10 flex-1 overflow-y-auto p-4 sm:p-8">
+        {/* Online Status Indicator aligned to the left */}
+        <div className="mb-6 flex flex-col items-start justify-start max-w-xl">
           <div className="flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-4 py-1.5 backdrop-blur-md">
             <span className="relative flex h-2 w-2">
               <span className={`absolute inline-flex h-full w-full rounded-full bg-[#f4c66a] opacity-75 ${isSpeaking ? 'animate-ping' : ''}`}></span>
@@ -192,14 +191,14 @@ export default function MyriamChat() {
           </div>
         </div>
 
-        <div className="mx-auto max-w-3xl space-y-6 pb-4">
+        <div className="max-w-xl space-y-6 pb-4">
           {messages.map((msg, idx) => (
             <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               <div 
-                className={`max-w-[85%] sm:max-w-[75%] p-4 text-sm leading-relaxed backdrop-blur-md ${
+                className={`max-w-[90%] p-4 text-sm leading-relaxed backdrop-blur-md ${
                   msg.role === 'user' 
-                    ? 'border border-white/20 bg-black/60 text-stone-300' 
-                    : 'border border-[#8f5728]/40 bg-black/60 text-stone-100 shadow-[0_10px_40px_rgba(201,82,16,0.1)]'
+                    ? 'border border-white/20 bg-black/60 text-stone-300 rounded-2xl rounded-br-sm' 
+                    : 'border border-[#8f5728]/40 bg-black/60 text-stone-100 shadow-[0_10px_40px_rgba(201,82,16,0.15)] rounded-2xl rounded-tl-sm'
                 }`}
               >
                 {msg.role === 'model' ? renderMessageText(msg.text) : msg.text}
