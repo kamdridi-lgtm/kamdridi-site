@@ -8,7 +8,11 @@ import { MyriamWidget } from "@/components/myriam-widget";
 import { DemographicsTracker } from "@/components/demographics-tracker";
 import { GlobalAudioPlayer } from "@/components/global-audio-player";
 
-const metadataBase = new URL(process.env.NEXT_PUBLIC_SITE_URL || siteMeta.domain);
+let siteUrl = process.env.NEXT_PUBLIC_SITE_URL || siteMeta.domain;
+if (siteUrl && !siteUrl.startsWith("http")) {
+  siteUrl = `https://${siteUrl}`;
+}
+const metadataBase = new URL(siteUrl);
 
 export const metadata: Metadata = {
   metadataBase,
