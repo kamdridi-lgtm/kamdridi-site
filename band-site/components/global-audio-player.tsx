@@ -1,25 +1,36 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useAudio } from "./providers/audio-provider";
 
 export function GlobalAudioPlayer() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const { isPlaying, togglePlay, currentTrack } = useAudio();
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.play().catch(() => setIsPlaying(false));
+    const handleScroll = () => {
+      // Show when scrolling down more than 100px
+      if (window.scrollY > 100) {
+        setShow(true);
       } else {
-        audioRef.current.pause();
+        setShow(false);
       }
-    }
-  }, [isPlaying]);
+    };
+    
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check initial scroll position
+    
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex items-center gap-3 rounded-full border border-[#f4c66a]/30 bg-black/60 px-4 py-2 backdrop-blur-md transition-all hover:border-[#f4c66a]/80">
+    <div 
+      className={`fixed bottom-5 right-5 z-[9998] flex items-center gap-3 rounded-full border border-[#f4c66a]/30 bg-black/60 px-4 py-2 backdrop-blur-md transition-all duration-500 hover:border-[#f4c66a]/80 ${
+        show ? "translate-x-0 opacity-100" : "translate-x-[150%] opacity-0"
+      }`}
+    >
       <button
-        onClick={() => setIsPlaying(!isPlaying)}
+        onClick={togglePlay}
         className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f4c66a] text-black transition-transform hover:scale-110 focus:outline-none"
         aria-label={isPlaying ? "Pause music" : "Play music"}
       >
@@ -39,16 +50,9 @@ export function GlobalAudioPlayer() {
           Now Playing
         </span>
         <span className="text-xs font-medium text-white truncate max-w-[120px]">
-          Too Fast Too Young
+          {currentTrack?.title || "No Track"}
         </span>
       </div>
-
-      <audio
-        ref={audioRef}
-        src="/assets/audio/too-fast-too-young.mp3"
-        loop
-        preload="none"
-      />
     </div>
   );
 }

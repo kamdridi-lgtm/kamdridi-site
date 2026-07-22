@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { getCommerceProductById } from "@/data/commerce-products";
+import { AudioProvider } from "@/components/providers/audio-provider";
 
 type CartItem = {
   id: string;
@@ -185,24 +186,26 @@ export function Providers({ children }: { children: React.ReactNode }) {
   const cartSubtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
-    <AppContext.Provider
-      value={{
-        cart,
-        cartCount,
-        cartSubtotal,
-        fan,
-        isCartOpen,
-        addToCart,
-        removeFromCart,
-        updateCartQuantity,
-        clearCart,
-        setCartOpen,
-        setFan,
-        checkout
-      }}
-    >
-      {children}
-    </AppContext.Provider>
+    <AudioProvider>
+      <AppContext.Provider
+        value={{
+          cart,
+          cartCount,
+          cartSubtotal,
+          fan,
+          isCartOpen,
+          addToCart,
+          removeFromCart,
+          updateCartQuantity,
+          clearCart,
+          setCartOpen,
+          setFan,
+          checkout
+        }}
+      >
+        {children}
+      </AppContext.Provider>
+    </AudioProvider>
   );
 }
 
