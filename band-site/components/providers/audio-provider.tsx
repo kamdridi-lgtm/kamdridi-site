@@ -52,6 +52,10 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const timerRef = useRef<number | null>(null);
 
   useEffect(() => {
+    // Select a random track on mount
+    const randomIdx = Math.floor(Math.random() * radioTracks.length);
+    setTrackIndex(randomIdx);
+
     audioRef.current = new Audio();
     audioRef.current.preload = "auto";
     audioRef.current.volume = 0.72;
