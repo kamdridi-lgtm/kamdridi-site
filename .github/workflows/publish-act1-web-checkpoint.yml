@@ -35,11 +35,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -s .checkpoint-stage/inner/web/index.html
-          test -s .checkpoint-stage/inner/web/index.js
-          test -s .checkpoint-stage/inner/web/index.pck
-          test -s .checkpoint-stage/inner/web/index.wasm
-          test -s .checkpoint-stage/inner/web/checkpoint.json
+          test -s .checkpoint-stage/inner/index.html
+          test -s .checkpoint-stage/inner/index.js
+          test -s .checkpoint-stage/inner/index.pck
+          test -s .checkpoint-stage/inner/index.wasm
+          test -s .checkpoint-stage/inner/checkpoint.json
           ! grep -Eiq 'SCRIPT ERROR|PARSE ERROR|FAILED|EXCEPTION' .checkpoint-stage/outer/export.log
 
       - name: Stage isolated playable route
@@ -48,7 +48,7 @@ jobs:
           set -euo pipefail
           TARGET="band-site/public/play/the-gilded-null-act1/checkpoints/act1-cp001"
           mkdir -p "$TARGET"
-          cp -a .checkpoint-stage/inner/web/. "$TARGET/"
+          cp -a .checkpoint-stage/inner/. "$TARGET/"
           rm -f .checkpoint-source-url
           rm -rf .checkpoint-stage
 
