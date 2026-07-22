@@ -194,6 +194,7 @@ const footerRoutes = [
 ];
 const mobileRoutes = [
   { label: "Home", href: "/" },
+  { label: "ORACLE (MYRIAM)", href: "/myriam" },
   { label: "Music", href: "/music" },
   { label: "Store", href: "/store" },
   { label: "Label", href: "/label" },
@@ -207,6 +208,7 @@ const mobileRoutes = [
 ];
 const primaryNavLabels = new Set([
   "Home",
+  "ORACLE (MYRIAM)",
   "Music",
   "Store",
   "Label",
@@ -414,6 +416,24 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                       {item.label}
                       <span className="absolute bottom-1 left-1/2 h-[1px] w-[60%] -translate-x-1/2 bg-[#c98542]/40 transition group-hover:bg-[#f4c66a]/80" />
                     </Link>
+                  ) : item.label === "ORACLE (MYRIAM)" ? (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.dispatchEvent(new CustomEvent('openMyriamWidget'));
+                      }}
+                      className={clsx(
+                        "relative block whitespace-nowrap px-2 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[#050403] bg-[#f4c66a] border border-[#f4c66a] transition hover:bg-transparent hover:text-[#f4c66a] 2xl:text-[11px] 2xl:tracking-[0.18em]",
+                        isNavItemActive(pathname, item) && "bg-transparent text-[#f4c66a]"
+                      )}
+                    >
+                      <span className="absolute -top-1 -right-1 flex h-2 w-2">
+                        <span className="absolute inline-flex h-full w-full rounded-full bg-white opacity-75 animate-ping"></span>
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
+                      </span>
+                      {item.label}
+                    </button>
                   ) : (
                     <Link
                       href={item.href}
@@ -555,6 +575,23 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                     active={isActivePath(pathname, item.href)}
                     onClick={() => setOpen(false)}
                   />
+                ) : item.label === "ORACLE (MYRIAM)" ? (
+                  <button
+                    key={item.label}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOpen(false);
+                      document.dispatchEvent(new CustomEvent('openMyriamWidget'));
+                    }}
+                    className={clsx(
+                      "rounded-2xl border border-[#f4c66a] bg-[#f4c66a] px-4 py-3 text-left text-sm font-bold uppercase tracking-[0.22em] text-[#050403] transition hover:bg-transparent hover:text-[#f4c66a]",
+                      isActivePath(pathname, item.href) &&
+                        "bg-transparent text-[#f4c66a]",
+                    )}
+                  >
+                    {" "}
+                    {item.label}{" "}
+                  </button>
                 ) : (
                   <Link
                     key={item.label}

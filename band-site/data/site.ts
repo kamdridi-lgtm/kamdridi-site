@@ -168,6 +168,10 @@ export const navigation: NavItem[] = [
     children: [{ label: "Active Signals", href: "/#video" }]
   },
   {
+    label: "ORACLE (MYRIAM)",
+    href: "/myriam"
+  },
+  {
     label: "Music",
     href: "/music",
     children: [
