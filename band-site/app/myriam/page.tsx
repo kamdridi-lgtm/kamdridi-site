@@ -70,19 +70,20 @@ export default function MyriamChat() {
   };
 
   const assignFemaleVoice = (utterance: SpeechSynthesisUtterance, voices: SpeechSynthesisVoice[]) => {
-    // Priorities for a feminine, mysterious voice
-    const femaleVoice = voices.find(v => 
-      v.name.includes('Zira') || // Windows default female
-      v.name.includes('Hazel') || // Windows UK female
-      v.name.includes('Catherine') || // Windows AU female
-      v.name.includes('Samantha') || // macOS default female
-      v.name.includes('Google UK English Female') ||
-      v.name.includes('Google US English Female') ||
-      v.name.includes('Female') ||
-      v.name.includes('Amelie') ||
-      v.name.includes('Kyoko')
-    ) || voices.find(v => v.lang.startsWith('en') && v.name.includes('Female')) || voices[0];
+    // Priorities for a feminine, mysterious voice across platforms (Windows, macOS, iOS, Android, Chrome)
+    const femaleNames = [
+      'Zira', 'Hazel', 'Catherine', 'Susan', // Windows
+      'Samantha', 'Victoria', 'Karen', 'Tessa', 'Moira', 'Amelie', 'Kyoko', // Apple/macOS/iOS
+      'Google UK English Female', 'Google US English', 'Google français', 'Female' // Google
+    ];
     
+    // First try to find a female voice in French or English
+    const femaleVoice = voices.find(v => 
+      femaleNames.some(name => v.name.toLowerCase().includes(name.toLowerCase()))
+    ) || voices.find(v => (v.lang.startsWith('en') || v.lang.startsWith('fr')) && v.name.toLowerCase().includes('female')) 
+      || voices.find(v => !v.name.toLowerCase().includes('david') && !v.name.toLowerCase().includes('mark') && !v.name.toLowerCase().includes('george') && !v.name.toLowerCase().includes('male'))
+      || voices[0];
+      
     if (femaleVoice) utterance.voice = femaleVoice;
   };
 
