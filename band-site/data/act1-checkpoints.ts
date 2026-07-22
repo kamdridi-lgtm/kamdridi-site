@@ -21,11 +21,53 @@ export type Act1Checkpoint = {
 
 export const act1Checkpoints: Act1Checkpoint[] = [
 {
+  id: "act1-cp003",
+  label: "Checkpoint 003",
+  updatedAt: "July 22, 2026",
+  status: "playable",
+  statusLabel: "Adaptive audio checkpoint verified - Godot 4.7.1",
+  sourceCommit: "e8d37af",
+  pipelineCommit: "fbd9b20",
+  branch: "codex/act1-production",
+  playUrl: "/play/the-gilded-null-act1/checkpoints/act1-cp003/index.html",
+  captures: [
+    {
+      src: "/assets/images/games/checkpoints/act1-cp003-runner.png",
+      alt: "ACT I Checkpoint 003 using the RUNNER camera",
+      caption: "RUNNER camera - adaptive signal score checkpoint"
+    },
+    {
+      src: "/assets/images/games/checkpoints/act1-cp003-hero.png",
+      alt: "ACT I Checkpoint 003 using the HERO camera",
+      caption: "HERO camera - temporary runner visual baseline"
+    },
+    {
+      src: "/assets/images/games/checkpoints/act1-cp003-immersive.png",
+      alt: "ACT I Checkpoint 003 using the IMMERSIVE camera",
+      caption: "IMMERSIVE camera - Megacity gameplay baseline"
+    }
+  ],
+  verified: [
+    "Two-layer generated score with black-gold signal and metallic threat pulse",
+    "Music intensity reacts to danger and late-run phases",
+    "Web-safe audio start after PLAY with pause, resume and end-state fades",
+    "Shield damage, ten-gold repair and all three runner cameras retained",
+    "Full soak through 500m, 1000m, 1500m, 2100m and Victory",
+    "Six graphical validation captures generated in Godot 4.7.1",
+    "WebGL 2 boot and PLAY with zero console, page or request errors"
+  ],
+  next: [
+    "Replace the temporary human runner with final RN-07",
+    "Replace generated layers with final authored KAMDRIDI masters",
+    "Continue impact feedback, mobile testing and Megacity polish"
+  ]
+},
+{
   id: "act1-cp002",
   label: "Checkpoint 002",
   updatedAt: "July 22, 2026",
-  status: "playable",
-  statusLabel: "WebGL 2 checkpoint verified - Godot 4.7.1",
+  status: "archived",
+  statusLabel: "Archived WebGL 2 checkpoint - still playable",
   sourceCommit: "c4a82d2",
   pipelineCommit: "dc8d0e6",
   branch: "codex/act1-production",
