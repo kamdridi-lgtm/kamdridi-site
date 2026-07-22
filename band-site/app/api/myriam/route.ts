@@ -69,7 +69,7 @@ Do not use this tag in every single message, only when the timing is right to se
 
     let responseText = "";
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+      const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
       const chat = model.startChat({
         history: formattedHistory,
         systemInstruction: {
@@ -80,8 +80,8 @@ Do not use this tag in every single message, only when the timing is right to se
       const result = await chat.sendMessage(message);
       responseText = result.response.text();
     } catch (e: any) {
-      console.warn("Primary model failed, falling back to gemini-1.5-pro", e.message);
-      const fallbackModel = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+      console.warn("Primary model failed, falling back to gemini-2.5-flash", e.message);
+      const fallbackModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
       const fallbackChat = fallbackModel.startChat({
         history: formattedHistory,
         systemInstruction: {
