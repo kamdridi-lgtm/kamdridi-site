@@ -229,8 +229,11 @@ export default function MyriamChat() {
       </div>
 
       {/* Input Area */}
-      <div className="relative z-10 border-t border-[#a86225]/20 bg-black/60 p-4 backdrop-blur-md">
-        <div className="mx-auto flex max-w-3xl items-center gap-3">
+      <div className="relative z-10 border-t border-[#f4c66a]/30 bg-black/80 p-6 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-3xl items-center gap-3 relative rounded-xl">
+          {/* Golden Flashy Haze Effect */}
+          <div className="absolute inset-[-10px] rounded-2xl bg-[#f4a33f] opacity-30 blur-2xl animate-pulse pointer-events-none"></div>
+          
           <input
             type="text"
             value={input}
@@ -238,14 +241,14 @@ export default function MyriamChat() {
             onKeyDown={handleKeyPress}
             disabled={showPaywall}
             placeholder="Transmit message to Myriam..."
-            className="flex-1 border border-white/20 bg-black/50 p-4 text-sm text-stone-200 placeholder:text-stone-400 focus:border-[#c98542] focus:outline-none focus:bg-black/70 transition-colors"
+            className="relative z-10 flex-1 rounded-xl border-2 border-[#f4c66a]/60 bg-black/80 p-4 text-sm font-medium text-stone-100 placeholder:text-stone-400 focus:border-[#f4c66a] focus:bg-black focus:outline-none focus:ring-4 focus:ring-[#f4c66a]/30 shadow-[0_0_20px_rgba(244,198,106,0.3)] transition-all"
           />
           <button
             onClick={sendMessage}
             disabled={showPaywall || !input.trim()}
-            className="flex h-12 w-12 items-center justify-center border border-white/20 bg-black/50 text-[#c98542] transition hover:border-[#c98542] hover:text-[#f4c66a] hover:bg-black/70 disabled:opacity-50"
+            className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border-2 border-[#f4c66a]/60 bg-black/80 text-[#f4c66a] transition-all hover:border-[#f4c66a] hover:bg-[#f4c66a] hover:text-black hover:shadow-[0_0_30px_rgba(244,198,106,0.8)] disabled:opacity-50 shadow-[0_0_20px_rgba(244,198,106,0.3)]"
           >
-            <Send className="h-5 w-5" />
+            <Send className="h-6 w-6 ml-1" />
           </button>
         </div>
       </div>
