@@ -1,89 +1,91 @@
-import type { AgentTaskRecord } from "@/lib/agents/types";
-import { GlassCard } from "@/components/ui";
+"use client";
 
-function PipelineTask({ task }: { task: AgentTaskRecord }) {
-  const isRunning = task.status === "running";
-  const isFailed = task.status === "failed";
-  const isPending = task.status === "pending";
+import { CheckCircle2, Circle, Clock, Flame, Loader2, Play, AlertTriangle } from "lucide-react";
+import clsx from "clsx";
 
-  return (
-    <div className={`relative overflow-hidden rounded-xl border p-4 transition-colors ${isRunning ? "border-[#f4c66a]/30 bg-[#f4c66a]/5" : isFailed ? "border-red-500/30 bg-red-500/5" : "border-white/10 bg-black/40"}`}>
-      {isRunning && (
-        <div className="absolute top-0 left-0 h-0.5 w-full overflow-hidden bg-white/10">
-          <div className="h-full w-1/3 animate-[slide_2s_ease-in-out_infinite] bg-[#f4c66a]" />
-        </div>
-      )}
-      
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-[10px] uppercase tracking-widest text-stone-500">{task.task_type}</p>
-          <h4 className="mt-1 font-display text-sm uppercase tracking-widest text-white">{task.title}</h4>
-        </div>
-        <span className={`rounded-full border px-2 py-0.5 text-[9px] uppercase tracking-widest ${isRunning ? "border-[#f4c66a]/50 text-[#f4c66a]" : isFailed ? "border-red-500/50 text-red-400" : isPending ? "border-blue-400/50 text-blue-300" : "border-stone-500/50 text-stone-400"}`}>
-          {task.status}
-        </span>
-      </div>
-      
-      <div className="mt-3 flex items-center justify-between text-[10px] uppercase tracking-wider text-stone-500">
-        <span>Priority: {task.priority}</span>
-        <span>{new Date(task.created_at).toLocaleTimeString()}</span>
-      </div>
-    </div>
-  );
+export type TaskStatus = "pending" | "rendering" | "completed" | "failed";
+
+export interface RenderTask {
+  id: string;
+  type: string;
+  subject: string;
+  status: TaskStatus;
+  progress: number;
+  timeAdded: string;
 }
 
-export function RenderPipeline({ tasks, onTrigger, pending }: { tasks: AgentTaskRecord[], onTrigger: () => void, pending: boolean }) {
-  const activeTasks = tasks.filter(t => t.status === "running" || t.status === "pending");
-  const recentHistory = tasks.filter(t => t.status !== "running" && t.status !== "pending").slice(0, 4);
-
+export function RenderPipeline({ tasks }: { tasks: RenderTask[] }) {
   return (
-    <div className="grid gap-6 lg:grid-cols-2">
-      <GlassCard>
-        <div className="flex items-center justify-between border-b border-white/5 pb-4">
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.35em] text-[#f4c66a]">Media Queue</p>
-            <h3 className="mt-1 font-display text-2xl uppercase tracking-[0.08em] text-white">Render Pipeline</h3>
-          </div>
-          <button
-            type="button"
-            onClick={onTrigger}
-            disabled={pending}
-            className="rounded bg-[#f4c66a] px-4 py-2 text-[10px] uppercase tracking-widest text-black transition-opacity hover:opacity-80 disabled:opacity-50"
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-purple-500/30 bg-purple-500/10 text-purple-400">
+          <Flame className="h-5 w-5" />
+        </div>
+        <div>
+          <h2 className="text-lg font-bold tracking-[0.15em] uppercase text-stone-100">Render Pipeline</h2>
+          <p className="text-xs tracking-[0.05em] text-stone-400">Echoes Engine Video Queue</p>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        {tasks.map((task) => (
+          <div 
+            key={task.id}
+            className="group relative flex flex-col sm:flex-row sm:items-center gap-4 overflow-hidden rounded-xl border border-white/5 bg-white/[0.02] p-4 transition-all hover:bg-white/[0.04]"
           >
-            Trigger Cycle
-          </button>
-        </div>
+            {/* Status Icon */}
+            <div className="flex shrink-0 items-center justify-center">
+              {task.status === "completed" && <CheckCircle2 className="h-6 w-6 text-emerald-400" />}
+              {task.status === "rendering" && <Loader2 className="h-6 w-6 animate-spin text-[#f4c66a]" />}
+              {task.status === "pending" && <Circle className="h-6 w-6 text-stone-500" />}
+              {task.status === "failed" && <AlertTriangle className="h-6 w-6 text-red-500" />}
+            </div>
 
-        <div className="mt-6">
-          <p className="mb-3 text-[10px] uppercase tracking-widest text-stone-500">Active & Pending ({activeTasks.length})</p>
-          <div className="grid gap-3">
-            {activeTasks.map(task => <PipelineTask key={task.id} task={task} />)}
-            {activeTasks.length === 0 && (
-              <div className="rounded-xl border border-white/5 border-dashed py-8 text-center text-xs text-stone-600">
-                Pipeline is idle.
+            {/* Task Info */}
+            <div className="flex-1">
+              <div className="flex items-center gap-2">
+                <span className="rounded bg-white/10 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-stone-300">
+                  {task.type}
+                </span>
+                <span className="text-[10px] font-mono text-stone-500">{task.id}</span>
+              </div>
+              <h3 className="mt-1 font-semibold text-stone-200">{task.subject}</h3>
+            </div>
+
+            {/* Progress Bar (if rendering) */}
+            {task.status === "rendering" && (
+              <div className="flex-1 sm:max-w-xs">
+                <div className="mb-1 flex items-center justify-between text-[10px] uppercase tracking-wider">
+                  <span className="text-[#f4c66a]">Rendering</span>
+                  <span className="text-stone-400">{task.progress}%</span>
+                </div>
+                <div className="h-1.5 w-full overflow-hidden rounded-full bg-black/50">
+                  <div 
+                    className="h-full rounded-full bg-gradient-to-r from-[#a86225] to-[#f4c66a] transition-all duration-500"
+                    style={{ width: `${task.progress}%` }}
+                  />
+                </div>
               </div>
             )}
-          </div>
-        </div>
-      </GlassCard>
 
-      <GlassCard>
-        <div className="border-b border-white/5 pb-4">
-          <p className="text-[10px] uppercase tracking-[0.35em] text-stone-500">History</p>
-          <h3 className="mt-1 font-display text-2xl uppercase tracking-[0.08em] text-white">Recent Jobs</h3>
-        </div>
-
-        <div className="mt-6">
-          <div className="grid gap-3">
-            {recentHistory.map(task => <PipelineTask key={task.id} task={task} />)}
-            {recentHistory.length === 0 && (
-              <div className="rounded-xl border border-white/5 border-dashed py-8 text-center text-xs text-stone-600">
-                No recent jobs found.
+            {/* Metadata */}
+            <div className="flex shrink-0 items-center gap-4 text-[10px] uppercase tracking-wider text-stone-500 sm:w-32 sm:justify-end">
+              <div className="flex items-center gap-1.5">
+                <Clock className="h-3 w-3" />
+                {task.timeAdded}
               </div>
-            )}
+            </div>
           </div>
-        </div>
-      </GlassCard>
+        ))}
+
+        {tasks.length === 0 && (
+          <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-white/10 py-12 text-center">
+            <Play className="h-8 w-8 text-stone-600 mb-3" />
+            <p className="text-sm font-medium text-stone-400">Pipeline is empty</p>
+            <p className="text-xs text-stone-500">No render tasks currently queued</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

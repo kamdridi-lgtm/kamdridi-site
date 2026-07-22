@@ -1,139 +1,173 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
-import type { AgentStatusPayload } from "@/lib/agents/types";
-import { AgentFleet } from "./agent-fleet";
-import { RenderPipeline } from "./render-pipeline";
-import { DemographicsDashboard } from "@/components/demographics-dashboard";
-import { GlassCard } from "@/components/ui";
+import { useEffect, useState } from "react";
+import { AgentFleet, AgentData } from "./agent-fleet";
+import { RenderPipeline, RenderTask } from "./render-pipeline";
+import { Globe, Share2, Eye, Brain } from "lucide-react";
+import clsx from "clsx";
 
-type ActionState = {
-  kind: "idle" | "success" | "error";
-  message: string;
-};
-
-async function readJson<T>(input: RequestInfo, init?: RequestInit) {
-  const response = await fetch(input, init);
-  const payload = (await response.json()) as T & { ok?: boolean; error?: string };
-  if (!response.ok || payload.ok === false) {
-    throw new Error(payload.error || "Request failed");
+const MOCK_AGENTS: AgentData[] = [
+  {
+    id: "myriam-01",
+    name: "Myriam",
+    role: "The Oracle / Sentience",
+    status: "online",
+    lastPing: "Just now",
+    uptime: "99.9%",
+    icon: <Brain className="h-5 w-5" />
+  },
+  {
+    id: "orchestrator-01",
+    name: "Echoes Engine",
+    role: "Pipeline Orchestrator",
+    status: "rendering",
+    lastPing: "2s ago",
+    uptime: "100%",
+    icon: <Globe className="h-5 w-5" />
+  },
+  {
+    id: "social-01",
+    name: "Social Bot (TikTok)",
+    role: "Distribution",
+    status: "sleeping",
+    lastPing: "45m ago",
+    uptime: "98.5%",
+    icon: <Share2 className="h-5 w-5" />
   }
-  return payload;
-}
+];
 
-export function CommandCenter({ initialStatus }: { initialStatus: AgentStatusPayload }) {
-  const [status, setStatus] = useState(initialStatus);
-  const [actionState, setActionState] = useState<ActionState>({ kind: "idle", message: "" });
-  const [pending, startTransition] = useTransition();
+const MOCK_TASKS: RenderTask[] = [
+  {
+    id: "TRK-9921",
+    type: "TikTok",
+    subject: "Salieri's Hands - Drop Teaser",
+    status: "rendering",
+    progress: 78,
+    timeAdded: "2m ago"
+  },
+  {
+    id: "TRK-9920",
+    type: "Instagram",
+    subject: "Echoes Unearthed - Lore Snippet",
+    status: "completed",
+    progress: 100,
+    timeAdded: "45m ago"
+  }
+];
 
-  const refresh = async () => {
-    try {
-      const payload = await readJson<AgentStatusPayload>("/api/agents/status");
-      setStatus(payload);
-    } catch {
-      // Ignore background refresh errors
-    }
-  };
+export function CommandCenter() {
+  const [agents, setAgents] = useState<AgentData[]>(MOCK_AGENTS);
+  const [tasks, setTasks] = useState<RenderTask[]>(MOCK_TASKS);
+  const [activeUsers, setActiveUsers] = useState(1337);
 
+  // Simulate real-time updates
   useEffect(() => {
-    const id = window.setInterval(refresh, 15000);
-    return () => window.clearInterval(id);
+    const interval = setInterval(() => {
+      setTasks(prev => prev.map(task => {
+        if (task.status === "rendering") {
+          const newProgress = task.progress + Math.floor(Math.random() * 5);
+          if (newProgress >= 100) {
+            return { ...task, progress: 100, status: "completed" };
+          }
+          return { ...task, progress: newProgress };
+        }
+        return task;
+      }));
+
+      setActiveUsers(prev => prev + Math.floor(Math.random() * 11) - 5);
+    }, 2000);
+
+    return () => clearInterval(interval);
   }, []);
 
-  const executeAction = (action: () => Promise<string>) => {
-    startTransition(async () => {
-      try {
-        const msg = await action();
-        await refresh();
-        setActionState({ kind: "success", message: msg });
-      } catch (error) {
-        setActionState({
-          kind: "error",
-          message: error instanceof Error ? error.message : "Action failed."
-        });
-      }
-    });
-  };
-
-  const triggerCycle = () => executeAction(async () => {
-    const payload = await readJson<{ processed?: Array<{ summary: string }> }>("/api/agents/orchestrator");
-    return `Cycle completed. ${payload.processed?.length || 0} tasks processed.`;
-  });
-
-  const restartAgent = (agentId: string) => executeAction(async () => {
-    await readJson("/api/agents/restart", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ agent_id: agentId })
-    });
-    return `Agent ${agentId} restarting...`;
-  });
-
-  const createTask = (taskType: string, title: string) => executeAction(async () => {
-    await readJson("/api/agents/intake", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, task_type: taskType, requested_by: "command_center" })
-    });
-    return `Task queued: ${title}`;
-  });
-
   return (
-    <div className="grid gap-8">
-      {actionState.message && (
-        <div className={`rounded-xl border px-4 py-3 text-sm flex items-center justify-between ${
-          actionState.kind === "error" ? "border-red-500/30 bg-red-500/10 text-red-200" : "border-[#f4c66a]/30 bg-[#f4c66a]/10 text-[#f4c66a]"
-        }`}>
-          <span>{actionState.message}</span>
-          <button onClick={() => setActionState({ kind: "idle", message: "" })} className="opacity-50 hover:opacity-100">&times;</button>
-        </div>
-      )}
-
-      {/* 1. Agent Fleet */}
-      <AgentFleet agents={status.agents} onRestart={restartAgent} pending={pending} />
-
-      {/* 2. Media Pipeline */}
-      <RenderPipeline tasks={status.tasks} onTrigger={triggerCycle} pending={pending} />
-
-      {/* 3. Global Radar */}
-      <DemographicsDashboard />
-
-      {/* 4. Social Distribution & Bot Commands */}
-      <GlassCard>
-        <div className="border-b border-white/5 pb-4">
-          <p className="text-[10px] uppercase tracking-[0.35em] text-[#f4c66a]">Social Bots</p>
-          <h3 className="mt-1 font-display text-2xl uppercase tracking-[0.08em] text-white">Distribution Network</h3>
-        </div>
+    <div className="min-h-screen bg-[#050403] p-4 sm:p-8 font-sans selection:bg-[#f4c66a]/30">
+      <div className="mx-auto max-w-7xl space-y-8">
         
-        <div className="mt-6 flex flex-wrap gap-4">
-          <button
-            onClick={() => createTask("tiktok_distribution", "Publish TikTok Snippet")}
-            disabled={pending}
-            className="group relative overflow-hidden rounded-xl border border-fuchsia-500/30 bg-black/40 p-4 transition-all hover:bg-fuchsia-500/10"
-          >
-            <h4 className="font-display text-lg tracking-widest text-white">TikTok Bot</h4>
-            <p className="mt-1 text-xs text-fuchsia-300">Queue Snippet Publish</p>
-          </button>
+        {/* Header */}
+        <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between border-b border-white/10 pb-6">
+          <div>
+            <h1 className="text-3xl font-black uppercase tracking-[0.2em] text-white">Command Center</h1>
+            <p className="mt-2 text-sm tracking-[0.1em] text-[#f4c66a]">Echoes Engine Administration Node</p>
+          </div>
+          <div className="flex items-center gap-6 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 px-6 py-3">
+            <div className="flex items-center gap-3">
+              <span className="relative flex h-3 w-3">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500"></span>
+              </span>
+              <span className="text-xs font-bold uppercase tracking-widest text-emerald-400">System Nominal</span>
+            </div>
+            <div className="h-6 w-[1px] bg-white/10" />
+            <div className="flex items-center gap-2">
+              <Eye className="h-4 w-4 text-emerald-500/70" />
+              <span className="text-xs font-bold tracking-widest text-emerald-400">{activeUsers} Active</span>
+            </div>
+          </div>
+        </header>
 
-          <button
-            onClick={() => createTask("instagram_distribution", "Publish IG Snippet")}
-            disabled={pending}
-            className="group relative overflow-hidden rounded-xl border border-pink-500/30 bg-black/40 p-4 transition-all hover:bg-pink-500/10"
-          >
-            <h4 className="font-display text-lg tracking-widest text-white">Instagram Bot</h4>
-            <p className="mt-1 text-xs text-pink-300">Queue Reels Publish</p>
-          </button>
+        {/* Grid Layout */}
+        <div className="grid gap-8 lg:grid-cols-12">
+          
+          {/* Main Column */}
+          <div className="space-y-8 lg:col-span-8">
+            <AgentFleet agents={agents} />
+            <RenderPipeline tasks={tasks} />
+          </div>
 
-          <button
-            onClick={() => createTask("spotify_pitching", "Pitch Spotify Canvas")}
-            disabled={pending}
-            className="group relative overflow-hidden rounded-xl border border-emerald-500/30 bg-black/40 p-4 transition-all hover:bg-emerald-500/10"
-          >
-            <h4 className="font-display text-lg tracking-widest text-white">Spotify Bot</h4>
-            <p className="mt-1 text-xs text-emerald-300">Queue Canvas Update</p>
-          </button>
+          {/* Side Column */}
+          <div className="space-y-8 lg:col-span-4">
+            
+            {/* Social Distribution Radar */}
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-500/30 bg-blue-500/10 text-blue-400">
+                  <Share2 className="h-5 w-5" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-bold tracking-[0.15em] uppercase text-stone-100">Distribution</h2>
+                  <p className="text-xs tracking-[0.05em] text-stone-400">Social Grid Status</p>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {[
+                  { name: "TikTok Node", status: "Active", posts: 24, sync: "2m ago" },
+                  { name: "Instagram Sync", status: "Active", posts: 18, sync: "5m ago" },
+                  { name: "Spotify Metadata", status: "Sleeping", posts: 0, sync: "1h ago" }
+                ].map((node) => (
+                  <div key={node.name} className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] p-4">
+                    <div>
+                      <h3 className="font-semibold text-stone-200">{node.name}</h3>
+                      <p className="text-[10px] uppercase tracking-wider text-stone-500">Last Sync: {node.sync}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className={clsx("text-xs font-bold uppercase tracking-wider", node.status === "Active" ? "text-emerald-400" : "text-stone-500")}>
+                        {node.status}
+                      </p>
+                      <p className="text-[10px] text-stone-400">{node.posts} Posts Today</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Manual Override Controls */}
+            <div className="rounded-2xl border border-red-500/20 bg-red-500/5 p-6">
+              <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-red-400">Manual Override</h3>
+              <div className="space-y-3">
+                <button className="w-full rounded-xl border border-red-500/50 bg-red-500/10 py-3 text-xs font-bold uppercase tracking-widest text-red-400 transition hover:bg-red-500 hover:text-black">
+                  Force Pipeline Cycle
+                </button>
+                <button className="w-full rounded-xl border border-white/10 bg-white/5 py-3 text-xs font-bold uppercase tracking-widest text-stone-300 transition hover:bg-white/10">
+                  Restart All Agents
+                </button>
+              </div>
+            </div>
+
+          </div>
         </div>
-      </GlassCard>
+      </div>
     </div>
   );
 }
