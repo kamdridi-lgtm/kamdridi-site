@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { currentAct1Checkpoint } from "@/data/act1-checkpoints";
+import { act1Checkpoints, currentAct1Checkpoint } from "@/data/act1-checkpoints";
 
 export const metadata: Metadata = {
   title: "The Gilded Null - ACT I Development",
@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 export default function TheGildedNullAct1Page() {
   const checkpoint = currentAct1Checkpoint;
+  const previousCheckpoints = act1Checkpoints.slice(1);
 
   return (
     <>
@@ -125,13 +126,41 @@ export default function TheGildedNullAct1Page() {
             <div className="mt-6 grid gap-5 lg:grid-cols-2">
               {checkpoint.captures.map((capture) => (
                 <figure key={capture.src} className="overflow-hidden border border-white/10 bg-black">
-                  <div className="relative aspect-[4/3]">
+                  <div className="relative aspect-video">
                     <Image src={capture.src} alt={capture.alt} fill className="object-cover" sizes="(min-width: 1024px) 50vw, 100vw" />
                   </div>
                   <figcaption className="border-t border-white/10 px-5 py-4 text-[10px] uppercase tracking-[0.24em] text-stone-400">
                     {capture.caption}
                   </figcaption>
                 </figure>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-10 border border-white/10 bg-black p-6 md:p-9">
+            <p className="text-[10px] uppercase tracking-[0.35em] text-[#f4c66a]">Checkpoint archive</p>
+            <h2 className="mt-3 font-display text-3xl uppercase tracking-[0.08em] text-white">
+              Previous playable builds
+            </h2>
+            <div className="mt-6 grid gap-3">
+              {previousCheckpoints.map((previous) => (
+                <Link
+                  key={previous.id}
+                  href={previous.playUrl ?? "/games/the-gilded-null-act1"}
+                  className="flex flex-wrap items-center justify-between gap-4 border border-white/10 bg-white/[0.025] p-5 transition hover:border-[#f4c66a]/50"
+                >
+                  <span>
+                    <span className="block text-xs uppercase tracking-[0.28em] text-[#f4c66a]">
+                      {previous.label}
+                    </span>
+                    <span className="mt-2 block text-xs text-stone-500">
+                      Source {previous.sourceCommit} · {previous.statusLabel}
+                    </span>
+                  </span>
+                  <span className="text-[10px] uppercase tracking-[0.24em] text-stone-300">
+                    Play archive →
+                  </span>
+                </Link>
               ))}
             </div>
           </section>
