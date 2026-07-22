@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Section } from "@/components/ui";
+import { currentAct1Checkpoint } from "@/data/act1-checkpoints";
 import { gameExperiences } from "@/data/site";
 
 export function GamesPanel() {
@@ -21,13 +22,60 @@ export function GamesPanel() {
               />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.03),rgba(0,0,0,0.32))]" />
             </div>
-            <div className="flex justify-center border-t border-[#f4c66a]/15 bg-black px-5 py-6">
-              <Link
-                href={gildedNull.launchUrl}
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#f4c66a] px-7 py-3 text-sm uppercase tracking-[0.25em] text-black transition duration-300 hover:-translate-y-0.5 hover:bg-[#ffd989]"
-              >
-                INITIATE PROTOCOL
-              </Link>
+            <div className="grid gap-px border-t border-[#f4c66a]/15 bg-[#f4c66a]/15 lg:grid-cols-[1.2fr_0.8fr]">
+              <div className="bg-[linear-gradient(135deg,#120d06,#050403)] px-6 py-7 md:px-8 md:py-9">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="text-[10px] uppercase tracking-[0.32em] text-[#f4c66a]">
+                    ACT I 3D Runner - Development
+                  </span>
+                  <span className="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-[9px] uppercase tracking-[0.2em] text-amber-200">
+                    {currentAct1Checkpoint.label}
+                  </span>
+                </div>
+                <h2 className="mt-4 font-display text-3xl uppercase leading-none tracking-[0.08em] text-[#f3dfb6] md:text-4xl">
+                  Latest production checkpoint
+                </h2>
+                <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-300">
+                  Follow the real Godot ACT I runner as it moves from the archived Windows build
+                  to a verified browser checkpoint. Existing public games remain untouched.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.2em] text-stone-400">
+                  <span className="border border-white/10 px-3 py-2">3 cameras verified</span>
+                  <span className="border border-white/10 px-3 py-2">19 wall modules</span>
+                  <span className="border border-white/10 px-3 py-2">500m+ tested</span>
+                </div>
+                <div className="mt-6 flex flex-wrap items-center gap-4">
+                  <Link
+                    href="/games/the-gilded-null-act1"
+                    className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#f4c66a] px-7 py-3 text-xs font-bold uppercase tracking-[0.22em] text-black transition hover:-translate-y-0.5 hover:bg-[#ffd989]"
+                  >
+                    View ACT I progress
+                  </Link>
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-stone-500">
+                    Updated {currentAct1Checkpoint.updatedAt}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-col justify-between bg-black px-6 py-7 md:px-8 md:py-9">
+                <div>
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-stone-500">
+                    Legacy playable build
+                  </span>
+                  <h3 className="mt-3 font-display text-2xl uppercase tracking-[0.08em] text-white">
+                    Canvas 2D Corridor Protocol
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-stone-400">
+                    The existing browser prototype stays online while the 3D checkpoint is validated.
+                  </p>
+                </div>
+                <Link
+                  href={gildedNull.launchUrl}
+                  className="mt-6 inline-flex min-h-12 items-center justify-center rounded-full border border-[#f4c66a]/55 px-6 py-3 text-xs uppercase tracking-[0.22em] text-[#f4c66a] transition hover:border-[#f4c66a] hover:bg-[#f4c66a]/10"
+                >
+                  Play Canvas prototype
+                </Link>
+              </div>
             </div>
           </div>
         </Section>
