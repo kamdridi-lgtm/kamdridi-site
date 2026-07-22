@@ -23,12 +23,12 @@ export const currentAct1Checkpoint: Act1Checkpoint = {
   id: "act1-cp001",
   label: "Checkpoint 001",
   updatedAt: "July 22, 2026",
-  status: "exporting",
-  statusLabel: "Source archived - browser export in validation",
-  sourceCommit: "51cb426",
-  pipelineCommit: "3d509ae",
+  status: "playable",
+  statusLabel: "Web checkpoint verified - Godot 4.7.1",
+  sourceCommit: "e8cbbce",
+  pipelineCommit: "f4cd59b",
   branch: "handoff/codex-2026-07-19",
-  playUrl: null,
+  playUrl: "/play/the-gilded-null-act1/checkpoints/act1-cp001/index.html",
   captures: [
     {
       src: "/assets/images/games/checkpoints/act1-cp001-gate.jpg",
@@ -42,15 +42,16 @@ export const currentAct1Checkpoint: Act1Checkpoint = {
     }
   ],
   verified: [
-    "Complete Title to Tutorial to Gate to Megacity loop",
+    "Complete Title to Tutorial to Gate to Megacity desktop loop",
+    "WebGL 2 browser boot and PLAY to Tutorial transition",
     "IMMERSIVE, RUNNER and HERO camera presets",
     "Nineteen Megacity wall modules loaded (A-S)",
-    "Game Over, Retry, Victory and Run Again",
-    "500m+ automated run with zero engine errors"
+    "Zero browser console, page and network errors",
+    "Game Over, Retry, Victory and Run Again"
   ],
   next: [
-    "Validate the first WebGL 2 browser export",
     "Replace the temporary runner with RN-07 when the final asset is ready",
-    "Complete shield feedback and the final audio pass"
+    "Complete the final audio pass",
+    "Continue browser performance and device coverage testing"
   ]
 };
