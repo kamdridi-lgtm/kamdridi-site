@@ -1,0 +1,1 @@
+drawtext=fontfile='C\:/Windows/Fonts/impact.ttf':text='TOO FAST TOO YOUNG':fontcolor=lightblue:fontsize=180:x=(w-text_w)/2:y=h-200:borderw=8:bordercolor=black

@@ -75,24 +75,30 @@ async function supabaseRequest<T>(table: string, options: RequestInit = {}, quer
     throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY");
   }
 
-  const response = await fetch(`${baseUrl}/rest/v1/${table}${query}`, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      apikey: serviceKey,
-      Authorization: `Bearer ${serviceKey}`,
-      Prefer: "return=representation",
-      ...(options.headers || {})
-    },
-    cache: "no-store"
-  });
+  try {
+    const response = await fetch(`${baseUrl}/rest/v1/${table}${query}`, {
+      ...options,
+      headers: {
+        "Content-Type": "application/json",
+        apikey: serviceKey,
+        Authorization: `Bearer ${serviceKey}`,
+        Prefer: "return=representation",
+        ...(options.headers || {})
+      },
+      cache: "no-store"
+    });
 
-  const text = await response.text();
-  if (!response.ok) {
-    throw new Error(text || `Supabase request failed (${response.status})`);
+    const text = await response.text();
+    if (!response.ok) {
+      console.warn(`Supabase request failed (${response.status}):`, text);
+      return [] as T;
+    }
+
+    return (text ? JSON.parse(text) : []) as T;
+  } catch (err) {
+    console.warn(`Supabase fetch error for table ${table}:`, err);
+    return [] as T;
   }
-
-  return (text ? JSON.parse(text) : []) as T;
 }
 
 function sortByNewest<T extends { created_at: string }>(rows: T[], limit?: number) {

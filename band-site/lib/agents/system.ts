@@ -443,14 +443,19 @@ async function runSpecialist(task: AgentTaskRecord, agentId: string) {
     }),
     tiktok_agent: async () => {
       const variants = [
-        { path: "/videos/too-fast-too-young-v1.mp4", name: "Variant 1 (Chorus)" },
-        { path: "/videos/too-fast-too-young-v2.mp4", name: "Variant 2 (Verse)" },
-        { path: "/videos/too-fast-too-young-v3.mp4", name: "Variant 3 (Intro)" },
-        { path: "/videos/too-fast-too-young-v4.mp4", name: "Variant 4 (Bridge)" },
-        { path: "/videos/too-fast-too-young-v5.mp4", name: "Variant 5 (Outro)" }
+        { path: "/videos/too-fast-too-young-v1.mp4", name: "Variant 1 (Chorus)", track: "Too Fast Too Young" },
+        { path: "/videos/too-fast-too-young-v2.mp4", name: "Variant 2 (Verse)", track: "Too Fast Too Young" },
+        { path: "/videos/too-fast-too-young-v3.mp4", name: "Variant 3 (Intro)", track: "Too Fast Too Young" },
+        { path: "/videos/too-fast-too-young-v4.mp4", name: "Variant 4 (Bridge)", track: "Too Fast Too Young" },
+        { path: "/videos/too-fast-too-young-v5.mp4", name: "Variant 5 (Outro)", track: "Too Fast Too Young" },
+        { path: "/videos/our-lost-dreams-v1.mp4", name: "Variant 1 (Refrain 2:00)", track: "Our Lost Dreams" },
+        { path: "/videos/our-lost-dreams-v2.mp4", name: "Variant 2 (Intro 0:30)", track: "Our Lost Dreams" },
+        { path: "/videos/our-lost-dreams-v3.mp4", name: "Variant 3 (Pre-Chorus 1:15)", track: "Our Lost Dreams" },
+        { path: "/videos/our-lost-dreams-v4.mp4", name: "Variant 4 (Solo 2:45)", track: "Our Lost Dreams" },
+        { path: "/videos/our-lost-dreams-v5.mp4", name: "Variant 5 (Outro 3:30)", track: "Our Lost Dreams" }
       ];
       const randomVariant = variants[Math.floor(Math.random() * variants.length)];
-      const track = payload.track || "Too Fast Too Young";
+      const track = payload.track || randomVariant.track;
       const price = "$249.00 CAD";
       return {
         summary: `${baseSummary}: Deployed ${randomVariant.name} snippet of '${track}' (using ${randomVariant.path}). Attached CD image, price tag (${price}), and 'CLICK HERE BUY NOW' CTA linking to checkout.`,
@@ -459,14 +464,19 @@ async function runSpecialist(task: AgentTaskRecord, agentId: string) {
     },
     instagram_agent: async () => {
       const variants = [
-        { path: "/videos/too-fast-too-young-v1.mp4", name: "Variant 1 (Chorus)" },
-        { path: "/videos/too-fast-too-young-v2.mp4", name: "Variant 2 (Verse)" },
-        { path: "/videos/too-fast-too-young-v3.mp4", name: "Variant 3 (Intro)" },
-        { path: "/videos/too-fast-too-young-v4.mp4", name: "Variant 4 (Bridge)" },
-        { path: "/videos/too-fast-too-young-v5.mp4", name: "Variant 5 (Outro)" }
+        { path: "/videos/too-fast-too-young-v1.mp4", name: "Variant 1 (Chorus)", track: "Too Fast Too Young" },
+        { path: "/videos/too-fast-too-young-v2.mp4", name: "Variant 2 (Verse)", track: "Too Fast Too Young" },
+        { path: "/videos/too-fast-too-young-v3.mp4", name: "Variant 3 (Intro)", track: "Too Fast Too Young" },
+        { path: "/videos/too-fast-too-young-v4.mp4", name: "Variant 4 (Bridge)", track: "Too Fast Too Young" },
+        { path: "/videos/too-fast-too-young-v5.mp4", name: "Variant 5 (Outro)", track: "Too Fast Too Young" },
+        { path: "/videos/our-lost-dreams-v1.mp4", name: "Variant 1 (Refrain 2:00)", track: "Our Lost Dreams" },
+        { path: "/videos/our-lost-dreams-v2.mp4", name: "Variant 2 (Intro 0:30)", track: "Our Lost Dreams" },
+        { path: "/videos/our-lost-dreams-v3.mp4", name: "Variant 3 (Pre-Chorus 1:15)", track: "Our Lost Dreams" },
+        { path: "/videos/our-lost-dreams-v4.mp4", name: "Variant 4 (Solo 2:45)", track: "Our Lost Dreams" },
+        { path: "/videos/our-lost-dreams-v5.mp4", name: "Variant 5 (Outro 3:30)", track: "Our Lost Dreams" }
       ];
       const randomVariant = variants[Math.floor(Math.random() * variants.length)];
-      const track = payload.track || "Too Fast Too Young";
+      const track = payload.track || randomVariant.track;
       const price = "$249.00 CAD";
       return {
         summary: `${baseSummary}: Deployed ${randomVariant.name} audio of '${track}' (using ${randomVariant.path}) to IG Reels and Stories. Embedded Collector Box image, price (${price}), and 'BUY NOW' product tag.`,

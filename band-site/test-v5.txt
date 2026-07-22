@@ -1,0 +1,4 @@
+drawbox=y=ih-350:color=black@1.0:width=iw:height=350:t=fill,
+drawtext=fontfile='C\:/Windows/Fonts/impact.ttf':text='TOO FAST TOO YOUNG':fontcolor=white:fontsize=150:x=(w-text_w)/2:y=h-250:borderw=6:bordercolor=black:enable='between(t\,0\,3.5)',
+drawtext=fontfile='C\:/Windows/Fonts/impact.ttf':text='OUT NOW':fontcolor=yellow:fontsize=180:x=(w-text_w)/2:y=h-280:borderw=8:bordercolor=black:enable='between(t\,3.5\,7)',
+drawtext=fontfile='C\:/Windows/Fonts/impact.ttf':text='visit kamdridi.com':fontcolor=red:fontsize=100:x=(w-text_w)/2:y=h-200:borderw=5:bordercolor=black:enable='gte(t\,7)'
