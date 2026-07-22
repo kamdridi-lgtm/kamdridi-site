@@ -326,12 +326,15 @@ export default function HomePage() {
                 Japan campaign page, and the Echoes Unearthed universe.
               </p>
               <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
-                <PremiumButton href="#listen-now">Stream Full Album</PremiumButton>
-                <PremiumButton href="#collector-products" tone="secondary">
-                  Collector CD
+                <PremiumButton href="/myriam" tone="primary">
+                  <span className="inline-flex items-center gap-2">
+                    <Sparkles className="h-4 w-4" />
+                    Consult Myriam (AI Oracle)
+                  </span>
                 </PremiumButton>
+                <PremiumButton href="#listen-now" tone="secondary">Stream Album</PremiumButton>
                 <PremiumButton href="#collector-products" tone="secondary">
-                  Special Edition
+                  Collector Editions
                 </PremiumButton>
                 <PremiumButton href={japanHref} tone="red">
                   Japan Page
@@ -570,5 +573,3 @@ export default function HomePage() {
     </>
   );
 }
-
-export const dynamic = 'force-dynamic';
