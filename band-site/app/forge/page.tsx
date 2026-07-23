@@ -33,7 +33,7 @@ function DraggableLayer({ item, updateItem, removeItem, isImage = false }: { ite
       updateItem(item.id, { x: e.clientX - startPos.x, y: e.clientY - startPos.y });
     } else if (isResizing) {
       const dx = e.clientX - startPos.x;
-      const newScale = Math.max(0.2, startScale + dx * 0.01);
+      const newScale = Math.max(0.2, startScale + dx * 0.02);
       updateItem(item.id, { scale: newScale });
     }
   };
@@ -42,6 +42,15 @@ function DraggableLayer({ item, updateItem, removeItem, isImage = false }: { ite
     setIsDragging(false);
     setIsResizing(false);
     (e.currentTarget as Element).releasePointerCapture(e.pointerId);
+  };
+
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    // Delta Y dictates scale up/down. We use a small multiplier for smooth wheel scaling.
+    const delta = e.deltaY * -0.005;
+    const currentScale = item.scale || 1;
+    const newScale = Math.max(0.2, currentScale + delta);
+    updateItem(item.id, { scale: newScale });
   };
 
   return (
@@ -60,6 +69,7 @@ function DraggableLayer({ item, updateItem, removeItem, isImage = false }: { ite
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
+      onWheel={handleWheel}
     >
       <div className={`relative w-full h-full pointer-events-none ${isImage ? 'rounded-md overflow-hidden mix-blend-screen' : 'mix-blend-screen'}`}>
         <Image src={item.src} alt="layer" fill className="object-cover" unoptimized />
@@ -163,51 +173,51 @@ export default function EchoesForge() {
         <div className="mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           
           {/* Left Column: T-Shirt Preview */}
-          <div className="relative aspect-[3/4] w-full max-w-md mx-auto bg-black rounded-3xl border border-white/10 overflow-hidden shadow-[0_30px_90px_rgba(0,0,0,0.5)]">
-            {/* Base T-Shirt Image (Mock) */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-80">
-               {/* We use a pure black background and draw a silhouette for the shirt to make it look real without needing an external asset */}
-               <div className="w-[85%] h-[90%] bg-[#111] rounded-[40px_40px_20px_20px] relative">
-                 {/* Neck hole */}
-                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-1/3 h-10 bg-black rounded-[50%]" />
-                 {/* Sleeves */}
-                 <div className="absolute top-10 -left-6 w-12 h-32 bg-[#111] -rotate-12 rounded-bl-3xl" />
-                 <div className="absolute top-10 -right-6 w-12 h-32 bg-[#111] rotate-12 rounded-br-3xl" />
-               </div>
-            </div>
-
-            {/* Placed Logos Overlay */}
-            {placedLogos.map(logo => (
-              <DraggableLayer 
-                key={logo.id} 
-                item={logo} 
-                updateItem={(id: string, updates: any) => setPlacedLogos(prev => prev.map(l => l.id === id ? { ...l, ...updates } : l))}
-                removeItem={(id: string) => setPlacedLogos(prev => prev.filter(l => l.id !== id))}
-              />
-            ))}
-
-            {/* Generated Design Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none mt-10">
-              {isGenerating && (
-                <div className="flex flex-col items-center gap-4">
-                  <Loader2 className="h-10 w-10 animate-spin text-[#f4c66a]" />
-                  <span className="text-[10px] uppercase tracking-widest text-[#f4c66a] animate-pulse">Forging Artefact...</span>
-                </div>
-              )}
-              {!isGenerating && !aiImageState && (
-                <div className="w-48 h-48 border border-dashed border-white/20 flex items-center justify-center text-center p-4 text-[10px] uppercase tracking-widest text-stone-500">
-                  Design will appear here
-                </div>
-              )}
-            </div>
+          <div className="relative aspect-[3/4] w-full max-w-md mx-auto bg-black rounded-3xl border border-white/10 p-8 shadow-[0_30px_90px_rgba(0,0,0,0.5)]">
             
-            {!isGenerating && aiImageState && (
-              <DraggableLayer 
-                item={aiImageState} 
-                updateItem={(id: string, updates: any) => setAiImageState((prev: any) => prev ? { ...prev, ...updates } : null)}
-                isImage={true}
-              />
-            )}
+            {/* The T-Shirt Canvas with Clip Path Masking */}
+            <div 
+              className="relative w-full h-full bg-[#111] overflow-hidden transition-all duration-300"
+              style={{
+                clipPath: "polygon(30% 0%, 70% 0%, 100% 25%, 90% 45%, 75% 35%, 80% 100%, 20% 100%, 25% 35%, 10% 45%, 0% 25%)"
+              }}
+            >
+              {/* Neck curve simulation (inner shadow) */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[45%] h-8 bg-black rounded-[50%] -translate-y-1/2 opacity-60 z-50 pointer-events-none" />
+
+              {/* Placed Logos Overlay */}
+              {placedLogos.map(logo => (
+                <DraggableLayer 
+                  key={logo.id} 
+                  item={logo} 
+                  updateItem={(id: string, updates: any) => setPlacedLogos(prev => prev.map(l => l.id === id ? { ...l, ...updates } : l))}
+                  removeItem={(id: string) => setPlacedLogos(prev => prev.filter(l => l.id !== id))}
+                />
+              ))}
+
+              {/* Generated Design Overlay */}
+              <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none mt-10">
+                {isGenerating && (
+                  <div className="flex flex-col items-center gap-4">
+                    <Loader2 className="h-10 w-10 animate-spin text-[#f4c66a]" />
+                    <span className="text-[10px] uppercase tracking-widest text-[#f4c66a] animate-pulse">Forging Artefact...</span>
+                  </div>
+                )}
+                {!isGenerating && !aiImageState && (
+                  <div className="w-48 h-48 border border-dashed border-white/20 flex items-center justify-center text-center p-4 text-[10px] uppercase tracking-widest text-stone-500">
+                    Design will appear here
+                  </div>
+                )}
+              </div>
+              
+              {!isGenerating && aiImageState && (
+                <DraggableLayer 
+                  item={aiImageState} 
+                  updateItem={(id: string, updates: any) => setAiImageState((prev: any) => prev ? { ...prev, ...updates } : null)}
+                  isImage={true}
+                />
+              )}
+            </div>
             
             {/* Details */}
             <div className="absolute bottom-4 left-4 right-4 text-center z-50 pointer-events-none">
