@@ -10,6 +10,7 @@ export function CommandCenter() {
   const [agents, setAgents] = useState<AgentData[]>([]);
   const [tasks, setTasks] = useState<RenderTask[]>([]);
   const [activeUsers, setActiveUsers] = useState(0);
+  const [countries, setCountries] = useState<{country: string, count: number}[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -48,9 +49,8 @@ export function CommandCenter() {
         const demoRes = await fetch("/api/track/stats");
         if (demoRes.ok) {
           const demoData = await demoRes.json();
-          // Active users could be represented by total distinct sessions or visits today
-          // We'll just use total logs length for now to show real activity
-          setActiveUsers(demoData.totalLogs || demoData.logs?.length || 0);
+          setActiveUsers(demoData.total || demoData.totalLogs || demoData.logs?.length || 0);
+          setCountries(demoData.countries || []);
         }
       } catch (err) {
         console.error("Failed to fetch command center data", err);
@@ -84,7 +84,7 @@ export function CommandCenter() {
             <div className="h-6 w-[1px] bg-white/10" />
             <div className="flex items-center gap-2">
               <Eye className="h-4 w-4 text-emerald-500/70" />
-              <span className="text-xs font-bold tracking-widest text-emerald-400">{activeUsers} Active</span>
+              <span className="text-xs font-bold tracking-widest text-emerald-400">{activeUsers} Total Visits</span>
             </div>
           </div>
         </header>
@@ -101,37 +101,36 @@ export function CommandCenter() {
           {/* Side Column */}
           <div className="space-y-8 lg:col-span-4">
             
-            {/* Social Distribution Radar */}
+            {/* Global Demographics */}
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-3 border-b border-white/10 pb-4">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-500/30 bg-blue-500/10 text-blue-400">
-                  <Share2 className="h-5 w-5" />
+                  <Globe className="h-5 w-5" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold tracking-[0.15em] uppercase text-stone-100">Distribution</h2>
-                  <p className="text-xs tracking-[0.05em] text-stone-400">Social Grid Status</p>
+                  <h2 className="text-lg font-bold tracking-[0.15em] uppercase text-stone-100">Global Radar</h2>
+                  <p className="text-xs tracking-[0.05em] text-stone-400">Real-time Top Demographics</p>
                 </div>
               </div>
 
               <div className="space-y-3">
-                {[
-                  { name: "TikTok Node", status: "Active", posts: 24, sync: "2m ago" },
-                  { name: "Instagram Sync", status: "Active", posts: 18, sync: "5m ago" },
-                  { name: "Spotify Metadata", status: "Sleeping", posts: 0, sync: "1h ago" }
-                ].map((node) => (
-                  <div key={node.name} className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] p-4">
+                {countries.length > 0 ? countries.slice(0, 5).map((c) => (
+                  <div key={c.country} className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] p-4">
                     <div>
-                      <h3 className="font-semibold text-stone-200">{node.name}</h3>
-                      <p className="text-[10px] uppercase tracking-wider text-stone-500">Last Sync: {node.sync}</p>
+                      <h3 className="font-semibold text-stone-200">{c.country || "Unknown Location"}</h3>
+                      <p className="text-[10px] uppercase tracking-wider text-stone-500">Live Traffic Source</p>
                     </div>
                     <div className="text-right">
-                      <p className={clsx("text-xs font-bold uppercase tracking-wider", node.status === "Active" ? "text-emerald-400" : "text-stone-500")}>
-                        {node.status}
+                      <p className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+                        {c.count} Visits
                       </p>
-                      <p className="text-[10px] text-stone-400">{node.posts} Posts Today</p>
                     </div>
                   </div>
-                ))}
+                )) : (
+                  <div className="rounded-xl border border-white/5 bg-white/[0.02] p-4 text-center">
+                    <p className="text-xs font-bold uppercase tracking-wider text-stone-500">No radar data yet</p>
+                  </div>
+                )}
               </div>
             </div>
 
