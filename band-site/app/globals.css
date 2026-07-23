@@ -2204,3 +2204,7 @@ textarea:focus {
   }
 }
 
+
+@keyframes space-dust { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+.animate-space-dust { animation: space-dust 60s linear infinite; }
+

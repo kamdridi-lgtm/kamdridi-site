@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CTAButton, Section, SectionHeading } from "@/components/ui";
 import { Storefront } from "@/components/storefront";
+import { SpaceDust } from "@/components/ui/SpaceDust";
 
 export const metadata: Metadata = {
   title: "Store",
@@ -18,7 +19,8 @@ export default function StorePage() {
 
   return (
     <>
-      <section id="collector-artifact" className="overflow-hidden border-b border-white/10">
+      <SpaceDust />
+      <section id="collector-artifact" className="relative z-10 overflow-hidden border-b border-white/10">
         <section className="relative h-[62svh] min-h-[420px] overflow-hidden md:h-[74svh]">
           <video
             className="absolute inset-0 h-full w-full object-cover object-top"
@@ -40,11 +42,6 @@ export default function StorePage() {
           <div className="pointer-events-none absolute left-0 top-0 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/4 rounded-full bg-[radial-gradient(circle_at_center,rgba(244,198,106,0.07),transparent_60%)] blur-3xl opacity-70 animate-[pulse_8s_ease-in-out_infinite]" />
           <div className="pointer-events-none absolute right-0 bottom-0 h-[1000px] w-[1000px] translate-x-1/3 translate-y-1/3 rounded-full bg-[radial-gradient(circle_at_center,rgba(200,50,50,0.04),transparent_70%)] blur-3xl opacity-60 animate-[pulse_12s_ease-in-out_infinite]" />
           
-          {/* Giant subtle logo mark in the background */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 opacity-[0.03] mix-blend-plus-lighter">
-            <Image src="/brand/logo_transparent_2.png" alt="Kam Dridi Background Crest" fill className="object-contain" />
-          </div>
-
           <div className="relative z-10 mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
             <div className="relative overflow-hidden border border-[#f4c66a]/30 p-6 md:p-8">
               <Image src="/store/collage/photo_1.jpg" alt="Kam Dridi Signing" fill className="object-cover opacity-30 mix-blend-luminosity" />
