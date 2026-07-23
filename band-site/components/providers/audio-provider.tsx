@@ -28,31 +28,6 @@ export const radioTracks: RadioTrack[] = [
     title: "Dust on the Altar",
     frequency: "107.1",
     src: "/audio/dust-on-the-altar.mp3"
-  },
-  {
-    title: "Alone Apart (Mix 1)",
-    frequency: "95.5",
-    src: "/audio/radio/Alone apart mix 1.mp3"
-  },
-  {
-    title: "Fall of the First Knight",
-    frequency: "99.1",
-    src: "/audio/radio/fall of the first knight.mp3"
-  },
-  {
-    title: "Lacrimosa",
-    frequency: "101.5",
-    src: "/audio/radio/lacrimosa.mp3"
-  },
-  {
-    title: "Michael Remembers (Rough)",
-    frequency: "108.3",
-    src: "/audio/radio/Michael Remembers rough 2.mp3"
-  },
-  {
-    title: "Too Fast Too Young (Remastered)",
-    frequency: "102.7",
-    src: "/audio/radio/too fast too young.wav (Remastered).mp3"
   }
 ];
 
