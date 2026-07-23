@@ -81,6 +81,7 @@ export function LabelAdminDashboardV2() {
         <div className="flex w-full flex-wrap gap-3 md:w-auto">
           <input value={query} onChange={(event) => setQuery(event.target.value)} className="label-input min-w-0 flex-1 md:w-80" placeholder="Search artists, status, email..." />
           <button onClick={exportCsv} className="label-action">Export CSV</button>
+          <a href="/label/admin/content-factory" className="label-action border-[#f4c66a]/50 text-[#f4c66a]">Content Factory</a>
         </div>
       </section>
 

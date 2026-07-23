@@ -16,7 +16,7 @@ export function CommandCenter() {
     async function fetchData() {
       try {
         // Fetch Agent Status
-        const statusRes = await fetch("/api/agents/status");
+        const statusRes = await fetch("/api/studio/status");
         if (statusRes.ok) {
           const statusData = await statusRes.json();
           if (statusData.ok) {
