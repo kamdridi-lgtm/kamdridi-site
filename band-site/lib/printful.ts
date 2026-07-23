@@ -158,6 +158,72 @@ export async function createPrintfulOrderFromSession(
   return { skipped: false };
 }
 
+function getForgeVariantId(gender: string, sleeves: string) {
+  // Using some standard Printful Variant IDs for black large shirts
+  // Men/Unisex Short (Gildan 64000): 4012
+  // Men/Unisex Long (Gildan 2400): 6056
+  // Women Short (Bella + Canvas 6004): 11211
+  // Women Long: 9341
+  if (gender === 'women') {
+    return sleeves === 'long' ? 9341 : 11211;
+  }
+  return sleeves === 'long' ? 6056 : 4012; 
+}
+
+export async function createCustomForgeOrder(session: Stripe.Checkout.Session) {
+  const apiKey = process.env.PRINTFUL_API_KEY;
+  if (!apiKey) return { skipped: true, reason: "PRINTFUL_API_KEY is not configured." };
+
+  const recipient = buildRecipient(session);
+  if (!recipient) return { skipped: true, reason: "Shipping recipient details were not available." };
+
+  const meta = session.metadata || {};
+  const gender = meta.gender || 'men';
+  const sleeves = meta.sleeves || 'short';
+  const printSides = meta.printSides || 'front';
+  const imageUrl = meta.imageUrl;
+
+  if (!imageUrl) {
+    return { skipped: true, reason: "No generated image URL found in session metadata." };
+  }
+
+  const variantId = getForgeVariantId(gender, sleeves);
+  
+  const files = [];
+  if (printSides === 'front' || printSides === 'both') {
+    files.push({ type: 'front', url: imageUrl });
+  }
+  if (printSides === 'back' || printSides === 'both') {
+    files.push({ type: 'back', url: imageUrl });
+  }
+
+  const items = [{
+    variant_id: variantId,
+    quantity: 1,
+    files
+  }];
+
+  const response = await fetch(`${getPrintfulApiBase()}/orders`, {
+    method: "POST",
+    headers: getPrintfulHeaders(),
+    body: JSON.stringify({
+      external_id: `forge_${session.id}`,
+      shipping: process.env.PRINTFUL_SHIPPING_SPEED || "STANDARD",
+      confirm: true, // Auto-submit to production
+      recipient,
+      items
+    })
+  });
+
+  if (!response.ok) {
+    const payload = await response.text();
+    throw new Error(`Printful Forge order failed: ${payload}`);
+  }
+
+  return { skipped: false };
+}
+
+
 type PrintfulShipment = {
   tracking_number?: string | null;
   tracking_url?: string | null;

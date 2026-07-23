@@ -13,6 +13,7 @@ export type FanClubUser = {
 const root = process.cwd();
 const fanClubPath = path.join(root, "data", "fan-club-users.json");
 const contactPath = path.join(root, "data", "contact-submissions.json");
+const forgePath = path.join(root, "data", "forge-creations.json");
 
 function getDatabaseUrl() {
   return process.env.DATABASE_URL || process.env.POSTGRES_URL || "";
@@ -68,6 +69,16 @@ async function ensureTables() {
       subject TEXT NOT NULL,
       message TEXT NOT NULL,
       received_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+  `;
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS forge_creations (
+      id TEXT PRIMARY KEY,
+      prompt TEXT NOT NULL,
+      enhanced_prompt TEXT NOT NULL,
+      image_url TEXT NOT NULL,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
   `;
 }
@@ -227,4 +238,27 @@ export async function verifyPassword(value: string, storedValue: string) {
 
   const derived = await scryptAsync(value, salt);
   return crypto.timingSafeEqual(Buffer.from(originalHash, "hex"), derived);
+}
+
+export async function saveForgeCreation(id: string, prompt: string, enhancedPrompt: string, imageUrl: string) {
+  if (!hasDatabaseConfig()) {
+    const creations = await readJsonFile<any[]>(forgePath, []);
+    creations.push({
+      id,
+      prompt,
+      enhancedPrompt,
+      imageUrl,
+      createdAt: new Date().toISOString()
+    });
+    await writeJsonFile(forgePath, creations);
+    return;
+  }
+
+  const sql = getSqlClient();
+  await ensureTables();
+  await sql`
+    INSERT INTO forge_creations (id, prompt, enhanced_prompt, image_url)
+    VALUES (${id}, ${prompt}, ${enhancedPrompt}, ${imageUrl})
+    ON CONFLICT (id) DO NOTHING
+  `;
 }

@@ -17,7 +17,6 @@ export type StoreProduct = CommerceProduct & {
 const allCommerce = getVisibleCommerceProducts();
 
 export const storeProducts: StoreProduct[] = allCommerce
-  .filter(p => p.projectSlug === "echoes-unearthed" || p.projectSlug === "kamdridi-core")
   .map(p => ({
     ...p,
     price: p.priceCents / 100,

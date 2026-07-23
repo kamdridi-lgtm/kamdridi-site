@@ -104,6 +104,27 @@ export async function POST(request: Request) {
           { status: 500 }
         );
       }
+    } else if (session.metadata?.orderType === "kamdridi-custom-merch") {
+      // CUSTOM FORGE MERCH
+      try {
+        const { createCustomForgeOrder } = await import('@/lib/printful');
+        await createCustomForgeOrder(session);
+        
+        // Also send admin notification
+        const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+          expand: ["data.price.product"]
+        });
+        await sendAdminOrderNotification(session, lineItems);
+
+      } catch (error) {
+        return NextResponse.json(
+          {
+            error:
+              error instanceof Error ? error.message : "Custom Forge processing failed."
+          },
+          { status: 500 }
+        );
+      }
     }
   }
 

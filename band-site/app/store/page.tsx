@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { CTAButton, Section, SectionHeading } from "@/components/ui";
 import { Storefront } from "@/components/storefront";
 
@@ -105,6 +106,31 @@ export default function StorePage() {
                   </div>
                 </a>
               ))}
+            </div>
+          </div>
+          
+          <div className="mx-auto mt-12 grid max-w-7xl gap-6 md:grid-cols-2">
+            <ul className="space-y-4 text-sm text-stone-300">
+              <li className="flex items-center gap-3">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#f4c66a]" /> 180g Heavyweight Double Vinyl
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#f4c66a]" /> Signed "Null Sector" Concept Art Print
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#f4c66a]" /> Hidden URL engraved in runout groove
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#f4c66a]" /> Immediate lossless digital download
+              </li>
+            </ul>
+
+            <div className="rounded-2xl border border-[#f4c66a]/20 bg-[linear-gradient(145deg,rgba(20,15,10,0.8),rgba(0,0,0,0.9))] p-6 flex flex-col justify-center text-center">
+              <h3 className="text-sm font-bold uppercase tracking-widest text-[#f4c66a] mb-2">Want Custom Merch?</h3>
+              <p className="text-xs text-stone-400 mb-4">Forge your own 1-of-1 T-Shirt design using our Oracle AI, printed on demand.</p>
+              <Link href="/forge" className="inline-block rounded-full border border-[#f4c66a]/50 bg-black/50 px-6 py-2.5 text-[10px] font-bold uppercase tracking-widest text-[#f4c66a] transition hover:bg-[#f4c66a] hover:text-black">
+                Enter The Forge
+              </Link>
             </div>
           </div>
         </Section>

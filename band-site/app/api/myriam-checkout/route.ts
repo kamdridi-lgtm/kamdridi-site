@@ -3,7 +3,8 @@ import Stripe from 'stripe';
 
 export async function POST(req: Request) {
   try {
-    const { item, sessionId } = await req.json();
+    const payload = await req.json();
+    const { item, sessionId, gender, sleeves, printSides, imageUrl, logos } = payload;
     
     // If no Stripe secret key, use the static payment link to prevent crashing
     if (!process.env.STRIPE_SECRET_KEY) {
@@ -13,8 +14,16 @@ export async function POST(req: Request) {
 
     let itemName = "Collector Artifact";
     let amount = 9900;
+    let orderType = 'MYRIAM_STORE';
 
-    if (item.includes("Salieri's Hands")) {
+    if (item === 'Echoes Forge Custom Merch') {
+       orderType = 'kamdridi-custom-merch';
+       itemName = `Echoes Forge Custom T-Shirt (${gender || 'men'}, ${sleeves || 'short'} sleeve)`;
+       let basePrice = 45;
+       if (sleeves === 'long') basePrice += 10;
+       if (printSides === 'both') basePrice += 15;
+       amount = basePrice * 100; // in cents
+    } else if (item.includes("Salieri's Hands")) {
        itemName = "Salieri's Hands Collector Edition";
        amount = 25000;
     } else if (item.includes("UNlive in Brasil")) {
@@ -41,18 +50,32 @@ export async function POST(req: Request) {
       mode: 'payment',
       success_url: successUrl,
       cancel_url: cancelUrl,
+      shipping_address_collection: orderType === 'kamdridi-custom-merch' ? {
+        allowed_countries: ["US", "CA", "GB", "FR", "DE", "AU"]
+      } : undefined,
       line_items: [{ 
         price_data: {
           currency: 'usd',
-          product_data: { name: itemName },
+          product_data: { 
+            name: itemName,
+            images: imageUrl ? [imageUrl] : undefined
+          },
           unit_amount: amount
         },
         quantity: 1 
       }],
       metadata: { 
-        type: 'MYRIAM_STORE',
+        type: orderType,
+        orderType: orderType, // for the webhook to intercept
         item: itemName,
-        sessionId: sessionId || ''
+        sessionId: sessionId || '',
+        ...(orderType === 'kamdridi-custom-merch' ? {
+          gender: gender || 'men',
+          sleeves: sleeves || 'short',
+          printSides: printSides || 'front',
+          imageUrl: imageUrl || '',
+          logos: logos || '0'
+        } : {})
       }
     };
 

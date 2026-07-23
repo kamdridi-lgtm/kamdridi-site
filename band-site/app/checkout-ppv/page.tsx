@@ -22,10 +22,24 @@ function CheckoutContent() {
       }
 
       try {
+        const payload: any = { item, sessionId };
+        
+        // Add forge options if they exist
+        const gender = searchParams.get('gender');
+        if (gender) payload.gender = gender;
+        const sleeves = searchParams.get('sleeves');
+        if (sleeves) payload.sleeves = sleeves;
+        const printSides = searchParams.get('printSides');
+        if (printSides) payload.printSides = printSides;
+        const imageUrl = searchParams.get('imageUrl');
+        if (imageUrl) payload.imageUrl = imageUrl;
+        const logos = searchParams.get('logos');
+        if (logos) payload.logos = logos;
+
         const response = await fetch('/api/myriam-checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ item, sessionId })
+          body: JSON.stringify(payload)
         });
         
         const data = await response.json();
