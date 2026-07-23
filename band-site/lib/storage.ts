@@ -255,6 +255,8 @@ export async function saveForgeCreation(id: string, prompt: string, enhancedProm
   }
 
   const sql = getSqlClient();
+  if (!sql) return;
+  
   await ensureTables();
   await sql`
     INSERT INTO forge_creations (id, prompt, enhanced_prompt, image_url)
