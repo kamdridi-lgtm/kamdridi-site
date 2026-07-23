@@ -36,9 +36,12 @@ export default function StorePage() {
         </section>
 
         <Section className="relative py-12 md:py-16 overflow-hidden">
-          {/* Animated Background Glows */}
-          <div className="pointer-events-none absolute left-0 top-0 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/4 rounded-full bg-[radial-gradient(circle_at_center,rgba(244,198,106,0.07),transparent_60%)] blur-3xl opacity-70 animate-[pulse_8s_ease-in-out_infinite]" />
-          <div className="pointer-events-none absolute right-0 bottom-0 h-[1000px] w-[1000px] translate-x-1/3 translate-y-1/3 rounded-full bg-[radial-gradient(circle_at_center,rgba(200,50,50,0.04),transparent_70%)] blur-3xl opacity-60 animate-[pulse_12s_ease-in-out_infinite]" />
+          {/* Fading Cyber Grid Background */}
+          <div className="pointer-events-none absolute inset-0 z-0 opacity-40 [background-image:linear-gradient(to_right,rgba(244,198,106,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(244,198,106,0.04)_1px,transparent_1px)] [background-size:3rem_3rem] [mask-image:radial-gradient(ellipse_60%_80%_at_50%_50%,#000_20%,transparent_100%)]" />
+
+          {/* Animated Ambient Glows */}
+          <div className="pointer-events-none absolute left-0 top-0 z-0 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/4 rounded-full bg-[radial-gradient(circle_at_center,rgba(244,198,106,0.05),transparent_60%)] blur-3xl animate-[pulse_8s_ease-in-out_infinite]" />
+          <div className="pointer-events-none absolute right-0 bottom-0 z-0 h-[1000px] w-[1000px] translate-x-1/3 translate-y-1/3 rounded-full bg-[radial-gradient(circle_at_center,rgba(180,30,10,0.03),transparent_70%)] blur-3xl animate-[pulse_12s_ease-in-out_infinite]" />
           
           <div className="relative z-10 mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
             <div className="relative overflow-hidden border border-[#f4c66a]/30 p-6 md:p-8">
