@@ -214,19 +214,19 @@ export default function StorePage() {
       <section className="relative w-full overflow-hidden border-b border-white/10 bg-black">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-1 h-[40svh] md:h-[50svh] lg:h-[60svh] opacity-90 transition-opacity duration-700 hover:opacity-100">
           <div className="relative h-full w-full overflow-hidden group">
-            <Image src="/store/collage/photo_1.jpg" alt="Kam Dridi Live" fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
+            <Image src="/assets/images/gallery/p01_hero.jpg" alt="Kam Dridi Live" fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700" />
           </div>
           <div className="relative h-full w-full overflow-hidden group">
-            <Image src="/store/collage/photo_2.jpg" alt="Kam Dridi Fans" fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
+            <Image src="/assets/images/gallery/p02_live.jpg" alt="Kam Dridi Fans" fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700" />
           </div>
           <div className="relative h-full w-full overflow-hidden group">
-            <Image src="/store/collage/photo_3.jpg" alt="Kam Dridi Merch" fill className="object-cover object-top transition-transform duration-1000 group-hover:scale-110" />
+            <Image src="/assets/images/gallery/p03_portrait_mic.jpg" alt="Kam Dridi Merch" fill className="object-cover object-top transition-transform duration-1000 group-hover:scale-110" />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700" />
           </div>
           <div className="relative h-full w-full overflow-hidden group">
-            <Image src="/store/collage/photo_4.jpg" alt="Kam Dridi Store" fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
+            <Image src="/assets/images/gallery/p04_portrait_leather.jpg" alt="Kam Dridi Store" fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700" />
           </div>
         </div>
