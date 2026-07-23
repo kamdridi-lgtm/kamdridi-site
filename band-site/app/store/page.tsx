@@ -37,28 +37,32 @@ export default function StorePage() {
 
         <Section className="py-8 md:py-10">
           <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
-            <div className="border border-[#f4c66a]/30 bg-[linear-gradient(135deg,rgba(244,198,106,0.16),rgba(0,0,0,0.35))] p-6 md:p-8">
-              <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Official Store</p>
-              <h1 className="mt-4 font-display text-4xl uppercase leading-none tracking-[0.08em] text-white sm:text-5xl md:text-6xl">
-                Shop the drop
-              </h1>
-              <p className="mt-5 max-w-2xl text-base leading-8 text-stone-300">
-                Best sellers first, prices visible, variants clear, and the cart always one click away.
-                Start with the logo tee, Echoes crest tee, or Signal Target capsule.
-              </p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                <CTAButton href="#featured">Shop Best Sellers</CTAButton>
-                <CTAButton href="#collector-artifact-pack" tone="secondary">
-                  Collector Bundle
-                </CTAButton>
-              </div>
-              <div className="mt-7 grid gap-3 text-[11px] uppercase tracking-[0.26em] text-stone-300 sm:grid-cols-2">
-                <span className="border border-[#f4c66a]/35 bg-[#f4c66a]/10 px-4 py-3 text-[#f4c66a]">
-                  {checkoutEnabled ? "Hosted checkout live" : "Demo checkout active"}
-                </span>
-                <span className="border border-white/10 bg-black/35 px-4 py-3">Tees from $38</span>
-                <span className="border border-white/10 bg-black/35 px-4 py-3">Hoodie $78</span>
-                <span className="border border-white/10 bg-black/35 px-4 py-3">Boxed keychain $36</span>
+            <div className="relative overflow-hidden border border-[#f4c66a]/30 p-6 md:p-8">
+              <Image src="/store/collage/photo_1.jpg" alt="Kam Dridi Signing" fill className="object-cover opacity-30 mix-blend-luminosity" />
+              <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(244,198,106,0.16),rgba(0,0,0,0.85))]" />
+              <div className="relative z-10">
+                <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Official Store</p>
+                <h1 className="mt-4 font-display text-4xl uppercase leading-none tracking-[0.08em] text-white sm:text-5xl md:text-6xl">
+                  Shop the drop
+                </h1>
+                <p className="mt-5 max-w-2xl text-base leading-8 text-stone-300">
+                  Best sellers first, prices visible, variants clear, and the cart always one click away.
+                  Start with the logo tee, Echoes crest tee, or Signal Target capsule.
+                </p>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <CTAButton href="#featured">Shop Best Sellers</CTAButton>
+                  <CTAButton href="#collector-artifact-pack" tone="secondary">
+                    Collector Bundle
+                  </CTAButton>
+                </div>
+                <div className="mt-7 grid gap-3 text-[11px] uppercase tracking-[0.26em] text-stone-300 sm:grid-cols-2">
+                  <span className="border border-[#f4c66a]/35 bg-[#f4c66a]/10 px-4 py-3 text-[#f4c66a]">
+                    {checkoutEnabled ? "Hosted checkout live" : "Demo checkout active"}
+                  </span>
+                  <span className="border border-white/10 bg-black/35 px-4 py-3">Tees from $38</span>
+                  <span className="border border-white/10 bg-black/35 px-4 py-3">Hoodie $78</span>
+                  <span className="border border-white/10 bg-black/35 px-4 py-3">Boxed keychain $36</span>
+                </div>
               </div>
             </div>
 
@@ -135,9 +139,10 @@ export default function StorePage() {
           </div>
         </Section>
 
-        <Section id="collector-artifact-pack" className="relative py-14 md:py-18">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.14),transparent_26%),linear-gradient(180deg,rgba(11,10,8,0.65),rgba(11,10,8,0.96))]" />
-          <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <Section id="collector-artifact-pack" className="relative py-14 md:py-18 overflow-hidden">
+          <Image src="/store/collage/photo_4.jpg" alt="Kam Dridi Backstage" fill className="object-cover opacity-[0.15] mix-blend-luminosity" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.14),transparent_26%),linear-gradient(180deg,rgba(11,10,8,0.4),rgba(11,10,8,0.96))]" />
+          <div className="relative z-10 mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
               <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Featured Drop</p>
               <h2 className="mt-5 font-display text-4xl uppercase leading-none tracking-[0.08em] text-white md:text-6xl">
