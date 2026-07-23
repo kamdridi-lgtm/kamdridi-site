@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { CTAButton, Section, SectionHeading } from "@/components/ui";
 import { Storefront } from "@/components/storefront";
-import { SpaceDust } from "@/components/ui/SpaceDust";
 
 export const metadata: Metadata = {
   title: "Store",
@@ -19,7 +18,6 @@ export default function StorePage() {
 
   return (
     <>
-      <SpaceDust />
       <section id="collector-artifact" className="relative z-10 overflow-hidden border-b border-white/10">
         <section className="relative h-[62svh] min-h-[420px] overflow-hidden md:h-[74svh]">
           <video
