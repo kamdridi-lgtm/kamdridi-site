@@ -23,6 +23,11 @@ export const radioTracks: RadioTrack[] = [
     title: "Our Lost Dreams",
     frequency: "104.9",
     src: "/audio/radio/our-lost-dreams-chorus.wav"
+  },
+  {
+    title: "Dust on the Altar",
+    frequency: "107.1",
+    src: "/audio/dust-on-the-altar.mp3"
   }
 ];
 
@@ -50,6 +55,9 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const noiseRef = useRef<AudioContext | null>(null);
   const timerRef = useRef<number | null>(null);
+  
+  // Use a ref for nextTrack to avoid stale closures in event listener
+  const nextTrackRef = useRef<() => void>();
 
   useEffect(() => {
     // Select a random track on mount
@@ -59,13 +67,17 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     audioRef.current = new Audio();
     audioRef.current.preload = "auto";
     audioRef.current.volume = 0.72;
-    audioRef.current.loop = true;
+    // Don't loop a single track anymore, we want random play
+    audioRef.current.loop = false;
 
     const audio = audioRef.current;
 
     const handlePlay = () => setIsPlaying(true);
     const handlePause = () => setIsPlaying(false);
-    const handleEnded = () => setIsPlaying(false);
+    const handleEnded = () => {
+      setIsPlaying(false);
+      if (nextTrackRef.current) nextTrackRef.current();
+    };
 
     audio.addEventListener("play", handlePlay);
     audio.addEventListener("pause", handlePause);
@@ -165,9 +177,19 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   }
 
   function nextTrack() {
-    const nextIndex = (trackIndex + 1) % radioTracks.length;
+    let nextIndex;
+    if (radioTracks.length <= 1) {
+      nextIndex = 0;
+    } else {
+      do {
+        nextIndex = Math.floor(Math.random() * radioTracks.length);
+      } while (nextIndex === trackIndex);
+    }
     void tuneTo(nextIndex);
   }
+
+  // Keep the ref updated with the latest nextTrack function
+  nextTrackRef.current = nextTrack;
 
   return (
     <AudioContext.Provider
