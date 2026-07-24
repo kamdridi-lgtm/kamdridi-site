@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, UploadCloud, FileAudio, FileImage, FileText, CheckCircle2, Copy } from "lucide-react";
 
@@ -17,6 +17,29 @@ export default function MediaManagerPage() {
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [error, setError] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const [cloudFiles, setCloudFiles] = useState<UploadedFile[]>([]);
+  const [isLoadingLibrary, setIsLoadingLibrary] = useState(true);
+
+  // Fetch the cloud library on mount
+  useEffect(() => {
+    async function fetchLibrary() {
+      try {
+        const res = await fetch("/api/admin/media");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.files) {
+            setCloudFiles(data.files);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch cloud library", err);
+      } finally {
+        setIsLoadingLibrary(false);
+      }
+    }
+    fetchLibrary();
+  }, []);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -46,10 +69,12 @@ export default function MediaManagerPage() {
       }
 
       const data = await res.json();
-      setUploadedFiles((prev) => [
-        { name: data.name, url: data.url, size: data.size, type: file.type },
-        ...prev,
-      ]);
+      const newFile = { name: data.name, url: data.url, size: data.size, type: file.type };
+      
+      setUploadedFiles((prev) => [newFile, ...prev]);
+      // Also add to cloud library at the top
+      setCloudFiles((prev) => [newFile, ...prev]);
+      
     } catch (err: any) {
       setError(err.message || "An error occurred during upload.");
     } finally {
@@ -73,6 +98,35 @@ export default function MediaManagerPage() {
     navigator.clipboard.writeText(url);
     alert("URL copied to clipboard!");
   };
+
+  const FileRow = ({ file, isNew = false }: { file: UploadedFile; isNew?: boolean }) => (
+    <div className={`flex items-center justify-between rounded-xl border p-4 ${isNew ? 'border-[#f4c66a]/50 bg-[#f4c66a]/5' : 'border-white/10 bg-black/30'}`}>
+      <div className="flex items-center gap-4 truncate">
+        {file.type?.startsWith("audio") ? (
+          <FileAudio className="h-6 w-6 text-blue-400 shrink-0" />
+        ) : file.type?.startsWith("image") ? (
+          <FileImage className="h-6 w-6 text-green-400 shrink-0" />
+        ) : (
+          <FileText className="h-6 w-6 text-stone-400 shrink-0" />
+        )}
+        <div className="truncate">
+          <p className="truncate text-sm font-bold text-stone-200">{file.name}</p>
+          <p className="text-xs text-stone-500">
+            {file.size ? (file.size / 1024 / 1024).toFixed(2) + ' MB' : 'Unknown size'}
+          </p>
+        </div>
+      </div>
+      <div className="flex shrink-0 items-center gap-3">
+        {isNew && <CheckCircle2 className="h-4 w-4 text-[#f4c66a]" />}
+        <button
+          onClick={() => copyToClipboard(file.url)}
+          className="flex items-center gap-2 rounded bg-white/5 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-stone-300 transition hover:bg-white/10"
+        >
+          <Copy className="h-3 w-3" /> URL
+        </button>
+      </div>
+    </div>
+  );
 
   return (
     <main className="min-h-screen bg-[#050403] px-5 py-20 text-white md:py-24">
@@ -130,45 +184,25 @@ export default function MediaManagerPage() {
             </p>
           </div>
 
-          {/* Uploaded Files List */}
+          {/* Cloud Library List */}
           <div className="flex flex-col gap-4">
             <h3 className="text-sm uppercase tracking-widest text-stone-400 border-b border-white/10 pb-2">
-              Recent Uploads
+              Cloud Library
             </h3>
-            {uploadedFiles.length === 0 ? (
-              <p className="text-sm text-stone-500">No media uploaded in this session.</p>
+            {isLoadingLibrary ? (
+              <p className="text-sm text-stone-500">Loading library...</p>
+            ) : cloudFiles.length === 0 ? (
+              <p className="text-sm text-stone-500">No media found in the cloud.</p>
             ) : (
-              uploadedFiles.map((file, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center justify-between rounded-xl border border-white/10 bg-black/30 p-4"
-                >
-                  <div className="flex items-center gap-4 truncate">
-                    {file.type.startsWith("audio") ? (
-                      <FileAudio className="h-6 w-6 text-blue-400 shrink-0" />
-                    ) : file.type.startsWith("image") ? (
-                      <FileImage className="h-6 w-6 text-green-400 shrink-0" />
-                    ) : (
-                      <FileText className="h-6 w-6 text-stone-400 shrink-0" />
-                    )}
-                    <div className="truncate">
-                      <p className="truncate text-sm font-bold text-stone-200">{file.name}</p>
-                      <p className="text-xs text-stone-500">
-                        {(file.size / 1024 / 1024).toFixed(2)} MB
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex shrink-0 items-center gap-3">
-                    <CheckCircle2 className="h-4 w-4 text-[#f4c66a]" />
-                    <button
-                      onClick={() => copyToClipboard(file.url)}
-                      className="flex items-center gap-2 rounded bg-white/5 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-stone-300 transition hover:bg-white/10"
-                    >
-                      <Copy className="h-3 w-3" /> URL
-                    </button>
-                  </div>
-                </div>
-              ))
+              <div className="max-h-[600px] overflow-y-auto pr-2 space-y-3 custom-scrollbar">
+                {cloudFiles.map((file, idx) => (
+                  <FileRow 
+                    key={file.url + idx} 
+                    file={file} 
+                    isNew={uploadedFiles.some(f => f.url === file.url)} 
+                  />
+                ))}
+              </div>
             )}
           </div>
         </div>
