@@ -108,7 +108,7 @@ export default function MobileCompanionPage() {
             </p>
           </div>
 
-          <div id="scan" className="relative mx-auto w-full max-w-[430px] border border-[#3dc9ff]/38 bg-black/70 p-5 shadow-[0_36px_120px_rgba(0,74,190,0.38)]">
+          <div id="scan" className="relative hidden lg:block mx-auto w-full max-w-[430px] border border-[#3dc9ff]/38 bg-black/70 p-5 shadow-[0_36px_120px_rgba(0,74,190,0.38)]">
             <div className="absolute -inset-px -z-10 bg-[linear-gradient(135deg,rgba(80,203,255,0.42),transparent_42%,rgba(30,86,255,0.32))]" />
             <div className="relative aspect-[4/3] overflow-hidden border border-white/10 bg-[#06101d]">
               <Image src={albumCover} alt="Echoes Unearthed" fill className="object-cover opacity-78" />
@@ -129,25 +129,9 @@ export default function MobileCompanionPage() {
                 <p className="mt-2 text-sm leading-6 text-blue-100/72">Tap the Android download button after scanning this page.</p>
               </div>
             </div>
-            <div className="mt-5 grid gap-3">
-              <a
-                href={androidDownloadHref}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex min-h-12 items-center justify-center gap-2 border border-[#64d5ff]/60 bg-[linear-gradient(180deg,#0b86ff,#06327a)] px-5 text-center text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:-translate-y-0.5 hover:border-[#bff5ff]"
-              >
-                <Download className="h-4 w-4" />
-                Download Android APK
-              </a>
-              <a
-                href={googlePlayBundleHref}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex min-h-11 items-center justify-center gap-2 border border-white/12 bg-white/5 px-4 text-center text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-100 transition hover:border-[#64d5ff]/60"
-              >
-                <ExternalLink className="h-3.5 w-3.5" />
-                Google Play bundle ready
-              </a>
+            <div className="mt-5 rounded bg-blue-900/20 p-4 border border-blue-500/20 text-sm leading-6 text-blue-100/80">
+              <strong className="text-white">PWA Ready:</strong> No need for App Stores.<br/>
+              Simply open this page on your phone and select <em>"Add to Home Screen"</em> from your browser menu.
             </div>
           </div>
         </div>
