@@ -34,12 +34,19 @@ export async function processCommerceOrder({
     return fm === "printful";
   });
 
+  const multiVendorItems = lineItems.data.filter(item => {
+    const fm = item.price?.product && (item.price.product as Stripe.Product).metadata?.fulfillmentMode;
+    return fm === "multi_vendor";
+  });
+
   let notificationStatus: NotificationStatus = "skipped_not_configured";
-  if (manualItems.length > 0) {
+  if (manualItems.length > 0 || multiVendorItems.length > 0) {
     try {
+      // For now, we route multi_vendor to manual notification.
+      // In production, multiVendorItems would be parsed and sent to respective third-party APIs.
       notificationStatus = await sendNotification(session, {
         ...lineItems,
-        data: manualItems
+        data: [...manualItems, ...multiVendorItems]
       });
     } catch (error) {
       console.error(`[Webhook] Failed to send admin notification for session ${session.id}`, error);

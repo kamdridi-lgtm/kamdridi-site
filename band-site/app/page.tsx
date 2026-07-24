@@ -411,15 +411,23 @@ export default function HomePage() {
           <SectionTitle eyebrow="Official Store" title="Collector Products" />
           <div className="mx-auto mt-9 grid max-w-7xl gap-5 lg:grid-cols-4">
             {products.map((product) => (
-              <article key={product.title} className="border border-[#8f5728]/35 bg-black/52">
-                <div className="relative aspect-[4/3] overflow-hidden border-b border-white/10 bg-[#120b07]">
-                  <Image src={product.image} alt={product.title} fill className="object-cover" />
+              <article key={product.title} className="group relative border border-white/10 bg-black/40 overflow-hidden transition-colors hover:border-[#f4c66a]/30">
+                <div className="relative aspect-[4/3] overflow-hidden border-b border-white/10 bg-[#0a0a0a]">
+                  {product.live && product.image !== albumCoverPng ? (
+                    <Image src={product.image} alt={product.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                  ) : (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/80">
+                      <div className="absolute inset-0 bg-[linear-gradient(rgba(244,198,106,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(244,198,106,0.05)_1px,transparent_1px)] bg-[size:20px_20px]" />
+                      <div className="relative z-10 text-[#f4c66a]/70 uppercase tracking-[0.3em] text-xs font-bold font-mono">Signal Pending</div>
+                      <div className="relative z-10 mt-2 text-stone-500 text-[10px] uppercase tracking-[0.2em]">[ Production Data Missing ]</div>
+                    </div>
+                  )}
                 </div>
                 <div className="p-5">
                   <p className={product.live ? "text-xs uppercase tracking-[0.25em] text-[#f4c66a]" : "text-xs uppercase tracking-[0.25em] text-stone-500"}>
                     {product.status}
                   </p>
-                  <h3 className="mt-3 min-h-16 font-display text-2xl uppercase tracking-[0.08em] text-stone-100">
+                  <h3 className="mt-3 min-h-16 font-display text-xl uppercase tracking-[0.08em] text-stone-100">
                     {product.title}
                   </h3>
                   <p className="mt-3 min-h-28 text-sm leading-6 text-stone-400">{product.text}</p>

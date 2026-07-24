@@ -1,5 +1,11 @@
 export type SaleMode = "buy_now" | "preorder" | "digital" | "sold_out";
-export type FulfillmentMode = "manual_physical" | "manual_preorder" | "digital_manual" | "printful" | "game_access";
+export type FulfillmentMode = "manual_physical" | "manual_preorder" | "digital_manual" | "printful" | "game_access" | "multi_vendor";
+
+export type VendorComponent = {
+  name: string;
+  vendorId: "printful" | "qrates_vinyl" | "custom_jeweler" | "book_printer" | "merch_supplier";
+  sku: string;
+};
 
 export type CommerceProduct = {
   id: string;
@@ -26,6 +32,7 @@ export type CommerceProduct = {
   colors?: readonly string[];
   sizes?: readonly string[];
   formats?: readonly string[];
+  productionComponents?: VendorComponent[];
 };
 
 export const commerceProducts: CommerceProduct[] = [
@@ -110,10 +117,27 @@ export const commerceProducts: CommerceProduct[] = [
     saleMode: "buy_now",
     visible: true,
     checkoutEnabled: true,
-    fulfillmentMode: "manual_preorder",
+    fulfillmentMode: "multi_vendor",
     requiresShipping: true,
     productPath: "/store/salieri-collector-bundle",
-    releasePath: "/releases/salieris-hands"
+    releasePath: "/releases/salieris-hands",
+    productionComponents: [
+      {
+        name: "Collector Medallion",
+        vendorId: "custom_jeweler",
+        sku: "SAL-MED-01"
+      },
+      {
+        name: "Salieri's Hands Vinyl",
+        vendorId: "qrates_vinyl",
+        sku: "SAL-VINYL-01"
+      },
+      {
+        name: "Lore Booklet",
+        vendorId: "book_printer",
+        sku: "SAL-BOOK-01"
+      }
+    ]
   },
   {
     id: "salieri-special-edition-box",

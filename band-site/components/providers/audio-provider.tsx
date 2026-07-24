@@ -57,7 +57,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const timerRef = useRef<number | null>(null);
   
   // Use a ref for nextTrack to avoid stale closures in event listener
-  const nextTrackRef = useRef<() => void>();
+  const nextTrackRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     // Select a random track on mount
