@@ -21,6 +21,10 @@ export interface CommerceOrderDependencies {
   createPrintfulOrder: (session: Stripe.Checkout.Session, lineItems: Stripe.ApiList<Stripe.LineItem>) => Promise<void>;
 }
 
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy');
+
 async function dispatchMultiVendorOrder(session: Stripe.Checkout.Session, multiVendorItems: Stripe.LineItem[]) {
   // In production, this would make actual API calls to each vendor's system
   console.log(`[Webhook] Initiating Multi-Vendor Dispatch for Session: ${session.id}`);
@@ -60,6 +64,7 @@ async function dispatchMultiVendorOrder(session: Stripe.Checkout.Session, multiV
   }
 
   const customerName = session.customer_details?.name || "Customer";
+  const customerEmail = session.customer_details?.email || "No email";
   const sessionAny = session as any;
   const address = sessionAny.shipping_details?.address 
     ? `${sessionAny.shipping_details.address.line1}, ${sessionAny.shipping_details.address.city}, ${sessionAny.shipping_details.address.country}` 
@@ -67,17 +72,38 @@ async function dispatchMultiVendorOrder(session: Stripe.Checkout.Session, multiV
 
   // Simulate dispatching emails/APIs to vendors
   for (const [vendorId, components] of Object.entries(vendorDispatches)) {
-    console.log(`\n======================================================`);
-    console.log(`[VENDOR DISPATCH] TO: ${vendorId}@kamdridi-partners.com`);
-    console.log(`[VENDOR DISPATCH] SUBJECT: New Fulfillment Request - Order ${session.id}`);
-    console.log(`[VENDOR DISPATCH] Ship To: ${customerName}, ${address}`);
-    console.log(`[VENDOR DISPATCH] Items to fulfill:`);
+    let itemsHtml = "<ul>";
     for (const comp of components) {
-      console.log(`  - ${comp.orderQuantity}x ${comp.componentName} (SKU: ${comp.sku}) for ${comp.parentProduct}`);
+      itemsHtml += `<li>${comp.orderQuantity}x ${comp.componentName} (SKU: ${comp.sku}) for ${comp.parentProduct}</li>`;
     }
-    console.log(`======================================================\n`);
+    itemsHtml += "</ul>";
+
+    const emailHtml = `
+      <h1>New Fulfillment Request - Order ${session.id}</h1>
+      <p><strong>Ship To:</strong> ${customerName}</p>
+      <p><strong>Email:</strong> ${customerEmail}</p>
+      <p><strong>Address:</strong> ${address}</p>
+      <h2>Items to Fulfill:</h2>
+      ${itemsHtml}
+    `;
+
+    console.log(`[VENDOR DISPATCH] Preparing email to ${vendorId}@kamdridi-partners.com`);
     
-    // NOTE: Here we would use resend or nodemailer to actually email the vendor.
+    try {
+      if (process.env.RESEND_API_KEY) {
+        await resend.emails.send({
+          from: 'Kamdridi Records <orders@kamdridi.com>',
+          to: [`${vendorId}@kamdridi-partners.com`, process.env.ADMIN_NOTIFICATION_EMAIL || 'contact@kamdridi.com'],
+          subject: `Fulfillment Request - Order ${session.id}`,
+          html: emailHtml
+        });
+        console.log(`[VENDOR DISPATCH] Email sent successfully.`);
+      } else {
+        console.log(`[VENDOR DISPATCH] RESEND_API_KEY missing. Skipped sending email.`);
+      }
+    } catch (err) {
+      console.error(`[VENDOR DISPATCH] Failed to send email via Resend:`, err);
+    }
   }
 }
 

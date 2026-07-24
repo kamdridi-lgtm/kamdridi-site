@@ -5,20 +5,22 @@ import { createPrintfulOrderFromSession } from "@/lib/printful";
 import { updateLabelApplication } from "@/lib/label-storage";
 import { processCommerceOrder, NotificationStatus } from "@/lib/commerce-order-processing";
 
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy');
+
 async function sendAdminOrderNotification(session: Stripe.Checkout.Session, lineItems: Stripe.ApiList<Stripe.LineItem>): Promise<NotificationStatus> {
-  const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL;
+  const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL || 'contact@kamdridi.com';
   
-  if (!adminEmail) {
-    console.warn(`[Webhook] ADMIN ORDER EMAIL NOT SENT — PROVIDER NOT CONFIGURED. Order ${session.id} recorded in Stripe but email notification omitted.`);
+  if (!process.env.RESEND_API_KEY) {
+    console.warn(`[Webhook] ADMIN ORDER EMAIL NOT SENT — RESEND_API_KEY NOT CONFIGURED. Order ${session.id} recorded in Stripe but email notification omitted.`);
     return "skipped_not_configured";
   }
   
-  // Collect order variables for potential email API
+  // Collect order variables for email
   const customerEmail = session.customer_details?.email || "Unknown";
+  const customerName = session.customer_details?.name || "Customer";
   const total = session.amount_total ? (session.amount_total / 100).toFixed(2) : "0.00";
-  const projects = session.metadata?.projects || "Unknown";
-  const hasPreorder = session.metadata?.containsPreorder === "true";
-  const isPhysical = session.metadata?.containsPhysical === "true";
   const dashboardLink = `https://dashboard.stripe.com/payments/${session.payment_intent || session.id}`;
   
   const sessionAny = session as any;
@@ -26,16 +28,36 @@ async function sendAdminOrderNotification(session: Stripe.Checkout.Session, line
     ? `${sessionAny.shipping_details.address.line1}, ${sessionAny.shipping_details.address.city}, ${sessionAny.shipping_details.address.country}` 
     : (session.customer_details?.address ? `${session.customer_details.address.line1}, ${session.customer_details.address.city}, ${session.customer_details.address.country}` : "No address");
   
-  const itemsList = lineItems.data.map(item => {
+  let itemsHtml = "<ul>";
+  lineItems.data.forEach(item => {
     const p = item.price?.product as Stripe.Product;
-    return `${item.quantity}x ${p.name}`;
-  }).join(", ");
+    itemsHtml += `<li>${item.quantity}x ${p.name}</li>`;
+  });
+  itemsHtml += "</ul>";
 
-  console.log(`[Webhook] Prepared email payload for ${adminEmail}: Session ${session.id}, Customer ${customerEmail}, Total $${total}`);
-  console.log(`[Webhook] Products: ${itemsList}, Projects: ${projects}, Preorder: ${hasPreorder}, Physical: ${isPhysical}, Address: ${address}`);
-  console.log(`[Webhook] Stripe Link: ${dashboardLink}`);
-  
-  return "sent";
+  const emailHtml = `
+    <h1>New Order Received - $${total}</h1>
+    <p><strong>Customer:</strong> ${customerName} (${customerEmail})</p>
+    <p><strong>Shipping Address:</strong> ${address}</p>
+    <h2>Items:</h2>
+    ${itemsHtml}
+    <br/>
+    <a href="${dashboardLink}" style="padding:10px 20px; background:#6366f1; color:white; text-decoration:none; border-radius:5px;">View in Stripe Dashboard</a>
+  `;
+
+  try {
+    await resend.emails.send({
+      from: 'Kamdridi Commerce <orders@kamdridi.com>',
+      to: [adminEmail],
+      subject: `🚨 New Order from ${customerName} - $${total}`,
+      html: emailHtml
+    });
+    console.log(`[Webhook] Admin notification email sent successfully.`);
+    return "sent";
+  } catch (err) {
+    console.error(`[Webhook] Failed to send admin email via Resend:`, err);
+    return "failed";
+  }
 }
 
 export async function POST(request: Request) {
