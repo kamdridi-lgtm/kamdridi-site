@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { LabelApplication } from "@/lib/label-storage";
 import { LabelAdminDashboard } from "@/label/admin/dashboard";
+import { MediaWidget } from "@/components/label/admin/media-widget";
 
 type Overview = {
   signedArtists: number;
@@ -88,7 +89,8 @@ export function LabelAdminDashboardV2() {
         </div>
       </section>
 
-      <section className="grid gap-6 lg:grid-cols-2">
+      <section className="grid gap-6 lg:grid-cols-3">
+        <MediaWidget />
         <div className="label-panel block">
           <p className="text-xs uppercase tracking-[0.28em] text-[#f4c66a]">Top Artists</p>
           <div className="mt-5 grid gap-3">
