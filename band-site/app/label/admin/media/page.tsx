@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, UploadCloud, FileAudio, FileImage, FileText, CheckCircle2, Copy } from "lucide-react";
+import { upload } from "@vercel/blob/client";
 
 type UploadedFile = {
   name: string;
@@ -55,22 +56,13 @@ export default function MediaManagerPage() {
     setIsUploading(true);
     setError("");
 
-    const formData = new FormData();
-    formData.append("file", file);
-
     try {
-      const res = await fetch("/api/admin/media", {
-        method: "POST",
-        body: formData,
+      const blob = await upload(`label/uploads/${file.name}`, file, {
+        access: 'public',
+        handleUploadUrl: '/api/admin/media/upload',
       });
 
-      if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        throw new Error(errData.error || `Upload failed with status ${res.status}. Check Vercel Blob configuration.`);
-      }
-
-      const data = await res.json();
-      const newFile = { name: data.name, url: data.url, size: data.size, type: file.type };
+      const newFile = { name: file.name, url: blob.url, size: file.size, type: file.type };
       
       setUploadedFiles((prev) => [newFile, ...prev]);
       // Also add to cloud library at the top

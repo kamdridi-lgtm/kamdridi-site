@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { UploadCloud, FileAudio, FileImage, FileText, CheckCircle2, Copy } from "lucide-react";
+import { upload } from "@vercel/blob/client";
 
 export function MediaWidget() {
   const [isDragging, setIsDragging] = useState(false);
@@ -13,22 +14,14 @@ export function MediaWidget() {
   const uploadFile = async (file: File) => {
     setIsUploading(true);
     setError("");
-    const formData = new FormData();
-    formData.append("file", file);
 
     try {
-      const res = await fetch("/api/admin/media", {
-        method: "POST",
-        body: formData,
+      const blob = await upload(`label/uploads/${file.name}`, file, {
+        access: 'public',
+        handleUploadUrl: '/api/admin/media/upload',
       });
 
-      if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        throw new Error(errData.error || `Upload failed with status ${res.status}. Check Vercel Blob configuration.`);
-      }
-
-      const data = await res.json();
-      setUploadedFiles(prev => [{ name: data.name, url: data.url, size: data.size, type: file.type }, ...prev]);
+      setUploadedFiles(prev => [{ name: file.name, url: blob.url, size: file.size, type: file.type }, ...prev]);
     } catch (err: any) {
       setError(err.message || "An error occurred during upload.");
     } finally {
