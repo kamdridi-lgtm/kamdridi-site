@@ -706,21 +706,18 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               {" "}
               <p>{siteMeta.email}</p>{" "}
               <p>Booking, press, management, licensing</p>{" "}
-              <div className="mt-8 flex items-center justify-between text-stone-600 text-xs">
+              <div className="mt-8 flex items-center text-stone-600 text-xs">
                 <div className="flex items-center gap-3">
                   <span>(c) 2026</span>
-                  <span className="relative inline-block h-4 w-16 opacity-50">
+                  <Link href="/label/system-access" className="relative inline-block h-4 w-16 opacity-50 transition-opacity hover:opacity-100">
                     <Image
                       src={brandLogo}
                       alt="KAMDRIDI logo"
                       fill
                       className="object-contain object-left"
                     />
-                  </span>
+                  </Link>
                 </div>
-                <Link href="/label/system-access" className="opacity-0 transition-opacity hover:opacity-100 hover:text-[#f4c66a]">
-                  [ SYSTEM ACCESS ]
-                </Link>
               </div>
             </div>
           </div>{" "}
