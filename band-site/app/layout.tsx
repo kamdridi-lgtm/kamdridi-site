@@ -17,6 +17,15 @@ const metadataBase = new URL(siteUrl);
 export const metadata: Metadata = {
   metadataBase,
   manifest: "/manifest.json",
+  icons: {
+    icon: "/assets/images/kamdridi-pwa-icon.png",
+    apple: "/assets/images/kamdridi-pwa-icon.png"
+  },
+  appleWebApp: {
+    capable: true,
+    title: "KAMDRIDI App",
+    statusBarStyle: "black-translucent"
+  },
   title: {
     default: `${siteMeta.bandName} | Official Website`,
     template: `%s | ${siteMeta.bandName}`
