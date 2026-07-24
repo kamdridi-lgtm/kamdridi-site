@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Section } from "@/components/ui";
 import { currentAct1Checkpoint } from "@/data/act1-checkpoints";
+import { act1LiveStatus } from "@/data/act1-live-status";
 import { gameExperiences } from "@/data/site";
 
 export function GamesPanel() {
@@ -31,6 +32,9 @@ export function GamesPanel() {
                   <span className="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-[9px] uppercase tracking-[0.2em] text-amber-200">
                     {currentAct1Checkpoint.label}
                   </span>
+                  <span className="rounded-full border border-emerald-300/25 bg-emerald-300/10 px-3 py-1 text-[9px] uppercase tracking-[0.2em] text-emerald-200">
+                    {act1LiveStatus.deploymentStatus}
+                  </span>
                 </div>
                 <h2 className="mt-4 font-display text-3xl uppercase leading-none tracking-[0.08em] text-[#f3dfb6] md:text-4xl">
                   Latest production checkpoint
@@ -39,6 +43,30 @@ export function GamesPanel() {
                   Follow the real Godot ACT I runner as it moves from the archived Windows build
                   to a verified browser checkpoint. Existing public games remain untouched.
                 </p>
+
+                <div className="mt-6 grid gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-2 xl:grid-cols-4">
+                  <div className="bg-black/80 p-4">
+                    <span className="block text-[9px] uppercase tracking-[0.24em] text-stone-500">Source</span>
+                    <span className="mt-2 block text-xs font-semibold text-stone-200">{act1LiveStatus.sourceRepo}</span>
+                  </div>
+                  <div className="bg-black/80 p-4">
+                    <span className="block text-[9px] uppercase tracking-[0.24em] text-stone-500">Branch</span>
+                    <span className="mt-2 block break-all text-xs font-semibold text-stone-200">{act1LiveStatus.sourceBranch}</span>
+                  </div>
+                  <div className="bg-black/80 p-4">
+                    <span className="block text-[9px] uppercase tracking-[0.24em] text-stone-500">Verified source</span>
+                    <span className="mt-2 block font-mono text-xs font-semibold text-[#f4c66a]">{act1LiveStatus.sourceCommit}</span>
+                  </div>
+                  <div className="bg-black/80 p-4">
+                    <span className="block text-[9px] uppercase tracking-[0.24em] text-stone-500">Public build</span>
+                    <span className="mt-2 block text-xs font-semibold text-stone-200">{act1LiveStatus.deployedCheckpoint}</span>
+                  </div>
+                </div>
+
+                <p className="mt-4 max-w-3xl border-l border-[#f4c66a]/40 pl-4 text-xs leading-6 text-stone-400">
+                  {act1LiveStatus.sourceMessage}. {act1LiveStatus.truthNote}
+                </p>
+
                 <div className="mt-5 flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.2em] text-stone-400">
                   <span className="border border-white/10 px-3 py-2">3 cameras verified</span>
                   <span className="border border-white/10 px-3 py-2">19 wall modules</span>
@@ -52,8 +80,12 @@ export function GamesPanel() {
                     View ACT I progress
                   </Link>
                   <span className="text-[10px] uppercase tracking-[0.2em] text-stone-500">
-                    Updated {currentAct1Checkpoint.updatedAt}
+                    Updated {act1LiveStatus.updatedAt}
                   </span>
+                </div>
+                <div className="mt-5 rounded-2xl border border-[#f4c66a]/15 bg-[#f4c66a]/5 p-4">
+                  <span className="text-[9px] uppercase tracking-[0.24em] text-[#f4c66a]">Next production milestone</span>
+                  <p className="mt-2 text-xs leading-6 text-stone-300">{act1LiveStatus.nextMilestone}</p>
                 </div>
               </div>
 
