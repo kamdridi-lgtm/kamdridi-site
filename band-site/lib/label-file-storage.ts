@@ -35,7 +35,8 @@ export async function storeLabelFile(file: File | null, folder: LabelFileFolder)
   };
 
   if (process.env.BLOB_READ_WRITE_TOKEN) {
-    const blob = await put(key, file, {
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const blob = await put(key, buffer, {
       access: "public",
       contentType: file.type || "application/octet-stream",
       addRandomSuffix: false

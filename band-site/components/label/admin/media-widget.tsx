@@ -22,7 +22,10 @@ export function MediaWidget() {
         body: formData,
       });
 
-      if (!res.ok) throw new Error("Upload failed. Check Vercel Blob configuration.");
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || `Upload failed with status ${res.status}. Check Vercel Blob configuration.`);
+      }
 
       const data = await res.json();
       setUploadedFiles(prev => [{ name: data.name, url: data.url, size: data.size, type: file.type }, ...prev]);

@@ -65,7 +65,8 @@ export default function MediaManagerPage() {
       });
 
       if (!res.ok) {
-        throw new Error("Upload failed. Check Vercel Blob configuration.");
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || `Upload failed with status ${res.status}. Check Vercel Blob configuration.`);
       }
 
       const data = await res.json();
