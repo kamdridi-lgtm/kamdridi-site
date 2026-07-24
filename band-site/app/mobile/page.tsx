@@ -86,25 +86,31 @@ export default function MobileCompanionPage() {
             </p>
             <div className="mt-8 flex flex-col gap-4">
               <div className="flex flex-wrap gap-3">
-                <div className="inline-flex min-h-12 items-center justify-center gap-2 border border-[#64d5ff]/60 bg-[linear-gradient(180deg,#0b86ff,#06327a)] px-6 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-[0_18px_55px_rgba(0,119,255,0.32)]">
+                <a
+                  href={androidDownloadHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 border border-[#64d5ff]/60 bg-[linear-gradient(180deg,#0b86ff,#06327a)] px-6 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-[0_18px_55px_rgba(0,119,255,0.32)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_65px_rgba(40,160,255,0.45)]"
+                >
                   <Download className="h-4 w-4" />
-                  PWA Ready
-                </div>
-                <Link
-                  href="/fan-club"
+                  Download Android APK
+                </a>
+                <a
+                  href={googlePlayBundleHref}
+                  target="_blank"
+                  rel="noreferrer"
                   className="inline-flex min-h-12 items-center justify-center border border-white/15 bg-black/35 px-6 text-xs font-semibold uppercase tracking-[0.18em] text-blue-100 transition hover:-translate-y-0.5 hover:border-[#64d5ff]/70"
                 >
-                  Fan Access
-                </Link>
+                  Google Play Bundle
+                </a>
               </div>
               <div className="mt-2 text-sm text-blue-200/80 bg-blue-900/20 p-4 border border-blue-500/20 rounded">
-                <strong>INSTALL THE COMPANION APP:</strong><br/>
-                • <strong>Android:</strong> Tap your browser menu (3 dots) and select <em>"Add to Home Screen"</em>.<br/>
-                • <strong>iPhone:</strong> Tap the Share button at the bottom of Safari, then select <em>"Add to Home Screen"</em>.
+                <strong>FOR IPHONE USERS (PWA):</strong><br/>
+                Tap the Share button at the bottom of Safari, then select <em>"Add to Home Screen"</em> to install the web app.
               </div>
             </div>
             <p className="mt-4 max-w-xl text-xs leading-6 text-blue-100/64">
-              Add the KAMDRIDI Companion to your home screen for an app-like experience without going through the app stores.
+              Android direct install is delivered from the official Expo build page while Google Play approval is being prepared.
             </p>
           </div>
 
