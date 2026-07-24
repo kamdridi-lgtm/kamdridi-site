@@ -45,7 +45,13 @@ export default function StorePage() {
           
           <div className="relative z-10 mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
             <div className="relative overflow-hidden border border-[#f4c66a]/30 p-6 md:p-8">
-              <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(244,198,106,0.16),rgba(0,0,0,0.85))]" />
+              <Image
+                src="/assets/images/band/photos_bg.jpg"
+                alt="Kam Dridi Team"
+                fill
+                className="object-cover opacity-50 grayscale sepia-[0.3]"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(244,198,106,0.25),rgba(0,0,0,0.85))]" />
               <div className="relative z-10">
                 <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Official Store</p>
                 <h1 className="mt-4 font-display text-4xl uppercase leading-none tracking-[0.08em] text-white sm:text-5xl md:text-6xl">

@@ -37,6 +37,89 @@ export type CommerceProduct = {
 
 export const commerceProducts: CommerceProduct[] = [
   // ==========================================
+  // ECHOES ENGINE
+  // ==========================================
+  {
+    id: "echoes-engine-cd",
+    slug: "echoes-engine-cd",
+    name: "ECHOES ENGINE",
+    subtitle: "CD EDITION",
+    project: "ECHOES ENGINE",
+    projectSlug: "echoes-engine",
+    category: "Physical Music",
+    description: "Official CD Edition of Echoes Engine.",
+    images: ["/assets/images/releases/war-machines-cover.png"], // Placeholder
+    priceCents: 2900,
+    currency: "CAD",
+    saleMode: "buy_now",
+    visible: true,
+    checkoutEnabled: true,
+    fulfillmentMode: "manual_preorder",
+    requiresShipping: true,
+    productPath: "/store/echoes-engine-cd",
+    releasePath: "/releases/echoes-engine"
+  },
+  {
+    id: "echoes-engine-vinyl",
+    slug: "echoes-engine-vinyl",
+    name: "ECHOES ENGINE",
+    subtitle: "VINYL EDITION",
+    project: "ECHOES ENGINE",
+    projectSlug: "echoes-engine",
+    category: "Physical Music",
+    description: "Official Vinyl Edition of Echoes Engine.",
+    images: ["/assets/images/releases/war-machines-cover.png"], // Placeholder
+    priceCents: 5900,
+    currency: "CAD",
+    saleMode: "buy_now",
+    visible: true,
+    checkoutEnabled: true,
+    fulfillmentMode: "manual_preorder",
+    requiresShipping: true,
+    productPath: "/store/echoes-engine-vinyl",
+    releasePath: "/releases/echoes-engine"
+  },
+  {
+    id: "echoes-engine-cassette",
+    slug: "echoes-engine-cassette",
+    name: "ECHOES ENGINE",
+    subtitle: "CASSETTE EDITION",
+    project: "ECHOES ENGINE",
+    projectSlug: "echoes-engine",
+    category: "Physical Music",
+    description: "Official Cassette Edition of Echoes Engine.",
+    images: ["/assets/images/releases/war-machines-cover.png"], // Placeholder
+    priceCents: 2400,
+    currency: "CAD",
+    saleMode: "buy_now",
+    visible: true,
+    checkoutEnabled: true,
+    fulfillmentMode: "manual_preorder",
+    requiresShipping: true,
+    productPath: "/store/echoes-engine-cassette",
+    releasePath: "/releases/echoes-engine"
+  },
+  {
+    id: "echoes-engine-special",
+    slug: "echoes-engine-special",
+    name: "ECHOES ENGINE",
+    subtitle: "SPECIAL COLLECTOR EDITION",
+    project: "ECHOES ENGINE",
+    projectSlug: "echoes-engine",
+    category: "Physical Music",
+    description: "Special Collector Edition of Echoes Engine.",
+    images: ["/assets/images/releases/war-machines-cover.png"], // Placeholder
+    priceCents: 14900,
+    currency: "CAD",
+    saleMode: "buy_now",
+    visible: true,
+    checkoutEnabled: true,
+    fulfillmentMode: "manual_preorder",
+    requiresShipping: true,
+    productPath: "/store/echoes-engine-special",
+    releasePath: "/releases/echoes-engine"
+  },
+  // ==========================================
   // ECHOES UN LIVE IN BRASIL
   // ==========================================
   {
