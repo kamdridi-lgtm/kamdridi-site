@@ -152,6 +152,12 @@ export default function StorePage() {
         </Section>
 
         <Section id="collector-artifact-pack" className="relative py-14 md:py-18 overflow-hidden">
+          <Image
+            src="/assets/images/band/live_stage.jpg"
+            alt="Live Stage Background"
+            fill
+            className="object-cover opacity-15 grayscale sepia-[0.3]"
+          />
           {/* Fading Cyber Grid Background */}
           <div className="pointer-events-none absolute inset-0 z-0 opacity-40 [background-image:linear-gradient(to_right,rgba(244,198,106,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(244,198,106,0.04)_1px,transparent_1px)] [background-size:3rem_3rem] [mask-image:radial-gradient(ellipse_60%_80%_at_50%_50%,#000_20%,transparent_100%)]" />
           <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.14),transparent_26%),linear-gradient(180deg,rgba(11,10,8,0.4),rgba(11,10,8,0.96))]" />
