@@ -84,25 +84,27 @@ export default function MobileCompanionPage() {
               The premium companion hub for the KAMDRIDI universe: music access, game portals,
               Japan campaign signals, collector drops, and fan updates in one fast mobile gateway.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href={androidDownloadHref}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex min-h-12 items-center justify-center gap-2 border border-[#64d5ff]/60 bg-[linear-gradient(180deg,#0b86ff,#06327a)] px-6 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-[0_18px_55px_rgba(0,119,255,0.32)] transition hover:-translate-y-0.5 hover:border-[#bff5ff]"
-              >
-                <Download className="h-4 w-4" />
-                Download Android App
-              </a>
-              <Link
-                href="/fan-club"
-                className="inline-flex min-h-12 items-center justify-center border border-white/15 bg-black/35 px-6 text-xs font-semibold uppercase tracking-[0.18em] text-blue-100 transition hover:-translate-y-0.5 hover:border-[#64d5ff]/70"
-              >
-                Fan Access
-              </Link>
+            <div className="mt-8 flex flex-col gap-4">
+              <div className="flex flex-wrap gap-3">
+                <div className="inline-flex min-h-12 items-center justify-center gap-2 border border-[#64d5ff]/60 bg-[linear-gradient(180deg,#0b86ff,#06327a)] px-6 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-[0_18px_55px_rgba(0,119,255,0.32)]">
+                  <Download className="h-4 w-4" />
+                  PWA Ready
+                </div>
+                <Link
+                  href="/fan-club"
+                  className="inline-flex min-h-12 items-center justify-center border border-white/15 bg-black/35 px-6 text-xs font-semibold uppercase tracking-[0.18em] text-blue-100 transition hover:-translate-y-0.5 hover:border-[#64d5ff]/70"
+                >
+                  Fan Access
+                </Link>
+              </div>
+              <div className="mt-2 text-sm text-blue-200/80 bg-blue-900/20 p-4 border border-blue-500/20 rounded">
+                <strong>INSTALL THE COMPANION APP:</strong><br/>
+                • <strong>Android:</strong> Tap your browser menu (3 dots) and select <em>"Add to Home Screen"</em>.<br/>
+                • <strong>iPhone:</strong> Tap the Share button at the bottom of Safari, then select <em>"Add to Home Screen"</em>.
+              </div>
             </div>
             <p className="mt-4 max-w-xl text-xs leading-6 text-blue-100/64">
-              Android direct install is delivered from the official Expo build page while Google Play approval is being prepared.
+              Add the KAMDRIDI Companion to your home screen for an app-like experience without going through the app stores.
             </p>
           </div>
 

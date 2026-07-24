@@ -16,6 +16,7 @@ const metadataBase = new URL(siteUrl);
 
 export const metadata: Metadata = {
   metadataBase,
+  manifest: "/manifest.json",
   title: {
     default: `${siteMeta.bandName} | Official Website`,
     template: `%s | ${siteMeta.bandName}`

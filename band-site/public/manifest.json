@@ -1,0 +1,17 @@
+{
+  "name": "KAMDRIDI Official App",
+  "short_name": "KAMDRIDI",
+  "description": "The premium companion hub for the KAMDRIDI universe: music access, game portals, and fan updates.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020407",
+  "theme_color": "#020407",
+  "icons": [
+    {
+      "src": "/assets/images/kamdridi-app-logo-blue.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
