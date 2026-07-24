@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "node scripts/lint.mjs",
-    "test:label": "node --test tests/label-critical.test.mjs",
-    "prebuild": "node get-models.js"
+    "test:label": "node --test tests/label-critical.test.mjs"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
