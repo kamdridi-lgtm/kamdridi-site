@@ -108,7 +108,7 @@ export default function MobileCompanionPage() {
             </p>
           </div>
 
-          <div id="scan" className="relative hidden lg:block mx-auto w-full max-w-[430px] border border-[#3dc9ff]/38 bg-black/70 p-5 shadow-[0_36px_120px_rgba(0,74,190,0.38)]">
+          <div id="scan" className="relative mx-auto w-full max-w-[430px] border border-[#3dc9ff]/38 bg-black/70 p-5 shadow-[0_36px_120px_rgba(0,74,190,0.38)]">
             <div className="absolute -inset-px -z-10 bg-[linear-gradient(135deg,rgba(80,203,255,0.42),transparent_42%,rgba(30,86,255,0.32))]" />
             <div className="relative aspect-[4/3] overflow-hidden border border-white/10 bg-[#06101d]">
               <Image src={albumCover} alt="Echoes Unearthed" fill className="object-cover opacity-78" />
@@ -119,19 +119,9 @@ export default function MobileCompanionPage() {
                 </div>
               </div>
             </div>
-            <div className="mt-5 grid grid-cols-[126px_1fr] gap-4">
-              <div className="bg-white p-2">
-                <Image src={appQr} alt="QR code for KAMDRIDI mobile app" width={512} height={512} className="h-auto w-full" />
-              </div>
-              <div className="self-center">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-[#9be8ff]">Scan with phone</p>
-                <h2 className="mt-2 font-display text-3xl uppercase tracking-[0.08em] text-white">Download app</h2>
-                <p className="mt-2 text-sm leading-6 text-blue-100/72">Tap the Android download button after scanning this page.</p>
-              </div>
-            </div>
             <div className="mt-5 rounded bg-blue-900/20 p-4 border border-blue-500/20 text-sm leading-6 text-blue-100/80">
               <strong className="text-white">PWA Ready:</strong> No need for App Stores.<br/>
-              Simply open this page on your phone and select <em>"Add to Home Screen"</em> from your browser menu.
+              Simply open your browser menu and select <em>"Add to Home Screen"</em>.
             </div>
           </div>
         </div>
