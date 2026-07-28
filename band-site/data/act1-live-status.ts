@@ -11,14 +11,16 @@ export type Act1LiveStatus = {
 };
 
 export const act1LiveStatus: Act1LiveStatus = {
-  updatedAt: "July 24, 2026",
+  updatedAt: "July 28, 2026",
   sourceRepo: "kamdridi-lgtm/kamdridi-gilded-null-act1",
   sourceBranch: "handoff/codex-2026-07-19",
-  sourceCommit: "e8cbbce",
-  sourceMessage: "Fix Web wall loading and validate ACT I export",
+  sourceCommit: "67559f0",
+  sourceMessage:
+    "Promote the complete ACT I production branch with responsive mobile controls, adaptive audio, three camera modes and the validated full-run gameplay loop",
   deployedCheckpoint: "Checkpoint 003",
   deploymentStatus: "PLAYABLE",
-  nextMilestone: "Replace the temporary runner with final RN-07 and validate a new browser checkpoint",
+  nextMilestone:
+    "Integrate the final RN-07 character, then export and validate Checkpoint 004 before replacing the current public browser build",
   truthNote:
-    "Checkpoint 003 remains the latest public browser build. A newer checkpoint will not be labeled playable until export, browser boot, camera, audio and full-run validation pass."
+    "The production source is newer than the public build. Checkpoint 003 remains the latest playable browser checkpoint until Checkpoint 004 passes Godot import, Web export, browser boot, mobile controls, camera, audio and complete-run validation."
 };
