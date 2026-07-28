@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { act1Checkpoints, currentAct1Checkpoint } from "@/data/act1-checkpoints";
+import { act1LiveStatus } from "@/data/act1-live-status";
 
 export const metadata: Metadata = {
   title: "The Gilded Null - ACT I Development",
@@ -42,6 +43,41 @@ export default function TheGildedNullAct1Page() {
 
       <main className="bg-[radial-gradient(circle_at_top,rgba(244,198,106,0.07),transparent_34%),#030303] px-5 py-10 sm:px-8 md:py-14">
         <div className="mx-auto max-w-7xl">
+          <section className="mb-10 overflow-hidden border border-emerald-300/20 bg-[linear-gradient(135deg,rgba(16,60,38,0.28),rgba(7,7,7,0.96)_52%)] p-6 md:p-8">
+            <div className="flex flex-wrap items-start justify-between gap-5">
+              <div className="max-w-3xl">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="text-[10px] uppercase tracking-[0.34em] text-emerald-200">
+                    Production source promoted
+                  </span>
+                  <span className="border border-emerald-300/25 bg-emerald-300/10 px-3 py-1 text-[9px] uppercase tracking-[0.2em] text-emerald-100">
+                    {act1LiveStatus.sourceCommit}
+                  </span>
+                </div>
+                <h2 className="mt-4 font-display text-3xl uppercase leading-none tracking-[0.07em] text-white md:text-4xl">
+                  Mobile, audio and full-run work consolidated
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-stone-300">
+                  {act1LiveStatus.sourceMessage}. The code now lives on the default delivery branch,
+                  while the current public browser build remains protected.
+                </p>
+              </div>
+              <dl className="grid min-w-[270px] gap-3 text-xs sm:grid-cols-2 lg:grid-cols-1">
+                <div className="border border-white/10 bg-black/45 p-3">
+                  <dt className="text-[9px] uppercase tracking-[0.22em] text-stone-500">Source branch</dt>
+                  <dd className="mt-2 break-all font-mono text-stone-200">{act1LiveStatus.sourceBranch}</dd>
+                </div>
+                <div className="border border-white/10 bg-black/45 p-3">
+                  <dt className="text-[9px] uppercase tracking-[0.22em] text-stone-500">Public build</dt>
+                  <dd className="mt-2 text-stone-200">{act1LiveStatus.deployedCheckpoint}</dd>
+                </div>
+              </dl>
+            </div>
+            <p className="mt-5 border-l border-emerald-300/40 pl-4 text-xs leading-6 text-stone-400">
+              {act1LiveStatus.truthNote}
+            </p>
+          </section>
+
           <div className="grid gap-px border border-[#f4c66a]/20 bg-[#f4c66a]/20 lg:grid-cols-[1.15fr_0.85fr]">
             <section className="bg-[#080604] p-6 md:p-9">
               <div className="flex flex-wrap items-center justify-between gap-3">
