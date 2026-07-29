@@ -55,7 +55,7 @@ export default function TheGildedNullAct1Page() {
                   </span>
                 </div>
                 <h2 className="mt-4 font-display text-3xl uppercase leading-none tracking-[0.07em] text-white md:text-4xl">
-                  Mobile, audio and full-run work consolidated
+                  {act1LiveStatus.headline}
                 </h2>
                 <p className="mt-4 text-sm leading-7 text-stone-300">
                   {act1LiveStatus.sourceMessage}. The code now lives on the default delivery branch,
