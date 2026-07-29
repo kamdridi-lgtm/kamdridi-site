@@ -3,6 +3,7 @@ export type Act1LiveStatus = {
   sourceRepo: string;
   sourceBranch: string;
   sourceCommit: string;
+  headline: string;
   sourceMessage: string;
   deployedCheckpoint: string;
   deploymentStatus: "PLAYABLE" | "EXPORTING" | "ARCHIVED";
@@ -11,16 +12,17 @@ export type Act1LiveStatus = {
 };
 
 export const act1LiveStatus: Act1LiveStatus = {
-  updatedAt: "July 28, 2026",
+  updatedAt: "July 29, 2026",
   sourceRepo: "kamdridi-lgtm/kamdridi-gilded-null-act1",
   sourceBranch: "handoff/codex-2026-07-19",
-  sourceCommit: "67559f0",
+  sourceCommit: "ad44b00",
+  headline: "RN-07 replacement path merged",
   sourceMessage:
-    "Promote the complete ACT I production branch with responsive mobile controls, adaptive audio, three camera modes and the validated full-run gameplay loop",
+    "Merge the fail-closed RN-07 asset admission gate and the automatic runtime character slot while preserving the procedural runner, collision, movement and camera behavior",
   deployedCheckpoint: "Checkpoint 003",
   deploymentStatus: "PLAYABLE",
   nextMilestone:
-    "Integrate the final RN-07 character, then export and validate Checkpoint 004 before replacing the current public browser build",
+    "Add and approve the final RN-07 wrapper scene at assets/characters/rn07/RN07.tscn, prove animation playback and retargeting in the real game, then pass mobile, camera, audio, complete-run and Web validation before publishing Checkpoint 004",
   truthNote:
-    "The production source is newer than the public build. Checkpoint 003 remains the latest playable browser checkpoint until Checkpoint 004 passes Godot import, Web export, browser boot, mobile controls, camera, audio and complete-run validation."
+    "The RN-07 gate and automatic replacement slot are now merged and validated, but the final RN-07 character asset is not yet present or approved. Checkpoint 003 remains the latest playable browser build; Checkpoint 004 is not being presented as playable."
 };
