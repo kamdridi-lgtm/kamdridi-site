@@ -3,6 +3,7 @@ export type Act1LiveStatus = {
   sourceRepo: string;
   sourceBranch: string;
   sourceCommit: string;
+  headline: string;
   sourceMessage: string;
   deployedCheckpoint: string;
   deploymentStatus: "PLAYABLE" | "EXPORTING" | "ARCHIVED";
@@ -15,6 +16,7 @@ export const act1LiveStatus: Act1LiveStatus = {
   sourceRepo: "kamdridi-lgtm/kamdridi-gilded-null-act1",
   sourceBranch: "handoff/codex-2026-07-19",
   sourceCommit: "67559f0",
+  headline: "Mobile, audio and full-run work consolidated",
   sourceMessage:
     "Promote the complete ACT I production branch with responsive mobile controls, adaptive audio, three camera modes and the validated full-run gameplay loop",
   deployedCheckpoint: "Checkpoint 003",
