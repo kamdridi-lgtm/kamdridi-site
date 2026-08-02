@@ -5,11 +5,7 @@ import Link from "next/link";
 import {
   ArrowRight,
   Box,
-  Eye,
   Film,
-  Play,
-  QrCode,
-  Share2,
   Sparkles,
   Smartphone,
   Youtube
@@ -19,7 +15,6 @@ import { HomeReleaseCoverCarousel } from "@/components/home-release-cover-carous
 import { SalieriCinematicIntro } from "@/components/salieri-cinematic-intro";
 import { EchoesBrasilCinematicIntro } from "@/components/echoes-brasil-cinematic-intro";
 import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
-import { SignalRadio } from "@/components/signal-radio";
 import { LostRequiemUniverseCard } from "@/components/lost-requiem-universe-card";
 import { featuredVideo, gameExperiences, socialFeed, streamingLinks, visualAlbumScenes } from "@/data/site";
 
@@ -277,8 +272,8 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,3,2,0.03),rgba(4,3,2,0.16))]" />
           </div>
 
-          <div className="mx-auto grid max-w-7xl items-center gap-6 px-4 py-12 sm:px-6 md:py-16 lg:grid-cols-[0.58fr_1.42fr]">
-            <div className="mx-auto w-full max-w-[190px] sm:max-w-[250px] lg:max-w-[300px]">
+          <div className="mx-auto grid max-w-[1400px] items-center gap-8 px-4 py-12 sm:px-6 md:py-16 lg:grid-cols-[minmax(400px,500px)_minmax(0,1fr)] lg:gap-10">
+            <div className="mx-auto w-full max-w-[280px] sm:max-w-[390px] lg:max-w-[500px]">
               <HomeReleaseCoverCarousel />
             </div>
             <div className="text-center lg:text-left">
@@ -310,54 +305,21 @@ export default function HomePage() {
                   <div className="absolute inset-x-0 bottom-0 h-px bg-[linear-gradient(90deg,transparent,#7de7ff,transparent)] opacity-70 transition group-hover:opacity-100" />
                 </Link>
               </div>
-              <h1 className="mt-2 font-display text-[clamp(2.45rem,7vw,5.8rem)] uppercase leading-[0.82] tracking-[0.08em] text-stone-100">
-                Echoes
-                <br />
-                Unearthed
+              <p className="mt-7 text-xs font-semibold uppercase tracking-[0.34em] text-[#c98542]">
+                The official KAMDRIDI catalogue
+              </p>
+              <h1 className="mt-3 font-display text-[clamp(2.7rem,6.5vw,6rem)] uppercase leading-[0.88] tracking-[0.07em] text-stone-100">
+                Discography
               </h1>
-              <p className="mt-4 max-w-2xl text-sm font-semibold leading-7 text-stone-200 sm:text-base">
-                The full cinematic rock album is available now. Stream the record, enter the Echoes
-                Unearthed universe, and collect the physical edition.
+              <p className="mt-5 max-w-2xl text-sm font-semibold uppercase leading-7 tracking-[0.16em] text-stone-300 sm:text-base">
+                Albums · Singles · Special Editions
               </p>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-stone-400">
-                Stream the full album now. Explore the official tracklist, collector editions,
-                Japan campaign page, and the Echoes Unearthed universe.
+              <p className="mt-3 max-w-xl text-sm leading-7 text-stone-400">
+                Select a cover to discover each official release.
               </p>
-              <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
-                <PremiumButton href="/myriam" tone="primary">
-                  <span className="inline-flex items-center gap-2">
-                    <Sparkles className="h-4 w-4" />
-                    Consult Myriam (AI Oracle)
-                  </span>
-                </PremiumButton>
-                <PremiumButton href="#listen-now" tone="secondary">Stream Album</PremiumButton>
-                <PremiumButton href="#collector-products" tone="secondary">
-                  Collector Editions
-                </PremiumButton>
-                <PremiumButton href={japanHref} tone="red">
-                  Japan Page
-                </PremiumButton>
-                <PremiumButton href={mobileAppHref} tone="blue">
-                  <span className="inline-flex items-center gap-2">
-                    <QrCode className="h-4 w-4" />
-                    Mobile App
-                  </span>
-                </PremiumButton>
-              </div>
-              <SignalRadio />
-              <div className="mt-4 grid gap-3 text-xs uppercase tracking-[0.18em] text-stone-300 sm:grid-cols-3">
-                <Link href="#video" className="inline-flex items-center justify-center gap-3 py-2 hover:text-[#f4c66a]">
-                  <Play className="h-4 w-4" /> Watch War Machines
-                </Link>
-                <Link href="#universe" className="inline-flex items-center justify-center gap-3 py-2 hover:text-[#f4c66a]">
-                  <Eye className="h-4 w-4" /> Enter the Universe
-                </Link>
-                <a
-                  href="https://kamdridi.com"
-                  className="inline-flex items-center justify-center gap-3 py-2 hover:text-[#f4c66a]"
-                >
-                  <Share2 className="h-4 w-4" /> Share Album
-                </a>
+              <div className="mt-7 flex flex-wrap justify-center gap-3 lg:justify-start">
+                <PremiumButton href="/releases">Explore Releases</PremiumButton>
+                <PremiumButton href="/store" tone="secondary">Official Store</PremiumButton>
               </div>
             </div>
           </div>
