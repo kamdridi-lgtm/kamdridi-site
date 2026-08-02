@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { AustraliaParallaxBackground } from "@/components/australia-parallax-background";
 
 export const metadata: Metadata = {
   title: "17 FOR EVER — Australia",
@@ -62,7 +63,7 @@ function ArtworkCard({
 
 export default function AustraliaPage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-black text-white">
+    <main className="min-h-screen overflow-x-clip bg-black text-white">
       <section aria-label="17 FOR EVER campaign artwork" className="relative w-full bg-black">
         <div className="relative aspect-[1672/941] w-full">
           <Image
@@ -76,46 +77,38 @@ export default function AustraliaPage() {
         </div>
       </section>
 
-      <div
-        className="relative"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(2,3,5,.12),rgba(2,3,5,.28)),url('/australia/17-for-ever-background.webp?v=20260802-5')",
-          backgroundPosition: "top center",
-          backgroundSize: "100% auto",
-          backgroundRepeat: "repeat-y",
-          backgroundAttachment: "scroll",
-          backgroundColor: "#151515"
-        }}
-      >
-        <div className="border-y border-white/15 bg-black/58 backdrop-blur-[2px]">
-          <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 px-5 py-6 sm:px-8 lg:flex-row">
-            <div className="text-center lg:text-left">
-              <p className="text-[11px] font-black uppercase tracking-[0.36em] text-[#e5d1aa]">
-                Australian Summer Campaign
-              </p>
-              <p className="mt-2 text-2xl font-black uppercase tracking-[0.16em] text-white sm:text-3xl">
-                January 2027
-              </p>
-            </div>
-            <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <Link
-                href="#edition"
-                className="rounded-full border border-white/30 bg-black/35 px-7 py-3.5 text-center text-xs font-black uppercase tracking-[0.22em] text-white transition hover:border-[#e5d1aa] hover:text-[#e5d1aa]"
-              >
-                Explore the edition
-              </Link>
-              <Link
-                href="/store"
-                className="rounded-full bg-[#e5d1aa] px-8 py-3.5 text-center text-xs font-black uppercase tracking-[0.22em] text-[#05070b] shadow-[0_0_34px_rgba(229,209,170,.22)] transition hover:bg-white"
-              >
-                Collector editions
-              </Link>
+      <div className="relative isolate bg-[#151515]">
+        <AustraliaParallaxBackground />
+
+        <div className="relative z-10 mx-auto max-w-[1280px] border-x border-white/10 bg-black/20 shadow-[0_0_100px_rgba(0,0,0,.9)]">
+          <div className="border-y border-white/15 bg-black/72 backdrop-blur-md">
+            <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 px-5 py-6 sm:px-8 lg:flex-row">
+              <div className="text-center lg:text-left">
+                <p className="text-[11px] font-black uppercase tracking-[0.36em] text-[#e5d1aa]">
+                  Australian Summer Campaign
+                </p>
+                <p className="mt-2 text-2xl font-black uppercase tracking-[0.16em] text-white sm:text-3xl">
+                  January 2027
+                </p>
+              </div>
+              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+                <Link
+                  href="#edition"
+                  className="rounded-full border border-white/30 bg-black/35 px-7 py-3.5 text-center text-xs font-black uppercase tracking-[0.22em] text-white transition hover:border-[#e5d1aa] hover:text-[#e5d1aa]"
+                >
+                  Explore the edition
+                </Link>
+                <Link
+                  href="/store"
+                  className="rounded-full bg-[#e5d1aa] px-8 py-3.5 text-center text-xs font-black uppercase tracking-[0.22em] text-[#05070b] shadow-[0_0_34px_rgba(229,209,170,.22)] transition hover:bg-white"
+                >
+                  Collector editions
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="bg-black/[0.06]">
+          <div className="bg-black/[0.08] backdrop-blur-[1px]">
           <section className="mx-auto grid max-w-6xl gap-7 px-5 py-20 sm:px-8 md:py-28 lg:grid-cols-[1fr_310px] lg:items-stretch">
             <div className="rounded-[2rem] border border-white/20 bg-black/68 p-7 shadow-2xl backdrop-blur-[2px] sm:p-10">
               <p className="text-xs font-black uppercase tracking-[0.34em] text-[#e5d1aa]">Four versions. One story.</p>
@@ -204,16 +197,6 @@ export default function AustraliaPage() {
               />
             </div>
 
-            <div className="mt-6">
-              <ArtworkCard
-                src="/australia/17-for-ever-booklet-spread.webp"
-                alt="17 FOR EVER collector booklet outside spread"
-                title="Collector Booklet"
-                subtitle="Outside spread"
-                aspect="aspect-[2048/1015]"
-              />
-            </div>
-
             <div className="mt-6 grid gap-6 md:grid-cols-2">
               <ArtworkCard
                 src="/australia/17-for-ever-scrapbook.webp"
@@ -256,6 +239,7 @@ export default function AustraliaPage() {
               </div>
             </div>
           </section>
+          </div>
         </div>
       </div>
 
@@ -270,17 +254,6 @@ export default function AustraliaPage() {
         <p className="mx-auto mt-8 max-w-xl text-base leading-8 text-stone-400">
           The second official KAMDRIDI album. The next chapter begins after the Australian summer.
         </p>
-      </section>
-
-      <section aria-label="KAMDRIDI Australia" className="flex min-h-[78svh] items-center justify-center bg-black px-5 py-20 sm:px-8">
-        <Image
-          src="/australia/kamdridi-australia-logo.webp"
-          alt="KAMDRIDI Australia"
-          width={1024}
-          height={1015}
-          sizes="(max-width: 1024px) 92vw, 820px"
-          className="h-auto w-full max-w-[820px]"
-        />
       </section>
     </main>
   );
