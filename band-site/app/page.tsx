@@ -18,7 +18,7 @@ import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
 import { LostRequiemUniverseCard } from "@/components/lost-requiem-universe-card";
 import { featuredVideo, gameExperiences, socialFeed, streamingLinks, visualAlbumScenes } from "@/data/site";
 
-const albumCoverPng = "/assets/images/releases/echoes-unearthed-cover.png";
+const echoesUnearthedCover = "/assets/images/releases/echoes-unearthed-cover.jpg";
 const heroVideo = "/videos/hero-page-video-generation-2.mp4";
 const warMachinesCover = "/assets/images/releases/war-machines-cover.png";
 const collectorCdImage = "/store/cd-product.jpg";
@@ -109,7 +109,7 @@ const products = [
     title: "Echoes Unearthed - Vinyl Edition",
     text: "Collector vinyl edition currently in preparation. No preorder, stock count, or release date is shown until confirmed.",
     price: "Future edition",
-    image: albumCoverPng,
+    image: echoesUnearthedCover,
     imageClassName: "object-contain",
     imageSurfaceClassName: "bg-black",
     href: "/store",
