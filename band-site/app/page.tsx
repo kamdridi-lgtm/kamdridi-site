@@ -15,7 +15,7 @@ import {
   Youtube
 } from "lucide-react";
 import { HomeCinematicIntro } from "@/components/home-cinematic-intro";
-import { WarMachinesCinematicIntro } from "@/components/war-machines-cinematic-intro";
+import { HomeReleaseCoverCarousel } from "@/components/home-release-cover-carousel";
 import { SalieriCinematicIntro } from "@/components/salieri-cinematic-intro";
 import { EchoesBrasilCinematicIntro } from "@/components/echoes-brasil-cinematic-intro";
 import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
@@ -23,7 +23,6 @@ import { SignalRadio } from "@/components/signal-radio";
 import { LostRequiemUniverseCard } from "@/components/lost-requiem-universe-card";
 import { featuredVideo, gameExperiences, socialFeed, streamingLinks, visualAlbumScenes } from "@/data/site";
 
-const albumCover = "/assets/images/releases/echoes-unearthed-cover.jpg";
 const albumCoverPng = "/assets/images/releases/echoes-unearthed-cover.png";
 const heroVideo = "/videos/hero-page-video-generation-2.mp4";
 const warMachinesCover = "/assets/images/releases/war-machines-cover.png";
@@ -253,7 +252,6 @@ export default function HomePage() {
     <>
 
       <HomeCinematicIntro />
-      <WarMachinesCinematicIntro />
       <SalieriCinematicIntro />
       <EchoesBrasilCinematicIntro />
       <div className="relative overflow-hidden bg-[#050403] text-white">
@@ -281,9 +279,7 @@ export default function HomePage() {
 
           <div className="mx-auto grid max-w-7xl items-center gap-6 px-4 py-12 sm:px-6 md:py-16 lg:grid-cols-[0.58fr_1.42fr]">
             <div className="mx-auto w-full max-w-[190px] sm:max-w-[250px] lg:max-w-[300px]">
-              <div className="relative aspect-square border border-[#d08a43]/35 bg-black shadow-[0_35px_120px_rgba(0,0,0,0.68)]">
-                <Image src={albumCover} alt="Echoes Unearthed album cover" fill priority className="object-cover" />
-              </div>
+              <HomeReleaseCoverCarousel />
             </div>
             <div className="text-center lg:text-left">
               <div className="mx-auto grid max-w-[720px] items-center gap-4 lg:mx-0 lg:grid-cols-[minmax(250px,330px)_minmax(280px,360px)]">
