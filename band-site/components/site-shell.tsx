@@ -370,7 +370,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isMoreActive = moreNavItems.some((item) =>
     isNavItemActive(pathname, item),
   );
-  const showSecondaryExplore = !isHome && pathname !== salieriReleaseHref;
+  const isAustraliaCampaign = pathname === "/australia";
+  const showSecondaryExplore = !isHome && pathname !== salieriReleaseHref && !isAustraliaCampaign;
   if (isStandalonePoster || isStandaloneArtistSite || isStandaloneMyriam) {
     return <>{children}</>;
   }
@@ -637,7 +638,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         ) : null}{" "}
       </header>{" "}
       <main>{children}</main> <CartDrawer />{" "}
-      <footer className="border-t border-white/10 bg-black/60">
+      {isAustraliaCampaign ? null : <footer className="border-t border-white/10 bg-black/60">
         {" "}
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.1fr_0.8fr_0.8fr_0.8fr]">
           {" "}
@@ -722,7 +723,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             </div>
           </div>{" "}
         </div>{" "}
-      </footer>{" "}
+      </footer>}{" "}
     </div>
   );
 }
