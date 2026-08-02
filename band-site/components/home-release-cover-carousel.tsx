@@ -8,22 +8,26 @@ const releases = [
   {
     title: "Echoes Unearthed",
     image: "/assets/images/releases/echoes-unearthed-cover.jpg",
-    href: "#listen-now"
+    href: "#listen-now",
+    fit: "cover"
   },
   {
     title: "War Machines — Japan Edition",
     image: "/assets/images/war-machines-jp-cover.png",
-    href: "/app/war-machines-jp"
+    href: "/app/war-machines-jp",
+    fit: "cover"
   },
   {
     title: "Salieri's Hands",
-    image: "/assets/images/salieris-hands/partition-card.png",
-    href: "/releases/salieris-hands"
+    image: "/assets/images/releases/salieris-hands-cover.webp",
+    href: "/releases/salieris-hands",
+    fit: "cover"
   },
   {
     title: "ECHOES UN LIVE IN BRASIL",
-    image: "/echoes-un-live-in-brasil/assets/images/front-cover.webp",
-    href: "/releases/echoes-un-live-in-brasil"
+    image: "/assets/images/releases/echoes-unlive-in-brasil-cover.webp",
+    href: "/releases/echoes-un-live-in-brasil",
+    fit: "contain"
   }
 ] as const;
 
@@ -64,7 +68,7 @@ export function HomeReleaseCoverCarousel() {
 
   return (
     <div data-home-release-carousel>
-      <div className="relative aspect-square overflow-hidden border border-[#d08a43]/35 bg-black shadow-[0_35px_120px_rgba(0,0,0,0.68)]">
+      <div className="relative aspect-square overflow-hidden border border-[#d08a43]/45 bg-black shadow-[0_35px_120px_rgba(0,0,0,0.78)]">
         {releases.map((release, index) => (
           <Image
             key={release.title}
@@ -73,9 +77,10 @@ export function HomeReleaseCoverCarousel() {
             aria-hidden={index !== activeIndex}
             fill
             loading="eager"
-            sizes="(max-width: 640px) 190px, (max-width: 1024px) 250px, 300px"
+            sizes="(max-width: 640px) 280px, (max-width: 1024px) 390px, 500px"
             className={
-              "object-cover transition-opacity duration-1000 motion-reduce:transition-none " +
+              (release.fit === "contain" ? "object-contain " : "object-cover ") +
+              "transition-opacity duration-1000 motion-reduce:transition-none " +
               (index === activeIndex ? "opacity-100" : "opacity-0")
             }
           />
