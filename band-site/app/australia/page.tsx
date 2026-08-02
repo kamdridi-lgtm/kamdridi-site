@@ -99,7 +99,7 @@ export default function AustraliaPage() {
                   Explore the edition
                 </Link>
                 <Link
-                  href="/store"
+                  href="/store?filter=australia-17-for-ever#17-for-ever-maxi-single"
                   className="rounded-full bg-[#e5d1aa] px-8 py-3.5 text-center text-xs font-black uppercase tracking-[0.22em] text-[#05070b] shadow-[0_0_34px_rgba(229,209,170,.22)] transition hover:bg-white"
                 >
                   Collector editions
@@ -231,10 +231,10 @@ export default function AustraliaPage() {
                   2027 campaign. Built for the fans who still believe music should exist as an object.
                 </p>
                 <Link
-                  href="/store"
+                  href="/store?filter=australia-17-for-ever#17-for-ever-maxi-single"
                   className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[#e5d1aa] px-8 py-4 text-center text-xs font-black uppercase tracking-[0.23em] text-black transition hover:bg-white sm:w-auto"
                 >
-                  Explore the store
+                  View the editions
                 </Link>
               </div>
             </div>

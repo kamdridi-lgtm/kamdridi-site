@@ -17,8 +17,8 @@ async function runTests() {
     }
   }
 
-  // 1. 27 products
-  assert(commerceProducts.length === 27, `Il y a exactement 27 produits (${commerceProducts.length} trouvés)`);
+  // 1. Complete catalog, including the three Australia 2027 editions
+  assert(commerceProducts.length === 34, `Il y a exactement 34 produits (${commerceProducts.length} trouvés)`);
 
   // 2. IDs uniques
   const ids = new Set(commerceProducts.map(p => p.id));
@@ -31,6 +31,12 @@ async function runTests() {
   // 4. prix entiers en cents
   const nonIntegerPrices = commerceProducts.filter(p => p.priceCents % 1 !== 0);
   assert(nonIntegerPrices.length === 0, "Tous les prix sont des entiers en cents");
+
+  const australiaProducts = commerceProducts.filter(p => p.projectSlug === "australia-17-for-ever");
+  assert(
+    australiaProducts.length === 3 && australiaProducts.every(p => !p.checkoutEnabled && p.saleMode === "coming_soon"),
+    "Les éditions australiennes restent non achetables avant l'annonce des prix"
+  );
 
   // Tests via pure function
   try {

@@ -6,10 +6,13 @@ export async function POST(req: Request) {
     const payload = await req.json();
     const { item, sessionId, gender, sleeves, printSides, imageUrl, logos } = payload;
     
-    // If no Stripe secret key, use the static payment link to prevent crashing
+    // Never simulate or redirect to a generic payment link: the requested item and
+    // amount must remain bound to a server-created Stripe Checkout Session.
     if (!process.env.STRIPE_SECRET_KEY) {
-      const fallbackUrl = process.env.NEXT_PUBLIC_STRIPE_LINK_COLLECTOR || "https://buy.stripe.com/test_...";
-      return NextResponse.json({ url: fallbackUrl });
+      return NextResponse.json(
+        { error: "Secure checkout is not configured yet." },
+        { status: 503 }
+      );
     }
 
     let itemName = "Collector Artifact";

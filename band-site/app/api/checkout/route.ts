@@ -12,8 +12,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Your cart is empty." }, { status: 400 });
     }
 
-    const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || new URL(request.url).origin;
-    const siteUrl = rawSiteUrl.trim().replace(/\\r|\\n/g, "").replace(/\/$/, "");
+    const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+    const rawSiteUrl =
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      (productionHost ? `https://${productionHost}` : new URL(request.url).origin);
+    const siteUrl = rawSiteUrl.trim().replace(/[\r\n]/g, "").replace(/\/$/, "");
     const requestedReturnPath = typeof body.returnPath === "string" ? body.returnPath : "/store";
     const returnPath = requestedReturnPath.startsWith("/") && !requestedReturnPath.startsWith("//") ? requestedReturnPath : "/store";
     const stripe = getStripeServer();
@@ -33,18 +36,10 @@ export async function POST(request: Request) {
     }
 
     if (!stripe) {
-      return NextResponse.json({
-        mode: "simulated",
-        message: "Stripe is not configured. Redirecting to local demo checkout.",
-        url: `${siteUrl}${returnPath}?purchase=demo&session_id=simulated_session`,
-        items: plan.lineItems.map(li => ({
-          id: li.price_data.product_data.metadata.productId,
-          name: li.price_data.product_data.name,
-          price: li.price_data.unit_amount,
-          quantity: li.quantity
-        })),
-        total: plan.checkoutTotal
-      });
+      return NextResponse.json(
+        { error: "Secure checkout is not configured yet. Please try again later." },
+        { status: 503 }
+      );
     }
 
     const submitMessage = plan.containsPreorder 
@@ -90,8 +85,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ sessionId: session.id, url: session.url });
   } catch (error) {
+    console.error("[Checkout] Unable to create Stripe Checkout session", error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Unable to start checkout." },
+      { error: "Unable to start secure checkout. Please try again." },
       { status: 500 }
     );
   }

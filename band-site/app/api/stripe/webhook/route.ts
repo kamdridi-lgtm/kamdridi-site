@@ -9,6 +9,15 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy');
 
+function escapeHtml(value: unknown) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
 async function sendAdminOrderNotification(session: Stripe.Checkout.Session, lineItems: Stripe.ApiList<Stripe.LineItem>): Promise<NotificationStatus> {
   const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL || 'contact@kamdridi.com';
   
@@ -21,7 +30,14 @@ async function sendAdminOrderNotification(session: Stripe.Checkout.Session, line
   const customerEmail = session.customer_details?.email || "Unknown";
   const customerName = session.customer_details?.name || "Customer";
   const total = session.amount_total ? (session.amount_total / 100).toFixed(2) : "0.00";
-  const dashboardLink = `https://dashboard.stripe.com/payments/${session.payment_intent || session.id}`;
+  const paymentIntentId =
+    typeof session.payment_intent === "string"
+      ? session.payment_intent
+      : session.payment_intent?.id;
+  const dashboardMode = session.livemode ? "" : "/test";
+  const dashboardLink = paymentIntentId
+    ? `https://dashboard.stripe.com${dashboardMode}/payments/${encodeURIComponent(paymentIntentId)}`
+    : `https://dashboard.stripe.com${dashboardMode}/checkout/sessions/${encodeURIComponent(session.id)}`;
   
   const sessionAny = session as any;
   const address = sessionAny.shipping_details?.address 
@@ -31,14 +47,14 @@ async function sendAdminOrderNotification(session: Stripe.Checkout.Session, line
   let itemsHtml = "<ul>";
   lineItems.data.forEach(item => {
     const p = item.price?.product as Stripe.Product;
-    itemsHtml += `<li>${item.quantity}x ${p.name}</li>`;
+    itemsHtml += `<li>${escapeHtml(item.quantity)}x ${escapeHtml(p?.name || item.description || "Item")}</li>`;
   });
   itemsHtml += "</ul>";
 
   const emailHtml = `
-    <h1>New Order Received - $${total}</h1>
-    <p><strong>Customer:</strong> ${customerName} (${customerEmail})</p>
-    <p><strong>Shipping Address:</strong> ${address}</p>
+    <h1>New Order Received - $${escapeHtml(total)}</h1>
+    <p><strong>Customer:</strong> ${escapeHtml(customerName)} (${escapeHtml(customerEmail)})</p>
+    <p><strong>Shipping Address:</strong> ${escapeHtml(address)}</p>
     <h2>Items:</h2>
     ${itemsHtml}
     <br/>
@@ -90,7 +106,8 @@ export async function POST(request: Request) {
   }
 
   if (event.type === "checkout.session.completed") {
-    const session = event.data.object as Stripe.Checkout.Session;
+    const eventSession = event.data.object as Stripe.Checkout.Session;
+    const session = await stripe.checkout.sessions.retrieve(eventSession.id);
 
     // LABEL APPLICATION
     if (session.metadata?.type === "label_application" && session.metadata.labelApplicationId) {
@@ -104,6 +121,10 @@ export async function POST(request: Request) {
 
     // COMMERCE
     if (session.metadata?.orderType === "kamdridi-commerce" || session.metadata?.campaignType) {
+      if (session.metadata?.fulfillmentStatus === "processed") {
+        return NextResponse.json({ received: true, duplicate: true });
+      }
+
       const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
         expand: ["data.price.product"]
       });
@@ -117,6 +138,13 @@ export async function POST(request: Request) {
             await createPrintfulOrderFromSession(sess, { ...items, has_more: false, object: "list", url: "" });
           }
         });
+        await stripe.checkout.sessions.update(session.id, {
+          metadata: {
+            ...session.metadata,
+            fulfillmentStatus: "processed",
+            fulfillmentProcessedAt: new Date().toISOString()
+          }
+        });
       } catch (error) {
         return NextResponse.json(
           {
@@ -128,6 +156,10 @@ export async function POST(request: Request) {
       }
     } else if (session.metadata?.orderType === "kamdridi-custom-merch") {
       // CUSTOM FORGE MERCH
+      if (session.metadata?.fulfillmentStatus === "processed") {
+        return NextResponse.json({ received: true, duplicate: true });
+      }
+
       try {
         const { createCustomForgeOrder } = await import('@/lib/printful');
         await createCustomForgeOrder(session);
@@ -137,6 +169,13 @@ export async function POST(request: Request) {
           expand: ["data.price.product"]
         });
         await sendAdminOrderNotification(session, lineItems);
+        await stripe.checkout.sessions.update(session.id, {
+          metadata: {
+            ...session.metadata,
+            fulfillmentStatus: "processed",
+            fulfillmentProcessedAt: new Date().toISOString()
+          }
+        });
 
       } catch (error) {
         return NextResponse.json(

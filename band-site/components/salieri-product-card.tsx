@@ -147,25 +147,55 @@ export function SalieriProductCard({
 export function SalieriCheckoutStatus() {
   const searchParams = useSearchParams();
   const purchaseState = searchParams.get("purchase") || searchParams.get("checkout");
+  const sessionId = searchParams.get("session_id");
   const { clearCart } = useApp();
+  const [verificationMessage, setVerificationMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    if (purchaseState === "success" || purchaseState === "demo") {
-      clearCart();
-      window.localStorage.removeItem("kamdridi-pending-checkout");
+    let cancelled = false;
+
+    if (purchaseState === "success" && sessionId) {
+      setVerificationMessage("Verifying your secure payment…");
+      void fetch(`/api/checkout/session?session_id=${encodeURIComponent(sessionId)}`, {
+        cache: "no-store"
+      })
+        .then(async (response) => {
+          const payload = await response.json().catch(() => ({}));
+          if (!response.ok || payload.paid !== true) {
+            throw new Error(payload.error || "Payment has not been confirmed.");
+          }
+
+          if (!cancelled) {
+            clearCart();
+            window.localStorage.removeItem("kamdridi-pending-checkout");
+            setVerificationMessage("Payment confirmed. Your Salieri's Hands order has been received.");
+          }
+        })
+        .catch((error: unknown) => {
+          if (!cancelled) {
+            setVerificationMessage(
+              error instanceof Error ? error.message : "Payment verification failed. Your cart has been kept."
+            );
+          }
+        });
+    } else if (purchaseState === "success") {
+      setVerificationMessage("We could not verify this checkout. Your cart has been kept.");
     }
-  }, [clearCart, purchaseState]);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [clearCart, purchaseState, sessionId]);
 
   if (!purchaseState) {
     return null;
   }
 
   const message =
-    purchaseState === "cancelled"
+    verificationMessage ||
+    (purchaseState === "cancelled"
       ? "Checkout was cancelled. Your cart is still available."
-      : purchaseState === "demo"
-        ? "Demo checkout completed. Connect Stripe credentials for live payment collection."
-        : "Checkout confirmed. Your Salieri's Hands order has been received.";
+      : "Verifying your secure payment…");
 
   return (
     <div className="mt-6 border border-[#efc36f]/50 bg-[#e2ad52]/10 p-4 text-sm font-semibold leading-7 text-[#ffe7bd]">
