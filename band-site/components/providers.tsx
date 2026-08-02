@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { getCommerceProductById } from "@/data/commerce-products";
 import { AudioProvider } from "@/components/providers/audio-provider";
 
@@ -52,7 +52,13 @@ export function Providers({ children }: { children: React.ReactNode }) {
           for (const item of parsed) {
             if (!item || !item.id) continue;
             const product = getCommerceProductById(item.id);
-            if (!product || !product.visible || product.saleMode === "sold_out") continue;
+            if (
+              !product ||
+              !product.visible ||
+              !product.checkoutEnabled ||
+              product.saleMode === "sold_out" ||
+              product.saleMode === "coming_soon"
+            ) continue;
             
             // Validate variants
             let validColor = item.color;
@@ -113,7 +119,13 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   function addToCart(rawItem: Omit<CartItem, "quantity">) {
     const product = getCommerceProductById(rawItem.id);
-    if (!product || !product.visible || product.saleMode === "sold_out") return;
+    if (
+      !product ||
+      !product.visible ||
+      !product.checkoutEnabled ||
+      product.saleMode === "sold_out" ||
+      product.saleMode === "coming_soon"
+    ) return;
     
     const item = {
       id: product.id,
@@ -133,7 +145,13 @@ export function Providers({ children }: { children: React.ReactNode }) {
       if (existing) {
         return current.map((entry) =>
           entry.id === item.id && entry.size === item.size && entry.color === item.color
-            ? { ...entry, quantity: entry.quantity + 1 }
+            ? {
+                ...entry,
+                quantity: Math.min(
+                  entry.quantity + 1,
+                  product.quantityLimit ?? 20
+                )
+              }
             : entry
         );
       }
@@ -161,25 +179,62 @@ export function Providers({ children }: { children: React.ReactNode }) {
           return [];
         }
 
-        return { ...entry, quantity };
+        const product = getCommerceProductById(entry.id);
+        const maximum = product?.quantityLimit ?? 20;
+        return { ...entry, quantity: Math.min(Math.floor(quantity), maximum) };
       })
     );
   }
 
-  function clearCart() {
+  const clearCart = useCallback(() => {
     setCart([]);
-  }
+  }, []);
 
   async function checkout() {
-    window.localStorage.setItem(
-      "kamdridi-pending-checkout",
-      JSON.stringify(cart.map((item) => item.id))
-    );
+    if (!cart.length) {
+      return { ok: false, message: "Your cart is empty." };
+    }
 
-    // Fallback to static Stripe Payment link if dynamic checkout is not configured
-    const stripeLink = process.env.NEXT_PUBLIC_STRIPE_LINK_COLLECTOR || "https://buy.stripe.com/test_...";
-    window.location.href = stripeLink;
-    return { ok: true };
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: cart.map(({ id, quantity, color, size }) => ({
+            id,
+            quantity,
+            color,
+            size
+          })),
+          returnPath: "/store"
+        })
+      });
+
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || typeof payload.url !== "string") {
+        return {
+          ok: false,
+          message: payload.error || "Secure checkout is temporarily unavailable."
+        };
+      }
+
+      const checkoutUrl = new URL(payload.url, window.location.origin);
+      if (checkoutUrl.protocol !== "https:" && checkoutUrl.origin !== window.location.origin) {
+        return { ok: false, message: "The checkout destination is invalid." };
+      }
+
+      window.localStorage.setItem(
+        "kamdridi-pending-checkout",
+        JSON.stringify(cart.map((item) => item.id))
+      );
+      window.location.assign(checkoutUrl.toString());
+      return { ok: true };
+    } catch {
+      return {
+        ok: false,
+        message: "Unable to reach secure checkout. Please try again."
+      };
+    }
   }
 
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);

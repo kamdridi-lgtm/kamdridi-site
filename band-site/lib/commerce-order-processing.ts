@@ -35,7 +35,10 @@ async function dispatchMultiVendorOrder(session: Stripe.Checkout.Session, multiV
     const product = item.price?.product as Stripe.Product;
     // We assume the stripe product metadata contains our internal product ID.
     // Fallback to checking the name if metadata isn't strictly set during testing.
-    const internalProductId = product.metadata?.kamdridiProductId || product.metadata?.id;
+    const internalProductId =
+      product.metadata?.productId ||
+      product.metadata?.kamdridiProductId ||
+      product.metadata?.id;
     let commerceProduct = null;
     
     if (internalProductId) {

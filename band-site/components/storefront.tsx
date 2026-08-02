@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { ShoppingBag, Lock, ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { ShoppingBag } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useApp } from "@/components/providers";
@@ -16,32 +17,66 @@ function formatCurrency(value: number) {
 
 export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
   const searchParams = useSearchParams();
-  const { addToCart, cart, cartSubtotal, clearCart, setCartOpen } = useApp();
-  const [status, setStatus] = useState<string | null>(null);
+  const { addToCart, clearCart, setCartOpen } = useApp();
+  const [status, setStatus] = useState<{
+    message: string;
+    tone: "success" | "warning" | "error";
+  } | null>(null);
   
   const [activeFilter, setActiveFilter] = useState<string>("ALL");
   const [selectedSizes, setSelectedSizes] = useState<Record<string, string | undefined>>({});
   const [selectedColors, setSelectedColors] = useState<Record<string, string | undefined>>({});
+  const purchaseState = searchParams.get("purchase") || searchParams.get("checkout");
+  const checkoutSessionId = searchParams.get("session_id");
+  const requestedFilter = searchParams.get("filter");
 
   useEffect(() => {
-    const purchaseState = searchParams.get("purchase") || searchParams.get("checkout");
-    if (purchaseState === "success" || purchaseState === "demo") {
-      clearCart();
-      window.localStorage.removeItem("kamdridi-pending-checkout");
-      setStatus(purchaseState === "success" ? "Order confirmed." : "Demo checkout completed.");
+    let cancelled = false;
+    if (purchaseState === "success") {
+      if (!checkoutSessionId) {
+        setStatus({
+          message: "We could not verify this checkout. Your cart has been kept.",
+          tone: "error"
+        });
+      } else {
+        setStatus({ message: "Verifying your secure payment…", tone: "warning" });
+        void fetch(`/api/checkout/session?session_id=${encodeURIComponent(checkoutSessionId)}`, {
+          cache: "no-store"
+        })
+          .then(async (response) => {
+            const payload = await response.json().catch(() => ({}));
+            if (!response.ok || payload.paid !== true) {
+              throw new Error(payload.error || "Payment has not been confirmed.");
+            }
+
+            if (!cancelled) {
+              clearCart();
+              window.localStorage.removeItem("kamdridi-pending-checkout");
+              setStatus({ message: "Payment confirmed. Your order has been received.", tone: "success" });
+            }
+          })
+          .catch((error: unknown) => {
+            if (!cancelled) {
+              setStatus({
+                message: error instanceof Error ? error.message : "Payment verification failed. Your cart has been kept.",
+                tone: "error"
+              });
+            }
+          });
+      }
     } else if (purchaseState === "cancelled") {
-      setStatus("Checkout cancelled.");
+      setStatus({ message: "Checkout cancelled. Your cart is still available.", tone: "warning" });
     }
     
-    const filterParam = searchParams.get("filter");
-    if (filterParam) {
-      setActiveFilter(filterParam);
+    if (requestedFilter) {
+      setActiveFilter(requestedFilter);
     }
     
     const hash = window.location.hash;
     if (hash) {
       setTimeout(() => {
-        const el = document.querySelector(hash);
+        const elementId = decodeURIComponent(hash.slice(1));
+        const el = document.getElementById(elementId);
         if (el) {
           el.scrollIntoView({ behavior: "smooth", block: "center" });
           el.classList.add("ring-2", "ring-[#f4c66a]", "ring-offset-4", "ring-offset-black", "transition-all", "duration-1000");
@@ -51,19 +86,28 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
         }
       }, 300);
     }
-  }, [clearCart, searchParams]);
+    return () => {
+      cancelled = true;
+    };
+  }, [checkoutSessionId, clearCart, purchaseState, requestedFilter]);
 
   const allProducts = getVisibleCommerceProducts();
 
   const getButtonLabel = (product: CommerceProduct) => {
     if (product.saleMode === "sold_out") return "SOLD OUT";
+    if (product.saleMode === "coming_soon") return "PRE-ORDERS OPEN SOON";
+    if (!product.checkoutEnabled) return "NOT AVAILABLE YET";
     if (product.saleMode === "preorder") return "PRE-ORDER";
     if (product.saleMode === "digital") return "ORDER DIGITAL";
     return "ADD TO CART";
   };
 
   const handleAddToCart = (product: CommerceProduct) => {
-    if (product.saleMode === "sold_out") return;
+    if (
+      product.saleMode === "sold_out" ||
+      product.saleMode === "coming_soon" ||
+      !product.checkoutEnabled
+    ) return;
     addToCart({
       id: product.id,
       name: product.name,
@@ -77,6 +121,8 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
 
   const renderProductCard = (product: CommerceProduct) => {
     const isSoldOut = product.saleMode === "sold_out";
+    const isComingSoon = product.saleMode === "coming_soon";
+    const isUnavailable = isSoldOut || isComingSoon || !product.checkoutEnabled;
 
     return (
       <div key={product.id} id={product.id} className="group relative flex flex-col overflow-hidden rounded-[24px] border border-white/10 bg-black/40">
@@ -85,6 +131,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
             src={product.images[0]}
             alt={product.name}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className={`object-cover transition duration-700 ${isSoldOut ? 'grayscale opacity-50' : 'group-hover:scale-105'}`}
           />
           {product.saleMode === "preorder" && (
@@ -97,6 +144,11 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
               Sold Out
             </div>
           )}
+          {isComingSoon && (
+            <div className="absolute left-4 top-4 rounded-full border border-[#e5d1aa]/45 bg-black/80 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[#e5d1aa] backdrop-blur">
+              January 2027
+            </div>
+          )}
         </div>
         <div className="flex flex-1 flex-col p-5">
           <div className="mb-2 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-stone-500">
@@ -104,8 +156,15 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
             <span>{product.category}</span>
           </div>
           <div className="flex items-start justify-between gap-4">
-            <h3 className="font-display text-xl uppercase tracking-wider text-white">{product.name}</h3>
-            <span className="shrink-0 text-lg text-[#f4c66a]">{formatCurrency(product.priceCents / 100)}</span>
+            <div>
+              <h3 className="font-display text-xl uppercase tracking-wider text-white">{product.name}</h3>
+              <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#f4c66a]">
+                {product.subtitle}
+              </p>
+            </div>
+            <span className="shrink-0 text-right text-sm font-bold uppercase tracking-[0.12em] text-[#f4c66a]">
+              {isComingSoon ? "Price TBA" : formatCurrency(product.priceCents / 100)}
+            </span>
           </div>
           <p className="mt-2 text-sm leading-6 text-stone-400">{product.description}</p>
           
@@ -116,6 +175,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
                 {product.colors.map(c => (
                   <button
                     key={c}
+                    type="button"
                     onClick={() => setSelectedColors(prev => ({ ...prev, [product.id]: c }))}
                     className={`rounded-full border px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] ${selectedColors[product.id] === c || (!selectedColors[product.id] && product.colors![0] === c) ? 'border-[#f4c66a] bg-[#f4c66a]/10 text-[#f4c66a]' : 'border-white/10 text-stone-400'}`}
                   >
@@ -133,6 +193,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
                 {product.sizes.map(s => (
                   <button
                     key={s}
+                    type="button"
                     onClick={() => setSelectedSizes(prev => ({ ...prev, [product.id]: s }))}
                     className={`rounded-full border px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] ${selectedSizes[product.id] === s || (!selectedSizes[product.id] && product.sizes![0] === s) ? 'border-[#f4c66a] bg-[#f4c66a]/10 text-[#f4c66a]' : 'border-white/10 text-stone-400'}`}
                   >
@@ -144,12 +205,13 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
           )}
 
           <button
+            type="button"
             onClick={() => handleAddToCart(product)}
-            disabled={isSoldOut}
-            className={`mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full py-4 text-xs font-bold uppercase tracking-[0.2em] transition ${isSoldOut ? 'bg-stone-800 text-stone-500 cursor-not-allowed' : 'bg-[#f4c66a] text-black hover:bg-[#ffd989]'}`}
+            disabled={isUnavailable}
+            className={`mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full py-4 text-xs font-bold uppercase tracking-[0.2em] transition ${isUnavailable ? 'cursor-not-allowed bg-stone-800 text-stone-500' : 'bg-[#f4c66a] text-black hover:bg-[#ffd989]'}`}
           >
             {getButtonLabel(product)}
-            {!isSoldOut && <ShoppingBag className="h-4 w-4" />}
+            {!isUnavailable && <ShoppingBag className="h-4 w-4" />}
           </button>
         </div>
       </div>
@@ -158,6 +220,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
 
   const filters = [
     { label: "ALL", value: "ALL" },
+    { label: "17 FOR EVER", value: "australia-17-for-ever" },
     { label: "ECHOES BRASIL", value: "echoes-un-live-in-brasil" },
     { label: "SALIERI", value: "salieris-hands" },
     { label: "ECHOES UNEARTHED", value: "echoes-unearthed" },
@@ -172,6 +235,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
   });
 
   const featured = filteredProducts.filter(p => p.id === "kamdridi-gold-logo-tee" || p.id === "echoes-unearthed-crest-tee" || p.id === "echoes-brasil-expanded-2026");
+  const australia = filteredProducts.filter(p => p.projectSlug === "australia-17-for-ever");
   const echoesBrasil = filteredProducts.filter(p => p.projectSlug === "echoes-un-live-in-brasil" && !featured.includes(p));
   const salieri = filteredProducts.filter(p => p.projectSlug === "salieris-hands");
   const echoesUnearthed = filteredProducts.filter(p => p.projectSlug === "echoes-unearthed" && !featured.includes(p));
@@ -181,8 +245,20 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
   return (
     <div className="grid gap-16">
       {status && (
-        <div className="rounded-[24px] border border-emerald-500/20 bg-emerald-500/10 p-4 text-center text-sm font-semibold tracking-wide text-emerald-200">
-          {status}
+        <div aria-live="polite" className={`rounded-[24px] border p-4 text-center text-sm font-semibold tracking-wide ${
+          status.tone === "success"
+            ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-200"
+            : status.tone === "error"
+              ? "border-rose-500/25 bg-rose-500/10 text-rose-200"
+              : "border-amber-500/25 bg-amber-500/10 text-amber-100"
+        }`}>
+          {status.message}
+        </div>
+      )}
+
+      {!checkoutEnabled && (
+        <div className="rounded-[24px] border border-amber-500/25 bg-amber-500/10 p-4 text-center text-sm leading-7 text-amber-100">
+          Secure checkout setup is in progress. The catalog remains visible, but payment cannot open until Stripe credentials are connected.
         </div>
       )}
 
@@ -205,6 +281,23 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
           <h2 className="mb-8 font-display text-3xl uppercase tracking-widest text-[#f4c66a]">Featured</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {featured.map(renderProductCard)}
+          </div>
+        </section>
+      )}
+
+      {australia.length > 0 && (
+        <section id="australia-17-for-ever" className="scroll-mt-36">
+          <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#e5d1aa]">Australian summer · January 2027</p>
+              <h2 className="mt-3 font-display text-3xl uppercase tracking-widest text-white">17 For Ever</h2>
+            </div>
+            <Link href="/australia" className="text-xs font-bold uppercase tracking-[0.2em] text-[#e5d1aa] transition hover:text-white">
+              Explore the campaign →
+            </Link>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {australia.map(renderProductCard)}
           </div>
         </section>
       )}

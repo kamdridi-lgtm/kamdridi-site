@@ -140,7 +140,7 @@ export function CartDrawer() {
             <span className="text-lg text-[#f4c66a]">{formatCurrency(cartSubtotal)}</span>
           </div>
           <p className="mt-3 text-xs leading-6 text-stone-500">
-            Hosted checkout supports card and wallet payment methods when live payment credentials are available. Otherwise the site falls back to a local confirmation path for testing.
+            Card and supported wallet payments open in Stripe&apos;s secure hosted checkout. Shipping and contact details are collected there when required.
           </p>
           {message ? <p className="mt-3 text-sm text-rose-300">{message}</p> : null}
           <div className="mt-5 grid gap-3">

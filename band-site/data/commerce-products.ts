@@ -1,4 +1,4 @@
-export type SaleMode = "buy_now" | "preorder" | "digital" | "sold_out";
+export type SaleMode = "buy_now" | "preorder" | "digital" | "sold_out" | "coming_soon";
 export type FulfillmentMode = "manual_physical" | "manual_preorder" | "digital_manual" | "printful" | "game_access" | "multi_vendor";
 
 export type VendorComponent = {
@@ -37,7 +37,80 @@ export type CommerceProduct = {
 
 export const commerceProducts: CommerceProduct[] = [
   // ==========================================
-  // ECHOES ENGINE
+  // 17 FOR EVER — AUSTRALIA 2027
+  // Prices are intentionally withheld until the official pre-order announcement.
+  // ==========================================
+  {
+    id: "17-for-ever-maxi-single",
+    slug: "17-for-ever-maxi-single",
+    name: "17 FOR EVER",
+    subtitle: "LIMITED EDITION MAXI SINGLE",
+    project: "17 FOR EVER",
+    projectSlug: "australia-17-for-ever",
+    category: "Physical Music",
+    description: "The four-version Australian maxi single, arriving for the Australian summer in January 2027.",
+    images: ["/australia/17-for-ever-front-cover.webp"],
+    priceCents: 0,
+    currency: "CAD",
+    saleMode: "coming_soon",
+    visible: true,
+    checkoutEnabled: false,
+    fulfillmentMode: "manual_preorder",
+    requiresShipping: true,
+    quantityLimit: 4,
+    badge: "January 2027",
+    fulfillmentNote: "Pre-orders and official pricing will be announced before the Australian summer campaign.",
+    productPath: "/store#17-for-ever-maxi-single",
+    releasePath: "/australia"
+  },
+  {
+    id: "17-for-ever-limited-cd",
+    slug: "17-for-ever-limited-cd",
+    name: "17 FOR EVER",
+    subtitle: "LIMITED EDITION CD",
+    project: "17 FOR EVER",
+    projectSlug: "australia-17-for-ever",
+    category: "Physical Music",
+    description: "Limited CD presentation with the Australian disc face and the complete four-version tracklist.",
+    images: ["/australia/17-for-ever-disc.webp"],
+    priceCents: 0,
+    currency: "CAD",
+    saleMode: "coming_soon",
+    visible: true,
+    checkoutEnabled: false,
+    fulfillmentMode: "manual_preorder",
+    requiresShipping: true,
+    quantityLimit: 4,
+    badge: "January 2027",
+    fulfillmentNote: "Pre-orders and official pricing will be announced before the Australian summer campaign.",
+    productPath: "/store#17-for-ever-limited-cd",
+    releasePath: "/australia"
+  },
+  {
+    id: "17-for-ever-special-cassette",
+    slug: "17-for-ever-special-cassette",
+    name: "17 FOR EVER",
+    subtitle: "SPECIAL CASSETTE EDITION",
+    project: "17 FOR EVER",
+    projectSlug: "australia-17-for-ever",
+    category: "Collector Item",
+    description: "The special collector cassette edition created for the January 2027 Australian campaign.",
+    images: ["/australia/17-for-ever-cassette-mockup.webp"],
+    priceCents: 0,
+    currency: "CAD",
+    saleMode: "coming_soon",
+    visible: true,
+    checkoutEnabled: false,
+    fulfillmentMode: "manual_preorder",
+    requiresShipping: true,
+    quantityLimit: 2,
+    badge: "January 2027",
+    fulfillmentNote: "Pre-orders and official pricing will be announced before the Australian summer campaign.",
+    productPath: "/store#17-for-ever-special-cassette",
+    releasePath: "/australia"
+  },
+  // ==========================================
+  // ECHOES ENGINE — hidden until official artwork and product details are ready
   // ==========================================
   {
     id: "echoes-engine-cd",
@@ -52,8 +125,8 @@ export const commerceProducts: CommerceProduct[] = [
     priceCents: 2900,
     currency: "CAD",
     saleMode: "buy_now",
-    visible: true,
-    checkoutEnabled: true,
+    visible: false,
+    checkoutEnabled: false,
     fulfillmentMode: "manual_preorder",
     requiresShipping: true,
     productPath: "/store/echoes-engine-cd",
@@ -72,8 +145,8 @@ export const commerceProducts: CommerceProduct[] = [
     priceCents: 5900,
     currency: "CAD",
     saleMode: "buy_now",
-    visible: true,
-    checkoutEnabled: true,
+    visible: false,
+    checkoutEnabled: false,
     fulfillmentMode: "manual_preorder",
     requiresShipping: true,
     productPath: "/store/echoes-engine-vinyl",
@@ -92,8 +165,8 @@ export const commerceProducts: CommerceProduct[] = [
     priceCents: 2400,
     currency: "CAD",
     saleMode: "buy_now",
-    visible: true,
-    checkoutEnabled: true,
+    visible: false,
+    checkoutEnabled: false,
     fulfillmentMode: "manual_preorder",
     requiresShipping: true,
     productPath: "/store/echoes-engine-cassette",
@@ -112,8 +185,8 @@ export const commerceProducts: CommerceProduct[] = [
     priceCents: 14900,
     currency: "CAD",
     saleMode: "buy_now",
-    visible: true,
-    checkoutEnabled: true,
+    visible: false,
+    checkoutEnabled: false,
     fulfillmentMode: "manual_preorder",
     requiresShipping: true,
     productPath: "/store/echoes-engine-special",
@@ -744,7 +817,13 @@ export function resolveCommerceCheckoutItems(items: RawCheckoutItem[]): Resolved
 
   for (const item of items) {
     const product = getCommerceProductById(item.id);
-    if (!product || !product.visible || !product.checkoutEnabled || product.saleMode === "sold_out") {
+    if (
+      !product ||
+      !product.visible ||
+      !product.checkoutEnabled ||
+      product.saleMode === "sold_out" ||
+      product.saleMode === "coming_soon"
+    ) {
       throw new Error(`UNKNOWN_PRODUCT`);
     }
 

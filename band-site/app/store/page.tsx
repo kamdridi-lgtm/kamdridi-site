@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const storeHeroVideo = "/videos/store-hero-grok.mp4";
 
 export default function StorePage() {
-  const checkoutEnabled = Boolean(process.env.NEXT_PUBLIC_STRIPE_LINK_COLLECTOR || process.env.STRIPE_SECRET_KEY);
+  const checkoutEnabled = Boolean(process.env.STRIPE_SECRET_KEY);
 
   return (
     <>
@@ -64,7 +64,7 @@ export default function StorePage() {
                 </div>
                 <div className="mt-7 grid gap-3 text-[11px] uppercase tracking-[0.26em] text-stone-300 sm:grid-cols-2">
                   <span className="border border-[#f4c66a]/35 bg-[#f4c66a]/10 px-4 py-3 text-[#f4c66a]">
-                    {checkoutEnabled ? "Hosted checkout live" : "Demo checkout active"}
+                    {checkoutEnabled ? "Secure checkout ready" : "Checkout setup in progress"}
                   </span>
                   <span className="border border-white/10 bg-black/35 px-4 py-3">Tees from $38</span>
                   <span className="border border-white/10 bg-black/35 px-4 py-3">Hoodie $78</span>
@@ -199,7 +199,7 @@ export default function StorePage() {
                   <div className="rounded-[28px] border border-white/10 bg-white/[0.04] p-5 backdrop-blur">
                     <p className="text-xs uppercase tracking-[0.35em] text-stone-500">Checkout</p>
                     <p className="mt-3 text-lg text-white">
-                      {checkoutEnabled ? "Hosted Stripe checkout is active" : "Local demo checkout is active"}
+                      {checkoutEnabled ? "Hosted Stripe checkout is active" : "Stripe connection is not active yet"}
                     </p>
                     <p className="mt-4 text-sm leading-7 text-stone-400">
                       Sizes and variants stay in the cart, then move into one direct KAMDRIDI
