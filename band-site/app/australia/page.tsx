@@ -42,8 +42,8 @@ function ArtworkCard({
   aspect?: string;
 }) {
   return (
-    <figure className="overflow-hidden rounded-[1.75rem] border border-white/15 bg-[#030509]/92 shadow-[0_28px_80px_rgba(0,0,0,.55)]">
-      <div className={`relative ${aspect} overflow-hidden bg-black`}>
+    <figure className="overflow-hidden rounded-[1.75rem] border border-white/20 bg-black/70 shadow-[0_28px_80px_rgba(0,0,0,.5)] backdrop-blur-[2px]">
+      <div className={`relative ${aspect} overflow-hidden bg-black/75`}>
         <Image
           src={src}
           alt={alt}
@@ -52,7 +52,7 @@ function ArtworkCard({
           className="object-contain transition duration-700 hover:scale-[1.015]"
         />
       </div>
-      <figcaption className="border-t border-white/10 bg-black/90 px-5 py-4">
+      <figcaption className="border-t border-white/15 bg-black/78 px-5 py-4">
         <p className="text-sm font-black uppercase tracking-[0.18em] text-white">{title}</p>
         <p className="mt-1 text-xs uppercase tracking-[0.16em] text-stone-400">{subtitle}</p>
       </figcaption>
@@ -74,8 +74,21 @@ export default function AustraliaPage() {
             className="object-cover"
           />
         </div>
+      </section>
 
-        <div className="border-y border-white/10 bg-[#05070b]">
+      <div
+        className="relative"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(2,3,5,.12),rgba(2,3,5,.28)),url('/australia/17-for-ever-background.webp?v=20260802-5')",
+          backgroundPosition: "top center",
+          backgroundSize: "100% auto",
+          backgroundRepeat: "repeat-y",
+          backgroundAttachment: "scroll",
+          backgroundColor: "#151515"
+        }}
+      >
+        <div className="border-y border-white/15 bg-black/58 backdrop-blur-[2px]">
           <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 px-5 py-6 sm:px-8 lg:flex-row">
             <div className="text-center lg:text-left">
               <p className="text-[11px] font-black uppercase tracking-[0.36em] text-[#e5d1aa]">
@@ -88,7 +101,7 @@ export default function AustraliaPage() {
             <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
               <Link
                 href="#edition"
-                className="rounded-full border border-white/25 bg-white/[0.04] px-7 py-3.5 text-center text-xs font-black uppercase tracking-[0.22em] text-white transition hover:border-[#e5d1aa] hover:text-[#e5d1aa]"
+                className="rounded-full border border-white/30 bg-black/35 px-7 py-3.5 text-center text-xs font-black uppercase tracking-[0.22em] text-white transition hover:border-[#e5d1aa] hover:text-[#e5d1aa]"
               >
                 Explore the edition
               </Link>
@@ -101,22 +114,10 @@ export default function AustraliaPage() {
             </div>
           </div>
         </div>
-      </section>
 
-      <div
-        className="relative bg-top bg-repeat-y"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(2,3,5,.25),rgba(2,3,5,.48)),url('/australia/17-for-ever-background.webp?v=20260802-4')",
-          backgroundPosition: "top center",
-          backgroundSize: "min(100%, 1023px) auto",
-          backgroundRepeat: "repeat-y",
-          backgroundAttachment: "scroll"
-        }}
-      >
-        <div className="bg-gradient-to-b from-black/25 via-transparent to-black/70">
+        <div className="bg-black/[0.06]">
           <section className="mx-auto grid max-w-6xl gap-7 px-5 py-20 sm:px-8 md:py-28 lg:grid-cols-[1fr_310px] lg:items-stretch">
-            <div className="rounded-[2rem] border border-white/15 bg-[#05070b]/90 p-7 shadow-2xl backdrop-blur-[3px] sm:p-10">
+            <div className="rounded-[2rem] border border-white/20 bg-black/68 p-7 shadow-2xl backdrop-blur-[2px] sm:p-10">
               <p className="text-xs font-black uppercase tracking-[0.34em] text-[#e5d1aa]">Four versions. One story.</p>
               <h1 className="mt-5 font-display text-5xl uppercase leading-[0.92] tracking-[0.06em] sm:text-7xl">
                 17 FOR EVER
@@ -133,7 +134,7 @@ export default function AustraliaPage() {
               </div>
             </div>
 
-            <aside className="flex flex-col justify-between rounded-[2rem] border border-[#e5d1aa]/35 bg-black/90 p-7 text-center shadow-2xl backdrop-blur-[3px] sm:p-9">
+            <aside className="flex flex-col justify-between rounded-[2rem] border border-[#e5d1aa]/45 bg-black/68 p-7 text-center shadow-2xl backdrop-blur-[2px] sm:p-9">
               <p className="text-[11px] font-black uppercase tracking-[0.34em] text-[#e5d1aa]">Launch window</p>
               <div className="my-8">
                 <p className="font-display text-7xl leading-none text-white">01</p>
@@ -145,18 +146,9 @@ export default function AustraliaPage() {
             </aside>
           </section>
 
-          <section className="mx-auto max-w-6xl px-5 pb-20 sm:px-8 md:pb-28">
-            <div className="grid overflow-hidden rounded-[2rem] border border-white/15 bg-[#030509]/94 shadow-2xl backdrop-blur-[3px] lg:grid-cols-[minmax(0,.92fr)_minmax(0,1.08fr)]">
-              <div className="relative aspect-square min-h-[360px] lg:aspect-auto">
-                <Image
-                  src="/australia/17-for-ever-front-cover.webp"
-                  alt="17 FOR EVER Australian limited edition front cover"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 46vw"
-                  className="object-contain"
-                />
-              </div>
-              <div className="border-t border-white/10 p-7 sm:p-10 lg:border-l lg:border-t-0 lg:p-12">
+          <section className="mx-auto max-w-5xl px-5 pb-20 sm:px-8 md:pb-28">
+            <div className="rounded-[2rem] border border-white/20 bg-black/70 p-7 shadow-2xl backdrop-blur-[2px] sm:p-10 lg:p-12">
+              <div>
                 <p className="text-xs font-black uppercase tracking-[0.34em] text-[#e5d1aa]">The Australian tracklist</p>
                 <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.06em] sm:text-5xl">Every life of the song</h2>
                 <div className="mt-8 divide-y divide-white/12 border-y border-white/12">
@@ -175,7 +167,7 @@ export default function AustraliaPage() {
           </section>
 
           <section id="edition" className="mx-auto max-w-6xl scroll-mt-40 px-5 pb-20 sm:px-8 md:pb-28">
-            <div className="mb-10 rounded-[2rem] border border-white/15 bg-black/88 px-7 py-8 text-center shadow-2xl backdrop-blur-[3px] sm:px-10">
+            <div className="mb-10 rounded-[2rem] border border-white/20 bg-black/68 px-7 py-8 text-center shadow-2xl backdrop-blur-[2px] sm:px-10">
               <p className="text-xs font-black uppercase tracking-[0.34em] text-[#e5d1aa]">Explore the edition</p>
               <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.07em] sm:text-6xl">Built to be held</h2>
               <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-stone-300">
@@ -239,17 +231,16 @@ export default function AustraliaPage() {
           </section>
 
           <section className="mx-auto max-w-6xl px-5 pb-24 sm:px-8 md:pb-32">
-            <div className="grid overflow-hidden rounded-[2rem] border border-[#e5d1aa]/30 bg-[#05070b]/95 shadow-[0_35px_100px_rgba(0,0,0,.65)] backdrop-blur-[3px] lg:grid-cols-[minmax(0,1fr)_minmax(0,.9fr)]">
-              <div className="relative aspect-[4/5] min-h-[460px] bg-white lg:aspect-auto">
-                <Image
-                  src="/australia/17-for-ever-cassette-mockup.webp"
-                  alt="17 FOR EVER special collector cassette edition"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 54vw"
-                  className="object-contain"
-                />
+            <div className="grid overflow-hidden rounded-[2rem] border border-[#e5d1aa]/40 bg-black/70 shadow-[0_35px_100px_rgba(0,0,0,.6)] backdrop-blur-[2px] lg:grid-cols-[minmax(0,.72fr)_minmax(0,1.28fr)]">
+              <div className="flex flex-col justify-center border-b border-white/15 p-8 sm:p-11 lg:border-b-0 lg:border-r lg:p-12">
+                <p className="text-xs font-black uppercase tracking-[0.34em] text-[#e5d1aa]">January 2027</p>
+                <div className="mt-7 grid gap-3 text-xs font-black uppercase tracking-[0.2em] text-white">
+                  <span className="rounded-full border border-white/20 bg-white/[0.06] px-5 py-3">Limited Edition CD</span>
+                  <span className="rounded-full border border-white/20 bg-white/[0.06] px-5 py-3">Collector Maxi Single</span>
+                  <span className="rounded-full border border-white/20 bg-white/[0.06] px-5 py-3">Special Cassette Edition</span>
+                </div>
               </div>
-              <div className="flex flex-col justify-center border-t border-white/10 p-8 sm:p-11 lg:border-l lg:border-t-0 lg:p-14">
+              <div className="flex flex-col justify-center p-8 sm:p-11 lg:p-14">
                 <p className="text-xs font-black uppercase tracking-[0.34em] text-[#e5d1aa]">The Australian drop</p>
                 <h2 className="mt-5 font-display text-5xl uppercase leading-[0.94] tracking-[0.05em]">Own the memory</h2>
                 <p className="mt-6 text-base leading-8 text-stone-300">
