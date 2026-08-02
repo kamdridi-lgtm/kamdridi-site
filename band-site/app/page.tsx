@@ -15,6 +15,7 @@ import {
   Youtube
 } from "lucide-react";
 import { HomeCinematicIntro } from "@/components/home-cinematic-intro";
+import { WarMachinesCinematicIntro } from "@/components/war-machines-cinematic-intro";
 import { SalieriCinematicIntro } from "@/components/salieri-cinematic-intro";
 import { EchoesBrasilCinematicIntro } from "@/components/echoes-brasil-cinematic-intro";
 import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
@@ -252,6 +253,7 @@ export default function HomePage() {
     <>
 
       <HomeCinematicIntro />
+      <WarMachinesCinematicIntro />
       <SalieriCinematicIntro />
       <EchoesBrasilCinematicIntro />
       <div className="relative overflow-hidden bg-[#050403] text-white">
