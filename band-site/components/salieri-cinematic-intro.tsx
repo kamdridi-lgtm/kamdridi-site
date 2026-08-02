@@ -20,8 +20,8 @@ export function SalieriCinematicIntro() {
   const cardRef = useRef<HTMLAnchorElement | null>(null);
 
   useEffect(() => {
-    const showTimer = window.setTimeout(() => setMounted(true), 15800);
-    const hideTimer = window.setTimeout(() => setMounted(false), 23200);
+    const showTimer = window.setTimeout(() => setMounted(true), 7800);
+    const hideTimer = window.setTimeout(() => setMounted(false), 15200);
     return () => {
       window.clearTimeout(showTimer);
       window.clearTimeout(hideTimer);

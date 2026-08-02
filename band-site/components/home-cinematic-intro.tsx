@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { CSSProperties, MouseEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 
-const poster = "/assets/images/releases/echoes-unearthed-cover.jpg";
+const poster = "/assets/images/games/act-ii-war-machines-poster.png";
 
 const embers = Array.from({ length: 8 }, (_, index) => ({
   id: index,
@@ -51,7 +51,7 @@ export function HomeCinematicIntro() {
   }
 
   return (
-    <aside className="home-cinematic-intro" aria-label="Echoes Unearthed album promo">
+    <aside className="home-cinematic-intro" aria-label="ACT II War Machines promo">
       <div className="home-cinematic-shake home-promo-card">
         <div className="home-promo-float">
           <div className="home-cinematic-electric-field">
@@ -62,16 +62,16 @@ export function HomeCinematicIntro() {
           </div>
           <Link
             ref={cardRef}
-            href="#listen-now"
+            href="/games"
             className="home-promo-link"
-            aria-label="Explore the Echoes Unearthed album"
+            aria-label="Learn more about ACT II War Machines"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
             <div className="home-cinematic-poster-wrap">
               <Image
                 src={poster}
-                alt="Echoes Unearthed album cover"
+                alt="ACT II War Machines"
                 fill
                 priority
                 sizes="(max-width: 700px) 180px, 260px"
@@ -80,8 +80,8 @@ export function HomeCinematicIntro() {
               <div className="home-cinematic-poster-glow" />
             </div>
             <div className="home-promo-copy">
-              <p>ECHOES UNEARTHED</p>
-              <span>THE FIRST ALBUM</span>
+              <p>ACT II - WAR MACHINES</p>
+              <span>Coming 2027</span>
             </div>
           </Link>
           <div className="home-cinematic-embers">
