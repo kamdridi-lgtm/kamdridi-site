@@ -18,12 +18,12 @@ import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
 import { LostRequiemUniverseCard } from "@/components/lost-requiem-universe-card";
 import { featuredVideo, gameExperiences, socialFeed, streamingLinks, visualAlbumScenes } from "@/data/site";
 
-const albumCoverPng = "/assets/images/releases/echoes-unearthed-cover.png";
+const echoesUnearthedCover = "/assets/images/releases/echoes-unearthed-cover.jpg";
 const heroVideo = "/videos/hero-page-video-generation-2.mp4";
 const warMachinesCover = "/assets/images/releases/war-machines-cover.png";
 const collectorCdImage = "/store/cd-product.jpg";
-const vinylImage = "/store/vinyl-product.jpg";
-const cassetteImage = "/store/war-machines-helmet.jpg";
+const echoesBrasilDeluxeImage = "/echoes-un-live-in-brasil/assets/images/edition-deluxe.webp";
+const cassetteImage = "/assets/images/releases/17-for-ever-special-cassette-edition.webp";
 const japanHref = "/app/war-machines-jp";
 const japanQr = "/assets/images/kamdridi-japan-page-qr.svg";
 const brandLogo = "/assets/images/kamdridi-logo-hd.png";
@@ -86,17 +86,21 @@ const products = [
     text: "Physical collector CD edition with 9 official tracks, hidden bonus archive track, premium booklet, and collector artwork.",
     price: "$34",
     image: collectorCdImage,
+    imageClassName: "object-cover",
+    imageSurfaceClassName: "bg-[#0a0a0a]",
     href: "/store",
     cta: "Buy Collector CD",
     live: true
   },
   {
     status: "Coming soon",
-    title: "Special Collector Edition",
-    text: "Expanded collector edition with exclusive archive material and premium physical packaging.",
+    title: "ECHOES UN LIVE IN BRASIL - Special Collector Edition",
+    text: "Deluxe collector presentation with premium packaging and the official ECHOES UN LIVE IN BRASIL vinyl artwork.",
     price: "Future edition",
-    image: albumCoverPng,
-    href: "/store",
+    image: echoesBrasilDeluxeImage,
+    imageClassName: "object-cover",
+    imageSurfaceClassName: "bg-[#0a0a0a]",
+    href: "/store/echoes-brasil-deluxe",
     cta: "Coming Soon",
     live: false
   },
@@ -105,18 +109,22 @@ const products = [
     title: "Echoes Unearthed - Vinyl Edition",
     text: "Collector vinyl edition currently in preparation. No preorder, stock count, or release date is shown until confirmed.",
     price: "Future edition",
-    image: vinylImage,
+    image: echoesUnearthedCover,
+    imageClassName: "object-contain",
+    imageSurfaceClassName: "bg-black",
     href: "/store",
     cta: "Coming Soon",
     live: false
   },
   {
     status: "Coming soon",
-    title: "Archive Cassette",
-    text: "Limited cassette edition inspired by underground sci-fi rock archive transmissions.",
+    title: "17 FOR EVER - Special Cassette Edition",
+    text: "Limited collector cassette presentation for the 17 FOR EVER maxi single.",
     price: "Future edition",
     image: cassetteImage,
-    href: "/store",
+    imageClassName: "object-contain",
+    imageSurfaceClassName: "bg-[#f1f0ee]",
+    href: "/australia",
     cta: "Coming Soon",
     live: false
   }
@@ -372,16 +380,13 @@ export default function HomePage() {
           <div className="mx-auto mt-9 grid max-w-7xl gap-5 lg:grid-cols-4">
             {products.map((product) => (
               <article key={product.title} className="group relative border border-white/10 bg-black/40 overflow-hidden transition-colors hover:border-[#f4c66a]/30">
-                <div className="relative aspect-[4/3] overflow-hidden border-b border-white/10 bg-[#0a0a0a]">
-                  {product.live && product.image !== albumCoverPng ? (
-                    <Image src={product.image} alt={product.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                  ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/80">
-                      <div className="absolute inset-0 bg-[linear-gradient(rgba(244,198,106,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(244,198,106,0.05)_1px,transparent_1px)] bg-[size:20px_20px]" />
-                      <div className="relative z-10 text-[#f4c66a]/70 uppercase tracking-[0.3em] text-xs font-bold font-mono">Signal Pending</div>
-                      <div className="relative z-10 mt-2 text-stone-500 text-[10px] uppercase tracking-[0.2em]">[ Production Data Missing ]</div>
-                    </div>
-                  )}
+                <div className={`relative aspect-[4/3] overflow-hidden border-b border-white/10 ${product.imageSurfaceClassName}`}>
+                  <Image
+                    src={product.image}
+                    alt={product.title}
+                    fill
+                    className={`${product.imageClassName} transition-transform duration-700 group-hover:scale-105`}
+                  />
                 </div>
                 <div className="p-5">
                   <p className={product.live ? "text-xs uppercase tracking-[0.25em] text-[#f4c66a]" : "text-xs uppercase tracking-[0.25em] text-stone-500"}>
