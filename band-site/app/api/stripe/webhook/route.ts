@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { getStripeServer } from "@/lib/stripe";
+import { getStripeServer, getStripeWebhookSecret } from "@/lib/stripe";
 import { createPrintfulOrderFromSession } from "@/lib/printful";
 import { updateLabelApplication } from "@/lib/label-storage";
 import { processCommerceOrder, NotificationStatus } from "@/lib/commerce-order-processing";
@@ -78,7 +78,7 @@ async function sendAdminOrderNotification(session: Stripe.Checkout.Session, line
 
 export async function POST(request: Request) {
   const stripe = getStripeServer();
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  const webhookSecret = getStripeWebhookSecret();
 
   if (!stripe || !webhookSecret) {
     return NextResponse.json(
