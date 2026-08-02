@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { CSSProperties, MouseEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 
-const poster = "/assets/images/salieris-hands/partition-card.png";
+const poster = "/assets/images/war-machines-jp-cover.png";
 
 const embers = Array.from({ length: 8 }, (_, index) => ({
   id: index,
@@ -15,13 +15,13 @@ const embers = Array.from({ length: 8 }, (_, index) => ({
   drift: `${index % 2 === 0 ? "-" : ""}${9 + (index % 4) * 6}px`
 }));
 
-export function SalieriCinematicIntro() {
+export function WarMachinesCinematicIntro() {
   const [mounted, setMounted] = useState(false);
   const cardRef = useRef<HTMLAnchorElement | null>(null);
 
   useEffect(() => {
-    const showTimer = window.setTimeout(() => setMounted(true), 15800);
-    const hideTimer = window.setTimeout(() => setMounted(false), 23200);
+    const showTimer = window.setTimeout(() => setMounted(true), 7800);
+    const hideTimer = window.setTimeout(() => setMounted(false), 15200);
     return () => {
       window.clearTimeout(showTimer);
       window.clearTimeout(hideTimer);
@@ -55,7 +55,7 @@ export function SalieriCinematicIntro() {
   }
 
   return (
-    <aside className="home-cinematic-intro salieri-promo-intro" aria-label="Salieri's Hands promo">
+    <aside className="home-cinematic-intro salieri-promo-intro" aria-label="War Machines Japan Edition promo">
       <div className="home-cinematic-shake home-promo-card">
         <div className="home-promo-float">
           <div className="home-cinematic-electric-field">
@@ -66,16 +66,16 @@ export function SalieriCinematicIntro() {
           </div>
           <Link
             ref={cardRef}
-            href="/releases/salieris-hands"
+            href="/app/war-machines-jp"
             className="home-promo-link"
-            aria-label="Open Salieri's Hands release page"
+            aria-label="Open the War Machines Japan Edition page"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
             <div className="home-cinematic-poster-wrap">
               <Image
                 src={poster}
-                alt="Salieri's Hands"
+                alt="War Machines — Japan Edition"
                 fill
                 priority
                 sizes="(max-width: 700px) 180px, 260px"
@@ -84,8 +84,8 @@ export function SalieriCinematicIntro() {
               <div className="home-cinematic-poster-glow" />
             </div>
             <div className="home-promo-copy">
-              <p>NEW RELEASE</p>
-              <span>Vienna, 1791</span>
+              <p>WAR MACHINES</p>
+              <span>JAPAN EDITION</span>
             </div>
           </Link>
           <div className="home-cinematic-embers">
