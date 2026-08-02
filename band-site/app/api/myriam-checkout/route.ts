@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import Stripe from 'stripe';
+import type Stripe from 'stripe';
+import { getStripeServer } from '@/lib/stripe';
 
 export async function POST(req: Request) {
   try {
@@ -8,7 +9,8 @@ export async function POST(req: Request) {
     
     // Never simulate or redirect to a generic payment link: the requested item and
     // amount must remain bound to a server-created Stripe Checkout Session.
-    if (!process.env.STRIPE_SECRET_KEY) {
+    const stripe = getStripeServer();
+    if (!stripe) {
       return NextResponse.json(
         { error: "Secure checkout is not configured yet." },
         { status: 503 }
@@ -43,10 +45,6 @@ export async function POST(req: Request) {
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://kamdridi.com';
     const successUrl = `${baseUrl}/myriam?success=true`;
     const cancelUrl = `${baseUrl}/myriam?canceled=true`;
-
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: '2025-08-27.basil',
-    });
 
     const sessionParams: Stripe.Checkout.SessionCreateParams = {
       payment_method_types: ['card'],

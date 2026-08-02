@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CTAButton, Section, SectionHeading } from "@/components/ui";
 import { Storefront } from "@/components/storefront";
+import { hasStripeServerCredentials } from "@/lib/stripe";
 
 export const metadata: Metadata = {
   title: "Store",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 const storeHeroVideo = "/videos/store-hero-grok.mp4";
 
 export default function StorePage() {
-  const checkoutEnabled = Boolean(process.env.STRIPE_SECRET_KEY);
+  const checkoutEnabled = hasStripeServerCredentials();
 
   return (
     <>
