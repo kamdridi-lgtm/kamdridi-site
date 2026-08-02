@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -16,26 +17,30 @@ const tracks = [
 export default function AustraliaPage() {
   return (
     <main className="min-h-screen bg-black text-white">
-      <section className="w-full bg-black">
-        <img
-          src="/australia/17-for-ever-hero.webp?v=20260801-2"
+      <section className="relative isolate flex min-h-[calc(100svh-10rem)] items-center justify-center overflow-hidden border-b border-white/10 bg-[#020307] px-3 py-5 sm:px-6 sm:py-8">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_45%,rgba(33,61,92,.24),transparent_48%),radial-gradient(circle_at_48%_65%,rgba(107,14,24,.22),transparent_42%)]"
+        />
+        <Image
+          src="/australia/17-for-ever-hero.webp"
           alt="KAMDRIDI Australia — 17 FOR EVER Limited Edition Maxi Single"
-          width={1536}
-          height={1536}
-          loading="eager"
-          fetchPriority="high"
-          decoding="sync"
-          className="block h-auto w-full object-contain"
-          style={{ backgroundColor: "#000" }}
+          width={1423}
+          height={1411}
+          priority
+          sizes="(max-width: 768px) 94vw, 900px"
+          className="h-auto max-h-[calc(100svh-12rem)] w-auto max-w-[94vw] object-contain shadow-[0_35px_110px_rgba(0,0,0,.72)]"
         />
       </section>
 
       <div
-        className="min-h-screen bg-top bg-repeat-y [background-size:100%_auto] lg:[background-size:1022px_auto]"
+        className="min-h-screen bg-top bg-repeat-y"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(5,5,5,.35),rgba(5,5,5,.50)),url('/australia/17-for-ever-background.webp?v=20260801-2')",
+            "linear-gradient(rgba(5,5,5,.14),rgba(5,5,5,.30)),url('/australia/17-for-ever-background.webp?v=20260802-3')",
           backgroundPosition: "top center",
+          backgroundSize: "min(100%, 1023px) auto",
+          backgroundRepeat: "repeat-y",
           backgroundAttachment: "scroll"
         }}
       >
