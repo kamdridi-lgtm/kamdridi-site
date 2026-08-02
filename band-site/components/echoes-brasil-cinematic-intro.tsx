@@ -21,8 +21,8 @@ export function EchoesBrasilCinematicIntro() {
 
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const showDelay = prefersReduced ? 100 : 16400;
-    const hideDelay = prefersReduced ? 12000 : 31500;
+    const showDelay = prefersReduced ? 23800 : 23800;
+    const hideDelay = prefersReduced ? 31000 : 38900;
 
     const showTimer = window.setTimeout(() => setMounted(true), showDelay);
     const hideTimer = window.setTimeout(() => setMounted(false), hideDelay);
