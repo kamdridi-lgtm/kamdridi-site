@@ -75,7 +75,8 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
     const hash = window.location.hash;
     if (hash) {
       setTimeout(() => {
-        const el = document.querySelector(hash);
+        const elementId = decodeURIComponent(hash.slice(1));
+        const el = document.getElementById(elementId);
         if (el) {
           el.scrollIntoView({ behavior: "smooth", block: "center" });
           el.classList.add("ring-2", "ring-[#f4c66a]", "ring-offset-4", "ring-offset-black", "transition-all", "duration-1000");
