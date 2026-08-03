@@ -249,6 +249,39 @@ button { color: inherit; }
 .playlist-item strong { display: block; font-weight: 600; }
 .playlist-item small { display: block; color: var(--muted); }
 .playlist-item time { color: var(--muted); font-size: .78rem; }
+.track-access { display: inline-flex; align-items: center; justify-content: flex-end; gap: 10px; }
+.track-lock {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 13px;
+  margin-top: 4px;
+  border: 1px solid rgba(224, 177, 108, .72);
+  border-radius: 3px;
+  background: linear-gradient(180deg, rgba(196, 122, 65, .24), rgba(72, 25, 17, .78));
+  box-shadow: 0 0 14px rgba(190, 57, 44, .18);
+}
+.track-lock::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: -8px;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgba(224, 177, 108, .78);
+  border-bottom: 0;
+  border-radius: 7px 7px 0 0;
+}
+.track-lock::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  width: 3px;
+  height: 4px;
+  border-radius: 50% 50% 30% 30%;
+  background: var(--gold-bright);
+}
 .preview-note { color: var(--muted); text-align: right; font-size: .78rem; margin-top: 18px; }
 
 .gallery { background: #0c0805; }
