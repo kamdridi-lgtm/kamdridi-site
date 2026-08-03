@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Suspense } from "react";
 import { Disc3, ListMusic, Package, Play, Shirt, Sparkles } from "lucide-react";
 import { SalieriCheckoutStatus, SalieriProductCard, SalieriQuickBuy } from "@/components/salieri-product-card";
+import { TrackAccessControls } from "@/components/track-access-controls";
 import { getCommerceProductById } from "@/data/commerce-products";
 
 const assetBase = "/assets/images/salieris-hands";
@@ -618,13 +619,21 @@ export default function SalierisHandsPage() {
 
       <section id="tracklist" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-7xl">
-          <SectionIntro title="Full Tracklist" />
+          <SectionIntro title="Full Tracklist">
+            <p>Every 36-second preview stays free. The lock applies only to the complete track.</p>
+          </SectionIntro>
           <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_0.54fr]">
             <div className="overflow-hidden border border-[#bd8b45]/45 bg-[#0d0704]/78">
               {mainTracks.map((track, index) => (
-                <div key={track} className="grid grid-cols-[56px_1fr] items-center border-b border-[#bd8b45]/18 px-4 py-4 last:border-b-0 sm:grid-cols-[78px_1fr]">
-                  <span className="font-serif text-2xl text-[#e3b86a] sm:text-3xl">{String(index + 1).padStart(2, "0")}</span>
+                <div key={track} className="grid grid-cols-[56px_minmax(0,1fr)] items-center gap-x-3 gap-y-3 border-b border-[#bd8b45]/18 px-4 py-4 last:border-b-0 sm:grid-cols-[78px_minmax(0,1fr)]">
+                  <span className="row-span-2 font-serif text-2xl text-[#e3b86a] sm:text-3xl">{String(index + 1).padStart(2, "0")}</span>
                   <span className="text-base font-semibold text-[#f9e3bd]">{track}</span>
+                  <TrackAccessControls
+                    previewLabel="Free preview"
+                    previewPendingLabel="Preview after mastering"
+                    fullTrackLabel="Full track locked"
+                    theme="gold"
+                  />
                 </div>
               ))}
             </div>
@@ -632,9 +641,15 @@ export default function SalierisHandsPage() {
               <h3 className="text-xs font-bold uppercase tracking-[0.28em] text-[#e3b86a]">Bonus tracks</h3>
               <div className="mt-5 space-y-5">
                 {bonusTracks.map((track, index) => (
-                  <div key={track} className="grid grid-cols-[44px_1fr] gap-3">
-                    <span className="font-serif text-2xl text-[#e3b86a]">{index + 11}</span>
+                  <div key={track} className="grid grid-cols-[44px_minmax(0,1fr)] gap-x-3 gap-y-3">
+                    <span className="row-span-2 font-serif text-2xl text-[#e3b86a]">{index + 11}</span>
                     <span className="text-sm leading-6 text-[#f1d8ac]">{track}</span>
+                    <TrackAccessControls
+                      previewLabel="Free preview"
+                      previewPendingLabel="Preview after mastering"
+                      fullTrackLabel="Full track locked"
+                      theme="gold"
+                    />
                   </div>
                 ))}
               </div>

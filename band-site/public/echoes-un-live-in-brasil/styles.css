@@ -249,13 +249,46 @@ button { color: inherit; }
 .playlist-item strong { display: block; font-weight: 600; }
 .playlist-item small { display: block; color: var(--muted); }
 .playlist-item time { color: var(--muted); font-size: .78rem; }
-.track-access { display: inline-flex; align-items: center; justify-content: flex-end; gap: 10px; }
+.track-access { display: grid; grid-template-columns: auto auto; align-items: center; justify-content: flex-end; gap: 8px; }
+.preview-access,
+.full-access {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  font-size: .61rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.preview-access { border-color: rgba(190, 67, 55, .52); color: #f3c3aa; background: rgba(158, 45, 38, .1); }
+.preview-access.unavailable { border-color: rgba(255,255,255,.12); color: var(--muted); background: rgba(255,255,255,.02); }
+.preview-play {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  font-size: .55rem;
+  line-height: 1;
+  padding-left: 1px;
+}
+.playlist-item:hover .preview-access,
+.playlist-item.active .preview-access { border-color: rgba(218, 91, 73, .86); background: rgba(158, 45, 38, .18); }
+.full-access { border-color: rgba(224, 177, 108, .3); color: var(--gold-bright); background: rgba(0,0,0,.22); }
 .track-lock {
   position: relative;
   display: inline-block;
   width: 16px;
   height: 13px;
-  margin-top: 4px;
+  margin-top: 0;
   border: 1px solid rgba(224, 177, 108, .72);
   border-radius: 3px;
   background: linear-gradient(180deg, rgba(196, 122, 65, .24), rgba(72, 25, 17, .78));
@@ -431,6 +464,9 @@ button { color: inherit; }
   .player-card { display: block; }
   .player-art { min-height: 320px; }
   .playlist-item { grid-template-columns: 34px 1fr auto; padding-left: 6px; padding-right: 6px; }
+  .track-access { gap: 5px; }
+  .preview-access, .full-access { min-height: 29px; padding: 5px 6px; }
+  .access-copy { display: none; }
   .gallery-grid { display: block; }
   .gallery-item { width: 100%; height: 330px; margin-bottom: 12px; }
   .gallery-item.tall { height: 470px; }
