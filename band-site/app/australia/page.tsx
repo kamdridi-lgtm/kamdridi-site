@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { LockKeyhole } from "lucide-react";
 import { AustraliaParallaxBackground } from "@/components/australia-parallax-background";
 
 export const metadata: Metadata = {
@@ -146,12 +147,18 @@ export default function AustraliaPage() {
                 <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.06em] sm:text-5xl">Every life of the song</h2>
                 <div className="mt-8 divide-y divide-white/12 border-y border-white/12">
                   {tracks.map(([number, title, version]) => (
-                    <article key={number} className="grid grid-cols-[48px_1fr] gap-4 py-5">
+                    <article key={number} className="grid grid-cols-[48px_1fr_auto] items-center gap-4 py-5">
                       <span className="font-display text-2xl text-[#e5d1aa]">{number}</span>
                       <div>
                         <h3 className="text-sm font-black tracking-[0.11em] text-white">{title}</h3>
                         <p className="mt-1.5 text-sm leading-6 text-stone-300">{version}</p>
                       </div>
+                      <span
+                        className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.14em] text-[#e5d1aa]"
+                        title="Secure full-track unlock is being prepared"
+                      >
+                        <LockKeyhole className="h-4 w-4" aria-hidden="true" />
+                      </span>
                     </article>
                   ))}
                 </div>
