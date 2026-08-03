@@ -48,6 +48,106 @@ function AustraliaCollectorIcon() {
     </svg>
   );
 }
+function JapanCollectorIcon() {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true" className="h-full w-full">
+      <defs>
+        <linearGradient id="jp-metal-rim" x1="7" y1="5" x2="42" y2="43" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#fff6e8" />
+          <stop offset="0.42" stopColor="#8f8b86" />
+          <stop offset="0.7" stopColor="#f0d9c4" />
+          <stop offset="1" stopColor="#5f5b58" />
+        </linearGradient>
+        <radialGradient id="jp-vinyl-face" cx="0" cy="0" r="1" gradientTransform="translate(17 13) rotate(49) scale(39)">
+          <stop stopColor="#3a1513" />
+          <stop offset="0.46" stopColor="#100909" />
+          <stop offset="1" stopColor="#020202" />
+        </radialGradient>
+      </defs>
+      <circle cx="24" cy="24" r="21.5" fill="url(#jp-metal-rim)" />
+      <circle cx="24" cy="24" r="19.5" fill="url(#jp-vinyl-face)" stroke="#2d1715" />
+      <g fill="#bb1717" opacity=".88">
+        <path d="m24 5 2.5 11.2L24 19l-2.5-2.8Z" />
+        <path d="m43 24-11.2 2.5L29 24l2.8-2.5Z" />
+        <path d="m24 43-2.5-11.2L24 29l2.5 2.8Z" />
+        <path d="m5 24 11.2-2.5L19 24l-2.8 2.5Z" />
+        <path d="m37.4 10.6-6.1 9.7-3.7.2.2-3.7Z" />
+        <path d="m37.4 37.4-9.7-6.1-.2-3.7 3.7.2Z" />
+        <path d="m10.6 37.4 6.1-9.7 3.7-.2-.2 3.7Z" />
+        <path d="m10.6 10.6 9.7 6.1.2 3.7-3.7-.2Z" />
+      </g>
+      <circle cx="24" cy="24" r="8.5" fill="#e42525" stroke="#fff1e6" strokeWidth="1" />
+      <circle cx="24" cy="24" r="2" fill="#fff1e6" />
+      <path d="M9 31.5c8 3.7 21 3.7 30 0" fill="none" stroke="#fff1e6" strokeOpacity=".35" />
+      <text x="24" y="40" textAnchor="middle" fill="#fff1e6" fontSize="4.6" fontWeight="900" letterSpacing=".7">JP</text>
+    </svg>
+  );
+}
+function BrasilLiveIcon() {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true" className="h-full w-full">
+      <defs>
+        <linearGradient id="br-gold-rim" x1="7" y1="5" x2="42" y2="43" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#f4dfaa" />
+          <stop offset="0.48" stopColor="#795a2d" />
+          <stop offset="1" stopColor="#e9c975" />
+        </linearGradient>
+        <radialGradient id="br-vinyl-face" cx="0" cy="0" r="1" gradientTransform="translate(16 13) rotate(48) scale(40)">
+          <stop stopColor="#214638" />
+          <stop offset="0.5" stopColor="#090c0a" />
+          <stop offset="1" stopColor="#020302" />
+        </radialGradient>
+      </defs>
+      <circle cx="24" cy="24" r="21.5" fill="url(#br-gold-rim)" />
+      <circle cx="24" cy="24" r="19.5" fill="url(#br-vinyl-face)" stroke="#15271c" />
+      <circle cx="24" cy="24" r="15.5" fill="none" stroke="#e9c975" strokeOpacity=".2" />
+      <circle cx="24" cy="24" r="11.7" fill="none" stroke="#e9c975" strokeOpacity=".16" />
+      <path d="m24 14 10 10-10 10-10-10Z" fill="#d4ad35" />
+      <circle cx="24" cy="24" r="6.4" fill="#173e77" stroke="#e6ddc4" strokeWidth=".65" />
+      <path d="M18.2 23.4c3.6-1.2 7.7-.8 11.6 1.2" fill="none" stroke="#f7f0da" strokeWidth=".8" />
+      <circle cx="24" cy="24" r="1.8" fill="#f3dfaa" />
+      <text x="24" y="11.5" textAnchor="middle" fill="#e74739" fontSize="5.8" fontWeight="900" letterSpacing=".5">UN</text>
+      <text x="24" y="40" textAnchor="middle" fill="#f3dfaa" fontSize="4.4" fontWeight="900" letterSpacing=".8">LIVE</text>
+    </svg>
+  );
+}
+
+function CampaignBadgeLink({
+  href,
+  label,
+  shortLabel,
+  active,
+  glowClass,
+  children,
+}: {
+  href: string;
+  label: string;
+  shortLabel: string;
+  active: boolean;
+  glowClass: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className={clsx(
+        "group relative inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full p-0.5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#e8ce93]/70 sm:h-11 sm:w-11",
+        glowClass,
+        active && "ring-2 ring-[#e8ce93]/80",
+      )}
+      aria-label={label}
+      title={label}
+    >
+      <span className="absolute inset-0 rounded-full bg-[#e8ce93]/20 opacity-0 blur-md transition group-hover:opacity-100" />
+      <span className="relative h-full w-full transition duration-700 group-hover:rotate-12">
+        {children}
+      </span>
+      <span className="absolute -bottom-1 -right-1 rounded-full border border-[#e8ce93]/70 bg-[#07101b] px-1 py-0.5 text-[6px] font-black uppercase tracking-[0.05em] text-[#fff0c5] shadow-lg sm:px-1.5 sm:text-[7px] sm:tracking-[0.08em]">
+        {shortLabel}
+      </span>
+    </Link>
+  );
+}
 function SpotifyIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
@@ -399,6 +499,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     isNavItemActive(pathname, item),
   );
   const isAustraliaCampaign = pathname === "/australia";
+  const isJapanCampaign = pathname === "/app/war-machines-jp";
+  const isBrasilCampaign = pathname.startsWith("/releases/echoes-un-live-in-brasil");
   const showSecondaryExplore = !isHome && pathname !== salieriReleaseHref && !isAustraliaCampaign;
   if (isStandalonePoster || isStandaloneArtistSite || isStandaloneMyriam) {
     return <>{children}</>;
@@ -547,25 +649,36 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               </div>{" "}
             </div>{" "}
           </nav>{" "}
-          <div className="flex shrink-0 items-center gap-2">
-            {" "}
-            <Link
-              href="/australia"
-              className={clsx(
-                "group relative inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full p-0.5 shadow-[0_0_22px_rgba(42,91,151,0.18)] transition hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(190,42,48,0.34)] focus:outline-none focus:ring-2 focus:ring-[#e8ce93]/70",
-                isAustraliaCampaign && "ring-2 ring-[#e8ce93]/80",
-              )}
-              aria-label="17 FOR EVER — Australia 2027"
-              title="17 FOR EVER — Australia 2027"
-            >
-              <span className="absolute inset-0 rounded-full bg-[#e8ce93]/20 opacity-0 blur-md transition group-hover:opacity-100" />
-              <span className="relative h-full w-full transition duration-700 group-hover:rotate-12">
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+            <div className="flex items-center gap-0.5 sm:gap-1.5" aria-label="International campaign pages">
+              <CampaignBadgeLink
+                href="/app/war-machines-jp"
+                label="War Machines — Japan special edition"
+                shortLabel="JP"
+                active={isJapanCampaign}
+                glowClass="shadow-[0_0_22px_rgba(210,32,32,0.2)] hover:shadow-[0_0_28px_rgba(232,46,37,0.42)]"
+              >
+                <JapanCollectorIcon />
+              </CampaignBadgeLink>
+              <CampaignBadgeLink
+                href="/releases/echoes-un-live-in-brasil"
+                label="ECHOES UN LIVE IN BRASIL"
+                shortLabel="BR"
+                active={isBrasilCampaign}
+                glowClass="shadow-[0_0_22px_rgba(32,132,74,0.2)] hover:shadow-[0_0_28px_rgba(214,173,53,0.4)]"
+              >
+                <BrasilLiveIcon />
+              </CampaignBadgeLink>
+              <CampaignBadgeLink
+                href="/australia"
+                label="17 FOR EVER — Australia 2027"
+                shortLabel="AUS"
+                active={isAustraliaCampaign}
+                glowClass="shadow-[0_0_22px_rgba(42,91,151,0.18)] hover:shadow-[0_0_28px_rgba(190,42,48,0.34)]"
+              >
                 <AustraliaCollectorIcon />
-              </span>
-              <span className="absolute -bottom-1 -right-1 rounded-full border border-[#e8ce93]/70 bg-[#07101b] px-1.5 py-0.5 text-[7px] font-black uppercase tracking-[0.08em] text-[#fff0c5] shadow-lg">
-                AUS
-              </span>
-            </Link>{" "}
+              </CampaignBadgeLink>
+            </div>{" "}
             <button
               type="button"
               onClick={() => setCartOpen(true)}

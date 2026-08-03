@@ -1,7 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Film, PlayCircle, ShoppingCart } from "lucide-react";
+import { Film, LockKeyhole, PlayCircle, ShoppingCart } from "lucide-react";
 
 const LINKS = {
   buySpecialEdition: "TODO_STRIPE_OR_KAMDRIDI_LINK_1500",
@@ -43,6 +43,12 @@ const infoRows = [
   ["発売", "2026"],
   ["版", "日本語版"]
 ];
+
+const japanTracklist = [
+  "ウォー・マシーンズ",
+  "トゥー・ファスト・トゥー・ヤング",
+  "ザ・フォール・オブ・ザ・ファースト・ナイト",
+] as const;
 
 const platforms = [
   { label: "Spotify", href: LINKS.spotify, logo: <SpotifyLogo /> },
@@ -374,9 +380,21 @@ export default function WarMachinesJapanPage() {
                 </span>
               </div>
               <ol className="mt-5 space-y-2 text-base font-bold text-stone-100 sm:text-lg">
-                <li>1. ウォー・マシーンズ</li>
-                <li>2. トゥー・ファスト・トゥー・ヤング</li>
-                <li>3. ザ・フォール・オブ・ザ・ファースト・ナイト</li>
+                {japanTracklist.map((track, index) => (
+                  <li
+                    key={track}
+                    className="flex min-h-12 items-center justify-between gap-4 border border-[#4f1b18] bg-black/30 px-4 py-2.5"
+                  >
+                    <span>{index + 1}. {track}</span>
+                    <span
+                      className="inline-flex shrink-0 items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.16em] text-[#ff6d49]"
+                      title="Secure full-track unlock is being prepared"
+                    >
+                      <LockKeyhole className="h-3.5 w-3.5" aria-hidden="true" />
+                      ¥250
+                    </span>
+                  </li>
+                ))}
               </ol>
               <p className="mt-4 text-sm font-semibold text-[#d7a06e]">
                 ※2曲目・3曲目は「Echoes Unearthed」収録曲です
