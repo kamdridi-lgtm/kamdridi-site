@@ -20,6 +20,34 @@ const brandLogo = "/assets/images/kamdridi-logo-hd.png";
 const salieriReleaseHref = "/releases/salieris-hands";
 const salieriPanelImage =
   "/assets/images/salieris-hands/front-cover-approved.png";
+function AustraliaCollectorIcon() {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true" className="h-full w-full">
+      <defs>
+        <linearGradient id="aus-vinyl-rim" x1="8" y1="6" x2="40" y2="42" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#f5ddaa" />
+          <stop offset="0.48" stopColor="#8b6a37" />
+          <stop offset="1" stopColor="#fff0c5" />
+        </linearGradient>
+        <radialGradient id="aus-vinyl-face" cx="0" cy="0" r="1" gradientTransform="translate(18 14) rotate(47) scale(38)">
+          <stop stopColor="#24384e" />
+          <stop offset="0.5" stopColor="#070a0e" />
+          <stop offset="1" stopColor="#020203" />
+        </radialGradient>
+      </defs>
+      <circle cx="24" cy="24" r="21.5" fill="url(#aus-vinyl-rim)" />
+      <circle cx="24" cy="24" r="19.5" fill="url(#aus-vinyl-face)" stroke="#111820" />
+      <path d="M24 4.5A19.5 19.5 0 0 0 6.2 32l17.8-8Z" fill="#b3212c" fillOpacity=".82" />
+      <path d="M24 4.5A19.5 19.5 0 0 1 42.4 30.5L24 24Z" fill="#174a83" fillOpacity=".9" />
+      <circle cx="24" cy="24" r="15.5" fill="none" stroke="#f5ddaa" strokeOpacity=".18" />
+      <circle cx="24" cy="24" r="11.7" fill="none" stroke="#f5ddaa" strokeOpacity=".16" />
+      <circle cx="24" cy="24" r="8" fill="#07090c" stroke="#d8b875" strokeWidth=".8" />
+      <circle cx="24" cy="24" r="2.1" fill="#e8ce93" />
+      <path d="m33.8 10.5.8 1.7 1.8.2-1.3 1.3.3 1.8-1.6-.9-1.6.9.3-1.8-1.3-1.3 1.8-.2.8-1.7Zm4.2 7.7.55 1.16 1.28.16-.92.9.22 1.25-1.13-.6-1.13.6.22-1.25-.92-.9 1.28-.16.55-1.16Zm-6.4 3.1.62 1.3 1.43.18-1.03 1 .25 1.42-1.27-.68-1.27.68.25-1.42-1.03-1 1.43-.18.62-1.3Z" fill="#fff7db" />
+      <text x="24" y="36.5" textAnchor="middle" fill="#fff0c5" fontSize="5.6" fontWeight="900" letterSpacing="1.1">17</text>
+    </svg>
+  );
+}
 function SpotifyIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
@@ -521,6 +549,23 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           </nav>{" "}
           <div className="flex shrink-0 items-center gap-2">
             {" "}
+            <Link
+              href="/australia"
+              className={clsx(
+                "group relative inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full p-0.5 shadow-[0_0_22px_rgba(42,91,151,0.18)] transition hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(190,42,48,0.34)] focus:outline-none focus:ring-2 focus:ring-[#e8ce93]/70",
+                isAustraliaCampaign && "ring-2 ring-[#e8ce93]/80",
+              )}
+              aria-label="17 FOR EVER — Australia 2027"
+              title="17 FOR EVER — Australia 2027"
+            >
+              <span className="absolute inset-0 rounded-full bg-[#e8ce93]/20 opacity-0 blur-md transition group-hover:opacity-100" />
+              <span className="relative h-full w-full transition duration-700 group-hover:rotate-12">
+                <AustraliaCollectorIcon />
+              </span>
+              <span className="absolute -bottom-1 -right-1 rounded-full border border-[#e8ce93]/70 bg-[#07101b] px-1.5 py-0.5 text-[7px] font-black uppercase tracking-[0.08em] text-[#fff0c5] shadow-lg">
+                AUS
+              </span>
+            </Link>{" "}
             <button
               type="button"
               onClick={() => setCartOpen(true)}

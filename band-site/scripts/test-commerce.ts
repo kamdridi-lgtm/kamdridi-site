@@ -34,8 +34,12 @@ async function runTests() {
 
   const australiaProducts = commerceProducts.filter(p => p.projectSlug === "australia-17-for-ever");
   assert(
-    australiaProducts.length === 3 && australiaProducts.every(p => !p.checkoutEnabled && p.saleMode === "coming_soon"),
-    "Les éditions australiennes restent non achetables avant l'annonce des prix"
+    australiaProducts.length === 3 &&
+      australiaProducts.find(p => p.id === "17-for-ever-maxi-single")?.priceCents === 15900 &&
+      australiaProducts.find(p => p.id === "17-for-ever-maxi-single")?.checkoutEnabled === true &&
+      australiaProducts.find(p => p.id === "17-for-ever-maxi-single")?.saleMode === "preorder" &&
+      australiaProducts.filter(p => p.id !== "17-for-ever-maxi-single").every(p => !p.checkoutEnabled && p.saleMode === "coming_soon"),
+    "Le maxi single australien est en précommande à 159 $ CA; le CD et la cassette restent à annoncer"
   );
 
   // Tests via pure function
