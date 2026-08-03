@@ -38,7 +38,8 @@ export type CommerceProduct = {
 export const commerceProducts: CommerceProduct[] = [
   // ==========================================
   // 17 FOR EVER — AUSTRALIA 2027
-  // Prices are intentionally withheld until the official pre-order announcement.
+  // 12-inch black vinyl: US$36 ≈ CA$50.45, plus ≈CA$3 for two archive art cards.
+  // CA$53.45 estimated production cost × 3 = CA$160.35; collector retail rounded to CA$159.
   // ==========================================
   {
     id: "17-for-ever-maxi-single",
@@ -48,18 +49,18 @@ export const commerceProducts: CommerceProduct[] = [
     project: "17 FOR EVER",
     projectSlug: "australia-17-for-ever",
     category: "Physical Music",
-    description: "The four-version Australian maxi single, arriving for the Australian summer in January 2027.",
+    description: "12-inch black-vinyl maxi single with a full-color jacket, printed inner sleeve, and two exclusive archive art cards. Four versions, arriving January 2027.",
     images: ["/australia/17-for-ever-front-cover.webp"],
-    priceCents: 0,
+    priceCents: 15900,
     currency: "CAD",
-    saleMode: "coming_soon",
+    saleMode: "preorder",
     visible: true,
-    checkoutEnabled: false,
+    checkoutEnabled: true,
     fulfillmentMode: "manual_preorder",
     requiresShipping: true,
     quantityLimit: 4,
-    badge: "January 2027",
-    fulfillmentNote: "Pre-orders and official pricing will be announced before the Australian summer campaign.",
+    badge: "Pre-order · January 2027",
+    fulfillmentNote: "Collector pre-order. Shipping details are collected at checkout. Planned release: January 2027.",
     productPath: "/store#17-for-ever-maxi-single",
     releasePath: "/australia"
   },
