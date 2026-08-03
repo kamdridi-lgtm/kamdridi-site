@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { LockKeyhole } from "lucide-react";
 import { AustraliaParallaxBackground } from "@/components/australia-parallax-background";
+import { TrackAccessControls } from "@/components/track-access-controls";
 
 export const metadata: Metadata = {
   title: "17 FOR EVER — Australia",
@@ -24,10 +24,10 @@ export const metadata: Metadata = {
 };
 
 const tracks = [
-  ["01", "17 FOR EVER", "Exclusive Australian Version"],
-  ["02", "17 FOR EVER", "Different Mix / Album Version"],
-  ["03", "17 FOR EVER", "Unplugged — UN LIVE IN BRASIL / Night #2 Version"],
-  ["04", "17 FOR EVER", "Demo Version"]
+  { number: "01", title: "17 FOR EVER", version: "Exclusive Australian Version", previewSrc: null },
+  { number: "02", title: "17 FOR EVER", version: "Different Mix / Album Version", previewSrc: null },
+  { number: "03", title: "17 FOR EVER", version: "Unplugged — UN LIVE IN BRASIL / Night #2 Version", previewSrc: null },
+  { number: "04", title: "17 FOR EVER", version: "Demo Version", previewSrc: null }
 ] as const;
 
 function ArtworkCard({
@@ -145,20 +145,26 @@ export default function AustraliaPage() {
               <div>
                 <p className="text-xs font-black uppercase tracking-[0.34em] text-[#e5d1aa]">The Australian tracklist</p>
                 <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.06em] sm:text-5xl">Every life of the song</h2>
+                <p className="mt-5 text-sm leading-7 text-stone-300">
+                  Every 36-second preview stays free. The lock applies only to the complete track.
+                </p>
                 <div className="mt-8 divide-y divide-white/12 border-y border-white/12">
-                  {tracks.map(([number, title, version]) => (
-                    <article key={number} className="grid grid-cols-[48px_1fr_auto] items-center gap-4 py-5">
-                      <span className="font-display text-2xl text-[#e5d1aa]">{number}</span>
+                  {tracks.map((track) => (
+                    <article key={track.number} className="grid grid-cols-[48px_minmax(0,1fr)] items-center gap-x-4 gap-y-3 py-5 lg:grid-cols-[48px_minmax(0,1fr)_auto]">
+                      <span className="font-display text-2xl text-[#e5d1aa]">{track.number}</span>
                       <div>
-                        <h3 className="text-sm font-black tracking-[0.11em] text-white">{title}</h3>
-                        <p className="mt-1.5 text-sm leading-6 text-stone-300">{version}</p>
+                        <h3 className="text-sm font-black tracking-[0.11em] text-white">{track.title}</h3>
+                        <p className="mt-1.5 text-sm leading-6 text-stone-300">{track.version}</p>
                       </div>
-                      <span
-                        className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.14em] text-[#e5d1aa]"
-                        title="Secure full-track unlock is being prepared"
-                      >
-                        <LockKeyhole className="h-4 w-4" aria-hidden="true" />
-                      </span>
+                      <div className="col-start-2 lg:col-start-auto">
+                        <TrackAccessControls
+                          previewSrc={track.previewSrc ?? undefined}
+                          previewLabel="Free preview"
+                          previewPendingLabel="Preview after mastering"
+                          fullTrackLabel="Full track locked"
+                          theme="australia"
+                        />
+                      </div>
                     </article>
                   ))}
                 </div>

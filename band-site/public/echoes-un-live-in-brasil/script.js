@@ -79,7 +79,12 @@
   const nowTitle = document.getElementById('now-title');
   const nowSubtitle = document.getElementById('now-subtitle');
   const tracks = [...document.querySelectorAll('.playlist-item')];
-  let current = 0;
+  const previewLimitSeconds = 36;
+  const playableTrackIndexes = tracks.reduce((indexes, item, index) => {
+    if (item.dataset.src) indexes.push(index);
+    return indexes;
+  }, []);
+  let current = playableTrackIndexes[0] || 0;
 
   const formatTime = (seconds) => {
     if (!Number.isFinite(seconds)) return '0:00';
@@ -90,34 +95,55 @@
 
   const loadTrack = (index, autoplay = false) => {
     current = (index + tracks.length) % tracks.length;
-    tracks.forEach((item, idx) => item.classList.toggle('active', idx === current));
     const item = tracks[current];
+    if (!item.dataset.src) return;
+    tracks.forEach((track, idx) => track.classList.toggle('active', idx === current));
     audio.src = item.dataset.src;
     nowTitle.textContent = item.dataset.title;
     nowSubtitle.textContent = item.dataset.subtitle;
     progress.value = 0;
     elapsed.textContent = '0:00';
-    remaining.textContent = '0:36';
+    remaining.textContent = formatTime(previewLimitSeconds);
     if (autoplay) audio.play().catch(() => {});
   };
 
-  tracks.forEach((item, index) => item.addEventListener('click', () => loadTrack(index, true)));
+  const adjacentPlayableTrack = (direction) => {
+    const position = playableTrackIndexes.indexOf(current);
+    const nextPosition = (position + direction + playableTrackIndexes.length) % playableTrackIndexes.length;
+    return playableTrackIndexes[nextPosition];
+  };
+
+  tracks.forEach((item, index) => {
+    if (item.dataset.src) item.addEventListener('click', () => loadTrack(index, true));
+  });
   playButton.addEventListener('click', () => audio.paused ? audio.play() : audio.pause());
-  prevButton.addEventListener('click', () => loadTrack(current - 1, true));
-  nextButton.addEventListener('click', () => loadTrack(current + 1, true));
+  prevButton.addEventListener('click', () => loadTrack(adjacentPlayableTrack(-1), true));
+  nextButton.addEventListener('click', () => loadTrack(adjacentPlayableTrack(1), true));
   audio.addEventListener('play', () => { playButton.textContent = 'Ⅱ'; playButton.setAttribute('aria-label', playerLabels[language].pause); });
   audio.addEventListener('pause', () => { playButton.textContent = '▶'; playButton.setAttribute('aria-label', playerLabels[language].play); });
-  audio.addEventListener('ended', () => loadTrack(current + 1, true));
+  audio.addEventListener('ended', () => loadTrack(adjacentPlayableTrack(1), true));
   audio.addEventListener('timeupdate', () => {
-    const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+    const duration = Math.min(audio.duration || previewLimitSeconds, previewLimitSeconds);
+    if (audio.currentTime >= previewLimitSeconds) {
+      audio.pause();
+      audio.currentTime = 0;
+      progress.value = 0;
+      elapsed.textContent = '0:00';
+      remaining.textContent = formatTime(previewLimitSeconds);
+      return;
+    }
+    const pct = duration ? (audio.currentTime / duration) * 100 : 0;
     progress.value = pct;
     elapsed.textContent = formatTime(audio.currentTime);
-    remaining.textContent = formatTime(Math.max(0, (audio.duration || 36) - audio.currentTime));
+    remaining.textContent = formatTime(Math.max(0, duration - audio.currentTime));
   });
   progress.addEventListener('input', () => {
-    if (audio.duration) audio.currentTime = (Number(progress.value) / 100) * audio.duration;
+    if (audio.duration) {
+      const duration = Math.min(audio.duration, previewLimitSeconds);
+      audio.currentTime = (Number(progress.value) / 100) * duration;
+    }
   });
-  loadTrack(0);
+  loadTrack(current);
   let initialLanguage = 'pt';
   try {
     const savedLanguage = localStorage.getItem('echoes-language');

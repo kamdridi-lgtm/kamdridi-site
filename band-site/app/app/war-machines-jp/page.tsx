@@ -1,7 +1,8 @@
 import type { CSSProperties, ReactNode } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Film, LockKeyhole, PlayCircle, ShoppingCart } from "lucide-react";
+import { Film, PlayCircle, ShoppingCart } from "lucide-react";
+import { TrackAccessControls } from "@/components/track-access-controls";
 
 const LINKS = {
   buySpecialEdition: "TODO_STRIPE_OR_KAMDRIDI_LINK_1500",
@@ -45,9 +46,9 @@ const infoRows = [
 ];
 
 const japanTracklist = [
-  "ウォー・マシーンズ",
-  "トゥー・ファスト・トゥー・ヤング",
-  "ザ・フォール・オブ・ザ・ファースト・ナイト",
+  { title: "ウォー・マシーンズ", previewSrc: null },
+  { title: "トゥー・ファスト・トゥー・ヤング", previewSrc: null },
+  { title: "ザ・フォール・オブ・ザ・ファースト・ナイト", previewSrc: null },
 ] as const;
 
 const platforms = [
@@ -379,20 +380,23 @@ export default function WarMachinesJapanPage() {
                   日本向け構成
                 </span>
               </div>
+              <p className="mt-4 text-sm leading-6 text-stone-300">
+                36秒の試聴は無料です。鍵はフル楽曲のみに適用されます。
+              </p>
               <ol className="mt-5 space-y-2 text-base font-bold text-stone-100 sm:text-lg">
                 {japanTracklist.map((track, index) => (
                   <li
-                    key={track}
-                    className="flex min-h-12 items-center justify-between gap-4 border border-[#4f1b18] bg-black/30 px-4 py-2.5"
+                    key={track.title}
+                    className="grid min-h-12 gap-3 border border-[#4f1b18] bg-black/30 px-4 py-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center"
                   >
-                    <span>{index + 1}. {track}</span>
-                    <span
-                      className="inline-flex shrink-0 items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.16em] text-[#ff6d49]"
-                      title="Secure full-track unlock is being prepared"
-                    >
-                      <LockKeyhole className="h-3.5 w-3.5" aria-hidden="true" />
-                      ¥250
-                    </span>
+                    <span>{index + 1}. {track.title}</span>
+                    <TrackAccessControls
+                      previewSrc={track.previewSrc ?? undefined}
+                      previewLabel="無料試聴"
+                      previewPendingLabel="マスタリング後に試聴公開"
+                      fullTrackLabel="フル楽曲・ロック中 · ¥250"
+                      theme="red"
+                    />
                   </li>
                 ))}
               </ol>
