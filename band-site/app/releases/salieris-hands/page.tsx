@@ -41,10 +41,10 @@ const mainTracks = [
 ];
 
 const bonusTracks = [
-  "Salieri's Hands - Classical Version",
-  "The Fall of the First Knight - Requiem Aria",
-  "The Prism Requiem (Viennese Aria) - Extended English Version",
-  "Das Prisma: Requiem für meine Seele - Extended German Version"
+  { title: "Salieri's Hands - Classical Version" },
+  { title: "The Fall of the First Knight - Requiem Aria", previewSrc: `${previewBase}/12-first-knight-requiem-aria-preview.mp3` },
+  { title: "The Prism Requiem (Viennese Aria) - Extended English Version", previewSrc: `${previewBase}/13-the-prism-requiem-english-preview.mp3` },
+  { title: "Das Prisma: Requiem für meine Seele - Extended German Version", previewSrc: `${previewBase}/14-das-prisma-german-preview.mp3` }
 ];
 
 const collectorProductsData = [
@@ -644,10 +644,11 @@ export default function SalierisHandsPage() {
               <h3 className="text-xs font-bold uppercase tracking-[0.28em] text-[#e3b86a]">Bonus tracks</h3>
               <div className="mt-5 space-y-5">
                 {bonusTracks.map((track, index) => (
-                  <div key={track} className="grid grid-cols-[44px_minmax(0,1fr)] gap-x-3 gap-y-3">
+                  <div key={track.title} className="grid grid-cols-[44px_minmax(0,1fr)] gap-x-3 gap-y-3">
                     <span className="row-span-2 font-serif text-2xl text-[#e3b86a]">{index + 11}</span>
-                    <span className="text-sm leading-6 text-[#f1d8ac]">{track}</span>
+                    <span className="text-sm leading-6 text-[#f1d8ac]">{track.title}</span>
                     <TrackAccessControls
+                      previewSrc={track.previewSrc}
                       previewLabel="Free preview"
                       previewPendingLabel="Preview after mastering"
                       fullTrackLabel="Full track locked"
