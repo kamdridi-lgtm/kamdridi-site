@@ -11,6 +11,7 @@ const teaserUrl = "https://youtu.be/wD0u7-krT8s?si=4a1J1siTwJV9bGCI";
 const teaserVideo = "/assets/video/salieris-hands/official-teaser.mp4";
 const heroVideo = "/assets/video/salieris-hands/salieri-hero-slow.mp4";
 const heroVideoWebm = "/assets/video/salieris-hands/salieri-hero-slow.webm";
+const previewBase = "/assets/audio/salieris-hands";
 
 const assets = {
   hero: `${assetBase}/salieri-opera-hall-hero.png`,
@@ -27,16 +28,16 @@ const assets = {
 };
 
 const mainTracks = [
-  "Requiem",
-  "Shadows of Vienna",
-  "The Gift Was Not Mine",
-  "Divine Jealousy",
-  "Mozart's Ghost",
-  "Invidia",
-  "Confession in C Minor",
-  "The Face of My Prayer",
-  "Fugue for the Unchosen",
-  "Salieri's Hands"
+  { title: "Requiem", previewSrc: `${previewBase}/01-requiem-preview.mp3` },
+  { title: "Shadows of Vienna", previewSrc: `${previewBase}/02-shadows-of-vienna-preview.mp3` },
+  { title: "The Gift Was Not Mine", previewSrc: `${previewBase}/03-the-gift-was-not-mine-preview.mp3` },
+  { title: "Divine Jealousy", previewSrc: `${previewBase}/04-divine-jealousy-preview.mp3` },
+  { title: "Mozart's Ghost", previewSrc: `${previewBase}/05-mozarts-ghost-preview.mp3` },
+  { title: "Invidia", previewSrc: `${previewBase}/06-invidia-preview.mp3` },
+  { title: "Confession in C Minor", previewSrc: `${previewBase}/07-confession-in-c-minor-preview.mp3` },
+  { title: "The Face of My Prayer", previewSrc: `${previewBase}/08-the-face-of-my-prayer-preview.mp3` },
+  { title: "Fugue for the Unchosen", previewSrc: `${previewBase}/09-fugue-for-the-unchosen-preview.mp3` },
+  { title: "Salieri's Hands", previewSrc: `${previewBase}/10-salieris-hands-preview.mp3` }
 ];
 
 const bonusTracks = [
@@ -626,10 +627,11 @@ export default function SalierisHandsPage() {
           <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_0.54fr]">
             <div className="overflow-hidden border border-[#bd8b45]/45 bg-[#0d0704]/78">
               {mainTracks.map((track, index) => (
-                <div key={track} className="grid grid-cols-[56px_minmax(0,1fr)] items-center gap-x-3 gap-y-3 border-b border-[#bd8b45]/18 px-4 py-4 last:border-b-0 sm:grid-cols-[78px_minmax(0,1fr)]">
+                <div key={track.title} className="grid grid-cols-[56px_minmax(0,1fr)] items-center gap-x-3 gap-y-3 border-b border-[#bd8b45]/18 px-4 py-4 last:border-b-0 sm:grid-cols-[78px_minmax(0,1fr)]">
                   <span className="row-span-2 font-serif text-2xl text-[#e3b86a] sm:text-3xl">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="text-base font-semibold text-[#f9e3bd]">{track}</span>
+                  <span className="text-base font-semibold text-[#f9e3bd]">{track.title}</span>
                   <TrackAccessControls
+                    previewSrc={track.previewSrc}
                     previewLabel="Free preview"
                     previewPendingLabel="Preview after mastering"
                     fullTrackLabel="Full track locked"
