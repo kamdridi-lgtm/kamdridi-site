@@ -87,7 +87,7 @@ const collectorProductsData = [
   },
   {
     id: "salieri-digital-release",
-    description: "High-resolution audio package with digital booklet and 2 exclusive bonus tracks unavailable on streaming platforms.",
+    description: "High-resolution audio package with digital booklet and 4 exclusive bonus tracks unavailable on streaming platforms.",
     image: assets.frontCover,
     alt: "Official album front cover artwork"
   }
@@ -128,7 +128,7 @@ const orderInfoItems = [
   },
   {
     title: "Digital delivery",
-    text: "Digital Deluxe orders are prepared as a high-resolution audio package with booklet and two exclusive bonus tracks."
+    text: "Digital Deluxe orders are prepared as a high-resolution audio package with booklet and four exclusive bonus tracks."
   },
   {
     title: "Shipping",
@@ -141,7 +141,7 @@ const orderInfoItems = [
 ];
 
 const fulfillmentItems = [
-  ["Digital Deluxe Release", "High-resolution files, digital booklet, and exclusive bonus track package."],
+  ["Digital Deluxe Release", "High-resolution files, digital booklet, and four exclusive bonus tracks."],
   ["Collector formats", "CD, vinyl, booklet, box, and coin items are prepared for campaign fulfillment after production confirmation."],
   ["Merch", "Apparel, mug, and poster orders use the selected size, color, and delivery details from checkout."],
   ["Collector Bundle", "Bundle contents are confirmed as one campaign package before fulfillment begins."]
