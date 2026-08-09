@@ -7,7 +7,7 @@ export function SignalRadio() {
   const { isPlaying, isTuning, trackIndex, currentTrack, missingSignal, nextTrack } = useAudio();
 
   return (
-    <div className="signal-radio-shell mt-5 max-w-2xl overflow-hidden border border-[#c98542]/35 bg-[#050302]/78 shadow-[0_22px_70px_rgba(0,0,0,0.48)] backdrop-blur-md">
+    <div className="signal-radio-shell relative mt-5 max-w-2xl overflow-hidden border border-[#c98542]/35 bg-[#050302]/78 shadow-[0_22px_70px_rgba(0,0,0,0.48)] backdrop-blur-md">
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(244,198,106,0.1),transparent_22%,rgba(141,5,8,0.08)_62%,transparent)]" />
       <div className="pointer-events-none absolute left-7 top-0 h-6 w-px -translate-y-full bg-[#c98542]/55 shadow-[0_0_18px_rgba(244,198,106,0.6)]" />
       <div className="signal-static-bolt signal-static-bolt-a" />
@@ -62,7 +62,7 @@ export function SignalRadio() {
           </div>
           {missingSignal ? (
             <p className="mt-2 text-xs leading-5 text-stone-500">
-              Add the chorus files in <span className="font-mono text-stone-300">public/audio/radio/</span>.
+              This preview is unavailable. Tune another station.
             </p>
           ) : null}
         </div>
