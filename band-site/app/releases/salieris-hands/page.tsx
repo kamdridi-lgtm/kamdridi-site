@@ -41,8 +41,9 @@ const mainTracks = [
 
 const bonusTracks = [
   "Salieri's Hands - Classical Version",
-  "The Fall of the First Knight - Grand Opera Version",
-  "The Prism - Grand Opera Version"
+  "The Fall of the First Knight - Requiem Aria",
+  "The Prism Requiem (Viennese Aria) - Extended English Version",
+  "Das Prisma: Requiem für meine Seele - Extended German Version"
 ];
 
 const collectorProductsData = [
@@ -654,7 +655,7 @@ export default function SalierisHandsPage() {
                 ))}
               </div>
               <p className="mt-7 border-t border-[#bd8b45]/22 pt-5 text-sm leading-7 text-[#d9c09a]">
-                Bonus tracks include material connected to the forthcoming KAMDRIDI album TWICE UPON A TIME.
+                Four bonus tracks extend the story beyond the album: the classical Salieri&apos;s Hands confession, a requiem aria for the First Knight, and The Prism Requiem in extended English and German editions.
               </p>
             </div>
           </div>
