@@ -60,22 +60,12 @@ export function SalieriProductCard({
   return (
     <article className="group flex min-h-full flex-col overflow-hidden border border-[#bd8b45]/45 bg-[radial-gradient(circle_at_28%_0%,rgba(255,210,126,0.14),transparent_40%),linear-gradient(180deg,rgba(27,15,8,0.94),rgba(9,5,3,0.96))] transition-colors hover:border-[#f4c66a]/50">
       <div className="relative aspect-[4/3] border-b border-[#bd8b45]/25 bg-[#050403] overflow-hidden">
-        {image.includes("mockup") || image.includes("pack") || image.includes("cover") ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/80">
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(226,173,82,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(226,173,82,0.05)_1px,transparent_1px)] bg-[size:20px_20px]" />
-            <div className="relative z-10 text-[#e3b86a]/70 uppercase tracking-[0.3em] text-xs font-bold font-mono">Signal Pending</div>
-            <div className="relative z-10 mt-2 text-[#d9c09a]/50 text-[10px] uppercase tracking-[0.2em]">[ Production Data Missing ]</div>
+        <Image src={image} alt={alt} fill className="object-contain p-3 transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
+        {secondaryImage && secondaryAlt ? (
+          <div className="absolute bottom-3 right-3 h-20 w-20 overflow-hidden border border-[#efc36f]/50 bg-black/78 shadow-[0_12px_30px_rgba(0,0,0,0.55)] sm:h-24 sm:w-24">
+            <Image src={secondaryImage} alt={secondaryAlt} fill className="object-cover" sizes="96px" />
           </div>
-        ) : (
-          <>
-            <Image src={image} alt={alt} fill className="object-contain p-3 transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
-            {secondaryImage && secondaryAlt ? (
-              <div className="absolute bottom-3 right-3 h-20 w-20 overflow-hidden border border-[#efc36f]/50 bg-black/78 shadow-[0_12px_30px_rgba(0,0,0,0.55)] sm:h-24 sm:w-24">
-                <Image src={secondaryImage} alt={secondaryAlt} fill className="object-cover" sizes="96px" />
-              </div>
-            ) : null}
-          </>
-        )}
+        ) : null}
       </div>
       <div className="flex flex-1 flex-col p-4 sm:p-5">
         <div className="flex items-start justify-between gap-4">
