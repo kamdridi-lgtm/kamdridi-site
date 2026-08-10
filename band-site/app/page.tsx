@@ -43,7 +43,7 @@ const tracks = [
   ["06", "The Victory Goes On"],
   ["07", "Alone Apart / One Apart"],
   ["08", "Michael Remembers"],
-  ["09", "The Fall of the First Knight demo"]
+  ["09", "The Fall of the First Knight"]
 ];
 
 const universeCards = [

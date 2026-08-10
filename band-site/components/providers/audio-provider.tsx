@@ -9,26 +9,20 @@ export type RadioTrack = {
 };
 
 export const radioTracks: RadioTrack[] = [
-  {
-    title: "War Machines",
-    frequency: "87.7",
-    src: "/audio/radio/war-machines-chorus.wav"
-  },
-  {
-    title: "Too Fast Too Young",
-    frequency: "91.3",
-    src: "/audio/radio/too-fast-too-young-chorus.wav"
-  },
-  {
-    title: "Our Lost Dreams",
-    frequency: "104.9",
-    src: "/audio/radio/our-lost-dreams-chorus.wav"
-  },
-  {
-    title: "Dust on the Altar",
-    frequency: "107.1",
-    src: "/audio/dust-on-the-altar.mp3"
-  }
+  { title: "Dream Machines", frequency: "87.7", src: "/echoes-un-live-in-brasil/assets/audio/01-dream-machines.mp3" },
+  { title: "Michael Remembers", frequency: "89.1", src: "/echoes-un-live-in-brasil/assets/audio/02-michael-remembers.mp3" },
+  { title: "The Time of Signs", frequency: "90.4", src: "/echoes-un-live-in-brasil/assets/audio/03-time-of-signs.mp3" },
+  { title: "17 FOR EVER", frequency: "91.3", src: "/echoes-un-live-in-brasil/assets/audio/04-17-forever.mp3" },
+  { title: "Too Fast Too Young", frequency: "93.7", src: "/echoes-un-live-in-brasil/assets/audio/05-too-fast-too-young.mp3" },
+  { title: "For Some Dialog…", frequency: "95.1", src: "/echoes-un-live-in-brasil/assets/audio/06-for-some-dialog.mp3" },
+  { title: "Alone Apart / One Apart", frequency: "96.9", src: "/echoes-un-live-in-brasil/assets/audio/07-alone-apart.mp3" },
+  { title: "Our Lost Dreams", frequency: "98.4", src: "/echoes-un-live-in-brasil/assets/audio/08-our-lost-dreams.mp3" },
+  { title: "The Fall of the First Knight", frequency: "99.8", src: "/echoes-un-live-in-brasil/assets/audio/09-first-knight.mp3" },
+  { title: "War Machines", frequency: "101.3", src: "/echoes-un-live-in-brasil/assets/audio/10-war-machines.mp3" },
+  { title: "Junction Ahead", frequency: "103.1", src: "/echoes-un-live-in-brasil/assets/audio/11-junction-ahead.mp3" },
+  { title: "For Some Dialog… (Unplugged)", frequency: "104.9", src: "/echoes-un-live-in-brasil/assets/audio/13-for-some-dialog-unplugged.mp3" },
+  { title: "Tough Boys Rumble", frequency: "106.3", src: "/echoes-un-live-in-brasil/assets/audio/14-tough-boys-rumble.mp3" },
+  { title: "Dream Machines (Bonus)", frequency: "107.7", src: "/echoes-un-live-in-brasil/assets/audio/15-dream-machines-solo.mp3" }
 ];
 
 const staticDurationMs = 1250;

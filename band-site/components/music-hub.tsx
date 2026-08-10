@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Disc3, Music2, Play, Radio } from "lucide-react";
 import { GlassCard, Section, SectionHeading } from "@/components/ui";
+import { SignalRadio } from "@/components/signal-radio";
 import { albumTimeline, featuredVideo, streamingLinks, warMachinesCover } from "@/data/site";
 
 const galleryImages = [
@@ -135,6 +136,7 @@ export function MusicHub() {
             </GlassCard>
           ))}
         </div>
+        <SignalRadio />
       </Section>
     </>
   );
