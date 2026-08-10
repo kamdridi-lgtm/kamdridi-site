@@ -62,7 +62,7 @@ export function SignalRadio() {
           </div>
           {missingSignal ? (
             <p className="mt-2 text-xs leading-5 text-stone-500">
-              This preview is unavailable. Tune another station.
+              This station is temporarily unavailable. Tune another station.
             </p>
           ) : null}
         </div>

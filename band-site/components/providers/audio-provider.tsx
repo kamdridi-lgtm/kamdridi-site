@@ -1,29 +1,14 @@
 "use client";
 
 import { createContext, useContext, useEffect, useRef, useState, ReactNode } from "react";
+import { radioTracks as catalogTracks, type RadioTrack as CatalogTrack } from "@/lib/radio-catalog";
 
-export type RadioTrack = {
-  title: string;
-  frequency: string;
-  src: string;
-};
+export type RadioTrack = CatalogTrack & { src: string };
 
-export const radioTracks: RadioTrack[] = [
-  { title: "Dream Machines", frequency: "87.7", src: "/echoes-un-live-in-brasil/assets/audio/01-dream-machines.mp3" },
-  { title: "Michael Remembers", frequency: "89.1", src: "/echoes-un-live-in-brasil/assets/audio/02-michael-remembers.mp3" },
-  { title: "The Time of Signs", frequency: "90.4", src: "/echoes-un-live-in-brasil/assets/audio/03-time-of-signs.mp3" },
-  { title: "17 FOR EVER", frequency: "91.3", src: "/echoes-un-live-in-brasil/assets/audio/04-17-forever.mp3" },
-  { title: "Too Fast Too Young", frequency: "93.7", src: "/echoes-un-live-in-brasil/assets/audio/05-too-fast-too-young.mp3" },
-  { title: "For Some Dialog…", frequency: "95.1", src: "/echoes-un-live-in-brasil/assets/audio/06-for-some-dialog.mp3" },
-  { title: "Alone Apart / One Apart", frequency: "96.9", src: "/echoes-un-live-in-brasil/assets/audio/07-alone-apart.mp3" },
-  { title: "Our Lost Dreams", frequency: "98.4", src: "/echoes-un-live-in-brasil/assets/audio/08-our-lost-dreams.mp3" },
-  { title: "The Fall of the First Knight", frequency: "99.8", src: "/echoes-un-live-in-brasil/assets/audio/09-first-knight.mp3" },
-  { title: "War Machines", frequency: "101.3", src: "/echoes-un-live-in-brasil/assets/audio/10-war-machines.mp3" },
-  { title: "Junction Ahead", frequency: "103.1", src: "/echoes-un-live-in-brasil/assets/audio/11-junction-ahead.mp3" },
-  { title: "For Some Dialog… (Unplugged)", frequency: "104.9", src: "/echoes-un-live-in-brasil/assets/audio/13-for-some-dialog-unplugged.mp3" },
-  { title: "Tough Boys Rumble", frequency: "106.3", src: "/echoes-un-live-in-brasil/assets/audio/14-tough-boys-rumble.mp3" },
-  { title: "Dream Machines (Bonus)", frequency: "107.7", src: "/echoes-un-live-in-brasil/assets/audio/15-dream-machines-solo.mp3" }
-];
+export const radioTracks: RadioTrack[] = catalogTracks.map((track) => ({
+  ...track,
+  src: `/api/radio/stream/${track.id}`
+}));
 
 const staticDurationMs = 1250;
 
@@ -59,7 +44,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     setTrackIndex(randomIdx);
 
     audioRef.current = new Audio();
-    audioRef.current.preload = "auto";
+    audioRef.current.preload = "metadata";
     audioRef.current.volume = 0.72;
     // Don't loop a single track anymore, we want random play
     audioRef.current.loop = false;
@@ -68,6 +53,11 @@ export function AudioProvider({ children }: { children: ReactNode }) {
 
     const handlePlay = () => setIsPlaying(true);
     const handlePause = () => setIsPlaying(false);
+    const handleError = () => {
+      setIsPlaying(false);
+      setIsTuning(false);
+      setMissingSignal(true);
+    };
     const handleEnded = () => {
       setIsPlaying(false);
       if (nextTrackRef.current) nextTrackRef.current();
@@ -75,11 +65,13 @@ export function AudioProvider({ children }: { children: ReactNode }) {
 
     audio.addEventListener("play", handlePlay);
     audio.addEventListener("pause", handlePause);
+    audio.addEventListener("error", handleError);
     audio.addEventListener("ended", handleEnded);
 
     return () => {
       audio.removeEventListener("play", handlePlay);
       audio.removeEventListener("pause", handlePause);
+      audio.removeEventListener("error", handleError);
       audio.removeEventListener("ended", handleEnded);
       if (timerRef.current) window.clearTimeout(timerRef.current);
       audio.pause();
