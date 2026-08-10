@@ -12,7 +12,7 @@ const oneTimeCredentialHash = "920f5e93e9d89d2051aca9fdb23fc3de4c73cc064d96113b4
 const allowedPathnames = new Set(radioTracks.map((track) => track.pathname));
 
 function isAuthorized(request: Request) {
-  const token = request.headers.get("authorization")?.replace(/^Bearer\\s+/i, "") ?? "";
+  const token = request.headers.get("authorization")?.replace(/^Bearer\s+/i, "") ?? "";
   if (token.length < 48) return false;
 
   const candidateHash = createHash("sha256").update(token).digest("hex");
