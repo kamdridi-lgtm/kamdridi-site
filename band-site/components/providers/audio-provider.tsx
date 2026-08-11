@@ -12,22 +12,52 @@ export const radioTracks: RadioTrack[] = [
   {
     title: "War Machines",
     frequency: "87.7",
-    src: "/audio/radio/war-machines-chorus.wav"
+    src: "/audio/radio/01-war-machines-radio.mp3"
   },
   {
     title: "Too Fast Too Young",
     frequency: "91.3",
-    src: "/audio/radio/too-fast-too-young-chorus.wav"
+    src: "/audio/radio/02-too-fast-too-young-radio.mp3"
   },
   {
     title: "Our Lost Dreams",
-    frequency: "104.9",
-    src: "/audio/radio/our-lost-dreams-chorus.wav"
+    frequency: "95.5",
+    src: "/audio/radio/03-our-lost-dreams-radio.mp3"
   },
   {
-    title: "Dust on the Altar",
+    title: "Junction Ahead (New Heaven's Odyssey)",
+    frequency: "98.1",
+    src: "/audio/radio/04-junction-ahead-new-heavens-odyssey-radio.mp3"
+  },
+  {
+    title: "17 For Ever",
+    frequency: "101.4",
+    src: "/audio/radio/05-17-for-ever-radio.mp3"
+  },
+  {
+    title: "The Victory Goes On",
+    frequency: "103.9",
+    src: "/audio/radio/06-the-victory-goes-on-radio.mp3"
+  },
+  {
+    title: "Alone Apart / One Apart",
+    frequency: "105.2",
+    src: "/audio/radio/07-alone-apart-one-apart-radio.mp3"
+  },
+  {
+    title: "Michael Remembers",
+    frequency: "106.8",
+    src: "/audio/radio/08-michael-remembers-radio.mp3"
+  },
+  {
+    title: "The Fall of the First Knight",
     frequency: "107.1",
-    src: "/audio/dust-on-the-altar.mp3"
+    src: "/audio/radio/09-the-fall-of-the-first-knight-radio.mp3"
+  },
+  {
+    title: "Echoes of Our Youth",
+    frequency: "108.5",
+    src: "/audio/radio/10-echoes-of-our-youth-radio.mp3"
   }
 ];
 
