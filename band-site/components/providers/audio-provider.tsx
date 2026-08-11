@@ -1,23 +1,13 @@
 "use client";
 
 import { createContext, useContext, useEffect, useRef, useState, ReactNode } from "react";
-import { radioTracks as catalogTracks, type RadioTrack as CatalogTrack } from "@/lib/radio-catalog";
+import { radioTracks, type RadioTrack } from "@/lib/radio-catalog";
 
 declare global {
   interface Window {
     webkitAudioContext?: typeof AudioContext;
   }
 }
-
-export type RadioTrack = CatalogTrack & { src: string };
-
-export const radioTracks: RadioTrack[] = catalogTracks.map((track) => {
-  const filename = track.pathname.split("/").pop();
-  return {
-    ...track,
-    src: `/audio/radio/${filename}`
-  };
-});
 
 const staticDurationMs = 1250;
 
