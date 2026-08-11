@@ -11,6 +11,8 @@ data/fan-club-users.json
 *.log
 *.err.log
 .edge-shot-profile
+master-staging/
+masters-inbox/
 
 .vercel
 .env*

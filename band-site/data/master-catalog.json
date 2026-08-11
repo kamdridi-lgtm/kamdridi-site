@@ -1,0 +1,611 @@
+{
+  "schemaVersion": 1,
+  "artist": "KAMDRIDI",
+  "previewDurationSeconds": 36,
+  "collections": [
+    {
+      "id": "echoes-unearthed",
+      "title": "Echoes Unearthed",
+      "status": "live",
+      "ingestLocked": true,
+      "notes": "First album already completed. Protected from accidental re-ingestion."
+    },
+    {
+      "id": "echoes-unlive-brasil",
+      "title": "ECHOES UN LIVE IN BRASIL",
+      "status": "awaiting-masters",
+      "ingestLocked": false,
+      "notes": "Fifteen full masters expected. Existing 36-second page previews are not full radio tracks."
+    },
+    {
+      "id": "salieris-hands",
+      "title": "Salieri's Hands",
+      "status": "awaiting-masters",
+      "ingestLocked": false,
+      "notes": "Ten album tracks and four bonus tracks expected."
+    },
+    {
+      "id": "17-for-ever-australia",
+      "title": "17 FOR EVER — Australia",
+      "status": "awaiting-masters",
+      "ingestLocked": false,
+      "notes": "Four versions expected for the January 2027 maxi single."
+    },
+    {
+      "id": "singles-archive",
+      "title": "KAMDRIDI Singles Archive",
+      "status": "awaiting-masters",
+      "ingestLocked": false,
+      "notes": "Known standalone editions. New legacy singles can be registered without changing the radio player."
+    },
+    {
+      "id": "twice-upon-a-time",
+      "title": "Twice Upon a Time",
+      "status": "awaiting-tracklist",
+      "ingestLocked": false,
+      "notes": "Second official album. Track slots will be added only from the approved final tracklist."
+    }
+  ],
+  "tracks": [
+    {
+      "id": "echoes-unearthed-01-war-machines",
+      "collectionId": "echoes-unearthed",
+      "trackNumber": 1,
+      "title": "War Machines",
+      "frequency": "87.7",
+      "status": "live",
+      "radioEnabled": true,
+      "radioPath": "audio/radio/01-war-machines-radio.mp3",
+      "blobPath": "radio/echoes-unearthed/01-war-machines-radio.mp3"
+    },
+    {
+      "id": "echoes-unearthed-02-too-fast-too-young",
+      "collectionId": "echoes-unearthed",
+      "trackNumber": 2,
+      "title": "Too Fast Too Young",
+      "frequency": "89.1",
+      "status": "live",
+      "radioEnabled": true,
+      "radioPath": "audio/radio/02-too-fast-too-young-radio.mp3",
+      "blobPath": "radio/echoes-unearthed/02-too-fast-too-young-radio.mp3"
+    },
+    {
+      "id": "echoes-unearthed-03-our-lost-dreams",
+      "collectionId": "echoes-unearthed",
+      "trackNumber": 3,
+      "title": "Our Lost Dreams",
+      "frequency": "90.4",
+      "status": "live",
+      "radioEnabled": true,
+      "radioPath": "audio/radio/03-our-lost-dreams-radio.mp3",
+      "blobPath": "radio/echoes-unearthed/03-our-lost-dreams-radio.mp3"
+    },
+    {
+      "id": "echoes-unearthed-04-junction-ahead",
+      "collectionId": "echoes-unearthed",
+      "trackNumber": 4,
+      "title": "Junction Ahead (New Heaven's Odyssey)",
+      "frequency": "91.3",
+      "status": "live",
+      "radioEnabled": true,
+      "radioPath": "audio/radio/04-junction-ahead-new-heavens-odyssey-radio.mp3",
+      "blobPath": "radio/echoes-unearthed/04-junction-ahead-new-heavens-odyssey-radio.mp3"
+    },
+    {
+      "id": "echoes-unearthed-05-17-for-ever",
+      "collectionId": "echoes-unearthed",
+      "trackNumber": 5,
+      "title": "17 For Ever",
+      "frequency": "93.7",
+      "status": "live",
+      "radioEnabled": true,
+      "radioPath": "audio/radio/05-17-for-ever-radio.mp3",
+      "blobPath": "radio/echoes-unearthed/05-17-for-ever-radio.mp3"
+    },
+    {
+      "id": "echoes-unearthed-06-the-victory-goes-on",
+      "collectionId": "echoes-unearthed",
+      "trackNumber": 6,
+      "title": "The Victory Goes On",
+      "frequency": "95.1",
+      "status": "live",
+      "radioEnabled": true,
+      "radioPath": "audio/radio/06-the-victory-goes-on-radio.mp3",
+      "blobPath": "radio/echoes-unearthed/06-the-victory-goes-on-radio.mp3"
+    },
+    {
+      "id": "echoes-unearthed-07-alone-apart-one-apart",
+      "collectionId": "echoes-unearthed",
+      "trackNumber": 7,
+      "title": "Alone Apart / One Apart",
+      "frequency": "96.9",
+      "status": "live",
+      "radioEnabled": true,
+      "radioPath": "audio/radio/07-alone-apart-one-apart-radio.mp3",
+      "blobPath": "radio/echoes-unearthed/07-alone-apart-one-apart-radio.mp3"
+    },
+    {
+      "id": "echoes-unearthed-08-michael-remembers",
+      "collectionId": "echoes-unearthed",
+      "trackNumber": 8,
+      "title": "Michael Remembers",
+      "frequency": "98.4",
+      "status": "live",
+      "radioEnabled": true,
+      "radioPath": "audio/radio/08-michael-remembers-radio.mp3",
+      "blobPath": "radio/echoes-unearthed/08-michael-remembers-radio.mp3"
+    },
+    {
+      "id": "echoes-unearthed-09-the-fall-of-the-first-knight",
+      "collectionId": "echoes-unearthed",
+      "trackNumber": 9,
+      "title": "The Fall of the First Knight",
+      "frequency": "99.8",
+      "status": "live",
+      "radioEnabled": true,
+      "radioPath": "audio/radio/09-the-fall-of-the-first-knight-radio.mp3",
+      "blobPath": "radio/echoes-unearthed/09-the-fall-of-the-first-knight-radio.mp3"
+    },
+    {
+      "id": "echoes-unearthed-10-echoes-of-our-youth",
+      "collectionId": "echoes-unearthed",
+      "trackNumber": 10,
+      "title": "Echoes of Our Youth",
+      "frequency": "101.3",
+      "status": "live",
+      "radioEnabled": true,
+      "radioPath": "audio/radio/10-echoes-of-our-youth-radio.mp3",
+      "blobPath": "radio/echoes-unearthed/10-echoes-of-our-youth-radio.mp3"
+    },
+
+    {
+      "id": "brasil-01-dream-machines",
+      "collectionId": "echoes-unlive-brasil",
+      "trackNumber": 1,
+      "title": "Dream Machines",
+      "version": "Acoustic Session",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/brasil-01-dream-machines.mp3",
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/01-dream-machines.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "brasil-02-michael-remembers",
+      "collectionId": "echoes-unlive-brasil",
+      "trackNumber": 2,
+      "title": "Michael Remembers",
+      "version": "Live Chant Version",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/brasil-02-michael-remembers.mp3",
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/02-michael-remembers.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "brasil-03-the-time-of-signs",
+      "collectionId": "echoes-unlive-brasil",
+      "trackNumber": 3,
+      "title": "The Time of Signs",
+      "version": "Harmony Version",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/brasil-03-the-time-of-signs.mp3",
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/03-time-of-signs.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "brasil-04-17-forever",
+      "collectionId": "echoes-unlive-brasil",
+      "trackNumber": 4,
+      "title": "17 Forever",
+      "version": "Youth Choir Version",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/brasil-04-17-forever.mp3",
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/04-17-forever.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "brasil-05-too-fast-too-young",
+      "collectionId": "echoes-unlive-brasil",
+      "trackNumber": 5,
+      "title": "Too Fast Too Young",
+      "version": "Unplugged Arena Version",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/brasil-05-too-fast-too-young.mp3",
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/05-too-fast-too-young.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "brasil-06-for-some-dialog-live-lounge",
+      "collectionId": "echoes-unlive-brasil",
+      "trackNumber": 6,
+      "title": "For Some Dialog…",
+      "version": "Live Lounge Club Mix",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/brasil-06-for-some-dialog-live-lounge.mp3",
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/06-for-some-dialog.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "brasil-07-alone-apart-one-apart",
+      "collectionId": "echoes-unlive-brasil",
+      "trackNumber": 7,
+      "title": "Alone Apart / One Apart",
+      "version": "Unplugged Crowd Version",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/brasil-07-alone-apart-one-apart.mp3",
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/07-alone-apart.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "brasil-08-our-lost-dreams",
+      "collectionId": "echoes-unlive-brasil",
+      "trackNumber": 8,
+      "title": "Our Lost Dreams",
+      "version": "Unplugged Live",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/brasil-08-our-lost-dreams.mp3",
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/08-our-lost-dreams.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "brasil-09-the-fall-of-the-first-knight",
+      "collectionId": "echoes-unlive-brasil",
+      "trackNumber": 9,
+      "title": "The Fall of the First Knight",
+      "version": "Acoustic Glory",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/brasil-09-the-fall-of-the-first-knight.mp3",
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/09-first-knight.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "brasil-10-war-machines",
+      "collectionId": "echoes-unlive-brasil",
+      "trackNumber": 10,
+      "title": "War Machines",
+      "version": "Live Crowd Version",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/brasil-10-war-machines.mp3",
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/10-war-machines.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "brasil-11-junction-ahead",
+      "collectionId": "echoes-unlive-brasil",
+      "trackNumber": 11,
+      "title": "Junction Ahead",
+      "version": "Brazil Club Unplugged",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/brasil-11-junction-ahead.mp3",
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/11-junction-ahead.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "brasil-12-into-the-news",
+      "collectionId": "echoes-unlive-brasil",
+      "trackNumber": 12,
+      "title": "Into the News",
+      "version": "Semi-Acoustic Session",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/brasil-12-into-the-news.mp3",
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/12-into-the-news.mp3"
+    },
+    {
+      "id": "brasil-13-for-some-dialog-unplugged",
+      "collectionId": "echoes-unlive-brasil",
+      "trackNumber": 13,
+      "title": "For Some Dialog…",
+      "version": "Unplugged Acoustic Session",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/brasil-13-for-some-dialog-unplugged.mp3",
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/13-for-some-dialog-unplugged.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "brasil-14-tough-boys-rumble",
+      "collectionId": "echoes-unlive-brasil",
+      "trackNumber": 14,
+      "title": "Tough Boys Rumble",
+      "version": "Night Session",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/brasil-14-tough-boys-rumble.mp3",
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/14-tough-boys-rumble.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "brasil-15-dream-machines-bonus",
+      "collectionId": "echoes-unlive-brasil",
+      "trackNumber": 15,
+      "title": "Dream Machines (Bonus)",
+      "version": "Solo Remix",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/brasil-15-dream-machines-bonus.mp3",
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/15-dream-machines-solo.mp3",
+      "previewAvailable": true
+    },
+
+    {
+      "id": "salieri-01-requiem",
+      "collectionId": "salieris-hands",
+      "trackNumber": 1,
+      "title": "Requiem",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/salieri-01-requiem.mp3",
+      "previewPath": "assets/audio/salieris-hands/01-requiem-preview.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "salieri-02-shadows-of-vienna",
+      "collectionId": "salieris-hands",
+      "trackNumber": 2,
+      "title": "Shadows of Vienna",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/salieri-02-shadows-of-vienna.mp3",
+      "previewPath": "assets/audio/salieris-hands/02-shadows-of-vienna-preview.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "salieri-03-the-gift-was-not-mine",
+      "collectionId": "salieris-hands",
+      "trackNumber": 3,
+      "title": "The Gift Was Not Mine",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/salieri-03-the-gift-was-not-mine.mp3",
+      "previewPath": "assets/audio/salieris-hands/03-the-gift-was-not-mine-preview.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "salieri-04-divine-jealousy",
+      "collectionId": "salieris-hands",
+      "trackNumber": 4,
+      "title": "Divine Jealousy",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/salieri-04-divine-jealousy.mp3",
+      "previewPath": "assets/audio/salieris-hands/04-divine-jealousy-preview.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "salieri-05-mozarts-ghost",
+      "collectionId": "salieris-hands",
+      "trackNumber": 5,
+      "title": "Mozart's Ghost",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/salieri-05-mozarts-ghost.mp3",
+      "previewPath": "assets/audio/salieris-hands/05-mozarts-ghost-preview.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "salieri-06-invidia",
+      "collectionId": "salieris-hands",
+      "trackNumber": 6,
+      "title": "Invidia",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/salieri-06-invidia.mp3",
+      "previewPath": "assets/audio/salieris-hands/06-invidia-preview.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "salieri-07-confession-in-c-minor",
+      "collectionId": "salieris-hands",
+      "trackNumber": 7,
+      "title": "Confession in C Minor",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/salieri-07-confession-in-c-minor.mp3",
+      "previewPath": "assets/audio/salieris-hands/07-confession-in-c-minor-preview.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "salieri-08-the-face-of-my-prayer",
+      "collectionId": "salieris-hands",
+      "trackNumber": 8,
+      "title": "The Face of My Prayer",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/salieri-08-the-face-of-my-prayer.mp3",
+      "previewPath": "assets/audio/salieris-hands/08-the-face-of-my-prayer-preview.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "salieri-09-fugue-for-the-unchosen",
+      "collectionId": "salieris-hands",
+      "trackNumber": 9,
+      "title": "Fugue for the Unchosen",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/salieri-09-fugue-for-the-unchosen.mp3",
+      "previewPath": "assets/audio/salieris-hands/09-fugue-for-the-unchosen-preview.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "salieri-10-salieris-hands",
+      "collectionId": "salieris-hands",
+      "trackNumber": 10,
+      "title": "Salieri's Hands",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/salieri-10-salieris-hands.mp3",
+      "previewPath": "assets/audio/salieris-hands/10-salieris-hands-preview.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "salieri-11-classical-version",
+      "collectionId": "salieris-hands",
+      "trackNumber": 11,
+      "title": "Salieri's Hands",
+      "version": "Classical Version",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/salieri-11-classical-version.mp3",
+      "previewPath": "assets/audio/salieris-hands/11-salieris-hands-classical-preview.mp3"
+    },
+    {
+      "id": "salieri-12-first-knight-requiem-aria",
+      "collectionId": "salieris-hands",
+      "trackNumber": 12,
+      "title": "The Fall of the First Knight",
+      "version": "Requiem Aria",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/salieri-12-first-knight-requiem-aria.mp3",
+      "previewPath": "assets/audio/salieris-hands/12-first-knight-requiem-aria-preview.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "salieri-13-the-prism-requiem-english",
+      "collectionId": "salieris-hands",
+      "trackNumber": 13,
+      "title": "The Prism Requiem (Viennese Aria)",
+      "version": "Extended English Version",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/salieri-13-the-prism-requiem-english.mp3",
+      "previewPath": "assets/audio/salieris-hands/13-the-prism-requiem-english-preview.mp3",
+      "previewAvailable": true
+    },
+    {
+      "id": "salieri-14-das-prisma-german",
+      "collectionId": "salieris-hands",
+      "trackNumber": 14,
+      "title": "Das Prisma: Requiem für meine Seele",
+      "version": "Extended German Version",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/salieri-14-das-prisma-german.mp3",
+      "previewPath": "assets/audio/salieris-hands/14-das-prisma-german-preview.mp3",
+      "previewAvailable": true
+    },
+
+    {
+      "id": "australia-01-exclusive",
+      "collectionId": "17-for-ever-australia",
+      "trackNumber": 1,
+      "title": "17 FOR EVER",
+      "version": "Exclusive Australian Version",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/australia-01-17-for-ever-exclusive.mp3",
+      "previewPath": "assets/audio/australia/01-17-for-ever-exclusive-preview.mp3"
+    },
+    {
+      "id": "australia-02-album-mix",
+      "collectionId": "17-for-ever-australia",
+      "trackNumber": 2,
+      "title": "17 FOR EVER",
+      "version": "Different Mix / Album Version",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/australia-02-17-for-ever-album-mix.mp3",
+      "previewPath": "assets/audio/australia/02-17-for-ever-album-mix-preview.mp3"
+    },
+    {
+      "id": "australia-03-unlive-night-two",
+      "collectionId": "17-for-ever-australia",
+      "trackNumber": 3,
+      "title": "17 FOR EVER",
+      "version": "Unplugged — UN LIVE IN BRASIL / Night #2 Version",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/australia-03-17-for-ever-unlive-night-two.mp3",
+      "previewPath": "assets/audio/australia/03-17-for-ever-unlive-night-two-preview.mp3"
+    },
+    {
+      "id": "australia-04-demo",
+      "collectionId": "17-for-ever-australia",
+      "trackNumber": 4,
+      "title": "17 FOR EVER",
+      "version": "Demo Version",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/australia-04-17-for-ever-demo.mp3",
+      "previewPath": "assets/audio/australia/04-17-for-ever-demo-preview.mp3"
+    },
+
+    {
+      "id": "single-war-machines",
+      "collectionId": "singles-archive",
+      "trackNumber": 1,
+      "title": "War Machines",
+      "version": "Official Single Master",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/single-war-machines.mp3",
+      "previewPath": "assets/audio/singles/war-machines-preview.mp3"
+    },
+    {
+      "id": "single-too-fast-too-young",
+      "collectionId": "singles-archive",
+      "trackNumber": 2,
+      "title": "Too Fast Too Young",
+      "version": "Official Single Master",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/single-too-fast-too-young.mp3",
+      "previewPath": "assets/audio/singles/too-fast-too-young-preview.mp3"
+    },
+    {
+      "id": "single-our-lost-dreams",
+      "collectionId": "singles-archive",
+      "trackNumber": 3,
+      "title": "Our Lost Dreams",
+      "version": "Official Single Master",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/single-our-lost-dreams.mp3",
+      "previewPath": "assets/audio/singles/our-lost-dreams-preview.mp3"
+    },
+    {
+      "id": "single-junction-ahead",
+      "collectionId": "singles-archive",
+      "trackNumber": 4,
+      "title": "Junction Ahead",
+      "version": "Official Single Master",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/single-junction-ahead.mp3",
+      "previewPath": "assets/audio/singles/junction-ahead-preview.mp3"
+    },
+    {
+      "id": "single-17-for-ever",
+      "collectionId": "singles-archive",
+      "trackNumber": 5,
+      "title": "17 For Ever",
+      "version": "Official Single Master",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/single-17-for-ever.mp3",
+      "previewPath": "assets/audio/singles/17-for-ever-preview.mp3"
+    },
+    {
+      "id": "single-the-victory-goes-on",
+      "collectionId": "singles-archive",
+      "trackNumber": 6,
+      "title": "The Victory Goes On",
+      "version": "Official Single Master",
+      "status": "awaiting-master",
+      "radioEnabled": false,
+      "radioPath": "audio/radio/single-the-victory-goes-on.mp3",
+      "previewPath": "assets/audio/singles/the-victory-goes-on-preview.mp3"
+    }
+  ]
+}

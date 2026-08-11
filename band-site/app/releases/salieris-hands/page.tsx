@@ -5,13 +5,13 @@ import { Disc3, ListMusic, Package, Play, Shirt, Sparkles } from "lucide-react";
 import { SalieriCheckoutStatus, SalieriProductCard, SalieriQuickBuy } from "@/components/salieri-product-card";
 import { TrackAccessControls } from "@/components/track-access-controls";
 import { getCommerceProductById } from "@/data/commerce-products";
+import { getPreparedPreview } from "@/lib/master-catalog";
 
 const assetBase = "/assets/images/salieris-hands";
 const teaserUrl = "https://youtu.be/wD0u7-krT8s?si=4a1J1siTwJV9bGCI";
 const teaserVideo = "/assets/video/salieris-hands/official-teaser.mp4";
 const heroVideo = "/assets/video/salieris-hands/salieri-hero-slow.mp4";
 const heroVideoWebm = "/assets/video/salieris-hands/salieri-hero-slow.webm";
-const previewBase = "/assets/audio/salieris-hands";
 
 const assets = {
   hero: `${assetBase}/salieri-opera-hall-hero.png`,
@@ -28,23 +28,23 @@ const assets = {
 };
 
 const mainTracks = [
-  { title: "Requiem", previewSrc: `${previewBase}/01-requiem-preview.mp3` },
-  { title: "Shadows of Vienna", previewSrc: `${previewBase}/02-shadows-of-vienna-preview.mp3` },
-  { title: "The Gift Was Not Mine", previewSrc: `${previewBase}/03-the-gift-was-not-mine-preview.mp3` },
-  { title: "Divine Jealousy", previewSrc: `${previewBase}/04-divine-jealousy-preview.mp3` },
-  { title: "Mozart's Ghost", previewSrc: `${previewBase}/05-mozarts-ghost-preview.mp3` },
-  { title: "Invidia", previewSrc: `${previewBase}/06-invidia-preview.mp3` },
-  { title: "Confession in C Minor", previewSrc: `${previewBase}/07-confession-in-c-minor-preview.mp3` },
-  { title: "The Face of My Prayer", previewSrc: `${previewBase}/08-the-face-of-my-prayer-preview.mp3` },
-  { title: "Fugue for the Unchosen", previewSrc: `${previewBase}/09-fugue-for-the-unchosen-preview.mp3` },
-  { title: "Salieri's Hands", previewSrc: `${previewBase}/10-salieris-hands-preview.mp3` }
+  { title: "Requiem", previewSrc: getPreparedPreview("salieri-01-requiem") },
+  { title: "Shadows of Vienna", previewSrc: getPreparedPreview("salieri-02-shadows-of-vienna") },
+  { title: "The Gift Was Not Mine", previewSrc: getPreparedPreview("salieri-03-the-gift-was-not-mine") },
+  { title: "Divine Jealousy", previewSrc: getPreparedPreview("salieri-04-divine-jealousy") },
+  { title: "Mozart's Ghost", previewSrc: getPreparedPreview("salieri-05-mozarts-ghost") },
+  { title: "Invidia", previewSrc: getPreparedPreview("salieri-06-invidia") },
+  { title: "Confession in C Minor", previewSrc: getPreparedPreview("salieri-07-confession-in-c-minor") },
+  { title: "The Face of My Prayer", previewSrc: getPreparedPreview("salieri-08-the-face-of-my-prayer") },
+  { title: "Fugue for the Unchosen", previewSrc: getPreparedPreview("salieri-09-fugue-for-the-unchosen") },
+  { title: "Salieri's Hands", previewSrc: getPreparedPreview("salieri-10-salieris-hands") }
 ];
 
 const bonusTracks = [
-  { title: "Salieri's Hands - Classical Version" },
-  { title: "The Fall of the First Knight - Requiem Aria", previewSrc: `${previewBase}/12-first-knight-requiem-aria-preview.mp3` },
-  { title: "The Prism Requiem (Viennese Aria) - Extended English Version", previewSrc: `${previewBase}/13-the-prism-requiem-english-preview.mp3` },
-  { title: "Das Prisma: Requiem für meine Seele - Extended German Version", previewSrc: `${previewBase}/14-das-prisma-german-preview.mp3` }
+  { title: "Salieri's Hands - Classical Version", previewSrc: getPreparedPreview("salieri-11-classical-version") },
+  { title: "The Fall of the First Knight - Requiem Aria", previewSrc: getPreparedPreview("salieri-12-first-knight-requiem-aria") },
+  { title: "The Prism Requiem (Viennese Aria) - Extended English Version", previewSrc: getPreparedPreview("salieri-13-the-prism-requiem-english") },
+  { title: "Das Prisma: Requiem für meine Seele - Extended German Version", previewSrc: getPreparedPreview("salieri-14-das-prisma-german") }
 ];
 
 const collectorProductsData = [
