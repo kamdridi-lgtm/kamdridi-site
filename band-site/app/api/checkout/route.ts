@@ -47,6 +47,7 @@ export async function POST(request: Request) {
       : "Official KAMDRIDI order.";
 
     const session = await stripe.checkout.sessions.create({
+      integration_identifier: "kamdridi_store_xqmdriva",
       mode: "payment",
       success_url: `${siteUrl}${returnPath}?purchase=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}${returnPath}?purchase=cancelled`,
