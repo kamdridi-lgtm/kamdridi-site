@@ -435,8 +435,15 @@ a {
 }
 
 .signal-radio-shell {
+  --radio-energy: 0.16;
+  --radio-needle-position: 66%;
   position: relative;
   isolation: isolate;
+  border-radius: 30px;
+  transition:
+    border-color 260ms ease,
+    box-shadow 260ms ease,
+    filter 260ms ease;
 }
 
 .signal-radio-shell::before {
@@ -461,6 +468,200 @@ a {
     repeating-linear-gradient(0deg, transparent 0 3px, rgba(255, 255, 255, 0.035) 3px 4px),
     radial-gradient(circle at 18% 12%, rgba(244, 198, 106, 0.18), transparent 22%);
   mix-blend-mode: screen;
+  transition: opacity 260ms ease;
+}
+
+.signal-radio-aura {
+  position: absolute;
+  inset: -25%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--radio-energy);
+  background:
+    radial-gradient(circle at 24% 38%, rgba(244, 166, 75, 0.72), transparent 27%),
+    radial-gradient(circle at 82% 62%, rgba(168, 30, 18, 0.48), transparent 30%);
+  filter: blur(46px);
+  transition: opacity 90ms linear;
+}
+
+.signal-radio-top-glow {
+  position: absolute;
+  inset: 0 8% auto;
+  z-index: 0;
+  height: 2px;
+  pointer-events: none;
+  opacity: calc(0.2 + var(--radio-energy));
+  background: linear-gradient(90deg, transparent, #f4c66a 18%, #ff743d 50%, #f4c66a 82%, transparent);
+  box-shadow:
+    0 0 18px rgba(244, 198, 106, var(--radio-energy)),
+    0 0 48px rgba(224, 96, 40, var(--radio-energy));
+  transition: opacity 90ms linear;
+}
+
+.signal-radio-emblem,
+.signal-radio-display,
+.signal-radio-control-bank {
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 -14px 24px rgba(0, 0, 0, 0.22);
+}
+
+.signal-radio-display {
+  border-radius: 18px;
+  background-image:
+    linear-gradient(180deg, rgba(244, 198, 106, 0.035), transparent 46%),
+    repeating-linear-gradient(0deg, transparent 0 3px, rgba(255, 255, 255, 0.025) 3px 4px);
+}
+
+.signal-radio-control-bank {
+  border-radius: 22px;
+}
+
+.signal-radio-status-lamp {
+  transition:
+    background-color 200ms ease,
+    box-shadow 200ms ease,
+    opacity 200ms ease;
+}
+
+.signal-radio-status-live {
+  background: #f4c66a;
+  box-shadow: 0 0 18px rgba(244, 198, 106, 0.95);
+}
+
+.signal-radio-status-error {
+  background: #ef4444;
+  box-shadow: 0 0 18px rgba(255, 48, 48, 0.8);
+}
+
+.signal-radio-status-standby {
+  background: #8f5728;
+  box-shadow: 0 0 12px rgba(201, 133, 66, 0.45);
+}
+
+.signal-radio-beat-lamp {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  opacity: calc(0.1 + var(--radio-energy));
+  background: #f4c66a;
+  box-shadow: 0 0 16px rgba(244, 198, 106, var(--radio-energy));
+  transition: opacity 80ms linear, box-shadow 80ms linear;
+}
+
+.signal-radio-beat-lamp-delay {
+  opacity: calc(0.07 + var(--radio-energy));
+  background: #ff7a3d;
+}
+
+.signal-radio-beat-lamp-soft {
+  opacity: calc(0.04 + var(--radio-energy));
+  background: #9d2417;
+}
+
+.signal-radio-dial {
+  position: relative;
+}
+
+.signal-radio-frequency-labels {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1px 7px;
+  color: rgba(168, 162, 158, 0.58);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+}
+
+.signal-radio-frequency-track {
+  position: relative;
+  height: 38px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background:
+    linear-gradient(90deg, rgba(143, 50, 8, 0.18), rgba(244, 198, 106, 0.08) 50%, rgba(143, 50, 8, 0.18)),
+    #050403;
+}
+
+.signal-radio-frequency-track::after {
+  content: "";
+  position: absolute;
+  inset: 50% 8% auto;
+  height: 1px;
+  background: linear-gradient(90deg, #6d2508, #f4c66a, #6d2508);
+  box-shadow: 0 0 14px rgba(244, 198, 106, calc(var(--radio-energy) * 0.7));
+}
+
+.signal-radio-frequency-minor-ticks {
+  position: absolute;
+  inset: 0 5%;
+  opacity: 0.5;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 13px,
+    rgba(244, 198, 106, 0.38) 13px 14px,
+    transparent 14px 27px
+  );
+  mask-image: linear-gradient(180deg, #000 0 42%, transparent 42% 100%);
+}
+
+.signal-radio-speaker {
+  border-radius: 16px;
+}
+
+.signal-radio-speaker-grille {
+  position: absolute;
+  inset: 0;
+  opacity: 0.52;
+  background:
+    radial-gradient(circle, rgba(146, 125, 103, 0.32) 0 1.4px, transparent 1.7px) 0 0 / 9px 9px,
+    radial-gradient(circle at 50% 55%, rgba(201, 133, 66, 0.18), transparent 47%),
+    #070604;
+}
+
+.signal-radio-meter-bar {
+  width: 7px;
+  height: 100%;
+  transform-origin: bottom;
+  border-radius: 4px 4px 1px 1px;
+  background: linear-gradient(180deg, #ff5c38 0 18%, #f4c66a 18% 62%, #8f3208 62% 100%);
+  box-shadow: 0 0 12px rgba(244, 198, 106, var(--radio-energy));
+  transition: transform 70ms linear, opacity 220ms ease;
+}
+
+.signal-radio-power-button {
+  box-shadow: 0 12px 28px rgba(201, 82, 16, calc(var(--radio-energy) * 0.36));
+}
+
+.signal-radio-lights-off {
+  border-color: rgba(120, 113, 108, 0.14);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.72);
+  filter: saturate(0.58) brightness(0.7);
+}
+
+.signal-radio-lights-off::before {
+  opacity: 0.04;
+}
+
+.signal-radio-lights-off::after,
+.signal-radio-lights-off .signal-radio-aura,
+.signal-radio-lights-off .signal-radio-top-glow,
+.signal-radio-lights-off .signal-static-bolt {
+  opacity: 0;
+  animation: none;
+}
+
+.signal-radio-lights-off .signal-radio-status-lamp,
+.signal-radio-lights-off .signal-radio-beat-lamp,
+.signal-radio-lights-off .signal-radio-meter-bar {
+  opacity: 0.12;
+  box-shadow: none;
+}
+
+.signal-radio-lights-off .signal-needle {
+  background: #57534e;
+  box-shadow: none;
 }
 
 .signal-static-bolt {
@@ -500,12 +701,14 @@ a {
 
 .signal-needle {
   position: absolute;
-  left: 66%;
+  z-index: 2;
+  left: var(--radio-needle-position);
   top: 3px;
   width: 2px;
   height: calc(100% - 6px);
   background: #f4c66a;
   box-shadow: 0 0 14px rgba(244, 198, 106, 0.75);
+  transition: left 650ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 90ms linear;
 }
 
 .signal-needle-scan {
@@ -515,6 +718,22 @@ a {
 .signal-button-sheen {
   transform: translateX(-120%);
   animation: signalButtonSheen 2.9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signal-static-bolt,
+  .signal-text-drift,
+  .signal-needle-scan,
+  .signal-button-sheen {
+    animation: none !important;
+  }
+
+  .signal-radio-meter-bar,
+  .signal-radio-aura,
+  .signal-radio-top-glow,
+  .signal-radio-beat-lamp {
+    transition-duration: 180ms;
+  }
 }
 
 @keyframes signalBolt {
