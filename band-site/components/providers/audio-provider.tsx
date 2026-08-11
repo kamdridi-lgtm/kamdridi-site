@@ -3,6 +3,12 @@
 import { createContext, useContext, useEffect, useRef, useState, ReactNode } from "react";
 import { radioTracks as catalogTracks, type RadioTrack as CatalogTrack } from "@/lib/radio-catalog";
 
+declare global {
+  interface Window {
+    webkitAudioContext?: typeof AudioContext;
+  }
+}
+
 export type RadioTrack = CatalogTrack & { src: string };
 
 export const radioTracks: RadioTrack[] = catalogTracks.map((track) => ({
@@ -15,6 +21,7 @@ const staticDurationMs = 1250;
 type AudioContextType = {
   isPlaying: boolean;
   isTuning: boolean;
+  audioEnergy: number;
   trackIndex: number;
   currentTrack: RadioTrack;
   missingSignal: boolean;
@@ -23,16 +30,23 @@ type AudioContextType = {
   nextTrack: () => void;
 };
 
-const AudioContext = createContext<AudioContextType | undefined>(undefined);
+const RadioAudioContext = createContext<AudioContextType | undefined>(undefined);
 
 export function AudioProvider({ children }: { children: ReactNode }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isTuning, setIsTuning] = useState(false);
   const [trackIndex, setTrackIndex] = useState(0);
   const [missingSignal, setMissingSignal] = useState(false);
+  const [audioEnergy, setAudioEnergy] = useState(0);
   
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const noiseRef = useRef<AudioContext | null>(null);
+  const mediaContextRef = useRef<AudioContext | null>(null);
+  const mediaSourceRef = useRef<MediaElementAudioSourceNode | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const analyserDataRef = useRef<Uint8Array<ArrayBuffer> | null>(null);
+  const analyserFrameRef = useRef<number | null>(null);
+  const lastEnergySampleRef = useRef(0);
   const timerRef = useRef<number | null>(null);
   
   // Use a ref for nextTrack to avoid stale closures in event listener
@@ -51,12 +65,19 @@ export function AudioProvider({ children }: { children: ReactNode }) {
 
     const audio = audioRef.current;
 
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
+    const handlePlay = () => {
+      setIsPlaying(true);
+      startEnergyMonitor();
+    };
+    const handlePause = () => {
+      setIsPlaying(false);
+      stopEnergyMonitor();
+    };
     const handleError = () => {
       setIsPlaying(false);
       setIsTuning(false);
       setMissingSignal(true);
+      stopEnergyMonitor();
     };
     const handleEnded = () => {
       setIsPlaying(false);
@@ -76,8 +97,79 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       if (timerRef.current) window.clearTimeout(timerRef.current);
       audio.pause();
       noiseRef.current?.close().catch(() => {});
+      mediaSourceRef.current?.disconnect();
+      analyserRef.current?.disconnect();
+      mediaContextRef.current?.close().catch(() => {});
+      stopEnergyMonitor();
     };
   }, []);
+
+  function ensureEnergyAnalyser() {
+    const audio = audioRef.current;
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!audio || !AudioContextClass) return;
+
+    if (!mediaContextRef.current) {
+      const mediaContext = new AudioContextClass();
+      const mediaSource = mediaContext.createMediaElementSource(audio);
+      const analyser = mediaContext.createAnalyser();
+
+      analyser.fftSize = 128;
+      analyser.smoothingTimeConstant = 0.72;
+      mediaSource.connect(analyser);
+      analyser.connect(mediaContext.destination);
+
+      mediaContextRef.current = mediaContext;
+      mediaSourceRef.current = mediaSource;
+      analyserRef.current = analyser;
+      analyserDataRef.current = new Uint8Array(analyser.frequencyBinCount);
+    }
+
+    if (mediaContextRef.current.state === "suspended") {
+      void mediaContextRef.current.resume();
+    }
+  }
+
+  function startEnergyMonitor() {
+    if (analyserFrameRef.current !== null) return;
+
+    const sampleEnergy = (timestamp: number) => {
+      const analyser = analyserRef.current;
+      const data = analyserDataRef.current;
+
+      if (analyser && data && timestamp - lastEnergySampleRef.current >= 48) {
+        analyser.getByteFrequencyData(data);
+
+        const bassEnd = Math.min(16, data.length);
+        let bassTotal = 0;
+        let overallTotal = 0;
+
+        for (let index = 0; index < data.length; index += 1) {
+          overallTotal += data[index];
+          if (index >= 1 && index < bassEnd) bassTotal += data[index];
+        }
+
+        const bassAverage = bassTotal / Math.max(1, bassEnd - 1) / 255;
+        const overallAverage = overallTotal / Math.max(1, data.length) / 255;
+        const nextEnergy = Math.min(1, Math.max(0.04, bassAverage * 1.15 + overallAverage * 0.34));
+
+        setAudioEnergy(nextEnergy);
+        lastEnergySampleRef.current = timestamp;
+      }
+
+      analyserFrameRef.current = window.requestAnimationFrame(sampleEnergy);
+    };
+
+    analyserFrameRef.current = window.requestAnimationFrame(sampleEnergy);
+  }
+
+  function stopEnergyMonitor() {
+    if (analyserFrameRef.current !== null) {
+      window.cancelAnimationFrame(analyserFrameRef.current);
+      analyserFrameRef.current = null;
+    }
+    setAudioEnergy(0);
+  }
 
   function playStatic() {
     const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
@@ -120,6 +212,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     setIsTuning(true);
     setMissingSignal(false);
     audio.pause();
+    ensureEnergyAnalyser();
     playStatic();
 
     if (timerRef.current) window.clearTimeout(timerRef.current);
@@ -153,6 +246,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     if (isPlaying) {
       audio.pause();
     } else {
+      ensureEnergyAnalyser();
       if (!audio.src || audio.src === window.location.href) {
         // If not initialized, tune to current track first
         void tuneTo(trackIndex);
@@ -178,10 +272,11 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   nextTrackRef.current = nextTrack;
 
   return (
-    <AudioContext.Provider
+    <RadioAudioContext.Provider
       value={{
         isPlaying,
         isTuning,
+        audioEnergy,
         trackIndex,
         currentTrack: radioTracks[trackIndex],
         missingSignal,
@@ -191,12 +286,12 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       }}
     >
       {children}
-    </AudioContext.Provider>
+    </RadioAudioContext.Provider>
   );
 }
 
 export function useAudio() {
-  const context = useContext(AudioContext);
+  const context = useContext(RadioAudioContext);
   if (context === undefined) {
     throw new Error("useAudio must be used within an AudioProvider");
   }
