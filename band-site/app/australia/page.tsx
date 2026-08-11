@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AustraliaParallaxBackground } from "@/components/australia-parallax-background";
 import { TrackAccessControls } from "@/components/track-access-controls";
+import { getPreparedPreview } from "@/lib/master-catalog";
 
 export const metadata: Metadata = {
   title: "17 FOR EVER — Australia",
@@ -24,11 +25,11 @@ export const metadata: Metadata = {
 };
 
 const tracks = [
-  { number: "01", title: "17 FOR EVER", version: "Exclusive Australian Version", previewSrc: null },
-  { number: "02", title: "17 FOR EVER", version: "Different Mix / Album Version", previewSrc: null },
-  { number: "03", title: "17 FOR EVER", version: "Unplugged — UN LIVE IN BRASIL / Night #2 Version", previewSrc: null },
-  { number: "04", title: "17 FOR EVER", version: "Demo Version", previewSrc: null }
-] as const;
+  { number: "01", title: "17 FOR EVER", version: "Exclusive Australian Version", previewSrc: getPreparedPreview("australia-01-exclusive") },
+  { number: "02", title: "17 FOR EVER", version: "Different Mix / Album Version", previewSrc: getPreparedPreview("australia-02-album-mix") },
+  { number: "03", title: "17 FOR EVER", version: "Unplugged — UN LIVE IN BRASIL / Night #2 Version", previewSrc: getPreparedPreview("australia-03-unlive-night-two") },
+  { number: "04", title: "17 FOR EVER", version: "Demo Version", previewSrc: getPreparedPreview("australia-04-demo") }
+];
 
 function ArtworkCard({
   src,
