@@ -13,7 +13,7 @@ export type RadioTrack = CatalogTrack & { src: string };
 
 export const radioTracks: RadioTrack[] = catalogTracks.map((track) => ({
   ...track,
-  src: `/api/radio/stream/${track.id}`
+  src: `/${track.pathname}`
 }));
 
 const staticDurationMs = 1250;
