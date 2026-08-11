@@ -36,9 +36,6 @@ export const metadata: Metadata = {
   creator: "KAM DRIDI",
   publisher: "KAM DRIDI",
   category: "music",
-  alternates: {
-    canonical: "/"
-  },
   robots: {
     index: true,
     follow: true,
@@ -81,7 +78,8 @@ const artistStructuredData = {
   name: "KAM DRIDI",
   alternateName: "KAMDRIDI",
   url: siteUrl,
-  image: `${siteUrl}/assets/images/kamdridi-pwa-icon.png`,
+  image: `${siteUrl}/assets/images/gallery/p04_portrait_leather.jpg`,
+  logo: `${siteUrl}/assets/images/kamdridi-pwa-icon.png`,
   description: siteMeta.description,
   genre: ["Cinematic Rock", "Hard Rock", "Industrial Rock"],
   foundingLocation: {
