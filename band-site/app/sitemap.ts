@@ -16,7 +16,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/band",
     "/tour",
     "/store",
-    "/press",
     "/contact",
     "/fan-club",
     "/games",
@@ -42,7 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:
       route === "/"
         ? 1
-        : route === "/music" || route === "/band" || route === "/press"
+        : route === "/music" || route === "/band" || route === "/media"
           ? 0.9
           : 0.7
   }));
