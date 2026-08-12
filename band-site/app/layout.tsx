@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent"
   },
   title: {
-    default: "KAM DRIDI | Official Website",
+    default: "KAM DRIDI | Official Artist Website",
     template: "%s | KAM DRIDI"
   },
   description: siteMeta.description,
@@ -48,13 +48,19 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "KAM DRIDI | Official Website",
+    title: "KAM DRIDI | Official Artist Website",
     description: siteMeta.description,
     url: metadataBase,
     siteName: "KAM DRIDI",
     locale: "en_CA",
     type: "website",
     images: [
+      {
+        url: "/assets/images/gallery/p04_portrait_leather.jpg",
+        width: 1200,
+        height: 1200,
+        alt: "KAM DRIDI — Montreal cinematic hard rock artist"
+      },
       {
         url: "/assets/images/releases/echoes-unearthed-cover.jpg",
         width: 1200,
@@ -65,9 +71,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "KAM DRIDI | Official Website",
+    title: "KAM DRIDI | Official Artist Website",
     description: siteMeta.description,
-    images: ["/assets/images/releases/echoes-unearthed-cover.jpg"]
+    images: ["/assets/images/gallery/p04_portrait_leather.jpg"]
   }
 };
 
@@ -76,8 +82,12 @@ const artistStructuredData = {
   "@type": "MusicGroup",
   "@id": `${siteUrl}/#artist`,
   name: "KAM DRIDI",
-  alternateName: "KAMDRIDI",
+  alternateName: ["KAMDRIDI", "Kam Dridi"],
   url: siteUrl,
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": siteUrl
+  },
   image: `${siteUrl}/assets/images/gallery/p04_portrait_leather.jpg`,
   logo: `${siteUrl}/assets/images/kamdridi-pwa-icon.png`,
   description: siteMeta.description,
@@ -90,6 +100,7 @@ const artistStructuredData = {
     "https://youtube.com/@kamdridi",
     "https://instagram.com/kamdridi",
     "https://tiktok.com/@kamdridi",
+    "https://open.spotify.com/artist/17yVPHf6qsH2kyQjW4wT2o",
     "https://music.apple.com/us/artist/kam-dridi/1871722663",
     "https://facebook.com/kamdridi",
     "https://x.com/kamdridi"
