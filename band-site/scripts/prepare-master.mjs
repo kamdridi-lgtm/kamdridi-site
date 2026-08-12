@@ -73,6 +73,14 @@ function runFfmpeg(args) {
   execFileSync("ffmpeg", ["-hide_banner", "-loglevel", "error", "-nostdin", ...args], { stdio: "inherit" });
 }
 
+function preflightOutputs(outputPaths, force) {
+  if (force) return;
+  const existingOutputs = outputPaths.filter((outputPath) => existsSync(outputPath));
+  if (existingOutputs.length === 0) return;
+  const paths = existingOutputs.map((outputPath) => relative(siteRoot, outputPath)).join(", ");
+  throw new Error(`Output already exists: ${paths}. Use --force only after confirming the replacement.`);
+}
+
 function atomicEncode(outputPath, ffmpegArgs, force) {
   if (existsSync(outputPath) && !force) {
     throw new Error(`Output already exists: ${relative(siteRoot, outputPath)}. Use --force only after confirming the replacement.`);
@@ -138,6 +146,7 @@ if (sourceProbe.channels < 1 || sourceProbe.sampleRate < 32000) {
 
 const radioOutput = publicFile(track.radioPath);
 const previewOutput = publicFile(track.previewPath);
+preflightOutputs([radioOutput, previewOutput], args.force);
 const album = collection.title;
 const displayTitle = track.version ? `${track.title} — ${track.version}` : track.title;
 const metadata = [
