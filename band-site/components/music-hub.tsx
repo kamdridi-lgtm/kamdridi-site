@@ -41,11 +41,11 @@ export function MusicHub() {
                 <p className="text-xs font-semibold uppercase tracking-[0.4em] text-[#f4c66a]">
                   Full album broadcast
                 </p>
-                <h2 className="mt-3 font-display text-3xl uppercase tracking-[0.08em] text-white md:text-5xl">
+                <h2 className="mt-3 max-w-3xl font-display text-4xl uppercase leading-none tracking-[0.06em] text-white md:text-5xl">
                   Catch the KAMDRIDI signal
                 </h2>
               </div>
-              <p className="max-w-md text-sm leading-7 text-stone-300">
+              <p className="music-copy max-w-md text-sm leading-7 text-stone-300 sm:text-base">
                 Power on for full Echoes Unearthed tracks and a live spectrum driven by the music.
               </p>
             </div>
@@ -62,11 +62,16 @@ export function MusicHub() {
                 <Image src={warMachinesCover} alt="War Machines single cover" fill className="object-cover" />
               </div>
               <div className="flex flex-col justify-center p-6">
-                <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Listen Now</p>
-                <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.08em] text-white">
-                  War Machines is live
+                <p className="text-xs font-semibold uppercase tracking-[0.45em] text-[#f4c66a]">
+                  Listen Now
+                </p>
+                <h2 className="mt-4 font-display text-4xl uppercase leading-none tracking-[0.06em] text-white">
+                  War Machines
                 </h2>
-                <p className="mt-4 text-sm leading-7 text-stone-400">
+                <p className="mt-3 text-xs font-bold uppercase tracking-[0.32em] text-[#f4c66a]">
+                  Available Now
+                </p>
+                <p className="music-copy mt-5 text-sm leading-7 text-stone-300">
                   Stream the current KAMDRIDI single across the official platform links below.
                 </p>
               </div>
@@ -117,8 +122,12 @@ export function MusicHub() {
           </GlassCard>
           <GlassCard className="flex flex-col justify-center">
             <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Now playing</p>
-            <h2 className="mt-4 text-4xl text-white">{featuredVideo.title}</h2>
-            <p className="mt-5 text-sm leading-8 text-stone-400">{featuredVideo.description}</p>
+            <h2 className="mt-4 font-display text-4xl uppercase leading-none tracking-[0.06em] text-white">
+              {featuredVideo.title}
+            </h2>
+            <p className="music-copy mt-5 text-sm leading-8 text-stone-300">
+              {featuredVideo.description}
+            </p>
           </GlassCard>
         </div>
       </Section>
@@ -161,8 +170,12 @@ export function MusicHub() {
                 <p className="text-xs uppercase tracking-[0.35em] text-[#f4c66a]">
                   {album.year} · {album.type}
                 </p>
-                <h3 className="mt-4 text-3xl text-white">{album.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-stone-400">{album.description}</p>
+                <h3 className="mt-4 font-display text-3xl uppercase leading-none tracking-[0.05em] text-white">
+                  {album.title}
+                </h3>
+                <p className="music-copy mt-4 text-sm leading-7 text-stone-300">
+                  {album.description}
+                </p>
               </div>
             </GlassCard>
           ))}

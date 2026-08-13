@@ -373,6 +373,31 @@ a {
   font-family: var(--font-display);
 }
 
+.music-premium h1.font-display,
+.music-premium h2.font-display,
+.music-premium h3.font-display {
+  color: #f0ece4 !important;
+  font-weight: 800;
+  letter-spacing: 0.055em;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.68);
+  text-wrap: balance;
+}
+
+.music-premium .music-hero-title {
+  letter-spacing: 0.045em;
+}
+
+.music-premium .music-copy {
+  color: #d5cec2 !important;
+  letter-spacing: 0.006em;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.72);
+}
+
+.music-premium .un-letter {
+  color: #ff2438;
+  text-shadow: 0 1px 9px rgba(255, 36, 56, 0.4);
+}
+
 .panel-grid {
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
