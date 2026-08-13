@@ -10,11 +10,14 @@ declare global {
 }
 
 const staticDurationMs = 1250;
+const spectrumBarCount = 10;
+const idleSpectrum = Array.from({ length: spectrumBarCount }, () => 0);
 
 type AudioContextType = {
   isPlaying: boolean;
   isTuning: boolean;
   audioEnergy: number;
+  audioSpectrum: number[];
   trackIndex: number;
   currentTrack: RadioTrack;
   missingSignal: boolean;
@@ -31,6 +34,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const [trackIndex, setTrackIndex] = useState(0);
   const [missingSignal, setMissingSignal] = useState(false);
   const [audioEnergy, setAudioEnergy] = useState(0);
+  const [audioSpectrum, setAudioSpectrum] = useState<number[]>(idleSpectrum);
   
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const noiseRef = useRef<AudioContext | null>(null);
@@ -40,6 +44,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const analyserDataRef = useRef<Uint8Array<ArrayBuffer> | null>(null);
   const analyserFrameRef = useRef<number | null>(null);
   const lastEnergySampleRef = useRef(0);
+  const spectrumRef = useRef<number[]>(idleSpectrum);
   const timerRef = useRef<number | null>(null);
   
   // Use a ref for nextTrack to avoid stale closures in event listener
@@ -107,8 +112,10 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       const mediaSource = mediaContext.createMediaElementSource(audio);
       const analyser = mediaContext.createAnalyser();
 
-      analyser.fftSize = 128;
-      analyser.smoothingTimeConstant = 0.72;
+      analyser.fftSize = 512;
+      analyser.smoothingTimeConstant = 0.48;
+      analyser.minDecibels = -90;
+      analyser.maxDecibels = -18;
       mediaSource.connect(analyser);
       analyser.connect(mediaContext.destination);
 
@@ -130,22 +137,50 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       const analyser = analyserRef.current;
       const data = analyserDataRef.current;
 
-      if (analyser && data && timestamp - lastEnergySampleRef.current >= 48) {
+      if (analyser && data && timestamp - lastEnergySampleRef.current >= 38) {
         analyser.getByteFrequencyData(data);
 
-        const bassEnd = Math.min(16, data.length);
-        let bassTotal = 0;
-        let overallTotal = 0;
+        const nyquist = (mediaContextRef.current?.sampleRate ?? 48000) / 2;
+        const minimumFrequency = 45;
+        const maximumFrequency = Math.min(12500, nyquist);
+        const nextSpectrum = Array.from({ length: spectrumBarCount }, (_, bandIndex) => {
+          const lowRatio = bandIndex / spectrumBarCount;
+          const highRatio = (bandIndex + 1) / spectrumBarCount;
+          const lowFrequency = minimumFrequency * Math.pow(maximumFrequency / minimumFrequency, lowRatio);
+          const highFrequency = minimumFrequency * Math.pow(maximumFrequency / minimumFrequency, highRatio);
+          const startBin = Math.max(1, Math.floor((lowFrequency / nyquist) * data.length));
+          const endBin = Math.max(startBin + 1, Math.ceil((highFrequency / nyquist) * data.length));
+          let bandTotal = 0;
+          let peak = 0;
 
+          for (let bin = startBin; bin < Math.min(endBin, data.length); bin += 1) {
+            bandTotal += data[bin];
+            peak = Math.max(peak, data[bin]);
+          }
+
+          const binCount = Math.max(1, Math.min(endBin, data.length) - startBin);
+          const average = bandTotal / binCount / 255;
+          const peakLevel = peak / 255;
+          const frequencyWeight = bandIndex < 3 ? 1.18 : bandIndex > 7 ? 1.08 : 1;
+          const rawLevel = Math.min(1, (average * 0.72 + peakLevel * 0.48) * frequencyWeight);
+          const previousLevel = spectrumRef.current[bandIndex] ?? 0;
+
+          return rawLevel > previousLevel
+            ? previousLevel * 0.28 + rawLevel * 0.72
+            : previousLevel * 0.68 + rawLevel * 0.32;
+        });
+
+        let overallTotal = 0;
         for (let index = 0; index < data.length; index += 1) {
           overallTotal += data[index];
-          if (index >= 1 && index < bassEnd) bassTotal += data[index];
         }
 
-        const bassAverage = bassTotal / Math.max(1, bassEnd - 1) / 255;
         const overallAverage = overallTotal / Math.max(1, data.length) / 255;
-        const nextEnergy = Math.min(1, Math.max(0.04, bassAverage * 1.15 + overallAverage * 0.34));
+        const spectrumPeak = Math.max(...nextSpectrum);
+        const nextEnergy = Math.min(1, Math.max(0.04, overallAverage * 0.72 + spectrumPeak * 0.58));
 
+        spectrumRef.current = nextSpectrum;
+        setAudioSpectrum(nextSpectrum);
         setAudioEnergy(nextEnergy);
         lastEnergySampleRef.current = timestamp;
       }
@@ -162,6 +197,8 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       analyserFrameRef.current = null;
     }
     setAudioEnergy(0);
+    spectrumRef.current = idleSpectrum;
+    setAudioSpectrum(idleSpectrum);
   }
 
   function playStatic() {
@@ -270,6 +307,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
         isPlaying,
         isTuning,
         audioEnergy,
+        audioSpectrum,
         trackIndex,
         currentTrack: radioTracks[trackIndex],
         missingSignal,
