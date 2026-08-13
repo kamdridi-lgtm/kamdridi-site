@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function MusicPage() {
   return (
-    <>
+    <div className="music-premium">
       <section className="overflow-hidden border-b border-white/10">
         <div className="relative isolate">
           <video
@@ -44,11 +44,17 @@ export default function MusicPage() {
 
           <Section className="relative py-12 md:py-16">
             <div className="mx-auto max-w-4xl">
-              <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Music</p>
-              <h1 className="mt-5 font-display text-5xl uppercase leading-none tracking-[0.08em] text-white md:text-7xl">
-                Echoes Unearthed in sound, image, and atmosphere
+              <p className="text-xs font-semibold uppercase tracking-[0.45em] text-[#f4c66a]">
+                Music
+              </p>
+              <h1 className="music-hero-title mt-5 max-w-[18ch] font-display text-[clamp(2.1rem,7.5vw,4.8rem)] uppercase leading-[0.9] tracking-[0.045em] text-white">
+                <span className="block">
+                  Echoes <span className="block sm:inline">Unearthed in</span>
+                </span>
+                <span className="block">Sound, image, and</span>
+                <span className="block">atmosphere</span>
               </h1>
-              <p className="mt-6 max-w-2xl text-base leading-8 text-stone-300">
+              <p className="music-copy mt-6 max-w-2xl text-[15px] leading-7 text-stone-300 sm:text-base sm:leading-8">
                 The official music hub for KAMDRIDI with embedded video, gallery imagery, release
                 history, and the visual world around the album.
               </p>
@@ -57,6 +63,6 @@ export default function MusicPage() {
         </div>
       </section>
       <MusicHub />
-    </>
+    </div>
   );
 }
