@@ -27,6 +27,7 @@ export function getStripeServer() {
   }
 
   return new Stripe(secretKey, {
-    apiVersion: "2025-08-27.basil"
+    // Keep the account on Basil while satisfying the current SDK's latest-version-only type.
+    apiVersion: "2025-08-27.basil" as Stripe.LatestApiVersion
   });
 }
