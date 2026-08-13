@@ -10,7 +10,7 @@ declare global {
 }
 
 const staticDurationMs = 1250;
-const spectrumBarCount = 10;
+const spectrumBarCount = 16;
 const idleSpectrum = Array.from({ length: spectrumBarCount }, () => 0);
 
 type AudioContextType = {
@@ -45,6 +45,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const analyserFrameRef = useRef<number | null>(null);
   const lastEnergySampleRef = useRef(0);
   const spectrumRef = useRef<number[]>(idleSpectrum);
+  const spectrumRawRef = useRef<number[]>(idleSpectrum);
   const timerRef = useRef<number | null>(null);
   
   // Use a ref for nextTrack to avoid stale closures in event listener
@@ -112,10 +113,10 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       const mediaSource = mediaContext.createMediaElementSource(audio);
       const analyser = mediaContext.createAnalyser();
 
-      analyser.fftSize = 512;
-      analyser.smoothingTimeConstant = 0.48;
-      analyser.minDecibels = -90;
-      analyser.maxDecibels = -18;
+      analyser.fftSize = 1024;
+      analyser.smoothingTimeConstant = 0.24;
+      analyser.minDecibels = -82;
+      analyser.maxDecibels = -6;
       mediaSource.connect(analyser);
       analyser.connect(mediaContext.destination);
 
@@ -137,13 +138,13 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       const analyser = analyserRef.current;
       const data = analyserDataRef.current;
 
-      if (analyser && data && timestamp - lastEnergySampleRef.current >= 38) {
+      if (analyser && data && timestamp - lastEnergySampleRef.current >= 32) {
         analyser.getByteFrequencyData(data);
 
         const nyquist = (mediaContextRef.current?.sampleRate ?? 48000) / 2;
         const minimumFrequency = 45;
         const maximumFrequency = Math.min(12500, nyquist);
-        const nextSpectrum = Array.from({ length: spectrumBarCount }, (_, bandIndex) => {
+        const rawSpectrum = Array.from({ length: spectrumBarCount }, (_, bandIndex) => {
           const lowRatio = bandIndex / spectrumBarCount;
           const highRatio = (bandIndex + 1) / spectrumBarCount;
           const lowFrequency = minimumFrequency * Math.pow(maximumFrequency / minimumFrequency, lowRatio);
@@ -161,13 +162,20 @@ export function AudioProvider({ children }: { children: ReactNode }) {
           const binCount = Math.max(1, Math.min(endBin, data.length) - startBin);
           const average = bandTotal / binCount / 255;
           const peakLevel = peak / 255;
-          const frequencyWeight = bandIndex < 3 ? 1.18 : bandIndex > 7 ? 1.08 : 1;
-          const rawLevel = Math.min(1, (average * 0.72 + peakLevel * 0.48) * frequencyWeight);
+          const frequencyWeight = bandIndex < 5 ? 1.2 : bandIndex > 11 ? 1.12 : 1;
+          const spectralLevel = Math.min(1, (average * 0.68 + peakLevel * 0.32) * frequencyWeight);
+          return spectralLevel;
+        });
+
+        const nextSpectrum = rawSpectrum.map((spectralLevel, bandIndex) => {
+          const previousRawLevel = spectrumRawRef.current[bandIndex] ?? 0;
+          const transient = Math.max(0, spectralLevel - previousRawLevel);
+          const rawLevel = Math.min(1, Math.pow(spectralLevel, 1.16) * 1.08 + transient * 2.2);
           const previousLevel = spectrumRef.current[bandIndex] ?? 0;
 
           return rawLevel > previousLevel
-            ? previousLevel * 0.28 + rawLevel * 0.72
-            : previousLevel * 0.68 + rawLevel * 0.32;
+            ? previousLevel * 0.14 + rawLevel * 0.86
+            : previousLevel * 0.57 + rawLevel * 0.43;
         });
 
         let overallTotal = 0;
@@ -179,6 +187,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
         const spectrumPeak = Math.max(...nextSpectrum);
         const nextEnergy = Math.min(1, Math.max(0.04, overallAverage * 0.72 + spectrumPeak * 0.58));
 
+        spectrumRawRef.current = rawSpectrum;
         spectrumRef.current = nextSpectrum;
         setAudioSpectrum(nextSpectrum);
         setAudioEnergy(nextEnergy);
@@ -198,6 +207,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     }
     setAudioEnergy(0);
     spectrumRef.current = idleSpectrum;
+    spectrumRawRef.current = idleSpectrum;
     setAudioSpectrum(idleSpectrum);
   }
 

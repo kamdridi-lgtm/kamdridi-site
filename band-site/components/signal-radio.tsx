@@ -4,7 +4,10 @@ import { useState, type CSSProperties } from "react";
 import { AudioLines, Lightbulb, LightbulbOff, Power, Radio, SkipForward, Waves } from "lucide-react";
 import { useAudio } from "./providers/audio-provider";
 
-const ambientMeterBars = [0.22, 0.34, 0.46, 0.38, 0.5, 0.42, 0.36, 0.44, 0.31, 0.24];
+const ambientMeterBars = [
+  0.18, 0.26, 0.34, 0.42, 0.5, 0.4, 0.32, 0.46,
+  0.38, 0.48, 0.35, 0.43, 0.31, 0.39, 0.27, 0.2
+];
 
 export function SignalRadio() {
   const {
@@ -144,7 +147,7 @@ export function SignalRadio() {
               {ambientMeterBars.map((ambientLevel, index) => {
                 const meterEnergy = lightsOn
                   ? beatSync && isPlaying
-                    ? Math.min(1, Math.max(0.035, (audioSpectrum[index] ?? 0) * 1.24))
+                    ? Math.min(1, Math.max(0.025, (audioSpectrum[index] ?? 0) * 1.34))
                     : isPlaying
                       ? ambientLevel
                       : 0.06
