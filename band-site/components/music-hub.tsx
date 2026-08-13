@@ -23,6 +23,25 @@ const streamIcons: Record<string, React.ReactNode> = {
 export function MusicHub() {
   return (
     <>
+      <Section id="signal-radio" className="pt-8 md:pt-12">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-[#f4c66a]">
+                Full album broadcast
+              </p>
+              <h2 className="mt-3 font-display text-3xl uppercase tracking-[0.08em] text-white md:text-5xl">
+                Catch the KAMDRIDI signal
+              </h2>
+            </div>
+            <p className="max-w-md text-sm leading-7 text-stone-400">
+              Power on for full Echoes Unearthed tracks and a live spectrum driven by the music.
+            </p>
+          </div>
+          <SignalRadio />
+        </div>
+      </Section>
+
       <Section id="listen-now">
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <GlassCard className="overflow-hidden p-0">
@@ -136,7 +155,6 @@ export function MusicHub() {
             </GlassCard>
           ))}
         </div>
-        <SignalRadio />
       </Section>
     </>
   );
