@@ -375,7 +375,7 @@ export const albumTimeline: AlbumEntry[] = [
     year: "2023",
     title: "Fragments of Earth",
     type: "Single Series",
-    art: "/assets/images/releases/echoes-unearthed-cover.png",
+    art: "/assets/images/releases/fragments-of-earth-cover.webp",
     description: "A set of releases that expanded the visual identity and sharpened the heavy atmospheric direction."
   },
   {
