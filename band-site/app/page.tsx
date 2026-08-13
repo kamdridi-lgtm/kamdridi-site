@@ -10,12 +10,12 @@ import {
   Smartphone,
   Youtube
 } from "lucide-react";
-import { HomeCinematicIntro } from "@/components/home-cinematic-intro";
 import { HomeReleaseCoverCarousel } from "@/components/home-release-cover-carousel";
 import { SalieriCinematicIntro } from "@/components/salieri-cinematic-intro";
 import { EchoesBrasilCinematicIntro } from "@/components/echoes-brasil-cinematic-intro";
 import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
 import { LostRequiemUniverseCard } from "@/components/lost-requiem-universe-card";
+import { ActiveSignalsTV } from "@/components/active-signals-tv";
 import { featuredVideo, gameExperiences, socialFeed, streamingLinks, visualAlbumScenes } from "@/data/site";
 
 const echoesUnearthedCover = "/assets/images/releases/echoes-unearthed-cover.jpg";
@@ -253,9 +253,7 @@ function PlatformLinks({ compact = false }: { compact?: boolean }) {
 export default function HomePage() {
   return (
     <>
-
-      <HomeCinematicIntro />
-      <SalieriCinematicIntro />
+      <SalieriCinematicIntro />
       <EchoesBrasilCinematicIntro />
       <div className="relative overflow-hidden bg-[#050403] text-white">
         <div className="pointer-events-none fixed inset-0 z-0 opacity-55">
@@ -473,17 +471,7 @@ export default function HomePage() {
         <section id="video" className="relative z-10 px-4 py-10 sm:px-6">
           <SectionTitle eyebrow="News / Video" title="Active Signals" />
           <div className="mx-auto mt-8 grid max-w-7xl gap-6 lg:grid-cols-[1.25fr_0.75fr]">
-            <div className="overflow-hidden border border-[#8f5728]/35 bg-black/55">
-              <div className="aspect-video">
-                <iframe
-                  className="h-full w-full"
-                  src={featuredVideo.embedUrl}
-                  title={featuredVideo.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            </div>
+            <ActiveSignalsTV />
             <div className="grid gap-4">
               {socialFeed.map((item) => (
                 <div key={`${item.platform}-${item.date}`} className="border border-white/10 bg-black/50 p-5">
