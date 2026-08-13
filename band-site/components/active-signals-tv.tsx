@@ -16,13 +16,13 @@ export function ActiveSignalsTV() {
           </div>
         )}
         {channel === 2 && (
-          <video autoPlay controls className="h-full w-full" poster="/kamdridi-hero.jpg">
+          <video controls className="h-full w-full" poster="/kamdridi-hero.jpg">
             <source src="/videos/too-fast-too-young-master.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         )}
         {channel === 3 && (
-          <video autoPlay controls className="h-full w-full" poster="/kamdridi-hero.jpg">
+          <video controls className="h-full w-full" poster="/kamdridi-hero.jpg">
             <source src="/videos/our-lost-dreams-v5.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
