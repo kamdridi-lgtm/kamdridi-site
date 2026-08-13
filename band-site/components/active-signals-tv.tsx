@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { featuredVideo } from "@/data/site";
-import { WarMachinesV20Experience } from "./war-machines-v20-experience";
 
 export function ActiveSignalsTV() {
   const [channel, setChannel] = useState(2);
@@ -11,9 +10,13 @@ export function ActiveSignalsTV() {
     <div className="group relative overflow-hidden border border-[#8f5728]/35 bg-black/55 shadow-[0_0_30px_rgba(244,198,106,0.05)] transition-all duration-500 hover:border-[#f4c66a]/50 hover:shadow-[0_0_40px_rgba(244,198,106,0.15)] flex flex-col">
       <div className="aspect-video relative bg-black">
         {channel === 1 && (
-          <div className="absolute inset-0 z-10 w-full h-full">
-            <WarMachinesV20Experience />
-          </div>
+          <iframe
+            className="absolute inset-0 z-10 w-full h-full border-none bg-black"
+            src="/war-machines-premium-v20/index.html"
+            title="War Machines Premium"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
         )}
         {channel === 2 && (
           <video controls className="h-full w-full" poster="/kamdridi-hero.jpg">
