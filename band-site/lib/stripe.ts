@@ -27,6 +27,6 @@ export function getStripeServer() {
   }
 
   return new Stripe(secretKey, {
-    apiVersion: "2026-07-29.dahlia"
+    apiVersion: "2025-08-27.basil"
   });
 }
