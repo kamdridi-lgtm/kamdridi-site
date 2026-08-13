@@ -19,7 +19,7 @@ export function ActiveSignalsTV() {
           />
         )}
         {channel === 2 && (
-          <video controls className="h-full w-full" poster="/kamdridi-hero.jpg">
+          <video controls className="h-full w-full" poster="/assets/images/too-fast-too-young-poster.jpg">
             <source src="/videos/too-fast-too-young-master.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
