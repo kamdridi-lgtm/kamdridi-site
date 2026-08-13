@@ -48,7 +48,6 @@ export async function POST(req: Request) {
     const cancelUrl = `${baseUrl}/myriam?canceled=true`;
 
     const sessionParams: Stripe.Checkout.SessionCreateParams = {
-      integration_identifier: "kamdridi_myriam_jpnqveta",
       mode: 'payment',
       success_url: successUrl,
       cancel_url: cancelUrl,
