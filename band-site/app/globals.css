@@ -621,7 +621,7 @@ a {
 }
 
 .signal-radio-meter-bar {
-  width: 7px;
+  width: clamp(4px, 0.52vw, 7px);
   height: 100%;
   transform-origin: bottom;
   border-radius: 4px 4px 1px 1px;
