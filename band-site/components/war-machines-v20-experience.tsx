@@ -142,8 +142,15 @@ export function WarMachinesV20Experience() {
   const handleIgnite = () => {
     setIsPlaying(true);
     setPhase("VOID");
+    
+    // Force the first video to load and play immediately while the 47MB audio buffers
+    triggerCut("VOID");
+    nextCutTimeRef.current = 4.0; // Prevent double-cut when audio finally starts
+
     if (audioRef.current) {
-      audioRef.current.play();
+      audioRef.current.play().catch((err) => {
+        console.error("Audio playback failed:", err);
+      });
     }
   };
 
@@ -153,8 +160,8 @@ export function WarMachinesV20Experience() {
       <audio ref={audioRef} src="/war-machines-premium-v20/assets/audio/war-machines-full.wav" preload="auto" />
 
       {/* Video Layers for Crossfading */}
-      <video ref={vidARef} className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" muted playsInline />
-      <video ref={vidBRef} className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" muted playsInline />
+      <video ref={vidARef} className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" muted playsInline loop />
+      <video ref={vidBRef} className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" muted playsInline loop />
       
       {/* Cinematic Overlays (CRT, Vignette, Scanlines) */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_50%,rgba(0,0,0,0.8)_100%)] pointer-events-none" />
