@@ -627,7 +627,14 @@ a {
   border-radius: 4px 4px 1px 1px;
   background: linear-gradient(180deg, #ff5c38 0 18%, #f4c66a 18% 62%, #8f3208 62% 100%);
   box-shadow: 0 0 12px rgba(244, 198, 106, var(--radio-energy));
-  transition: transform 70ms linear, opacity 220ms ease;
+  transition: transform 46ms linear, opacity 220ms ease;
+  will-change: transform;
+}
+
+.signal-radio-beat-active .signal-radio-speaker {
+  box-shadow:
+    inset 0 0 34px rgba(244, 198, 106, calc(var(--radio-energy) * 0.3)),
+    0 0 26px rgba(224, 96, 40, calc(var(--radio-energy) * 0.2));
 }
 
 .signal-radio-power-button {
