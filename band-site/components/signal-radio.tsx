@@ -4,13 +4,14 @@ import { useState, type CSSProperties } from "react";
 import { AudioLines, Lightbulb, LightbulbOff, Power, Radio, SkipForward, Waves } from "lucide-react";
 import { useAudio } from "./providers/audio-provider";
 
-const meterBars = [0.56, 0.82, 1, 0.74, 0.92, 0.64, 0.86, 0.58, 0.76, 0.48];
+const ambientMeterBars = [0.22, 0.34, 0.46, 0.38, 0.5, 0.42, 0.36, 0.44, 0.31, 0.24];
 
 export function SignalRadio() {
   const {
     isPlaying,
     isTuning,
     audioEnergy,
+    audioSpectrum,
     currentTrack,
     missingSignal,
     togglePlay,
@@ -37,7 +38,7 @@ export function SignalRadio() {
 
   return (
     <div
-      className={`signal-radio-shell ${lightingClass} ${beatClass} relative mt-8 max-w-5xl overflow-hidden border border-[#c98542]/35 bg-[#050302]/92 shadow-[0_28px_90px_rgba(0,0,0,0.62)] backdrop-blur-md`}
+      className={`signal-radio-shell ${lightingClass} ${beatClass} relative w-full overflow-hidden border border-[#c98542]/35 bg-[#050302]/92 shadow-[0_28px_90px_rgba(0,0,0,0.62)] backdrop-blur-md`}
       style={radioStyle}
     >
       <div className="signal-radio-aura" />
@@ -140,18 +141,18 @@ export function SignalRadio() {
           <div className="signal-radio-speaker relative flex h-28 items-end justify-center overflow-hidden border border-white/10 bg-[#080705] px-5 pb-4 sm:h-32">
             <div className="signal-radio-speaker-grille" />
             <div className="signal-radio-meter relative z-10 flex h-16 items-end gap-1.5" aria-hidden="true">
-              {meterBars.map((response, index) => {
+              {ambientMeterBars.map((ambientLevel, index) => {
                 const meterEnergy = lightsOn
                   ? beatSync && isPlaying
-                    ? Math.min(1, Math.max(0.08, audioEnergy * response * 1.45))
+                    ? Math.min(1, Math.max(0.035, (audioSpectrum[index] ?? 0) * 1.24))
                     : isPlaying
-                      ? 0.28 * response
+                      ? ambientLevel
                       : 0.06
                   : 0.025;
 
                 return (
                   <span
-                    key={`${response}-${index}`}
+                    key={`spectrum-${index}`}
                     className="signal-radio-meter-bar"
                     style={{ transform: `scaleY(${meterEnergy})` }}
                   />
