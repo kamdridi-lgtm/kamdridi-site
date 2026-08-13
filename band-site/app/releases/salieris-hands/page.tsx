@@ -12,7 +12,7 @@ const teaserUrl = "https://youtu.be/wD0u7-krT8s?si=4a1J1siTwJV9bGCI";
 const teaserVideo = "/assets/video/salieris-hands/official-teaser.mp4";
 const heroVideo = "/assets/video/salieris-hands/salieri-hero-slow.mp4";
 const heroVideoWebm = "/assets/video/salieris-hands/salieri-hero-slow.webm";
-const salieriPreviewVersion = "36s-20260812";
+const salieriPreviewVersion = "36s-clean-20260812";
 
 function getSalieriPreview(trackId: string) {
   const previewSrc = getPreparedPreview(trackId);
@@ -778,4 +778,3 @@ export default function SalierisHandsPage() {
     </main>
   );
 }
-
