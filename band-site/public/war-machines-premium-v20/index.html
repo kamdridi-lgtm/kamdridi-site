@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAR MACHINES - REALITY TRANSMISSION</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=18">
+</head>
+<body class="state-inactive">
+
+    <div id="boot-sequence">
+        <div id="neural-sync-container">
+            <div id="sync-label">NEURAL_SYNC_ESTABLISHED</div>
+            <div id="sync-bar-bg"><div id="sync-bar-fill"></div></div>
+            <div id="sync-percent">00%</div>
+        </div>
+        <button id="ignite-btn" disabled>INITIALIZING COMMS...</button>
+        <button id="force-debug-btn" style="margin-top: 10px; border-color: #666; color: #666; font-size: 0.8rem; letter-spacing: 2px;">FORCE DEBUG IGNITE (BYPASS LOCKS)</button>
+    </div>
+
+    <!-- The physical world layer (Cinematic Video Scenes) -->
+    <div id="world-layer">
+        <!-- Dynamic Big Mix Engine (No loops) -->
+        <video class="cinematic-vid blur-vid" id="blur-a" muted playsinline preload="auto"></video>
+        <video class="cinematic-vid blur-vid" id="blur-b" muted playsinline preload="auto"></video>
+        
+        <video class="cinematic-vid mix-vid" id="vid-a" muted playsinline preload="auto"></video>
+        <video class="cinematic-vid mix-vid" id="vid-b" muted playsinline preload="auto"></video>
+        
+        <!-- Subliminal image flash layer -->
+        <div id="subliminal-flash-layer"></div>
+        <div id="dirt-overlay"></div>
+    </div>
+
+    <!-- Warp canvas for intense space/rust particle flight -->
+    <canvas id="warp-canvas"></canvas>
+    
+    <!-- Audio Waveform Visualizer -->
+    <canvas id="waveform-canvas"></canvas>
+
+    <!-- Tactical HUD Interface Overlay -->
+    <div id="mech-hud">
+        <div class="hud-top">
+            <span class="glitch-txt" data-text="SECURE COMMS v7.0">SECURE COMMS v7.0</span>
+            <div class="audio-freq" id="freq-bars">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </div>
+        </div>
+        
+        <div class="hud-center-ring">
+            <div class="ring r-outer"></div>
+            <div class="ring r-mid"></div>
+            <div class="ring r-inner"></div>
+            <div class="crosshairs"></div>
+            <div class="core-glow"></div>
+        </div>
+        
+        <div id="data-stream" class="terminal-feed"></div>
+
+        <div class="hud-bottom">
+            <span id="system-status">AWAITING INPUT...</span>
+            <span id="timecode">T-00:00:00</span>
+        </div>
+    </div>
+
+    <!-- Narrative / Title Overlays -->
+    <div id="narrative-layer">
+        <h2 id="msg-detect">DECRYPTING...</h2>
+        <div id="kam-reveal"></div>
+        
+        <!-- Main Glitch Title (Appears at the Drop) -->
+        <h1 id="main-title" data-text="WAR MACHINES">WAR MACHINES</h1>
+    </div>
+
+    <!-- Persistent Global Effects -->
+    <div id="damage-vignette"></div>
+    <div id="dirt-overlay"></div>
+    <div id="cinematic-grade"></div>
+    <div id="crt-scanlines"></div>
+    <div id="flash-overlay"></div>
+
+    <script src="assets.js?v=18"></script>
+    <script src="main.js?v=18"></script>
+</body>
+</html>
