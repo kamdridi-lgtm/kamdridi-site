@@ -25,7 +25,7 @@ export function ActiveSignalsTV() {
           </video>
         )}
         {channel === 3 && (
-          <video controls className="h-full w-full" poster="/kamdridi-hero.jpg">
+          <video controls className="h-full w-full" poster="/assets/images/our-lost-dreams-cover.jpg">
             <source src="/videos/our-lost-dreams-v5.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
