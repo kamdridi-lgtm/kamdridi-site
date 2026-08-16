@@ -1,6 +1,8 @@
 import crypto from "crypto";
 
 const SESSION_COOKIE_NAME = "kamdridi_fan_session";
+const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 30;
+const DEVELOPMENT_FALLBACK_SECRET = "dev-only-fallback-secret-change-me";
 
 type SessionUser = {
   name: string;
@@ -8,7 +10,16 @@ type SessionUser = {
 };
 
 function getSecret() {
-  return process.env.FAN_CLUB_SESSION_SECRET || "dev-fallback-secret-change-me";
+  const configuredSecret = process.env.FAN_CLUB_SESSION_SECRET?.trim();
+  if (configuredSecret) {
+    return configuredSecret;
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("FAN_CLUB_SESSION_SECRET must be configured in production.");
+  }
+
+  return DEVELOPMENT_FALLBACK_SECRET;
 }
 
 function shouldUseSecureCookies() {
@@ -21,6 +32,22 @@ function shouldUseSecureCookies() {
 
 function sign(value: string) {
   return crypto.createHmac("sha256", getSecret()).update(value).digest("hex");
+}
+
+function hasValidSignature(encodedPayload: string, signature: string) {
+  const expectedSignature = sign(encodedPayload);
+  if (signature.length !== expectedSignature.length) {
+    return false;
+  }
+
+  try {
+    return crypto.timingSafeEqual(
+      Buffer.from(signature, "hex"),
+      Buffer.from(expectedSignature, "hex")
+    );
+  } catch {
+    return false;
+  }
 }
 
 export function createSessionToken(user: SessionUser) {
@@ -39,7 +66,7 @@ export function verifySessionToken(token: string | undefined | null): SessionUse
   }
 
   const [encodedPayload, signature] = token.split(".");
-  if (!encodedPayload || !signature || sign(encodedPayload) !== signature) {
+  if (!encodedPayload || !signature || !hasValidSignature(encodedPayload, signature)) {
     return null;
   }
 
@@ -47,9 +74,16 @@ export function verifySessionToken(token: string | undefined | null): SessionUse
     const payload = JSON.parse(Buffer.from(encodedPayload, "base64url").toString("utf8")) as {
       name: string;
       email: string;
+      issuedAt?: number;
     };
 
-    if (!payload.name || !payload.email) {
+    if (!payload.name || !payload.email || typeof payload.issuedAt !== "number") {
+      return null;
+    }
+
+    const now = Date.now();
+    const maxAgeMs = SESSION_MAX_AGE_SECONDS * 1000;
+    if (payload.issuedAt > now || now - payload.issuedAt > maxAgeMs) {
       return null;
     }
 
@@ -69,7 +103,7 @@ export const sessionCookie = {
     sameSite: "lax" as const,
     secure: shouldUseSecureCookies(),
     path: "/",
-    maxAge: 60 * 60 * 24 * 30
+    maxAge: SESSION_MAX_AGE_SECONDS
   }
 };
 
