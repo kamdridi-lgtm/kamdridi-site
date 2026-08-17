@@ -3,11 +3,15 @@ import Stripe from "stripe";
 import { getStripeServer, getStripeWebhookSecret } from "@/lib/stripe";
 import { createPrintfulOrderFromSession } from "@/lib/printful";
 import { updateLabelApplication } from "@/lib/label-storage";
-import { processCommerceOrder, NotificationStatus } from "@/lib/commerce-order-processing";
+import {
+  deriveCommerceFulfillmentStatus,
+  processCommerceOrder,
+  NotificationStatus
+} from "@/lib/commerce-order-processing";
 
-import { Resend } from 'resend';
+import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy');
+const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy");
 
 function escapeHtml(value: unknown) {
   return String(value ?? "")
@@ -18,15 +22,19 @@ function escapeHtml(value: unknown) {
     .replaceAll("'", "&#039;");
 }
 
-async function sendAdminOrderNotification(session: Stripe.Checkout.Session, lineItems: Stripe.ApiList<Stripe.LineItem>): Promise<NotificationStatus> {
-  const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL || 'contact@kamdridi.com';
-  
+async function sendAdminOrderNotification(
+  session: Stripe.Checkout.Session,
+  lineItems: Stripe.ApiList<Stripe.LineItem>
+): Promise<NotificationStatus> {
+  const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL || "contact@kamdridi.com";
+
   if (!process.env.RESEND_API_KEY) {
-    console.warn(`[Webhook] ADMIN ORDER EMAIL NOT SENT — RESEND_API_KEY NOT CONFIGURED. Order ${session.id} recorded in Stripe but email notification omitted.`);
+    console.warn(
+      `[Webhook] ADMIN ORDER EMAIL NOT SENT — RESEND_API_KEY NOT CONFIGURED. Order ${session.id} recorded in Stripe but email notification omitted.`
+    );
     return "skipped_not_configured";
   }
-  
-  // Collect order variables for email
+
   const customerEmail = session.customer_details?.email || "Unknown";
   const customerName = session.customer_details?.name || "Customer";
   const total = session.amount_total ? (session.amount_total / 100).toFixed(2) : "0.00";
@@ -38,16 +46,26 @@ async function sendAdminOrderNotification(session: Stripe.Checkout.Session, line
   const dashboardLink = paymentIntentId
     ? `https://dashboard.stripe.com${dashboardMode}/payments/${encodeURIComponent(paymentIntentId)}`
     : `https://dashboard.stripe.com${dashboardMode}/checkout/sessions/${encodeURIComponent(session.id)}`;
-  
-  const sessionAny = session as any;
-  const address = sessionAny.shipping_details?.address 
-    ? `${sessionAny.shipping_details.address.line1}, ${sessionAny.shipping_details.address.city}, ${sessionAny.shipping_details.address.country}` 
-    : (session.customer_details?.address ? `${session.customer_details.address.line1}, ${session.customer_details.address.city}, ${session.customer_details.address.country}` : "No address");
-  
+
+  const sessionAny = session as Stripe.Checkout.Session & {
+    shipping_details?: {
+      address?: Stripe.Address | null;
+    };
+  };
+  const address = sessionAny.shipping_details?.address
+    ? `${sessionAny.shipping_details.address.line1}, ${sessionAny.shipping_details.address.city}, ${sessionAny.shipping_details.address.country}`
+    : session.customer_details?.address
+      ? `${session.customer_details.address.line1}, ${session.customer_details.address.city}, ${session.customer_details.address.country}`
+      : "No address";
+
   let itemsHtml = "<ul>";
-  lineItems.data.forEach(item => {
-    const p = item.price?.product as Stripe.Product;
-    itemsHtml += `<li>${escapeHtml(item.quantity)}x ${escapeHtml(p?.name || item.description || "Item")}</li>`;
+  lineItems.data.forEach((item) => {
+    const product = item.price?.product;
+    const productName =
+      product && typeof product !== "string" && !("deleted" in product)
+        ? product.name
+        : item.description || "Item";
+    itemsHtml += `<li>${escapeHtml(item.quantity)}x ${escapeHtml(productName)}</li>`;
   });
   itemsHtml += "</ul>";
 
@@ -63,15 +81,15 @@ async function sendAdminOrderNotification(session: Stripe.Checkout.Session, line
 
   try {
     await resend.emails.send({
-      from: 'Kamdridi Commerce <orders@kamdridi.com>',
+      from: "Kamdridi Commerce <orders@kamdridi.com>",
       to: [adminEmail],
       subject: `🚨 New Order from ${customerName} - $${total}`,
       html: emailHtml
     });
-    console.log(`[Webhook] Admin notification email sent successfully.`);
+    console.log("[Webhook] Admin notification email sent successfully.");
     return "sent";
   } catch (err) {
-    console.error(`[Webhook] Failed to send admin email via Resend:`, err);
+    console.error("[Webhook] Failed to send admin email via Resend:", err);
     return "failed";
   }
 }
@@ -121,7 +139,10 @@ export async function POST(request: Request) {
 
     // COMMERCE
     if (session.metadata?.orderType === "kamdridi-commerce" || session.metadata?.campaignType) {
-      if (session.metadata?.fulfillmentStatus === "processed") {
+      if (
+        session.metadata?.fulfillmentStatus === "processed" ||
+        session.metadata?.fulfillmentStatus === "manual_action_required"
+      ) {
         return NextResponse.json({ received: true, duplicate: true });
       }
 
@@ -130,26 +151,41 @@ export async function POST(request: Request) {
       });
 
       try {
-        await processCommerceOrder({
+        const processingResult = await processCommerceOrder({
           session,
           lineItems,
           sendNotification: sendAdminOrderNotification,
-          createPrintfulOrder: async (sess, items) => {
-            await createPrintfulOrderFromSession(sess, { ...items, has_more: false, object: "list", url: "" });
-          }
+          createPrintfulOrder: async (sess, items) =>
+            createPrintfulOrderFromSession(sess, {
+              ...items,
+              has_more: false,
+              object: "list",
+              url: ""
+            })
         });
+
+        const fulfillmentStatus = deriveCommerceFulfillmentStatus(processingResult);
+        const updatedAt = new Date().toISOString();
+
         await stripe.checkout.sessions.update(session.id, {
           metadata: {
             ...session.metadata,
-            fulfillmentStatus: "processed",
-            fulfillmentProcessedAt: new Date().toISOString()
+            fulfillmentStatus,
+            fulfillmentUpdatedAt: updatedAt,
+            notificationStatus: processingResult.notificationStatus,
+            printfulStatus: processingResult.printfulStatus,
+            manualItemCount: String(processingResult.manualItemCount),
+            printfulItemCount: String(processingResult.printfulItemCount),
+            multiVendorItemCount: String(processingResult.multiVendorItemCount),
+            ...(fulfillmentStatus === "processed"
+              ? { fulfillmentProcessedAt: updatedAt }
+              : { fulfillmentManualActionAt: updatedAt })
           }
         });
       } catch (error) {
         return NextResponse.json(
           {
-            error:
-              error instanceof Error ? error.message : "Commerce processing failed."
+            error: error instanceof Error ? error.message : "Commerce processing failed."
           },
           { status: 500 }
         );
@@ -161,22 +197,29 @@ export async function POST(request: Request) {
       }
 
       try {
-        const { createCustomForgeOrder } = await import('@/lib/printful');
-        await createCustomForgeOrder(session);
-        
-        // Also send admin notification
+        const { createCustomForgeOrder } = await import("@/lib/printful");
+        const forgeResult = await createCustomForgeOrder(session);
+        if (forgeResult.skipped) {
+          throw new Error(
+            `Custom Forge fulfillment skipped: ${forgeResult.reason || "no Printful order was created"}`
+          );
+        }
+
         const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
           expand: ["data.price.product"]
         });
-        await sendAdminOrderNotification(session, lineItems);
+        const notificationStatus = await sendAdminOrderNotification(session, lineItems);
+        const processedAt = new Date().toISOString();
+
         await stripe.checkout.sessions.update(session.id, {
           metadata: {
             ...session.metadata,
             fulfillmentStatus: "processed",
-            fulfillmentProcessedAt: new Date().toISOString()
+            fulfillmentProcessedAt: processedAt,
+            fulfillmentUpdatedAt: processedAt,
+            notificationStatus
           }
         });
-
       } catch (error) {
         return NextResponse.json(
           {
