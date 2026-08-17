@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "node scripts/lint.mjs",
     "test:label": "node --test tests/label-critical.test.mjs",
+    "test:session-security": "node --import tsx --test tests/session-security.test.ts",
     "commerce:verify": "node --import tsx scripts/test-commerce.ts",
     "masters:prepare": "node scripts/prepare-master.mjs",
     "masters:verify": "node scripts/verify-master-catalog.mjs"
