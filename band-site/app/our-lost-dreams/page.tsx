@@ -45,7 +45,12 @@ export default function OurLostDreamsPage() {
   return (
     <main className="min-h-screen bg-[#050505] text-white">
       <section className="relative overflow-hidden border-b border-red-900/40 px-5 py-20 md:py-28">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(220,38,38,0.18),transparent_34%),radial-gradient(circle_at_82%_20%,rgba(120,53,15,0.12),transparent_30%),linear-gradient(180deg,#090606_0%,#050505_74%)]" />
+        <div
+          className="pointer-events-none absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/our-lost-dreams-hero.webp')" }}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.76)_0%,rgba(0,0,0,0.54)_48%,rgba(0,0,0,0.66)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,5,5,0.18)_0%,rgba(5,5,5,0.34)_48%,rgba(5,5,5,0.88)_100%)]" />
         <div className="relative mx-auto max-w-6xl">
           <p className="text-xs font-black uppercase tracking-[0.38em] text-red-500">
             KAM DRIDI · Montreal, Canada
@@ -56,12 +61,12 @@ export default function OurLostDreamsPage() {
           <p className="mt-7 text-2xl font-black uppercase tracking-[0.12em] text-red-500 md:text-4xl">
             BE EARLY.
           </p>
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-stone-200 md:text-xl">
+          <p className="mt-4 max-w-3xl text-lg leading-8 text-stone-100 drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] md:text-xl">
             One request: listen before you decide. Be among the first stations,
             media outlets and music professionals in your market to discover
             OUR LOST DREAMS.
           </p>
-          <p className="mt-4 max-w-3xl text-sm uppercase tracking-[0.2em] text-stone-400">
+          <p className="mt-4 max-w-3xl text-sm uppercase tracking-[0.2em] text-stone-300 drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
             One song. Two worlds. The cinematic original and the unplugged live interpretation.
           </p>
         </div>
