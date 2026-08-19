@@ -47,7 +47,13 @@ export default function OurLostDreamsPage() {
       <section className="relative overflow-hidden border-b border-red-900/40 px-5 py-20 md:py-28">
         <div
           className="pointer-events-none absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/our-lost-dreams-hero.webp')" }}
+          style={{
+            backgroundImage:
+              "url('/images/our-lost-dreams-hero.webp?v=20260819-1944')",
+            backgroundPosition: "center center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
         />
         <div className="relative mx-auto max-w-6xl">
           <p className="text-xs font-black uppercase tracking-[0.38em] text-red-500">
