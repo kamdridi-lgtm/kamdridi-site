@@ -49,8 +49,6 @@ export default function OurLostDreamsPage() {
           className="pointer-events-none absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url('/images/our-lost-dreams-hero.webp')" }}
         />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.76)_0%,rgba(0,0,0,0.54)_48%,rgba(0,0,0,0.66)_100%)]" />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,5,5,0.18)_0%,rgba(5,5,5,0.34)_48%,rgba(5,5,5,0.88)_100%)]" />
         <div className="relative mx-auto max-w-6xl">
           <p className="text-xs font-black uppercase tracking-[0.38em] text-red-500">
             KAM DRIDI · Montreal, Canada
@@ -61,12 +59,12 @@ export default function OurLostDreamsPage() {
           <p className="mt-7 text-2xl font-black uppercase tracking-[0.12em] text-red-500 md:text-4xl">
             BE EARLY.
           </p>
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-stone-100 drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] md:text-xl">
+          <p className="mt-4 max-w-3xl text-lg leading-8 text-stone-100 md:text-xl">
             One request: listen before you decide. Be among the first stations,
             media outlets and music professionals in your market to discover
             OUR LOST DREAMS.
           </p>
-          <p className="mt-4 max-w-3xl text-sm uppercase tracking-[0.2em] text-stone-300 drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+          <p className="mt-4 max-w-3xl text-sm uppercase tracking-[0.2em] text-stone-300">
             One song. Two worlds. The cinematic original and the unplugged live interpretation.
           </p>
         </div>
