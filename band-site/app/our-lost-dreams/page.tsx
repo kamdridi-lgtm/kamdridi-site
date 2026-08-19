@@ -76,7 +76,7 @@ export default function OurLostDreamsPage() {
             From Echoes Unearthed
           </h2>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-stone-300">
-            Emotional cinematic rock / crossover. This is the primary radio and
+            Emotional cinematic melodic hard rock / crossover. This is the primary radio and
             media version of OUR LOST DREAMS.
           </p>
 
@@ -125,7 +125,7 @@ export default function OurLostDreamsPage() {
               KAM DRIDI
             </h2>
             <p className="mt-4 text-sm leading-7 text-stone-300">
-              Independent artist · Montreal, Canada. Cinematic hard rock,
+              Independent artist · Montreal, Canada. Cinematic melodic hard rock,
               industrial energy and emotional songwriting.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
