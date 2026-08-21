@@ -49,7 +49,7 @@ export default function OurLostDreamsPage() {
           className="pointer-events-none absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url('/images/our-lost-dreams-hero.webp?v=20260819-1944')",
+              "url('/images/our-lost-dreams-bg.jpg')",
             backgroundPosition: "center center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
