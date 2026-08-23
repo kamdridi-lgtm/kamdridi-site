@@ -8,7 +8,7 @@ const gamesHeroVideo = "/videos/games-hero-20260516.mp4";
 export const metadata: Metadata = {
   title: "Games",
   description:
-    "Launch game experiences inside the KAMDRIDI fan universe, including The Gilded Null and deeper protocol access for members."
+    "Explore game development inside the KAMDRIDI fan universe, including The Gilded Null and deeper protocol access for members."
 };
 
 export default function GamesPage() {
@@ -46,15 +46,15 @@ export default function GamesPage() {
             <div className="mx-auto grid max-w-6xl gap-7 lg:grid-cols-[1fr_0.9fr] lg:items-end">
               <div className="max-w-3xl">
                 <p className="text-xs uppercase tracking-[0.42em] text-[#f4c66a]">
-                  New upcoming KAMDRIDI video game
+                  KAMDRIDI game development
                 </p>
                 <h2 className="mt-4 font-display text-4xl uppercase leading-none tracking-[0.06em] text-[#f3dfb6] md:text-6xl">
                   Play the signal. Survive the machine.
                 </h2>
                 <p className="mt-5 max-w-2xl text-sm leading-7 text-stone-300 md:text-base">
-                  A new KAMDRIDI video game is coming with exclusive music made
-                  and available only for this release. Until then, compare the
-                  Codex and Qwen War Machines builds, then enter The Gilded Null.
+                  The next KAMDRIDI game builds are in active production with exclusive music and
+                  a larger cinematic world. Compare the Codex and Qwen War Machines experiments,
+                  then follow The Gilded Null — Act I as the next build takes shape.
                 </p>
               </div>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
@@ -95,10 +95,10 @@ export default function GamesPage() {
                 </Link>
 
                 <Link
-                  href="/play/the-gilded-null/index.html"
-                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#f4c66a] px-7 py-3 text-sm uppercase tracking-[0.24em] text-black transition hover:-translate-y-0.5 hover:bg-[#ffd989] sm:col-span-2 lg:col-span-1 xl:col-span-2"
+                  href="/games/the-gilded-null"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#f4c66a]/55 bg-[#f4c66a]/10 px-7 py-3 text-sm uppercase tracking-[0.24em] text-[#f4c66a] transition hover:-translate-y-0.5 hover:border-[#f4c66a] hover:bg-[#f4c66a]/15 sm:col-span-2 lg:col-span-1 xl:col-span-2"
                 >
-                  Play Free Game
+                  The Gilded Null · In Development
                 </Link>
               </div>
             </div>
