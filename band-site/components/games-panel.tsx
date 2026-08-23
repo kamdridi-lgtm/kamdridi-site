@@ -16,7 +16,7 @@ export function GamesPanel() {
             <div className="relative aspect-[16/10] min-h-[360px] sm:aspect-[21/9]">
               <Image
                 src={gildedNull.poster}
-                alt="The Gilded Null launch art"
+                alt="The Gilded Null development art"
                 fill
                 className="object-cover object-center"
                 sizes="(min-width: 1024px) 1120px, 100vw"
@@ -32,16 +32,16 @@ export function GamesPanel() {
                   <span className="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-[9px] uppercase tracking-[0.2em] text-amber-200">
                     {currentAct1Checkpoint.label}
                   </span>
-                  <span className="rounded-full border border-emerald-300/25 bg-emerald-300/10 px-3 py-1 text-[9px] uppercase tracking-[0.2em] text-emerald-200">
-                    {act1LiveStatus.deploymentStatus}
+                  <span className="rounded-full border border-[#f4c66a]/30 bg-[#f4c66a]/10 px-3 py-1 text-[9px] uppercase tracking-[0.2em] text-[#f4c66a]">
+                    Active Development
                   </span>
                 </div>
                 <h2 className="mt-4 font-display text-3xl uppercase leading-none tracking-[0.08em] text-[#f3dfb6] md:text-4xl">
                   Latest production checkpoint
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-300">
-                  Follow the real Godot ACT I runner as it moves from the archived Windows build
-                  to a verified browser checkpoint. Existing public games remain untouched.
+                  Follow the real Godot ACT I runner as development continues toward the next
+                  public checkpoint. The project is not being presented as a finished game.
                 </p>
 
                 <div className="mt-6 grid gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-2 xl:grid-cols-4">
@@ -58,7 +58,7 @@ export function GamesPanel() {
                     <span className="mt-2 block font-mono text-xs font-semibold text-[#f4c66a]">{act1LiveStatus.sourceCommit}</span>
                   </div>
                   <div className="bg-black/80 p-4">
-                    <span className="block text-[9px] uppercase tracking-[0.24em] text-stone-500">Public build</span>
+                    <span className="block text-[9px] uppercase tracking-[0.24em] text-stone-500">Latest checkpoint</span>
                     <span className="mt-2 block text-xs font-semibold text-stone-200">{act1LiveStatus.deployedCheckpoint}</span>
                   </div>
                 </div>
@@ -92,20 +92,21 @@ export function GamesPanel() {
               <div className="flex flex-col justify-between bg-black px-6 py-7 md:px-8 md:py-9">
                 <div>
                   <span className="text-[10px] uppercase tracking-[0.3em] text-stone-500">
-                    Legacy playable build
+                    Public build status
                   </span>
                   <h3 className="mt-3 font-display text-2xl uppercase tracking-[0.08em] text-white">
-                    Canvas 2D Corridor Protocol
+                    Temporarily Offline
                   </h3>
                   <p className="mt-3 text-sm leading-6 text-stone-400">
-                    The existing browser prototype stays online while the 3D checkpoint is validated.
+                    The public prototype is paused while the next production pass is being prepared.
+                    Development progress remains visible without exposing a broken or unfinished build.
                   </p>
                 </div>
                 <Link
-                  href={gildedNull.launchUrl}
+                  href="/games/the-gilded-null"
                   className="mt-6 inline-flex min-h-12 items-center justify-center rounded-full border border-[#f4c66a]/55 px-6 py-3 text-xs uppercase tracking-[0.22em] text-[#f4c66a] transition hover:border-[#f4c66a] hover:bg-[#f4c66a]/10"
                 >
-                  Play Canvas prototype
+                  View Development Status
                 </Link>
               </div>
             </div>
