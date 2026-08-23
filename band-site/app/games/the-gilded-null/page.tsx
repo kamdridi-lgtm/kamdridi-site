@@ -6,12 +6,10 @@ import { CTAButton, Section } from "@/components/ui";
 export const metadata: Metadata = {
   title: "The Gilded Null",
   description:
-    "Play The Gilded Null inside the KAMDRIDI games protocol."
+    "The Gilded Null — Act I is currently in active development inside the KAMDRIDI games universe."
 };
 
 export default function TheGildedNullPage() {
-  const iframeSrc = "/play/the-gilded-null/index.html";
-
   return (
     <>
       <section className="overflow-hidden border-b border-white/10">
@@ -46,18 +44,18 @@ export default function TheGildedNullPage() {
               The Gilded Null
             </h1>
             <p className="mt-6 max-w-3xl text-base leading-8 text-stone-300">
-              The playable browser build is now hosted directly on kamdridi.com as a Canvas 2D
-              corridor protocol.
+              Act I is currently in active development. The public playable build is temporarily
+              offline while the next development pass is completed.
             </p>
             <div className="mt-8 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.28em] text-stone-400">
               <span className="rounded-full border border-[#f4c66a]/40 bg-[#f4c66a]/10 px-4 py-2 text-[#f4c66a]">
-                Playable Build Live
+                In Development
               </span>
               <span className="rounded-full border border-white/10 px-4 py-2 text-white">
-                Canvas 2D
+                Act I
               </span>
               <span className="rounded-full border border-white/10 px-4 py-2 text-white">
-                Web Audio
+                Next Build In Progress
               </span>
             </div>
             <div className="mt-8 flex flex-wrap gap-4">
@@ -75,15 +73,28 @@ export default function TheGildedNullPage() {
       <Section>
         <div className="overflow-hidden rounded-[32px] border border-[#f4c66a]/20 bg-black shadow-[0_30px_90px_rgba(0,0,0,0.45)]">
           <div className="border-b border-white/10 px-6 py-4 text-xs uppercase tracking-[0.35em] text-stone-400">
-            The Gilded Null playable web build loaded from kamdridi.com
+            Development Status
           </div>
-          <div className="relative aspect-[16/10] w-full bg-black">
-            <iframe
-              src={iframeSrc}
-              title="The Gilded Null"
-              className="absolute inset-0 h-full w-full border-0"
-              allow="fullscreen"
+          <div className="relative flex min-h-[420px] w-full items-center justify-center overflow-hidden bg-black px-6 py-16 text-center">
+            <Image
+              src="/assets/images/games/gilded-null-master.png"
+              alt="The Gilded Null development preview"
+              fill
+              className="object-cover opacity-25"
             />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(244,198,106,0.08),rgba(0,0,0,0.88)_65%)]" />
+            <div className="relative z-10 mx-auto max-w-2xl">
+              <p className="text-xs uppercase tracking-[0.42em] text-[#f4c66a]">
+                Public Build Temporarily Offline
+              </p>
+              <h2 className="mt-5 font-display text-3xl uppercase tracking-[0.08em] text-white md:text-5xl">
+                The Next Build Is Being Forged
+              </h2>
+              <p className="mx-auto mt-6 max-w-xl text-sm leading-7 text-stone-300 md:text-base">
+                Development continues on The Gilded Null — Act I. This page will reopen the playable
+                build when the current production pass is ready for public testing.
+              </p>
+            </div>
           </div>
         </div>
 
