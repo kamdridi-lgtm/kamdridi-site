@@ -41,7 +41,6 @@ const infoRows = [
   ["作品名", "ウォー・マシーンズ"],
   ["仕様", "4曲入りフィジカル・マキシシングル"],
   ["ジャンル", "メロディック・ハードロック / シネマティック・メロディック・ハードロック"],
-  ["予定限定数", "約300枚"],
   ["発売", "未定"],
   ["版", "日本向け限定盤"],
   ["カタログ番号", "KDR-WM-JP-001"]
@@ -262,14 +261,13 @@ export default function WarMachinesJapanPage() {
                         ウォー・マシーンズ
                       </h1>
                       <p className="mt-3 max-w-xl text-sm font-semibold leading-7 text-stone-300 sm:text-base">
-                        赤い光、鋼鉄の質感、戦場のような緊張感で構成したKAMDRIDIの日本向けプレミアムページです。
-                        聴く、観る、購入する導線をひとつのキャンペーン画面にまとめています。
+                        インダストリアルなビジュアル・アイデンティティとメロディック・シネマティック・ハードロックを融合。公式サイト限定のデジタル配信に加え、将来的な日本盤フィジカル・マキシシングルの発売を予定した、KAMDRIDIの日本向けプレゼンテーションです。
                       </p>
                     </div>
 
                     <div className="mt-7 grid gap-3 sm:grid-cols-2">
                       {[
-                        ["版", "日本スペシャル"],
+                        ["版", "日本向け限定盤"],
                         ["形式", "シングル / デジタル"],
                         ["地域", "日本"],
                         ["信号", "最優先"]
@@ -345,7 +343,7 @@ export default function WarMachinesJapanPage() {
               <p className="text-xs font-black uppercase tracking-[0.28em] text-[#ff2d21]">特典 01</p>
               <h2 className="mt-3 text-2xl font-black text-white">日本限定フィジカル・マキシシングル</h2>
               <p className="mt-2 min-h-12 text-sm font-semibold leading-6 text-stone-300">
-                4曲収録<br />初回約300枚予定
+                4曲収録
               </p>
               <p className="mt-4 font-display text-4xl font-black text-[#ff2d21] drop-shadow-[0_0_18px_rgba(255,26,18,0.8)] sm:text-5xl">
                 価格未定
@@ -359,7 +357,7 @@ export default function WarMachinesJapanPage() {
             <Panel className="p-5">
               <p className="text-xs font-black uppercase tracking-[0.28em] text-[#ff2d21]">特典 02</p>
               <h2 className="mt-3 text-2xl font-black text-white">デジタル・シングル</h2>
-              <p className="mt-2 min-h-12 text-sm font-semibold leading-6 text-stone-300">1曲ダウンロード</p>
+              <p className="mt-2 min-h-12 text-sm font-semibold leading-6 text-stone-300">1曲ダウンロード<br />公式サイト限定デジタル販売</p>
               <p className="mt-4 font-display text-5xl font-black text-[#ff2d21] drop-shadow-[0_0_18px_rgba(255,26,18,0.8)] sm:text-6xl">
                 ¥250
               </p>
