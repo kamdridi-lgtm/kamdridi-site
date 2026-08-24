@@ -39,16 +39,19 @@ export const metadata: Metadata = {
 const infoRows = [
   ["アーティスト", "カム・ドリディ"],
   ["作品名", "ウォー・マシーンズ"],
-  ["仕様", "シングル"],
-  ["ジャンル", "ダーク / シネマティック / バトル"],
-  ["発売", "2026"],
-  ["版", "日本語版"]
+  ["仕様", "4曲入りフィジカル・マキシシングル"],
+  ["ジャンル", "メロディック・ハードロック / シネマティック・メロディック・ハードロック"],
+  ["予定限定数", "約300枚"],
+  ["発売", "未定"],
+  ["版", "日本向け限定盤"],
+  ["カタログ番号", "KDR-WM-JP-001"]
 ];
 
 const japanTracklist = [
-  { title: "ウォー・マシーンズ", previewSrc: null },
-  { title: "トゥー・ファスト・トゥー・ヤング", previewSrc: null },
-  { title: "ザ・フォール・オブ・ザ・ファースト・ナイト", previewSrc: null },
+  { title: "ウォー・マシーンズ", previewSrc: null, isBonus: false },
+  { title: "トゥー・ファスト・トゥー・ヤング", previewSrc: null, isBonus: false },
+  { title: "失われた夢", previewSrc: null, isBonus: false },
+  { title: "ウォー・マシーンズ（ライブ・クラウド・ヴァージョン）", previewSrc: null, isBonus: true },
 ] as const;
 
 const platforms = [
@@ -302,10 +305,10 @@ export default function WarMachinesJapanPage() {
                 </div>
                 <div className="mt-5 grid gap-3">
                   <ActionButton
-                    href={offerLinks.special}
+                    href="#"
                     icon={<ShoppingCart className="h-8 w-8" />}
-                    title="今すぐ購入"
-                    subtitle="高品質・アーティストを支援"
+                    title="準備中"
+                    subtitle="発売情報近日公開"
                     primary
                   />
                   <ActionButton
@@ -340,19 +343,18 @@ export default function WarMachinesJapanPage() {
           <section className="relative grid gap-4 px-5 py-5 sm:grid-cols-2 sm:px-10">
             <Panel className="p-5">
               <p className="text-xs font-black uppercase tracking-[0.28em] text-[#ff2d21]">特典 01</p>
-              <h2 className="mt-3 text-2xl font-black text-white">スペシャル・エディション</h2>
+              <h2 className="mt-3 text-2xl font-black text-white">日本限定フィジカル・マキシシングル</h2>
               <p className="mt-2 min-h-12 text-sm font-semibold leading-6 text-stone-300">
-                3曲収録 / ダウンロードまたはフィジカルCD
+                4曲収録<br />初回約300枚予定
               </p>
-              <p className="mt-4 font-display text-5xl font-black text-[#ff2d21] drop-shadow-[0_0_18px_rgba(255,26,18,0.8)] sm:text-6xl">
-                ¥1,500
+              <p className="mt-4 font-display text-4xl font-black text-[#ff2d21] drop-shadow-[0_0_18px_rgba(255,26,18,0.8)] sm:text-5xl">
+                価格未定
               </p>
-              <a
-                href={offerLinks.special}
-                className="mt-4 inline-flex border border-[#ff321d] px-4 py-2 text-xs font-black tracking-[0.16em] text-white"
+              <span
+                className="mt-4 inline-flex border border-[#ff321d]/40 px-4 py-2 text-xs font-black tracking-[0.16em] text-white/50 cursor-not-allowed"
               >
-                今すぐ購入
-              </a>
+                発売情報近日公開
+              </span>
             </Panel>
             <Panel className="p-5">
               <p className="text-xs font-black uppercase tracking-[0.28em] text-[#ff2d21]">特典 02</p>
@@ -389,7 +391,15 @@ export default function WarMachinesJapanPage() {
                     key={track.title}
                     className="grid min-h-12 gap-3 border border-[#4f1b18] bg-black/30 px-4 py-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center"
                   >
-                    <span>{index + 1}. {track.title}</span>
+                    <span>
+                      {index + 1}. {track.title}
+                      {track.isBonus && (
+                        <span className="mt-1 block text-[11px] font-bold text-[#ffb28a]">
+                          フィジカル限定ボーナス・トラック<br />
+                          次回作「ECHOES UNLIVE IN BRASIL」より
+                        </span>
+                      )}
+                    </span>
                     <TrackAccessControls
                       previewSrc={track.previewSrc ?? undefined}
                       previewLabel="無料試聴"
@@ -401,17 +411,17 @@ export default function WarMachinesJapanPage() {
                 ))}
               </ol>
               <p className="mt-4 text-sm font-semibold text-[#d7a06e]">
-                ※2曲目・3曲目は「Echoes Unearthed」収録曲です
+                本作は、今後予定されている「ECHOES UNEARTHED — JAPAN EDITION」とは別企画です。
               </p>
             </Panel>
           </section>
 
           <section className="relative grid gap-3 px-5 pb-5 sm:grid-cols-3 sm:px-10">
             <ActionButton
-              href={offerLinks.special}
+              href="#"
               icon={<ShoppingCart className="h-8 w-8" />}
-              title="購入"
-              subtitle="高品質・アーティスト支援"
+              title="準備中"
+              subtitle="発売情報近日公開"
               primary
             />
             <ActionButton
@@ -430,7 +440,7 @@ export default function WarMachinesJapanPage() {
 
           <section className="relative px-5 pb-8 sm:px-10">
             <p className="mb-3 text-center text-xs font-black tracking-[0.34em] text-stone-300 sm:text-sm sm:tracking-[0.55em]">
-              配信先
+              配信予定先 / 調整中
             </p>
             <Panel className="grid grid-cols-2 gap-2 p-4 sm:grid-cols-4">
               {platforms.map((platform) => (
