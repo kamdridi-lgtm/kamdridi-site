@@ -8,6 +8,67 @@ import { useSearchParams } from "next/navigation";
 import { useApp } from "@/components/providers";
 import { getVisibleCommerceProducts, CommerceProduct } from "@/data/commerce-products";
 
+const REMOTE_CATALOG_URL =
+  "https://retoydsgsuvznlpsguts.supabase.co/functions/v1/commerce-catalog";
+
+type RemoteProduct = {
+  id: string;
+  slug: string;
+  name: string;
+  subtitle?: string | null;
+  project: string;
+  project_slug: string;
+  category: string;
+  description: string;
+  images?: string[] | null;
+  price_cents: number;
+  currency: "CAD";
+  sale_mode: CommerceProduct["saleMode"];
+  visible: boolean;
+  checkout_enabled: boolean;
+  fulfillment_mode: CommerceProduct["fulfillmentMode"];
+  requires_shipping: boolean;
+  quantity_limit?: number | null;
+  product_path?: string | null;
+  release_path?: string | null;
+  badge?: string | null;
+  fulfillment_note?: string | null;
+  colors?: string[] | null;
+  sizes?: string[] | null;
+  formats?: string[] | null;
+  production_components?: CommerceProduct["productionComponents"] | null;
+};
+
+function normalizeRemoteProduct(product: RemoteProduct): CommerceProduct {
+  return {
+    id: product.id,
+    slug: product.slug,
+    name: product.name,
+    subtitle: product.subtitle || "",
+    project: product.project,
+    projectSlug: product.project_slug,
+    category: product.category,
+    description: product.description,
+    images: Array.isArray(product.images) && product.images.length > 0 ? product.images : ["/assets/images/releases/war-machines-cover.png"],
+    priceCents: product.price_cents,
+    currency: product.currency,
+    saleMode: product.sale_mode,
+    visible: product.visible,
+    checkoutEnabled: product.checkout_enabled,
+    fulfillmentMode: product.fulfillment_mode,
+    requiresShipping: product.requires_shipping,
+    quantityLimit: product.quantity_limit ?? undefined,
+    productPath: product.product_path || `/store#${product.id}`,
+    releasePath: product.release_path || "/store",
+    badge: product.badge || undefined,
+    fulfillmentNote: product.fulfillment_note || undefined,
+    colors: product.colors || undefined,
+    sizes: product.sizes || undefined,
+    formats: product.formats || undefined,
+    productionComponents: product.production_components || undefined
+  };
+}
+
 function formatCurrency(value: number) {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -22,13 +83,35 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
     message: string;
     tone: "success" | "warning" | "error";
   } | null>(null);
-  
+  const [allProducts, setAllProducts] = useState<CommerceProduct[]>(() => getVisibleCommerceProducts());
   const [activeFilter, setActiveFilter] = useState<string>("ALL");
   const [selectedSizes, setSelectedSizes] = useState<Record<string, string | undefined>>({});
   const [selectedColors, setSelectedColors] = useState<Record<string, string | undefined>>({});
   const purchaseState = searchParams.get("purchase") || searchParams.get("checkout");
   const checkoutSessionId = searchParams.get("session_id");
   const requestedFilter = searchParams.get("filter");
+
+  useEffect(() => {
+    let cancelled = false;
+
+    void fetch(REMOTE_CATALOG_URL, { cache: "no-store" })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("Remote catalog unavailable");
+        const payload = await response.json();
+        if (!Array.isArray(payload?.products)) throw new Error("Invalid remote catalog");
+        const normalized = (payload.products as RemoteProduct[])
+          .filter((product) => product.visible)
+          .map(normalizeRemoteProduct);
+        if (!cancelled && normalized.length > 0) setAllProducts(normalized);
+      })
+      .catch(() => {
+        // Keep the checked-in catalog as a resilient fallback.
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -67,11 +150,11 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
     } else if (purchaseState === "cancelled") {
       setStatus({ message: "Checkout cancelled. Your cart is still available.", tone: "warning" });
     }
-    
+
     if (requestedFilter) {
       setActiveFilter(requestedFilter);
     }
-    
+
     const hash = window.location.hash;
     if (hash) {
       setTimeout(() => {
@@ -90,8 +173,6 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
       cancelled = true;
     };
   }, [checkoutSessionId, clearCart, purchaseState, requestedFilter]);
-
-  const allProducts = getVisibleCommerceProducts();
 
   const getButtonLabel = (product: CommerceProduct) => {
     if (product.saleMode === "sold_out") return "SOLD OUT";
@@ -132,7 +213,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
             alt={product.name}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className={`object-cover transition duration-700 ${isSoldOut ? 'grayscale opacity-50' : 'group-hover:scale-105'}`}
+            className={`object-cover transition duration-700 ${isSoldOut ? "grayscale opacity-50" : "group-hover:scale-105"}`}
           />
           {product.saleMode === "preorder" && (
             <div className="absolute left-4 top-4 rounded-full border border-amber-500/30 bg-amber-950/80 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-amber-500 backdrop-blur">
@@ -152,7 +233,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
         </div>
         <div className="flex flex-1 flex-col p-5">
           <div className="mb-2 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-stone-500">
-            <span>{product.projectSlug.replace(/-/g, ' ')}</span>
+            <span>{product.projectSlug.replace(/-/g, " ")}</span>
             <span>{product.category}</span>
           </div>
           <div className="flex items-start justify-between gap-4">
@@ -167,17 +248,17 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
             </span>
           </div>
           <p className="mt-2 text-sm leading-6 text-stone-400">{product.description}</p>
-          
+
           {product.colors && product.colors.length > 0 && (
             <div className="mt-4">
               <div className="mb-2 text-[10px] uppercase tracking-[0.2em] text-stone-500">Color</div>
               <div className="flex flex-wrap gap-2">
-                {product.colors.map(c => (
+                {product.colors.map((c) => (
                   <button
                     key={c}
                     type="button"
-                    onClick={() => setSelectedColors(prev => ({ ...prev, [product.id]: c }))}
-                    className={`rounded-full border px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] ${selectedColors[product.id] === c || (!selectedColors[product.id] && product.colors![0] === c) ? 'border-[#f4c66a] bg-[#f4c66a]/10 text-[#f4c66a]' : 'border-white/10 text-stone-400'}`}
+                    onClick={() => setSelectedColors((prev) => ({ ...prev, [product.id]: c }))}
+                    className={`rounded-full border px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] ${selectedColors[product.id] === c || (!selectedColors[product.id] && product.colors![0] === c) ? "border-[#f4c66a] bg-[#f4c66a]/10 text-[#f4c66a]" : "border-white/10 text-stone-400"}`}
                   >
                     {c}
                   </button>
@@ -185,17 +266,17 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
               </div>
             </div>
           )}
-          
+
           {product.sizes && product.sizes.length > 0 && (
             <div className="mt-4">
               <div className="mb-2 text-[10px] uppercase tracking-[0.2em] text-stone-500">Size</div>
               <div className="flex flex-wrap gap-2">
-                {product.sizes.map(s => (
+                {product.sizes.map((s) => (
                   <button
                     key={s}
                     type="button"
-                    onClick={() => setSelectedSizes(prev => ({ ...prev, [product.id]: s }))}
-                    className={`rounded-full border px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] ${selectedSizes[product.id] === s || (!selectedSizes[product.id] && product.sizes![0] === s) ? 'border-[#f4c66a] bg-[#f4c66a]/10 text-[#f4c66a]' : 'border-white/10 text-stone-400'}`}
+                    onClick={() => setSelectedSizes((prev) => ({ ...prev, [product.id]: s }))}
+                    className={`rounded-full border px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] ${selectedSizes[product.id] === s || (!selectedSizes[product.id] && product.sizes![0] === s) ? "border-[#f4c66a] bg-[#f4c66a]/10 text-[#f4c66a]" : "border-white/10 text-stone-400"}`}
                   >
                     {s}
                   </button>
@@ -208,7 +289,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
             type="button"
             onClick={() => handleAddToCart(product)}
             disabled={isUnavailable}
-            className={`mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full py-4 text-xs font-bold uppercase tracking-[0.2em] transition ${isUnavailable ? 'cursor-not-allowed bg-stone-800 text-stone-500' : 'bg-[#f4c66a] text-black hover:bg-[#ffd989]'}`}
+            className={`mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full py-4 text-xs font-bold uppercase tracking-[0.2em] transition ${isUnavailable ? "cursor-not-allowed bg-stone-800 text-stone-500" : "bg-[#f4c66a] text-black hover:bg-[#ffd989]"}`}
           >
             {getButtonLabel(product)}
             {!isUnavailable && <ShoppingBag className="h-4 w-4" />}
@@ -228,19 +309,19 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
     { label: "DIGITAL", value: "digital" }
   ];
 
-  const filteredProducts = allProducts.filter(p => {
+  const filteredProducts = allProducts.filter((p) => {
     if (activeFilter === "ALL") return true;
     if (activeFilter === "digital") return p.category === "Digital Access" || p.saleMode === "digital";
     return p.projectSlug === activeFilter;
   });
 
-  const featured = filteredProducts.filter(p => p.id === "kamdridi-gold-logo-tee" || p.id === "echoes-unearthed-crest-tee" || p.id === "echoes-brasil-expanded-2026");
-  const australia = filteredProducts.filter(p => p.projectSlug === "australia-17-for-ever");
-  const echoesBrasil = filteredProducts.filter(p => p.projectSlug === "echoes-un-live-in-brasil" && !featured.includes(p));
-  const salieri = filteredProducts.filter(p => p.projectSlug === "salieris-hands");
-  const echoesUnearthed = filteredProducts.filter(p => p.projectSlug === "echoes-unearthed" && !featured.includes(p));
-  const kamdridiCore = filteredProducts.filter(p => p.projectSlug === "kamdridi-core" && !featured.includes(p) && p.category !== "Digital Access");
-  const digitalAccess = filteredProducts.filter(p => p.category === "Digital Access" || p.saleMode === "digital");
+  const featured = filteredProducts.filter((p) => p.id === "kamdridi-gold-logo-tee" || p.id === "echoes-unearthed-crest-tee" || p.id === "echoes-brasil-expanded-2026");
+  const australia = filteredProducts.filter((p) => p.projectSlug === "australia-17-for-ever");
+  const echoesBrasil = filteredProducts.filter((p) => p.projectSlug === "echoes-un-live-in-brasil" && !featured.includes(p));
+  const salieri = filteredProducts.filter((p) => p.projectSlug === "salieris-hands");
+  const echoesUnearthed = filteredProducts.filter((p) => p.projectSlug === "echoes-unearthed" && !featured.includes(p));
+  const kamdridiCore = filteredProducts.filter((p) => p.projectSlug === "kamdridi-core" && !featured.includes(p) && p.category !== "Digital Access");
+  const digitalAccess = filteredProducts.filter((p) => p.category === "Digital Access" || p.saleMode === "digital");
 
   return (
     <div className="grid gap-16">
@@ -262,20 +343,18 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
         </div>
       )}
 
-      {/* FILTERS */}
       <div className="flex flex-wrap justify-center gap-3">
-        {filters.map(f => (
+        {filters.map((f) => (
           <button
             key={f.value}
             onClick={() => setActiveFilter(f.value)}
-            className={`rounded-full border px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] transition ${activeFilter === f.value ? 'border-[#f4c66a] bg-[#f4c66a] text-black' : 'border-white/20 bg-black/50 text-stone-400 hover:border-[#f4c66a]/50 hover:text-[#f4c66a]'}`}
+            className={`rounded-full border px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] transition ${activeFilter === f.value ? "border-[#f4c66a] bg-[#f4c66a] text-black" : "border-white/20 bg-black/50 text-stone-400 hover:border-[#f4c66a]/50 hover:text-[#f4c66a]"}`}
           >
             {f.label}
           </button>
         ))}
       </div>
 
-      {/* SECTIONS */}
       {featured.length > 0 && activeFilter === "ALL" && (
         <section>
           <h2 className="mb-8 font-display text-3xl uppercase tracking-widest text-[#f4c66a]">Featured</h2>
@@ -313,7 +392,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
 
       {salieri.length > 0 && (
         <section>
-          <h2 className="mb-8 font-display text-3xl uppercase tracking-widest text-white">Salieri's Hands</h2>
+          <h2 className="mb-8 font-display text-3xl uppercase tracking-widest text-white">Salieri&apos;s Hands</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {salieri.map(renderProductCard)}
           </div>
