@@ -4,14 +4,13 @@ import Image from "next/image";
 import { Film, PlayCircle, ShoppingCart } from "lucide-react";
 import { TrackAccessControls } from "@/components/track-access-controls";
 
-
 function T({ children }: { children: React.ReactNode }) {
   return <span translate="no" className="notranslate" lang="en">{children}</span>;
 }
 
 const LINKS = {
   buySpecialEdition: "TODO_STRIPE_OR_KAMDRIDI_LINK_1500",
-  buyDigitalSingle: "TODO_STRIPE_OR_KAMDRIDI_LINK_250",
+  buyDigitalSingle: "#tracklist",
   spotify: "https://open.spotify.com/album/4rrOMu0BIhzJt1ElOfgXZu?si=a6eAct6jQl6BapO1_Zm4gA",
   apple: "https://music.apple.com/us/album/war-machines-radio-edit-single/1871879256",
   youtubeMusic: "https://www.youtube.com/watch?v=hzlVyLQN6a8",
@@ -29,11 +28,11 @@ const BACKGROUND = "/assets/images/war-machines-jp-background.png";
 const BACKGROUND_VIDEO = "/videos/war-machines-jp-background.mp4";
 const COVER = "/assets/images/war-machines-jp-cover.png";
 const FALLBACK_BUY_LINK =
-  "mailto:contact@kamdridi.com?subject=War%20Machines%20Japanese%20Edition%20Purchase";
+  "mailto:kamdridi@hotmail.com?subject=War%20Machines%20Japanese%20Edition%20Purchase";
 
 const offerLinks = {
   special: LINKS.buySpecialEdition.startsWith("TODO_") ? FALLBACK_BUY_LINK : LINKS.buySpecialEdition,
-  digital: LINKS.buyDigitalSingle.startsWith("TODO_") ? FALLBACK_BUY_LINK : LINKS.buyDigitalSingle
+  digital: LINKS.buyDigitalSingle
 };
 
 export const metadata: Metadata = {
@@ -278,7 +277,7 @@ export default function WarMachinesJapanPage() {
                         ["ステータス", "準備中"]
                       ].map(([label, value]) => (
                         <div key={label} className="border border-[#4f1b18] bg-black/48 p-4">
-                      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#ff6d49] sm:tracking-[0.28em]">
+                          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#ff6d49] sm:tracking-[0.28em]">
                             {label}
                           </p>
                           <p className="mt-2 text-lg font-black text-white">{value}</p>
@@ -370,12 +369,12 @@ export default function WarMachinesJapanPage() {
                 href={offerLinks.digital}
                 className="mt-4 inline-flex border border-[#ff321d] px-4 py-2 text-xs font-black tracking-[0.16em] text-white"
               >
-                購入
+                曲を選ぶ
               </a>
             </Panel>
           </section>
 
-          <section className="relative px-5 pb-5 sm:px-10">
+          <section id="tracklist" className="relative scroll-mt-6 px-5 pb-5 sm:px-10">
             <Panel className="p-5">
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
                 <h2 className="font-display text-3xl font-black tracking-[0.14em] text-stone-100 sm:tracking-[0.24em]">
