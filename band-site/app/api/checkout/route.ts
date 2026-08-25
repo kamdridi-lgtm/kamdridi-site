@@ -3,6 +3,10 @@ import { getStripeServer } from "@/lib/stripe";
 import { siteMeta } from "@/data/site";
 import { buildCommerceCheckoutPlan, RawCheckoutItem } from "@/data/commerce-products";
 
+function sanitizeMetadataValue(value: string | undefined) {
+  return (value || "").replace(/[|\r\n]/g, " ").slice(0, 120);
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -42,9 +46,22 @@ export async function POST(request: Request) {
       );
     }
 
-    const submitMessage = plan.containsPreorder 
+    const submitMessage = plan.containsPreorder
       ? "This order includes pre-order items. Production and fulfillment details are shown on the corresponding product pages."
       : "Official KAMDRIDI order.";
+
+    const itemMetadata = Object.fromEntries(
+      plan.resolvedItems.slice(0, 20).map((item, index) => [
+        `item_${index}`,
+        [
+          item.product.id,
+          String(item.quantity),
+          sanitizeMetadataValue(item.color),
+          sanitizeMetadataValue(item.size),
+          sanitizeMetadataValue(item.format)
+        ].join("|").slice(0, 500)
+      ])
+    );
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -67,8 +84,10 @@ export async function POST(request: Request) {
       metadata: {
         artist: siteMeta.bandName,
         ...plan.metadata,
+        ...itemMetadata,
         productIds: plan.resolvedItems.map(i => i.product.id).join(",").slice(0, 500),
-        returnPath: returnPath,
+        itemCount: String(plan.resolvedItems.length),
+        returnPath,
         orderTotalCad: (plan.checkoutTotal / 100).toFixed(2)
       },
       line_items: plan.lineItems.map(item => ({
