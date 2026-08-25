@@ -33,6 +33,7 @@ type TrackAccessControlsProps = {
   previewPendingLabel: string;
   fullTrackLabel: string;
   theme?: keyof typeof themeClasses;
+  purchaseHref?: string;
 };
 
 export function TrackAccessControls({
@@ -41,6 +42,7 @@ export function TrackAccessControls({
   previewPendingLabel,
   fullTrackLabel,
   theme = "gold",
+  purchaseHref,
 }: TrackAccessControlsProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -106,15 +108,27 @@ export function TrackAccessControls({
         </span>
       </button>
 
-      <span
-        className={`inline-flex min-h-9 items-center gap-2 border px-3 py-2 ${styles.locked}`}
-        aria-label={fullTrackLabel}
-        title={fullTrackLabel}
-        role="img"
-      >
-        <LockKeyhole className="h-3.5 w-3.5" aria-hidden="true" />
-        {fullTrackLabel}
-      </span>
+      {purchaseHref ? (
+        <a
+          href={purchaseHref}
+          className={`inline-flex min-h-9 items-center gap-2 border px-3 py-2 transition hover:brightness-110 ${styles.locked}`}
+          aria-label={fullTrackLabel}
+          title={fullTrackLabel}
+        >
+          <LockKeyhole className="h-3.5 w-3.5" aria-hidden="true" />
+          {fullTrackLabel}
+        </a>
+      ) : (
+        <span
+          className={`inline-flex min-h-9 items-center gap-2 border px-3 py-2 ${styles.locked}`}
+          aria-label={fullTrackLabel}
+          title={fullTrackLabel}
+          role="img"
+        >
+          <LockKeyhole className="h-3.5 w-3.5" aria-hidden="true" />
+          {fullTrackLabel}
+        </span>
+      )}
 
       {previewSrc ? (
         <audio

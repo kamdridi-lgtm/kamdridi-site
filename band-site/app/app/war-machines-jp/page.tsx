@@ -4,6 +4,11 @@ import Image from "next/image";
 import { Film, PlayCircle, ShoppingCart } from "lucide-react";
 import { TrackAccessControls } from "@/components/track-access-controls";
 
+
+function T({ children }: { children: React.ReactNode }) {
+  return <span translate="no" className="notranslate" lang="en">{children}</span>;
+}
+
 const LINKS = {
   buySpecialEdition: "TODO_STRIPE_OR_KAMDRIDI_LINK_1500",
   buyDigitalSingle: "TODO_STRIPE_OR_KAMDRIDI_LINK_250",
@@ -36,32 +41,32 @@ export const metadata: Metadata = {
   description: "KAMDRIDI「ウォー・マシーンズ」の日本向けプレミアム紹介ページ。"
 };
 
-const infoRows = [
-  ["アーティスト", "カム・ドリディ"],
-  ["作品名", "ウォー・マシーンズ"],
+const infoRows: Array<[string, React.ReactNode]> = [
+  ["アーティスト", <T key="artist">KAM DRIDI</T>],
+  ["作品名", <T key="title">WAR MACHINES</T>],
   ["仕様", "4曲入りフィジカル・マキシシングル"],
   ["ジャンル", "メロディック・ハードロック / シネマティック・メロディック・ハードロック"],
-  ["発売", "未定"],
+  ["発売", "準備中"],
   ["版", "日本向け限定盤"],
-  ["カタログ番号", "KDR-WM-JP-001"]
+  ["カタログ番号", <T key="cat">KDR-WM-JP-001</T>]
 ];
 
 const japanTracklist = [
-  { title: "ウォー・マシーンズ", previewSrc: "/audio/war-machines-jp/01-war-machines-preview-36s.mp3", isBonus: false },
-  { title: "トゥー・ファスト・トゥー・ヤング", previewSrc: "/audio/war-machines-jp/02-too-fast-too-young-preview-36s.mp3", isBonus: false },
-  { title: "失われた夢", previewSrc: "/audio/war-machines-jp/03-our-lost-dreams-preview-36s.mp3", isBonus: false },
-  { title: "ウォー・マシーンズ（ライブ・クラウド・ヴァージョン）", previewSrc: "/audio/war-machines-jp/04-war-machines-live-crowd-preview-36s.mp3", isBonus: true },
-] as const;
+  { title: <T>War Machines</T>, previewSrc: "/audio/war-machines-jp/01-war-machines-preview-36s.mp3", isBonus: false, isPhysicalOnly: false },
+  { title: <T>Too Fast Too Young</T>, previewSrc: "/audio/war-machines-jp/02-too-fast-too-young-preview-36s.mp3", isBonus: false, isPhysicalOnly: false },
+  { title: <T>Our Lost Dreams</T>, previewSrc: "/audio/war-machines-jp/03-our-lost-dreams-preview-36s.mp3", isBonus: false, isPhysicalOnly: false },
+  { title: <T>War Machines — Live Crowd Version</T>, previewSrc: "/audio/war-machines-jp/04-war-machines-live-crowd-preview-36s.mp3", isBonus: true, isPhysicalOnly: true },
+];
 
 const platforms = [
-  { label: "Spotify", href: LINKS.spotify, logo: <SpotifyLogo /> },
-  { label: "Apple Music", href: LINKS.apple, logo: <AppleLogo /> },
-  { label: "YouTube Music", href: LINKS.youtubeMusic, logo: <YouTubeLogo /> },
-  { label: "Amazon Music", href: LINKS.amazonMusicJapan, logo: <AmazonLogo /> },
-  { label: "LINE MUSIC", href: LINKS.lineMusic, logo: <PlatformWordmark text="LINE MUSIC" /> },
-  { label: "AWA", href: LINKS.awa, logo: <PlatformWordmark text="AWA" /> },
-  { label: "RecoChoku", href: LINKS.recochoku, logo: <PlatformWordmark text="RecoChoku" /> },
-  { label: "mora", href: LINKS.mora, logo: <PlatformWordmark text="mora" /> }
+  { label: "Spotify", labelNode: <T>Spotify</T>, href: LINKS.spotify, logo: <SpotifyLogo /> },
+  { label: "Apple Music", labelNode: <T>Apple Music</T>, href: LINKS.apple, logo: <AppleLogo /> },
+  { label: "YouTube Music", labelNode: <T>YouTube</T>, href: LINKS.youtubeMusic, logo: <YouTubeLogo /> },
+  { label: "Amazon Music", labelNode: <T>Amazon Music</T>, href: LINKS.amazonMusicJapan, logo: <AmazonLogo /> },
+  { label: "LINE MUSIC", labelNode: <T>LINE MUSIC</T>, href: LINKS.lineMusic, logo: <PlatformWordmark text={<T>LINE MUSIC</T>} /> },
+  { label: "AWA", labelNode: <T>AWA</T>, href: LINKS.awa, logo: <PlatformWordmark text={<T>AWA</T>} /> },
+  { label: "RecoChoku", labelNode: <T>RecoChoku</T>, href: LINKS.recochoku, logo: <PlatformWordmark text={<T>RecoChoku</T>} /> },
+  { label: "mora", labelNode: <T>mora</T>, href: LINKS.mora, logo: <PlatformWordmark text={<T>mora</T>} /> }
 ];
 
 const embers = Array.from({ length: 112 }, (_, index) => {
@@ -118,10 +123,10 @@ function YouTubeLogo() {
 }
 
 function AmazonLogo() {
-  return <span className="text-base font-black lowercase tracking-[-0.05em] text-white">amazon music</span>;
+  return <span className="text-base font-black lowercase tracking-[-0.05em] text-white"><T>amazon music</T></span>;
 }
 
-function PlatformWordmark({ text }: { text: string }) {
+function PlatformWordmark({ text }: { text: ReactNode }) {
   return <span className="text-sm font-black tracking-[0.05em] text-white">{text}</span>;
 }
 
@@ -176,7 +181,7 @@ function ActionButton({
 
 export default function WarMachinesJapanPage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-black text-white">
+    <main lang="ja" className="min-h-screen overflow-hidden bg-black text-white">
       <div className="relative isolate min-h-screen bg-[#050505] text-white">
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
           <video
@@ -231,10 +236,10 @@ export default function WarMachinesJapanPage() {
                 />
               </div>
               <p className="-mt-3 text-[11px] font-black uppercase tracking-[0.22em] text-stone-200 drop-shadow-[0_0_12px_rgba(255,255,255,0.35)] sm:-mt-5 sm:text-base sm:tracking-[0.4em]">
-                日本語版シングル・プレゼンテーション
+                日本向けリリース・プレゼンテーション
               </p>
               <p className="mt-3 text-sm font-black tracking-[0.18em] text-[#ff3a21] drop-shadow-[0_0_18px_rgba(255,32,18,0.62)] sm:text-lg sm:tracking-[0.3em]">
-                ウォー・マシーンズ
+                <T>WAR MACHINES</T><br/><span className="text-sm tracking-[0.1em] mt-2 block opacity-70">ウォー・マシーンズ</span>
               </p>
               <div className="mx-auto mt-6 h-px w-3/5 bg-[linear-gradient(90deg,transparent,#b01210,#ffefef,#b01210,transparent)]" />
             </div>
@@ -255,13 +260,13 @@ export default function WarMachinesJapanPage() {
                   <div className="flex flex-col justify-between p-5 sm:p-7">
                     <div>
                       <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[#ff6d49] sm:text-xs sm:tracking-[0.42em]">
-                        日本向けリリース資料
+                        日本向けリリース概要
                       </p>
                       <h1 className="mt-4 font-display text-3xl font-black leading-[0.9] tracking-[0.03em] text-white sm:text-5xl sm:tracking-[0.06em]">
-                        ウォー・マシーンズ
+                        <T>WAR MACHINES</T>
                       </h1>
                       <p className="mt-3 max-w-xl text-sm font-semibold leading-7 text-stone-300 sm:text-base">
-                        インダストリアルなビジュアル・アイデンティティとメロディック・シネマティック・ハードロックを融合。公式サイト限定のデジタル配信に加え、将来的な日本盤フィジカル・マキシシングルの発売を予定した、KAMDRIDIの日本向けプレゼンテーションです。
+                        インダストリアルなビジュアルと、メロディック／シネマティック・ハードロックの世界観を融合した、日本向け「<T>WAR MACHINES</T>」プロジェクトです。公式サイトではデジタル音源を直接購入でき、フィジカル版は4曲入りマキシシングルとして準備中です。
                       </p>
                     </div>
 
@@ -270,7 +275,7 @@ export default function WarMachinesJapanPage() {
                         ["版", "日本向け限定盤"],
                         ["形式", "シングル / デジタル"],
                         ["地域", "日本"],
-                        ["信号", "最優先"]
+                        ["ステータス", "準備中"]
                       ].map(([label, value]) => (
                         <div key={label} className="border border-[#4f1b18] bg-black/48 p-4">
                       <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#ff6d49] sm:tracking-[0.28em]">
@@ -285,7 +290,7 @@ export default function WarMachinesJapanPage() {
               </Panel>
 
               <Panel className="p-5 sm:p-6">
-                <p className="text-xs font-black uppercase tracking-[0.34em] text-[#ff6d49]">伝送資料</p>
+                <p className="text-xs font-black uppercase tracking-[0.34em] text-[#ff6d49]">商品情報</p>
                 <div className="mt-4 grid gap-0 border border-[#4f1b18] bg-black/35">
                   {infoRows.map(([label, value], index) => (
                     <div
@@ -328,10 +333,10 @@ export default function WarMachinesJapanPage() {
 
           <section className="relative px-5 py-6 text-center sm:px-10 sm:py-8">
             <h2 className="font-display text-[clamp(2.05rem,8.4vw,7rem)] font-black leading-[0.9] tracking-[0.01em] text-stone-100 drop-shadow-[0_7px_0_#3b0605] sm:tracking-[0.02em]">
-              ウォー・マシーンズ
+              <T>WAR MACHINES</T>
             </h2>
             <p className="mt-4 font-display text-2xl font-black tracking-[0.14em] text-[#ff1b18] drop-shadow-[0_0_16px_rgba(255,29,20,0.72)] sm:text-5xl sm:tracking-[0.28em]">
-              カム・ドリディ
+              <T>KAM DRIDI</T>
             </p>
             <p className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-stone-400 sm:text-base">
               工業的で暗く、コレクター優先の日本向けプレゼンテーションです。
@@ -341,7 +346,7 @@ export default function WarMachinesJapanPage() {
           <section className="relative grid gap-4 px-5 py-5 sm:grid-cols-2 sm:px-10">
             <Panel className="p-5">
               <p className="text-xs font-black uppercase tracking-[0.28em] text-[#ff2d21]">特典 01</p>
-              <h2 className="mt-3 text-2xl font-black text-white">日本限定フィジカル・マキシシングル</h2>
+              <h2 className="mt-3 text-2xl font-black text-white">日本向けフィジカル・マキシシングル</h2>
               <p className="mt-2 min-h-12 text-sm font-semibold leading-6 text-stone-300">
                 4曲収録
               </p>
@@ -356,8 +361,8 @@ export default function WarMachinesJapanPage() {
             </Panel>
             <Panel className="p-5">
               <p className="text-xs font-black uppercase tracking-[0.28em] text-[#ff2d21]">特典 02</p>
-              <h2 className="mt-3 text-2xl font-black text-white">デジタル・シングル</h2>
-              <p className="mt-2 min-h-12 text-sm font-semibold leading-6 text-stone-300">1曲ダウンロード<br />公式サイト限定デジタル販売</p>
+              <h2 className="mt-3 text-2xl font-black text-white">デジタル・ダウンロード</h2>
+              <p className="mt-2 min-h-12 text-sm font-semibold leading-6 text-stone-300">1曲 ¥250<br />公式サイトで直接購入</p>
               <p className="mt-4 font-display text-5xl font-black text-[#ff2d21] drop-shadow-[0_0_18px_rgba(255,26,18,0.8)] sm:text-6xl">
                 ¥250
               </p>
@@ -381,12 +386,12 @@ export default function WarMachinesJapanPage() {
                 </span>
               </div>
               <p className="mt-4 text-sm leading-6 text-stone-300">
-                36秒の試聴ができます。
+                各曲36秒の無料試聴ができます。1〜3曲目のフル音源は購入可能です。4曲目はフィジカル限定ボーナス・トラックです。
               </p>
               <ol className="mt-5 space-y-2 text-base font-bold text-stone-100 sm:text-lg">
                 {japanTracklist.map((track, index) => (
                   <li
-                    key={track.title}
+                    key={index}
                     className="grid min-h-12 gap-3 border border-[#4f1b18] bg-black/30 px-4 py-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center"
                   >
                     <span>
@@ -394,22 +399,23 @@ export default function WarMachinesJapanPage() {
                       {track.isBonus && (
                         <span className="mt-1 block text-[11px] font-bold text-[#ffb28a]">
                           フィジカル限定ボーナス・トラック<br />
-                          次回作「ECHOES UNLIVE IN BRASIL」より
+                          次回作「<T>ECHOES UNLIVE IN BRASIL</T>」より
                         </span>
                       )}
                     </span>
                     <TrackAccessControls
                       previewSrc={track.previewSrc ?? undefined}
-                      previewLabel="無料試聴"
+                      previewLabel="無料試聴 0:00 / 0:36"
                       previewPendingLabel="試聴"
-                      fullTrackLabel="フル楽曲・ロック中 · ¥250"
+                      fullTrackLabel={track.isPhysicalOnly ? "フィジカル限定" : "フル音源を購入 • ¥250"}
                       theme="red"
+                      purchaseHref={track.isPhysicalOnly ? undefined : offerLinks.digital}
                     />
                   </li>
                 ))}
               </ol>
               <p className="mt-4 text-sm font-semibold text-[#d7a06e]">
-                本作は、今後予定されている「ECHOES UNEARTHED — JAPAN EDITION」とは別企画です。
+                本作は、今後予定されている「<T>ECHOES UNEARTHED — JAPAN EDITION</T>」とは別企画です。
               </p>
             </Panel>
           </section>
@@ -450,7 +456,7 @@ export default function WarMachinesJapanPage() {
                   className="flex min-h-12 items-center justify-center gap-2 border border-[#3b1613] bg-black/35 px-2 text-center text-sm font-black text-white transition hover:border-[#ff321d]"
                 >
                   {platform.logo}
-                  <span className="sr-only">{platform.label}</span>
+                  <span className="sr-only">{platform.labelNode || platform.label}</span>
                 </a>
               ))}
             </Panel>
