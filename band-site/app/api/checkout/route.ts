@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getStripeServer } from "@/lib/stripe";
 import { siteMeta } from "@/data/site";
 import { buildCommerceCheckoutPlan, RawCheckoutItem } from "@/data/commerce-products";
+import { buildUnifiedCheckoutPlan, getUnifiedCommerceProducts } from "@/lib/unified-commerce";
 
 function sanitizeMetadataValue(value: string | undefined) {
   return (value || "").replace(/[|\r\n]/g, " ").slice(0, 120);
@@ -27,7 +28,13 @@ export async function POST(request: Request) {
 
     let plan;
     try {
-      plan = buildCommerceCheckoutPlan(rawItems);
+      try {
+        const unifiedProducts = await getUnifiedCommerceProducts();
+        plan = buildUnifiedCheckoutPlan(rawItems, unifiedProducts);
+      } catch (catalogError) {
+        console.warn("[Checkout] Unified catalog unavailable; using checked-in fallback", catalogError);
+        plan = buildCommerceCheckoutPlan(rawItems);
+      }
     } catch (err: any) {
       if (["UNKNOWN_PRODUCT", "EXCESSIVE_QUANTITY", "INVALID_QUANTITY", "INVALID_COLOR", "INVALID_SIZE", "INVALID_FORMAT"].includes(err.message)) {
         return NextResponse.json({ error: err.message }, { status: 400 });
