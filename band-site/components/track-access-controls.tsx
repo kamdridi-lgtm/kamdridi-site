@@ -6,6 +6,12 @@ import { useRef, useState } from "react";
 const PREVIEW_LIMIT_SECONDS = 36;
 let activePreview: HTMLAudioElement | null = null;
 
+const JAPAN_TRACK_CHECKOUTS: Record<string, string> = {
+  "/audio/war-machines-jp/01-war-machines-preview-36s.mp3": "https://buy.stripe.com/bJe28rgJG2hK38k0fCeEo0l",
+  "/audio/war-machines-jp/02-too-fast-too-young-preview-36s.mp3": "https://buy.stripe.com/dRmfZheBy2hK38k4vSeEo0m",
+  "/audio/war-machines-jp/03-our-lost-dreams-preview-36s.mp3": "https://buy.stripe.com/8x2eVdali2hKdMY6E0eEo0n",
+};
+
 function formatPreviewTime(seconds: number) {
   const safeSeconds = Math.max(0, Math.min(PREVIEW_LIMIT_SECONDS, Math.floor(seconds)));
   const minutes = Math.floor(safeSeconds / 60);
@@ -49,6 +55,9 @@ export function TrackAccessControls({
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const styles = themeClasses[theme];
   const hasPreview = Boolean(previewSrc);
+  const resolvedPurchaseHref = previewSrc && JAPAN_TRACK_CHECKOUTS[previewSrc]
+    ? JAPAN_TRACK_CHECKOUTS[previewSrc]
+    : purchaseHref;
 
   const togglePreview = () => {
     const audio = audioRef.current;
@@ -108,9 +117,11 @@ export function TrackAccessControls({
         </span>
       </button>
 
-      {purchaseHref ? (
+      {resolvedPurchaseHref ? (
         <a
-          href={purchaseHref}
+          href={resolvedPurchaseHref}
+          target={resolvedPurchaseHref.startsWith("http") ? "_blank" : undefined}
+          rel={resolvedPurchaseHref.startsWith("http") ? "noreferrer" : undefined}
           className={`inline-flex min-h-9 items-center gap-2 border px-3 py-2 transition hover:brightness-110 ${styles.locked}`}
           aria-label={fullTrackLabel}
           title={fullTrackLabel}
