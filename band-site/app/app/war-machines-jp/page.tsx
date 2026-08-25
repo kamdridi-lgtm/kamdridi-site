@@ -47,10 +47,10 @@ const infoRows = [
 ];
 
 const japanTracklist = [
-  { title: "ウォー・マシーンズ", previewSrc: null, isBonus: false },
-  { title: "トゥー・ファスト・トゥー・ヤング", previewSrc: null, isBonus: false },
-  { title: "失われた夢", previewSrc: null, isBonus: false },
-  { title: "ウォー・マシーンズ（ライブ・クラウド・ヴァージョン）", previewSrc: null, isBonus: true },
+  { title: "ウォー・マシーンズ", previewSrc: "/audio/war-machines-jp/01-war-machines-preview-36s.mp3", isBonus: false },
+  { title: "トゥー・ファスト・トゥー・ヤング", previewSrc: "/audio/war-machines-jp/02-too-fast-too-young-preview-36s.mp3", isBonus: false },
+  { title: "失われた夢", previewSrc: "/audio/war-machines-jp/03-our-lost-dreams-preview-36s.mp3", isBonus: false },
+  { title: "ウォー・マシーンズ（ライブ・クラウド・ヴァージョン）", previewSrc: "/audio/war-machines-jp/04-war-machines-live-crowd-preview-36s.mp3", isBonus: true },
 ] as const;
 
 const platforms = [
@@ -381,7 +381,7 @@ export default function WarMachinesJapanPage() {
                 </span>
               </div>
               <p className="mt-4 text-sm leading-6 text-stone-300">
-                36秒の試聴は無料です。鍵はフル楽曲のみに適用されます。
+                36秒の試聴ができます。
               </p>
               <ol className="mt-5 space-y-2 text-base font-bold text-stone-100 sm:text-lg">
                 {japanTracklist.map((track, index) => (
@@ -401,7 +401,7 @@ export default function WarMachinesJapanPage() {
                     <TrackAccessControls
                       previewSrc={track.previewSrc ?? undefined}
                       previewLabel="無料試聴"
-                      previewPendingLabel="マスタリング後に試聴公開"
+                      previewPendingLabel="試聴"
                       fullTrackLabel="フル楽曲・ロック中 · ¥250"
                       theme="red"
                     />
