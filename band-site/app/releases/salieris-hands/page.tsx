@@ -81,6 +81,12 @@ const collectorProductsData = [
     secondaryAlt: "Salieri collector coin closeup"
   },
   {
+    id: "salieri-collector-medallion",
+    description: "Standalone made-to-order collector medallion from the Salieri's Hands collector world; final two-sided production artwork follows the metal-supplier proof.",
+    image: "/assets/images/salieris-hands/full-collector-pack.png",
+    alt: "Salieri collector medallion shown within the collector package"
+  },
+  {
     id: "salieri-hardcover-booklet",
     description: "Liner notes and story presentation by KAMDRIDI.",
     image: assets.booklet,
