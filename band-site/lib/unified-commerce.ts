@@ -105,6 +105,7 @@ export function buildUnifiedCheckoutPlan(rawItems: RawCheckoutItem[], products: 
   let containsPhysical = false;
   let containsDigital = false;
   let containsPreorder = false;
+  let containsMadeToOrder = false;
   let checkoutTotal = 0;
   const projects = new Set<string>();
 
@@ -114,6 +115,7 @@ export function buildUnifiedCheckoutPlan(rawItems: RawCheckoutItem[], products: 
     if (product.saleMode === "digital") containsDigital = true;
     else containsPhysical = true;
     if (product.saleMode === "preorder") containsPreorder = true;
+    if (product.fulfillmentMode === "made_to_order") containsMadeToOrder = true;
     projects.add(product.project);
     checkoutTotal += product.priceCents * item.quantity;
 
@@ -151,12 +153,14 @@ export function buildUnifiedCheckoutPlan(rawItems: RawCheckoutItem[], products: 
     containsPhysical,
     containsDigital,
     containsPreorder,
+    containsMadeToOrder,
     projects: Array.from(projects),
     metadata: {
       orderType: "kamdridi-commerce",
       projects: Array.from(projects).join(","),
       containsPhysical: containsPhysical ? "true" : "false",
       containsPreorder: containsPreorder ? "true" : "false",
+      containsMadeToOrder: containsMadeToOrder ? "true" : "false",
       containsDigital: containsDigital ? "true" : "false",
       catalogSource: "supabase-unified-v1"
     }
