@@ -157,7 +157,6 @@
       "radioPath": "audio/radio/10-echoes-of-our-youth-radio.mp3",
       "blobPath": "radio/echoes-unearthed/10-echoes-of-our-youth-radio.mp3"
     },
-
     {
       "id": "brasil-01-dream-machines",
       "collectionId": "echoes-unlive-brasil",
@@ -299,45 +298,33 @@
       "status": "awaiting-master",
       "radioEnabled": false,
       "radioPath": "audio/radio/brasil-12-into-the-news.mp3",
-      "previewPath": "echoes-un-live-in-brasil/assets/audio/12-into-the-news.mp3"
+      "previewPath": "echoes-un-live-in-brasil/assets/audio/12-into-the-news.mp3",
+      "previewAvailable": false
     },
     {
-      "id": "brasil-13-for-some-dialog-unplugged",
+      "id": "brasil-13-tough-boys-rumble",
       "collectionId": "echoes-unlive-brasil",
       "trackNumber": 13,
-      "title": "For Some Dialog…",
-      "version": "Unplugged Acoustic Session",
-      "status": "awaiting-master",
-      "radioEnabled": false,
-      "radioPath": "audio/radio/brasil-13-for-some-dialog-unplugged.mp3",
-      "previewPath": "echoes-un-live-in-brasil/assets/audio/13-for-some-dialog-unplugged.mp3",
-      "previewAvailable": true
-    },
-    {
-      "id": "brasil-14-tough-boys-rumble",
-      "collectionId": "echoes-unlive-brasil",
-      "trackNumber": 14,
       "title": "Tough Boys Rumble",
       "version": "Night Session",
       "status": "awaiting-master",
       "radioEnabled": false,
-      "radioPath": "audio/radio/brasil-14-tough-boys-rumble.mp3",
+      "radioPath": "audio/radio/brasil-13-tough-boys-rumble.mp3",
       "previewPath": "echoes-un-live-in-brasil/assets/audio/14-tough-boys-rumble.mp3",
       "previewAvailable": true
     },
     {
-      "id": "brasil-15-dream-machines-bonus",
+      "id": "brasil-14-dream-machines-bonus",
       "collectionId": "echoes-unlive-brasil",
-      "trackNumber": 15,
+      "trackNumber": 14,
       "title": "Dream Machines (Bonus)",
       "version": "Solo Remix",
       "status": "awaiting-master",
       "radioEnabled": false,
-      "radioPath": "audio/radio/brasil-15-dream-machines-bonus.mp3",
+      "radioPath": "audio/radio/brasil-14-dream-machines-bonus.mp3",
       "previewPath": "echoes-un-live-in-brasil/assets/audio/15-dream-machines-solo.mp3",
       "previewAvailable": true
     },
-
     {
       "id": "salieri-01-requiem",
       "collectionId": "salieris-hands",
@@ -495,7 +482,6 @@
       "previewPath": "assets/audio/salieris-hands/14-das-prisma-german-preview.mp3",
       "previewAvailable": true
     },
-
     {
       "id": "australia-01-exclusive",
       "collectionId": "17-for-ever-australia",
@@ -540,7 +526,6 @@
       "radioPath": "audio/radio/australia-04-17-for-ever-demo.mp3",
       "previewPath": "assets/audio/australia/04-17-for-ever-demo-preview.mp3"
     },
-
     {
       "id": "single-war-machines",
       "collectionId": "singles-archive",
