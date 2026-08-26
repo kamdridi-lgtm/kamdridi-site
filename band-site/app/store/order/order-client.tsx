@@ -87,6 +87,8 @@ export function OrderClient() {
     return () => { cancelled = true; };
   }, [orderUrl, attempt]);
 
+  const hasMadeToOrder = Boolean(payload?.items?.some((item) => item.fulfillment_mode === "made_to_order"));
+
   const download = (entitlementId: string) => {
     if (!sessionId) return;
     window.location.href = `${SUPABASE_FUNCTIONS}/commerce-download?entitlement_id=${encodeURIComponent(entitlementId)}&session_id=${encodeURIComponent(sessionId)}`;
@@ -100,6 +102,15 @@ export function OrderClient() {
         <p className="mt-5 max-w-3xl text-sm leading-7 text-stone-300">
           This page is tied to your Stripe checkout session. Physical orders remain queued for fulfillment; eligible digital files appear here only when the corresponding master is active in the private KAMDRIDI vault.
         </p>
+
+        {hasMadeToOrder && (
+          <div className="mt-7 rounded-2xl border border-[#f4c66a]/30 bg-[#f4c66a]/[0.07] p-5">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f4c66a]">Made to order</p>
+            <p className="mt-2 text-sm leading-7 text-stone-200">
+              Your physical edition enters production after payment. Please allow several weeks for manufacturing, quality control and delivery. You do not need to place another order or make another payment for production.
+            </p>
+          </div>
+        )}
 
         {!sessionId && (
           <div className="mt-8 rounded-2xl border border-rose-500/25 bg-rose-500/10 p-5 text-rose-100">Missing checkout session.</div>
@@ -128,7 +139,11 @@ export function OrderClient() {
               {payload!.items!.map((item) => (
                 <article key={item.id} className="rounded-2xl border border-white/10 bg-black/40 p-5">
                   <div className="flex flex-wrap items-start justify-between gap-4">
-                    <div><h3 className="text-lg font-semibold text-white">{item.product_name}</h3><p className="mt-2 text-xs uppercase tracking-[0.2em] text-stone-500">{[item.color, item.size, item.format].filter(Boolean).join(" · ") || "Standard edition"}</p></div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white">{item.product_name}</h3>
+                      <p className="mt-2 text-xs uppercase tracking-[0.2em] text-stone-500">{[item.color, item.size, item.format].filter(Boolean).join(" · ") || "Standard edition"}</p>
+                      {item.fulfillment_mode === "made_to_order" && <p className="mt-3 text-xs font-bold uppercase tracking-[0.16em] text-[#f4c66a]">Production queued · made to order</p>}
+                    </div>
                     <span className="text-sm text-[#f4c66a]">Qty {item.quantity}</span>
                   </div>
                 </article>
