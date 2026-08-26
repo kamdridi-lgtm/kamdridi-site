@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getStripeServer } from "@/lib/stripe";
 import { siteMeta } from "@/data/site";
-import { buildCommerceCheckoutPlan, RawCheckoutItem } from "@/data/commerce-products";
+import type { RawCheckoutItem } from "@/data/commerce-products";
 import { buildUnifiedCheckoutPlan, getUnifiedCommerceProducts } from "@/lib/unified-commerce";
 
 function sanitizeMetadataValue(value: string | undefined) {
@@ -28,18 +28,17 @@ export async function POST(request: Request) {
 
     let plan;
     try {
-      try {
-        const unifiedProducts = await getUnifiedCommerceProducts();
-        plan = buildUnifiedCheckoutPlan(rawItems, unifiedProducts);
-      } catch (catalogError) {
-        console.warn("[Checkout] Unified catalog unavailable; using checked-in fallback", catalogError);
-        plan = buildCommerceCheckoutPlan(rawItems);
-      }
+      const unifiedProducts = await getUnifiedCommerceProducts();
+      plan = buildUnifiedCheckoutPlan(rawItems, unifiedProducts);
     } catch (err: any) {
-      if (["UNKNOWN_PRODUCT", "EXCESSIVE_QUANTITY", "INVALID_QUANTITY", "INVALID_COLOR", "INVALID_SIZE", "INVALID_FORMAT"].includes(err.message)) {
+      if (["UNKNOWN_PRODUCT", "EXCESSIVE_QUANTITY", "INVALID_QUANTITY", "INVALID_COLOR", "INVALID_SIZE", "INVALID_FORMAT"].includes(err?.message)) {
         return NextResponse.json({ error: err.message }, { status: 400 });
       }
-      throw err;
+      console.error("[Checkout] Unified catalog unavailable; checkout blocked safely", err);
+      return NextResponse.json(
+        { error: "The live catalog is temporarily unavailable. Checkout has been paused to protect pricing and availability. Please try again shortly." },
+        { status: 503 }
+      );
     }
 
     if (!plan.resolvedItems || plan.resolvedItems.length === 0) {
