@@ -674,8 +674,9 @@ export const commerceProducts: CommerceProduct[] = [
     saleMode: "buy_now",
     visible: true,
     checkoutEnabled: true,
-    fulfillmentMode: "manual_preorder",
+    fulfillmentMode: "made_to_order",
     requiresShipping: true,
+    fulfillmentNote: "Made to order after payment. Please allow several weeks for production and delivery.",
     badge: "Boxed Accessory",
     productPath: "/store/kamdridi-logo-keychain",
     releasePath: "/store"
