@@ -1,5 +1,5 @@
 export type SaleMode = "buy_now" | "preorder" | "digital" | "sold_out" | "coming_soon";
-export type FulfillmentMode = "manual_physical" | "manual_preorder" | "digital_manual" | "printful" | "game_access" | "multi_vendor";
+export type FulfillmentMode = "manual_physical" | "manual_preorder" | "digital_manual" | "printful" | "game_access" | "multi_vendor" | "made_to_order";
 
 export type VendorComponent = {
   name: string;
