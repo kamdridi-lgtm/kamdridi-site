@@ -52,9 +52,11 @@ export async function POST(request: Request) {
       );
     }
 
-    const submitMessage = plan.containsPreorder
-      ? "This order includes pre-order items. Production and fulfillment details are shown on the corresponding product pages."
-      : "Official KAMDRIDI order.";
+    const submitMessage = plan.containsMadeToOrder
+      ? "Made-to-order item(s): production begins after payment. Please allow several weeks for production and delivery."
+      : plan.containsPreorder
+        ? "This order includes pre-order items. Production and fulfillment details are shown on the corresponding product pages."
+        : "Official KAMDRIDI order.";
 
     const itemMetadata = Object.fromEntries(
       plan.resolvedItems.slice(0, 20).map((item, index) => [
