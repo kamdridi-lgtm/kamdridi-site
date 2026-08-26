@@ -62,7 +62,7 @@ const collectorProductsData = [
   },
   {
     id: "salieri-special-edition-box",
-    description: "Collector package including selected physical formats, merch, art print, booklet, and campaign extras.",
+    description: "Made-to-order collector package including selected physical formats, merch, art print, booklet, and edition extras.",
     image: assets.collectorPack,
     alt: "Special edition collector package"
   },
@@ -151,13 +151,13 @@ const fulfillmentItems = [
   ["Digital Deluxe Release", "High-resolution files, digital booklet, and four exclusive bonus tracks."],
   ["Collector formats", "CD, vinyl, booklet, box, and coin items are produced through their selected made-to-order or manual supplier route after payment."],
   ["Merch", "Apparel, mug, and poster orders use the selected size, color, and delivery details from checkout."],
-  ["Collector Bundle", "Bundle contents are confirmed as one campaign package before fulfillment begins."]
+  ["Collector Bundle", "Bundle contents are checked as one direct artist package before production and fulfillment begin."]
 ];
 
 const trustNotes = [
   { title: "Made to order", text: "Physical collector items enter production after payment; please allow several weeks for manufacturing and delivery." },
   { title: "Secure checkout", text: "Payments use hosted Stripe checkout with card and wallet support." },
-  { title: "Shipping details", text: "Checkout collects the delivery details needed to confirm campaign fulfillment." },
+  { title: "Shipping details", text: "Checkout collects the delivery details needed to route paid orders to the correct production path." },
   { title: "Direct artist editions", text: "Collector formats are managed directly by KAMDRIDI through the supplier route assigned to each product." }
 ];
 
@@ -174,14 +174,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://kamdridi.com"),
   title: "Salieri's Hands - KAMDRIDI",
   description:
-    "Salieri's Hands is a special off-series KAMDRIDI release. Vienna, 1791. Faith. Envy. Confession. Album release: July 2026.",
+    "Salieri's Hands is a special off-series KAMDRIDI release. Vienna, 1791. Faith. Envy. Confession. Direct Artist Edition.",
   alternates: {
     canonical: "/releases/salieris-hands"
   },
   openGraph: {
     title: "Salieri's Hands - KAMDRIDI",
     description:
-      "A special off-series KAMDRIDI release. Vienna, 1791. Faith. Envy. Confession. Album release: July 2026.",
+      "A special off-series KAMDRIDI release. Vienna, 1791. Faith. Envy. Confession. Direct Artist Edition.",
     url: "/releases/salieris-hands",
     siteName: "KAMDRIDI",
     images: [
@@ -197,7 +197,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Salieri's Hands - KAMDRIDI",
-    description: "Official teaser out now. Album release: July 2026.",
+    description: "Official teaser and Direct Artist Edition collector presentation.",
     images: ["/assets/images/salieris-hands/salieri-social-preview.jpg"]
   }
 };
@@ -553,7 +553,7 @@ export default function SalierisHandsPage() {
                 <p>Limited release</p>
                 <p>Vienna, 1791</p>
                 <p>Faith. Envy. Confession.</p>
-                <p>Album release: July 2026</p>
+                <p>Direct Artist Edition</p>
               </div>
               <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                 <ActionLink href="#teaser">
@@ -674,7 +674,7 @@ export default function SalierisHandsPage() {
       <section id="collector-editions" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionIntro title="Collector Editions" align="center">
-            <p>Premium physical editions and limited collector items prepared for the July 2026 campaign.</p>
+            <p>Premium physical editions and collector items prepared as direct made-to-order releases.</p>
           </SectionIntro>
           <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
 
@@ -714,9 +714,9 @@ export default function SalierisHandsPage() {
           </div>
           <div className="mt-6 grid gap-5 lg:grid-cols-[0.78fr_1.22fr]">
             <div className="border border-[#efc36f]/45 bg-[#e2ad52]/10 p-5">
-              <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#f4c66a]">Limited July 2026 Campaign</p>
-              <p className="mt-3 font-serif text-3xl text-[#fff0cf]">Collector allocation may close without notice.</p>
-              <p className="mt-4 text-sm leading-6 text-[#e8d1aa]">The premium formats are campaign items, not permanent mass-market inventory.</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#f4c66a]">Direct Artist Collector Editions</p>
+              <p className="mt-3 font-serif text-3xl text-[#fff0cf]">Made to order after payment.</p>
+              <p className="mt-4 text-sm leading-6 text-[#e8d1aa]">The premium formats are direct artist editions produced through their assigned supplier route.</p>
             </div>
             <div className="grid gap-3 border border-[#bd8b45]/35 bg-black/32 p-4 sm:grid-cols-2">
               {fulfillmentItems.map(([title, text]) => (
@@ -737,7 +737,7 @@ export default function SalierisHandsPage() {
           <div className="border border-[#bd8b45]/45 bg-[radial-gradient(circle_at_12%_0%,rgba(255,210,126,0.16),transparent_34%),linear-gradient(180deg,rgba(28,16,8,0.94),rgba(8,5,3,0.97))] p-6 sm:p-8">
             <SectionIntro title="Release Updates">
               <p>Official teaser out now.</p>
-              <p>Album release: July 2026.</p>
+              <p>Direct Artist Edition collector store is open.</p>
             </SectionIntro>
             <Suspense fallback={null}>
               <SalieriCheckoutStatus />
@@ -753,7 +753,7 @@ export default function SalierisHandsPage() {
               </ActionLink>
             </div>
             <div className="mt-6 border border-[#bd8b45]/35 bg-black/30 p-4 text-sm leading-7 text-stone-300">
-              Request the July 2026 release alert through the official contact route and mention Salieri's Hands.
+              For release or order questions, use the official contact route and mention Salieri's Hands.
             </div>
             <div className="mt-8 grid gap-3">
               {streamingItems.map((platform) => (
