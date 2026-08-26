@@ -69,7 +69,7 @@ const collectorProductsData = [
   },
   {
     id: "salieri-vinyl-edition",
-    description: "Premium 12-inch black-vinyl collector edition following the 13-movement physical programme.",
+    description: "Premium 12-inch black-vinyl collector edition with a curated 9-track sequence: Side A 18:48, Side B 18:45, designed to stay inside the single-LP manufacturing limit.",
     image: assets.packBack,
     alt: "Vinyl and physical package artwork"
   },
