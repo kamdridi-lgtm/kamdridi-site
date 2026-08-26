@@ -32,6 +32,7 @@ type RemoteProduct = {
 
 function normalizeRemoteProduct(product: RemoteProduct): CommerceProduct | null {
   if (product.currency.toUpperCase() !== "CAD") return null;
+  if (!product.visible) return null;
   return {
     id: product.id,
     slug: product.slug,
@@ -45,7 +46,7 @@ function normalizeRemoteProduct(product: RemoteProduct): CommerceProduct | null 
     priceCents: product.price_cents,
     currency: "CAD",
     saleMode: product.sale_mode,
-    visible: product.visible,
+    visible: true,
     checkoutEnabled: product.checkout_enabled,
     fulfillmentMode: product.fulfillment_mode,
     requiresShipping: product.requires_shipping,
