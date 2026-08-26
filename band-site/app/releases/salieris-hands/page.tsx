@@ -6,6 +6,7 @@ import { SalieriCheckoutStatus, SalieriProductCard, SalieriQuickBuy } from "@/co
 import { TrackAccessControls } from "@/components/track-access-controls";
 import { getCommerceProductById } from "@/data/commerce-products";
 import { getPreparedPreview } from "@/lib/master-catalog";
+import { getUnifiedCommerceProducts } from "@/lib/unified-commerce";
 
 const assetBase = "/assets/images/salieris-hands";
 const teaserUrl = "https://youtu.be/wD0u7-krT8s?si=4a1J1siTwJV9bGCI";
@@ -321,7 +322,11 @@ function ImagePanel({
   );
 }
 
-export default function SalierisHandsPage() {
+export default async function SalierisHandsPage() {
+  const unifiedProducts = await getUnifiedCommerceProducts().catch(() => []);
+  const unifiedProductMap = new Map(unifiedProducts.map((product) => [product.id, product]));
+  const getProduct = (id: string) => unifiedProductMap.get(id) || getCommerceProductById(id);
+
   const getStatus = (mode: string) => {
     switch(mode) {
       case "preorder": return "PRE-ORDER";
@@ -333,7 +338,7 @@ export default function SalierisHandsPage() {
   };
 
   const collectorProducts = collectorProductsData.map(item => {
-    const product = getCommerceProductById(item.id);
+    const product = getProduct(item.id);
     return {
       ...item,
       name: product?.name || item.id,
@@ -345,7 +350,7 @@ export default function SalierisHandsPage() {
   });
 
   const merchProducts = merchProductsData.map(item => {
-    const product = getCommerceProductById(item.id);
+    const product = getProduct(item.id);
     return {
       ...item,
       name: product?.name || item.id,
