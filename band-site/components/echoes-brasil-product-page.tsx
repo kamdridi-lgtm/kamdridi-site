@@ -20,7 +20,7 @@ export default function EchoesBrasilProductPage({ product, includedItems }: { pr
           <div className="relative aspect-square overflow-hidden rounded-[20px] border border-amber-500/20 bg-black shadow-[0_0_50px_rgba(245,158,11,0.05)]">
             <Image
               src={product.images[0]}
-              alt={`${product.title} - ${product.subtitle}`}
+              alt={`${product.name} - ${product.subtitle}`}
               fill
               className="object-cover"
               priority
@@ -30,7 +30,7 @@ export default function EchoesBrasilProductPage({ product, includedItems }: { pr
 
           <div className="flex flex-col justify-center">
             <h1 className="font-display text-4xl uppercase tracking-[0.05em] text-white md:text-5xl">
-              {product.title}
+              {product.name}
             </h1>
             <p className="mt-2 text-xl uppercase tracking-[0.1em] text-amber-500/90">
               {product.subtitle}
@@ -88,7 +88,7 @@ export default function EchoesBrasilProductPage({ product, includedItems }: { pr
                 onClick={() => {
                   addToCart({
                     id: product.id,
-                    name: product.title,
+                    name: product.name,
                     price: (product.priceCents || 0) / 100,
                     image: product.images[0]
                   });
