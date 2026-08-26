@@ -12,10 +12,20 @@ export default function BuyOurLostDreamsPage() {
     setError("");
 
     try {
-      const response = await fetch("/api/buy-our-lost-dreams", {
+      const response = await fetch("/api/checkout", {
         method: "POST",
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: [
+            {
+              id: "our-lost-dreams-digital-single",
+              quantity: 1
+            }
+          ],
+          returnPath: "/buy"
+        })
       });
+
       const payload = await response.json();
 
       if (!response.ok || !payload.url) {
@@ -71,8 +81,8 @@ export default function BuyOurLostDreamsPage() {
           ) : null}
 
           <p className="mx-auto mt-6 max-w-lg text-xs leading-6 text-stone-500">
-            After payment, the digital copy will be sent to the email used at checkout.
-            ISRC: QZZ7M2627617.
+            Secure Stripe checkout. A receipt is sent to the email used at payment.
+            The digital copy is delivered to that same email. ISRC: QZZ7M2627617.
           </p>
 
           <div className="mt-7">
