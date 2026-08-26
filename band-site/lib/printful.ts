@@ -16,6 +16,25 @@ type PrintfulStore = {
   name?: string;
 };
 
+type PrintfulCatalogVariant = {
+  id?: number;
+  size?: string | null;
+  color?: string | null;
+  name?: string | null;
+};
+
+const PRINTFUL_CATALOG_PRODUCT_IDS: Record<string, number> = {
+  "salieri-tee": 71,
+  "echoes-unearthed-crest-tee": 71,
+  "echoes-unearthed-wordmark-tee": 71,
+  "official-tee-picture": 71,
+  "kamdridi-gold-logo-tee": 71,
+  "salieri-hoodie": 146,
+  "kamdridi-gold-logo-hoodie": 146,
+  "salieri-mug": 19,
+  "salieri-poster": 1
+};
+
 function normalizeToken(value: string | null | undefined) {
   return (value ?? "default").replace(/[^a-z0-9]+/gi, "_").toUpperCase();
 }
@@ -33,13 +52,45 @@ function getVariantEnvKey(productId: string, color?: string, size?: string) {
   return `PRINTFUL_VARIANT_${product.printfulEnvPrefix}_${normalizeToken(color)}_${normalizeToken(size)}`;
 }
 
-function getPrintfulVariantId(productId: string, color?: string, size?: string) {
+function getConfiguredPrintfulVariantId(productId: string, color?: string, size?: string) {
   const envKey = getVariantEnvKey(productId, color, size);
   if (!envKey) return null;
   const value = process.env[envKey];
   if (!value) return null;
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : null;
+}
+
+function normalizePrintfulSize(value?: string | null) {
+  const normalized = (value || "").trim().toUpperCase().replace(/\s+/g, "");
+  return normalized === "XXL" ? "2XL" : normalized;
+}
+
+function normalizePrintfulColor(value?: string | null) {
+  return (value || "").trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+async function resolvePrintfulVariantId(productId: string, color?: string, size?: string) {
+  const configured = getConfiguredPrintfulVariantId(productId, color, size);
+  if (configured) return configured;
+
+  const catalogProductId = PRINTFUL_CATALOG_PRODUCT_IDS[productId];
+  if (!catalogProductId) return null;
+
+  const payload = (await getPrintfulProduct(catalogProductId)) as Record<string, unknown>;
+  const result = (payload.result ?? payload.data ?? payload) as Record<string, unknown>;
+  const variants = Array.isArray(result.variants) ? (result.variants as PrintfulCatalogVariant[]) : [];
+
+  const wantedSize = normalizePrintfulSize(size);
+  const wantedColor = normalizePrintfulColor(color);
+
+  const match = variants.find((variant) => {
+    const variantSize = normalizePrintfulSize(variant.size);
+    const variantColor = normalizePrintfulColor(variant.color);
+    return (!wantedSize || variantSize === wantedSize) && (!wantedColor || variantColor === wantedColor);
+  });
+
+  return typeof match?.id === "number" ? match.id : null;
 }
 
 function getPrintfulApiBase() {
@@ -176,7 +227,7 @@ export async function createPrintfulOrderFromSession(
     const metadata = product.metadata ?? {};
     if (metadata.fulfillmentMode !== "printful") continue;
 
-    const variantId = getPrintfulVariantId(metadata.productId, metadata.color, metadata.size);
+    const variantId = await resolvePrintfulVariantId(metadata.productId, metadata.color, metadata.size);
     if (!variantId) continue;
 
     items.push({
