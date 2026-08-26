@@ -26,6 +26,21 @@ type OrderPayload = {
     format?: string | null;
     fulfillment_mode?: string | null;
   }>;
+  fulfillment_tasks?: Array<{
+    id: string;
+    order_item_id?: string | null;
+    product_id?: string | null;
+    task_type: string;
+    provider?: string | null;
+    status: string;
+    customer_stage: "queued" | "in_production" | "quality_check" | "shipped" | "delivered" | "issue";
+    due_at?: string | null;
+    created_at?: string | null;
+    updated_at?: string | null;
+    tracking_number?: string | null;
+    tracking_url?: string | null;
+    customer_note?: string | null;
+  }>;
   digital_entitlements?: Array<{
     entitlement_id: string;
     product_id?: string | null;
@@ -40,12 +55,24 @@ type OrderPayload = {
   error?: string;
 };
 
+const stages = [
+  { key: "queued", label: "Queued" },
+  { key: "in_production", label: "In production" },
+  { key: "quality_check", label: "Quality check" },
+  { key: "shipped", label: "Shipped" },
+  { key: "delivered", label: "Delivered" }
+] as const;
+
 function money(amount: number | null | undefined, currency: string | undefined) {
   if (amount == null) return "—";
   return new Intl.NumberFormat("en-CA", {
     style: "currency",
     currency: (currency || "CAD").toUpperCase()
   }).format(amount / 100);
+}
+
+function stageIndex(stage: string | undefined) {
+  return Math.max(0, stages.findIndex((item) => item.key === stage));
 }
 
 export function OrderClient() {
@@ -88,6 +115,7 @@ export function OrderClient() {
   }, [orderUrl, attempt]);
 
   const hasMadeToOrder = Boolean(payload?.items?.some((item) => item.fulfillment_mode === "made_to_order"));
+  const madeToOrderTasks = (payload?.fulfillment_tasks || []).filter((task) => task.task_type === "made_to_order_production");
 
   const download = (entitlementId: string) => {
     if (!sessionId) return;
@@ -112,17 +140,9 @@ export function OrderClient() {
           </div>
         )}
 
-        {!sessionId && (
-          <div className="mt-8 rounded-2xl border border-rose-500/25 bg-rose-500/10 p-5 text-rose-100">Missing checkout session.</div>
-        )}
-
-        {error && (
-          <div className="mt-8 rounded-2xl border border-rose-500/25 bg-rose-500/10 p-5 text-rose-100">{error}</div>
-        )}
-
-        {!error && payload?.state === "processing" && (
-          <div className="mt-8 rounded-2xl border border-amber-500/25 bg-amber-500/10 p-5 text-amber-100">Payment is confirmed by Stripe. Finalizing the order record…</div>
-        )}
+        {!sessionId && <div className="mt-8 rounded-2xl border border-rose-500/25 bg-rose-500/10 p-5 text-rose-100">Missing checkout session.</div>}
+        {error && <div className="mt-8 rounded-2xl border border-rose-500/25 bg-rose-500/10 p-5 text-rose-100">{error}</div>}
+        {!error && payload?.state === "processing" && <div className="mt-8 rounded-2xl border border-amber-500/25 bg-amber-500/10 p-5 text-amber-100">Payment is confirmed by Stripe. Finalizing the order record…</div>}
 
         {payload?.order && (
           <div className="mt-8 grid gap-4 rounded-[28px] border border-white/10 bg-white/[0.03] p-6 sm:grid-cols-3">
@@ -130,6 +150,45 @@ export function OrderClient() {
             <div><p className="text-[10px] uppercase tracking-[0.25em] text-stone-500">Fulfillment</p><p className="mt-2 text-lg font-semibold text-white">{(payload.order.fulfillment_status || "pending").replaceAll("_", " ")}</p></div>
             <div><p className="text-[10px] uppercase tracking-[0.25em] text-stone-500">Total</p><p className="mt-2 text-lg font-semibold text-[#f4c66a]">{money(payload.order.amount_total, payload.order.currency)}</p></div>
           </div>
+        )}
+
+        {madeToOrderTasks.length > 0 && (
+          <section className="mt-10 rounded-[28px] border border-[#f4c66a]/20 bg-[#f4c66a]/[0.03] p-6 sm:p-8">
+            <p className="text-xs font-black uppercase tracking-[0.25em] text-[#f4c66a]">Production tracking</p>
+            <h2 className="mt-3 font-display text-3xl uppercase tracking-[0.06em]">Your order journey</h2>
+            <div className="mt-8 grid gap-6">
+              {madeToOrderTasks.map((task) => {
+                const current = stageIndex(task.customer_stage);
+                return (
+                  <article key={task.id} className="rounded-2xl border border-white/10 bg-black/35 p-5">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.18em] text-stone-500">{task.provider ? `Production partner · ${task.provider}` : "Production partner assigned"}</p>
+                        <p className="mt-2 text-lg font-semibold text-white">{task.customer_stage === "issue" ? "Production review required" : stages[current]?.label || "Queued"}</p>
+                      </div>
+                      {task.tracking_url && (
+                        <a href={task.tracking_url} target="_blank" rel="noreferrer" className="rounded-full border border-[#f4c66a]/40 px-5 py-2.5 text-xs font-black uppercase tracking-[0.16em] text-[#f4c66a] hover:bg-[#f4c66a]/10">Track shipment</a>
+                      )}
+                    </div>
+
+                    {task.customer_stage !== "issue" && (
+                      <div className="mt-6 grid grid-cols-5 gap-2">
+                        {stages.map((stage, index) => (
+                          <div key={stage.key}>
+                            <div className={`h-1.5 rounded-full ${index <= current ? "bg-[#f4c66a]" : "bg-white/10"}`} />
+                            <p className={`mt-2 text-[9px] font-bold uppercase tracking-[0.12em] ${index <= current ? "text-[#f4c66a]" : "text-stone-600"}`}>{stage.label}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {task.customer_note && <p className="mt-5 text-sm leading-6 text-stone-300">{task.customer_note}</p>}
+                    {task.tracking_number && <p className="mt-3 text-xs uppercase tracking-[0.14em] text-stone-500">Tracking · {task.tracking_number}</p>}
+                  </article>
+                );
+              })}
+            </div>
+          </section>
         )}
 
         {(payload?.items?.length || 0) > 0 && (
