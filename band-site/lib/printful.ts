@@ -32,7 +32,18 @@ const PRINTFUL_CATALOG_PRODUCT_IDS: Record<string, number> = {
   "salieri-hoodie": 146,
   "kamdridi-gold-logo-hoodie": 146,
   "salieri-mug": 19,
-  "salieri-poster": 1
+  "salieri-poster": 1,
+  "kamdridi-logo-mug": 300,
+  "kamdridi-logo-snapback": 99,
+  "war-machines-mini-poster": 1
+};
+
+
+const PRINTFUL_FIXED_VARIANT_IDS: Record<string, number> = {
+  "salieri-mug": 1320,
+  "kamdridi-logo-mug": 9323,
+  "salieri-poster": 3876,
+  "war-machines-mini-poster": 3876
 };
 
 function normalizeToken(value: string | null | undefined) {
@@ -73,6 +84,9 @@ function normalizePrintfulColor(value?: string | null) {
 async function resolvePrintfulVariantId(productId: string, color?: string, size?: string) {
   const configured = getConfiguredPrintfulVariantId(productId, color, size);
   if (configured) return configured;
+
+  const fixedVariantId = PRINTFUL_FIXED_VARIANT_IDS[productId];
+  if (fixedVariantId && !color && !size) return fixedVariantId;
 
   const catalogProductId = PRINTFUL_CATALOG_PRODUCT_IDS[productId];
   if (!catalogProductId) return null;
