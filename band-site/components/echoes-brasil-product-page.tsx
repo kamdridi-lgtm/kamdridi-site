@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { EchoesDraftProduct } from "@/data/echoes-brasil-products";
+import type { CommerceProduct } from "@/data/commerce-products";
 import { useApp } from "@/components/providers";
 
-export default function EchoesBrasilProductPage({ product }: { product: EchoesDraftProduct }) {
+export default function EchoesBrasilProductPage({ product, includedItems }: { product: CommerceProduct; includedItems: string[] }) {
   const { addToCart, setCartOpen } = useApp();
 
   return (
@@ -12,7 +12,7 @@ export default function EchoesBrasilProductPage({ product }: { product: EchoesDr
       <div className="mx-auto max-w-6xl px-6 py-12 md:py-24">
         <div className="mb-6 flex gap-3">
           <span className="inline-block rounded-full border border-amber-900/50 bg-amber-950/30 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-amber-500">
-            PRE-ORDER
+            MADE TO ORDER
           </span>
         </div>
 
@@ -47,7 +47,7 @@ export default function EchoesBrasilProductPage({ product }: { product: EchoesDr
                 Conteúdo Incluído
               </h3>
               <ul className="mt-4 space-y-2 text-sm text-amber-100/70">
-                {product.includedItems.map((item, idx) => (
+                {includedItems.map((item, idx) => (
                   <li key={idx} className="flex items-center gap-3">
                     <span className="h-1 w-1 rounded-full bg-amber-500" />
                     {item}
@@ -70,7 +70,7 @@ export default function EchoesBrasilProductPage({ product }: { product: EchoesDr
                   </span>
                 </div>
                 <div className="text-right text-[10px] text-stone-500 uppercase tracking-widest">
-                  Frete calculado separadamente.
+                  Shipping details are collected at checkout.
                 </div>
               </div>
               <div className="flex items-center justify-between">
@@ -81,7 +81,7 @@ export default function EchoesBrasilProductPage({ product }: { product: EchoesDr
               </div>
               
               <div className="rounded border border-amber-900/30 bg-black p-3 text-[10px] leading-relaxed text-amber-500/80">
-                <p><strong>Artisanal Production:</strong> Please allow 2 to 3 weeks for manufacturing before shipping. Every item is individually crafted upon order.</p>
+                <p><strong>Made to order:</strong> Production begins after payment. Please allow several weeks for manufacturing and delivery.</p>
               </div>
               
               <button
@@ -96,7 +96,7 @@ export default function EchoesBrasilProductPage({ product }: { product: EchoesDr
                 }}
                 className="mt-4 w-full rounded-full bg-[#f4c66a] py-4 text-xs font-bold uppercase tracking-[0.2em] text-black transition-colors hover:bg-amber-400"
               >
-                PRE-ORDER
+                ADD TO CART
               </button>
             </div>
           </div>
