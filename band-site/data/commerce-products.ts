@@ -38,8 +38,8 @@ export type CommerceProduct = {
 export const commerceProducts: CommerceProduct[] = [
   // ==========================================
   // 17 FOR EVER — AUSTRALIA 2027
-  // 12-inch black vinyl: US$36 ≈ CA$50.45, plus ≈CA$3 for two archive art cards.
-  // CA$53.45 estimated production cost × 3 = CA$160.35; collector retail rounded to CA$159.
+  // 12-inch black vinyl supplier basis: Kunaki US$36/unit, MOQ 1; shipping excluded.
+  // Live retail is CA$159. Verify destination shipping before making any landed-margin claim.
   // ==========================================
   {
     id: "17-for-ever-maxi-single",
