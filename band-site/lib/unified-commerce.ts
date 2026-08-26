@@ -115,7 +115,7 @@ export function buildUnifiedCheckoutPlan(rawItems: RawCheckoutItem[], products: 
     if (product.saleMode === "digital") containsDigital = true;
     else containsPhysical = true;
     if (product.saleMode === "preorder") containsPreorder = true;
-    if (product.fulfillmentMode === "made_to_order") containsMadeToOrder = true;
+    if ((product.fulfillmentMode as string) === "made_to_order") containsMadeToOrder = true;
     projects.add(product.project);
     checkoutTotal += product.priceCents * item.quantity;
 
