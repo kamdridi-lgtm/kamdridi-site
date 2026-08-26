@@ -2,20 +2,30 @@
 
 import { useState } from "react";
 
+type CheckoutChoice = "digital" | "physical" | null;
+
 export default function BuyPage() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<CheckoutChoice>(null);
   const [error, setError] = useState("");
 
-  async function buyNow() {
-    setLoading(true);
+  async function startCheckout(choice: Exclude<CheckoutChoice, null>) {
+    setLoading(choice);
     setError("");
+
+    const items =
+      choice === "physical"
+        ? [
+            { id: "our-lost-dreams-digital-single", quantity: 1 },
+            { id: "our-lost-dreams-physical-upgrade", quantity: 1 }
+          ]
+        : [{ id: "our-lost-dreams-digital-single", quantity: 1 }];
 
     try {
       const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          items: [{ id: "our-lost-dreams-digital-single", quantity: 1 }],
+          items,
           returnPath: "/buy"
         })
       });
@@ -29,52 +39,141 @@ export default function BuyPage() {
       window.location.href = data.url;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Checkout unavailable.");
-      setLoading(false);
+      setLoading(null);
     }
   }
 
   return (
-    <main className="min-h-screen bg-black px-5 py-10 text-white">
-      <section className="mx-auto flex min-h-[78vh] max-w-3xl items-center justify-center">
-        <div className="w-full rounded-[30px] border border-white/10 bg-[#0b0b0b] p-7 text-center shadow-2xl sm:p-12">
+    <main className="relative min-h-[900px] overflow-hidden bg-black text-white">
+      <div
+        className="absolute inset-0 bg-cover bg-center md:bg-[center_35%]"
+        style={{ backgroundImage: "url('/images/our-lost-dreams-bg.jpg')" }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,.94)_0%,rgba(0,0,0,.84)_40%,rgba(0,0,0,.34)_68%,rgba(0,0,0,.48)_100%)]"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.40)_0%,rgba(0,0,0,.08)_45%,rgba(0,0,0,.72)_100%)]"
+        aria-hidden="true"
+      />
+
+      <section className="relative z-10 mx-auto flex min-h-[900px] max-w-7xl items-center px-5 py-12 sm:px-8 lg:px-12">
+        <div className="w-full max-w-xl rounded-[30px] border border-[#d6a83f]/45 bg-black/80 p-6 shadow-[0_30px_100px_rgba(0,0,0,.65)] backdrop-blur-md sm:p-8 lg:p-10">
           <p className="text-xs font-bold uppercase tracking-[0.34em] text-[#f4c66a]">
             Official KAM DRIDI Digital Single
           </p>
 
-          <h1 className="mt-6 text-5xl font-black uppercase leading-none tracking-[0.04em] sm:text-7xl">
-            OUR LOST DREAMS
+          <h1 className="mt-5 text-5xl font-black uppercase leading-[0.92] tracking-[0.02em] text-[#f7f0e5] sm:text-6xl">
+            OUR LOST
+            <br />
+            DREAMS
           </h1>
 
-          <p className="mt-5 text-lg text-stone-300">
+          <p className="mt-4 text-sm text-stone-300 sm:text-base">
             Achat numérique officiel / Official digital purchase
           </p>
 
-          <div className="mx-auto mt-8 max-w-md rounded-2xl border border-[#f4c66a]/30 bg-[#f4c66a]/[0.06] p-6">
-            <p className="text-sm uppercase tracking-[0.22em] text-stone-400">
+          <div className="mt-7 rounded-2xl border border-[#d6a83f]/35 bg-[#17130d]/90 p-5 text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.26em] text-stone-400">
               Digital single
             </p>
-            <p className="mt-2 text-4xl font-black text-[#f4c66a]">
-              $2.99 CAD
-            </p>
-            <p className="mt-3 text-sm leading-6 text-stone-400">
+            <p className="mt-2 text-4xl font-black text-[#f4c66a]">$2.99 CAD</p>
+            <p className="mt-2 text-xs text-stone-400">
               Secure Stripe payment • Receipt by email
             </p>
+
+            <button
+              type="button"
+              onClick={() => startCheckout("digital")}
+              disabled={loading !== null}
+              className="mt-5 inline-flex min-h-14 w-full items-center justify-center rounded-full bg-[#f4c66a] px-6 py-4 text-sm font-black uppercase tracking-[0.13em] text-black transition hover:bg-[#ffd989] disabled:cursor-wait disabled:opacity-70"
+            >
+              {loading === "digital"
+                ? "Opening secure checkout…"
+                : "BUY / ACHETER — $2.99 CAD"}
+            </button>
           </div>
 
-          <button
-            type="button"
-            onClick={buyNow}
-            disabled={loading}
-            className="mt-8 inline-flex min-h-16 w-full max-w-md items-center justify-center rounded-full bg-[#f4c66a] px-7 py-4 text-sm font-black uppercase tracking-[0.14em] text-black transition hover:bg-[#ffd989] disabled:opacity-70 sm:text-base"
-          >
-            {loading ? "Opening secure checkout…" : "BUY / ACHETER — $2.99 CAD"}
-          </button>
+          <div className="my-6 flex items-center gap-3" aria-hidden="true">
+            <span className="h-px flex-1 bg-[#d6a83f]/35" />
+            <span className="text-[#f4c66a]">◆</span>
+            <span className="h-px flex-1 bg-[#d6a83f]/35" />
+          </div>
 
-          {error ? <p className="mt-4 text-sm text-red-300">{error}</p> : null}
+          <div className="rounded-2xl border border-[#d6a83f]/45 bg-black/75 p-5 sm:p-6">
+            <div className="inline-flex rounded-full bg-[#f4c66a] px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-black">
+              Best value
+            </div>
 
-          <p className="mx-auto mt-6 max-w-lg text-xs leading-6 text-stone-500">
-            One real purchase = one official digital music sale. Payment is processed securely by Stripe.
-          </p>
+            <h2 className="mt-4 text-xl font-black uppercase tracking-[0.07em] text-[#f4c66a]">
+              Want the physical version too?
+            </h2>
+
+            <p className="mt-3 text-base leading-7 text-stone-200">
+              Add the made-to-order physical CD for only{" "}
+              <strong className="text-[#f4c66a]">$8.99 more</strong>.
+            </p>
+
+            <div className="mt-4 grid gap-2 text-sm text-stone-300 sm:grid-cols-2">
+              <div className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3">
+                <span className="font-bold text-white">Made to order</span>
+                <span className="mt-1 block text-xs text-stone-400">
+                  Physical CD edition
+                </span>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3">
+                <span className="font-bold text-white">Home delivery</span>
+                <span className="mt-1 block text-xs text-stone-400">
+                  Allow 6–8 weeks
+                </span>
+              </div>
+            </div>
+
+            <p className="mt-4 text-center text-sm text-stone-400">
+              Digital + physical total:{" "}
+              <strong className="text-white">$11.98 CAD</strong>
+            </p>
+
+            <button
+              type="button"
+              onClick={() => startCheckout("physical")}
+              disabled={loading !== null}
+              className="mt-4 inline-flex min-h-14 w-full items-center justify-center rounded-full border border-[#f4c66a] bg-[#f4c66a]/10 px-6 py-4 text-sm font-black uppercase tracking-[0.11em] text-[#f4c66a] transition hover:bg-[#f4c66a] hover:text-black disabled:cursor-wait disabled:opacity-70"
+            >
+              {loading === "physical"
+                ? "Opening secure checkout…"
+                : "DIGITAL + PHYSICAL — $11.98 CAD"}
+            </button>
+          </div>
+
+          {error ? (
+            <p className="mt-4 rounded-xl border border-red-400/20 bg-red-950/30 px-4 py-3 text-sm text-red-200">
+              {error}
+            </p>
+          ) : null}
+
+          <div className="mt-6 grid grid-cols-3 gap-2 text-center">
+            <div className="rounded-xl border border-white/10 bg-black/45 px-2 py-3">
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white">
+                Secure
+              </p>
+              <p className="mt-1 text-[10px] text-stone-500">Stripe checkout</p>
+            </div>
+            <div className="rounded-xl border border-white/10 bg-black/45 px-2 py-3">
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white">
+                Receipt
+              </p>
+              <p className="mt-1 text-[10px] text-stone-500">By email</p>
+            </div>
+            <div className="rounded-xl border border-white/10 bg-black/45 px-2 py-3">
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white">
+                Official
+              </p>
+              <p className="mt-1 text-[10px] text-stone-500">Direct from KAM DRIDI</p>
+            </div>
+          </div>
         </div>
       </section>
     </main>
