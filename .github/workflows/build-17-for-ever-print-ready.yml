@@ -21,62 +21,119 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y imagemagick
 
-      - name: Build exact Kunaki CD artwork package
+      - name: Build 17 FOR EVER manufacturing artwork package
         shell: bash
         run: |
           set -euo pipefail
           SRC="band-site/public/australia"
-          OUT="17_FOR_EVER_PRINT_READY/CD_KUNAKI"
-          mkdir -p "$OUT" "17_FOR_EVER_PRINT_READY/REFERENCE_ONLY"
+          ROOT="17_FOR_EVER_PRINT_READY"
+          CD="$ROOT/CD_KUNAKI"
+          CAS="$ROOT/CASSETTE_DUPLICATION_CA_PREPRESS"
+          VIN="$ROOT/VINYL_12_DUPLICATION_CA_PREPRESS"
+          REF="$ROOT/REFERENCE_ONLY"
+          mkdir -p "$CD" "$CAS" "$VIN" "$REF"
 
-          # Kunaki jewel-case artwork is printed RGB at 300 DPI with no bleed.
-          # Existing source dimensions already match Kunaki's published pixel specs exactly.
-          convert "$SRC/17-for-ever-front-cover.webp" -colorspace sRGB -units PixelsPerInch -density 300 -quality 100 -sampling-factor 4:4:4 "$OUT/01_FRONT_COVER_1423x1411_RGB_300DPI.jpg"
-          convert "$SRC/17-for-ever-scrapbook.webp" -colorspace sRGB -units PixelsPerInch -density 300 -quality 100 -sampling-factor 4:4:4 "$OUT/02_INSIDE_INSERT_1423x1411_RGB_300DPI.jpg"
-          convert "$SRC/17-for-ever-tray-card.webp" -colorspace sRGB -units PixelsPerInch -density 300 -quality 100 -sampling-factor 4:4:4 "$OUT/03_TRAY_CARD_1772x1385_RGB_300DPI.jpg"
-          convert "$SRC/17-for-ever-disc.webp" -colorspace sRGB -units PixelsPerInch -density 300 -quality 100 -sampling-factor 4:4:4 "$OUT/04_DISC_FACE_1394x1394_RGB_300DPI.jpg"
+          # ------------------------------------------------------------
+          # CD - exact Kunaki jewel-case print files.
+          # Existing source dimensions match Kunaki's published pixel specs.
+          # ------------------------------------------------------------
+          convert "$SRC/17-for-ever-front-cover.webp" -colorspace sRGB -units PixelsPerInch -density 300 -quality 100 -sampling-factor 4:4:4 "$CD/01_FRONT_COVER_1423x1411_RGB_300DPI.jpg"
+          convert "$SRC/17-for-ever-scrapbook.webp" -colorspace sRGB -units PixelsPerInch -density 300 -quality 100 -sampling-factor 4:4:4 "$CD/02_INSIDE_INSERT_1423x1411_RGB_300DPI.jpg"
+          convert "$SRC/17-for-ever-tray-card.webp" -colorspace sRGB -units PixelsPerInch -density 300 -quality 100 -sampling-factor 4:4:4 "$CD/03_TRAY_CARD_1772x1385_RGB_300DPI.jpg"
+          convert "$SRC/17-for-ever-disc.webp" -colorspace sRGB -units PixelsPerInch -density 300 -quality 100 -sampling-factor 4:4:4 "$CD/04_DISC_FACE_1394x1394_RGB_300DPI.jpg"
 
-          # Keep these campaign visuals in the package as references only; they are not supplier print files yet.
-          cp "$SRC/17-for-ever-studio.webp" "17_FOR_EVER_PRINT_READY/REFERENCE_ONLY/17-for-ever-studio.webp"
-          cp "$SRC/17-for-ever-booklet-spread.webp" "17_FOR_EVER_PRINT_READY/REFERENCE_ONLY/17-for-ever-booklet-spread.webp"
-          cp "$SRC/17-for-ever-cassette-mockup.webp" "17_FOR_EVER_PRINT_READY/REFERENCE_ONLY/17-for-ever-cassette-mockup.webp"
+          test "$(identify -format '%wx%h' "$CD/01_FRONT_COVER_1423x1411_RGB_300DPI.jpg")" = "1423x1411"
+          test "$(identify -format '%wx%h' "$CD/02_INSIDE_INSERT_1423x1411_RGB_300DPI.jpg")" = "1423x1411"
+          test "$(identify -format '%wx%h' "$CD/03_TRAY_CARD_1772x1385_RGB_300DPI.jpg")" = "1772x1385"
+          test "$(identify -format '%wx%h' "$CD/04_DISC_FACE_1394x1394_RGB_300DPI.jpg")" = "1394x1394"
 
-          # Fail the build if any manufacturing image is not the exact published Kunaki size.
-          test "$(identify -format '%wx%h' "$OUT/01_FRONT_COVER_1423x1411_RGB_300DPI.jpg")" = "1423x1411"
-          test "$(identify -format '%wx%h' "$OUT/02_INSIDE_INSERT_1423x1411_RGB_300DPI.jpg")" = "1423x1411"
-          test "$(identify -format '%wx%h' "$OUT/03_TRAY_CARD_1772x1385_RGB_300DPI.jpg")" = "1772x1385"
-          test "$(identify -format '%wx%h' "$OUT/04_DISC_FACE_1394x1394_RGB_300DPI.jpg")" = "1394x1394"
+          # ------------------------------------------------------------
+          # CASSETTE - Duplication.ca prepress master.
+          # Selected package direction: J-card + 4 additional panels.
+          # Official template overall size: 4.000 x 13.6875 inches.
+          # Build at 300 PPI => 1200 x 4106 px.
+          # This is a flat artwork master; final supplier dieline overlay remains separate.
+          # ------------------------------------------------------------
+          convert "$SRC/17-for-ever-front-cover.webp" -resize '1200x1200^' -gravity center -extent 1200x1200 /tmp/cas_front.png
+          convert "$SRC/17-for-ever-scrapbook.webp" -resize '1200x1200^' -gravity center -extent 1200x1200 /tmp/cas_scrap.png
+          convert "$SRC/17-for-ever-studio.webp" -resize '1200x1200^' -gravity center -extent 1200x1200 /tmp/cas_studio.png
+          convert "$SRC/17-for-ever-tray-card.webp" -resize '1200x1200^' -gravity center -extent 1200x1200 /tmp/cas_tray.png
 
-          cat > "17_FOR_EVER_PRINT_READY/README_PRINT_READY.txt" <<'EOF'
+          convert -size 4106x1200 xc:black \
+            \( /tmp/cas_scrap.png -resize 1027x1200^ -gravity center -extent 1027x1200 \) -geometry +0+0 -composite \
+            \( /tmp/cas_studio.png -resize 1026x1200^ -gravity center -extent 1026x1200 \) -geometry +1027+0 -composite \
+            \( /tmp/cas_tray.png -resize 1026x1200^ -gravity center -extent 1026x1200 \) -geometry +2053+0 -composite \
+            \( /tmp/cas_front.png -resize 1027x1200^ -gravity center -extent 1027x1200 \) -geometry +3079+0 -composite \
+            -colorspace CMYK -units PixelsPerInch -density 300 -quality 100 "$CAS/01_JCARD_JPLUS4_ART_MASTER_4106x1200_CMYK_300DPI.tif"
+
+          # Cassette side art masters are supplier-template-neutral and preserve the official front identity.
+          convert "$SRC/17-for-ever-front-cover.webp" -resize '1800x900^' -gravity center -extent 1800x900 -colorspace CMYK -units PixelsPerInch -density 300 -quality 100 "$CAS/02_SIDE_A_ART_MASTER_CMYK_300DPI.tif"
+          convert "$SRC/17-for-ever-tray-card.webp" -resize '1800x900^' -gravity center -extent 1800x900 -colorspace CMYK -units PixelsPerInch -density 300 -quality 100 "$CAS/03_SIDE_B_ART_MASTER_CMYK_300DPI.tif"
+
+          test "$(identify -format '%wx%h' "$CAS/01_JCARD_JPLUS4_ART_MASTER_4106x1200_CMYK_300DPI.tif")" = "4106x1200"
+
+          # ------------------------------------------------------------
+          # 12-INCH VINYL - Duplication.ca prepress masters.
+          # Selected target: standard 12-inch jacket, no spine.
+          # Manufacturer requires CMYK, >=300 PPI, 1/8-inch bleed and PDF/X-1a final.
+          # These are high-resolution front/back/label art masters to place on the
+          # exact supplier dieline before submission; no barcode is added yet.
+          # ------------------------------------------------------------
+          # Finished jacket face is 12.3125 x 12.354 in; add 0.125 in bleed per side.
+          # 300 PPI canvas = 3769 x 3781 px.
+          convert "$SRC/17-for-ever-front-cover.webp" -filter Lanczos -resize '3769x3781^' -gravity center -extent 3769x3781 -colorspace CMYK -units PixelsPerInch -density 300 -quality 100 "$VIN/01_JACKET_FRONT_MASTER_3769x3781_CMYK_300DPI.tif"
+          convert "$SRC/17-for-ever-tray-card.webp" -filter Lanczos -resize '3769x3781^' -gravity center -extent 3769x3781 -colorspace CMYK -units PixelsPerInch -density 300 -quality 100 "$VIN/02_JACKET_BACK_MASTER_3769x3781_CMYK_300DPI.tif"
+          convert "$SRC/17-for-ever-disc.webp" -filter Lanczos -resize '1200x1200^' -gravity center -extent 1200x1200 -colorspace CMYK -units PixelsPerInch -density 300 -quality 100 "$VIN/03_LABEL_A_ART_MASTER_4IN_CMYK_300DPI.tif"
+          convert "$SRC/17-for-ever-disc.webp" -filter Lanczos -resize '1200x1200^' -gravity center -extent 1200x1200 -flop -colorspace CMYK -units PixelsPerInch -density 300 -quality 100 "$VIN/04_LABEL_B_ART_MASTER_4IN_CMYK_300DPI.tif"
+          convert "$SRC/17-for-ever-scrapbook.webp" -filter Lanczos -resize '3675x3675^' -gravity center -extent 3675x3675 -colorspace CMYK -units PixelsPerInch -density 300 -quality 100 "$VIN/05_PRINTED_INNER_SLEEVE_FRONT_MASTER_CMYK_300DPI.tif"
+          convert "$SRC/17-for-ever-studio.webp" -filter Lanczos -resize '3675x3675^' -gravity center -extent 3675x3675 -colorspace CMYK -units PixelsPerInch -density 300 -quality 100 "$VIN/06_PRINTED_INNER_SLEEVE_BACK_MASTER_CMYK_300DPI.tif"
+
+          # Reference campaign assets remain untouched.
+          cp "$SRC/17-for-ever-booklet-spread.webp" "$REF/17-for-ever-booklet-spread.webp"
+          cp "$SRC/17-for-ever-cassette-mockup.webp" "$REF/17-for-ever-cassette-mockup.webp"
+          cp "$SRC/17-for-ever-hero-wide.webp" "$REF/17-for-ever-hero-wide.webp"
+
+          cat > "$ROOT/README_PRINT_READY.txt" <<'EOF'
           KAM DRIDI - 17 FOR EVER - AUSTRALIA
-          PRINT-READY MANUFACTURING PACKAGE
+          MANUFACTURING / PREPRESS PACKAGE
 
-          VERIFIED CD TARGET: KUNAKI STANDARD JEWEL CASE
-          COLOR: RGB
-          RESOLUTION: 300 DPI
-          BLEED: NONE (per Kunaki published artwork specification)
+          1) CD_KUNAKI
+          STATUS: PRINT-READY VERIFIED
+          - RGB, 300 DPI, no bleed, exact Kunaki jewel-case pixel dimensions.
 
-          MANUFACTURING FILES
-          01_FRONT_COVER_1423x1411_RGB_300DPI.jpg
-          02_INSIDE_INSERT_1423x1411_RGB_300DPI.jpg
-          03_TRAY_CARD_1772x1385_RGB_300DPI.jpg
-          04_DISC_FACE_1394x1394_RGB_300DPI.jpg
+          2) CASSETTE_DUPLICATION_CA_PREPRESS
+          STATUS: PREPRESS ART MASTER COMPLETE / FINAL DIELINE PLACEMENT REQUIRED
+          - Chosen manufacturer direction: Duplication.ca / Analogue Media Technologies.
+          - Chosen paper package: J-card + 4 additional panels.
+          - Official overall J-card template size: 4.000 x 13.6875 inches.
+          - Master is CMYK, 300 DPI, 4106 x 1200 px.
+          - Side A/B art masters included for final cassette-label or print template placement.
+          - Final submission must use Duplication.ca's current cassette template and keep template lines separate from artwork.
 
-          DECISION LOCK
-          - Front: existing official 17 FOR EVER Australian cover.
-          - Inside insert: existing Summer of '01 scrapbook artwork.
-          - Tray/back: existing four-version Australian tray artwork, including spines.
-          - Disc face: existing Australian CD face.
-          - Do not add a barcode until the final UPC/EAN decision is confirmed.
-          - Do not alter the KAM DRIDI global radio or Australia page behavior.
+          3) VINYL_12_DUPLICATION_CA_PREPRESS
+          STATUS: PREPRESS ART MASTER COMPLETE / FINAL DIELINE PLACEMENT REQUIRED
+          - Chosen manufacturer direction: Duplication.ca / Analogue Media Technologies.
+          - Chosen format: 12-inch collector maxi, standard jacket, no spine.
+          - CMYK, 300 DPI, 1/8-inch bleed included in jacket face masters.
+          - 4-inch label art masters included.
+          - Printed inner-sleeve art masters included.
+          - Final print submission must be placed on the current supplier dieline and exported PDF/X-1a.
 
-          NOT YET SUPPLIER-READY
-          - Special cassette: current file is a product mockup, not the flat 1200x1110 J-card + 1050x496 label art required for manufacturing.
-          - 12-inch collector maxi: current front-cover web asset is 1423x1411; the chosen vinyl supplier's exact full-size sleeve/label templates must be used before production.
-          - No manufacturing order or payment is authorized by this package.
+          ART DIRECTION LOCK
+          - Use the existing Australia campaign artwork; no redesign.
+          - Front identity remains the existing 17 FOR EVER Australian cover.
+          - Back/track information derives from the existing tray-card artwork.
+          - Scrapbook and studio visuals become interior/inner-sleeve content.
+          - Existing cassette mockup remains the visual reference.
+          - Do not add UPC/EAN until the final code is confirmed.
+          - Do not alter KAM DRIDI Radio behavior.
+
+          IMPORTANT
+          - No manufacturing order, payment or supplier submission is authorized by this package.
+          - Final supplier dielines must be rechecked immediately before production because templates can change.
           EOF
 
-          (cd 17_FOR_EVER_PRINT_READY && zip -r ../17_FOR_EVER_AUSTRALIA_PRINT_READY.zip .)
+          (cd "$ROOT" && zip -r ../17_FOR_EVER_AUSTRALIA_PRINT_READY.zip .)
 
       - name: Upload print-ready package
         uses: actions/upload-artifact@v4
