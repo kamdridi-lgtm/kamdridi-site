@@ -232,8 +232,8 @@ export default function AustraliaPage() {
               <div className="flex flex-col justify-center border-b border-white/15 p-8 sm:p-11 lg:border-b-0 lg:border-r lg:p-12">
                 <p className="text-xs font-black uppercase tracking-[0.34em] text-[#e5d1aa]">January 2027</p>
                 <div className="mt-7 grid gap-3 text-xs font-black uppercase tracking-[0.2em] text-white">
-                  <span className="rounded-full border border-white/20 bg-white/[0.06] px-5 py-3">Limited Edition CD · Coming soon</span>
-                  <span className="rounded-full border border-[#e5d1aa]/70 bg-[#e5d1aa]/12 px-5 py-3 text-[#f5dfb7]">12-inch Collector Maxi · CA$159</span>
+                  <span className="rounded-full border border-white/20 bg-white/[0.06] px-5 py-3">Limited Edition CD · Made to order · CA$39</span>
+                  <span className="rounded-full border border-[#e5d1aa]/70 bg-[#e5d1aa]/12 px-5 py-3 text-[#f5dfb7]">12-inch Collector Maxi · Made to order · CA$159</span>
                   <span className="rounded-full border border-white/20 bg-white/[0.06] px-5 py-3">Special Cassette · Coming soon</span>
                 </div>
               </div>
@@ -241,14 +241,13 @@ export default function AustraliaPage() {
                 <p className="text-xs font-black uppercase tracking-[0.34em] text-[#e5d1aa]">The Australian drop</p>
                 <h2 className="mt-5 font-display text-5xl uppercase leading-[0.94] tracking-[0.05em]">Own the memory</h2>
                 <p className="mt-6 text-base leading-8 text-stone-300">
-                  The 12-inch collector maxi single opens the January 2027 campaign with a full-color jacket,
-                  printed inner sleeve, and two exclusive archive art cards. CD and cassette editions follow.
+                  The CD and 12-inch collector maxi are made to order after payment. Production and delivery can take several weeks. The special cassette follows once its on-demand supplier is fully locked.
                 </p>
                 <Link
                   href="/store?filter=australia-17-for-ever#17-for-ever-maxi-single"
                   className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[#e5d1aa] px-8 py-4 text-center text-xs font-black uppercase tracking-[0.23em] text-black transition hover:bg-white sm:w-auto"
                 >
-                  Pre-order the maxi · CA$159
+                  Order collector editions
                 </Link>
               </div>
             </div>
