@@ -67,8 +67,8 @@ export default function StorePage() {
                   <span className="border border-[#f4c66a]/35 bg-[#f4c66a]/10 px-4 py-3 text-[#f4c66a]">
                     {checkoutEnabled ? "Secure checkout ready" : "Checkout setup in progress"}
                   </span>
-                  <span className="border border-white/10 bg-black/35 px-4 py-3">Tees from $38</span>
-                  <span className="border border-white/10 bg-black/35 px-4 py-3">Hoodie $78</span>
+                  <span className="border border-white/10 bg-black/35 px-4 py-3">Tees · made to order</span>
+                  <span className="border border-white/10 bg-black/35 px-4 py-3">Hoodies · made to order</span>
                   <span className="border border-white/10 bg-black/35 px-4 py-3">Boxed keychain $36</span>
                 </div>
               </div>
@@ -78,25 +78,25 @@ export default function StorePage() {
               {[
                 {
                   title: "Gold Logo Tee",
-                  price: "$38",
+                  price: "Made to order",
                   image: "/store/merch/gold-logo-tee-glow.png",
                   href: "#kamdridi-gold-logo-tee"
                 },
                 {
                   title: "Echoes Crest Tee",
-                  price: "$46",
+                  price: "Made to order",
                   image: "/store/merch/echoes-crest-tee-duo.png",
                   href: "#echoes-unearthed-crest-tee"
                 },
                 {
                   title: "Signal Target",
-                  price: "$44",
+                  price: "Made to order",
                   image: "/store/merch/signal-target-collection.png",
                   href: "#signal-target-tee-collection"
                 },
                 {
                   title: "Boxed Keychain",
-                  price: "$36",
+                  price: "Made to order",
                   image: "/store/merch/logo-essentials-grid.png",
                   href: "#kamdridi-logo-keychain"
                 }
@@ -124,16 +124,16 @@ export default function StorePage() {
           <div className="mx-auto mt-12 grid max-w-7xl gap-6 md:grid-cols-2">
             <ul className="space-y-4 text-sm text-stone-300">
               <li className="flex items-center gap-3">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#f4c66a]" /> 180g Heavyweight Double Vinyl
+                <span className="h-1.5 w-1.5 rounded-full bg-[#f4c66a]" /> Direct Artist physical editions
               </li>
               <li className="flex items-center gap-3">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#f4c66a]" /> Signed "Null Sector" Concept Art Print
+                <span className="h-1.5 w-1.5 rounded-full bg-[#f4c66a]" /> Made-to-order collector formats
               </li>
               <li className="flex items-center gap-3">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#f4c66a]" /> Hidden URL engraved in runout groove
+                <span className="h-1.5 w-1.5 rounded-full bg-[#f4c66a]" /> Hosted secure Stripe checkout
               </li>
               <li className="flex items-center gap-3">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#f4c66a]" /> Immediate lossless digital download
+                <span className="h-1.5 w-1.5 rounded-full bg-[#f4c66a]" /> Supplier routing after confirmed payment
               </li>
             </ul>
 
