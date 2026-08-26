@@ -123,6 +123,15 @@ export async function getPrintfulCatalog() {
   return res.json();
 }
 
+export async function getPrintfulProduct(productId: number) {
+  const res = await fetch(`${getPrintfulApiBase()}/products/${productId}`, {
+    headers: baseHeaders(),
+    cache: "no-store"
+  });
+  if (!res.ok) throw new Error(`Printful product request failed (${res.status}).`);
+  return res.json();
+}
+
 export async function getPrintfulVariant(variantId: number) {
   const res = await fetch(`${getPrintfulApiBase()}/products/variant/${variantId}`, {
     headers: baseHeaders(),
