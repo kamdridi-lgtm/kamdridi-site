@@ -56,7 +56,7 @@ const bonusTracks = [
 const collectorProductsData = [
   {
     id: "salieri-collector-bundle",
-    description: "Collector package including selected physical formats, merch, art print, booklet, and campaign extras.",
+    description: "Made-to-order collector package combining selected physical formats, merch, art print, booklet, and campaign extras.",
     image: assets.collectorPack,
     alt: "Salieri collector bundle"
   },
@@ -68,7 +68,7 @@ const collectorProductsData = [
   },
   {
     id: "salieri-vinyl-edition",
-    description: "Premium limited vinyl edition prepared for the physical collector campaign.",
+    description: "Premium 12-inch black-vinyl edition prepared as a made-to-order collector format.",
     image: assets.packBack,
     alt: "Vinyl and physical package artwork"
   },
@@ -88,7 +88,7 @@ const collectorProductsData = [
   },
   {
     id: "salieri-collector-cd",
-    description: "Digipak / jewel case edition with printed booklet, disc art, and back cover treatment.",
+    description: "Jewel-case CD edition with full-color disc art, 2-panel insert, and tray-card treatment.",
     image: assets.jewelcase,
     alt: "Collector CD jewel case concept"
   },
@@ -131,7 +131,7 @@ const streamingItems = ["Spotify", "Apple Music", "Amazon", "Instagram"];
 const orderInfoItems = [
   {
     title: "Pre-orders",
-    text: "Physical collector items are part of the July 2026 campaign and move into fulfillment after inventory is confirmed."
+    text: "Physical collector items are made to order after payment. Production begins through the selected fulfillment route and may take several weeks."
   },
   {
     title: "Digital delivery",
@@ -139,7 +139,7 @@ const orderInfoItems = [
   },
   {
     title: "Shipping",
-    text: "Checkout collects delivery details so KAMDRIDI can confirm the correct fulfillment path for physical items."
+    text: "Checkout collects delivery details so each paid physical order can be routed to the correct made-to-order supplier or manual production path."
   },
   {
     title: "Refunds and support",
@@ -149,16 +149,16 @@ const orderInfoItems = [
 
 const fulfillmentItems = [
   ["Digital Deluxe Release", "High-resolution files, digital booklet, and four exclusive bonus tracks."],
-  ["Collector formats", "CD, vinyl, booklet, box, and coin items are prepared for campaign fulfillment after production confirmation."],
+  ["Collector formats", "CD, vinyl, booklet, box, and coin items are produced through their selected made-to-order or manual supplier route after payment."],
   ["Merch", "Apparel, mug, and poster orders use the selected size, color, and delivery details from checkout."],
   ["Collector Bundle", "Bundle contents are confirmed as one campaign package before fulfillment begins."]
 ];
 
 const trustNotes = [
-  { title: "Pre-order campaign", text: "Physical collector items are prepared for the July 2026 campaign and ship when inventory is confirmed." },
+  { title: "Made to order", text: "Physical collector items enter production after payment; please allow several weeks for manufacturing and delivery." },
   { title: "Secure checkout", text: "Payments use hosted Stripe checkout with card and wallet support." },
   { title: "Shipping details", text: "Checkout collects the delivery details needed to confirm campaign fulfillment." },
-  { title: "Limited campaign", text: "Collector formats may close once the campaign allocation is filled." }
+  { title: "Direct artist editions", text: "Collector formats are managed directly by KAMDRIDI through the supplier route assigned to each product." }
 ];
 
 const sectionNavItems = [
