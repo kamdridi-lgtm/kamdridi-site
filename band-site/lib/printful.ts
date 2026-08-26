@@ -6,6 +6,7 @@ type PrintfulLineItem = {
   quantity: number;
   retail_price: string;
   name: string;
+  files?: Array<{ type: string; url: string }>;
 };
 
 function normalizeToken(value: string | null | undefined) {
@@ -24,21 +25,14 @@ function getVariantEnvKey(productId: string, color?: string, size?: string) {
   if (!product || !('printfulEnvPrefix' in product) || !product.printfulEnvPrefix) {
     return null;
   }
-
   return `PRINTFUL_VARIANT_${product.printfulEnvPrefix}_${normalizeToken(color)}_${normalizeToken(size)}`;
 }
 
 function getPrintfulVariantId(productId: string, color?: string, size?: string) {
   const envKey = getVariantEnvKey(productId, color, size);
-  if (!envKey) {
-    return null;
-  }
-
+  if (!envKey) return null;
   const value = process.env[envKey];
-  if (!value) {
-    return null;
-  }
-
+  if (!value) return null;
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : null;
 }
@@ -47,16 +41,25 @@ function getPrintfulApiBase() {
   return process.env.PRINTFUL_API_BASE_URL || "https://api.printful.com";
 }
 
+// SECURE TOKEN READ
+function getPrintfulToken() {
+  return process.env.PRINTFUL_API_TOKEN || process.env.PRINTFUL_API_KEY; // fallback if needed, but token is preferred
+}
+
 function getPrintfulHeaders() {
+  const token = getPrintfulToken();
+  if (!token) {
+    throw new Error("Missing Printful API Token.");
+  }
+  
   const headers: Record<string, string> = {
-    Authorization: `Bearer ${process.env.PRINTFUL_API_KEY}`,
+    Authorization: `Bearer ${token}`,
     "Content-Type": "application/json"
   };
 
   if (process.env.PRINTFUL_STORE_ID) {
     headers["X-PF-Store-Id"] = process.env.PRINTFUL_STORE_ID;
   }
-
   return headers;
 }
 
@@ -70,12 +73,9 @@ function buildRecipient(session: Stripe.Checkout.Session) {
   const shipping = shippingSession.shipping_details;
   const customer = session.customer_details;
   const address = shipping?.address ?? customer?.address;
-
   const recipientName = shipping?.name ?? customer?.name;
 
-  if (!address || !recipientName) {
-    return null;
-  }
+  if (!address || !recipientName) return null;
 
   return {
     name: recipientName,
@@ -90,13 +90,69 @@ function buildRecipient(session: Stripe.Checkout.Session) {
   };
 }
 
+// ---------------------------------------------------------
+// NEW SAFE FUNCTIONS FOR CATALOG / VARIANTS / SHIPPING
+// ---------------------------------------------------------
+
+export async function getPrintfulStore() {
+  if (!getPrintfulToken()) return { error: "Missing token" };
+  try {
+    const res = await fetch(`${getPrintfulApiBase()}/store/info`, { headers: getPrintfulHeaders() });
+    if (!res.ok) return { error: "Failed to fetch store" };
+    return await res.json();
+  } catch {
+    return { error: "Network error" };
+  }
+}
+
+export async function getPrintfulCatalog() {
+  if (!getPrintfulToken()) return { error: "Missing token" };
+  try {
+    const res = await fetch(`${getPrintfulApiBase()}/catalog/products`, { headers: getPrintfulHeaders() });
+    if (!res.ok) return { error: "Failed to fetch catalog" };
+    return await res.json();
+  } catch {
+    return { error: "Network error" };
+  }
+}
+
+export async function getPrintfulVariant(variantId: number) {
+  if (!getPrintfulToken()) return { error: "Missing token" };
+  try {
+    const res = await fetch(`${getPrintfulApiBase()}/catalog/variants/${variantId}`, { headers: getPrintfulHeaders() });
+    if (!res.ok) return { error: "Failed to fetch variant" };
+    return await res.json();
+  } catch {
+    return { error: "Network error" };
+  }
+}
+
+export async function calculateShippingRates(recipient: any, items: PrintfulLineItem[]) {
+  if (!getPrintfulToken()) return { error: "Missing token" };
+  try {
+    const res = await fetch(`${getPrintfulApiBase()}/shipping/rates`, {
+      method: "POST",
+      headers: getPrintfulHeaders(),
+      body: JSON.stringify({ recipient, items })
+    });
+    if (!res.ok) return { error: "Failed to calculate shipping" };
+    return await res.json();
+  } catch {
+    return { error: "Network error" };
+  }
+}
+
+// ---------------------------------------------------------
+// ORDER CREATION
+// ---------------------------------------------------------
+
 export async function createPrintfulOrderFromSession(
   session: Stripe.Checkout.Session,
   lineItems: Stripe.ApiList<Stripe.LineItem>
 ) {
-  const apiKey = process.env.PRINTFUL_API_KEY;
-  if (!apiKey) {
-    return { skipped: true, reason: "PRINTFUL_API_KEY is not configured." };
+  const token = getPrintfulToken();
+  if (!token) {
+    return { skipped: true, reason: "PRINTFUL_API_TOKEN is not configured." };
   }
 
   const recipient = buildRecipient(session);
@@ -108,23 +164,17 @@ export async function createPrintfulOrderFromSession(
 
   for (const lineItem of lineItems.data) {
     const product = lineItem.price?.product;
-    if (!product || typeof product === "string" || "deleted" in product) {
-      continue;
-    }
+    if (!product || typeof product === "string" || "deleted" in product) continue;
 
     const metadata = product.metadata ?? {};
-    if (metadata.fulfillmentMode !== "printful") {
-      continue;
-    }
+    if (metadata.fulfillmentMode !== "printful") continue;
 
     const productId = metadata.productId;
     const color = metadata.color;
     const size = metadata.size;
     const variantId = getPrintfulVariantId(productId, color, size);
 
-    if (!variantId) {
-      continue;
-    }
+    if (!variantId) continue;
 
     items.push({
       variant_id: variantId,
@@ -138,32 +188,28 @@ export async function createPrintfulOrderFromSession(
     return { skipped: true, reason: "No Printful-eligible items were found in this order." };
   }
 
+  // SAFETY: confirm: false ensures this is only a DRAFT order and won't charge/manufacture.
   const response = await fetch(`${getPrintfulApiBase()}/orders`, {
     method: "POST",
     headers: getPrintfulHeaders(),
     body: JSON.stringify({
       external_id: `stripe_${session.id}`,
       shipping: process.env.PRINTFUL_SHIPPING_SPEED || "STANDARD",
-      confirm: true,
+      confirm: false, // DO NOT COMMIT A REAL ORDER
       recipient,
       items
     })
   });
 
   if (!response.ok) {
-    const payload = await response.text();
-    throw new Error(`Printful order failed: ${payload}`);
+    // DO NOT expose token or raw payload if it contains secrets. Just log a generic error.
+    throw new Error("Printful draft order failed to create.");
   }
 
-  return { skipped: false };
+  return { skipped: false, draft: true };
 }
 
 function getForgeVariantId(gender: string, sleeves: string) {
-  // Using some standard Printful Variant IDs for black large shirts
-  // Men/Unisex Short (Gildan 64000): 4012
-  // Men/Unisex Long (Gildan 2400): 6056
-  // Women Short (Bella + Canvas 6004): 11211
-  // Women Long: 9341
   if (gender === 'women') {
     return sleeves === 'long' ? 9341 : 11211;
   }
@@ -171,8 +217,8 @@ function getForgeVariantId(gender: string, sleeves: string) {
 }
 
 export async function createCustomForgeOrder(session: Stripe.Checkout.Session) {
-  const apiKey = process.env.PRINTFUL_API_KEY;
-  if (!apiKey) return { skipped: true, reason: "PRINTFUL_API_KEY is not configured." };
+  const token = getPrintfulToken();
+  if (!token) return { skipped: true, reason: "PRINTFUL_API_TOKEN is not configured." };
 
   const recipient = buildRecipient(session);
   if (!recipient) return { skipped: true, reason: "Shipping recipient details were not available." };
@@ -200,40 +246,34 @@ export async function createCustomForgeOrder(session: Stripe.Checkout.Session) {
   const items = [{
     variant_id: variantId,
     quantity: 1,
+    retail_price: "0.00",
+    name: "Forge Custom Item",
     files
   }];
 
+  // SAFETY: confirm: false ensures this is only a DRAFT order and won't charge/manufacture.
   const response = await fetch(`${getPrintfulApiBase()}/orders`, {
     method: "POST",
     headers: getPrintfulHeaders(),
     body: JSON.stringify({
       external_id: `forge_${session.id}`,
       shipping: process.env.PRINTFUL_SHIPPING_SPEED || "STANDARD",
-      confirm: true, // Auto-submit to production
+      confirm: false, // DO NOT COMMIT A REAL ORDER
       recipient,
       items
     })
   });
 
   if (!response.ok) {
-    const payload = await response.text();
-    throw new Error(`Printful Forge order failed: ${payload}`);
+    throw new Error("Printful Forge draft order failed to create.");
   }
 
-  return { skipped: false };
+  return { skipped: false, draft: true };
 }
 
-
-type PrintfulShipment = {
-  tracking_number?: string | null;
-  tracking_url?: string | null;
-  status?: string | null;
-  shipped_at?: string | null;
-};
-
 export async function getPrintfulTrackingForSession(sessionId: string) {
-  const apiKey = process.env.PRINTFUL_API_KEY;
-  if (!apiKey) {
+  const token = getPrintfulToken();
+  if (!token) {
     return { configured: false, shipped: false };
   }
 
@@ -247,15 +287,12 @@ export async function getPrintfulTrackingForSession(sessionId: string) {
   }
 
   if (!response.ok) {
-    const payload = await response.text();
-    throw new Error(`Printful tracking lookup failed: ${payload}`);
+    throw new Error("Printful tracking lookup failed.");
   }
 
-  const payload = (await response.json()) as {
-    data?: PrintfulShipment[];
-  };
+  const payload = (await response.json()) as any;
   const shipments = payload.data ?? [];
-  const latest = shipments.find((shipment) => shipment.tracking_number || shipment.tracking_url);
+  const latest = shipments.find((shipment: any) => shipment.tracking_number || shipment.tracking_url);
 
   if (!latest) {
     return { configured: true, shipped: false };
