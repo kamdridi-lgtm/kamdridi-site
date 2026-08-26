@@ -4,7 +4,7 @@ import { getPrintfulCatalog, getPrintfulProduct } from "@/lib/printful";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const selected = [71, 146, 300, 19, 1] as const;
+const selected = [71, 146, 300, 19, 1, 99] as const;
 
 export async function GET() {
   try {
