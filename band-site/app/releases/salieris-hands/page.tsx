@@ -57,7 +57,7 @@ const bonusTracks = [
 const collectorProductsData = [
   {
     id: "salieri-collector-bundle",
-    description: "Made-to-order collector package combining selected physical formats, merch, art print, booklet, and campaign extras.",
+    description: "Made-to-order collector package built around the 13-movement physical edition, selected merch, art print, booklet, and campaign extras.",
     image: assets.collectorPack,
     alt: "Salieri collector bundle"
   },
@@ -69,7 +69,7 @@ const collectorProductsData = [
   },
   {
     id: "salieri-vinyl-edition",
-    description: "Premium 12-inch black-vinyl edition prepared as a made-to-order collector format.",
+    description: "Premium 12-inch black-vinyl collector edition following the 13-movement physical programme.",
     image: assets.packBack,
     alt: "Vinyl and physical package artwork"
   },
@@ -89,19 +89,19 @@ const collectorProductsData = [
   },
   {
     id: "salieri-hardcover-booklet",
-    description: "Liner notes and story presentation by KAMDRIDI.",
+    description: "Sixteen-page collector presentation built around the canonical 13-movement physical programme.",
     image: assets.booklet,
     alt: "Hardcover booklet concept"
   },
   {
     id: "salieri-collector-cd",
-    description: "Jewel-case CD edition with full-color disc art, 2-panel insert, and tray-card treatment.",
+    description: "Jewel-case CD edition following the 13-movement physical programme, with full-color disc art, 2-panel insert, and tray-card treatment.",
     image: assets.jewelcase,
     alt: "Collector CD jewel case concept"
   },
   {
     id: "salieri-digital-release",
-    description: "High-resolution audio package with digital booklet and 4 exclusive bonus tracks unavailable on streaming platforms.",
+    description: "Fourteen-track Digital Deluxe package: the 13-movement collector programme plus the additional German Das Prisma bonus, delivered with the digital booklet once final HD masters are locked.",
     image: assets.frontCover,
     alt: "Official album front cover artwork"
   }
