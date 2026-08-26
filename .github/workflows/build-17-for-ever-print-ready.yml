@@ -1,0 +1,87 @@
+name: Build 17 FOR EVER Print Ready
+
+on:
+  push:
+    paths:
+      - '.github/workflows/build-17-for-ever-print-ready.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-print-ready:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install ImageMagick
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+
+      - name: Build exact Kunaki CD artwork package
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="band-site/public/australia"
+          OUT="17_FOR_EVER_PRINT_READY/CD_KUNAKI"
+          mkdir -p "$OUT" "17_FOR_EVER_PRINT_READY/REFERENCE_ONLY"
+
+          # Kunaki jewel-case artwork is printed RGB at 300 DPI with no bleed.
+          # Existing source dimensions already match Kunaki's published pixel specs exactly.
+          convert "$SRC/17-for-ever-front-cover.webp" -colorspace sRGB -units PixelsPerInch -density 300 -quality 100 -sampling-factor 4:4:4 "$OUT/01_FRONT_COVER_1423x1411_RGB_300DPI.jpg"
+          convert "$SRC/17-for-ever-scrapbook.webp" -colorspace sRGB -units PixelsPerInch -density 300 -quality 100 -sampling-factor 4:4:4 "$OUT/02_INSIDE_INSERT_1423x1411_RGB_300DPI.jpg"
+          convert "$SRC/17-for-ever-tray-card.webp" -colorspace sRGB -units PixelsPerInch -density 300 -quality 100 -sampling-factor 4:4:4 "$OUT/03_TRAY_CARD_1772x1385_RGB_300DPI.jpg"
+          convert "$SRC/17-for-ever-disc.webp" -colorspace sRGB -units PixelsPerInch -density 300 -quality 100 -sampling-factor 4:4:4 "$OUT/04_DISC_FACE_1394x1394_RGB_300DPI.jpg"
+
+          # Keep these campaign visuals in the package as references only; they are not supplier print files yet.
+          cp "$SRC/17-for-ever-studio.webp" "17_FOR_EVER_PRINT_READY/REFERENCE_ONLY/17-for-ever-studio.webp"
+          cp "$SRC/17-for-ever-booklet-spread.webp" "17_FOR_EVER_PRINT_READY/REFERENCE_ONLY/17-for-ever-booklet-spread.webp"
+          cp "$SRC/17-for-ever-cassette-mockup.webp" "17_FOR_EVER_PRINT_READY/REFERENCE_ONLY/17-for-ever-cassette-mockup.webp"
+
+          # Fail the build if any manufacturing image is not the exact published Kunaki size.
+          test "$(identify -format '%wx%h' "$OUT/01_FRONT_COVER_1423x1411_RGB_300DPI.jpg")" = "1423x1411"
+          test "$(identify -format '%wx%h' "$OUT/02_INSIDE_INSERT_1423x1411_RGB_300DPI.jpg")" = "1423x1411"
+          test "$(identify -format '%wx%h' "$OUT/03_TRAY_CARD_1772x1385_RGB_300DPI.jpg")" = "1772x1385"
+          test "$(identify -format '%wx%h' "$OUT/04_DISC_FACE_1394x1394_RGB_300DPI.jpg")" = "1394x1394"
+
+          cat > "17_FOR_EVER_PRINT_READY/README_PRINT_READY.txt" <<'EOF'
+          KAM DRIDI - 17 FOR EVER - AUSTRALIA
+          PRINT-READY MANUFACTURING PACKAGE
+
+          VERIFIED CD TARGET: KUNAKI STANDARD JEWEL CASE
+          COLOR: RGB
+          RESOLUTION: 300 DPI
+          BLEED: NONE (per Kunaki published artwork specification)
+
+          MANUFACTURING FILES
+          01_FRONT_COVER_1423x1411_RGB_300DPI.jpg
+          02_INSIDE_INSERT_1423x1411_RGB_300DPI.jpg
+          03_TRAY_CARD_1772x1385_RGB_300DPI.jpg
+          04_DISC_FACE_1394x1394_RGB_300DPI.jpg
+
+          DECISION LOCK
+          - Front: existing official 17 FOR EVER Australian cover.
+          - Inside insert: existing Summer of '01 scrapbook artwork.
+          - Tray/back: existing four-version Australian tray artwork, including spines.
+          - Disc face: existing Australian CD face.
+          - Do not add a barcode until the final UPC/EAN decision is confirmed.
+          - Do not alter the KAM DRIDI global radio or Australia page behavior.
+
+          NOT YET SUPPLIER-READY
+          - Special cassette: current file is a product mockup, not the flat 1200x1110 J-card + 1050x496 label art required for manufacturing.
+          - 12-inch collector maxi: current front-cover web asset is 1423x1411; the chosen vinyl supplier's exact full-size sleeve/label templates must be used before production.
+          - No manufacturing order or payment is authorized by this package.
+          EOF
+
+          (cd 17_FOR_EVER_PRINT_READY && zip -r ../17_FOR_EVER_AUSTRALIA_PRINT_READY.zip .)
+
+      - name: Upload print-ready package
+        uses: actions/upload-artifact@v4
+        with:
+          name: 17_FOR_EVER_AUSTRALIA_PRINT_READY
+          path: 17_FOR_EVER_AUSTRALIA_PRINT_READY.zip
+          if-no-files-found: error
+          retention-days: 30
