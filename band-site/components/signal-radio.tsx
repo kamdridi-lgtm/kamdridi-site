@@ -94,7 +94,8 @@ export function SignalRadio() {
 
           <div className="signal-radio-display mt-5 border border-white/10 bg-black/55 p-4 sm:p-5">
             <p
-              className={`min-h-5 text-sm uppercase tracking-[0.18em] text-stone-200 ${isTuning ? "signal-text-drift" : ""}`}
+              translate="no"
+              className={`notranslate min-h-5 text-sm uppercase tracking-[0.18em] text-stone-200 ${isTuning ? "signal-text-drift" : ""}`}
               aria-live="polite"
             >
               {isTuning
