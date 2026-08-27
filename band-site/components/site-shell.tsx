@@ -142,7 +142,7 @@ function CampaignBadgeLink({
       <span className="relative h-full w-full transition duration-700 group-hover:rotate-12">
         {children}
       </span>
-      <span className="absolute -bottom-1 -right-1 rounded-full border border-[#e8ce93]/70 bg-[#07101b] px-1 py-0.5 text-[6px] font-black uppercase tracking-[0.05em] text-[#fff0c5] shadow-lg sm:px-1.5 sm:text-[7px] sm:tracking-[0.08em]">
+      <span className="absolute -bottom-1 -right-1 hidden rounded-full border border-[#e8ce93]/70 bg-[#07101b] px-1 py-0.5 text-[6px] font-black uppercase tracking-[0.05em] text-[#fff0c5] shadow-lg sm:inline-flex sm:px-1.5 sm:text-[7px] sm:tracking-[0.08em]">
         {shortLabel}
       </span>
     </Link>
@@ -488,6 +488,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const showCart =
     pathname === "/" ||
     pathname.startsWith("/store") ||
+    pathname === "/australia" ||
+    pathname.startsWith("/releases/echoes-un-live-in-brasil") ||
+    pathname.startsWith("/releases/echoes-unearthed") ||
     pathname === salieriReleaseHref;
   const primaryNavItems = navigation.filter((item) =>
     primaryNavLabels.has(item.label),
@@ -511,11 +514,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <SocialBar />{" "}
       <header className="sticky top-0 z-[1000] border-b border-white/10 bg-[#090909]/88 backdrop-blur-xl">
         {" "}
-        <div className="relative mx-auto flex max-w-[1500px] items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
+        <div className="relative mx-auto flex max-w-[1500px] items-center justify-between gap-2 px-3 py-2.5 sm:gap-4 sm:px-6">
           {" "}
           <Link href="/" className="flex shrink-0 items-center gap-3">
             {" "}
-            <div className="relative h-12 w-32 shrink-0 sm:w-36 2xl:w-44">
+            <div className="relative h-10 w-24 shrink-0 sm:h-12 sm:w-36 2xl:w-44">
               {" "}
               <Image
                 src={brandLogo}
