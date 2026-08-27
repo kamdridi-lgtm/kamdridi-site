@@ -46,8 +46,13 @@ export default function BuyPage() {
   return (
     <main className="relative min-h-[900px] overflow-hidden bg-black text-white">
       <div
-        className="absolute inset-0 bg-cover bg-center md:bg-[center_35%]"
-        style={{ backgroundImage: "url('/images/our-lost-dreams-bg.jpg')" }}
+        className="absolute inset-0 bg-black"
+        style={{
+          backgroundImage: "url('/images/our-lost-dreams-bg.jpg')",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "right center",
+          backgroundSize: "auto 100%"
+        }}
         aria-hidden="true"
       />
       <div
@@ -107,31 +112,46 @@ export default function BuyPage() {
               Best value
             </div>
 
-            <h2 className="mt-4 text-xl font-black uppercase tracking-[0.07em] text-[#f4c66a]">
-              Want the physical version too?
-            </h2>
-
-            <p className="mt-3 text-base leading-7 text-stone-200">
-              Add the made-to-order physical CD for only{" "}
-              <strong className="text-[#f4c66a]">$8.99 more</strong>.
-            </p>
-
-            <div className="mt-4 grid gap-2 text-sm text-stone-300 sm:grid-cols-2">
-              <div className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3">
-                <span className="font-bold text-white">Made to order</span>
-                <span className="mt-1 block text-xs text-stone-400">
-                  Physical CD edition
-                </span>
+            <div className="mt-4 grid gap-5 sm:grid-cols-[180px_1fr] sm:items-center">
+              <div className="relative mx-auto h-[170px] w-[180px]">
+                <div className="absolute right-0 top-1/2 h-[126px] w-[126px] -translate-y-1/2 rounded-full border border-white/20 bg-[radial-gradient(circle_at_35%_35%,#666_0%,#1a1a1a_22%,#080808_48%,#222_60%,#050505_100%)] shadow-[0_10px_30px_rgba(0,0,0,.55)]" />
+                <div className="absolute left-0 top-1/2 z-10 h-[150px] w-[150px] -translate-y-1/2 overflow-hidden rounded-[4px] border border-white/30 bg-black shadow-[0_12px_30px_rgba(0,0,0,.6)]">
+                  <img
+                    src="/assets/images/our-lost-dreams-cover.jpg"
+                    alt="OUR LOST DREAMS physical CD cover"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
               </div>
-              <div className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3">
-                <span className="font-bold text-white">Home delivery</span>
-                <span className="mt-1 block text-xs text-stone-400">
-                  Allow 6–8 weeks
-                </span>
+
+              <div>
+                <h2 className="text-xl font-black uppercase tracking-[0.07em] text-[#f4c66a]">
+                  Want the physical CD too?
+                </h2>
+
+                <p className="mt-3 text-base leading-7 text-stone-200">
+                  Add the made-to-order physical CD for only{" "}
+                  <strong className="text-[#f4c66a]">$8.99 more</strong>.
+                </p>
+
+                <div className="mt-4 grid gap-2 text-sm text-stone-300">
+                  <div className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3">
+                    <span className="font-bold text-white">Made to order</span>
+                    <span className="mt-1 block text-xs text-stone-400">
+                      Physical CD edition
+                    </span>
+                  </div>
+                  <div className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3">
+                    <span className="font-bold text-white">Home delivery</span>
+                    <span className="mt-1 block text-xs text-stone-400">
+                      Allow 6–8 weeks
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <p className="mt-4 text-center text-sm text-stone-400">
+            <p className="mt-5 text-center text-sm text-stone-400">
               Digital + physical total:{" "}
               <strong className="text-white">$11.98 CAD</strong>
             </p>
