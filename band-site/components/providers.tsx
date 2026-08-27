@@ -203,7 +203,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
             color,
             size
           })),
-          returnPath: "/store"
+          returnPath: `${window.location.pathname}${window.location.search}`
         })
       });
 
