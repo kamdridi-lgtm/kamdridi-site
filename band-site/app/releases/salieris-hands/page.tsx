@@ -797,10 +797,13 @@ export default async function SalierisHandsPage() {
             <p className="mt-5 border-l border-[#e2ad52]/55 pl-4 text-sm leading-7 text-[#d9c09a]">
               Official front cover, back cover, collector package, disc, booklet, jewel case, and campaign stills are approved visual assets. They are not to be redesigned or replaced with generated substitutes.
             </p>
-            <div className="mt-7">
+            <div className="mt-7 flex flex-wrap gap-3">
               <ActionLink href={teaserUrl}>
                 <Play className="h-4 w-4" />
                 Official Teaser
+              </ActionLink>
+              <ActionLink href="/releases/salieris-hands/PRESS_KIT.md" tone="ghost">
+                Press Kit Notes
               </ActionLink>
             </div>
           </div>
