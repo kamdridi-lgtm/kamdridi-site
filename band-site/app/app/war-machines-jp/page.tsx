@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Film, PlayCircle, ShoppingCart } from "lucide-react";
 import { TrackAccessControls } from "@/components/track-access-controls";
+import { DirectProductCheckoutButton } from "@/components/direct-product-checkout-button";
 
 function T({ children }: { children: React.ReactNode }) {
   return <span translate="no" className="notranslate" lang="en">{children}</span>;
@@ -306,12 +307,11 @@ export default function WarMachinesJapanPage() {
                   ))}
                 </div>
                 <div className="mt-5 grid gap-3">
-                  <ActionButton
-                    href="#"
-                    icon={<ShoppingCart className="h-8 w-8" />}
-                    title="準備中"
-                    subtitle="発売情報近日公開"
-                    primary
+                  <DirectProductCheckoutButton
+                    productId="war-machines-jp-digital-bundle"
+                    label="3曲HDバンドルを購入 · ¥600"
+                    returnPath="/app/war-machines-jp"
+                    className="w-full"
                   />
                   <ActionButton
                     href={LINKS.spotify}
@@ -365,12 +365,23 @@ export default function WarMachinesJapanPage() {
               <p className="mt-4 font-display text-5xl font-black text-[#ff2d21] drop-shadow-[0_0_18px_rgba(255,26,18,0.8)] sm:text-6xl">
                 ¥250
               </p>
-              <a
-                href={offerLinks.digital}
-                className="mt-4 inline-flex border border-[#ff321d] px-4 py-2 text-xs font-black tracking-[0.16em] text-white"
-              >
-                曲を選ぶ
-              </a>
+              <div className="mt-4 flex flex-col gap-3">
+                <a
+                  href={offerLinks.digital}
+                  className="inline-flex justify-center border border-[#ff321d] px-4 py-2 text-xs font-black tracking-[0.16em] text-white"
+                >
+                  曲を選ぶ
+                </a>
+                <DirectProductCheckoutButton
+                  productId="war-machines-jp-digital-bundle"
+                  label="3曲HDバンドル · ¥600"
+                  returnPath="/app/war-machines-jp"
+                  className="w-full"
+                />
+                <p className="text-[11px] leading-5 text-stone-400">
+                  3曲を個別購入すると¥750。バンドルは20%オフの¥600です。
+                </p>
+              </div>
             </Panel>
           </section>
 
@@ -420,12 +431,11 @@ export default function WarMachinesJapanPage() {
           </section>
 
           <section className="relative grid gap-3 px-5 pb-5 sm:grid-cols-3 sm:px-10">
-            <ActionButton
-              href="#"
-              icon={<ShoppingCart className="h-8 w-8" />}
-              title="準備中"
-              subtitle="発売情報近日公開"
-              primary
+            <DirectProductCheckoutButton
+              productId="war-machines-jp-digital-bundle"
+              label="3曲HDバンドル · ¥600"
+              returnPath="/app/war-machines-jp"
+              className="w-full"
             />
             <ActionButton
               href={LINKS.spotify}
