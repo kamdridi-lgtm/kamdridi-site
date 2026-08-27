@@ -71,7 +71,7 @@ function formatCurrency(value: number, locale: Locale) {
 }
 
 export function CartDrawer() {
-  const pathname = usePathname();
+  const pathname = usePathname() || "";
   const [requestedLang, setRequestedLang] = useState<string | null>(null);
 
   useEffect(() => {
