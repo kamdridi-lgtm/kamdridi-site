@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 
 const SUPABASE_FUNCTIONS = "https://retoydsgsuvznlpsguts.supabase.co/functions/v1";
 
-type Locale = "pt" | "en" | "fr";
+type Locale = "pt" | "en" | "fr" | "ja";
 
 const ui = {
   en: {
@@ -104,11 +104,43 @@ const ui = {
     backStore: "Retour à la boutique",
     music: "Musique",
     stages: { queued: "En attente", in_production: "En production", quality_check: "Contrôle qualité", shipped: "Expédié", delivered: "Livré" }
+  },
+  ja: {
+    secureOrder: "安全な注文",
+    paymentReceived: "お支払いを確認しました",
+    thankYou: "KAM DRIDIから直接ご購入いただき、ありがとうございます。このページはStripeの安全なチェックアウトに紐づいています。購入内容、配信案内、利用可能なアートワークを記載した確認メールをお送りします。",
+    digitalConfirmed: "デジタル購入を確認しました",
+    digitalBody: "デジタル購入が完了しました。Stripeの領収書を保管してください。プライベート・ダウンロードが有効な場合はここに表示されます。それ以外の場合は、チェックアウトで使用したメールアドレスへ安全に配信します。",
+    madeToOrder: "受注生産",
+    madeBody: "フィジカル商品はお支払い確認後に生産へ進みます。製造、品質確認、配送に数週間かかる場合があります。生産のために追加で注文や支払いを行う必要はありません。",
+    missing: "チェックアウト情報が見つかりません。",
+    finalizing: "Stripeでのお支払いを確認しました。注文情報を確定しています…",
+    payment: "お支払い",
+    fulfillment: "配送 / 生産",
+    total: "合計",
+    productionTracking: "生産状況",
+    journey: "ご注文の進行状況",
+    partner: "生産パートナー",
+    assigned: "生産パートナーを割り当てました",
+    issue: "生産内容の確認が必要です",
+    trackShipment: "配送を追跡",
+    tracking: "追跡番号",
+    orderItems: "注文内容",
+    standardEdition: "通常仕様",
+    productionQueued: "生産待ち · 受注生産",
+    qty: "数量",
+    digitalVault: "デジタル・ボールト",
+    secureDownload: "安全にダウンロード",
+    masterPending: "マスター準備中",
+    remaining: "回の安全なダウンロードが残っています",
+    backStore: "ストアへ戻る",
+    music: "音楽",
+    stages: { queued: "受付済み", in_production: "生産中", quality_check: "品質確認", shipped: "発送済み", delivered: "配達済み" }
   }
 } as const;
 
 function resolveLocale(value: string | null): Locale {
-  if (value === "pt" || value === "fr") return value;
+  if (value === "pt" || value === "fr" || value === "ja") return value;
   return "en";
 }
 
@@ -165,9 +197,10 @@ const stageKeys = ["queued", "in_production", "quality_check", "shipped", "deliv
 
 function money(amount: number | null | undefined, currency: string | undefined) {
   if (amount == null) return "—";
-  return new Intl.NumberFormat("en-CA", {
+  const code = (currency || "CAD").toUpperCase();
+  return new Intl.NumberFormat(code === "JPY" ? "ja-JP" : "en-CA", {
     style: "currency",
-    currency: (currency || "CAD").toUpperCase()
+    currency: code
   }).format(amount / 100);
 }
 
