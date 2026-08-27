@@ -154,7 +154,7 @@ export function MusicHub() {
                   <p className="text-xs font-semibold uppercase tracking-[0.45em] text-[#f4c66a]">
                     Listen Now
                   </p>
-                  <h2 className="mt-4 font-display text-4xl uppercase leading-none tracking-[0.06em] text-white">
+                  <h2 translate="no" className="notranslate mt-4 font-display text-4xl uppercase leading-none tracking-[0.06em] text-white">
                     War Machines
                   </h2>
                   <p className="mt-3 text-xs font-bold uppercase tracking-[0.32em] text-[#f4c66a]">
@@ -232,7 +232,7 @@ export function MusicHub() {
             </GlassCard>
             <GlassCard className="flex flex-col justify-center bg-black/50">
               <p className="text-xs uppercase tracking-[0.45em] text-[#f4c66a]">Now playing</p>
-              <h2 className="mt-4 font-display text-4xl uppercase leading-none tracking-[0.06em] text-white">
+              <h2 translate="no" className="notranslate mt-4 font-display text-4xl uppercase leading-none tracking-[0.06em] text-white">
                 {featuredVideo.title}
               </h2>
               <p className="music-copy mt-5 text-sm leading-8 text-stone-300">
@@ -314,7 +314,7 @@ export function MusicHub() {
                   <p className="text-xs uppercase tracking-[0.35em] text-[#f4c66a]">
                     {album.year} · {album.type}
                   </p>
-                  <h3 className="mt-4 font-display text-3xl uppercase leading-none tracking-[0.05em] text-white">
+                  <h3 translate="no" className="notranslate mt-4 font-display text-3xl uppercase leading-none tracking-[0.05em] text-white">
                     {album.title}
                   </h3>
                   <p className="music-copy mt-4 text-sm leading-7 text-stone-300">
