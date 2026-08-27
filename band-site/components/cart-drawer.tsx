@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { Minus, Plus, ShoppingBag, X } from "lucide-react";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useApp } from "@/components/providers";
 
 type Locale = "pt" | "en" | "fr";
@@ -72,8 +72,13 @@ function formatCurrency(value: number, locale: Locale) {
 
 export function CartDrawer() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const locale = resolveLocale(pathname, searchParams.get("lang"));
+  const [requestedLang, setRequestedLang] = useState<string | null>(null);
+
+  useEffect(() => {
+    setRequestedLang(new URLSearchParams(window.location.search).get("lang"));
+  }, [pathname]);
+
+  const locale = resolveLocale(pathname, requestedLang);
   const t = copy[locale];
 
   const {
