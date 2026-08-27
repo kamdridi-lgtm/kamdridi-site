@@ -124,7 +124,7 @@ export const commerceProducts: CommerceProduct[] = [
     projectSlug: "echoes-unearthed",
     category: "Digital Music",
     description: "24-bit / 48 kHz WAV album master from ECHOES UNEARTHED.",
-    images: [],
+    images: ["/assets/images/releases/echoes-unearthed-cover.jpg"],
     priceCents: 299,
     currency: "CAD",
     saleMode: "digital",
@@ -133,8 +133,8 @@ export const commerceProducts: CommerceProduct[] = [
     fulfillmentMode: "digital_manual",
     requiresShipping: false,
     badge: "HD WAV",
-    productPath: "/store#war-machines-digital-track",
-    releasePath: "/music"
+    productPath: "/releases/echoes-unearthed#buy",
+    releasePath: "/releases/echoes-unearthed"
   },
   {
     id: "too-fast-too-young-digital-track",
@@ -145,7 +145,7 @@ export const commerceProducts: CommerceProduct[] = [
     projectSlug: "echoes-unearthed",
     category: "Digital Music",
     description: "24-bit / 48 kHz WAV album master from ECHOES UNEARTHED.",
-    images: [],
+    images: ["/assets/images/releases/echoes-unearthed-cover.jpg"],
     priceCents: 299,
     currency: "CAD",
     saleMode: "digital",
@@ -154,8 +154,8 @@ export const commerceProducts: CommerceProduct[] = [
     fulfillmentMode: "digital_manual",
     requiresShipping: false,
     badge: "HD WAV",
-    productPath: "/store#too-fast-too-young-digital-track",
-    releasePath: "/music"
+    productPath: "/releases/echoes-unearthed#buy",
+    releasePath: "/releases/echoes-unearthed"
   },
   {
     id: "our-lost-dreams-digital-single",
@@ -176,7 +176,7 @@ export const commerceProducts: CommerceProduct[] = [
     requiresShipping: false,
     badge: "HD WAV",
     productPath: "/buy",
-    releasePath: "/music"
+    releasePath: "/releases/echoes-unearthed"
   },
   {
     id: "junction-ahead-digital-track",
@@ -187,7 +187,7 @@ export const commerceProducts: CommerceProduct[] = [
     projectSlug: "echoes-unearthed",
     category: "Digital Music",
     description: "24-bit / 48 kHz WAV album master from ECHOES UNEARTHED.",
-    images: [],
+    images: ["/assets/images/releases/echoes-unearthed-cover.jpg"],
     priceCents: 299,
     currency: "CAD",
     saleMode: "digital",
@@ -196,8 +196,8 @@ export const commerceProducts: CommerceProduct[] = [
     fulfillmentMode: "digital_manual",
     requiresShipping: false,
     badge: "HD WAV",
-    productPath: "/store#junction-ahead-digital-track",
-    releasePath: "/music"
+    productPath: "/releases/echoes-unearthed#buy",
+    releasePath: "/releases/echoes-unearthed"
   },
   {
     id: "17-for-ever-echoes-digital-track",
@@ -208,7 +208,7 @@ export const commerceProducts: CommerceProduct[] = [
     projectSlug: "echoes-unearthed",
     category: "Digital Music",
     description: "24-bit / 48 kHz WAV album master from ECHOES UNEARTHED.",
-    images: [],
+    images: ["/assets/images/releases/echoes-unearthed-cover.jpg"],
     priceCents: 299,
     currency: "CAD",
     saleMode: "digital",
@@ -217,8 +217,8 @@ export const commerceProducts: CommerceProduct[] = [
     fulfillmentMode: "digital_manual",
     requiresShipping: false,
     badge: "HD WAV",
-    productPath: "/store#17-for-ever-echoes-digital-track",
-    releasePath: "/music"
+    productPath: "/releases/echoes-unearthed#buy",
+    releasePath: "/releases/echoes-unearthed"
   },
   {
     id: "the-victory-goes-on-digital-track",
@@ -229,7 +229,7 @@ export const commerceProducts: CommerceProduct[] = [
     projectSlug: "echoes-unearthed",
     category: "Digital Music",
     description: "24-bit / 48 kHz WAV album master from ECHOES UNEARTHED.",
-    images: [],
+    images: ["/assets/images/releases/echoes-unearthed-cover.jpg"],
     priceCents: 299,
     currency: "CAD",
     saleMode: "digital",
@@ -238,8 +238,8 @@ export const commerceProducts: CommerceProduct[] = [
     fulfillmentMode: "digital_manual",
     requiresShipping: false,
     badge: "HD WAV",
-    productPath: "/store#the-victory-goes-on-digital-track",
-    releasePath: "/music"
+    productPath: "/releases/echoes-unearthed#buy",
+    releasePath: "/releases/echoes-unearthed"
   },
   {
     id: "alone-apart-one-apart-digital-track",
@@ -250,7 +250,7 @@ export const commerceProducts: CommerceProduct[] = [
     projectSlug: "echoes-unearthed",
     category: "Digital Music",
     description: "24-bit / 48 kHz WAV album master from ECHOES UNEARTHED.",
-    images: [],
+    images: ["/assets/images/releases/echoes-unearthed-cover.jpg"],
     priceCents: 299,
     currency: "CAD",
     saleMode: "digital",
@@ -259,8 +259,8 @@ export const commerceProducts: CommerceProduct[] = [
     fulfillmentMode: "digital_manual",
     requiresShipping: false,
     badge: "HD WAV",
-    productPath: "/store#alone-apart-one-apart-digital-track",
-    releasePath: "/music"
+    productPath: "/releases/echoes-unearthed#buy",
+    releasePath: "/releases/echoes-unearthed"
   },
   {
     id: "michael-remembers-digital-track",
@@ -271,7 +271,7 @@ export const commerceProducts: CommerceProduct[] = [
     projectSlug: "echoes-unearthed",
     category: "Digital Music",
     description: "24-bit / 48 kHz WAV album master from ECHOES UNEARTHED.",
-    images: [],
+    images: ["/assets/images/releases/echoes-unearthed-cover.jpg"],
     priceCents: 299,
     currency: "CAD",
     saleMode: "digital",
@@ -280,8 +280,8 @@ export const commerceProducts: CommerceProduct[] = [
     fulfillmentMode: "digital_manual",
     requiresShipping: false,
     badge: "HD WAV",
-    productPath: "/store#michael-remembers-digital-track",
-    releasePath: "/music"
+    productPath: "/releases/echoes-unearthed#buy",
+    releasePath: "/releases/echoes-unearthed"
   },
   {
     id: "the-fall-of-the-first-knight-digital-track",
@@ -292,7 +292,7 @@ export const commerceProducts: CommerceProduct[] = [
     projectSlug: "echoes-unearthed",
     category: "Digital Music",
     description: "24-bit / 48 kHz WAV album master from ECHOES UNEARTHED.",
-    images: [],
+    images: ["/assets/images/releases/echoes-unearthed-cover.jpg"],
     priceCents: 299,
     currency: "CAD",
     saleMode: "digital",
@@ -301,8 +301,8 @@ export const commerceProducts: CommerceProduct[] = [
     fulfillmentMode: "digital_manual",
     requiresShipping: false,
     badge: "HD WAV",
-    productPath: "/store#the-fall-of-the-first-knight-digital-track",
-    releasePath: "/music"
+    productPath: "/releases/echoes-unearthed#buy",
+    releasePath: "/releases/echoes-unearthed"
   },
   {
     id: "echoes-unearthed-digital-album",
@@ -313,7 +313,7 @@ export const commerceProducts: CommerceProduct[] = [
     projectSlug: "echoes-unearthed",
     category: "Digital Access",
     description: "Complete nine-track ECHOES UNEARTHED digital album in verified 24-bit / 48 kHz WAV. ECHOES OF OUR YOUTH remains exclusive to the physical edition.",
-    images: [],
+    images: ["/assets/images/releases/echoes-unearthed-cover.jpg"],
     priceCents: 1600,
     currency: "CAD",
     saleMode: "digital",
@@ -323,8 +323,8 @@ export const commerceProducts: CommerceProduct[] = [
     requiresShipping: false,
     badge: "9 TRACKS · HD WAV",
     fulfillmentNote: "Nine-track HD WAV album. ECHOES OF OUR YOUTH is physical-edition-only.",
-    productPath: "/store#echoes-unearthed-digital-album",
-    releasePath: "/music"
+    productPath: "/releases/echoes-unearthed#buy",
+    releasePath: "/releases/echoes-unearthed"
   },
 
   // ==========================================
