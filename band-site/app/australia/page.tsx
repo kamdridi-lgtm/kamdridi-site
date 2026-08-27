@@ -114,7 +114,7 @@ export default function AustraliaPage() {
           <section className="mx-auto grid max-w-6xl gap-7 px-5 py-20 sm:px-8 md:py-28 lg:grid-cols-[1fr_310px] lg:items-stretch">
             <div className="rounded-[2rem] border border-white/20 bg-black/68 p-7 shadow-2xl backdrop-blur-[2px] sm:p-10">
               <p className="text-xs font-black uppercase tracking-[0.34em] text-[#e5d1aa]">Four versions. One story.</p>
-              <h1 className="mt-5 font-display text-5xl uppercase leading-[0.92] tracking-[0.06em] sm:text-7xl">
+              <h1 translate="no" className="notranslate mt-5 font-display text-5xl uppercase leading-[0.92] tracking-[0.06em] sm:text-7xl">
                 17 FOR EVER
               </h1>
               <p className="mt-6 max-w-3xl text-base leading-8 text-stone-200 sm:text-lg">
@@ -154,7 +154,7 @@ export default function AustraliaPage() {
                     <article key={track.number} className="grid grid-cols-[48px_minmax(0,1fr)] items-center gap-x-4 gap-y-3 py-5 lg:grid-cols-[48px_minmax(0,1fr)_auto]">
                       <span className="font-display text-2xl text-[#e5d1aa]">{track.number}</span>
                       <div>
-                        <h3 className="text-sm font-black tracking-[0.11em] text-white">{track.title}</h3>
+                        <h3 translate="no" className="notranslate text-sm font-black tracking-[0.11em] text-white">{track.title}</h3>
                         <p className="mt-1.5 text-sm leading-6 text-stone-300">{track.version}</p>
                       </div>
                       <div className="col-start-2 lg:col-start-auto">
@@ -260,7 +260,7 @@ export default function AustraliaPage() {
         <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_50%,rgba(42,58,96,.22),transparent_38%),radial-gradient(circle_at_45%_70%,rgba(117,20,28,.18),transparent_34%)]" />
         <p className="text-xs font-black uppercase tracking-[0.42em] text-[#e5d1aa]">After 17 FOR EVER</p>
         <p className="mt-7 text-xs uppercase tracking-[0.32em] text-stone-500">Official Album II</p>
-        <h2 className="mx-auto mt-5 max-w-5xl font-display text-5xl uppercase leading-none tracking-[0.06em] text-white sm:text-7xl md:text-8xl">
+        <h2 translate="no" className="notranslate mx-auto mt-5 max-w-5xl font-display text-5xl uppercase leading-none tracking-[0.06em] text-white sm:text-7xl md:text-8xl">
           TWICE UPON A TIME
         </h2>
         <div className="mx-auto mt-8 h-px w-28 bg-gradient-to-r from-transparent via-[#e5d1aa] to-transparent" />
