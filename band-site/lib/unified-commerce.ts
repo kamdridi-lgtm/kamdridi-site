@@ -129,6 +129,7 @@ export function buildUnifiedCheckoutPlan(rawItems: RawCheckoutItem[], products: 
         currency: product.currency.toLowerCase(),
         product_data: {
           name,
+          description: product.description?.slice(0, 500) || undefined,
           images: product.images?.[0] ? [product.images[0]] : undefined,
           metadata: {
             productId: product.id,
