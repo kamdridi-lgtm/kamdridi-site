@@ -75,7 +75,7 @@ export async function POST(request: Request) {
       mode: "payment",
       success_url: `${siteUrl}/store/order?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}${returnPath}?purchase=cancelled`,
-      billing_address_collection: "required",
+      billing_address_collection: plan.requiresShipping ? "required" : "auto",
       shipping_address_collection: plan.requiresShipping ? {
         allowed_countries: ["US", "CA", "GB", "FR", "DE", "AU"]
       } : undefined,
@@ -83,7 +83,7 @@ export async function POST(request: Request) {
         enabled: plan.requiresShipping
       },
       customer_creation: "always",
-      allow_promotion_codes: true,
+      allow_promotion_codes: false,
       custom_text: {
         submit: {
           message: submitMessage
