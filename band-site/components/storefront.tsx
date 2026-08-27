@@ -319,9 +319,17 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
   const australia = filteredProducts.filter((p) => p.projectSlug === "australia-17-for-ever");
   const echoesBrasil = filteredProducts.filter((p) => p.projectSlug === "echoes-un-live-in-brasil" && !featured.includes(p));
   const salieri = filteredProducts.filter((p) => p.projectSlug === "salieris-hands");
-  const echoesUnearthed = filteredProducts.filter((p) => p.projectSlug === "echoes-unearthed" && !featured.includes(p));
+  const echoesUnearthed = filteredProducts
+    .filter((p) => p.projectSlug === "echoes-unearthed" && !featured.includes(p))
+    .sort((a, b) => {
+      if (a.id === "echoes-unearthed-digital-album") return -1;
+      if (b.id === "echoes-unearthed-digital-album") return 1;
+      return a.name.localeCompare(b.name);
+    });
   const kamdridiCore = filteredProducts.filter((p) => p.projectSlug === "kamdridi-core" && !featured.includes(p) && p.category !== "Digital Access");
-  const digitalAccess = filteredProducts.filter((p) => p.category === "Digital Access" || p.saleMode === "digital");
+  const digitalAccess = filteredProducts.filter(
+    (p) => (p.category === "Digital Access" || p.saleMode === "digital") && p.projectSlug !== "echoes-unearthed"
+  );
 
   return (
     <div className="grid gap-16">
@@ -400,8 +408,27 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
       )}
 
       {echoesUnearthed.length > 0 && (
-        <section>
-          <h2 className="mb-8 font-display text-3xl uppercase tracking-widest text-white">Echoes Unearthed</h2>
+        <section id="echoes-unearthed" className="scroll-mt-36">
+          <div className="mb-8 rounded-[28px] border border-[#f4c66a]/25 bg-[linear-gradient(135deg,rgba(244,198,106,0.10),rgba(0,0,0,0.72))] p-6 md:p-8">
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#f4c66a]">Direct digital · verified HD masters</p>
+            <div className="mt-3 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <h2 className="font-display text-3xl uppercase tracking-widest text-white">Echoes Unearthed</h2>
+                <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-300">
+                  Nine-track digital programme in verified 24-bit / 48 kHz WAV. Individual tracks are CA$2.99.
+                  The complete album is CA$16.00. ECHOES OF OUR YOUTH remains exclusive to the physical edition.
+                </p>
+              </div>
+              <div className="shrink-0 rounded-2xl border border-white/10 bg-black/45 px-5 py-4 text-sm leading-6 text-stone-300">
+                <span className="font-bold text-[#f4c66a]">Already bought a track?</span>
+                <br />
+                A private 20% album-upgrade offer is sent after 48 hours:
+                <span className="ml-1 font-bold text-white">CA$12.80</span>.
+                <br />
+                One offer per qualifying purchase history; discounts do not stack.
+              </div>
+            </div>
+          </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {echoesUnearthed.map(renderProductCard)}
           </div>
