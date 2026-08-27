@@ -115,6 +115,7 @@ export function OrderClient() {
   }, [orderUrl, attempt]);
 
   const hasMadeToOrder = Boolean(payload?.items?.some((item) => item.fulfillment_mode === "made_to_order"));
+  const hasManualDigital = Boolean(payload?.items?.some((item) => item.fulfillment_mode === "digital_manual"));
   const madeToOrderTasks = (payload?.fulfillment_tasks || []).filter((task) => task.task_type === "made_to_order_production");
 
   const download = (entitlementId: string) => {
@@ -130,6 +131,15 @@ export function OrderClient() {
         <p className="mt-5 max-w-3xl text-sm leading-7 text-stone-300">
           This page is tied to your Stripe checkout session. Physical orders remain queued for fulfillment; eligible digital files appear here only when the corresponding master is active in the private KAMDRIDI vault.
         </p>
+
+        {hasManualDigital && (
+          <div className="mt-7 rounded-2xl border border-[#f4c66a]/30 bg-[#f4c66a]/[0.07] p-5">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f4c66a]">Digital purchase confirmed</p>
+            <p className="mt-2 text-sm leading-7 text-stone-200">
+              Thank you for purchasing OUR LOST DREAMS directly from KAM DRIDI. Keep your Stripe receipt. Your digital copy is delivered using the email entered at checkout.
+            </p>
+          </div>
+        )}
 
         {hasMadeToOrder && (
           <div className="mt-7 rounded-2xl border border-[#f4c66a]/30 bg-[#f4c66a]/[0.07] p-5">
