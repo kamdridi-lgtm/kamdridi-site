@@ -49,7 +49,7 @@ export function GlobalAudioPlayer() {
         <span className="text-[10px] uppercase tracking-widest text-[#f4c66a]">
           Now Playing
         </span>
-        <span className="text-xs font-medium text-white truncate max-w-[120px]">
+        <span translate="no" className="notranslate text-xs font-medium text-white truncate max-w-[120px]">
           {currentTrack?.title || "No Track"}
         </span>
       </div>
