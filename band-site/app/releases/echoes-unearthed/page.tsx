@@ -61,7 +61,7 @@ export default function EchoesUnearthedReleasePage() {
             <p className="mt-8 text-xs font-bold uppercase tracking-[0.34em] text-[#c98542]">
               Official album · direct artist store
             </p>
-            <h1 className="mt-4 font-display text-[clamp(3rem,7vw,6.6rem)] uppercase leading-[0.86] tracking-[0.06em] text-[#e8b777]">
+            <h1 translate="no" className="notranslate mt-4 font-display text-[clamp(3rem,7vw,6.6rem)] uppercase leading-[0.86] tracking-[0.06em] text-[#e8b777]">
               Echoes Unearthed
             </h1>
             <p className="mt-6 max-w-3xl text-base leading-8 text-stone-300">
@@ -107,7 +107,7 @@ export default function EchoesUnearthedReleasePage() {
               <ShieldCheck className="mt-1 h-4 w-4 shrink-0 text-[#f4c66a]" />
               <p>
                 Secure Stripe checkout. Digital purchases are delivered to the email used at
-                checkout. <strong className="text-stone-200">Echoes of Our Youth</strong> is
+                checkout. <strong translate="no" className="notranslate text-stone-200">Echoes of Our Youth</strong> is
                 reserved for the physical edition and is not included in the nine-track digital album.
               </p>
             </div>
