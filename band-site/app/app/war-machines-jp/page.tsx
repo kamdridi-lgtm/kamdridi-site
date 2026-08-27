@@ -51,10 +51,10 @@ const infoRows: Array<[string, React.ReactNode]> = [
 ];
 
 const japanTracklist = [
-  { title: <T>War Machines</T>, previewSrc: "/audio/war-machines-jp/01-war-machines-preview-36s.mp3", isBonus: false, isPhysicalOnly: false },
-  { title: <T>Too Fast Too Young</T>, previewSrc: "/audio/war-machines-jp/02-too-fast-too-young-preview-36s.mp3", isBonus: false, isPhysicalOnly: false },
-  { title: <T>Our Lost Dreams</T>, previewSrc: "/audio/war-machines-jp/03-our-lost-dreams-preview-36s.mp3", isBonus: false, isPhysicalOnly: false },
-  { title: <T>War Machines — Live Crowd Version</T>, previewSrc: "/audio/war-machines-jp/04-war-machines-live-crowd-preview-36s.mp3", isBonus: true, isPhysicalOnly: true },
+  { title: <T>War Machines</T>, previewSrc: "/audio/war-machines-jp/01-war-machines-preview-36s.mp3", productId: "war-machines-jp-track-01", isBonus: false, isPhysicalOnly: false },
+  { title: <T>Too Fast Too Young</T>, previewSrc: "/audio/war-machines-jp/02-too-fast-too-young-preview-36s.mp3", productId: "war-machines-jp-track-02", isBonus: false, isPhysicalOnly: false },
+  { title: <T>Our Lost Dreams</T>, previewSrc: "/audio/war-machines-jp/03-our-lost-dreams-preview-36s.mp3", productId: "war-machines-jp-track-03", isBonus: false, isPhysicalOnly: false },
+  { title: <T>War Machines — Live Crowd Version</T>, previewSrc: "/audio/war-machines-jp/04-war-machines-live-crowd-preview-36s.mp3", productId: undefined, isBonus: true, isPhysicalOnly: true },
 ];
 
 const platforms = [
@@ -361,7 +361,7 @@ export default function WarMachinesJapanPage() {
             <Panel className="p-5">
               <p className="text-xs font-black uppercase tracking-[0.28em] text-[#ff2d21]">特典 02</p>
               <h2 className="mt-3 text-2xl font-black text-white">デジタル・ダウンロード</h2>
-              <p className="mt-2 min-h-12 text-sm font-semibold leading-6 text-stone-300">1曲 ¥250<br />公式サイトで直接購入</p>
+              <p className="mt-2 min-h-12 text-sm font-semibold leading-6 text-stone-300">1曲 ¥250<br />HDマスター確認後に公式サイトで直接購入</p>
               <p className="mt-4 font-display text-5xl font-black text-[#ff2d21] drop-shadow-[0_0_18px_rgba(255,26,18,0.8)] sm:text-6xl">
                 ¥250
               </p>
@@ -385,7 +385,7 @@ export default function WarMachinesJapanPage() {
                 </span>
               </div>
               <p className="mt-4 text-sm leading-6 text-stone-300">
-                各曲36秒の無料試聴ができます。1〜3曲目のフル音源は購入可能です。4曲目はフィジカル限定ボーナス・トラックです。
+                各曲36秒の無料試聴ができます。1〜3曲目はHDマスター確認後、公式サイトの購入ボタンが有効になります。4曲目はフィジカル限定ボーナス・トラックです。
               </p>
               <ol className="mt-5 space-y-2 text-base font-bold text-stone-100 sm:text-lg">
                 {japanTracklist.map((track, index) => (
@@ -408,7 +408,7 @@ export default function WarMachinesJapanPage() {
                       previewPendingLabel="試聴"
                       fullTrackLabel={track.isPhysicalOnly ? "フィジカル限定" : "フル音源を購入 • ¥250"}
                       theme="red"
-                      purchaseHref={track.isPhysicalOnly ? undefined : offerLinks.digital}
+                      purchaseProductId={track.isPhysicalOnly ? undefined : track.productId}
                     />
                   </li>
                 ))}
