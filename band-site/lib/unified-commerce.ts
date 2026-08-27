@@ -31,7 +31,8 @@ type RemoteProduct = {
 };
 
 function normalizeRemoteProduct(product: RemoteProduct): CommerceProduct | null {
-  if (product.currency.toUpperCase() !== "CAD") return null;
+  const currency = product.currency.toUpperCase();
+  if (currency !== "CAD" && currency !== "JPY") return null;
   if (!product.visible) return null;
   return {
     id: product.id,
@@ -44,7 +45,7 @@ function normalizeRemoteProduct(product: RemoteProduct): CommerceProduct | null 
     description: product.description,
     images: Array.isArray(product.images) ? product.images : [],
     priceCents: product.price_cents,
-    currency: "CAD",
+    currency: currency as CommerceProduct["currency"],
     saleMode: product.sale_mode,
     visible: true,
     checkoutEnabled: product.checkout_enabled,
@@ -108,6 +109,7 @@ export function buildUnifiedCheckoutPlan(rawItems: RawCheckoutItem[], products: 
   let containsMadeToOrder = false;
   let checkoutTotal = 0;
   const projects = new Set<string>();
+  const currencies = new Set<CommerceProduct["currency"]>();
 
   const lineItems = resolvedItems.map((item) => {
     const { product } = item;
@@ -117,6 +119,7 @@ export function buildUnifiedCheckoutPlan(rawItems: RawCheckoutItem[], products: 
     if (product.saleMode === "preorder") containsPreorder = true;
     if ((product.fulfillmentMode as string) === "made_to_order") containsMadeToOrder = true;
     projects.add(product.project);
+    currencies.add(product.currency);
     checkoutTotal += product.priceCents * item.quantity;
 
     const attributes = [item.color, item.size, item.format].filter(Boolean);
@@ -146,10 +149,16 @@ export function buildUnifiedCheckoutPlan(rawItems: RawCheckoutItem[], products: 
     };
   });
 
+  if (currencies.size > 1) {
+    throw new Error("MIXED_CURRENCY");
+  }
+  const orderCurrency = Array.from(currencies)[0] || "CAD";
+
   return {
     resolvedItems,
     lineItems,
     checkoutTotal,
+    orderCurrency,
     requiresShipping,
     containsPhysical,
     containsDigital,
@@ -163,6 +172,7 @@ export function buildUnifiedCheckoutPlan(rawItems: RawCheckoutItem[], products: 
       containsPreorder: containsPreorder ? "true" : "false",
       containsMadeToOrder: containsMadeToOrder ? "true" : "false",
       containsDigital: containsDigital ? "true" : "false",
+      orderCurrency,
       catalogSource: "supabase-unified-v1"
     }
   };
