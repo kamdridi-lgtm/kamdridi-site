@@ -8,7 +8,7 @@ const releases = [
   {
     title: "Echoes Unearthed",
     image: "/assets/images/releases/echoes-unearthed-cover.jpg",
-    href: "#listen-now",
+    href: "/releases/echoes-unearthed",
     fit: "cover"
   },
   {
