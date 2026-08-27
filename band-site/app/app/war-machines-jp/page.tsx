@@ -265,7 +265,7 @@ export default function WarMachinesJapanPage() {
                         <T>WAR MACHINES</T>
                       </h1>
                       <p className="mt-3 max-w-xl text-sm font-semibold leading-7 text-stone-300 sm:text-base">
-                        インダストリアルなビジュアルと、メロディック／シネマティック・ハードロックの世界観を融合した、日本向け「<T>WAR MACHINES</T>」プロジェクトです。公式サイトではデジタル音源を直接購入でき、フィジカル版は4曲入りマキシシングルとして準備中です。
+                        インダストリアルなビジュアルと、メロディック／シネマティック・ハードロックの世界観を融合した、日本向け「<T>WAR MACHINES</T>」プロジェクトです。日本向け専用HDマスターの確認後、公式サイトでデジタル音源を直接購入できる予定です。フィジカル版は4曲入りマキシシングルとして準備中です。
                       </p>
                     </div>
 
@@ -361,9 +361,9 @@ export default function WarMachinesJapanPage() {
             <Panel className="p-5">
               <p className="text-xs font-black uppercase tracking-[0.28em] text-[#ff2d21]">特典 02</p>
               <h2 className="mt-3 text-2xl font-black text-white">デジタル・ダウンロード</h2>
-              <p className="mt-2 min-h-12 text-sm font-semibold leading-6 text-stone-300">1曲 ¥250<br />HDマスター確認後に公式サイトで直接購入</p>
+              <p className="mt-2 min-h-12 text-sm font-semibold leading-6 text-stone-300">予定価格 1曲 ¥250<br />日本向け専用HDマスター確認後に購入開始</p>
               <p className="mt-4 font-display text-5xl font-black text-[#ff2d21] drop-shadow-[0_0_18px_rgba(255,26,18,0.8)] sm:text-6xl">
-                ¥250
+                ¥250 <span className="text-base align-middle text-stone-400">予定</span>
               </p>
               <a
                 href={offerLinks.digital}
@@ -385,7 +385,7 @@ export default function WarMachinesJapanPage() {
                 </span>
               </div>
               <p className="mt-4 text-sm leading-6 text-stone-300">
-                各曲36秒の無料試聴ができます。1〜3曲目はHDマスター確認後、公式サイトの購入ボタンが有効になります。4曲目はフィジカル限定ボーナス・トラックです。
+                各曲36秒の無料試聴ができます。1〜3曲目は日本向け専用HDマスター確認後、公式サイトの購入ボタンが有効になります。ECHOES UNEARTHEDのアルバム・マスターは代用しません。4曲目はフィジカル限定ボーナス・トラックです。
               </p>
               <ol className="mt-5 space-y-2 text-base font-bold text-stone-100 sm:text-lg">
                 {japanTracklist.map((track, index) => (
@@ -406,7 +406,7 @@ export default function WarMachinesJapanPage() {
                       previewSrc={track.previewSrc ?? undefined}
                       previewLabel="無料試聴 0:00 / 0:36"
                       previewPendingLabel="試聴"
-                      fullTrackLabel={track.isPhysicalOnly ? "フィジカル限定" : "フル音源を購入 • ¥250"}
+                      fullTrackLabel={track.isPhysicalOnly ? "フィジカル限定" : "HDマスター確認後 • ¥250"}
                       theme="red"
                       purchaseProductId={track.isPhysicalOnly ? undefined : track.productId}
                     />
