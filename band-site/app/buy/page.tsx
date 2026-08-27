@@ -1,10 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function BuyPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [salesCount, setSalesCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    let active = true;
+
+    fetch("https://retoydsgsuvznlpsguts.supabase.co/functions/v1/sales-goal", {
+      cache: "no-store"
+    })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data) => {
+        if (active && typeof data?.count === "number") {
+          setSalesCount(data.count);
+        }
+      })
+      .catch(() => {
+        // The sales counter is promotional only; checkout stays available if it cannot load.
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   async function startCheckout() {
     setLoading(true);
@@ -69,6 +91,31 @@ export default function BuyPage() {
             Version officielle de l&apos;album <strong className="text-white">ECHOES UNEARTHED</strong>.
             Téléchargement WAV HD 24-bit / 48 kHz acheté directement de KAM DRIDI.
           </p>
+
+          <div className="mt-7 rounded-2xl border border-[#f4c66a]/45 bg-black/60 p-5">
+            <div className="flex items-end justify-between gap-4">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#f4c66a]">
+                  First 10 direct music sales
+                </p>
+                <p className="mt-2 text-sm text-stone-300">
+                  Help KAM DRIDI reach the first 10 direct sales of OUR LOST DREAMS.
+                </p>
+              </div>
+              <p className="shrink-0 text-3xl font-black text-white">
+                {salesCount ?? 1}<span className="text-stone-500"> / 10</span>
+              </p>
+            </div>
+            <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/10">
+              <div
+                className="h-full rounded-full bg-[#f4c66a] transition-all duration-700"
+                style={{ width: `${Math.min(((salesCount ?? 1) / 10) * 100, 100)}%` }}
+              />
+            </div>
+            <p className="mt-3 text-xs text-stone-400">
+              Every completed purchase updates this goal automatically.
+            </p>
+          </div>
 
           <div className="mt-7 rounded-2xl border border-[#d6a83f]/35 bg-[#17130d]/90 p-5 text-center">
             <p className="text-xs font-bold uppercase tracking-[0.26em] text-stone-400">
