@@ -58,6 +58,32 @@ export default function ReleasesPage() {
           </div>
         </article>
 
+        <article className="overflow-hidden rounded-[2rem] border border-[#f4c66a]/30 bg-[radial-gradient(circle_at_18%_0%,rgba(244,198,106,0.14),transparent_34%),rgba(8,6,4,0.78)] shadow-[0_30px_100px_rgba(0,0,0,0.36)]">
+          <div className="relative bg-black p-4">
+            <div className="relative mx-auto aspect-square max-w-[520px]">
+              <Image
+                src="/assets/images/releases/echoes-unearthed-cover.jpg"
+                alt="Echoes Unearthed cover art"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 48vw"
+              />
+            </div>
+          </div>
+          <div className="p-6 md:p-8">
+            <p className="text-[10px] uppercase tracking-[0.28em] text-[#f4c66a]">KAM DRIDI · DIGITAL ALBUM · DIRECT</p>
+            <h2 className="mt-4 text-3xl font-black uppercase tracking-[0.06em] text-white">Echoes Unearthed</h2>
+            <p className="mt-3 text-sm leading-7 text-stone-300">KAM DRIDI</p>
+            <p className="mt-2 text-sm leading-7 text-stone-400">
+              Nine verified 24-bit / 48 kHz WAV masters. Buy the complete digital album for CA$16 or any individual track for CA$2.99. Track buyers qualify for a private 20% album-upgrade offer.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <ActionLink href="/releases/echoes-unearthed" primary>BUY / OPEN RELEASE</ActionLink>
+              <ActionLink href="/store?filter=echoes-unearthed">STORE</ActionLink>
+            </div>
+          </div>
+        </article>
+
         <article className="overflow-hidden rounded-[2rem] border border-[#f4c66a]/20 bg-[radial-gradient(circle_at_18%_0%,rgba(244,198,106,0.1),transparent_34%),rgba(8,6,4,0.72)] shadow-[0_30px_100px_rgba(0,0,0,0.32)]">
           <div className="relative bg-black p-4">
             <div className="relative mx-auto aspect-square max-w-[520px]">
