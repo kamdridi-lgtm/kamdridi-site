@@ -26,7 +26,12 @@ export async function POST(request: Request) {
     const returnPath = requestedReturnPath.startsWith("/") && !requestedReturnPath.startsWith("//") ? requestedReturnPath : "/store";
     const returnUrl = new URL(returnPath, siteUrl);
     const requestedLang = returnUrl.searchParams.get("lang");
-    const checkoutLang = requestedLang === "pt" || requestedLang === "fr" || requestedLang === "en" ? requestedLang : null;
+    const checkoutLang =
+      requestedLang === "pt" || requestedLang === "fr" || requestedLang === "en" || requestedLang === "ja"
+        ? requestedLang
+        : returnUrl.pathname.startsWith("/app/war-machines-jp")
+          ? "ja"
+          : null;
     const stripe = getStripeServer();
 
     let plan;
