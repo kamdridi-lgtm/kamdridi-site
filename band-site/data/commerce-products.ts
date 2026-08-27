@@ -1071,6 +1071,74 @@ export const commerceProducts: CommerceProduct[] = [
     productPath: "/store/official-tee-picture",
     releasePath: "/store"
   }
+  // ==========================================
+  // WAR MACHINES — JAPAN DIRECT HD TRACKS
+  // Verified Japan source masters; JPY checkout enabled.
+  // ==========================================
+  {
+    id: "war-machines-jp-track-01",
+    slug: "war-machines-jp-track-01",
+    name: "WAR MACHINES",
+    subtitle: "JAPAN HD DOWNLOAD",
+    project: "WAR MACHINES — Japan",
+    projectSlug: "war-machines-japan",
+    category: "Digital Music",
+    description: "Verified Japan source master. 24-bit / 48 kHz WAV direct download.",
+    images: ["/assets/images/war-machines-jp-cover.png"],
+    priceCents: 250,
+    currency: "JPY",
+    saleMode: "digital",
+    visible: true,
+    checkoutEnabled: true,
+    fulfillmentMode: "digital_manual",
+    requiresShipping: false,
+    badge: "HD WAV · JAPAN",
+    productPath: "/app/war-machines-jp#tracklist",
+    releasePath: "/app/war-machines-jp"
+  },
+  {
+    id: "war-machines-jp-track-02",
+    slug: "war-machines-jp-track-02",
+    name: "TOO FAST TOO YOUNG",
+    subtitle: "JAPAN HD DOWNLOAD",
+    project: "WAR MACHINES — Japan",
+    projectSlug: "war-machines-japan",
+    category: "Digital Music",
+    description: "Verified Japan-specific master. 24-bit / 48 kHz WAV direct download.",
+    images: ["/assets/images/war-machines-jp-cover.png"],
+    priceCents: 250,
+    currency: "JPY",
+    saleMode: "digital",
+    visible: true,
+    checkoutEnabled: true,
+    fulfillmentMode: "digital_manual",
+    requiresShipping: false,
+    badge: "HD WAV · JAPAN",
+    productPath: "/app/war-machines-jp#tracklist",
+    releasePath: "/app/war-machines-jp"
+  },
+  {
+    id: "war-machines-jp-track-03",
+    slug: "war-machines-jp-track-03",
+    name: "OUR LOST DREAMS",
+    subtitle: "JAPAN HD DOWNLOAD",
+    project: "WAR MACHINES — Japan",
+    projectSlug: "war-machines-japan",
+    category: "Digital Music",
+    description: "Verified Japan-specific master. 24-bit / 48 kHz WAV direct download.",
+    images: ["/assets/images/war-machines-jp-cover.png"],
+    priceCents: 250,
+    currency: "JPY",
+    saleMode: "digital",
+    visible: true,
+    checkoutEnabled: true,
+    fulfillmentMode: "digital_manual",
+    requiresShipping: false,
+    badge: "HD WAV · JAPAN",
+    productPath: "/app/war-machines-jp#tracklist",
+    releasePath: "/app/war-machines-jp"
+  },
+
 ];
 
 export function getCommerceProductById(id: string): CommerceProduct | undefined {
