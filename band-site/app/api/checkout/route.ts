@@ -24,6 +24,9 @@ export async function POST(request: Request) {
     const siteUrl = rawSiteUrl.trim().replace(/[\r\n]/g, "").replace(/\/$/, "");
     const requestedReturnPath = typeof body.returnPath === "string" ? body.returnPath : "/store";
     const returnPath = requestedReturnPath.startsWith("/") && !requestedReturnPath.startsWith("//") ? requestedReturnPath : "/store";
+    const returnUrl = new URL(returnPath, siteUrl);
+    const requestedLang = returnUrl.searchParams.get("lang");
+    const checkoutLang = requestedLang === "pt" || requestedLang === "fr" || requestedLang === "en" ? requestedLang : null;
     const stripe = getStripeServer();
 
     let plan;
@@ -73,7 +76,7 @@ export async function POST(request: Request) {
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      success_url: `${siteUrl}/store/order?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${siteUrl}/store/order?session_id={CHECKOUT_SESSION_ID}${checkoutLang ? `&lang=${checkoutLang}` : ""}`,
       cancel_url: `${siteUrl}${returnPath}${returnPath.includes("?") ? "&" : "?"}purchase=cancelled`,
       billing_address_collection: plan.requiresShipping ? "required" : "auto",
       shipping_address_collection: plan.requiresShipping ? {
