@@ -109,6 +109,21 @@ const itemTranslations: Record<string, Record<Locale, string>> = {
     pt: "Cartão da edição",
     en: "Edition card",
     fr: "Carte de l’édition"
+  },
+  "12-inch black vinyl": {
+    pt: "Vinil preto de 12 polegadas",
+    en: "12-inch black vinyl",
+    fr: "Vinyle noir 12 pouces"
+  },
+  "Full-color jacket and labels": {
+    pt: "Capa e rótulos coloridos",
+    en: "Full-color jacket and labels",
+    fr: "Pochette et étiquettes couleur"
+  },
+  "Made-to-order collector edition": {
+    pt: "Edição de colecionador produzida sob encomenda",
+    en: "Made-to-order collector edition",
+    fr: "Édition de collection fabriquée sur commande"
   }
 };
 
