@@ -31,7 +31,7 @@ export async function POST(request: Request) {
       const unifiedProducts = await getUnifiedCommerceProducts();
       plan = buildUnifiedCheckoutPlan(rawItems, unifiedProducts);
     } catch (err: any) {
-      if (["UNKNOWN_PRODUCT", "EXCESSIVE_QUANTITY", "INVALID_QUANTITY", "INVALID_COLOR", "INVALID_SIZE", "INVALID_FORMAT"].includes(err?.message)) {
+      if (["UNKNOWN_PRODUCT", "EXCESSIVE_QUANTITY", "INVALID_QUANTITY", "INVALID_COLOR", "INVALID_SIZE", "INVALID_FORMAT", "MIXED_CURRENCY"].includes(err?.message)) {
         return NextResponse.json({ error: err.message }, { status: 400 });
       }
       console.error("[Checkout] Unified catalog unavailable; checkout blocked safely", err);
@@ -96,7 +96,11 @@ export async function POST(request: Request) {
         productIds: plan.resolvedItems.map(i => i.product.id).join(",").slice(0, 500),
         itemCount: String(plan.resolvedItems.length),
         returnPath,
-        orderTotalCad: (plan.checkoutTotal / 100).toFixed(2)
+        orderCurrency: plan.orderCurrency,
+        orderTotalMinor: String(plan.checkoutTotal),
+        ...(plan.orderCurrency === "CAD"
+          ? { orderTotalCad: (plan.checkoutTotal / 100).toFixed(2) }
+          : {})
       },
       line_items: plan.lineItems.map(item => ({
         quantity: item.quantity,
