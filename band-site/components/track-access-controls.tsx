@@ -1,16 +1,13 @@
 "use client";
 
 import { LockKeyhole, Pause, Play } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const PREVIEW_LIMIT_SECONDS = 36;
 let activePreview: HTMLAudioElement | null = null;
 
-const JAPAN_TRACK_CHECKOUTS: Record<string, string> = {
-  "/audio/war-machines-jp/01-war-machines-preview-36s.mp3": "https://buy.stripe.com/bJe28rgJG2hK38k0fCeEo0l",
-  "/audio/war-machines-jp/02-too-fast-too-young-preview-36s.mp3": "https://buy.stripe.com/dRmfZheBy2hK38k4vSeEo0m",
-  "/audio/war-machines-jp/03-our-lost-dreams-preview-36s.mp3": "https://buy.stripe.com/8x2eVdali2hKdMY6E0eEo0n",
-};
+const REMOTE_CATALOG_URL =
+  "https://retoydsgsuvznlpsguts.supabase.co/functions/v1/commerce-catalog";
 
 function formatPreviewTime(seconds: number) {
   const safeSeconds = Math.max(0, Math.min(PREVIEW_LIMIT_SECONDS, Math.floor(seconds)));
@@ -40,6 +37,7 @@ type TrackAccessControlsProps = {
   fullTrackLabel: string;
   theme?: keyof typeof themeClasses;
   purchaseHref?: string;
+  purchaseProductId?: string;
 };
 
 export function TrackAccessControls({
@@ -49,15 +47,71 @@ export function TrackAccessControls({
   fullTrackLabel,
   theme = "gold",
   purchaseHref,
+  purchaseProductId,
 }: TrackAccessControlsProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [purchaseEnabled, setPurchaseEnabled] = useState(Boolean(purchaseHref));
+  const [purchaseLoading, setPurchaseLoading] = useState(false);
   const styles = themeClasses[theme];
   const hasPreview = Boolean(previewSrc);
-  const resolvedPurchaseHref = previewSrc && JAPAN_TRACK_CHECKOUTS[previewSrc]
-    ? JAPAN_TRACK_CHECKOUTS[previewSrc]
-    : purchaseHref;
+  const resolvedPurchaseHref = purchaseProductId ? undefined : purchaseHref;
+
+  useEffect(() => {
+    if (!purchaseProductId) {
+      setPurchaseEnabled(Boolean(purchaseHref));
+      return;
+    }
+
+    let cancelled = false;
+    void fetch(REMOTE_CATALOG_URL, { cache: "no-store" })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("Catalog unavailable");
+        const payload = await response.json();
+        const product = Array.isArray(payload?.products)
+          ? payload.products.find((candidate: any) => candidate?.id === purchaseProductId)
+          : null;
+        const enabled = Boolean(
+          product &&
+          product.visible &&
+          product.checkout_enabled &&
+          product.price_cents > 0 &&
+          product.sale_mode !== "sold_out" &&
+          product.sale_mode !== "coming_soon"
+        );
+        if (!cancelled) setPurchaseEnabled(enabled);
+      })
+      .catch(() => {
+        if (!cancelled) setPurchaseEnabled(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [purchaseHref, purchaseProductId]);
+
+  const startProductCheckout = async () => {
+    if (!purchaseProductId || !purchaseEnabled || purchaseLoading) return;
+    setPurchaseLoading(true);
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: [{ id: purchaseProductId, quantity: 1 }],
+          returnPath: window.location.pathname
+        })
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || typeof payload.url !== "string") {
+        throw new Error(payload.error || "Checkout unavailable");
+      }
+      window.location.assign(payload.url);
+    } catch {
+      setPurchaseLoading(false);
+    }
+  };
 
   const togglePreview = () => {
     const audio = audioRef.current;
@@ -117,7 +171,19 @@ export function TrackAccessControls({
         </span>
       </button>
 
-      {resolvedPurchaseHref ? (
+      {purchaseProductId && purchaseEnabled ? (
+        <button
+          type="button"
+          onClick={startProductCheckout}
+          disabled={purchaseLoading}
+          className={`inline-flex min-h-9 items-center gap-2 border px-3 py-2 transition hover:brightness-110 disabled:cursor-wait disabled:opacity-70 ${styles.locked}`}
+          aria-label={fullTrackLabel}
+          title={fullTrackLabel}
+        >
+          <LockKeyhole className="h-3.5 w-3.5" aria-hidden="true" />
+          {purchaseLoading ? "Opening checkout…" : fullTrackLabel}
+        </button>
+      ) : resolvedPurchaseHref ? (
         <a
           href={resolvedPurchaseHref}
           target={resolvedPurchaseHref.startsWith("http") ? "_blank" : undefined}
