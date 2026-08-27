@@ -134,7 +134,19 @@ export default function BuyPage() {
                   <strong className="text-[#f4c66a]">$8.99 more</strong>.
                 </p>
 
-                <div className="mt-4 grid gap-2 text-sm text-stone-300">
+                <div className="mt-4 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-4">
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#f4c66a]">
+                    4-track physical CD
+                  </p>
+                  <ol className="mt-3 space-y-1.5 text-xs leading-5 text-stone-300">
+                    <li>1. Our Lost Dreams (Single Version)</li>
+                    <li>2. Our Lost Dreams (Acoustic Version)</li>
+                    <li>3. Our Lost Dreams (UNlive in Brasil)</li>
+                    <li>4. Our Lost Dreams (Country Heartbreak Version) — introducing JUNE MARLOWE</li>
+                  </ol>
+                </div>
+
+                <div className="mt-3 grid gap-2 text-sm text-stone-300 sm:grid-cols-2">
                   <div className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3">
                     <span className="font-bold text-white">Made to order</span>
                     <span className="mt-1 block text-xs text-stone-400">
