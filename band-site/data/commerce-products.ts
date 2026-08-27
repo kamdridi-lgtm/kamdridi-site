@@ -1138,6 +1138,27 @@ export const commerceProducts: CommerceProduct[] = [
     productPath: "/app/war-machines-jp#tracklist",
     releasePath: "/app/war-machines-jp"
   },
+  {
+    id: "war-machines-jp-digital-bundle",
+    slug: "war-machines-jp-digital-bundle",
+    name: "WAR MACHINES",
+    subtitle: "JAPAN 3-TRACK HD DIGITAL BUNDLE",
+    project: "WAR MACHINES — Japan",
+    projectSlug: "war-machines-japan",
+    category: "Digital Music",
+    description: "Three verified Japan-source 24-bit / 48 kHz WAV masters. Bundle price ¥600 instead of ¥750 individually.",
+    images: ["/assets/images/war-machines-jp-cover.png"],
+    priceCents: 600,
+    currency: "JPY",
+    saleMode: "digital",
+    visible: true,
+    checkoutEnabled: true,
+    fulfillmentMode: "digital_manual",
+    requiresShipping: false,
+    badge: "3 TRACKS · HD WAV · JAPAN",
+    productPath: "/app/war-machines-jp#tracklist",
+    releasePath: "/app/war-machines-jp"
+  },
 
 ];
 
