@@ -18,7 +18,7 @@ export type CommerceProduct = {
   description: string;
   images: string[];
   priceCents: number;
-  currency: "CAD";
+  currency: "CAD" | "JPY";
   saleMode: SaleMode;
   visible: boolean;
   checkoutEnabled: boolean;
