@@ -16,6 +16,7 @@ import { EchoesBrasilCinematicIntro } from "@/components/echoes-brasil-cinematic
 import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
 import { LostRequiemUniverseCard } from "@/components/lost-requiem-universe-card";
 import { ActiveSignalsTV } from "@/components/active-signals-tv";
+import { EchoesUnearthedDirectSales } from "@/components/echoes-unearthed-direct-sales";
 import { featuredVideo, gameExperiences, socialFeed, streamingLinks, visualAlbumScenes } from "@/data/site";
 
 const echoesUnearthedCover = "/assets/images/releases/echoes-unearthed-cover.jpg";
@@ -33,18 +34,6 @@ const mobileAppLogo = "/assets/images/kamdridi-app-logo-blue.png";
 const spotifyAlbumHref =
   "https://open.spotify.com/album/4rrOMu0BIhzJt1ElOfgXZu?si=a6eAct6jQl6BapO1_Zm4gA";
 const youtubeWatchHref = "https://www.youtube.com/watch?v=hzlVyLQN6a8";
-
-const tracks = [
-  ["01", "War Machines"],
-  ["02", "Too Fast Too Young"],
-  ["03", "Our Lost Dreams"],
-  ["04", "Junction Ahead (New Heaven's Odyssey)"],
-  ["05", "17 For Ever"],
-  ["06", "The Victory Goes On"],
-  ["07", "Alone Apart / One Apart"],
-  ["08", "Michael Remembers"],
-  ["09", "The Fall of the First Knight"]
-];
 
 const universeCards = [
   {
@@ -324,6 +313,7 @@ export default function HomePage() {
                 Select a cover to discover each official release.
               </p>
               <div className="mt-7 flex flex-wrap justify-center gap-3 lg:justify-start">
+                <PremiumButton href="/releases/echoes-unearthed">Buy Echoes Unearthed</PremiumButton>
                 <PremiumButton href="/releases">Explore Releases</PremiumButton>
                 <PremiumButton href="/store" tone="secondary">Official Store</PremiumButton>
               </div>
@@ -339,37 +329,9 @@ export default function HomePage() {
         </section>
 
         <section id="tracklist" className="relative z-10 border-b border-[#a86225]/20 px-4 py-10 sm:px-6">
-          <SectionTitle title="Tracklist" />
-          <div className="mx-auto mt-8 max-w-7xl overflow-hidden border border-[#8f5728]/35 bg-black/48">
-            {tracks.map(([number, title]) => (
-              <div
-                key={number}
-                className="grid gap-3 border-b border-white/10 px-4 py-4 last:border-b-0 md:grid-cols-[70px_1fr_auto] md:items-center"
-              >
-                <span className="font-display text-2xl text-[#c98542]">{number}</span>
-                <a
-                  href={spotifyAlbumHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-semibold text-stone-100 transition hover:text-[#f4c66a]"
-                >
-                  {title}
-                </a>
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.2em]">
-                    Album
-                  </span>
-                  <PlatformLinks compact />
-                </div>
-              </div>
-            ))}
-            <div className="grid gap-3 bg-[#140d08] px-4 py-5 sm:grid-cols-[70px_1fr_auto] sm:items-center">
-              <span className="font-display text-2xl text-[#f4c66a]">Bonus</span>
-              <h3 className="font-semibold text-stone-100">Echoes of Our Youth</h3>
-              <span className="rounded-full border border-[#f4c66a]/30 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[#f4c66a]">
-                Physical Collector Edition Bonus Track
-              </span>
-            </div>
+          <SectionTitle eyebrow="Direct from KAM DRIDI" title="Buy Echoes Unearthed" />
+          <div className="mt-8">
+            <EchoesUnearthedDirectSales returnPath="/" />
           </div>
         </section>
 
