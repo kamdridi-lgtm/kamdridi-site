@@ -129,14 +129,14 @@ export function OrderClient() {
         <p className="text-xs font-bold uppercase tracking-[0.34em] text-[#f4c66a]">Secure Order</p>
         <h1 className="mt-4 font-display text-4xl uppercase tracking-[0.06em] md:text-6xl">Payment received</h1>
         <p className="mt-5 max-w-3xl text-sm leading-7 text-stone-300">
-          This page is tied to your Stripe checkout session. Physical orders remain queued for fulfillment; eligible digital files appear here only when the corresponding master is active in the private KAMDRIDI vault.
+          Thank you for buying directly from KAM DRIDI. This page is tied to your Stripe checkout session. A confirmation message is sent to the email used at checkout with your purchased items, delivery instructions, and included artwork when available.
         </p>
 
         {hasManualDigital && (
           <div className="mt-7 rounded-2xl border border-[#f4c66a]/30 bg-[#f4c66a]/[0.07] p-5">
             <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f4c66a]">Digital purchase confirmed</p>
             <p className="mt-2 text-sm leading-7 text-stone-200">
-              Thank you for purchasing OUR LOST DREAMS directly from KAM DRIDI. Keep your Stripe receipt. Your digital copy is delivered using the email entered at checkout.
+              Your digital purchase is confirmed. Keep your Stripe receipt. When a private-vault download is active it appears here; otherwise secure delivery is sent to the email entered at checkout.
             </p>
           </div>
         )}
