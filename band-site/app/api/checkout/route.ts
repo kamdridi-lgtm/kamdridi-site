@@ -77,7 +77,7 @@ export async function POST(request: Request) {
       cancel_url: `${siteUrl}${returnPath}?purchase=cancelled`,
       billing_address_collection: plan.requiresShipping ? "required" : "auto",
       shipping_address_collection: plan.requiresShipping ? {
-        allowed_countries: ["US", "CA", "GB", "FR", "DE", "AU"]
+        allowed_countries: ["US", "CA", "GB", "FR", "DE", "AU", "BR", "JP"]
       } : undefined,
       phone_number_collection: {
         enabled: plan.requiresShipping
