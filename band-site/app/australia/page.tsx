@@ -232,16 +232,31 @@ export default function AustraliaPage() {
               <div className="flex flex-col justify-center border-b border-white/15 p-8 sm:p-11 lg:border-b-0 lg:border-r lg:p-12">
                 <p className="text-xs font-black uppercase tracking-[0.34em] text-[#e5d1aa]">January 2027</p>
                 <div className="mt-7 grid gap-3 text-xs font-black uppercase tracking-[0.2em] text-white">
-                  <span className="rounded-full border border-white/20 bg-white/[0.06] px-5 py-3">Limited Edition CD · Made to order · CA$39</span>
-                  <span className="rounded-full border border-[#e5d1aa]/70 bg-[#e5d1aa]/12 px-5 py-3 text-[#f5dfb7]">12-inch Collector Maxi · Made to order · CA$159</span>
-                  <span className="rounded-full border border-white/20 bg-white/[0.06] px-5 py-3">Special Cassette · Coming soon</span>
+                  <Link
+                    href="/store#17-for-ever-limited-cd"
+                    className="rounded-full border border-white/20 bg-white/[0.06] px-5 py-3 transition hover:border-[#e5d1aa] hover:text-[#e5d1aa]"
+                  >
+                    Limited Edition CD · Made to order · CA$39
+                  </Link>
+                  <Link
+                    href="/store#17-for-ever-maxi-single"
+                    className="rounded-full border border-[#e5d1aa]/70 bg-[#e5d1aa]/12 px-5 py-3 text-[#f5dfb7] transition hover:bg-[#e5d1aa] hover:text-black"
+                  >
+                    12-inch Collector Maxi · Made to order · CA$159
+                  </Link>
+                  <Link
+                    href="/store#17-for-ever-special-cassette"
+                    className="rounded-full border border-white/20 bg-white/[0.06] px-5 py-3 transition hover:border-[#e5d1aa] hover:text-[#e5d1aa]"
+                  >
+                    Special Cassette · Made to order · CA$49
+                  </Link>
                 </div>
               </div>
               <div className="flex flex-col justify-center p-8 sm:p-11 lg:p-14">
                 <p className="text-xs font-black uppercase tracking-[0.34em] text-[#e5d1aa]">The Australian drop</p>
                 <h2 className="mt-5 font-display text-5xl uppercase leading-[0.94] tracking-[0.05em]">Own the memory</h2>
                 <p className="mt-6 text-base leading-8 text-stone-300">
-                  The CD and 12-inch collector maxi are made to order after payment. Production and delivery can take several weeks. The special cassette follows once its on-demand supplier is fully locked.
+                  The CD, 12-inch collector maxi and special cassette are made to order after payment. Production and delivery can take several weeks. Supplier submission remains manual; no supplier order is placed automatically.
                 </p>
                 <Link
                   href="/store?filter=australia-17-for-ever#17-for-ever-maxi-single"
