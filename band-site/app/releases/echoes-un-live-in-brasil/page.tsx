@@ -258,7 +258,10 @@ export default async function EchoesBrasilReleasePage({
           </div>
 
           <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {physical.map((product) => (
+            {physical.map((product) => {
+              const productHref = productRoutes[product.id] || product.productPath || "/store";
+              const localizedHref = `${productHref}${productHref.includes("?") ? "&" : "?"}lang=${locale}`;
+              return (
               <article key={product.id} className="overflow-hidden border border-white/10 bg-[#0c0907]">
                 <div className="relative aspect-square bg-black">
                   {product.images?.[0] && <Image src={product.images[0]} alt={product.name} fill className="object-cover" />}
@@ -272,7 +275,7 @@ export default async function EchoesBrasilReleasePage({
                   <div className="mt-6 flex items-center justify-between gap-4">
                     <span className="text-xl font-semibold text-[#e0b36f]">{money(product.priceCents, locale)}</span>
                     <Link
-                      href={`${productRoutes[product.id] || product.productPath}${(productRoutes[product.id] || product.productPath).includes("?") ? "&" : "?"}lang=${locale}`}
+                      href={localizedHref}
                       className="rounded-full border border-[#d6a55b]/45 px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.18em] text-[#e0b36f] hover:bg-[#d6a55b] hover:text-black"
                     >
                       {t.viewOrder}
@@ -280,7 +283,8 @@ export default async function EchoesBrasilReleasePage({
                   </div>
                 </div>
               </article>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
