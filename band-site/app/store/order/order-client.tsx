@@ -6,6 +6,112 @@ import { useEffect, useMemo, useState } from "react";
 
 const SUPABASE_FUNCTIONS = "https://retoydsgsuvznlpsguts.supabase.co/functions/v1";
 
+type Locale = "pt" | "en" | "fr";
+
+const ui = {
+  en: {
+    secureOrder: "Secure Order",
+    paymentReceived: "Payment received",
+    thankYou: "Thank you for buying directly from KAM DRIDI. This page is tied to your Stripe checkout session. A confirmation message is sent to the email used at checkout with your purchased items, delivery instructions, and included artwork when available.",
+    digitalConfirmed: "Digital purchase confirmed",
+    digitalBody: "Your digital purchase is confirmed. Keep your Stripe receipt. When a private-vault download is active it appears here; otherwise secure delivery is sent to the email entered at checkout.",
+    madeToOrder: "Made to order",
+    madeBody: "Your physical edition enters production after payment. Please allow several weeks for manufacturing, quality control and delivery. You do not need to place another order or make another payment for production.",
+    missing: "Missing checkout session.",
+    finalizing: "Payment is confirmed by Stripe. Finalizing the order record…",
+    payment: "Payment",
+    fulfillment: "Fulfillment",
+    total: "Total",
+    productionTracking: "Production tracking",
+    journey: "Your order journey",
+    partner: "Production partner",
+    assigned: "Production partner assigned",
+    issue: "Production review required",
+    trackShipment: "Track shipment",
+    tracking: "Tracking",
+    orderItems: "Order items",
+    standardEdition: "Standard edition",
+    productionQueued: "Production queued · made to order",
+    qty: "Qty",
+    digitalVault: "Digital vault",
+    secureDownload: "Secure Download",
+    masterPending: "Master Pending",
+    remaining: "secure download(s) remaining",
+    backStore: "Back to Store",
+    music: "Music",
+    stages: { queued: "Queued", in_production: "In production", quality_check: "Quality check", shipped: "Shipped", delivered: "Delivered" }
+  },
+  pt: {
+    secureOrder: "Pedido seguro",
+    paymentReceived: "Pagamento recebido",
+    thankYou: "Obrigado por comprar diretamente da KAM DRIDI. Esta página está vinculada à sua sessão segura da Stripe. Uma confirmação é enviada ao e-mail usado no checkout com os itens comprados, instruções de entrega e arte incluída quando disponível.",
+    digitalConfirmed: "Compra digital confirmada",
+    digitalBody: "Sua compra digital está confirmada. Guarde o recibo da Stripe. Quando o download no cofre privado estiver ativo, ele aparecerá aqui; caso contrário, a entrega segura será enviada ao e-mail usado no checkout.",
+    madeToOrder: "Produzido sob encomenda",
+    madeBody: "Sua edição física entra em produção após o pagamento. Reserve algumas semanas para fabricação, controle de qualidade e entrega. Você não precisa fazer outro pedido nem pagar novamente pela produção.",
+    missing: "Sessão de checkout ausente.",
+    finalizing: "Pagamento confirmado pela Stripe. Finalizando o registro do pedido…",
+    payment: "Pagamento",
+    fulfillment: "Produção / entrega",
+    total: "Total",
+    productionTracking: "Acompanhamento da produção",
+    journey: "Caminho do seu pedido",
+    partner: "Parceiro de produção",
+    assigned: "Parceiro de produção atribuído",
+    issue: "Revisão de produção necessária",
+    trackShipment: "Rastrear envio",
+    tracking: "Rastreamento",
+    orderItems: "Itens do pedido",
+    standardEdition: "Edição padrão",
+    productionQueued: "Produção na fila · sob encomenda",
+    qty: "Qtd.",
+    digitalVault: "Cofre digital",
+    secureDownload: "Download seguro",
+    masterPending: "Master pendente",
+    remaining: "download(s) seguro(s) restante(s)",
+    backStore: "Voltar à loja",
+    music: "Música",
+    stages: { queued: "Na fila", in_production: "Em produção", quality_check: "Controle de qualidade", shipped: "Enviado", delivered: "Entregue" }
+  },
+  fr: {
+    secureOrder: "Commande sécurisée",
+    paymentReceived: "Paiement reçu",
+    thankYou: "Merci d’acheter directement auprès de KAM DRIDI. Cette page est liée à votre session Stripe sécurisée. Une confirmation est envoyée à l’adresse utilisée au paiement avec les articles achetés, les instructions de livraison et le visuel inclus lorsqu’il est disponible.",
+    digitalConfirmed: "Achat numérique confirmé",
+    digitalBody: "Votre achat numérique est confirmé. Conservez votre reçu Stripe. Lorsqu’un téléchargement du coffre privé est actif, il apparaît ici; sinon, la livraison sécurisée est envoyée à l’adresse utilisée au paiement.",
+    madeToOrder: "Fabriqué sur commande",
+    madeBody: "Votre édition physique entre en production après le paiement. Prévoir plusieurs semaines pour la fabrication, le contrôle qualité et la livraison. Aucun autre paiement de production n’est requis.",
+    missing: "Session de paiement manquante.",
+    finalizing: "Paiement confirmé par Stripe. Finalisation de la commande…",
+    payment: "Paiement",
+    fulfillment: "Production / livraison",
+    total: "Total",
+    productionTracking: "Suivi de production",
+    journey: "Parcours de votre commande",
+    partner: "Partenaire de production",
+    assigned: "Partenaire de production assigné",
+    issue: "Révision de production requise",
+    trackShipment: "Suivre l’envoi",
+    tracking: "Suivi",
+    orderItems: "Articles commandés",
+    standardEdition: "Édition standard",
+    productionQueued: "Production en attente · sur commande",
+    qty: "Qté",
+    digitalVault: "Coffre numérique",
+    secureDownload: "Téléchargement sécurisé",
+    masterPending: "Master en attente",
+    remaining: "téléchargement(s) sécurisé(s) restant(s)",
+    backStore: "Retour à la boutique",
+    music: "Musique",
+    stages: { queued: "En attente", in_production: "En production", quality_check: "Contrôle qualité", shipped: "Expédié", delivered: "Livré" }
+  }
+} as const;
+
+function resolveLocale(value: string | null): Locale {
+  if (value === "pt" || value === "fr") return value;
+  return "en";
+}
+
 type OrderPayload = {
   ready?: boolean;
   state?: string;
@@ -55,13 +161,7 @@ type OrderPayload = {
   error?: string;
 };
 
-const stages = [
-  { key: "queued", label: "Queued" },
-  { key: "in_production", label: "In production" },
-  { key: "quality_check", label: "Quality check" },
-  { key: "shipped", label: "Shipped" },
-  { key: "delivered", label: "Delivered" }
-] as const;
+const stageKeys = ["queued", "in_production", "quality_check", "shipped", "delivered"] as const;
 
 function money(amount: number | null | undefined, currency: string | undefined) {
   if (amount == null) return "—";
@@ -72,11 +172,13 @@ function money(amount: number | null | undefined, currency: string | undefined) 
 }
 
 function stageIndex(stage: string | undefined) {
-  return Math.max(0, stages.findIndex((item) => item.key === stage));
+  return Math.max(0, stageKeys.findIndex((item) => item === stage));
 }
 
 export function OrderClient() {
   const searchParams = useSearchParams();
+  const locale = resolveLocale(searchParams.get("lang"));
+  const t = ui[locale];
   const sessionId = searchParams.get("session_id") || "";
   const [payload, setPayload] = useState<OrderPayload | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -89,7 +191,7 @@ export function OrderClient() {
 
   useEffect(() => {
     if (!orderUrl) {
-      setError("Missing checkout session.");
+      setError(t.missing);
       return;
     }
     let cancelled = false;
@@ -124,48 +226,48 @@ export function OrderClient() {
   };
 
   return (
-    <main className="min-h-screen bg-[#050403] px-5 py-20 text-white">
+    <main lang={locale === "pt" ? "pt-BR" : locale} translate="no" className="min-h-screen bg-[#050403] px-5 py-20 text-white">
       <section className="mx-auto max-w-5xl">
-        <p className="text-xs font-bold uppercase tracking-[0.34em] text-[#f4c66a]">Secure Order</p>
-        <h1 className="mt-4 font-display text-4xl uppercase tracking-[0.06em] md:text-6xl">Payment received</h1>
+        <p className="text-xs font-bold uppercase tracking-[0.34em] text-[#f4c66a]">{t.secureOrder}</p>
+        <h1 className="mt-4 font-display text-4xl uppercase tracking-[0.06em] md:text-6xl">{t.paymentReceived}</h1>
         <p className="mt-5 max-w-3xl text-sm leading-7 text-stone-300">
-          Thank you for buying directly from KAM DRIDI. This page is tied to your Stripe checkout session. A confirmation message is sent to the email used at checkout with your purchased items, delivery instructions, and included artwork when available.
+          {t.thankYou}
         </p>
 
         {hasManualDigital && (
           <div className="mt-7 rounded-2xl border border-[#f4c66a]/30 bg-[#f4c66a]/[0.07] p-5">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f4c66a]">Digital purchase confirmed</p>
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f4c66a]">{t.digitalConfirmed}</p>
             <p className="mt-2 text-sm leading-7 text-stone-200">
-              Your digital purchase is confirmed. Keep your Stripe receipt. When a private-vault download is active it appears here; otherwise secure delivery is sent to the email entered at checkout.
+              {t.digitalBody}
             </p>
           </div>
         )}
 
         {hasMadeToOrder && (
           <div className="mt-7 rounded-2xl border border-[#f4c66a]/30 bg-[#f4c66a]/[0.07] p-5">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f4c66a]">Made to order</p>
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f4c66a]">{t.madeToOrder}</p>
             <p className="mt-2 text-sm leading-7 text-stone-200">
-              Your physical edition enters production after payment. Please allow several weeks for manufacturing, quality control and delivery. You do not need to place another order or make another payment for production.
+              {t.madeBody}
             </p>
           </div>
         )}
 
-        {!sessionId && <div className="mt-8 rounded-2xl border border-rose-500/25 bg-rose-500/10 p-5 text-rose-100">Missing checkout session.</div>}
+        {!sessionId && <div className="mt-8 rounded-2xl border border-rose-500/25 bg-rose-500/10 p-5 text-rose-100">{t.missing}</div>}
         {error && <div className="mt-8 rounded-2xl border border-rose-500/25 bg-rose-500/10 p-5 text-rose-100">{error}</div>}
-        {!error && payload?.state === "processing" && <div className="mt-8 rounded-2xl border border-amber-500/25 bg-amber-500/10 p-5 text-amber-100">Payment is confirmed by Stripe. Finalizing the order record…</div>}
+        {!error && payload?.state === "processing" && <div className="mt-8 rounded-2xl border border-amber-500/25 bg-amber-500/10 p-5 text-amber-100">{t.finalizing}</div>}
 
         {payload?.order && (
           <div className="mt-8 grid gap-4 rounded-[28px] border border-white/10 bg-white/[0.03] p-6 sm:grid-cols-3">
-            <div><p className="text-[10px] uppercase tracking-[0.25em] text-stone-500">Payment</p><p className="mt-2 text-lg font-semibold text-white">{payload.order.payment_status || "paid"}</p></div>
-            <div><p className="text-[10px] uppercase tracking-[0.25em] text-stone-500">Fulfillment</p><p className="mt-2 text-lg font-semibold text-white">{(payload.order.fulfillment_status || "pending").replaceAll("_", " ")}</p></div>
-            <div><p className="text-[10px] uppercase tracking-[0.25em] text-stone-500">Total</p><p className="mt-2 text-lg font-semibold text-[#f4c66a]">{money(payload.order.amount_total, payload.order.currency)}</p></div>
+            <div><p className="text-[10px] uppercase tracking-[0.25em] text-stone-500">{t.payment}</p><p className="mt-2 text-lg font-semibold text-white">{payload.order.payment_status || "paid"}</p></div>
+            <div><p className="text-[10px] uppercase tracking-[0.25em] text-stone-500">{t.fulfillment}</p><p className="mt-2 text-lg font-semibold text-white">{(payload.order.fulfillment_status || "pending").replaceAll("_", " ")}</p></div>
+            <div><p className="text-[10px] uppercase tracking-[0.25em] text-stone-500">{t.total}</p><p className="mt-2 text-lg font-semibold text-[#f4c66a]">{money(payload.order.amount_total, payload.order.currency)}</p></div>
           </div>
         )}
 
         {madeToOrderTasks.length > 0 && (
           <section className="mt-10 rounded-[28px] border border-[#f4c66a]/20 bg-[#f4c66a]/[0.03] p-6 sm:p-8">
-            <p className="text-xs font-black uppercase tracking-[0.25em] text-[#f4c66a]">Production tracking</p>
-            <h2 className="mt-3 font-display text-3xl uppercase tracking-[0.06em]">Your order journey</h2>
+            <p className="text-xs font-black uppercase tracking-[0.25em] text-[#f4c66a]">{t.productionTracking}</p>
+            <h2 className="mt-3 font-display text-3xl uppercase tracking-[0.06em]">{t.journey}</h2>
             <div className="mt-8 grid gap-6">
               {madeToOrderTasks.map((task) => {
                 const current = stageIndex(task.customer_stage);
@@ -173,27 +275,27 @@ export function OrderClient() {
                   <article key={task.id} className="rounded-2xl border border-white/10 bg-black/35 p-5">
                     <div className="flex flex-wrap items-center justify-between gap-3">
                       <div>
-                        <p className="text-xs uppercase tracking-[0.18em] text-stone-500">{task.provider ? `Production partner · ${task.provider}` : "Production partner assigned"}</p>
-                        <p className="mt-2 text-lg font-semibold text-white">{task.customer_stage === "issue" ? "Production review required" : stages[current]?.label || "Queued"}</p>
+                        <p className="text-xs uppercase tracking-[0.18em] text-stone-500">{task.provider ? `${t.partner} · ${task.provider}` : t.assigned}</p>
+                        <p className="mt-2 text-lg font-semibold text-white">{task.customer_stage === "issue" ? t.issue : t.stages[stageKeys[current] || "queued"]}</p>
                       </div>
                       {task.tracking_url && (
-                        <a href={task.tracking_url} target="_blank" rel="noreferrer" className="rounded-full border border-[#f4c66a]/40 px-5 py-2.5 text-xs font-black uppercase tracking-[0.16em] text-[#f4c66a] hover:bg-[#f4c66a]/10">Track shipment</a>
+                        <a href={task.tracking_url} target="_blank" rel="noreferrer" className="rounded-full border border-[#f4c66a]/40 px-5 py-2.5 text-xs font-black uppercase tracking-[0.16em] text-[#f4c66a] hover:bg-[#f4c66a]/10">{t.trackShipment}</a>
                       )}
                     </div>
 
                     {task.customer_stage !== "issue" && (
                       <div className="mt-6 grid grid-cols-5 gap-2">
-                        {stages.map((stage, index) => (
-                          <div key={stage.key}>
+                        {stageKeys.map((stage, index) => (
+                          <div key={stage}>
                             <div className={`h-1.5 rounded-full ${index <= current ? "bg-[#f4c66a]" : "bg-white/10"}`} />
-                            <p className={`mt-2 text-[9px] font-bold uppercase tracking-[0.12em] ${index <= current ? "text-[#f4c66a]" : "text-stone-600"}`}>{stage.label}</p>
+                            <p className={`mt-2 text-[9px] font-bold uppercase tracking-[0.12em] ${index <= current ? "text-[#f4c66a]" : "text-stone-600"}`}>{t.stages[stage]}</p>
                           </div>
                         ))}
                       </div>
                     )}
 
                     {task.customer_note && <p className="mt-5 text-sm leading-6 text-stone-300">{task.customer_note}</p>}
-                    {task.tracking_number && <p className="mt-3 text-xs uppercase tracking-[0.14em] text-stone-500">Tracking · {task.tracking_number}</p>}
+                    {task.tracking_number && <p className="mt-3 text-xs uppercase tracking-[0.14em] text-stone-500">{t.tracking} · {task.tracking_number}</p>}
                   </article>
                 );
               })}
@@ -203,17 +305,17 @@ export function OrderClient() {
 
         {(payload?.items?.length || 0) > 0 && (
           <section className="mt-10">
-            <h2 className="font-display text-2xl uppercase tracking-[0.08em]">Order items</h2>
+            <h2 className="font-display text-2xl uppercase tracking-[0.08em]">{t.orderItems}</h2>
             <div className="mt-4 grid gap-3">
               {payload!.items!.map((item) => (
                 <article key={item.id} className="rounded-2xl border border-white/10 bg-black/40 p-5">
                   <div className="flex flex-wrap items-start justify-between gap-4">
                     <div>
-                      <h3 className="text-lg font-semibold text-white">{item.product_name}</h3>
-                      <p className="mt-2 text-xs uppercase tracking-[0.2em] text-stone-500">{[item.color, item.size, item.format].filter(Boolean).join(" · ") || "Standard edition"}</p>
-                      {item.fulfillment_mode === "made_to_order" && <p className="mt-3 text-xs font-bold uppercase tracking-[0.16em] text-[#f4c66a]">Production queued · made to order</p>}
+                      <h3 translate="no" className="notranslate text-lg font-semibold text-white">{item.product_name}</h3>
+                      <p className="mt-2 text-xs uppercase tracking-[0.2em] text-stone-500">{[item.color, item.size, item.format].filter(Boolean).join(" · ") || t.standardEdition}</p>
+                      {item.fulfillment_mode === "made_to_order" && <p className="mt-3 text-xs font-bold uppercase tracking-[0.16em] text-[#f4c66a]">{t.productionQueued}</p>}
                     </div>
-                    <span className="text-sm text-[#f4c66a]">Qty {item.quantity}</span>
+                    <span className="text-sm text-[#f4c66a]">{t.qty} {item.quantity}</span>
                   </div>
                 </article>
               ))}
@@ -223,7 +325,7 @@ export function OrderClient() {
 
         {(payload?.digital_entitlements?.length || 0) > 0 && (
           <section className="mt-10">
-            <h2 className="font-display text-2xl uppercase tracking-[0.08em]">Digital vault</h2>
+            <h2 className="font-display text-2xl uppercase tracking-[0.08em]">{t.digitalVault}</h2>
             <div className="mt-4 grid gap-3">
               {payload!.digital_entitlements!.map((entitlement) => (
                 <article key={entitlement.entitlement_id} className="rounded-2xl border border-[#f4c66a]/20 bg-[#f4c66a]/[0.04] p-5">
@@ -231,9 +333,9 @@ export function OrderClient() {
                     <div>
                       <h3 className="text-lg font-semibold text-white">{entitlement.label}</h3>
                       {entitlement.subtitle && <p className="mt-1 text-sm text-stone-400">{entitlement.subtitle}</p>}
-                      <p className="mt-2 text-xs uppercase tracking-[0.18em] text-stone-500">{entitlement.ready ? `${entitlement.downloads_remaining} secure download${entitlement.downloads_remaining === 1 ? "" : "s"} remaining` : entitlement.state.replaceAll("_", " ")}</p>
+                      <p className="mt-2 text-xs uppercase tracking-[0.18em] text-stone-500">{entitlement.ready ? `${entitlement.downloads_remaining} ${t.remaining}` : entitlement.state.replaceAll("_", " ")}</p>
                     </div>
-                    <button type="button" disabled={!entitlement.ready} onClick={() => download(entitlement.entitlement_id)} className={`rounded-full px-6 py-3 text-xs font-black uppercase tracking-[0.18em] ${entitlement.ready ? "bg-[#f4c66a] text-black hover:bg-[#ffe09a]" : "cursor-not-allowed bg-stone-800 text-stone-500"}`}>{entitlement.ready ? "Secure Download" : "Master Pending"}</button>
+                    <button type="button" disabled={!entitlement.ready} onClick={() => download(entitlement.entitlement_id)} className={`rounded-full px-6 py-3 text-xs font-black uppercase tracking-[0.18em] ${entitlement.ready ? "bg-[#f4c66a] text-black hover:bg-[#ffe09a]" : "cursor-not-allowed bg-stone-800 text-stone-500"}`}>{entitlement.ready ? t.secureDownload : t.masterPending}</button>
                   </div>
                 </article>
               ))}
@@ -242,8 +344,8 @@ export function OrderClient() {
         )}
 
         <div className="mt-12 flex flex-wrap gap-3">
-          <Link href="/store" className="rounded-full border border-[#f4c66a]/35 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-[#f4c66a] hover:bg-[#f4c66a]/10">Back to Store</Link>
-          <Link href="/music" className="rounded-full border border-white/15 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white hover:border-white/30">Music</Link>
+          <Link href="/store" className="rounded-full border border-[#f4c66a]/35 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-[#f4c66a] hover:bg-[#f4c66a]/10">{t.backStore}</Link>
+          <Link href="/music" className="rounded-full border border-white/15 px-6 py-3 text-xs font-black uppercase tracking-[0.18em] text-white hover:border-white/30">{t.music}</Link>
         </div>
       </section>
     </main>
