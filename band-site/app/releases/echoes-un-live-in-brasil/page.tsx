@@ -41,7 +41,8 @@ const tracks = [
 const productRoutes: Record<string, string> = {
   "echoes-brasil-expanded-2026": "/store/echoes-brasil-expanded",
   "echoes-brasil-livreto-2026": "/store/echoes-brasil-livreto",
-  "echoes-brasil-deluxe-2026": "/store/echoes-brasil-deluxe"
+  "echoes-brasil-deluxe-2026": "/store/echoes-brasil-deluxe",
+  "echoes-brasil-vinyl-2026": "/store/echoes-brasil-vinyl"
 };
 
 const copy = {
@@ -271,7 +272,7 @@ export default async function EchoesBrasilReleasePage({
                   <div className="mt-6 flex items-center justify-between gap-4">
                     <span className="text-xl font-semibold text-[#e0b36f]">{money(product.priceCents, locale)}</span>
                     <Link
-                      href={productRoutes[product.id] || product.productPath}
+                      href={`${productRoutes[product.id] || product.productPath}${(productRoutes[product.id] || product.productPath).includes("?") ? "&" : "?"}lang=${locale}`}
                       className="rounded-full border border-[#d6a55b]/45 px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.18em] text-[#e0b36f] hover:bg-[#d6a55b] hover:text-black"
                     >
                       {t.viewOrder}
