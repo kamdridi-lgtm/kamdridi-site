@@ -238,8 +238,8 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
           </div>
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h3 className="font-display text-xl uppercase tracking-wider text-white">{product.name}</h3>
-              <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#f4c66a]">
+              <h3 translate="no" className="notranslate font-display text-xl uppercase tracking-wider text-white">{product.name}</h3>
+              <p translate="no" className="notranslate mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#f4c66a]">
                 {product.subtitle}
               </p>
             </div>
