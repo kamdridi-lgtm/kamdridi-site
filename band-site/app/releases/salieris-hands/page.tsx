@@ -9,7 +9,7 @@ import { getPreparedPreview } from "@/lib/master-catalog";
 import { getUnifiedCommerceProducts } from "@/lib/unified-commerce";
 
 const assetBase = "/assets/images/salieris-hands";
-const teaserUrl = "https://youtu.be/wD0u7-krT8s?si=4a1J1siTwJV9bGCI";
+const teaserUrl = "https://youtu.be/wDOu7-krT8s";
 const teaserVideo = "/assets/video/salieris-hands/official-teaser.mp4";
 const heroVideo = "/assets/video/salieris-hands/salieri-hero-slow.mp4";
 const heroVideoWebm = "/assets/video/salieris-hands/salieri-hero-slow.webm";
@@ -24,6 +24,8 @@ const assets = {
   hero: `${assetBase}/salieri-opera-hall-hero.png`,
   heroPoster: `${assetBase}/hero-video-poster.jpg`,
   frontCover: `${assetBase}/front-cover-approved.png`,
+  backCover: `${assetBase}/back-cover-approved.png`,
+  disc: `${assetBase}/disc-mockup.png`,
   collectorPack: `${assetBase}/full-collector-pack.png`,
   booklet: `${assetBase}/booklet-mockup.png`,
   jewelcase: `${assetBase}/jewelcase-mockup.png`,
@@ -33,6 +35,15 @@ const assets = {
   wide: `${assetBase}/salieri-wide-official.png`,
   vienna: `${assetBase}/vienna-walking-official.png`
 };
+
+const physicalMaterials = [
+  { src: assets.frontCover, alt: "SALIERI'S HANDS official front cover", label: "Front cover" },
+  { src: assets.backCover, alt: "SALIERI'S HANDS official back cover", label: "Back cover" },
+  { src: assets.packBack, alt: "SALIERI'S HANDS full wrap and spine", label: "Wrap + spine" },
+  { src: assets.disc, alt: "SALIERI'S HANDS CD face", label: "CD face" },
+  { src: assets.booklet, alt: "SALIERI'S HANDS booklet mockup", label: "Booklet" },
+  { src: assets.jewelcase, alt: "SALIERI'S HANDS jewel case mockup", label: "Jewel case" }
+];
 
 const mainTracks = [
   { title: "Requiem", previewSrc: getSalieriPreview("salieri-01-requiem") },
@@ -171,8 +182,10 @@ const trustNotes = [
 const sectionNavItems = [
   { href: "#teaser", label: "Teaser" },
   { href: "#tracklist", label: "Tracklist" },
+  { href: "#packaging", label: "Physical Album World" },
   { href: "#collector-editions", label: "Collector Editions" },
   { href: "#merch", label: "Merch" },
+  { href: "#epk", label: "EPK" },
   { href: "#order-info", label: "Order Info" },
   { href: "#release-updates", label: "Release Updates" }
 ];
@@ -556,7 +569,7 @@ export default async function SalierisHandsPage() {
                 <div className="salieri-animated-word text-[clamp(2rem,7.4vw,5.2rem)] leading-none">Vienna, 1791</div>
                 <div className="salieri-animated-word text-[clamp(2rem,7.4vw,5.2rem)] leading-none">Salieri&apos;s Hands</div>
               </div>
-              <h1 className="salieri-hero-title text-[clamp(3rem,10vw,7.6rem)] uppercase leading-[0.9] text-[#ffe3ad] drop-shadow-[0_18px_48px_rgba(0,0,0,0.86)]">
+              <h1 translate="no" className="notranslate salieri-hero-title text-[clamp(3rem,10vw,7.6rem)] uppercase leading-[0.9] text-[#ffe3ad] drop-shadow-[0_18px_48px_rgba(0,0,0,0.86)]">
                 Salieri&apos;s Hands
               </h1>
               <div className="mt-5 grid max-w-2xl gap-1 text-sm font-semibold uppercase tracking-[0.16em] text-[#ffe7bd] sm:text-base">
@@ -682,6 +695,44 @@ export default async function SalierisHandsPage() {
         </div>
       </section>
 
+      <section id="packaging" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
+        <div className="mx-auto max-w-7xl">
+          <SectionIntro title="Physical Album World" align="center">
+            <p>The approved cover, back cover, wrap, disc, booklet, jewel case, and collector package are presented as one coherent dark baroque object.</p>
+          </SectionIntro>
+
+          <div className="mt-9 overflow-hidden border border-[#bd8b45]/55 bg-black/65 p-3 shadow-[0_34px_110px_rgba(0,0,0,0.5)] sm:p-5">
+            <div className="relative aspect-[16/9] min-h-[280px]">
+              <ImagePanel src={assets.collectorPack} alt="Complete SALIERI'S HANDS physical collector package mockup" contain />
+            </div>
+          </div>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {physicalMaterials.map((item) => (
+              <figure key={item.label} className="overflow-hidden border border-[#bd8b45]/35 bg-[#0d0704]/78 p-3">
+                <div className="relative aspect-square overflow-hidden bg-black">
+                  <ImagePanel src={item.src} alt={item.alt} contain />
+                </div>
+                <figcaption className="pt-3 text-center text-[10px] font-black uppercase tracking-[0.24em] text-[#e3b86a]">
+                  {item.label}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <div className="mt-6 border border-[#bd8b45]/35 bg-black/34 p-5">
+            <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#e3b86a]">Collector Edition Includes</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {["Collector CD", "16-page booklet", "Front cover", "Back cover", "CD face", "Art print", "Tracklist card", "Digital booklet"].map((item) => (
+                <span key={item} className="border border-[#bd8b45]/35 bg-[#100905]/62 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[#f3d8aa]">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="collector-editions" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionIntro title="Collector Editions" align="center">
@@ -706,6 +757,52 @@ export default async function SalierisHandsPage() {
             {merchProducts.map((product) => (
               <SalieriProductCard key={product.id} {...product} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="epk" className="border-b border-[#a67938]/25 px-4 py-12 sm:px-6 md:py-16">
+        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="border border-[#bd8b45]/45 bg-[radial-gradient(circle_at_12%_0%,rgba(255,210,126,0.12),transparent_34%),linear-gradient(180deg,rgba(28,16,8,0.92),rgba(8,5,3,0.97))] p-6 sm:p-8">
+            <Eyebrow>EPK / Press</Eyebrow>
+            <h2 translate="no" className="notranslate mt-4 font-serif text-[clamp(2rem,5vw,3.4rem)] uppercase leading-[0.95] text-[#ffe3ad]">
+              SALIERI&apos;S HANDS
+            </h2>
+            <p className="mt-5 text-sm leading-7 text-[#ead4ad]">
+              A KAMDRIDI classical / dark baroque concept release using the Salieri myth as a dramatic symbolic frame for original KAMDRIDI compositions. It is not a historical biography.
+            </p>
+            <dl className="mt-7 grid gap-3 text-sm">
+              {[
+                ["Artist", "KAMDRIDI"],
+                ["Label", "KAMDRIDI RECORDS"],
+                ["Release type", "Special off-series album"],
+                ["Genre", "Dark baroque / cinematic classical / classical rock"],
+                ["Status", "Official teaser out now · album coming soon"],
+                ["Core line", "Vienna, 1791. Faith. Envy. Confession."],
+                ["Historical note", "Inspired by the Salieri myth as a dramatic frame. Not a biography."]
+              ].map(([term, detail]) => (
+                <div key={term} className="grid gap-1 border-b border-[#bd8b45]/18 pb-3 sm:grid-cols-[160px_1fr]">
+                  <dt className="text-[10px] font-black uppercase tracking-[0.22em] text-[#e3b86a]">{term}</dt>
+                  <dd className="text-[#f0d8b2]">{detail}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <div className="border border-[#bd8b45]/45 bg-black/42 p-6 sm:p-8">
+            <Eyebrow>Credits / approved rule</Eyebrow>
+            <p className="mt-5 text-sm leading-7 text-[#ead4ad]">
+              All music written, produced, arranged and performed by KAMDRIDI. Released by KAMDRIDI RECORDS.
+            </p>
+            <p className="mt-5 border-l border-[#e2ad52]/55 pl-4 text-sm leading-7 text-[#d9c09a]">
+              Official front cover, back cover, collector package, disc, booklet, jewel case, and campaign stills are approved visual assets. They are not to be redesigned or replaced with generated substitutes.
+            </p>
+            <div className="mt-7">
+              <ActionLink href={teaserUrl}>
+                <Play className="h-4 w-4" />
+                Official Teaser
+              </ActionLink>
+            </div>
           </div>
         </div>
       </section>
