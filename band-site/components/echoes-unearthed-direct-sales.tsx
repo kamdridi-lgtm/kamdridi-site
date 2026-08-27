@@ -158,7 +158,7 @@ export function EchoesUnearthedDirectSales({
             <p className="text-[10px] font-bold uppercase tracking-[0.34em] text-[#c98542]">
               Direct from KAM DRIDI · HD WAV
             </p>
-            <h2 className="mt-4 font-display text-4xl uppercase leading-none tracking-[0.08em] text-[#e8b777] sm:text-5xl">
+            <h2 translate="no" className="notranslate mt-4 font-display text-4xl uppercase leading-none tracking-[0.08em] text-[#e8b777] sm:text-5xl">
               Echoes Unearthed
             </h2>
             <p className="mt-5 max-w-xl text-sm leading-7 text-stone-300">
@@ -211,7 +211,7 @@ export function EchoesUnearthedDirectSales({
             </div>
 
             <p className="mt-5 text-xs leading-6 text-stone-500">
-              Track 10, <strong className="text-stone-300">Echoes of Our Youth</strong>, is reserved
+              Track 10, <strong translate="no" className="notranslate text-stone-300">Echoes of Our Youth</strong>, is reserved
               for the physical edition and is not included in the digital album.
             </p>
           </div>
@@ -231,7 +231,7 @@ export function EchoesUnearthedDirectSales({
                   >
                     <span className="font-display text-xl text-[#c98542]">{track.number}</span>
                     <div>
-                      <p className="font-semibold text-stone-100">{track.title}</p>
+                      <p translate="no" className="notranslate font-semibold text-stone-100">{track.title}</p>
                       <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-stone-600">
                         Echoes Unearthed album master · HD WAV
                       </p>
@@ -251,7 +251,7 @@ export function EchoesUnearthedDirectSales({
               <div className="grid gap-3 bg-[#130d08] px-4 py-4 sm:grid-cols-[52px_minmax(0,1fr)_auto] sm:items-center">
                 <span className="font-display text-xl text-[#f4c66a]">10</span>
                 <div>
-                  <p className="font-semibold text-stone-100">Echoes of Our Youth</p>
+                  <p translate="no" className="notranslate font-semibold text-stone-100">Echoes of Our Youth</p>
                   <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-stone-500">
                     Bonus track
                   </p>
