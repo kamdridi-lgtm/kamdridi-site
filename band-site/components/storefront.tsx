@@ -22,7 +22,7 @@ type RemoteProduct = {
   description: string;
   images?: string[] | null;
   price_cents: number;
-  currency: "CAD";
+  currency: "CAD" | "JPY";
   sale_mode: CommerceProduct["saleMode"];
   visible: boolean;
   checkout_enabled: boolean;
@@ -100,7 +100,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
         const payload = await response.json();
         if (!Array.isArray(payload?.products)) throw new Error("Invalid remote catalog");
         const normalized = (payload.products as RemoteProduct[])
-          .filter((product) => product.visible)
+          .filter((product) => product.visible && product.currency === "CAD")
           .map(normalizeRemoteProduct);
         if (!cancelled && normalized.length > 0) setAllProducts(normalized);
       })
