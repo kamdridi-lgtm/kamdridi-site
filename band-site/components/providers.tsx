@@ -51,39 +51,38 @@ export function Providers({ children }: { children: React.ReactNode }) {
           
           for (const item of parsed) {
             if (!item || !item.id) continue;
+
+            // The checked-in catalog is only a resilient display fallback.
+            // The live Supabase catalog is authoritative and is revalidated
+            // server-side before Stripe Checkout is created.
             const product = getCommerceProductById(item.id);
-            if (
-              !product ||
-              !product.visible ||
-              !product.checkoutEnabled ||
-              product.saleMode === "sold_out" ||
-              product.saleMode === "coming_soon"
-            ) continue;
-            
-            // Validate variants
+
             let validColor = item.color;
-            if (product.colors?.length) {
+            if (product?.colors?.length) {
               if (!validColor || !product.colors.includes(validColor)) validColor = product.colors[0];
-            } else {
-              validColor = undefined;
             }
-            
+
             let validSize = item.size;
-            if (product.sizes?.length) {
+            if (product?.sizes?.length) {
               if (!validSize || !product.sizes.includes(validSize)) validSize = product.sizes[0];
-            } else {
-              validSize = undefined;
             }
-            
+
             let qty = Math.max(1, Math.floor(Number(item.quantity) || 1));
-            if (product.quantityLimit) qty = Math.min(qty, product.quantityLimit);
-            qty = Math.min(qty, 20); // Hard cap
-            
+            if (product?.quantityLimit) qty = Math.min(qty, product.quantityLimit);
+            qty = Math.min(qty, 20);
+
+            const displayPrice =
+              typeof item.price === "number" && Number.isFinite(item.price)
+                ? item.price
+                : product
+                  ? product.priceCents / 100
+                  : 0;
+
             validatedCart.push({
-              id: product.id,
-              name: product.name,
-              price: product.priceCents / 100, // Price in display CAD dollars
-              image: product.images?.[0] || item.image || "",
+              id: item.id,
+              name: product?.name || item.name || item.id,
+              price: displayPrice,
+              image: product?.images?.[0] || item.image || "",
               quantity: qty,
               color: validColor,
               size: validSize
@@ -118,24 +117,25 @@ export function Providers({ children }: { children: React.ReactNode }) {
   }
 
   function addToCart(rawItem: Omit<CartItem, "quantity">) {
+    // Do not let a stale checked-in fallback block a product that the live
+    // Supabase catalog has already exposed as purchasable. The checkout API
+    // performs the authoritative validation immediately before Stripe.
     const product = getCommerceProductById(rawItem.id);
-    if (
-      !product ||
-      !product.visible ||
-      !product.checkoutEnabled ||
-      product.saleMode === "sold_out" ||
-      product.saleMode === "coming_soon"
-    ) return;
-    
     const item = {
-      id: product.id,
-      name: product.name,
-      price: product.priceCents / 100,
-      image: product.images?.[0] || "",
+      id: rawItem.id,
+      name: rawItem.name || product?.name || rawItem.id,
+      price:
+        typeof rawItem.price === "number" && Number.isFinite(rawItem.price)
+          ? rawItem.price
+          : product
+            ? product.priceCents / 100
+            : 0,
+      image: rawItem.image || product?.images?.[0] || "",
       color: rawItem.color,
       size: rawItem.size
     };
-    
+    const quantityLimit = product?.quantityLimit ?? 20;
+
     setCart((current) => {
       const existing = current.find(
         (entry) =>
@@ -147,10 +147,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
           entry.id === item.id && entry.size === item.size && entry.color === item.color
             ? {
                 ...entry,
-                quantity: Math.min(
-                  entry.quantity + 1,
-                  product.quantityLimit ?? 20
-                )
+                quantity: Math.min(entry.quantity + 1, quantityLimit)
               }
             : entry
         );
