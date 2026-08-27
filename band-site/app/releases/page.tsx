@@ -46,7 +46,7 @@ export default function ReleasesPage() {
           </div>
           <div className="p-6 md:p-8">
             <p className="text-[10px] uppercase tracking-[0.28em] text-[#f4c66a]">Single / Released</p>
-            <h2 className="mt-4 text-3xl font-black uppercase tracking-[0.06em] text-white">Dust on the Altar</h2>
+            <h2 translate="no" className="notranslate mt-4 text-3xl font-black uppercase tracking-[0.06em] text-white">Dust on the Altar</h2>
             <p className="mt-3 text-sm leading-7 text-stone-300">IRON COUNTY GHOSTS</p>
             <p className="mt-2 text-sm leading-7 text-stone-400">
               The first KAMDRIDI RECORDS artist project release: dark country, ghost-road atmosphere, and cinematic storytelling from IRON COUNTY GHOSTS.
@@ -72,7 +72,7 @@ export default function ReleasesPage() {
           </div>
           <div className="p-6 md:p-8">
             <p className="text-[10px] uppercase tracking-[0.28em] text-[#f4c66a]">KAM DRIDI · DIGITAL ALBUM · DIRECT</p>
-            <h2 className="mt-4 text-3xl font-black uppercase tracking-[0.06em] text-white">Echoes Unearthed</h2>
+            <h2 translate="no" className="notranslate mt-4 text-3xl font-black uppercase tracking-[0.06em] text-white">Echoes Unearthed</h2>
             <p className="mt-3 text-sm leading-7 text-stone-300">KAM DRIDI</p>
             <p className="mt-2 text-sm leading-7 text-stone-400">
               Nine verified 24-bit / 48 kHz WAV masters. Buy the complete digital album for CA$16 or any individual track for CA$2.99. Track buyers qualify for a private 20% album-upgrade offer.
@@ -92,7 +92,7 @@ export default function ReleasesPage() {
           </div>
           <div className="p-6 md:p-8">
             <p className="text-[10px] uppercase tracking-[0.28em] text-[#f4c66a]">Featured KAM DRIDI release</p>
-            <h2 className="mt-4 text-3xl font-black uppercase tracking-[0.06em] text-white">War Machines</h2>
+            <h2 translate="no" className="notranslate mt-4 text-3xl font-black uppercase tracking-[0.06em] text-white">War Machines</h2>
             <p className="mt-3 text-sm leading-7 text-stone-300">KAM DRIDI</p>
             <p className="mt-2 text-sm leading-7 text-stone-400">
               A KAM DRIDI cinematic rock release connected to the wider KAMDRIDI creative universe.
@@ -118,7 +118,7 @@ export default function ReleasesPage() {
           </div>
           <div className="p-6 md:p-8">
             <p className="text-[10px] uppercase tracking-[0.28em] text-[#f4c66a]">EXPANDED LIVE EDITION · 2026</p>
-            <h2 className="mt-4 text-3xl font-black uppercase tracking-[0.06em] text-white">ECHOES UN LIVE IN BRASIL</h2>
+            <h2 translate="no" className="notranslate mt-4 text-3xl font-black uppercase tracking-[0.06em] text-white">ECHOES UN LIVE IN BRASIL</h2>
             <p className="mt-3 text-sm leading-7 text-stone-300">KAM DRIDI</p>
             <p className="mt-2 text-sm leading-7 text-stone-400">
               A warm semi-acoustic melodic rock performance shaped around the Brazilian audience, expanded editions, live-session arrangements, and the visual world of ECHOES UN LIVE IN BRASIL.
