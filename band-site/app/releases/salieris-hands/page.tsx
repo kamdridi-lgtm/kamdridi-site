@@ -142,7 +142,7 @@ const orderInfoItems = [
   },
   {
     title: "Digital delivery",
-    text: "Digital Deluxe orders are prepared as a high-resolution audio package with booklet and four exclusive bonus tracks."
+    text: "Digital Deluxe orders are prepared as the 14-track high-resolution edition: the 13-movement collector programme plus the additional German Das Prisma digital-only bonus and booklet."
   },
   {
     title: "Shipping",
@@ -155,7 +155,7 @@ const orderInfoItems = [
 ];
 
 const fulfillmentItems = [
-  ["Digital Deluxe Release", "High-resolution files, digital booklet, and four exclusive bonus tracks."],
+  ["Digital Deluxe Release", "Fourteen-track high-resolution edition: the 13-movement collector programme plus the additional German Das Prisma digital-only bonus and digital booklet."],
   ["Collector formats", "CD, vinyl, booklet, box, and coin items are produced through their selected made-to-order or manual supplier route after payment."],
   ["Merch", "Apparel, mug, and poster orders use the selected size, color, and delivery details from checkout."],
   ["Collector Bundle", "Bundle contents are checked as one direct artist package before production and fulfillment begin."]
