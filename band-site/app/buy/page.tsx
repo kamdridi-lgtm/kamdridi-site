@@ -136,6 +136,29 @@ export default function BuyPage() {
             </button>
           </div>
 
+          <div className="mt-6 rounded-2xl border border-[#f4c66a]/35 bg-black/65 p-5">
+            <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#f4c66a]">
+              Free private preview
+            </p>
+            <h2 className="mt-2 text-xl font-black uppercase text-white">
+              OUR LOST DREAMS — Stripped-Down Acoustic Version
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-stone-300">
+              Écoute privée de la version acoustique. Un seul clic — aucun achat requis.
+            </p>
+            <a
+              href="https://we.tl/t-FLPMEpLmQJ5dyg4x"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex min-h-12 w-full items-center justify-center rounded-full border border-[#f4c66a] bg-[#f4c66a]/10 px-5 py-3 text-center text-xs font-black uppercase tracking-[0.11em] text-[#f4c66a] transition hover:bg-[#f4c66a] hover:text-black"
+            >
+              LISTEN / ÉCOUTER — ACOUSTIC VERSION
+            </a>
+            <p className="mt-3 break-all text-[10px] text-stone-500">
+              Direct link: https://we.tl/t-FLPMEpLmQJ5dyg4x
+            </p>
+          </div>
+
           <div className="mt-6 rounded-2xl border border-white/10 bg-black/55 px-5 py-4 text-sm leading-6 text-stone-300">
             Cette vente concerne uniquement la version album de <strong className="text-white">OUR LOST DREAMS</strong>.
             Ce n&apos;est ni la future Single Version distincte, ni la version Japan.
