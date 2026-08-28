@@ -144,10 +144,10 @@ export default function BuyPage() {
               OUR LOST DREAMS — Stripped-Down Acoustic Version
             </h2>
             <p className="mt-2 text-sm leading-6 text-stone-300">
-              Écoute privée de la version acoustique. Un seul clic — aucun achat requis.
+              Écoute directe de la version acoustique. Un seul clic — aucun achat requis, aucun service externe.
             </p>
             <a
-              href="https://we.tl/t-FLPMEpLmQJ5dyg4x"
+              href="/audio/our-lost-dreams-stripped-down-acoustic.mp3"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 inline-flex min-h-12 w-full items-center justify-center rounded-full border border-[#f4c66a] bg-[#f4c66a]/10 px-5 py-3 text-center text-xs font-black uppercase tracking-[0.11em] text-[#f4c66a] transition hover:bg-[#f4c66a] hover:text-black"
@@ -155,7 +155,7 @@ export default function BuyPage() {
               LISTEN / ÉCOUTER — ACOUSTIC VERSION
             </a>
             <p className="mt-3 break-all text-[10px] text-stone-500">
-              Direct link: https://we.tl/t-FLPMEpLmQJ5dyg4x
+              Permanent link: kamdridi.com/audio/our-lost-dreams-stripped-down-acoustic.mp3
             </p>
           </div>
 
