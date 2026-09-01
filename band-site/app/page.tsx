@@ -17,6 +17,7 @@ import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
 import { LostRequiemUniverseCard } from "@/components/lost-requiem-universe-card";
 import { ActiveSignalsTV } from "@/components/active-signals-tv";
 import { EchoesUnearthedDirectSales } from "@/components/echoes-unearthed-direct-sales";
+import { BuySingleFab } from "@/components/buy-single-fab";
 import { featuredVideo, gameExperiences, socialFeed, streamingLinks, visualAlbumScenes } from "@/data/site";
 
 const echoesUnearthedCover = "/assets/images/releases/echoes-unearthed-cover.jpg";
@@ -242,7 +243,8 @@ function PlatformLinks({ compact = false }: { compact?: boolean }) {
 export default function HomePage() {
   return (
     <>
-      <SalieriCinematicIntro />
+      <BuySingleFab />
+      <SalieriCinematicIntro />
       <EchoesBrasilCinematicIntro />
       <div className="relative overflow-hidden bg-[#050403] text-white">
         <div className="pointer-events-none fixed inset-0 z-0 opacity-55">
