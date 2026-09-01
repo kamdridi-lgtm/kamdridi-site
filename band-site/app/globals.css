@@ -2459,3 +2459,80 @@ textarea:focus {
 @keyframes space-dust { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
 .animate-space-dust { animation: space-dust 60s linear infinite; }
 
+
+
+/* KAM DRIDI promo-card restoration — 2026-09-01 */
+.home-cinematic-intro {
+  top: 136px;
+  bottom: auto;
+}
+
+.home-cinematic-intro .home-promo-card,
+.home-cinematic-intro .home-cinematic-shake,
+.echoes-brasil-promo-card {
+  animation: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+/* ACT II — WAR MACHINES: upper left */
+.home-cinematic-intro:not(.salieri-promo-intro):not(.echoes-brasil-promo-intro) {
+  left: 26px;
+  right: auto;
+  top: 136px;
+  bottom: auto;
+  width: min(238px, calc(100vw - 52px));
+  transform: none;
+}
+
+/* SALIERI'S HANDS: upper right */
+.home-cinematic-intro.salieri-promo-intro {
+  left: auto;
+  right: 26px;
+  top: 132px;
+  bottom: auto;
+  width: min(242px, calc(100vw - 52px));
+}
+
+/* ECHOES UN LIVE IN BRASIL: directly under Salieri, never overlapping */
+.home-cinematic-intro.echoes-brasil-promo-intro {
+  left: auto;
+  right: 26px;
+  top: 430px;
+  bottom: auto;
+  transform: none;
+  width: min(242px, calc(100vw - 52px));
+  z-index: 54;
+}
+
+.echoes-brasil-promo-intro .home-cinematic-shake {
+  transform-origin: right top;
+}
+
+@media (max-width: 700px) {
+  .home-cinematic-intro:not(.salieri-promo-intro):not(.echoes-brasil-promo-intro) {
+    left: 10px;
+    right: auto;
+    top: 88px;
+    bottom: auto;
+    width: min(148px, calc(50vw - 16px));
+  }
+
+  .home-cinematic-intro.salieri-promo-intro {
+    left: auto;
+    right: 10px;
+    top: 88px;
+    bottom: auto;
+    width: min(148px, calc(50vw - 16px));
+  }
+
+  .home-cinematic-intro.echoes-brasil-promo-intro {
+    left: auto;
+    right: 10px;
+    top: 292px;
+    bottom: auto;
+    width: min(148px, calc(50vw - 16px));
+    transform: none;
+  }
+}
