@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties, MouseEvent } from "react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const poster = "/assets/images/salieris-hands/partition-card.png";
 
@@ -16,7 +16,19 @@ const embers = Array.from({ length: 8 }, (_, index) => ({
 }));
 
 export function SalieriCinematicIntro() {
+  const [mounted, setMounted] = useState(false);
   const cardRef = useRef<HTMLAnchorElement | null>(null);
+
+  useEffect(() => {
+    const showTimer = window.setTimeout(() => setMounted(true), 11200);
+    const hideTimer = window.setTimeout(() => setMounted(false), 22000);
+    return () => {
+      window.clearTimeout(showTimer);
+      window.clearTimeout(hideTimer);
+    };
+  }, []);
+
+  if (!mounted) return null;
 
 
   function handleMouseMove(event: MouseEvent<HTMLAnchorElement>) {
