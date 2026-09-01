@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 const poster = "/echoes-un-live-in-brasil/assets/images/front-cover.webp";
 
@@ -16,23 +16,8 @@ const particles = Array.from({ length: 8 }, (_, index) => ({
 }));
 
 export function EchoesBrasilCinematicIntro() {
-  const [mounted, setMounted] = useState(false);
   const cardRef = useRef<HTMLAnchorElement | null>(null);
 
-  useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const showDelay = prefersReduced ? 100 : 16400;
-    const hideDelay = prefersReduced ? 12000 : 31500;
-
-    const showTimer = window.setTimeout(() => setMounted(true), showDelay);
-    const hideTimer = window.setTimeout(() => setMounted(false), hideDelay);
-    return () => {
-      window.clearTimeout(showTimer);
-      window.clearTimeout(hideTimer);
-    };
-  }, []);
-
-  if (!mounted) return null;
 
   function handleMouseMove(event: React.MouseEvent<HTMLAnchorElement>) {
     if (!window.matchMedia("(pointer: fine)").matches) return;
