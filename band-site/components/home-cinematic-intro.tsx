@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties, MouseEvent } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 const poster = "/assets/images/games/act-ii-war-machines-poster.png";
 
@@ -16,15 +16,8 @@ const embers = Array.from({ length: 8 }, (_, index) => ({
 }));
 
 export function HomeCinematicIntro() {
-  const [mounted, setMounted] = useState(true);
   const cardRef = useRef<HTMLAnchorElement | null>(null);
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => setMounted(false), 7200);
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  if (!mounted) return null;
 
   function handleMouseMove(event: MouseEvent<HTMLAnchorElement>) {
     if (!window.matchMedia("(pointer: fine)").matches) return;
