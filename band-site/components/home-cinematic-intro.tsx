@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties, MouseEvent } from "react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const poster = "/assets/images/games/act-ii-war-machines-poster.png";
 
@@ -16,7 +16,15 @@ const embers = Array.from({ length: 8 }, (_, index) => ({
 }));
 
 export function HomeCinematicIntro() {
+  const [mounted, setMounted] = useState(true);
   const cardRef = useRef<HTMLAnchorElement | null>(null);
+
+  useEffect(() => {
+    const hideTimer = window.setTimeout(() => setMounted(false), 10500);
+    return () => window.clearTimeout(hideTimer);
+  }, []);
+
+  if (!mounted) return null;
 
 
   function handleMouseMove(event: MouseEvent<HTMLAnchorElement>) {
@@ -44,7 +52,7 @@ export function HomeCinematicIntro() {
   }
 
   return (
-    <aside className="home-cinematic-intro" aria-label="ACT II War Machines promo">
+    <aside className="home-cinematic-intro actii-promo-intro" aria-label="ACT II War Machines promo">
       <div className="home-cinematic-shake home-promo-card">
         <div className="home-promo-float">
           <div className="home-cinematic-electric-field">
