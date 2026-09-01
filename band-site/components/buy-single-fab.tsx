@@ -1,11 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function BuySingleFab() {
+  const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setVisible(true), 36000);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  if (!visible) return null;
 
   async function buyNow() {
     if (loading) return;
