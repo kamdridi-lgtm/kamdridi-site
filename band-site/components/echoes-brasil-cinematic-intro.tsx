@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const poster = "/echoes-un-live-in-brasil/assets/images/front-cover.webp";
 
@@ -16,7 +16,19 @@ const particles = Array.from({ length: 8 }, (_, index) => ({
 }));
 
 export function EchoesBrasilCinematicIntro() {
+  const [mounted, setMounted] = useState(false);
   const cardRef = useRef<HTMLAnchorElement | null>(null);
+
+  useEffect(() => {
+    const showTimer = window.setTimeout(() => setMounted(true), 22800);
+    const hideTimer = window.setTimeout(() => setMounted(false), 35200);
+    return () => {
+      window.clearTimeout(showTimer);
+      window.clearTimeout(hideTimer);
+    };
+  }, []);
+
+  if (!mounted) return null;
 
 
   function handleMouseMove(event: React.MouseEvent<HTMLAnchorElement>) {
