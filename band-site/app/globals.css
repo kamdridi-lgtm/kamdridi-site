@@ -2459,80 +2459,132 @@ textarea:focus {
 @keyframes space-dust { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
 .animate-space-dust { animation: space-dust 60s linear infinite; }
 
-
-
-/* KAM DRIDI promo-card restoration — 2026-09-01 */
+/* KAM DRIDI sequential promo flow — 2026-09-01 */
 .home-cinematic-intro {
-  top: 136px;
-  bottom: auto;
+  pointer-events: none;
+  background: transparent;
+  overflow: visible;
+}
+
+.home-cinematic-intro .home-promo-link {
+  pointer-events: auto;
 }
 
 .home-cinematic-intro .home-promo-card,
 .home-cinematic-intro .home-cinematic-shake,
 .echoes-brasil-promo-card {
-  animation: none !important;
-  opacity: 1 !important;
-  filter: none !important;
-  transform: none !important;
+  opacity: 0;
+  filter: blur(7px);
+  transform: translate3d(-18px, 0, 0) scale(0.975);
+  animation: kamPromoSlowPass 10.5s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  will-change: transform, opacity, filter;
 }
 
-/* ACT II — WAR MACHINES: upper left */
-.home-cinematic-intro:not(.salieri-promo-intro):not(.echoes-brasil-promo-intro) {
+/* 1 — ACT II WAR MACHINES: left */
+.home-cinematic-intro.actii-promo-intro {
   left: 26px;
   right: auto;
   top: 136px;
   bottom: auto;
   width: min(238px, calc(100vw - 52px));
   transform: none;
+  z-index: 55;
 }
 
-/* SALIERI'S HANDS: upper right */
+/* 2 — SALIERI'S HANDS: right */
 .home-cinematic-intro.salieri-promo-intro {
   left: auto;
   right: 26px;
   top: 132px;
   bottom: auto;
   width: min(242px, calc(100vw - 52px));
+  transform: none;
+  z-index: 55;
 }
 
-/* ECHOES UN LIVE IN BRASIL: directly under Salieri, never overlapping */
+/* 3 — ECHOES UN LIVE IN BRASIL: centered, final promo */
 .home-cinematic-intro.echoes-brasil-promo-intro {
-  left: auto;
-  right: 26px;
-  top: 430px;
-  bottom: auto;
-  transform: none;
-  width: min(242px, calc(100vw - 52px));
+  left: 50%;
+  right: auto;
+  top: auto;
+  bottom: 24px;
+  transform: translateX(-50%);
+  width: min(278px, calc(100vw - 32px));
   z-index: 54;
 }
 
-.echoes-brasil-promo-intro .home-cinematic-shake {
-  transform-origin: right top;
+.home-cinematic-intro.echoes-brasil-promo-intro .home-promo-card,
+.home-cinematic-intro.echoes-brasil-promo-intro .home-cinematic-shake,
+.echoes-brasil-promo-card {
+  animation-duration: 12.4s !important;
+  transform-origin: center bottom;
+}
+
+@keyframes kamPromoSlowPass {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translate3d(-22px, 3px, 0) scale(0.97);
+  }
+  12% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  78% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, -2px, 0) scale(1);
+  }
+  91% {
+    opacity: .48;
+    filter: blur(2px);
+    transform: translate3d(-8px, -3px, 0) scale(.99);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translate3d(-20px, -5px, 0) scale(.965);
+  }
 }
 
 @media (max-width: 700px) {
-  .home-cinematic-intro:not(.salieri-promo-intro):not(.echoes-brasil-promo-intro) {
-    left: 10px;
+  .home-cinematic-intro.actii-promo-intro {
+    left: 12px;
     right: auto;
-    top: 88px;
+    top: 92px;
     bottom: auto;
-    width: min(148px, calc(50vw - 16px));
+    width: min(170px, calc(100vw - 24px));
   }
 
   .home-cinematic-intro.salieri-promo-intro {
     left: auto;
-    right: 10px;
-    top: 88px;
+    right: 12px;
+    top: 92px;
     bottom: auto;
-    width: min(148px, calc(50vw - 16px));
+    width: min(170px, calc(100vw - 24px));
   }
 
   .home-cinematic-intro.echoes-brasil-promo-intro {
-    left: auto;
-    right: 10px;
-    top: 292px;
-    bottom: auto;
-    width: min(148px, calc(50vw - 16px));
-    transform: none;
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: 88px;
+    width: min(196px, calc(100vw - 24px));
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-cinematic-intro .home-promo-card,
+  .home-cinematic-intro .home-cinematic-shake,
+  .echoes-brasil-promo-card {
+    animation: kamPromoReduced 10s ease forwards !important;
+  }
+
+  @keyframes kamPromoReduced {
+    0%, 8% { opacity: 0; filter: none; transform: none; }
+    12%, 84% { opacity: 1; filter: none; transform: none; }
+    100% { opacity: 0; filter: none; transform: none; }
   }
 }
