@@ -11,6 +11,7 @@ import {
   Youtube
 } from "lucide-react";
 import { HomeReleaseCoverCarousel } from "@/components/home-release-cover-carousel";
+import { HomeCinematicIntro } from "@/components/home-cinematic-intro";
 import { SalieriCinematicIntro } from "@/components/salieri-cinematic-intro";
 import { EchoesBrasilCinematicIntro } from "@/components/echoes-brasil-cinematic-intro";
 import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
@@ -244,6 +245,7 @@ export default function HomePage() {
   return (
     <>
       <BuySingleFab />
+      <HomeCinematicIntro />
       <SalieriCinematicIntro />
       <EchoesBrasilCinematicIntro />
       <div className="relative overflow-hidden bg-[#050403] text-white">
