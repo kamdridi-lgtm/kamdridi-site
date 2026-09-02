@@ -197,11 +197,11 @@ export default async function EchoesBrasilReleasePage({
     <main lang={t.htmlLang} translate="no" className="min-h-screen bg-[#070504] text-white">
       <section className="relative isolate min-h-[78svh] overflow-hidden border-b border-[#bc8b49]/20">
         <Image
-          src="/echoes-un-live-in-brasil/assets/images/edition-expanded.webp"
+          src="/echoes-un-live-in-brasil/assets/images/hero.webp"
           alt="ECHOES UNlive in Brasil"
           fill
           priority
-          className="object-cover object-center opacity-45"
+          className="object-cover object-center opacity-70"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,3,2,.20),rgba(5,3,2,.72)_58%,#070504)]" />
 
