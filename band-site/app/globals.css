@@ -2464,6 +2464,7 @@ textarea:focus {
   pointer-events: none;
   background: transparent;
   overflow: visible;
+  contain: none;
 }
 
 .home-cinematic-intro .home-promo-link {
@@ -2550,19 +2551,21 @@ textarea:focus {
 
 @media (max-width: 700px) {
   .home-cinematic-intro.actii-promo-intro {
-    left: 12px;
+    left: max(16px, env(safe-area-inset-left));
     right: auto;
     top: 92px;
     bottom: auto;
-    width: min(170px, calc(100vw - 24px));
+    width: min(156px, calc(100vw - 40px));
+    max-width: calc(100vw - 40px);
   }
 
   .home-cinematic-intro.salieri-promo-intro {
     left: auto;
-    right: 12px;
+    right: max(16px, env(safe-area-inset-right));
     top: 92px;
     bottom: auto;
-    width: min(170px, calc(100vw - 24px));
+    width: min(156px, calc(100vw - 40px));
+    max-width: calc(100vw - 40px);
   }
 
   .home-cinematic-intro.echoes-brasil-promo-intro {
@@ -2570,8 +2573,29 @@ textarea:focus {
     right: auto;
     top: auto;
     bottom: 88px;
-    width: min(196px, calc(100vw - 24px));
+    width: min(184px, calc(100vw - 40px));
+    max-width: calc(100vw - 40px);
     transform: translateX(-50%);
+  }
+
+  .home-cinematic-intro .home-promo-link {
+    width: 100%;
+    max-width: 100%;
+    padding: 4px;
+    box-sizing: border-box;
+  }
+
+  .home-cinematic-intro .home-cinematic-poster-wrap {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .home-cinematic-intro .home-promo-copy {
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    padding: 7px 8px;
   }
 }
 
