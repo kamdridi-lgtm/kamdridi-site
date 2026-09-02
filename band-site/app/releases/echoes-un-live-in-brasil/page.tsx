@@ -195,32 +195,32 @@ export default async function EchoesBrasilReleasePage({
 
   return (
     <main lang={t.htmlLang} translate="no" className="min-h-screen bg-[#070504] text-white">
-      <section className="relative isolate min-h-[78svh] overflow-hidden border-b border-[#bc8b49]/20">
+      <section className="relative isolate min-h-[112svh] overflow-hidden border-b border-[#bc8b49]/20 md:min-h-[78svh]">
         <Image
           src="/echoes-un-live-in-brasil/assets/images/hero.webp"
           alt="ECHOES UNlive in Brasil"
           fill
           priority
-          className="object-cover object-center opacity-70"
+          className="object-cover object-[58%_center] opacity-95 md:object-center md:opacity-78"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,3,2,.20),rgba(5,3,2,.72)_58%,#070504)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,3,2,.06)_0%,rgba(5,3,2,.08)_30%,rgba(5,3,2,.34)_54%,rgba(5,3,2,.86)_78%,#070504_100%)] md:bg-[linear-gradient(90deg,rgba(5,3,2,.58)_0%,rgba(5,3,2,.28)_45%,rgba(5,3,2,.12)_72%,rgba(5,3,2,.24)_100%),linear-gradient(180deg,rgba(5,3,2,.08),rgba(5,3,2,.58)_70%,#070504)]" />
 
         <div className="absolute right-4 top-5 z-20 md:right-8 md:top-8">
           <LanguageFlags locale={locale} />
         </div>
 
-        <div className="relative mx-auto flex min-h-[78svh] max-w-7xl items-end px-5 pb-16 pt-28 md:px-8 md:pb-24">
-          <div className="max-w-4xl">
-            <p className="text-xs font-black uppercase tracking-[0.36em] text-[#c94b3f]">{t.heroEyebrow}</p>
-            <h1 className="notranslate mt-5 font-display text-[clamp(3rem,9vw,7.5rem)] uppercase leading-[.82] tracking-[0.02em] text-[#f3eadc]">
+        <div className="relative mx-auto flex min-h-[112svh] max-w-7xl items-end px-5 pb-10 pt-[54svh] md:min-h-[78svh] md:px-8 md:pb-24 md:pt-28">
+          <div className="w-full max-w-4xl rounded-[28px] border border-white/10 bg-black/20 p-5 shadow-[0_28px_90px_rgba(0,0,0,.42)] backdrop-blur-[2px] md:border-0 md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-none">
+            <p className="text-[10px] font-black uppercase tracking-[0.30em] text-[#e06a5e] md:text-xs md:tracking-[0.36em]">{t.heroEyebrow}</p>
+            <h1 className="notranslate mt-4 max-w-[9.5ch] font-display text-[clamp(2.45rem,12vw,4rem)] uppercase leading-[.84] tracking-[0.015em] text-[#f3eadc] drop-shadow-[0_5px_24px_rgba(0,0,0,.9)] md:mt-5 md:max-w-none md:text-[clamp(3rem,9vw,7.5rem)] md:leading-[.82] md:tracking-[0.02em]">
               ECHOES <span className="text-[#a92d2d]">UN</span>live in Brasil
             </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-stone-300">{t.heroText}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="#editions" className="rounded-full bg-[#d6a55b] px-7 py-3 text-xs font-black uppercase tracking-[0.18em] text-black">
+            <p className="mt-5 max-w-xl text-[15px] leading-7 text-[#e7ddcf] drop-shadow-[0_2px_14px_rgba(0,0,0,.9)] md:mt-7 md:max-w-2xl md:text-lg md:leading-8 md:text-stone-300">{t.heroText}</p>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 md:mt-8 md:flex md:flex-wrap">
+              <Link href="#editions" className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#d6a55b] px-6 py-3 text-center text-[11px] font-black uppercase tracking-[0.16em] text-black shadow-[0_10px_32px_rgba(214,165,91,.20)] md:px-7 md:text-xs md:tracking-[0.18em]">
                 {t.collectorEditions}
               </Link>
-              <Link href="#programme" className="rounded-full border border-white/20 px-7 py-3 text-xs font-black uppercase tracking-[0.18em] text-white">
+              <Link href="#programme" className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/25 bg-black/25 px-6 py-3 text-center text-[11px] font-black uppercase tracking-[0.16em] text-white backdrop-blur-sm md:px-7 md:text-xs md:tracking-[0.18em]">
                 {t.fullProgramme}
               </Link>
             </div>
