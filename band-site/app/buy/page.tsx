@@ -88,14 +88,14 @@ export default function BuyPage() {
           </h1>
 
           <p className="mt-4 text-sm leading-6 text-stone-300 sm:text-base">
-            Deux versions. Un seul prix. La version officielle de l&apos;album <strong className="text-white">ECHOES UNEARTHED</strong> + la version acoustique Stripped-Down en bonus.
+            Deux versions. Un seul prix. La version officielle de l&apos;album <strong className="text-white">ECHOES UNEARTHED</strong> + la nouvelle <strong className="text-white">Three-Guitar Acoustic Version</strong> en bonus.
           </p>
 
           <div className="mt-6 rounded-2xl border border-[#f4c66a]/55 bg-[#17130d]/90 p-5">
             <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#f4c66a]">YOU GET BOTH · TU REÇOIS LES DEUX</p>
             <div className="mt-4 space-y-3 text-sm text-stone-200">
               <p><strong className="text-white">01 — OUR LOST DREAMS</strong><br /><span className="text-stone-400">Official album version · HD WAV 24-bit / 48 kHz</span></p>
-              <p><strong className="text-white">02 — OUR LOST DREAMS</strong><br /><span className="text-stone-400">Stripped-Down Acoustic Version · special bonus</span></p>
+              <p><strong className="text-white">02 — OUR LOST DREAMS</strong><br /><span className="text-stone-400">Three-Guitar Acoustic Version · exclusive bonus · WAV 24-bit / 48 kHz</span></p>
             </div>
           </div>
 
@@ -126,9 +126,9 @@ export default function BuyPage() {
               SPECIAL 2-FOR-1 DIGITAL BUNDLE
             </p>
             <p className="mt-2 text-4xl font-black text-[#f4c66a]">$2.99 CAD</p>
-            <p className="mt-2 text-sm font-bold text-white">BUY ONE VERSION · GET THE ACOUSTIC VERSION TOO</p>
+            <p className="mt-2 text-sm font-bold text-white">ONE PURCHASE · TWO FULL VERSIONS</p>
             <p className="mt-2 text-xs text-stone-400">
-              Secure Stripe payment · Receipt and delivery by email
+              Secure Stripe payment · Both versions included with purchase
             </p>
 
             <button
@@ -143,26 +143,21 @@ export default function BuyPage() {
 
           <div className="mt-6 rounded-2xl border border-[#f4c66a]/35 bg-black/65 p-5">
             <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#f4c66a]">
-              BONUS VERSION · ACOUSTIC
+              NEW EXCLUSIVE BONUS · THREE GUITARS
             </p>
             <h2 className="mt-2 text-xl font-black uppercase text-white">
-              OUR LOST DREAMS — Stripped-Down Acoustic Version
+              OUR LOST DREAMS — Three-Guitar Acoustic Version
             </h2>
             <p className="mt-2 text-sm leading-6 text-stone-300">
-              Included in this special 2-for-1 offer. You can hear the current acoustic version below; it can be replaced by the new three-guitar version without changing the offer.
+              The new 24-bit / 48 kHz acoustic master is included only as part of this special 2-for-1 purchase. It is no longer offered here as a free public preview.
             </p>
-            <a
-              href="/audio/our-lost-dreams-stripped-down-acoustic.mp3"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex min-h-12 w-full items-center justify-center rounded-full border border-[#f4c66a] bg-[#f4c66a]/10 px-5 py-3 text-center text-xs font-black uppercase tracking-[0.11em] text-[#f4c66a] transition hover:bg-[#f4c66a] hover:text-black"
-            >
-              HEAR THE BONUS / ÉCOUTER LE BONUS
-            </a>
+            <div className="mt-4 rounded-xl border border-[#f4c66a]/25 bg-[#f4c66a]/[0.06] px-4 py-3 text-center text-xs font-black uppercase tracking-[0.13em] text-[#f4c66a]">
+              INCLUDED WITH PURCHASE · INCLUS AVEC L&apos;ACHAT
+            </div>
           </div>
 
           <div className="mt-6 rounded-2xl border border-white/10 bg-black/55 px-5 py-4 text-sm leading-6 text-stone-300">
-            Special direct-sale bundle: official album version + acoustic bonus version for <strong className="text-white">$2.99 CAD total</strong>.
+            Special direct-sale bundle: official album version + exclusive Three-Guitar Acoustic Version for <strong className="text-white">$2.99 CAD total</strong>.
           </div>
 
           {error ? (
@@ -177,8 +172,8 @@ export default function BuyPage() {
               <p className="mt-1 text-[10px] text-stone-500">Two versions</p>
             </div>
             <div className="rounded-xl border border-white/10 bg-black/45 px-2 py-3">
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white">HD WAV</p>
-              <p className="mt-1 text-[10px] text-stone-500">Album master</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white">2 HD WAVs</p>
+              <p className="mt-1 text-[10px] text-stone-500">24-bit / 48 kHz</p>
             </div>
             <div className="rounded-xl border border-white/10 bg-black/45 px-2 py-3">
               <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white">Official</p>
