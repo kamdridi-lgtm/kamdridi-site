@@ -20,7 +20,7 @@ export default function BuyPage() {
         }
       })
       .catch(() => {
-        // The sales counter is promotional only; checkout stays available if it cannot load.
+        // Promotional counter only; checkout remains available if it cannot load.
       });
 
     return () => {
@@ -78,7 +78,7 @@ export default function BuyPage() {
       <section className="relative z-10 mx-auto flex min-h-[900px] max-w-7xl items-center px-5 py-12 sm:px-8 lg:px-12">
         <div className="w-full max-w-xl rounded-[30px] border border-[#d6a83f]/45 bg-black/80 p-6 shadow-[0_30px_100px_rgba(0,0,0,.65)] backdrop-blur-md sm:p-8 lg:p-10">
           <p className="text-xs font-bold uppercase tracking-[0.34em] text-[#f4c66a]">
-            ECHOES UNEARTHED — OFFICIAL HD ALBUM TRACK
+            SPECIAL 2-FOR-1 BUNDLE · OFFRE 2 POUR 1
           </p>
 
           <h1 className="mt-5 text-5xl font-black uppercase leading-[0.92] tracking-[0.02em] text-[#f7f0e5] sm:text-6xl">
@@ -88,11 +88,18 @@ export default function BuyPage() {
           </h1>
 
           <p className="mt-4 text-sm leading-6 text-stone-300 sm:text-base">
-            Version officielle de l&apos;album <strong className="text-white">ECHOES UNEARTHED</strong>.
-            Téléchargement WAV HD 24-bit / 48 kHz acheté directement de KAM DRIDI.
+            Deux versions. Un seul prix. La version officielle de l&apos;album <strong className="text-white">ECHOES UNEARTHED</strong> + la version acoustique Stripped-Down en bonus.
           </p>
 
-          <div className="mt-7 rounded-2xl border border-[#f4c66a]/45 bg-black/60 p-5">
+          <div className="mt-6 rounded-2xl border border-[#f4c66a]/55 bg-[#17130d]/90 p-5">
+            <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#f4c66a]">YOU GET BOTH · TU REÇOIS LES DEUX</p>
+            <div className="mt-4 space-y-3 text-sm text-stone-200">
+              <p><strong className="text-white">01 — OUR LOST DREAMS</strong><br /><span className="text-stone-400">Official album version · HD WAV 24-bit / 48 kHz</span></p>
+              <p><strong className="text-white">02 — OUR LOST DREAMS</strong><br /><span className="text-stone-400">Stripped-Down Acoustic Version · special bonus</span></p>
+            </div>
+          </div>
+
+          <div className="mt-6 rounded-2xl border border-[#f4c66a]/45 bg-black/60 p-5">
             <div className="flex items-end justify-between gap-4">
               <div>
                 <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#f4c66a]">
@@ -112,18 +119,16 @@ export default function BuyPage() {
                 style={{ width: `${Math.min(((salesCount ?? 1) / 10) * 100, 100)}%` }}
               />
             </div>
-            <p className="mt-3 text-xs text-stone-400">
-              Every completed purchase updates this goal automatically.
-            </p>
           </div>
 
           <div className="mt-7 rounded-2xl border border-[#d6a83f]/35 bg-[#17130d]/90 p-5 text-center">
             <p className="text-xs font-bold uppercase tracking-[0.26em] text-stone-400">
-              HD album-track download
+              SPECIAL 2-FOR-1 DIGITAL BUNDLE
             </p>
             <p className="mt-2 text-4xl font-black text-[#f4c66a]">$2.99 CAD</p>
+            <p className="mt-2 text-sm font-bold text-white">BUY ONE VERSION · GET THE ACOUSTIC VERSION TOO</p>
             <p className="mt-2 text-xs text-stone-400">
-              Secure Stripe payment • Receipt and delivery by email
+              Secure Stripe payment · Receipt and delivery by email
             </p>
 
             <button
@@ -132,19 +137,19 @@ export default function BuyPage() {
               disabled={loading}
               className="mt-5 inline-flex min-h-14 w-full items-center justify-center rounded-full bg-[#f4c66a] px-6 py-4 text-sm font-black uppercase tracking-[0.13em] text-black transition hover:bg-[#ffd989] disabled:cursor-wait disabled:opacity-70"
             >
-              {loading ? "Opening secure checkout…" : "BUY / ACHETER — $2.99 CAD"}
+              {loading ? "Opening secure checkout…" : "GET BOTH / LES DEUX — $2.99 CAD"}
             </button>
           </div>
 
           <div className="mt-6 rounded-2xl border border-[#f4c66a]/35 bg-black/65 p-5">
             <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#f4c66a]">
-              Free private preview
+              BONUS VERSION · ACOUSTIC
             </p>
             <h2 className="mt-2 text-xl font-black uppercase text-white">
               OUR LOST DREAMS — Stripped-Down Acoustic Version
             </h2>
             <p className="mt-2 text-sm leading-6 text-stone-300">
-              Écoute directe de la version acoustique. Un seul clic — aucun achat requis, aucun service externe.
+              Included in this special 2-for-1 offer. You can hear the current acoustic version below; it can be replaced by the new three-guitar version without changing the offer.
             </p>
             <a
               href="/audio/our-lost-dreams-stripped-down-acoustic.mp3"
@@ -152,16 +157,12 @@ export default function BuyPage() {
               rel="noopener noreferrer"
               className="mt-4 inline-flex min-h-12 w-full items-center justify-center rounded-full border border-[#f4c66a] bg-[#f4c66a]/10 px-5 py-3 text-center text-xs font-black uppercase tracking-[0.11em] text-[#f4c66a] transition hover:bg-[#f4c66a] hover:text-black"
             >
-              LISTEN / ÉCOUTER — ACOUSTIC VERSION
+              HEAR THE BONUS / ÉCOUTER LE BONUS
             </a>
-            <p className="mt-3 break-all text-[10px] text-stone-500">
-              Permanent link: kamdridi.com/audio/our-lost-dreams-stripped-down-acoustic.mp3
-            </p>
           </div>
 
           <div className="mt-6 rounded-2xl border border-white/10 bg-black/55 px-5 py-4 text-sm leading-6 text-stone-300">
-            Cette vente concerne uniquement la version album de <strong className="text-white">OUR LOST DREAMS</strong>.
-            Ce n&apos;est ni la future Single Version distincte, ni la version Japan.
+            Special direct-sale bundle: official album version + acoustic bonus version for <strong className="text-white">$2.99 CAD total</strong>.
           </div>
 
           {error ? (
@@ -172,12 +173,12 @@ export default function BuyPage() {
 
           <div className="mt-6 grid grid-cols-3 gap-2 text-center">
             <div className="rounded-xl border border-white/10 bg-black/45 px-2 py-3">
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white">Secure</p>
-              <p className="mt-1 text-[10px] text-stone-500">Stripe checkout</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white">2 FOR 1</p>
+              <p className="mt-1 text-[10px] text-stone-500">Two versions</p>
             </div>
             <div className="rounded-xl border border-white/10 bg-black/45 px-2 py-3">
               <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white">HD WAV</p>
-              <p className="mt-1 text-[10px] text-stone-500">24-bit / 48 kHz</p>
+              <p className="mt-1 text-[10px] text-stone-500">Album master</p>
             </div>
             <div className="rounded-xl border border-white/10 bg-black/45 px-2 py-3">
               <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white">Official</p>
