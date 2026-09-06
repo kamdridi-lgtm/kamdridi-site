@@ -8,6 +8,12 @@ function sanitizeMetadataValue(value: string | undefined) {
   return (value || "").replace(/[|\r\n]/g, " ").slice(0, 120);
 }
 
+function checkoutImageUrl(siteUrl: string, value?: string) {
+  if (!value) return undefined;
+  if (/^https?:\/\//i.test(value)) return value;
+  return `${siteUrl}${value.startsWith("/") ? value : `/${value}`}`;
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -71,6 +77,16 @@ export async function POST(request: Request) {
       ])
     );
 
+    const aopQuantity = plan.resolvedItems
+      .filter((item) => item.product.id === "our-lost-dreams-live-tee")
+      .reduce((sum, item) => sum + Number(item.quantity || 0), 0);
+
+    // The current Printify AOP supplier quotes shipping separately from production.
+    // Use a conservative flat CAD shipping charge until live Printify rate lookup is enabled.
+    const printifyShippingAmount = aopQuantity > 0
+      ? 1995 + Math.max(0, aopQuantity - 1) * 995
+      : 0;
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       success_url: `${siteUrl}/store/order?session_id={CHECKOUT_SESSION_ID}`,
@@ -79,6 +95,19 @@ export async function POST(request: Request) {
       shipping_address_collection: plan.requiresShipping ? {
         allowed_countries: ["US", "CA", "GB", "FR", "DE", "AU"]
       } : undefined,
+      shipping_options: aopQuantity > 0 && plan.orderCurrency === "CAD" ? [
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: { amount: printifyShippingAmount, currency: "cad" },
+            display_name: "Printify standard tracked shipping",
+            delivery_estimate: {
+              minimum: { unit: "business_day", value: 5 },
+              maximum: { unit: "business_day", value: 15 }
+            }
+          }
+        }
+      ] : undefined,
       phone_number_collection: {
         enabled: plan.requiresShipping
       },
@@ -98,6 +127,7 @@ export async function POST(request: Request) {
         returnPath,
         orderCurrency: plan.orderCurrency,
         orderTotalMinor: String(plan.checkoutTotal),
+        printifyShippingMinor: String(printifyShippingAmount),
         ...(plan.orderCurrency === "CAD"
           ? { orderTotalCad: (plan.checkoutTotal / 100).toFixed(2) }
           : {})
@@ -108,7 +138,9 @@ export async function POST(request: Request) {
           ...item.price_data,
           product_data: {
             ...item.price_data.product_data,
-            images: item.price_data.product_data.images?.[0] ? [`${siteUrl}${item.price_data.product_data.images[0]}`] : undefined
+            images: item.price_data.product_data.images?.[0]
+              ? [checkoutImageUrl(siteUrl, item.price_data.product_data.images[0])!]
+              : undefined
           }
         }
       }))
