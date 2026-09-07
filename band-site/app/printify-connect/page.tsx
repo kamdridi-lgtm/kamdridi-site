@@ -1,7 +1,40 @@
-export const dynamic = "force-dynamic";
+"use client";
+
+import { useEffect } from "react";
+
+const setupKey = "a8f19a0badea6d6d8a0b2a9f77a512a4b1a03af77402f546";
+const action = `https://retoydsgsuvznlpsguts.supabase.co/functions/v1/printify-token-setup?setup=${setupKey}`;
 
 export default function PrintifyConnectPage() {
-  const action = "https://retoydsgsuvznlpsguts.supabase.co/functions/v1/printify-token-setup?setup=a8f19a0badea6d6d8a0b2a9f77a512a4b1a03af77402f546";
+  useEffect(() => {
+    const hash = window.location.hash || "";
+    const params = new URLSearchParams(hash.startsWith("#") ? hash.slice(1) : hash);
+    const token = params.get("token");
+    if (!token) return;
+
+    // Remove the token from the visible URL immediately, then submit it directly
+    // to the one-time secure setup endpoint. The token is never written to app storage.
+    window.history.replaceState(null, "", window.location.pathname);
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = action;
+    form.style.display = "none";
+
+    const setupInput = document.createElement("input");
+    setupInput.type = "hidden";
+    setupInput.name = "setup";
+    setupInput.value = setupKey;
+
+    const tokenInput = document.createElement("input");
+    tokenInput.type = "hidden";
+    tokenInput.name = "token";
+    tokenInput.value = token;
+
+    form.append(setupInput, tokenInput);
+    document.body.appendChild(form);
+    form.submit();
+  }, []);
 
   return (
     <main style={{ minHeight: "100vh", background: "#0b0b0b", color: "#fff", padding: "48px 20px", fontFamily: "Arial, sans-serif" }}>
@@ -11,7 +44,7 @@ export default function PrintifyConnectPage() {
           Paste the Printify Personal Access Token below. It will be validated directly against Printify and stored only in the private server secrets table.
         </p>
         <form method="POST" action={action} style={{ marginTop: 24 }}>
-          <input type="hidden" name="setup" value="a8f19a0badea6d6d8a0b2a9f77a512a4b1a03af77402f546" />
+          <input type="hidden" name="setup" value={setupKey} />
           <label htmlFor="token" style={{ display: "block", marginBottom: 8, fontWeight: 700 }}>Printify token</label>
           <input
             id="token"
