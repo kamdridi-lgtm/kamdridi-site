@@ -4,6 +4,9 @@ import { siteMeta } from "@/data/site";
 import type { RawCheckoutItem } from "@/data/commerce-products";
 import { buildUnifiedCheckoutPlan, getUnifiedCommerceProducts } from "@/lib/unified-commerce";
 
+const PRINTIFY_VALIDATE_URL =
+  "https://retoydsgsuvznlpsguts.supabase.co/functions/v1/commerce-printify-validate";
+
 function sanitizeMetadataValue(value: string | undefined) {
   return (value || "").replace(/[|\r\n]/g, " ").slice(0, 120);
 }
@@ -58,12 +61,54 @@ export async function POST(request: Request) {
       );
     }
 
-    const containsPrintify = plan.resolvedItems.some(
+    const printifyItems = plan.resolvedItems.filter(
       (item) => item.product.fulfillmentMode === "printify"
     );
-    const printifyQuantity = plan.resolvedItems
-      .filter((item) => item.product.fulfillmentMode === "printify")
-      .reduce((sum, item) => sum + Number(item.quantity || 0), 0);
+    const containsPrintify = printifyItems.length > 0;
+    const printifyQuantity = printifyItems.reduce(
+      (sum, item) => sum + Number(item.quantity || 0),
+      0
+    );
+
+    // Fail closed if a selected Printify size/color disappeared after the page loaded.
+    if (containsPrintify) {
+      try {
+        const validateResponse = await fetch(PRINTIFY_VALIDATE_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Origin: "https://kamdridi.com"
+          },
+          cache: "no-store",
+          body: JSON.stringify({
+            items: printifyItems.map((item) => ({
+              productId: item.product.id,
+              color: item.color || null,
+              size: item.size || null
+            }))
+          })
+        });
+        const validation = await validateResponse.json().catch(() => ({}));
+        if (!validateResponse.ok || validation?.ok !== true) {
+          const first = Array.isArray(validation?.unavailable) ? validation.unavailable[0] : null;
+          console.warn("[Checkout] Printify live validation blocked checkout", validation);
+          return NextResponse.json(
+            {
+              error: first?.reason === "supplier_mapping_not_ready"
+                ? "This merchandise item is temporarily unavailable while its production mapping is refreshed."
+                : "One of the selected merchandise variants is no longer available. Please choose another size or color and try again."
+            },
+            { status: 409 }
+          );
+        }
+      } catch (err) {
+        console.error("[Checkout] Printify live validation unavailable", err);
+        return NextResponse.json(
+          { error: "We could not verify live merchandise availability. Checkout has been paused to prevent an unfulfillable order. Please try again shortly." },
+          { status: 503 }
+        );
+      }
+    }
 
     const submitMessage = containsPrintify
       ? "Print-on-demand merchandise: your paid order is routed to production automatically. Tracking will follow when the supplier ships it."
@@ -86,8 +131,8 @@ export async function POST(request: Request) {
       ])
     );
 
-    // Temporary conservative tracked-shipping amount for Printify merchandise.
-    // The order router keeps the supplier order separate so live rate lookup can replace this later.
+    // Conservative tracked-shipping amount for Printify merchandise.
+    // Exact supplier shipping is resolved at fulfillment; this prevents under-collection while keeping checkout simple.
     const printifyShippingAmount = printifyQuantity > 0
       ? 1995 + Math.max(0, printifyQuantity - 1) * 995
       : 0;
