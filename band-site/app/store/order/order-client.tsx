@@ -115,8 +115,13 @@ export function OrderClient() {
   }, [orderUrl, attempt]);
 
   const hasMadeToOrder = Boolean(payload?.items?.some((item) => item.fulfillment_mode === "made_to_order"));
+  const hasPrintify = Boolean(payload?.items?.some((item) => item.fulfillment_mode === "printify"));
   const hasManualDigital = Boolean(payload?.items?.some((item) => item.fulfillment_mode === "digital_manual"));
-  const madeToOrderTasks = (payload?.fulfillment_tasks || []).filter((task) => task.task_type === "made_to_order_production");
+  const physicalTasks = (payload?.fulfillment_tasks || []).filter((task) =>
+    task.task_type === "made_to_order_production" ||
+    task.task_type === "physical_fulfillment" ||
+    task.provider === "printify"
+  );
 
   const download = (entitlementId: string) => {
     if (!sessionId) return;
@@ -129,7 +134,7 @@ export function OrderClient() {
         <p className="text-xs font-bold uppercase tracking-[0.34em] text-[#f4c66a]">Secure Order</p>
         <h1 className="mt-4 font-display text-4xl uppercase tracking-[0.06em] md:text-6xl">Payment received</h1>
         <p className="mt-5 max-w-3xl text-sm leading-7 text-stone-300">
-          Thank you for buying directly from KAM DRIDI. This page is tied to your Stripe checkout session. A confirmation message is sent to the email used at checkout with your purchased items, delivery instructions, and included artwork when available.
+          Thank you for buying directly from KAM DRIDI. This page is tied to your Stripe checkout session. A confirmation message is sent to the email used at checkout with your purchased items and delivery information.
         </p>
 
         {hasManualDigital && (
@@ -137,6 +142,15 @@ export function OrderClient() {
             <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f4c66a]">Digital purchase confirmed</p>
             <p className="mt-2 text-sm leading-7 text-stone-200">
               Your digital purchase is confirmed. Keep your Stripe receipt. When a private-vault download is active it appears here; otherwise secure delivery is sent to the email entered at checkout.
+            </p>
+          </div>
+        )}
+
+        {hasPrintify && (
+          <div className="mt-7 rounded-2xl border border-[#f4c66a]/30 bg-[#f4c66a]/[0.07] p-5">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f4c66a]">Print-on-demand order confirmed</p>
+            <p className="mt-2 text-sm leading-7 text-stone-200">
+              Your paid merchandise order is routed to Printify automatically. Production and shipment status will appear below, and tracking is emailed when the carrier receives the package.
             </p>
           </div>
         )}
@@ -162,12 +176,12 @@ export function OrderClient() {
           </div>
         )}
 
-        {madeToOrderTasks.length > 0 && (
+        {physicalTasks.length > 0 && (
           <section className="mt-10 rounded-[28px] border border-[#f4c66a]/20 bg-[#f4c66a]/[0.03] p-6 sm:p-8">
             <p className="text-xs font-black uppercase tracking-[0.25em] text-[#f4c66a]">Production tracking</p>
             <h2 className="mt-3 font-display text-3xl uppercase tracking-[0.06em]">Your order journey</h2>
             <div className="mt-8 grid gap-6">
-              {madeToOrderTasks.map((task) => {
+              {physicalTasks.map((task) => {
                 const current = stageIndex(task.customer_stage);
                 return (
                   <article key={task.id} className="rounded-2xl border border-white/10 bg-black/35 p-5">
@@ -212,6 +226,7 @@ export function OrderClient() {
                       <h3 className="text-lg font-semibold text-white">{item.product_name}</h3>
                       <p className="mt-2 text-xs uppercase tracking-[0.2em] text-stone-500">{[item.color, item.size, item.format].filter(Boolean).join(" · ") || "Standard edition"}</p>
                       {item.fulfillment_mode === "made_to_order" && <p className="mt-3 text-xs font-bold uppercase tracking-[0.16em] text-[#f4c66a]">Production queued · made to order</p>}
+                      {item.fulfillment_mode === "printify" && <p className="mt-3 text-xs font-bold uppercase tracking-[0.16em] text-[#f4c66a]">Printify · automatic production routing</p>}
                     </div>
                     <span className="text-sm text-[#f4c66a]">Qty {item.quantity}</span>
                   </div>
