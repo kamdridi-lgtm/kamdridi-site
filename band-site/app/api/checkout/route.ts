@@ -58,11 +58,20 @@ export async function POST(request: Request) {
       );
     }
 
-    const submitMessage = plan.containsMadeToOrder
-      ? "Made-to-order item(s): production begins after payment. Please allow several weeks for production and delivery."
-      : plan.containsPreorder
-        ? "This order includes pre-order items. Production and fulfillment details are shown on the corresponding product pages."
-        : "Official KAMDRIDI order.";
+    const containsPrintify = plan.resolvedItems.some(
+      (item) => item.product.fulfillmentMode === "printify"
+    );
+    const printifyQuantity = plan.resolvedItems
+      .filter((item) => item.product.fulfillmentMode === "printify")
+      .reduce((sum, item) => sum + Number(item.quantity || 0), 0);
+
+    const submitMessage = containsPrintify
+      ? "Print-on-demand merchandise: your paid order is routed to production automatically. Tracking will follow when the supplier ships it."
+      : plan.containsMadeToOrder
+        ? "Made-to-order item(s): production begins after payment. Please allow several weeks for production and delivery."
+        : plan.containsPreorder
+          ? "This order includes pre-order items. Production and fulfillment details are shown on the corresponding product pages."
+          : "Official KAMDRIDI order.";
 
     const itemMetadata = Object.fromEntries(
       plan.resolvedItems.slice(0, 20).map((item, index) => [
@@ -77,14 +86,10 @@ export async function POST(request: Request) {
       ])
     );
 
-    const aopQuantity = plan.resolvedItems
-      .filter((item) => item.product.id === "our-lost-dreams-live-tee")
-      .reduce((sum, item) => sum + Number(item.quantity || 0), 0);
-
-    // The current Printify AOP supplier quotes shipping separately from production.
-    // Use a conservative flat CAD shipping charge until live Printify rate lookup is enabled.
-    const printifyShippingAmount = aopQuantity > 0
-      ? 1995 + Math.max(0, aopQuantity - 1) * 995
+    // Temporary conservative tracked-shipping amount for Printify merchandise.
+    // The order router keeps the supplier order separate so live rate lookup can replace this later.
+    const printifyShippingAmount = printifyQuantity > 0
+      ? 1995 + Math.max(0, printifyQuantity - 1) * 995
       : 0;
 
     const session = await stripe.checkout.sessions.create({
@@ -95,12 +100,12 @@ export async function POST(request: Request) {
       shipping_address_collection: plan.requiresShipping ? {
         allowed_countries: ["US", "CA", "GB", "FR", "DE", "AU"]
       } : undefined,
-      shipping_options: aopQuantity > 0 && plan.orderCurrency === "CAD" ? [
+      shipping_options: printifyQuantity > 0 && plan.orderCurrency === "CAD" ? [
         {
           shipping_rate_data: {
             type: "fixed_amount",
             fixed_amount: { amount: printifyShippingAmount, currency: "cad" },
-            display_name: "Printify standard tracked shipping",
+            display_name: "Tracked print-on-demand shipping",
             delivery_estimate: {
               minimum: { unit: "business_day", value: 5 },
               maximum: { unit: "business_day", value: 15 }
