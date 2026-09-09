@@ -12,6 +12,10 @@ const archiveFrames = [
   { id: "07", title: "Mirror / Backstage", position: "100% 100%" },
 ];
 
+function cleanBase64(value: string) {
+  return value.replace(/[^A-Za-z0-9+/=]/g, "");
+}
+
 export default function GalleryPage() {
   const [coverSrc, setCoverSrc] = useState("");
   const [spriteSrc, setSpriteSrc] = useState("");
@@ -29,14 +33,11 @@ export default function GalleryPage() {
         return response.text();
       }),
     ])
-      .then(([coverText, spriteModule]) => {
+      .then(([coverText, spriteText]) => {
         if (!active) return;
-        setCoverSrc(`data:image/jpeg;base64,${coverText.trim()}`);
-        const spriteBase64 = spriteModule
-          .trim()
-          .replace(/^export default\s+"/, "")
-          .replace(/";?$/, "");
-        setSpriteSrc(`data:image/jpeg;base64,${spriteBase64}`);
+        setCoverSrc(`data:image/jpeg;base64,${cleanBase64(coverText)}`);
+        const spritePayload = spriteText.replace(/^\s*export default\s+"/, "");
+        setSpriteSrc(`data:image/jpeg;base64,${cleanBase64(spritePayload)}`);
       })
       .catch(() => {
         if (!active) return;
