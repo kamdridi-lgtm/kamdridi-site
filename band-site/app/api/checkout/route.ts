@@ -62,7 +62,7 @@ export async function POST(request: Request) {
     }
 
     const printifyItems = plan.resolvedItems.filter(
-      (item) => item.product.fulfillmentMode === "printify"
+      (item) => (item.product.fulfillmentMode as string) === "printify"
     );
     const containsPrintify = printifyItems.length > 0;
     const printifyQuantity = printifyItems.reduce(
