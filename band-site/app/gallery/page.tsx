@@ -12,9 +12,6 @@ const archiveFrames = [
   { id: "07", title: "Mirror / Backstage", position: "100% 100%" },
 ];
 
-const spriteSource =
-  "https://raw.githubusercontent.com/kamdridi-lgtm/kamdridi-site/main/band-site/data/history-gallery/chunk1.ts";
-
 export default function GalleryPage() {
   const [coverSrc, setCoverSrc] = useState("");
   const [spriteSrc, setSpriteSrc] = useState("");
@@ -27,7 +24,7 @@ export default function GalleryPage() {
         if (!response.ok) throw new Error("Gallery cover unavailable");
         return response.text();
       }),
-      fetch(spriteSource).then((response) => {
+      fetch("/assets/images/gallery/history/sprite.txt").then((response) => {
         if (!response.ok) throw new Error("Gallery archive unavailable");
         return response.text();
       }),
