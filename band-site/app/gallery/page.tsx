@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import historySpriteBase64 from "@/data/history-gallery/chunk1";
 
 const archiveFrames = [
   { id: "02", title: "Drums", position: "0% 0%" },
@@ -13,26 +12,41 @@ const archiveFrames = [
   { id: "07", title: "Mirror / Backstage", position: "100% 100%" },
 ];
 
+const spriteSource =
+  "https://raw.githubusercontent.com/kamdridi-lgtm/kamdridi-site/main/band-site/data/history-gallery/chunk1.ts";
+
 export default function GalleryPage() {
-  const [coverSrc, setCoverSrc] = useState<string>("");
-  const spriteSrc = useMemo(
-    () => `data:image/jpeg;base64,${historySpriteBase64}`,
-    []
-  );
+  const [coverSrc, setCoverSrc] = useState("");
+  const [spriteSrc, setSpriteSrc] = useState("");
 
   useEffect(() => {
     let active = true;
-    fetch("/assets/images/gallery/history/cover.jpg.b64")
-      .then((response) => {
+
+    Promise.all([
+      fetch("/assets/images/gallery/history/cover.jpg.b64").then((response) => {
         if (!response.ok) throw new Error("Gallery cover unavailable");
         return response.text();
-      })
-      .then((text) => {
-        if (active) setCoverSrc(`data:image/jpeg;base64,${text.trim()}`);
+      }),
+      fetch(spriteSource).then((response) => {
+        if (!response.ok) throw new Error("Gallery archive unavailable");
+        return response.text();
+      }),
+    ])
+      .then(([coverText, spriteModule]) => {
+        if (!active) return;
+        setCoverSrc(`data:image/jpeg;base64,${coverText.trim()}`);
+        const spriteBase64 = spriteModule
+          .trim()
+          .replace(/^export default\s+"/, "")
+          .replace(/";?$/, "");
+        setSpriteSrc(`data:image/jpeg;base64,${spriteBase64}`);
       })
       .catch(() => {
-        if (active) setCoverSrc("");
+        if (!active) return;
+        setCoverSrc("");
+        setSpriteSrc("");
       });
+
     return () => {
       active = false;
     };
@@ -70,14 +84,13 @@ export default function GalleryPage() {
       <section id="gallery-grid" className="mx-auto max-w-7xl px-5 pb-24 md:px-8">
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           <article className="overflow-hidden rounded-[28px] border border-[#f4c66a]/30 bg-[#0b0b0b] lg:row-span-2">
-            <div className="relative min-h-[560px] h-full bg-black">
-              {coverSrc ? (
-                <img
-                  src={coverSrc}
-                  alt="Live from Tangier, Morocco Festival"
-                  className="absolute inset-0 h-full w-full object-contain"
-                />
-              ) : (
+            <div
+              className="relative min-h-[560px] h-full bg-black bg-contain bg-center bg-no-repeat"
+              style={coverSrc ? { backgroundImage: `url(${coverSrc})` } : undefined}
+              role="img"
+              aria-label="Live from Tangier, Morocco Festival"
+            >
+              {!coverSrc && (
                 <div className="absolute inset-0 grid place-items-center text-xs uppercase tracking-[0.25em] text-stone-600">
                   Loading 01
                 </div>
@@ -85,7 +98,7 @@ export default function GalleryPage() {
             </div>
             <div className="border-t border-white/10 p-5">
               <p className="text-xs uppercase tracking-[0.35em] text-[#f4c66a]">01 — Live</p>
-              <h2 className="mt-2 text-lg uppercase tracking-[0.08em] text-white">Tangier, Morocco Festival</h2>
+              <h2 className="mt-2 text-lg uppercase tracking-[0.08em] text-white">Live from Tangier, Morocco Festival</h2>
             </div>
           </article>
 
@@ -96,11 +109,15 @@ export default function GalleryPage() {
             >
               <div
                 className="aspect-square w-full bg-black bg-no-repeat"
-                style={{
-                  backgroundImage: `url(${spriteSrc})`,
-                  backgroundSize: "200% 300%",
-                  backgroundPosition: frame.position,
-                }}
+                style={
+                  spriteSrc
+                    ? {
+                        backgroundImage: `url(${spriteSrc})`,
+                        backgroundSize: "200% 300%",
+                        backgroundPosition: frame.position,
+                      }
+                    : undefined
+                }
                 role="img"
                 aria-label={frame.title}
               />
