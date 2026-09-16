@@ -3,8 +3,33 @@ import { getCommerceProductBySlug } from "@/data/commerce-products";
 
 const CATALOG_URL = "https://retoydsgsuvznlps.supabase.co/functions/v1/commerce-catalog";
 
-const DIRECT_EXCAVATION_SLUG = "official-tee-picture";
+const DIRECT_EXCAVATION_SLUG = "echoes-unearthed-excavation-tee";
 const DIRECT_WORDMARK_SLUG = "echoes-unearthed-wordmark-tee";
+
+const EXCAVATION_TEE: CommerceProduct = {
+  id: "echoes-unearthed-excavation-tee",
+  slug: DIRECT_EXCAVATION_SLUG,
+  name: "ECHOES UNEARTHED / EXCAVATION TEE",
+  subtitle: "ECHOES UNEARTHED",
+  project: "ECHOES UNEARTHED",
+  projectSlug: "echoes-unearthed",
+  category: "Apparel",
+  description: "Official ECHOES UNEARTHED Excavation T-Shirt. Made to order with the excavation artwork and KAM DRIDI identity.",
+  images: ["/store/merch/official-tee-picture.png"],
+  priceCents: 5200,
+  currency: "CAD",
+  saleMode: "buy_now",
+  visible: true,
+  checkoutEnabled: true,
+  fulfillmentMode: "printful",
+  requiresShipping: true,
+  productPath: `/store/${DIRECT_EXCAVATION_SLUG}`,
+  releasePath: "/store",
+  badge: "Echoes Capsule",
+  fulfillmentNote: "Made to order after payment. Please allow several weeks for production and delivery.",
+  colors: ["Black", "White"],
+  sizes: ["S", "M", "L", "XL", "XXL"]
+};
 
 type RemoteProduct = {
   id: string;
@@ -69,7 +94,7 @@ function normalizeRemoteProduct(product: RemoteProduct): CommerceProduct | null 
 
 export async function getUnifiedCommerceProducts(): Promise<CommerceProduct[]> {
   const localDirectProducts = [
-    getCommerceProductBySlug(DIRECT_EXCAVATION_SLUG),
+    EXCAVATION_TEE,
     getCommerceProductBySlug(DIRECT_WORDMARK_SLUG)
   ].filter((product): product is CommerceProduct => Boolean(product));
 
@@ -86,9 +111,6 @@ export async function getUnifiedCommerceProducts(): Promise<CommerceProduct[]> {
       .map(normalizeRemoteProduct)
       .filter((product): product is CommerceProduct => Boolean(product));
 
-    // These two direct merch routes are canonical products in the checked-in
-    // commerce catalog. Keep them alive if the remote catalog row is stale or
-    // temporarily missing, without changing the behavior of other products.
     for (const localProduct of localDirectProducts) {
       if (!products.some((product) => product.slug === localProduct.slug)) {
         products.push(localProduct);
@@ -97,8 +119,6 @@ export async function getUnifiedCommerceProducts(): Promise<CommerceProduct[]> {
 
     return products;
   } catch (error) {
-    // Fail open only for explicitly verified direct merch products. All other
-    // commerce remains fail-closed so stale local pricing cannot affect checkout.
     if (localDirectProducts.length > 0) return localDirectProducts;
     throw error;
   }
@@ -177,9 +197,7 @@ export function buildUnifiedCheckoutPlan(rawItems: RawCheckoutItem[], products: 
     };
   });
 
-  if (currencies.size > 1) {
-    throw new Error("MIXED_CURRENCY");
-  }
+  if (currencies.size > 1) throw new Error("MIXED_CURRENCY");
   const orderCurrency = Array.from(currencies)[0] || "CAD";
 
   return {
