@@ -4,7 +4,27 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
-const CATALOG_URL = "https://retoydsgsuvznlpsguts.supabase.co/functions/v1/commerce-catalog";
+const CATALOG_URL = "https://retoydsgsuvznlps.supabase.co/functions/v1/commerce-catalog";
+
+// Safety fallback for the Instagram-linked Excavation Tee. The product is already
+// defined in the canonical commerce catalog; this prevents a stale/missing remote
+// catalog row from turning a valid public product URL into a dead page.
+const EXCAVATION_FALLBACK = {
+  id: "official-tee-picture",
+  slug: "official-tee-picture",
+  name: "Echoes Unearthed Excavation Tee",
+  subtitle: "ECHOES UNEARTHED",
+  description: "Collector apparel variant pairing excavation artwork on black with a reverse wordmark.",
+  images: ["/store/merch/official-tee-picture.png"],
+  price_cents: 5200,
+  currency: "CAD",
+  sale_mode: "buy_now",
+  visible: true,
+  checkout_enabled: true,
+  fulfillment_mode: "printful",
+  colors: ["Black", "White"],
+  sizes: ["S", "M", "L", "XL", "XXL"]
+};
 
 type Product = {
   id: string;
@@ -51,11 +71,24 @@ export default function DirectMerchProductPage() {
         const payload = await response.json();
         const products = Array.isArray(payload?.products) ? (payload.products as Product[]) : [];
         const match = products.find((item) => item.visible && item.slug === slug);
-        if (!match) throw new Error("This product could not be found.");
+        if (!match) {
+          if (slug === EXCAVATION_FALLBACK.slug) {
+            if (!cancelled) setProduct(EXCAVATION_FALLBACK);
+            return;
+          }
+          throw new Error("This product could not be found.");
+        }
         if (!cancelled) setProduct(match);
       })
       .catch((err: unknown) => {
-        if (!cancelled) setError(err instanceof Error ? err.message : "Unable to load this product.");
+        if (!cancelled) {
+          if (slug === EXCAVATION_FALLBACK.slug) {
+            setProduct(EXCAVATION_FALLBACK);
+            setError(null);
+          } else {
+            setError(err instanceof Error ? err.message : "Unable to load this product.");
+          }
+        }
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
