@@ -6,8 +6,9 @@ import { useEffect, useMemo, useState } from "react";
 import { getCommerceProductBySlug } from "@/data/commerce-products";
 
 const CATALOG_URL = "https://retoydsgsuvznlps.supabase.co/functions/v1/commerce-catalog";
+const EXCAVATION_SLUG = "echoes-unearthed-excavation-tee";
 
-type Product = {
+ type Product = {
   id: string;
   slug: string;
   name: string;
@@ -24,11 +25,29 @@ type Product = {
   sizes?: readonly string[] | null;
 };
 
+const EXCAVATION_TEE: Product = {
+  id: EXCAVATION_SLUG,
+  slug: EXCAVATION_SLUG,
+  name: "ECHOES UNEARTHED / EXCAVATION TEE",
+  subtitle: "ECHOES UNEARTHED",
+  description: "Official ECHOES UNEARTHED Excavation T-Shirt. Made to order with the excavation artwork and KAM DRIDI identity.",
+  images: ["/store/merch/official-tee-picture.png"],
+  price_cents: 5200,
+  currency: "CAD",
+  sale_mode: "buy_now",
+  visible: true,
+  checkout_enabled: true,
+  fulfillment_mode: "printful",
+  colors: ["Black", "White"],
+  sizes: ["S", "M", "L", "XL", "XXL"]
+};
+
 function money(cents: number, currency = "CAD") {
   return new Intl.NumberFormat("en-CA", { style: "currency", currency: currency.toUpperCase() }).format(cents / 100);
 }
 
 function localProduct(slug: string): Product | null {
+  if (slug === EXCAVATION_SLUG) return EXCAVATION_TEE;
   const item = getCommerceProductBySlug(slug);
   if (!item || !item.visible) return null;
   return {
