@@ -6,9 +6,9 @@ import { useEffect, useMemo, useState } from "react";
 
 const CATALOG_URL = "https://retoydsgsuvznlps.supabase.co/functions/v1/commerce-catalog";
 
-// Safety fallback for the Instagram-linked Excavation Tee. The product is already
-// defined in the canonical commerce catalog; this prevents a stale/missing remote
-// catalog row from turning a valid public product URL into a dead page.
+// Safety fallbacks for direct Instagram-linked merch pages. The products are
+// already defined in the canonical commerce catalog; these prevent a stale or
+// missing remote catalog row from turning a valid public product URL into a dead page.
 const EXCAVATION_FALLBACK = {
   id: "official-tee-picture",
   slug: "official-tee-picture",
@@ -16,6 +16,23 @@ const EXCAVATION_FALLBACK = {
   subtitle: "ECHOES UNEARTHED",
   description: "Collector apparel variant pairing excavation artwork on black with a reverse wordmark.",
   images: ["/store/merch/official-tee-picture.png"],
+  price_cents: 5200,
+  currency: "CAD",
+  sale_mode: "buy_now",
+  visible: true,
+  checkout_enabled: true,
+  fulfillment_mode: "printful",
+  colors: ["Black", "White"],
+  sizes: ["S", "M", "L", "XL", "XXL"]
+};
+
+const WORDMARK_FALLBACK = {
+  id: "echoes-unearthed-wordmark-tee",
+  slug: "echoes-unearthed-wordmark-tee",
+  name: "KAM DRIDI / Echoes Unearthed Wordmark Tee",
+  subtitle: "ECHOES UNEARTHED",
+  description: "Clean front-print wordmark tee pairing the KAM DRIDI mark with the Echoes Unearthed title.",
+  images: ["/store/merch/echoes-wordmark-tee-duo.png"],
   price_cents: 5200,
   currency: "CAD",
   sale_mode: "buy_now",
@@ -50,6 +67,12 @@ function money(cents: number, currency = "CAD") {
   }).format(cents / 100);
 }
 
+function getFallback(slug: string): Product | null {
+  if (slug === EXCAVATION_FALLBACK.slug) return EXCAVATION_FALLBACK;
+  if (slug === WORDMARK_FALLBACK.slug) return WORDMARK_FALLBACK;
+  return null;
+}
+
 export default function DirectMerchProductPage() {
   const params = useParams<{ slug: string }>();
   const slug = decodeURIComponent(String(params?.slug || ""));
@@ -72,8 +95,9 @@ export default function DirectMerchProductPage() {
         const products = Array.isArray(payload?.products) ? (payload.products as Product[]) : [];
         const match = products.find((item) => item.visible && item.slug === slug);
         if (!match) {
-          if (slug === EXCAVATION_FALLBACK.slug) {
-            if (!cancelled) setProduct(EXCAVATION_FALLBACK);
+          const fallback = getFallback(slug);
+          if (fallback) {
+            if (!cancelled) setProduct(fallback);
             return;
           }
           throw new Error("This product could not be found.");
@@ -82,8 +106,9 @@ export default function DirectMerchProductPage() {
       })
       .catch((err: unknown) => {
         if (!cancelled) {
-          if (slug === EXCAVATION_FALLBACK.slug) {
-            setProduct(EXCAVATION_FALLBACK);
+          const fallback = getFallback(slug);
+          if (fallback) {
+            setProduct(fallback);
             setError(null);
           } else {
             setError(err instanceof Error ? err.message : "Unable to load this product.");
