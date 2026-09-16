@@ -1,9 +1,10 @@
 import type { CommerceProduct, RawCheckoutItem, ResolvedCheckoutItem } from "@/data/commerce-products";
 import { getCommerceProductBySlug } from "@/data/commerce-products";
 
-const CATALOG_URL = "https://retoydsgsuvznlpsguts.supabase.co/functions/v1/commerce-catalog";
+const CATALOG_URL = "https://retoydsgsuvznlps.supabase.co/functions/v1/commerce-catalog";
 
 const DIRECT_EXCAVATION_SLUG = "official-tee-picture";
+const DIRECT_WORDMARK_SLUG = "echoes-unearthed-wordmark-tee";
 
 type RemoteProduct = {
   id: string;
@@ -67,7 +68,10 @@ function normalizeRemoteProduct(product: RemoteProduct): CommerceProduct | null 
 }
 
 export async function getUnifiedCommerceProducts(): Promise<CommerceProduct[]> {
-  const localExcavation = getCommerceProductBySlug(DIRECT_EXCAVATION_SLUG);
+  const localDirectProducts = [
+    getCommerceProductBySlug(DIRECT_EXCAVATION_SLUG),
+    getCommerceProductBySlug(DIRECT_WORDMARK_SLUG)
+  ].filter((product): product is CommerceProduct => Boolean(product));
 
   try {
     const response = await fetch(CATALOG_URL, {
@@ -82,18 +86,20 @@ export async function getUnifiedCommerceProducts(): Promise<CommerceProduct[]> {
       .map(normalizeRemoteProduct)
       .filter((product): product is CommerceProduct => Boolean(product));
 
-    // The Excavation Tee is an active canonical local product and is the public
-    // product linked by the Instagram campaign. Keep that direct route alive even
-    // if the remote catalog row is stale/missing, without changing other products.
-    if (localExcavation && !products.some((product) => product.slug === DIRECT_EXCAVATION_SLUG)) {
-      products.push(localExcavation);
+    // These two direct merch routes are canonical products in the checked-in
+    // commerce catalog. Keep them alive if the remote catalog row is stale or
+    // temporarily missing, without changing the behavior of other products.
+    for (const localProduct of localDirectProducts) {
+      if (!products.some((product) => product.slug === localProduct.slug)) {
+        products.push(localProduct);
+      }
     }
 
     return products;
   } catch (error) {
-    // Fail open only for this explicitly verified direct product. All other
+    // Fail open only for explicitly verified direct merch products. All other
     // commerce remains fail-closed so stale local pricing cannot affect checkout.
-    if (localExcavation) return [localExcavation];
+    if (localDirectProducts.length > 0) return localDirectProducts;
     throw error;
   }
 }
