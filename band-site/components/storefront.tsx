@@ -11,6 +11,31 @@ import { getVisibleCommerceProducts, CommerceProduct } from "@/data/commerce-pro
 const REMOTE_CATALOG_URL =
   "https://retoydsgsuvznlpsguts.supabase.co/functions/v1/commerce-catalog";
 
+const EXCAVATION_TEE: CommerceProduct = {
+  id: "echoes-unearthed-excavation-tee",
+  slug: "echoes-unearthed-excavation-tee",
+  name: "ECHOES UNEARTHED / EXCAVATION TEE",
+  subtitle: "ECHOES UNEARTHED",
+  project: "ECHOES UNEARTHED",
+  projectSlug: "echoes-unearthed",
+  category: "Apparel",
+  description: "Official ECHOES UNEARTHED Excavation T-Shirt. Made to order with the excavation artwork and KAM DRIDI identity.",
+  images: ["/store/merch/official-tee-picture.png"],
+  priceCents: 5200,
+  currency: "CAD",
+  saleMode: "buy_now",
+  visible: true,
+  checkoutEnabled: true,
+  fulfillmentMode: "printful",
+  requiresShipping: true,
+  productPath: "/store/echoes-unearthed-excavation-tee",
+  releasePath: "/store",
+  badge: "Echoes Capsule",
+  fulfillmentNote: "Made to order after payment. Please allow several weeks for production and delivery.",
+  colors: ["Black", "White"],
+  sizes: ["S", "M", "L", "XL", "XXL"]
+};
+
 type RemoteProduct = {
   id: string;
   slug: string;
@@ -83,7 +108,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
     message: string;
     tone: "success" | "warning" | "error";
   } | null>(null);
-  const [allProducts, setAllProducts] = useState<CommerceProduct[]>(() => getVisibleCommerceProducts());
+  const [allProducts, setAllProducts] = useState<CommerceProduct[]>(() => [EXCAVATION_TEE, ...getVisibleCommerceProducts()]);
   const [activeFilter, setActiveFilter] = useState<string>("ALL");
   const [selectedSizes, setSelectedSizes] = useState<Record<string, string | undefined>>({});
   const [selectedColors, setSelectedColors] = useState<Record<string, string | undefined>>({});
@@ -102,7 +127,12 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
         const normalized = (payload.products as RemoteProduct[])
           .filter((product) => product.visible && product.currency === "CAD")
           .map(normalizeRemoteProduct);
-        if (!cancelled && normalized.length > 0) setAllProducts(normalized);
+        if (!cancelled && normalized.length > 0) {
+          const bySlug = new Map<string, CommerceProduct>();
+          for (const product of normalized) bySlug.set(product.slug, product);
+          bySlug.set(EXCAVATION_TEE.slug, EXCAVATION_TEE);
+          setAllProducts(Array.from(bySlug.values()));
+        }
       })
       .catch(() => {
         // Keep the checked-in catalog as a resilient fallback.
