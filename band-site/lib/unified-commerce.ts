@@ -1,6 +1,9 @@
 import type { CommerceProduct, RawCheckoutItem, ResolvedCheckoutItem } from "@/data/commerce-products";
+import { getCommerceProductBySlug } from "@/data/commerce-products";
 
 const CATALOG_URL = "https://retoydsgsuvznlpsguts.supabase.co/functions/v1/commerce-catalog";
+
+const DIRECT_EXCAVATION_SLUG = "official-tee-picture";
 
 type RemoteProduct = {
   id: string;
@@ -64,16 +67,35 @@ function normalizeRemoteProduct(product: RemoteProduct): CommerceProduct | null 
 }
 
 export async function getUnifiedCommerceProducts(): Promise<CommerceProduct[]> {
-  const response = await fetch(CATALOG_URL, {
-    cache: "no-store",
-    headers: { accept: "application/json" }
-  });
-  if (!response.ok) throw new Error("UNIFIED_CATALOG_UNAVAILABLE");
-  const payload = await response.json();
-  if (!Array.isArray(payload?.products)) throw new Error("UNIFIED_CATALOG_INVALID");
-  return (payload.products as RemoteProduct[])
-    .map(normalizeRemoteProduct)
-    .filter((product): product is CommerceProduct => Boolean(product));
+  const localExcavation = getCommerceProductBySlug(DIRECT_EXCAVATION_SLUG);
+
+  try {
+    const response = await fetch(CATALOG_URL, {
+      cache: "no-store",
+      headers: { accept: "application/json" }
+    });
+    if (!response.ok) throw new Error("UNIFIED_CATALOG_UNAVAILABLE");
+    const payload = await response.json();
+    if (!Array.isArray(payload?.products)) throw new Error("UNIFIED_CATALOG_INVALID");
+
+    const products = (payload.products as RemoteProduct[])
+      .map(normalizeRemoteProduct)
+      .filter((product): product is CommerceProduct => Boolean(product));
+
+    // The Excavation Tee is an active canonical local product and is the public
+    // product linked by the Instagram campaign. Keep that direct route alive even
+    // if the remote catalog row is stale/missing, without changing other products.
+    if (localExcavation && !products.some((product) => product.slug === DIRECT_EXCAVATION_SLUG)) {
+      products.push(localExcavation);
+    }
+
+    return products;
+  } catch (error) {
+    // Fail open only for this explicitly verified direct product. All other
+    // commerce remains fail-closed so stale local pricing cannot affect checkout.
+    if (localExcavation) return [localExcavation];
+    throw error;
+  }
 }
 
 function resolveVariant(value: string | undefined, allowed: readonly string[] | undefined, errorCode: string) {
