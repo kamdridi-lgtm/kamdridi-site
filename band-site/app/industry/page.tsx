@@ -33,7 +33,7 @@ export default function IndustryPage() {
       "@type": "MusicRecording",
       name: "OUR LOST DREAMS",
       duration: "PT4M55S",
-      isrcCode: "QZZ7M2627618",
+      isrcCode: "QZZ7M2627617",
       byArtist: { "@type": "MusicGroup", name: "KAM DRIDI" },
       inAlbum: { "@type": "MusicAlbum", name: "Echoes Unearthed" },
       url: "https://kamdridi.com/our-lost-dreams"
@@ -63,7 +63,7 @@ export default function IndustryPage() {
           <div className="mt-5 grid gap-2 text-sm text-stone-300 md:grid-cols-2">
             <p>Artist: KAM DRIDI</p><p>Album: Echoes Unearthed</p>
             <p>Genre: Cinematic Melodic Hard Rock</p><p>Duration: 4:55</p>
-            <p>ISRC: QZZ7M2627618</p><p>Origin: Montreal, Canada</p>
+            <p>ISRC: QZZ7M2627617</p><p>Origin: Montreal, Canada</p>
           </div>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link href="/our-lost-dreams" className="rounded-full bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.16em]">Open radio/media page</Link>

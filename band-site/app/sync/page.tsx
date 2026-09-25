@@ -17,7 +17,7 @@ export default function SyncPage() {
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           <section className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-7">
             <h2 className="text-2xl font-black uppercase">Primary track</h2>
-            <p className="mt-4 text-stone-300">OUR LOST DREAMS · 4:55 · ISRC QZZ7M2627618 · Echoes Unearthed.</p>
+            <p className="mt-4 text-stone-300">OUR LOST DREAMS · 4:55 · ISRC QZZ7M2627617 · Echoes Unearthed.</p>
             <Link href="/our-lost-dreams" className="mt-6 inline-flex rounded-full bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.16em]">Open track package</Link>
           </section>
           <section className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-7">
