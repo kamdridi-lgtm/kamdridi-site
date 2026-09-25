@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { discoveryAudiences, discoveryMarkets, discoveryRouteCount } from "@/data/discovery";
+import { discoveryAudiences, discoveryMarkets, discoveryRegions, discoveryRouteCount } from "@/data/discovery";
 
 export const metadata: Metadata = {
   title: "KAM DRIDI Professional Discovery Network",
@@ -40,6 +40,21 @@ export default function DiscoverIndexPage() {
             </div>
           </article>
         ))}
+      </section>
+
+      <section className="mx-auto mt-12 max-w-6xl">
+        <h2 className="text-2xl font-black uppercase tracking-[0.05em]">Regional hubs</h2>
+        <div className="mt-6 flex flex-wrap gap-2">
+          {discoveryRegions.map((region) => (
+            <Link
+              key={region.slug}
+              href={`/discover/region/${region.slug}`}
+              className="rounded-full border border-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-stone-200 hover:border-red-500/50"
+            >
+              {region.name}
+            </Link>
+          ))}
+        </div>
       </section>
 
       <section className="mx-auto mt-12 max-w-6xl rounded-[2rem] border border-red-900/35 bg-black/40 p-6 md:p-9">
