@@ -99,9 +99,9 @@ export type AlbumEntry = {
 export const siteMeta = {
   bandName: "KAMDRIDI",
   albumName: "Echoes Unearthed",
-  tagline: "Heavy, cinematic, and unearthed from dust, steel, and long-form atmosphere.",
+  tagline: "Melodic hard rock with cinematic scale, emotional songwriting, and a visual world built from dust, steel, and memory.",
   description:
-    "Official cinematic artist website for KAMDRIDI featuring Echoes Unearthed music, visual album content, games, memberships, merchandise, and fan-universe access.",
+    "Official website for KAM DRIDI, a Montreal-based independent Melodic Hard Rock / Cinematic Melodic Hard Rock artist, featuring music, live booking, radio, sync licensing, press, visuals, merchandise, and professional industry access.",
   heroVideo:
     "https://cdn.coverr.co/videos/coverr-stage-lights-1565701223930?download=1080p",
   email: "contact@kamdridi.com",
@@ -109,14 +109,18 @@ export const siteMeta = {
   keywords: [
     "KAMDRIDI",
     "Echoes Unearthed",
-    "cinematic metal",
-    "visual album",
-    "interactive music experience",
-    "The Gilded Null",
-    "artist website",
-    "music merch store",
-    "tour dates",
-    "fan club"
+    "melodic hard rock",
+    "cinematic melodic hard rock",
+    "KAM DRIDI Montreal",
+    "OUR LOST DREAMS",
+    "WAR MACHINES",
+    "Echoes Unearthed",
+    "radio airplay",
+    "music licensing",
+    "sync licensing",
+    "festival booking",
+    "artist EPK",
+    "independent rock artist"
   ]
 };
 

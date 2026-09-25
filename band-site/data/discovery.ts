@@ -12,6 +12,7 @@ export type DiscoveryMarket = {
   name: string;
   region: string;
   priorityTrack: "our-lost-dreams" | "war-machines";
+  marketContext?: string;
 };
 
 export const discoveryAudiences: DiscoveryAudience[] = [
@@ -77,7 +78,23 @@ export const discoveryMarkets: DiscoveryMarket[] = [
   { slug: "greece", name: "Greece", region: "Europe", priorityTrack: "our-lost-dreams" },
   { slug: "india", name: "India", region: "Asia", priorityTrack: "our-lost-dreams" },
   { slug: "philippines", name: "Philippines", region: "Asia", priorityTrack: "our-lost-dreams" },
-  { slug: "taiwan", name: "Taiwan", region: "Asia", priorityTrack: "our-lost-dreams" }
+  { slug: "taiwan", name: "Taiwan", region: "Asia", priorityTrack: "our-lost-dreams" },
+  { slug: "sweden", name: "Sweden", region: "Europe", priorityTrack: "our-lost-dreams", marketContext: "Nordic rock, specialist radio, press, festival and sync discovery." },
+  { slug: "norway", name: "Norway", region: "Europe", priorityTrack: "our-lost-dreams", marketContext: "Nordic rock, live-booking, press and licensing discovery." },
+  { slug: "denmark", name: "Denmark", region: "Europe", priorityTrack: "our-lost-dreams", marketContext: "Nordic music-industry, radio, festival and media discovery." },
+  { slug: "finland", name: "Finland", region: "Europe", priorityTrack: "our-lost-dreams", marketContext: "Rock-focused radio, media, festival and professional music discovery." },
+  { slug: "poland", name: "Poland", region: "Europe", priorityTrack: "our-lost-dreams", marketContext: "Rock radio, festival, press and international artist discovery." },
+  { slug: "portugal", name: "Portugal", region: "Europe", priorityTrack: "our-lost-dreams", marketContext: "Radio, music press, festivals and sync licensing discovery." },
+  { slug: "ireland", name: "Ireland", region: "Europe", priorityTrack: "our-lost-dreams", marketContext: "Independent radio, rock media, festivals and booking discovery." },
+  { slug: "south-korea", name: "South Korea", region: "Asia", priorityTrack: "our-lost-dreams", marketContext: "International rock, media, sync and live-show discovery." },
+  { slug: "singapore", name: "Singapore", region: "Asia", priorityTrack: "our-lost-dreams", marketContext: "Regional media, sync, festival and international music discovery." },
+  { slug: "thailand", name: "Thailand", region: "Asia", priorityTrack: "our-lost-dreams", marketContext: "Radio, media, live and international music discovery." },
+  { slug: "indonesia", name: "Indonesia", region: "Asia", priorityTrack: "our-lost-dreams", marketContext: "Rock media, radio, festival and digital music discovery." },
+  { slug: "argentina", name: "Argentina", region: "South America", priorityTrack: "our-lost-dreams", marketContext: "Rock radio, music press, festivals and booking discovery." },
+  { slug: "chile", name: "Chile", region: "South America", priorityTrack: "our-lost-dreams", marketContext: "Rock media, festival, radio and international artist discovery." },
+  { slug: "colombia", name: "Colombia", region: "South America", priorityTrack: "our-lost-dreams", marketContext: "Radio, music media, festival and sync discovery." },
+  { slug: "tunisia", name: "Tunisia", region: "Africa", priorityTrack: "our-lost-dreams", marketContext: "Festival, cultural programming, media and international artist discovery." },
+  { slug: "united-arab-emirates", name: "United Arab Emirates", region: "Middle East", priorityTrack: "our-lost-dreams", marketContext: "Music supervision, branded media, events and international artist discovery." }
 ];
 
 export const discoveryRouteCount = discoveryAudiences.length * discoveryMarkets.length;
