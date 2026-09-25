@@ -186,6 +186,14 @@ export const navigation: NavItem[] = [
     ]
   },
   {
+    label: "Live",
+    href: "/live",
+    children: [
+      { label: "Adelaide Fringe 2027", href: "/live" },
+      { label: "Tour Dates", href: "/tour#dates" }
+    ]
+  },
+  {
     label: "Store",
     href: "/store",
     children: [
@@ -402,40 +410,13 @@ export const albumTimeline: AlbumEntry[] = [
 
 export const tourDates: TourDate[] = [
   {
-    city: "Toronto, ON",
-    venue: "The Danforth Music Hall",
-    date: "2026-05-08",
-    ticketLink: `mailto:${siteMeta.email}?subject=KAMDRIDI%20Toronto%20Ticket%20Request`,
-    actionLabel: "Request Tickets",
-    vip: "Early entry + signed poster",
-    status: "Tickets on request"
-  },
-  {
-    city: "Montreal, QC",
-    venue: "MTELUS",
-    date: "2026-05-14",
-    ticketLink: `mailto:${siteMeta.email}?subject=KAMDRIDI%20Montreal%20Ticket%20Request`,
-    actionLabel: "Request Tickets",
-    vip: "Q&A + exclusive merch pack",
-    status: "Tickets on request"
-  },
-  {
-    city: "Los Angeles, CA",
-    venue: "The Fonda Theatre",
-    date: "2026-05-24",
-    ticketLink: `mailto:${siteMeta.email}?subject=KAMDRIDI%20Los%20Angeles%20Ticket%20Request`,
-    actionLabel: "Request Access",
-    vip: "Backstage photo + laminate",
-    status: "Priority requests"
-  },
-  {
-    city: "Paris, FR",
-    venue: "L'Olympia",
-    date: "2026-06-12",
-    ticketLink: `mailto:${siteMeta.email}?subject=KAMDRIDI%20Paris%20VIP%20Request`,
-    actionLabel: "Join Waitlist",
-    vip: "Acoustic preview + early merch access",
-    status: "VIP Waitlist"
+    city: "Adelaide, SA",
+    venue: "Domain Theatre · Marion Cultural Centre",
+    date: "2027-03-18",
+    ticketLink: "https://adelaidefringe.com.au/",
+    actionLabel: "Official Ticketing",
+    vip: "No VIP package announced",
+    status: "Public ticket on-sale: 4 December 2026"
   }
 ];
 
