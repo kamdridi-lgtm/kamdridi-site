@@ -59,7 +59,7 @@ export const metadata: Metadata = {
         url: "/assets/images/gallery/p04_portrait_leather.jpg",
         width: 1200,
         height: 1200,
-        alt: "KAM DRIDI — Montreal cinematic hard rock artist"
+        alt: "KAM DRIDI — Montreal melodic hard rock artist"
       },
       {
         url: "/assets/images/releases/echoes-unearthed-cover.jpg",
@@ -91,7 +91,7 @@ const artistStructuredData = {
   image: `${siteUrl}/assets/images/gallery/p04_portrait_leather.jpg`,
   logo: `${siteUrl}/assets/images/kamdridi-pwa-icon.png`,
   description: siteMeta.description,
-  genre: ["Cinematic Rock", "Hard Rock", "Industrial Rock"],
+  genre: ["Melodic Hard Rock", "Cinematic Melodic Hard Rock"],
   foundingLocation: {
     "@type": "Place",
     name: "Montreal, Quebec, Canada"
