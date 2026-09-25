@@ -79,6 +79,9 @@ export default async function DiscoveryMarketPage({ params }: PageProps) {
           KAM DRIDI · {market.name}
         </h1>
         <p className="mt-6 max-w-4xl text-lg leading-8 text-stone-300">{audience.description}</p>
+        {market.marketContext ? (
+          <p className="mt-3 max-w-4xl text-sm leading-7 text-stone-400">{market.marketContext}</p>
+        ) : null}
       </section>
 
       <section className="mx-auto mt-12 grid max-w-6xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
