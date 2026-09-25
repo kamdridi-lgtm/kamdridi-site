@@ -69,7 +69,7 @@ export default async function DiscoveryMarketPage({ params }: PageProps) {
       <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/assets/images/discovery-hero-official.webp')" }}
+          style={{ backgroundImage: "url('/assets/images/discovery-hero-official.png')" }}
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.84)_0%,rgba(0,0,0,0.58)_48%,rgba(0,0,0,0.36)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.18)_0%,rgba(0,0,0,0.28)_45%,rgba(0,0,0,0.72)_100%)]" />
