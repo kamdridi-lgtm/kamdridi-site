@@ -146,7 +146,7 @@ export function getPriorityTrack(market: DiscoveryMarket) {
     description: "Primary international radio, media and professional outreach track outside Japan.",
     href: "/our-lost-dreams",
     album: "Echoes Unearthed",
-    isrc: "QZZ7M2627618",
+    isrc: "QZZ7M2627617",
     duration: "4:55"
   };
 }
