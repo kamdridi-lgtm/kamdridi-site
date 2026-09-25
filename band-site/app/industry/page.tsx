@@ -12,6 +12,7 @@ const cards = [
   ["Sync Licensing", "/sync", "Music licensing for film, TV, trailers, games and advertising."],
   ["Festival Booking", "/festival-booking", "Live availability, artist positioning and booking materials."],
   ["Press / EPK", "/press", "Official biography, assets, music and professional contact."],
+  ["Discovery Network", "/discover", "Market-specific professional routes for radio, sync, festivals and press."],
 ];
 
 export default function IndustryPage() {

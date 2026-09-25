@@ -196,17 +196,19 @@ export const navigation: NavItem[] = [
       { label: "KAMDRIDI Records", href: "/label" },
       { label: "Roster", href: "/roster" },
       { label: "Releases", href: "/releases" },
-      { label: "Submit Music", href: "/submit" },
+      { label: "Industry Hub", href: "/industry" },
       { label: "IRON COUNTY GHOSTS", href: "/iron-county-ghosts" },
     ]
   },
   {
-    label: "Submit",
-    href: "/submit",
+    label: "Industry",
+    href: "/industry",
     children: [
-      { label: "Artist Submissions", href: "/submit" },
-      { label: "Label Packages", href: "/label" },
-      { label: "Licensing Inquiry", href: "mailto:kamdridi@proton.me?subject=Licensing Inquiry - KAMDRIDI RECORDS" }
+      { label: "Industry Hub", href: "/industry" },
+      { label: "Radio", href: "/radio" },
+      { label: "Sync Licensing", href: "/sync" },
+      { label: "Festival Booking", href: "/festival-booking" },
+      { label: "Discovery Network", href: "/discover" }
     ]
   },
   {
@@ -215,7 +217,7 @@ export const navigation: NavItem[] = [
     children: [
       { label: "KAM DRIDI", href: "/" },
       { label: "IRON COUNTY GHOSTS", href: "/iron-county-ghosts" },
-      { label: "Submit Music", href: "/submit" }
+      { label: "Industry Hub", href: "/industry" }
     ]
   },
   {
@@ -225,7 +227,7 @@ export const navigation: NavItem[] = [
       { label: "Dust on the Altar", href: "/iron-county-ghosts/music" },
       { label: "War Machines", href: "/music" },
       { label: "Salieri's Hands", href: "/releases/salieris-hands" },
-      { label: "Submit Music", href: "/submit" }
+      { label: "Press / EPK", href: "/press" }
     ]
   },
   {
