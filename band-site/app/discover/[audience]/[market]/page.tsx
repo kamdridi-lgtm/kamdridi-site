@@ -65,7 +65,16 @@ export default async function DiscoveryMarketPage({ params }: PageProps) {
   };
 
   return (
-    <main className="min-h-screen bg-[#050505] px-5 py-20 text-white">
+    <main className="relative min-h-screen overflow-hidden bg-[#050505] px-5 py-20 text-white">
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/assets/images/discovery-hero-official.webp')" }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.84)_0%,rgba(0,0,0,0.58)_48%,rgba(0,0,0,0.36)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.18)_0%,rgba(0,0,0,0.28)_45%,rgba(0,0,0,0.72)_100%)]" />
+      </div>
+      <div className="relative z-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -85,7 +94,7 @@ export default async function DiscoveryMarketPage({ params }: PageProps) {
       </section>
 
       <section className="mx-auto mt-12 grid max-w-6xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <article className="rounded-[2rem] border border-red-900/40 bg-[radial-gradient(circle_at_15%_0%,rgba(220,38,38,0.10),transparent_34%),rgba(10,8,8,0.86)] p-6 md:p-9">
+        <article className="rounded-[2rem] border border-red-900/50 bg-[radial-gradient(circle_at_15%_0%,rgba(220,38,38,0.12),transparent_34%),rgba(8,6,6,0.72)] p-6 shadow-2xl backdrop-blur-[3px] md:p-9">
           <p className="text-xs font-black uppercase tracking-[0.28em] text-red-500">Priority music</p>
           <h2 className="mt-4 text-4xl font-black uppercase tracking-[0.05em]">{track.title}</h2>
           <p className="mt-4 text-sm leading-7 text-stone-300">{track.description}</p>
@@ -103,7 +112,7 @@ export default async function DiscoveryMarketPage({ params }: PageProps) {
           </div>
         </article>
 
-        <aside className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-6 md:p-9">
+        <aside className="rounded-[2rem] border border-white/15 bg-black/60 p-6 shadow-2xl backdrop-blur-[3px] md:p-9">
           <p className="text-xs font-black uppercase tracking-[0.28em] text-red-500">Professional review checklist</p>
           <ul className="mt-5 space-y-3 text-sm leading-7 text-stone-300">
             {audience.needs.map((need) => (
@@ -116,7 +125,7 @@ export default async function DiscoveryMarketPage({ params }: PageProps) {
         </aside>
       </section>
 
-      <section className="mx-auto mt-12 max-w-6xl rounded-[2rem] border border-white/10 bg-black/35 p-6 md:p-9">
+      <section className="mx-auto mt-12 max-w-6xl rounded-[2rem] border border-white/10 bg-black/55 p-6 backdrop-blur-[2px] md:p-9">
         <p className="text-sm leading-7 text-stone-300">
           This page is an official KAM DRIDI professional discovery route for {audience.label.toLowerCase()} review in {market.name}.
           It is designed to make verified artist, music and contact information easier for professional search systems and human buyers to interpret.
@@ -126,6 +135,7 @@ export default async function DiscoveryMarketPage({ params }: PageProps) {
           <Link href="/industry" className="rounded-full border border-white/10 px-5 py-2 text-xs font-bold uppercase tracking-[0.14em] text-stone-200 hover:border-red-500/40">Industry hub</Link>
         </div>
       </section>
+      </div>
     </main>
   );
 }
