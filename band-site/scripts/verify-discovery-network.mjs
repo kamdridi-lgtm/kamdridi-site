@@ -24,7 +24,7 @@ const audienceMatches = [...discovery.matchAll(/slug:\s*"(radio|sync|festivals|p
 const markets = marketMatches.map((m) => ({ slug: m[1], name: m[2], region: m[3], priorityTrack: m[4] }));
 const audienceSlugs = [...new Set(audienceMatches.map((m) => m[1]))];
 
-if (markets.length < 40) throw new Error(`Expected at least 40 markets, found ${markets.length}`);
+if (markets.length < 64) throw new Error(`Expected at least 64 markets, found ${markets.length}`);
 if (audienceSlugs.length !== 4) throw new Error(`Expected 4 discovery audiences, found ${audienceSlugs.length}`);
 
 const marketSlugs = markets.map((m) => m.slug);
@@ -44,6 +44,7 @@ if (nonJapanWarMachines.length) {
 const expectedRoutes = markets.length * audienceSlugs.length;
 if (!discovery.includes("discoveryRoutes")) throw new Error("discoveryRoutes export missing");
 if (!sitemap.includes("...discoveryRoutes")) throw new Error("Discovery routes are not published in sitemap");
+if (!sitemap.includes("...discoveryRegionRoutes")) throw new Error("Regional discovery hubs are not published in sitemap");
 if (!sitemap.includes('"/discover"')) throw new Error("/discover index missing from sitemap");
 
 if (!discovery.includes("QZZ7M2627618")) throw new Error("OUR LOST DREAMS ISRC missing or changed");
