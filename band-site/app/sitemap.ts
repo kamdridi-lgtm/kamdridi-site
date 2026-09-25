@@ -10,6 +10,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     "/",
+    "/industry",
+    "/radio",
+    "/sync",
+    "/festival-booking",
+    "/press",
+    "/our-lost-dreams",
     "/music",
     "/media",
     "/news",
@@ -22,8 +28,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/visual-album",
     "/who-is-kam-dridi",
     "/australia",
+    "/app/war-machines-jp",
     "/label",
-    "/label/apply",
     "/label/ai-artists",
     "/label/ai-artists/iron-county-ghosts",
     "/iron-county-ghosts",
@@ -37,12 +43,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: route === "/" ? "weekly" : "monthly",
+    changeFrequency:
+      route === "/" || route === "/industry" || route === "/radio" || route === "/sync" || route === "/festival-booking"
+        ? "weekly"
+        : "monthly",
     priority:
       route === "/"
         ? 1
-        : route === "/music" || route === "/band" || route === "/media"
-          ? 0.9
-          : 0.7
+        : ["/industry", "/radio", "/sync", "/festival-booking", "/press", "/our-lost-dreams"].includes(route)
+          ? 0.95
+          : route === "/music" || route === "/band" || route === "/media"
+            ? 0.9
+            : 0.7
   }));
 }
