@@ -66,13 +66,21 @@ export default async function DiscoveryMarketPage({ params }: PageProps) {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#050505] px-5 py-20 text-white">
-      <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0">
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute -inset-8 scale-110 bg-cover bg-top bg-no-repeat opacity-30 blur-[3px]"
           style={{ backgroundImage: "url('/assets/images/discovery-hero-official.png')" }}
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.84)_0%,rgba(0,0,0,0.58)_48%,rgba(0,0,0,0.36)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.18)_0%,rgba(0,0,0,0.28)_45%,rgba(0,0,0,0.72)_100%)]" />
+        <div
+          className="absolute inset-0 bg-no-repeat"
+          style={{
+            backgroundImage: "url('/assets/images/discovery-hero-official.png')",
+            backgroundSize: "auto 118vh",
+            backgroundPosition: "right 170px"
+          }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.90)_0%,rgba(0,0,0,0.68)_40%,rgba(0,0,0,0.28)_72%,rgba(0,0,0,0.14)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.12)_0%,rgba(0,0,0,0.16)_48%,rgba(0,0,0,0.68)_100%)]" />
       </div>
       <div className="relative z-10">
       <script
