@@ -47,7 +47,7 @@ if (!sitemap.includes("...discoveryRoutes")) throw new Error("Discovery routes a
 if (!sitemap.includes("...discoveryRegionRoutes")) throw new Error("Regional discovery hubs are not published in sitemap");
 if (!sitemap.includes('"/discover"')) throw new Error("/discover index missing from sitemap");
 
-if (!discovery.includes("QZZ7M2627618")) throw new Error("OUR LOST DREAMS ISRC missing or changed");
+if (!discovery.includes("QZZ7M2627617")) throw new Error("OUR LOST DREAMS ISRC missing or changed");
 if (!discovery.includes('duration: "4:55"')) throw new Error("OUR LOST DREAMS duration missing or changed");
 
 for (const value of ["Melodic Hard Rock", "Cinematic Melodic Hard Rock"]) {
