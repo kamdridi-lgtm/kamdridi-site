@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteMeta } from "@/data/site";
+import { discoveryRoutes } from "@/data/discovery";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   let baseUrl = process.env.NEXT_PUBLIC_SITE_URL || siteMeta.domain;
@@ -11,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "/",
     "/industry",
+    "/discover",
     "/radio",
     "/sync",
     "/festival-booking",
@@ -37,23 +39,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/iron-county-ghosts/lyrics",
     "/iron-county-ghosts/photos",
     "/iron-county-ghosts/epk",
-    "/iron-county-ghosts/contact"
+    "/iron-county-ghosts/contact",
+    ...discoveryRoutes
   ];
 
   return routes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency:
-      route === "/" || route === "/industry" || route === "/radio" || route === "/sync" || route === "/festival-booking"
+      route === "/" ||
+      route === "/industry" ||
+      route === "/discover" ||
+      route === "/radio" ||
+      route === "/sync" ||
+      route === "/festival-booking" ||
+      route.startsWith("/discover/")
         ? "weekly"
         : "monthly",
     priority:
       route === "/"
         ? 1
-        : ["/industry", "/radio", "/sync", "/festival-booking", "/press", "/our-lost-dreams"].includes(route)
+        : ["/industry", "/discover", "/radio", "/sync", "/festival-booking", "/press", "/our-lost-dreams"].includes(route)
           ? 0.95
-          : route === "/music" || route === "/band" || route === "/media"
-            ? 0.9
-            : 0.7
+          : route.startsWith("/discover/")
+            ? 0.86
+            : route === "/music" || route === "/band" || route === "/media"
+              ? 0.9
+              : 0.7
   }));
 }
