@@ -149,8 +149,17 @@ export default function DirectMerchProductPage() {
         )}
         {product && (
           <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
-            <div className="overflow-hidden rounded-[30px] border border-white/10 bg-black">
-              {product.images?.[0] ? <img src={product.images[0]} alt={product.name} className="aspect-square h-full w-full object-cover" /> : <div className="aspect-square bg-white/[0.03]" />}
+            <div className="overflow-hidden rounded-[30px] border border-white/10 bg-[#4a4a4a]">
+              {product.images?.[0] ? (
+                product.id === "printify-6a9f26d0f7e35632ab03cadb" && product.images.length >= 2 ? (
+                  <div className="grid aspect-square grid-cols-2 items-center gap-2 bg-[#555] p-3 sm:gap-3 sm:p-4">
+                    <img src={product.images[0]} alt={`${product.name} — front`} className="h-full w-full object-contain" />
+                    <img src={product.images[1]} alt={`${product.name} — back`} className="h-full w-full object-contain" />
+                  </div>
+                ) : (
+                  <img src={product.images[0]} alt={product.name} className="aspect-square h-full w-full object-cover" />
+                )
+              ) : <div className="aspect-square bg-white/[0.03]" />}
             </div>
             <section>
               <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#f4c66a]">Buy direct</p>
