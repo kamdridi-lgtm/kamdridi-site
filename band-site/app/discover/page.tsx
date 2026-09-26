@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { discoveryAudiences, discoveryMarkets, discoveryRegions, discoveryRouteCount } from "@/data/discovery";
+import { discoveryAudiences, discoveryMarkets, discoveryRegions, discoveryRouteCount, discoveryTrackHubs } from "@/data/discovery";
 
 export const metadata: Metadata = {
   title: "KAM DRIDI Professional Discovery Network",
@@ -19,6 +19,23 @@ export default function DiscoverIndexPage() {
           A structured professional access layer for radio programmers, music supervisors, festival buyers and media professionals.
           The network currently publishes {discoveryRouteCount} focused market routes from one verified data source.
         </p>
+      </section>
+
+      <section className="mx-auto mt-12 max-w-6xl">
+        <h2 className="text-2xl font-black uppercase tracking-[0.05em]">Priority tracks</h2>
+        <div className="mt-6 grid gap-5 md:grid-cols-2">
+          {discoveryTrackHubs.map((track) => (
+            <Link
+              key={track.slug}
+              href={`/discover/track/${track.slug}`}
+              className="rounded-[2rem] border border-red-900/35 bg-black/45 p-6 transition hover:border-red-500/50 md:p-8"
+            >
+              <p className="text-xs font-black uppercase tracking-[0.28em] text-red-500">{track.subtitle}</p>
+              <h3 className="mt-4 text-3xl font-black uppercase tracking-[0.05em]">{track.title}</h3>
+              <p className="mt-4 text-sm leading-7 text-stone-300">{track.description}</p>
+            </Link>
+          ))}
+        </div>
       </section>
 
       <section className="mx-auto mt-12 grid max-w-6xl gap-5 md:grid-cols-2">
