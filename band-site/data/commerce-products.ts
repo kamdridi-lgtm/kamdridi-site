@@ -36,6 +36,35 @@ export type CommerceProduct = {
 };
 
 export const commerceProducts: CommerceProduct[] = [
+
+  // KAMDRIDI CORE — direct Instagram merch route.
+  // Canonical supplier/fulfillment data remains in Supabase; this local entry is the
+  // resilient product-page fallback so a temporary catalog fetch failure never
+  // turns the direct product URL into "Product unavailable".
+  {
+    id: "printify-6a9f26d0f7e35632ab03cadb",
+    slug: "kamdrin-band-logo-roof-trio-graphic-tee-rock-band-t-shirt",
+    name: "KAM DRIDI — COMIC BOOK TEE",
+    subtitle: "OFFICIAL KAM DRIDI MERCH",
+    project: "KAMDRIDI CORE",
+    projectSlug: "kamdridi-core",
+    category: "Apparel",
+    description: "Official KAM DRIDI Comic Book Tee with the roof-trio front artwork and retro comic composition on the back.",
+    images: ["/store/merch/comic-book-tee.png"],
+    priceCents: 6160,
+    currency: "CAD",
+    saleMode: "buy_now",
+    visible: true,
+    checkoutEnabled: true,
+    fulfillmentMode: "made_to_order",
+    requiresShipping: true,
+    colors: ["White", "Black"],
+    sizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
+    fulfillmentNote: "Printed on demand and fulfilled after confirmed payment.",
+    productPath: "/store/kamdrin-band-logo-roof-trio-graphic-tee-rock-band-t-shirt",
+    releasePath: "/store"
+  },
+
   // ==========================================
   // 17 FOR EVER — AUSTRALIA 2027
   // 12-inch black vinyl supplier basis: Kunaki US$36/unit, MOQ 1; shipping excluded.
