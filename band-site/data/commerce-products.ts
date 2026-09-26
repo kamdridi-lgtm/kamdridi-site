@@ -50,7 +50,7 @@ export const commerceProducts: CommerceProduct[] = [
     projectSlug: "kamdridi-core",
     category: "Apparel",
     description: "Official KAM DRIDI Comic Book Tee with the roof-trio front artwork and retro comic composition on the back.",
-    images: ["/store/merch/comic-book-tee-front-back.jpg"],
+    images: ["https://raw.githubusercontent.com/kamdridi-lgtm/kamdridi-site/main/band-site/public/store/merch/comic-book-tee-front-back.jpg"],
     priceCents: 6160,
     currency: "CAD",
     saleMode: "buy_now",
