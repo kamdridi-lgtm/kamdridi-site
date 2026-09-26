@@ -50,7 +50,10 @@ export const commerceProducts: CommerceProduct[] = [
     projectSlug: "kamdridi-core",
     category: "Apparel",
     description: "Official KAM DRIDI Comic Book Tee with the roof-trio front artwork and retro comic composition on the back.",
-    images: ["https://raw.githubusercontent.com/kamdridi-lgtm/kamdridi-site/main/band-site/public/store/merch/comic-book-tee-front-back.jpg"],
+    images: [
+      "https://images-api.printify.com/mockup/6a9f26d0f7e35632ab03cadb/103548/100285/kamdrin-band-logo-roof-trio-graphic-tee-rock-band-t-shirt.jpg?camera_label=front",
+      "https://images-api.printify.com/mockup/6a9f26d0f7e35632ab03cadb/103548/100286/kamdrin-band-logo-roof-trio-graphic-tee-rock-band-t-shirt.jpg?camera_label=back"
+    ],
     priceCents: 6160,
     currency: "CAD",
     saleMode: "buy_now",
