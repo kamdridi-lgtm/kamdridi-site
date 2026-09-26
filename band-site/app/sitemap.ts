@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteMeta } from "@/data/site";
-import { discoveryRegionRoutes, discoveryRoutes } from "@/data/discovery";
+import { discoveryRegionRoutes, discoveryRoutes, discoveryTrackRoutes } from "@/data/discovery";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   let baseUrl = process.env.NEXT_PUBLIC_SITE_URL || siteMeta.domain;
@@ -41,6 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/iron-county-ghosts/epk",
     "/iron-county-ghosts/contact",
     ...discoveryRegionRoutes,
+    ...discoveryTrackRoutes,
     ...discoveryRoutes
   ];
 
