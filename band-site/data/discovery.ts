@@ -118,7 +118,23 @@ export const discoveryMarkets: DiscoveryMarket[] = [
   { slug: "costa-rica", name: "Costa Rica", region: "North America", priorityTrack: "our-lost-dreams", marketContext: "Radio, festivals, music press and international artist discovery." },
   { slug: "puerto-rico", name: "Puerto Rico", region: "North America", priorityTrack: "our-lost-dreams", marketContext: "Radio, media, live booking and sync discovery." },
   { slug: "iceland", name: "Iceland", region: "Europe", priorityTrack: "our-lost-dreams", marketContext: "Independent music, showcase, press and sync discovery." },
-  { slug: "luxembourg", name: "Luxembourg", region: "Europe", priorityTrack: "our-lost-dreams", marketContext: "Cross-border radio, media, festival and music-industry discovery." }
+  { slug: "luxembourg", name: "Luxembourg", region: "Europe", priorityTrack: "our-lost-dreams", marketContext: "Cross-border radio, media, festival and music-industry discovery." },
+  { slug: "china", name: "China", region: "Asia", priorityTrack: "our-lost-dreams", marketContext: "International music media, sync, brand and live-event discovery." },
+  { slug: "saudi-arabia", name: "Saudi Arabia", region: "Middle East", priorityTrack: "our-lost-dreams", marketContext: "Live events, branded entertainment, sync and international music discovery." },
+  { slug: "qatar", name: "Qatar", region: "Middle East", priorityTrack: "our-lost-dreams", marketContext: "Events, media, hospitality, sync and international artist discovery." },
+  { slug: "bahrain", name: "Bahrain", region: "Middle East", priorityTrack: "our-lost-dreams", marketContext: "Regional events, media, hospitality and music-industry discovery." },
+  { slug: "kuwait", name: "Kuwait", region: "Middle East", priorityTrack: "our-lost-dreams", marketContext: "Media, events, branded entertainment and international music discovery." },
+  { slug: "jordan", name: "Jordan", region: "Middle East", priorityTrack: "our-lost-dreams", marketContext: "Festival, media, cultural programming and international artist discovery." },
+  { slug: "lebanon", name: "Lebanon", region: "Middle East", priorityTrack: "our-lost-dreams", marketContext: "Rock media, radio, live events and international artist discovery." },
+  { slug: "georgia", name: "Georgia", region: "Europe", priorityTrack: "our-lost-dreams", marketContext: "Festival, live music, media and international artist discovery." },
+  { slug: "armenia", name: "Armenia", region: "Europe", priorityTrack: "our-lost-dreams", marketContext: "Media, live music, cultural programming and international artist discovery." },
+  { slug: "kazakhstan", name: "Kazakhstan", region: "Asia", priorityTrack: "our-lost-dreams", marketContext: "International music media, radio, events and sync discovery." },
+  { slug: "ukraine", name: "Ukraine", region: "Europe", priorityTrack: "our-lost-dreams", marketContext: "Rock media, radio, festivals and independent music discovery." },
+  { slug: "malta", name: "Malta", region: "Europe", priorityTrack: "our-lost-dreams", marketContext: "Radio, festivals, media and international artist discovery." },
+  { slug: "cyprus", name: "Cyprus", region: "Europe", priorityTrack: "our-lost-dreams", marketContext: "Live events, radio, media and international music discovery." },
+  { slug: "panama", name: "Panama", region: "North America", priorityTrack: "our-lost-dreams", marketContext: "Radio, media, events and international artist discovery." },
+  { slug: "dominican-republic", name: "Dominican Republic", region: "North America", priorityTrack: "our-lost-dreams", marketContext: "Radio, entertainment media, events and international music discovery." },
+  { slug: "ecuador", name: "Ecuador", region: "South America", priorityTrack: "our-lost-dreams", marketContext: "Radio, press, festivals and international artist discovery." }
 ];
 
 export const discoveryRouteCount = discoveryAudiences.length * discoveryMarkets.length;
@@ -170,3 +186,35 @@ export function getMarketsForRegion(regionName: string) {
 }
 
 export const discoveryRegionRoutes = discoveryRegions.map((region) => `/discover/region/${region.slug}`);
+
+
+export const discoveryTrackHubs = [
+  {
+    slug: "our-lost-dreams",
+    title: "OUR LOST DREAMS",
+    subtitle: "International priority track",
+    album: "Echoes Unearthed",
+    isrc: "QZZ7M2627617",
+    duration: "4:55",
+    genre: "Cinematic Melodic Hard Rock",
+    description: "Primary KAM DRIDI track for international radio, press, sync and professional discovery outside Japan.",
+    href: "/our-lost-dreams",
+    markets: discoveryMarkets.filter((market) => market.slug !== "japan")
+  },
+  {
+    slug: "war-machines",
+    title: "WAR MACHINES",
+    subtitle: "Japan priority track",
+    album: "Echoes Unearthed",
+    genre: "Cinematic Melodic Hard Rock",
+    description: "Primary KAM DRIDI track for the Japan-focused campaign, including physical-release, media, retail and professional discovery.",
+    href: "/app/war-machines-jp",
+    markets: discoveryMarkets.filter((market) => market.slug === "japan")
+  }
+];
+
+export function getDiscoveryTrackHub(slug: string) {
+  return discoveryTrackHubs.find((track) => track.slug === slug);
+}
+
+export const discoveryTrackRoutes = discoveryTrackHubs.map((track) => `/discover/track/${track.slug}`);
