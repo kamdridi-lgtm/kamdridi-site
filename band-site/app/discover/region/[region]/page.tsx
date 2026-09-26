@@ -36,7 +36,24 @@ export default async function RegionDiscoveryPage({ params }: PageProps) {
   const markets = getMarketsForRegion(region.name);
 
   return (
-    <main className="min-h-screen bg-[#050505] px-5 py-20 text-white">
+    <main className="relative min-h-screen overflow-hidden bg-[#050505] px-5 py-20 text-white">
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+        <div
+          className="absolute -inset-8 scale-110 bg-cover bg-top bg-no-repeat opacity-25 blur-[3px]"
+          style={{ backgroundImage: "url('/assets/images/discovery-hero-official.png')" }}
+        />
+        <div
+          className="absolute inset-0 bg-no-repeat"
+          style={{
+            backgroundImage: "url('/assets/images/discovery-hero-official.png')",
+            backgroundSize: "auto 118vh",
+            backgroundPosition: "right 170px"
+          }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.72)_42%,rgba(0,0,0,0.36)_72%,rgba(0,0,0,0.18)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.14)_0%,rgba(0,0,0,0.22)_48%,rgba(0,0,0,0.74)_100%)]" />
+      </div>
+      <div className="relative z-10">
       <section className="mx-auto max-w-6xl">
         <p className="text-xs font-black uppercase tracking-[0.34em] text-red-500">
           Regional professional discovery
@@ -54,7 +71,7 @@ export default async function RegionDiscoveryPage({ params }: PageProps) {
         <h2 className="text-2xl font-black uppercase tracking-[0.05em]">Markets</h2>
         <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {markets.map((market) => (
-            <article key={market.slug} className="rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-5">
+            <article key={market.slug} className="rounded-[1.5rem] border border-white/10 bg-black/60 backdrop-blur-[3px] p-5">
               <h3 className="text-xl font-black uppercase tracking-[0.04em]">{market.name}</h3>
               {market.marketContext ? (
                 <p className="mt-3 text-sm leading-7 text-stone-400">{market.marketContext}</p>
@@ -75,7 +92,7 @@ export default async function RegionDiscoveryPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="mx-auto mt-12 max-w-6xl rounded-[2rem] border border-red-900/35 bg-black/40 p-6 md:p-9">
+      <section className="mx-auto mt-12 max-w-6xl rounded-[2rem] border border-red-900/35 bg-black/60 backdrop-blur-[3px] p-6 md:p-9">
         <div className="flex flex-wrap gap-3">
           <Link href="/discover" className="rounded-full bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.16em]">
             Discovery Network
@@ -85,6 +102,7 @@ export default async function RegionDiscoveryPage({ params }: PageProps) {
           </Link>
         </div>
       </section>
+          </div>
     </main>
   );
 }
