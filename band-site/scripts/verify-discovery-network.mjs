@@ -28,7 +28,7 @@ const audienceMatches = [...discovery.matchAll(/slug:\s*"(radio|sync|festivals|p
 const markets = marketMatches.map((m) => ({ slug: m[1], name: m[2], region: m[3], priorityTrack: m[4] }));
 const audienceSlugs = [...new Set(audienceMatches.map((m) => m[1]))];
 
-if (markets.length < 64) throw new Error(`Expected at least 64 markets, found ${markets.length}`);
+if (markets.length < 80) throw new Error(`Expected at least 80 markets after wave 2, found ${markets.length}`);
 if (audienceSlugs.length !== 4) throw new Error(`Expected 4 discovery audiences, found ${audienceSlugs.length}`);
 
 const marketSlugs = markets.map((m) => m.slug);
@@ -49,6 +49,7 @@ const expectedRoutes = markets.length * audienceSlugs.length;
 if (!discovery.includes("discoveryRoutes")) throw new Error("discoveryRoutes export missing");
 if (!sitemap.includes("...discoveryRoutes")) throw new Error("Discovery routes are not published in sitemap");
 if (!sitemap.includes("...discoveryRegionRoutes")) throw new Error("Regional discovery hubs are not published in sitemap");
+if (!sitemap.includes("...discoveryTrackRoutes")) throw new Error("Track discovery hubs are not published in sitemap");
 if (!sitemap.includes('"/discover"')) throw new Error("/discover index missing from sitemap");
 
 if (!discovery.includes("QZZ7M2627617")) throw new Error("OUR LOST DREAMS ISRC missing or changed");
@@ -80,4 +81,10 @@ if (!discoverIndex.includes("discoveryMarkets.map")) {
   throw new Error("Discovery index must expose international market coverage");
 }
 
-console.log(`Discovery QA passed: ${markets.length} markets × ${audienceSlugs.length} audiences = ${expectedRoutes} routes, with natural navigation guardrails.`);
+for (const trackSlug of ["our-lost-dreams", "war-machines"]) {
+  if (!discovery.includes(`slug: "${trackSlug}"`)) {
+    throw new Error(`Discovery track hub missing: ${trackSlug}`);
+  }
+}
+
+console.log(`Discovery QA passed: ${markets.length} markets × ${audienceSlugs.length} audiences = ${expectedRoutes} market routes + 2 track hubs, with natural navigation guardrails.`);
