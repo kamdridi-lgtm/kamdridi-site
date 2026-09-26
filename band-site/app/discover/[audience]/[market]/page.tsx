@@ -117,6 +117,12 @@ export default async function DiscoveryMarketPage({ params }: PageProps) {
           <div className="mt-7 flex flex-wrap gap-3">
             <Link href={track.href} className="rounded-full bg-red-600 px-6 py-3 text-xs font-black uppercase tracking-[0.16em] text-white hover:bg-red-500">Open track</Link>
             <Link href="/press" className="rounded-full border border-red-500/45 px-6 py-3 text-xs font-black uppercase tracking-[0.16em] text-red-100 hover:bg-red-500/10">Press / EPK</Link>
+            <Link
+              href={`/discover/track/${market.priorityTrack}`}
+              className="rounded-full border border-white/10 px-6 py-3 text-xs font-black uppercase tracking-[0.16em] text-stone-200 hover:border-red-500/40"
+            >
+              Track discovery hub
+            </Link>
           </div>
         </article>
 
