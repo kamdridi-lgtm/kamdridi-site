@@ -6,8 +6,10 @@ const discoveryPath = path.join(root, "data", "discovery.ts");
 const sitemapPath = path.join(root, "app", "sitemap.ts");
 const sitePath = path.join(root, "data", "site.ts");
 const layoutPath = path.join(root, "app", "layout.tsx");
+const shellPath = path.join(root, "components", "site-shell.tsx");
+const discoverIndexPath = path.join(root, "app", "discover", "page.tsx");
 
-for (const file of [discoveryPath, sitemapPath, sitePath, layoutPath]) {
+for (const file of [discoveryPath, sitemapPath, sitePath, layoutPath, shellPath, discoverIndexPath]) {
   if (!fs.existsSync(file)) {
     throw new Error(`Missing required file: ${file}`);
   }
@@ -17,6 +19,8 @@ const discovery = fs.readFileSync(discoveryPath, "utf8");
 const sitemap = fs.readFileSync(sitemapPath, "utf8");
 const site = fs.readFileSync(sitePath, "utf8");
 const layout = fs.readFileSync(layoutPath, "utf8");
+const shell = fs.readFileSync(shellPath, "utf8");
+const discoverIndex = fs.readFileSync(discoverIndexPath, "utf8");
 
 const marketMatches = [...discovery.matchAll(/slug:\s*"([^"]+)",\s*name:\s*"([^"]+)",\s*region:\s*"([^"]+)",\s*priorityTrack:\s*"(our-lost-dreams|war-machines)"/g)];
 const audienceMatches = [...discovery.matchAll(/slug:\s*"(radio|sync|festivals|press)"/g)];
@@ -58,4 +62,22 @@ for (const value of ["Melodic Hard Rock", "Cinematic Melodic Hard Rock"]) {
 if (/label:\s*"Submit"/.test(site)) throw new Error('Top-level "Submit" navigation must remain removed');
 if (/label:\s*"Submit Music"/.test(site)) throw new Error('"Submit Music" navigation link reintroduced');
 
-console.log(`Discovery QA passed: ${markets.length} markets × ${audienceSlugs.length} audiences = ${expectedRoutes} routes.`);
+for (const requiredHref of ["/industry", "/discover", "/radio", "/sync", "/festival-booking", "/press"]) {
+  if (!shell.includes(`href: "${requiredHref}"`)) {
+    throw new Error(`Site shell missing natural professional navigation link: ${requiredHref}`);
+  }
+}
+
+if (/label:\s*"Submit"/.test(shell) || /label:\s*"Submit Music"/.test(shell)) {
+  throw new Error("Legacy Submit navigation has been reintroduced into the site shell");
+}
+
+if (!discoverIndex.includes("discoveryRegions.map")) {
+  throw new Error("Discovery index must link to regional hubs");
+}
+
+if (!discoverIndex.includes("discoveryMarkets.map")) {
+  throw new Error("Discovery index must expose international market coverage");
+}
+
+console.log(`Discovery QA passed: ${markets.length} markets × ${audienceSlugs.length} audiences = ${expectedRoutes} routes, with natural navigation guardrails.`);
