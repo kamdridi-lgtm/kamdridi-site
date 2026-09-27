@@ -95,9 +95,13 @@ export default function DiscoverIndexPage() {
         <h2 className="text-2xl font-black uppercase tracking-[0.05em]">International market coverage</h2>
         <div className="mt-6 flex flex-wrap gap-2">
           {discoveryMarkets.map((market) => (
-            <span key={market.slug} className="rounded-full border border-white/10 px-4 py-2 text-xs text-stone-300">
+            <Link
+              key={market.slug}
+              href={`/discover/market/${market.slug}`}
+              className="rounded-full border border-white/10 px-4 py-2 text-xs text-stone-300 transition hover:border-red-500/50 hover:text-white"
+            >
               {market.name}
-            </span>
+            </Link>
           ))}
         </div>
         <div className="mt-8 flex flex-wrap gap-3">
