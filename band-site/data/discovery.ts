@@ -187,6 +187,8 @@ export function getMarketsForRegion(regionName: string) {
 
 export const discoveryRegionRoutes = discoveryRegions.map((region) => `/discover/region/${region.slug}`);
 
+export const discoveryMarketRoutes = discoveryMarkets.map((market) => `/discover/market/${market.slug}`);
+
 
 export const discoveryTrackHubs = [
   {

@@ -49,6 +49,7 @@ const expectedRoutes = markets.length * audienceSlugs.length;
 if (!discovery.includes("discoveryRoutes")) throw new Error("discoveryRoutes export missing");
 if (!sitemap.includes("...discoveryRoutes")) throw new Error("Discovery routes are not published in sitemap");
 if (!sitemap.includes("...discoveryRegionRoutes")) throw new Error("Regional discovery hubs are not published in sitemap");
+if (!sitemap.includes("...discoveryMarketRoutes")) throw new Error("Market discovery hubs are not published in sitemap");
 if (!sitemap.includes("...discoveryTrackRoutes")) throw new Error("Track discovery hubs are not published in sitemap");
 if (!sitemap.includes('"/discover"')) throw new Error("/discover index missing from sitemap");
 
@@ -79,6 +80,10 @@ if (!discoverIndex.includes("discoveryRegions.map")) {
 
 if (!discoverIndex.includes("discoveryMarkets.map")) {
   throw new Error("Discovery index must expose international market coverage");
+}
+
+if (!discoverIndex.includes("/discover/market/")) {
+  throw new Error("International market coverage must link to market hubs");
 }
 
 for (const trackSlug of ["our-lost-dreams", "war-machines"]) {
