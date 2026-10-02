@@ -54,7 +54,7 @@ export const commerceProducts: CommerceProduct[] = [
       "https://images-api.printify.com/mockup/6a9f26d0f7e35632ab03cadb/103548/100285/kamdrin-band-logo-roof-trio-graphic-tee-rock-band-t-shirt.jpg?camera_label=front",
       "https://images-api.printify.com/mockup/6a9f26d0f7e35632ab03cadb/103548/100286/kamdrin-band-logo-roof-trio-graphic-tee-rock-band-t-shirt.jpg?camera_label=back"
     ],
-    priceCents: 6160,
+    priceCents: 6895,
     currency: "CAD",
     saleMode: "buy_now",
     visible: true,
