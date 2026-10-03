@@ -97,7 +97,7 @@ export default function StorePage() {
                 {
                   title: "Boxed Keychain",
                   price: "Coming soon",
-                  image: "/store/merch/logo-essentials-grid.png",
+                  image: "/store/merch/our-lost-dreams-keychain.svg",
                   href: "#kamdridi-logo-keychain"
                 }
               ].map((item) => (
