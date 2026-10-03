@@ -972,7 +972,7 @@ export const commerceProducts: CommerceProduct[] = [
     projectSlug: "kamdridi-core",
     category: "Accessories",
     description: "Premium boxed metal KAMDRIDI logo keychain. Supplier proof, final dimensions, landed cost and packaging are being verified before sales open.",
-    images: ["/store/merch/logo-essentials-grid.png"],
+    images: ["/store/merch/our-lost-dreams-keychain.svg"],
     priceCents: 3600,
     currency: "CAD",
     saleMode: "coming_soon",
