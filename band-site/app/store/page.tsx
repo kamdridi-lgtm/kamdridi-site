@@ -69,7 +69,7 @@ export default function StorePage() {
                   </span>
                   <span className="border border-white/10 bg-black/35 px-4 py-3">Tees · made to order</span>
                   <span className="border border-white/10 bg-black/35 px-4 py-3">Hoodies · made to order</span>
-                  <span className="border border-white/10 bg-black/35 px-4 py-3">Boxed keychain $36</span>
+                  <span className="border border-red-500/35 bg-red-950/20 px-4 py-3 text-red-300">Boxed metal keychain · proof pending</span>
                 </div>
               </div>
             </div>
@@ -96,7 +96,7 @@ export default function StorePage() {
                 },
                 {
                   title: "Boxed Keychain",
-                  price: "Made to order",
+                  price: "Coming soon",
                   image: "/store/merch/logo-essentials-grid.png",
                   href: "#kamdridi-logo-keychain"
                 }
@@ -104,16 +104,18 @@ export default function StorePage() {
                 <a
                   key={item.title}
                   href={item.href}
-                  className="group relative min-h-[300px] overflow-hidden border border-white/10 bg-black"
+                  className={`group relative min-h-[300px] overflow-hidden border bg-black ${item.title === "Boxed Keychain" ? "border-red-500/45" : "border-white/10"}`}
                 >
                   <Image src={item.image} alt={item.title} fill className="object-cover transition duration-500 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.05),rgba(0,0,0,0.78))]" />
                   <div className="absolute inset-x-0 bottom-0 p-4">
-                    <p className="text-[10px] uppercase tracking-[0.28em] text-[#f4c66a]">Best Seller</p>
+                    <p className={`text-[10px] uppercase tracking-[0.28em] ${item.title === "Boxed Keychain" ? "text-red-300" : "text-[#f4c66a]"}`}>
+                      {item.title === "Boxed Keychain" ? "Proof pending" : "Best Seller"}
+                    </p>
                     <h2 className="mt-2 text-xl text-white">{item.title}</h2>
-                    <p className="mt-2 text-lg text-[#f4c66a]">{item.price}</p>
+                    <p className={`mt-2 text-lg ${item.title === "Boxed Keychain" ? "text-red-300" : "text-[#f4c66a]"}`}>{item.price}</p>
                     <p className="mt-3 text-[10px] uppercase tracking-[0.24em] text-stone-400">
-                      Choose variant
+                      {item.title === "Boxed Keychain" ? "Supplier approval required" : "Choose variant"}
                     </p>
                   </div>
                 </a>
