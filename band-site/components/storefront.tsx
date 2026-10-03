@@ -264,8 +264,8 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
             </div>
           )}
           {isComingSoon && (
-            <div className="absolute left-4 top-4 rounded-full border border-[#e5d1aa]/45 bg-black/80 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[#e5d1aa] backdrop-blur">
-              January 2027
+            <div className={`absolute left-4 top-4 rounded-full border px-3 py-1 text-[10px] uppercase tracking-[0.2em] backdrop-blur ${product.id === "kamdridi-logo-keychain" ? "border-red-500/45 bg-red-950/90 text-red-300" : "border-[#e5d1aa]/45 bg-black/80 text-[#e5d1aa]"}`}>
+              {product.badge || "COMING SOON"}
             </div>
           )}
         </div>
@@ -343,6 +343,8 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
     { label: "ECHOES BRASIL", value: "echoes-un-live-in-brasil" },
     { label: "SALIERI", value: "salieris-hands" },
     { label: "ECHOES UNEARTHED", value: "echoes-unearthed" },
+    { label: "OUR LOST DREAMS", value: "our-lost-dreams" },
+    { label: "WAR MACHINES JP", value: "war-machines-japan" },
     { label: "KAMDRIDI", value: "kamdridi-core" },
     { label: "DIGITAL", value: "digital" }
   ];
@@ -364,7 +366,8 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
       if (b.id === "echoes-unearthed-digital-album") return 1;
       return a.name.localeCompare(b.name);
     });
-  const kamdridiCore = filteredProducts.filter((p) => p.projectSlug === "kamdridi-core" && !featured.includes(p) && p.category !== "Digital Access");
+  const keychainProducts = filteredProducts.filter((p) => p.id === "kamdridi-logo-keychain");
+  const kamdridiCore = filteredProducts.filter((p) => p.projectSlug === "kamdridi-core" && p.id !== "kamdridi-logo-keychain" && !featured.includes(p) && p.category !== "Digital Access");
   const digitalAccess = filteredProducts.filter(
     (p) => (p.category === "Digital Access" || p.saleMode === "digital") && p.projectSlug !== "echoes-unearthed"
   );
@@ -469,6 +472,19 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {echoesUnearthed.map(renderProductCard)}
+          </div>
+        </section>
+      )}
+
+      {keychainProducts.length > 0 && (
+        <section id="kamdridi-logo-keychain" className="scroll-mt-36 rounded-[28px] border border-red-500/25 bg-red-950/10 p-5 md:p-7">
+          <div className="mb-6">
+            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-red-300">COMING SOON · SUPPLIER PROOF PENDING</p>
+            <h2 className="mt-2 font-display text-3xl uppercase tracking-widest text-white">KAMDRIDI Boxed Metal Logo Keychain</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-300">Owner-approved visual concept. Checkout remains locked until the supplier quote, exact dimensions, manufacturing method, packaging, landed cost and final proof are verified.</p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {keychainProducts.map(renderProductCard)}
           </div>
         </section>
       )}
