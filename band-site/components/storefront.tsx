@@ -128,9 +128,17 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
           .filter((product) => product.visible && product.currency === "CAD")
           .map(normalizeRemoteProduct);
         if (!cancelled && normalized.length > 0) {
+          // Merge the remote catalog into the checked-in catalog instead of
+          // replacing it. Remote products remain authoritative for matching
+          // slugs, while local merch that has not yet been mirrored to
+          // Supabase (including legacy tee imagery) stays visible.
           const bySlug = new Map<string, CommerceProduct>();
-          for (const product of normalized) bySlug.set(product.slug, product);
-          bySlug.set(EXCAVATION_TEE.slug, EXCAVATION_TEE);
+          for (const product of [EXCAVATION_TEE, ...getVisibleCommerceProducts()]) {
+            bySlug.set(product.slug, product);
+          }
+          for (const product of normalized) {
+            bySlug.set(product.slug, product);
+          }
           setAllProducts(Array.from(bySlug.values()));
         }
       })
