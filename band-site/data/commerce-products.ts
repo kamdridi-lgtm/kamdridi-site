@@ -37,6 +37,37 @@ export type CommerceProduct = {
 
 export const commerceProducts: CommerceProduct[] = [
 
+
+  // ECHOES UNEARTHED — direct Instagram product route.
+  // This mirrors the live Printify product so the direct URL remains usable
+  // even if the remote catalog endpoint is temporarily unavailable.
+  {
+    id: "printify-6a9f4be42198071f540cee93",
+    slug: "kamdrid-target-logo-t-shirt-echoes-unearthed-back-graphic",
+    name: "SIGNAL TARGET TEE — ECHOES UNEARTHED",
+    subtitle: "OFFICIAL KAM DRIDI MERCHANDISE",
+    project: "ECHOES UNEARTHED",
+    projectSlug: "echoes-unearthed",
+    category: "Apparel",
+    description: "Official ECHOES UNEARTHED Signal Target Tee with KAMDRIDI target artwork on the front and ECHOES UNEARTHED back graphic.",
+    images: [
+      "https://images-api.printify.com/mockup/6a9f4be42198071f540cee93/117607/127480/kamdrid-target-logo-t-shirt-echoes-unearthed-back-graphic.jpg?camera_label=front",
+      "https://images-api.printify.com/mockup/6a9f4be42198071f540cee93/117607/127482/kamdrid-target-logo-t-shirt-echoes-unearthed-back-graphic.jpg?camera_label=back"
+    ],
+    priceCents: 8195,
+    currency: "CAD",
+    saleMode: "buy_now",
+    visible: true,
+    checkoutEnabled: true,
+    fulfillmentMode: "made_to_order",
+    requiresShipping: true,
+    colors: ["White", "Black"],
+    sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL", "7XL"],
+    fulfillmentNote: "Printed on demand through Printify after confirmed payment.",
+    productPath: "/store/kamdrid-target-logo-t-shirt-echoes-unearthed-back-graphic",
+    releasePath: "/store"
+  },
+
   // KAMDRIDI CORE — direct Instagram merch route.
   // Canonical supplier/fulfillment data remains in Supabase; this local entry is the
   // resilient product-page fallback so a temporary catalog fetch failure never
