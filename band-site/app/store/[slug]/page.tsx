@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { getCommerceProductBySlug } from "@/data/commerce-products";
 
-const CATALOG_URL = "https://retoydsgsuvznlps.supabase.co/functions/v1/commerce-catalog";
+const CATALOG_URL = "https://retoydsgsuvznlpsguts.supabase.co/functions/v1/commerce-catalog";
 const EXCAVATION_SLUG = "echoes-unearthed-excavation-tee";
 
  type Product = {
