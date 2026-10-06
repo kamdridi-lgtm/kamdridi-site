@@ -74,7 +74,7 @@ function normalizeRemoteProduct(product: RemoteProduct): CommerceProduct {
     projectSlug: product.project_slug,
     category: product.category,
     description: product.description,
-    images: Array.isArray(product.images) && product.images.length > 0 ? product.images : ["/assets/images/releases/war-machines-cover.png"],
+    images: product.id === "printify-6a9f4be42198071f540cee93" ? ["/store/merch/signal-target-tee-front-back.webp"] : (Array.isArray(product.images) && product.images.length > 0 ? product.images : ["/assets/images/releases/war-machines-cover.png"]),
     priceCents: product.price_cents,
     currency: product.currency,
     saleMode: product.sale_mode,

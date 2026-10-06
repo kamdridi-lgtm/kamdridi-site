@@ -50,10 +50,7 @@ export const commerceProducts: CommerceProduct[] = [
     projectSlug: "echoes-unearthed",
     category: "Apparel",
     description: "Official ECHOES UNEARTHED Signal Target Tee with KAMDRIDI target artwork on the front and ECHOES UNEARTHED back graphic.",
-    images: [
-      "https://images-api.printify.com/mockup/6a9f4be42198071f540cee93/117607/127480/kamdrid-target-logo-t-shirt-echoes-unearthed-back-graphic.jpg?camera_label=front",
-      "https://images-api.printify.com/mockup/6a9f4be42198071f540cee93/117607/127482/kamdrid-target-logo-t-shirt-echoes-unearthed-back-graphic.jpg?camera_label=back"
-    ],
+    images: ["/store/merch/signal-target-tee-front-back.webp"],
     priceCents: 8195,
     currency: "CAD",
     saleMode: "buy_now",
