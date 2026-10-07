@@ -122,7 +122,7 @@ export default function LivePage() {
           {tourDates.map((show) => (
             <div key={show.date + show.city} className="group grid grid-cols-[105px_1fr] gap-x-4 border-b border-white/10 py-6 transition hover:border-white/35 sm:grid-cols-[155px_1fr_1fr_auto] sm:items-center sm:gap-x-7">
               <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-400 sm:text-xs">{show.date}</div>
-              <div><div className="font-display text-xl uppercase tracking-[0.04em] text-white sm:text-2xl">{show.city}</div><div className="mt-1 text-[9px] uppercase tracking-[0.2em] text-stone-500 sm:hidden">{show.country}</div></div>
+              <div><div className="flex items-center gap-2 font-display text-xl uppercase tracking-[0.04em] text-white sm:text-2xl"><span>{show.city}</span><span className="text-base sm:text-lg" aria-hidden="true">{show.country === "Japan" ? "🇯🇵" : show.country === "Australia" ? "🇦🇺" : "🇳🇿"}</span></div><div className="mt-1 text-[9px] uppercase tracking-[0.2em] text-stone-500 sm:hidden">{show.country}</div></div>
               <div className="col-start-2 mt-2 sm:col-start-auto sm:mt-0"><div className="text-xs font-semibold uppercase tracking-[0.1em] text-stone-200 sm:text-sm">{show.venue}</div><div className="mt-1 hidden text-[9px] uppercase tracking-[0.2em] text-stone-500 sm:block">{show.country}</div></div>
 
             </div>
