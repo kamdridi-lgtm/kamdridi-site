@@ -1,7 +1,7 @@
 import type { CommerceProduct, RawCheckoutItem, ResolvedCheckoutItem } from "@/data/commerce-products";
 import { getCommerceProductBySlug } from "@/data/commerce-products";
 
-const CATALOG_URL = "https://retoydsgsuvznlps.supabase.co/functions/v1/commerce-catalog";
+const CATALOG_URL = "https://retoydsgsuvznlpsguts.supabase.co/functions/v1/commerce-catalog";
 
 const DIRECT_EXCAVATION_SLUG = "echoes-unearthed-excavation-tee";
 const DIRECT_WORDMARK_SLUG = "echoes-unearthed-wordmark-tee";
