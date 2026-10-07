@@ -14,19 +14,22 @@ import {
 
 const fringeUrl = "https://adelaidefringe.com.au/";
 const tourDates = [
-  { date: "17 JAN 2027", city: "Tokyo", country: "Japan", venue: "TBA", status: "TBA", confirmed: false },
-  { date: "FEB 2027", city: "Brisbane", country: "Australia", venue: "TBA", status: "TBA", confirmed: false },
-  { date: "FEB 2027", city: "Gold Coast", country: "Australia", venue: "TBA", status: "TBA", confirmed: false },
-  { date: "FEB 2027", city: "Rockhampton", country: "Australia", venue: "TBA", status: "TBA", confirmed: false },
-  { date: "FEB 2027", city: "Mackay", country: "Australia", venue: "TBA", status: "TBA", confirmed: false },
-  { date: "FEB 2027", city: "Cairns", country: "Australia", venue: "TBA", status: "TBA", confirmed: false },
-  { date: "02 MAR 2027", city: "Wellington", country: "New Zealand", venue: "The Fringe Bar", status: "DETAILS TBA", confirmed: false },
-  { date: "04 MAR 2027", city: "Lyttelton / Christchurch", country: "New Zealand", venue: "Wunderbar", status: "DETAILS TBA", confirmed: false },
-  { date: "MAR 2027", city: "Auckland", country: "New Zealand", venue: "TBA", status: "TBA", confirmed: false },
-  { date: "MAR 2027", city: "Dunedin", country: "New Zealand", venue: "TBA", status: "TBA", confirmed: false },
-  { date: "05 MAR 2027", city: "Sydney", country: "Australia", venue: "Dead Set", status: "DETAILS TBA", confirmed: true },
-  { date: "18 MAR 2027 · 19:30", city: "Adelaide", country: "Australia", venue: "Domain Theatre · Marion Cultural Centre", status: "CONFIRMED", confirmed: true },
-  { date: "2027", city: "Perth", country: "Australia", venue: "TBA", status: "TBA", confirmed: false },
+  { date: "17 JAN 2027", city: "Tokyo", country: "Japan", venue: "TBA" },
+  { date: "22–24 JAN 2027", city: "Canberra", country: "Australia", venue: "TBA" },
+  { date: "JAN / FEB 2027", city: "Sydney", country: "Australia", venue: "TBA" },
+  { date: "FEB 2027", city: "Brisbane", country: "Australia", venue: "TBA" },
+  { date: "06 FEB 2027", city: "Coolangatta · Gold Coast", country: "Australia", venue: "Eddie’s Grub House" },
+  { date: "FEB 2027", city: "Rockhampton", country: "Australia", venue: "TBA" },
+  { date: "FEB 2027", city: "Mackay", country: "Australia", venue: "TBA" },
+  { date: "FEB 2027", city: "Airlie Beach", country: "Australia", venue: "TBA" },
+  { date: "FEB 2027", city: "Cairns", country: "Australia", venue: "TBA" },
+  { date: "02 MAR 2027 · 19:30", city: "Wellington", country: "New Zealand", venue: "The Fringe Bar · NZ Fringe" },
+  { date: "MAR 2027", city: "Lyttelton · Christchurch", country: "New Zealand", venue: "Wunderbar" },
+  { date: "MAR 2027", city: "Auckland", country: "New Zealand", venue: "TBA" },
+  { date: "MAR 2027", city: "Dunedin", country: "New Zealand", venue: "TBA" },
+  { date: "05 MAR 2027", city: "Sydney", country: "Australia", venue: "Dead Set" },
+  { date: "18 MAR 2027 · 19:30", city: "Adelaide", country: "Australia", venue: "Domain Theatre · Marion Cultural Centre" },
+  { date: "2027", city: "Perth", country: "Australia", venue: "TBA" },
 ];
 
 
@@ -107,7 +110,7 @@ export default function LivePage() {
           <p className="text-xs font-semibold uppercase tracking-[0.42em] text-[#f4c66a]">KAM DRIDI · LIVE 2027</p>
           <h1 className="mt-5 max-w-5xl font-display text-5xl uppercase leading-[0.86] tracking-[0.03em] text-white sm:text-7xl lg:text-8xl">Asia-Pacific <span className="block text-red-500">Tour 2027</span></h1>
           <p className="mt-6 max-w-xl text-sm uppercase tracking-[0.25em] text-white/70">Japan · Australia · New Zealand</p>
-          <p className="mt-4 max-w-xl text-sm leading-6 text-stone-300">Confirmed performances and projected routing. Additional dates, venues and ticket details will be announced as the tour develops.</p>
+          <p className="mt-4 max-w-xl text-sm leading-6 text-stone-300">Asia-Pacific 2027. Additional dates, venues and ticket details to be announced.</p>
         </div>
       </section>
 
@@ -122,11 +125,11 @@ export default function LivePage() {
               <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-400 sm:text-xs">{show.date}</div>
               <div><div className="font-display text-xl uppercase tracking-[0.04em] text-white sm:text-2xl">{show.city}</div><div className="mt-1 text-[9px] uppercase tracking-[0.2em] text-stone-500 sm:hidden">{show.country}</div></div>
               <div className="col-start-2 mt-2 sm:col-start-auto sm:mt-0"><div className="text-xs font-semibold uppercase tracking-[0.1em] text-stone-200 sm:text-sm">{show.venue}</div><div className="mt-1 hidden text-[9px] uppercase tracking-[0.2em] text-stone-500 sm:block">{show.country}</div></div>
-              <div className="col-start-2 mt-3 sm:col-start-auto sm:mt-0 sm:text-right"><span className={show.status === "CONFIRMED" ? "inline-flex rounded-full bg-white px-3 py-2 text-[9px] font-bold uppercase tracking-[0.16em] text-black" : "inline-flex rounded-full border border-white/20 px-3 py-2 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/55"}>{show.status}</span></div>
+
             </div>
           ))}
         </div>
-        <p className="mt-7 max-w-2xl text-xs leading-6 text-stone-500">TBA dates are projected routing and remain subject to final venue, schedule and production confirmation.</p>
+        <p className="mt-7 max-w-2xl text-xs leading-6 text-stone-500">Additional dates and venue details to be announced.</p>
       </section>
 
       <section className="relative isolate overflow-hidden border-b border-white/10">
