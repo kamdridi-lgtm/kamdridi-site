@@ -166,7 +166,7 @@ export default function LivePage() {
                   width={1400}
                   height={620}
                   priority
-                  className="h-auto w-full drop-shadow-[0_0_30px_rgba(48,133,255,0.42)]"
+                  className="h-auto w-full mix-blend-screen drop-shadow-[0_0_30px_rgba(48,133,255,0.42)]"
                 />
               </div>
 
