@@ -93,35 +93,21 @@ function normalizeRemoteProduct(product: RemoteProduct): CommerceProduct | null 
 }
 
 export async function getUnifiedCommerceProducts(): Promise<CommerceProduct[]> {
-  const localDirectProducts = [
-    EXCAVATION_TEE,
-    getCommerceProductBySlug(DIRECT_WORDMARK_SLUG)
-  ].filter((product): product is CommerceProduct => Boolean(product));
+  // Checkout authorization is fail-closed: Supabase is the source of truth for
+  // visibility, sale mode and checkout_enabled. Local catalog entries are never
+  // allowed to authorize a purchase when the remote catalog is unavailable.
+  const response = await fetch(CATALOG_URL, {
+    cache: "no-store",
+    headers: { accept: "application/json" }
+  });
+  if (!response.ok) throw new Error("UNIFIED_CATALOG_UNAVAILABLE");
 
-  try {
-    const response = await fetch(CATALOG_URL, {
-      cache: "no-store",
-      headers: { accept: "application/json" }
-    });
-    if (!response.ok) throw new Error("UNIFIED_CATALOG_UNAVAILABLE");
-    const payload = await response.json();
-    if (!Array.isArray(payload?.products)) throw new Error("UNIFIED_CATALOG_INVALID");
+  const payload = await response.json();
+  if (!Array.isArray(payload?.products)) throw new Error("UNIFIED_CATALOG_INVALID");
 
-    const products = (payload.products as RemoteProduct[])
-      .map(normalizeRemoteProduct)
-      .filter((product): product is CommerceProduct => Boolean(product));
-
-    for (const localProduct of localDirectProducts) {
-      if (!products.some((product) => product.slug === localProduct.slug)) {
-        products.push(localProduct);
-      }
-    }
-
-    return products;
-  } catch (error) {
-    if (localDirectProducts.length > 0) return localDirectProducts;
-    throw error;
-  }
+  return (payload.products as RemoteProduct[])
+    .map(normalizeRemoteProduct)
+    .filter((product): product is CommerceProduct => Boolean(product));
 }
 
 function resolveVariant(value: string | undefined, allowed: readonly string[] | undefined, errorCode: string) {
