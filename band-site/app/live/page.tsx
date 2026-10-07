@@ -16,7 +16,6 @@ const fringeUrl = "https://adelaidefringe.com.au/";
 const tourDates = [
   { date: "17 JAN 2027", city: "Tokyo", country: "Japan", venue: "TBA" },
   { date: "22–24 JAN 2027", city: "Canberra", country: "Australia", venue: "TBA" },
-  { date: "JAN / FEB 2027", city: "Sydney", country: "Australia", venue: "TBA" },
   { date: "FEB 2027", city: "Brisbane", country: "Australia", venue: "TBA" },
   { date: "06 FEB 2027", city: "Coolangatta · Gold Coast", country: "Australia", venue: "Eddie’s Grub House" },
   { date: "FEB 2027", city: "Rockhampton", country: "Australia", venue: "TBA" },
