@@ -159,14 +159,12 @@ export default function LivePage() {
 
           <div className="grid flex-1 items-center gap-10 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <div>
-              <div className="mb-8 w-full max-w-[620px]">
-                <Image
-                  src="/australia/kamdridi-australia-logo.webp"
-                  alt="KAM DRIDI Australia"
-                  width={1400}
-                  height={620}
-                  priority
-                  className="h-auto w-full mix-blend-screen drop-shadow-[0_0_30px_rgba(48,133,255,0.42)]"
+              <div className="mb-8 flex h-[250px] w-full max-w-[620px] items-center justify-center sm:h-[310px]">
+                <div
+                  role="img"
+                  aria-label="KAM DRIDI Australia"
+                  className="h-full w-full bg-contain bg-center bg-no-repeat mix-blend-screen drop-shadow-[0_0_30px_rgba(48,133,255,0.42)]"
+                  style={{ backgroundImage: 'url("/australia/kamdridi-australia-logo.webp")' }}
                 />
               </div>
 
