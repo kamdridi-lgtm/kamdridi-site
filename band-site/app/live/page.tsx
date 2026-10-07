@@ -13,6 +13,22 @@ import {
 } from "lucide-react";
 
 const fringeUrl = "https://adelaidefringe.com.au/";
+const tourDates = [
+  { date: "17 JAN 2027", city: "Tokyo", country: "Japan", venue: "TBA", status: "TBA", confirmed: false },
+  { date: "FEB 2027", city: "Brisbane", country: "Australia", venue: "TBA", status: "TBA", confirmed: false },
+  { date: "FEB 2027", city: "Gold Coast", country: "Australia", venue: "TBA", status: "TBA", confirmed: false },
+  { date: "FEB 2027", city: "Rockhampton", country: "Australia", venue: "TBA", status: "TBA", confirmed: false },
+  { date: "FEB 2027", city: "Mackay", country: "Australia", venue: "TBA", status: "TBA", confirmed: false },
+  { date: "FEB 2027", city: "Cairns", country: "Australia", venue: "TBA", status: "TBA", confirmed: false },
+  { date: "02 MAR 2027", city: "Wellington", country: "New Zealand", venue: "The Fringe Bar", status: "DETAILS TBA", confirmed: false },
+  { date: "04 MAR 2027", city: "Lyttelton / Christchurch", country: "New Zealand", venue: "Wunderbar", status: "DETAILS TBA", confirmed: false },
+  { date: "MAR 2027", city: "Auckland", country: "New Zealand", venue: "TBA", status: "TBA", confirmed: false },
+  { date: "MAR 2027", city: "Dunedin", country: "New Zealand", venue: "TBA", status: "TBA", confirmed: false },
+  { date: "05 MAR 2027", city: "Sydney", country: "Australia", venue: "Dead Set", status: "DETAILS TBA", confirmed: true },
+  { date: "18 MAR 2027 · 19:30", city: "Adelaide", country: "Australia", venue: "Domain Theatre · Marion Cultural Centre", status: "CONFIRMED", confirmed: true },
+  { date: "2027", city: "Perth", country: "Australia", venue: "TBA", status: "TBA", confirmed: false },
+];
+
 
 export const metadata: Metadata = {
   title: "Live in Australia — Adelaide Fringe 2027",
@@ -82,6 +98,36 @@ export default function LivePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }}
       />
+
+      <section className="relative isolate overflow-hidden border-b border-white/10">
+        <Image src="/assets/images/tour/tour-crowd-stage.png" alt="KAM DRIDI Asia-Pacific Tour 2027" fill priority className="object-cover object-center opacity-70" sizes="100vw" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,3,4,0.2)_0%,rgba(3,3,4,0.5)_48%,#050403_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_25%,rgba(28,99,255,0.22),transparent_32%),radial-gradient(circle_at_82%_30%,rgba(217,31,43,0.26),transparent_30%)]" />
+        <div className="relative z-10 mx-auto flex min-h-[82vh] max-w-7xl flex-col justify-end px-5 pb-14 pt-28 sm:px-8 lg:px-10 lg:pb-20">
+          <p className="text-xs font-semibold uppercase tracking-[0.42em] text-[#f4c66a]">KAM DRIDI · LIVE 2027</p>
+          <h1 className="mt-5 max-w-5xl font-display text-5xl uppercase leading-[0.86] tracking-[0.03em] text-white sm:text-7xl lg:text-8xl">Asia-Pacific <span className="block text-red-500">Tour 2027</span></h1>
+          <p className="mt-6 max-w-xl text-sm uppercase tracking-[0.25em] text-white/70">Japan · Australia · New Zealand</p>
+          <p className="mt-4 max-w-xl text-sm leading-6 text-stone-300">Confirmed performances and projected routing. Additional dates, venues and ticket details will be announced as the tour develops.</p>
+        </div>
+      </section>
+
+      <section id="tour-dates" className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:px-10 lg:py-20">
+        <div className="mb-8 flex items-end justify-between gap-6 border-b border-white/15 pb-5">
+          <div><p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-[#f4c66a]">Asia-Pacific · 2027</p><h2 className="mt-3 font-display text-4xl uppercase tracking-[0.04em] sm:text-5xl">Tour Dates</h2></div>
+          <p className="hidden text-[10px] uppercase tracking-[0.24em] text-stone-500 sm:block">More dates incoming</p>
+        </div>
+        <div>
+          {tourDates.map((show) => (
+            <div key={show.date + show.city} className="group grid grid-cols-[105px_1fr] gap-x-4 border-b border-white/10 py-6 transition hover:border-white/35 sm:grid-cols-[155px_1fr_1fr_auto] sm:items-center sm:gap-x-7">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-400 sm:text-xs">{show.date}</div>
+              <div><div className="font-display text-xl uppercase tracking-[0.04em] text-white sm:text-2xl">{show.city}</div><div className="mt-1 text-[9px] uppercase tracking-[0.2em] text-stone-500 sm:hidden">{show.country}</div></div>
+              <div className="col-start-2 mt-2 sm:col-start-auto sm:mt-0"><div className="text-xs font-semibold uppercase tracking-[0.1em] text-stone-200 sm:text-sm">{show.venue}</div><div className="mt-1 hidden text-[9px] uppercase tracking-[0.2em] text-stone-500 sm:block">{show.country}</div></div>
+              <div className="col-start-2 mt-3 sm:col-start-auto sm:mt-0 sm:text-right"><span className={show.status === "CONFIRMED" ? "inline-flex rounded-full bg-white px-3 py-2 text-[9px] font-bold uppercase tracking-[0.16em] text-black" : "inline-flex rounded-full border border-white/20 px-3 py-2 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/55"}>{show.status}</span></div>
+            </div>
+          ))}
+        </div>
+        <p className="mt-7 max-w-2xl text-xs leading-6 text-stone-500">TBA dates are projected routing and remain subject to final venue, schedule and production confirmation.</p>
+      </section>
 
       <section className="relative isolate overflow-hidden border-b border-white/10">
         <Image
