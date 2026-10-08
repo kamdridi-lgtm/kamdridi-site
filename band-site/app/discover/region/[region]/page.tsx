@@ -72,7 +72,11 @@ export default async function RegionDiscoveryPage({ params }: PageProps) {
         <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {markets.map((market) => (
             <article key={market.slug} className="rounded-[1.5rem] border border-white/10 bg-black/60 backdrop-blur-[3px] p-5">
-              <h3 className="text-xl font-black uppercase tracking-[0.04em]">{market.name}</h3>
+              <h3 className="text-xl font-black uppercase tracking-[0.04em]">
+                <Link href={`/discover/market/${market.slug}`} className="transition hover:text-red-300">
+                  {market.name}
+                </Link>
+              </h3>
               {market.marketContext ? (
                 <p className="mt-3 text-sm leading-7 text-stone-400">{market.marketContext}</p>
               ) : null}

@@ -145,6 +145,7 @@ export default async function DiscoveryMarketPage({ params }: PageProps) {
           It is designed to make verified artist, music and contact information easier for professional search systems and human buyers to interpret.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
+          <Link href={`/discover/market/${market.slug}`} className="rounded-full border border-red-500/35 px-5 py-2 text-xs font-bold uppercase tracking-[0.14em] text-red-100 hover:border-red-400">Market hub</Link>
           <Link href="/discover" className="rounded-full border border-white/10 px-5 py-2 text-xs font-bold uppercase tracking-[0.14em] text-stone-200 hover:border-red-500/40">Discovery network</Link>
           <Link href="/industry" className="rounded-full border border-white/10 px-5 py-2 text-xs font-bold uppercase tracking-[0.14em] text-stone-200 hover:border-red-500/40">Industry hub</Link>
         </div>

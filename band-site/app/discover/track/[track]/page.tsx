@@ -33,7 +33,24 @@ export default async function DiscoveryTrackPage({ params }: PageProps) {
   if (!track) notFound();
 
   return (
-    <main className="min-h-screen bg-[#050505] px-5 py-20 text-white">
+    <main className="relative min-h-screen overflow-hidden bg-[#050505] px-5 py-20 text-white">
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+        <div
+          className="absolute -inset-8 scale-110 bg-cover bg-top bg-no-repeat opacity-25 blur-[3px]"
+          style={{ backgroundImage: "url('/assets/images/discovery-hero-official.png')" }}
+        />
+        <div
+          className="absolute inset-0 bg-no-repeat"
+          style={{
+            backgroundImage: "url('/assets/images/discovery-hero-official.png')",
+            backgroundSize: "auto 118vh",
+            backgroundPosition: "right 170px"
+          }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.72)_42%,rgba(0,0,0,0.36)_72%,rgba(0,0,0,0.18)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.14)_0%,rgba(0,0,0,0.22)_48%,rgba(0,0,0,0.74)_100%)]" />
+      </div>
+      <div className="relative z-10">
       <section className="mx-auto max-w-6xl">
         <p className="text-xs font-black uppercase tracking-[0.34em] text-red-500">{track.subtitle}</p>
         <h1 className="mt-5 font-display text-5xl uppercase leading-none tracking-[0.05em] md:text-7xl">
@@ -43,7 +60,7 @@ export default async function DiscoveryTrackPage({ params }: PageProps) {
       </section>
 
       <section className="mx-auto mt-12 grid max-w-6xl gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-        <article className="rounded-[2rem] border border-red-900/40 bg-black/55 p-6 md:p-9">
+        <article className="rounded-[2rem] border border-red-900/40 bg-black/60 p-6 backdrop-blur-[3px] md:p-9">
           <p className="text-xs font-black uppercase tracking-[0.28em] text-red-500">Verified track data</p>
           <div className="mt-6 grid gap-3 text-sm text-stone-300 sm:grid-cols-2">
             <p><span className="font-bold text-white">Artist:</span> KAM DRIDI</p>
@@ -66,7 +83,7 @@ export default async function DiscoveryTrackPage({ params }: PageProps) {
           </div>
         </article>
 
-        <aside className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-6 md:p-9">
+        <aside className="rounded-[2rem] border border-white/10 bg-black/60 p-6 backdrop-blur-[3px] md:p-9">
           <p className="text-xs font-black uppercase tracking-[0.28em] text-red-500">Professional routes</p>
           <p className="mt-4 text-sm leading-7 text-stone-300">
             Open the market-specific route that matches the professional use case.
@@ -92,6 +109,7 @@ export default async function DiscoveryTrackPage({ params }: PageProps) {
           ← Back to discovery network
         </Link>
       </section>
+      </div>
     </main>
   );
 }
