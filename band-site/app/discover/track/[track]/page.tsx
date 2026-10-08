@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  discoveryAudiences,
   discoveryTrackHubs,
   getDiscoveryTrackHub
 } from "@/data/discovery";
@@ -86,20 +85,18 @@ export default async function DiscoveryTrackPage({ params }: PageProps) {
         <aside className="rounded-[2rem] border border-white/10 bg-black/60 p-6 backdrop-blur-[3px] md:p-9">
           <p className="text-xs font-black uppercase tracking-[0.28em] text-red-500">Professional routes</p>
           <p className="mt-4 text-sm leading-7 text-stone-300">
-            Open the market-specific route that matches the professional use case.
+            Open a market hub first, then choose Radio, Sync, Festivals or Press. This keeps the network useful without duplicating hundreds of links on one page.
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
-            {track.markets.map((market) =>
-              discoveryAudiences.map((audience) => (
-                <Link
-                  key={`${audience.slug}-${market.slug}`}
-                  href={`/discover/${audience.slug}/${market.slug}`}
-                  className="rounded-full border border-white/10 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.1em] text-stone-200 hover:border-red-500/50"
-                >
-                  {market.name} · {audience.slug}
-                </Link>
-              ))
-            )}
+            {track.markets.map((market) => (
+              <Link
+                key={market.slug}
+                href={`/discover/market/${market.slug}`}
+                className="rounded-full border border-white/10 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.1em] text-stone-200 hover:border-red-500/50"
+              >
+                {market.name}
+              </Link>
+            ))}
           </div>
         </aside>
       </section>
