@@ -1001,7 +1001,7 @@ export const commerceProducts: CommerceProduct[] = [
     category: "Accessories",
     description: "Premium boxed metal KAMDRIDI logo keychain. Supplier proof, final dimensions, landed cost and packaging are being verified before sales open.",
     images: ["/store/merch/our-lost-dreams-keychain.svg"],
-    priceCents: 3600,
+    priceCents: 1495,
     currency: "CAD",
     saleMode: "coming_soon",
     visible: true,
