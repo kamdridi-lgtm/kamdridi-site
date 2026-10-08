@@ -108,7 +108,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
     message: string;
     tone: "success" | "warning" | "error";
   } | null>(null);
-  const [allProducts, setAllProducts] = useState<CommerceProduct[]>(() => [EXCAVATION_TEE, ...getVisibleCommerceProducts()]);
+  const [allProducts, setAllProducts] = useState<CommerceProduct[]>([]);
   const [activeFilter, setActiveFilter] = useState<string>("ALL");
   const [selectedSizes, setSelectedSizes] = useState<Record<string, string | undefined>>({});
   const [selectedColors, setSelectedColors] = useState<Record<string, string | undefined>>({});
@@ -127,23 +127,15 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
         const normalized = (payload.products as RemoteProduct[])
           .filter((product) => product.visible && product.currency === "CAD")
           .map(normalizeRemoteProduct);
-        if (!cancelled && normalized.length > 0) {
-          // Merge the remote catalog into the checked-in catalog instead of
-          // replacing it. Remote products remain authoritative for matching
-          // slugs, while local merch that has not yet been mirrored to
-          // Supabase (including legacy tee imagery) stays visible.
-          const bySlug = new Map<string, CommerceProduct>();
-          for (const product of [EXCAVATION_TEE, ...getVisibleCommerceProducts()]) {
-            bySlug.set(product.slug, product);
-          }
-          for (const product of normalized) {
-            bySlug.set(product.slug, product);
-          }
-          setAllProducts(Array.from(bySlug.values()));
+        if (!cancelled) {
+          // Supabase is the only authority for storefront visibility, price,
+          // sale mode and checkout eligibility. Fail closed rather than
+          // exposing stale checked-in merchandise when the catalog is down.
+          setAllProducts(normalized);
         }
       })
       .catch(() => {
-        // Keep the checked-in catalog as a resilient fallback.
+        if (!cancelled) setAllProducts([]);
       });
 
     return () => {
