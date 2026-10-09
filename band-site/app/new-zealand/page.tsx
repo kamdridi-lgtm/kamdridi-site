@@ -18,32 +18,48 @@ const organisations = [
 export default function NewZealandLivePage() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#08070d] text-white">
-      <section className="relative isolate border-b border-white/10">
-        <div className="pointer-events-none absolute inset-0 bg-[url('/nz/wellington-live-header-crowd-hd.png')] bg-cover bg-[60%_85%] md:bg-[center_60%]" aria-hidden="true" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#08070d]/55 via-[#08070d]/30 to-[#08070d]/10" aria-hidden="true" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#08070d]/35 via-transparent to-[#08070d]/10" aria-hidden="true" />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-8 px-5 pb-12 pt-10 sm:px-8 md:grid-cols-[1fr_.8fr] md:gap-12 md:py-16">
-          <div>
-            <div className="flex flex-wrap items-center gap-4">
-              <Link href="/live" className="text-xs font-bold uppercase tracking-[.22em] text-[#f4c66a] hover:underline">← Live / Tour</Link>
-              <Link href="/japan" className="text-xs font-semibold uppercase tracking-[.18em] text-stone-300 hover:text-white">🇯🇵 Japan</Link>
-              <Link href="/live#adelaide-show" className="text-xs font-semibold uppercase tracking-[.18em] text-stone-300 hover:text-white">🇦🇺 Australia</Link>
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#09080e]">
+        <div className="pointer-events-none absolute inset-0 bg-[url('/nz/wellington-live-header-crowd-hd.png')] bg-cover bg-[65%_75%] md:bg-center" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#07060c]/45 via-[#07060c]/25 to-[#07060c]/80" aria-hidden="true" />
+
+        <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-8 md:py-14 lg:px-10">
+          <nav aria-label="Asia-Pacific live pages" className="mb-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-[11px] font-bold uppercase tracking-[.16em] text-white">
+            <Link href="/live" className="text-[#f4c66a] hover:underline">← Live / Tour</Link>
+            <Link href="/japan" className="hover:text-[#f4c66a]">🇯🇵 Japan</Link>
+            <Link href="/live#adelaide-show" className="hover:text-[#f4c66a]">🇦🇺 Australia</Link>
+          </nav>
+
+          <div className="grid items-center gap-6 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,.88fr)] lg:gap-10">
+            <div className="rounded-[28px] border border-white/15 bg-[#07060d]/80 p-6 shadow-2xl shadow-black/35 backdrop-blur-[3px] sm:p-9 lg:p-11">
+              <p className="text-xs font-bold uppercase tracking-[.3em] text-[#d7b1ef]">🇳🇿 Aotearoa · New Zealand</p>
+              <h1 className="mt-5 font-display text-4xl font-bold uppercase leading-[.98] tracking-[.02em] text-white sm:text-6xl lg:text-[4.1rem]">
+                KAM DRIDI <span className="mt-2 block text-[#d9b1f1]">LIVE IN NZ</span>
+              </h1>
+              <p className="mt-6 max-w-xl text-sm leading-7 text-stone-200 sm:text-base">Cinematic Melodic Hard Rock — live lead vocals, professional instrumental backing tracks and cinematic visuals.</p>
+
+              <div className="mt-7 border-t border-white/20 pt-6">
+                <p className="text-[11px] font-bold uppercase tracking-[.22em] text-[#f4c66a]">Wellington · The Fringe Bar</p>
+                <p className="mt-3 text-xl font-bold text-white sm:text-2xl">Tuesday 2 March 2027</p>
+                <p className="mt-1 text-sm font-semibold text-stone-200">7:30 PM · 60-minute show</p>
+              </div>
+
+              <a href="https://www.fringe.co.nz/" target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex max-w-full items-center gap-4 rounded-xl border border-white/20 bg-[#27142c]/85 px-4 py-3 transition hover:border-white/50" aria-label="New Zealand Fringe Festival official website">
+                <img src="/nz/fringe-official.svg" alt="NZ Fringe Festival logo" width={112} height={56} className="h-[47px] w-[94px] shrink-0 object-contain" />
+                <span className="text-[10px] font-bold uppercase leading-5 tracking-[.12em] text-white sm:text-xs">NZ Fringe Festival 2027 <ArrowUpRight className="ml-1 inline h-3 w-3" /></span>
+              </a>
+
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Link href="/press" className="inline-flex items-center rounded-full bg-white px-5 py-3 text-xs font-bold uppercase tracking-[.12em] !text-black hover:bg-stone-200">Artist EPK <ArrowUpRight className="ml-2 h-4 w-4" /></Link>
+                <Link href="/tour#dates" className="inline-flex items-center rounded-full border border-white/35 bg-black/35 px-5 py-3 text-xs font-bold uppercase tracking-[.12em] text-white hover:bg-white/10">Tour dates</Link>
+              </div>
             </div>
-            <p className="mt-10 text-xs font-semibold uppercase tracking-[.38em] text-[#cda2ff]">Aotearoa · New Zealand</p>
-            <h1 className="mt-4 font-display text-5xl font-bold uppercase leading-[.95] tracking-[.02em] text-white sm:text-7xl">KAM DRIDI <span className="mt-2 block text-[#cba5f4]">LIVE IN NZ</span></h1>
-            <p className="mt-7 max-w-xl text-base leading-8 text-stone-200">Cinematic Melodic Hard Rock — live lead vocals with professional instrumental backing tracks and cinematic visuals.</p>
-            <a href="https://www.fringe.co.nz/" target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex max-w-full flex-col items-start gap-3 rounded-2xl border border-white/20 bg-[#201329] px-6 py-5 transition hover:border-white/50" aria-label="New Zealand Fringe Festival — official website">
-              <img src="/nz/fringe-official.svg" alt="New Zealand Fringe Festival official logo" width={168} height={84} className="h-[70px] w-auto max-w-full object-contain" />
-              <span className="text-xs font-semibold uppercase tracking-[.18em] text-white">Wellington · NZ Fringe Festival 2027 ↗</span>
-            </a>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/press" className="rounded-full bg-white px-6 py-3 text-xs font-bold uppercase tracking-[.16em] !text-black hover:bg-[#e7d7f9]">Artist EPK <ArrowUpRight className="ml-2 inline h-4 w-4" /></Link>
-              <Link href="/tour#dates" className="rounded-full border border-white/30 px-6 py-3 text-xs font-bold uppercase tracking-[.16em] text-white hover:bg-white/10">Tour dates</Link>
+
+            <div className="mx-auto w-full max-w-[380px] lg:max-w-[405px]">
+              <a href="/nz/kamdridi-wellington-2027-poster.png" target="_blank" rel="noopener noreferrer" className="group block overflow-hidden rounded-2xl border border-white/25 bg-black shadow-[0_22px_65px_rgba(0,0,0,.7)]" aria-label="Open the original Wellington 2027 poster at full size">
+                <Image src="/nz/kamdridi-wellington-2027-poster.png" alt="KAM DRIDI Wellington 2027 show poster — The Fringe Bar, 2 March 2027" width={1055} height={1491} priority sizes="(max-width: 1024px) 90vw, 405px" className="block h-auto w-full transition duration-300 group-hover:scale-[1.015]" />
+              </a>
+              <p className="mt-3 text-center text-[11px] font-semibold uppercase tracking-[.18em] text-white/85">Official show poster · Tap to enlarge ↗</p>
             </div>
-          </div>
-          <div className="relative mx-auto w-full max-w-[390px] overflow-hidden rounded-3xl border border-white/15 bg-black shadow-[0_25px_75px_rgba(89,38,143,.25)]">
-            <a href="/nz/kamdridi-wellington-2027-poster.png" target="_blank" rel="noopener noreferrer" aria-label="Open Wellington show poster"><Image src="/nz/kamdridi-wellington-2027-poster.png" alt="Wellington KAM DRIDI concert poster, 2 March 2027 at The Fringe Bar" width={1055} height={1491} priority className="h-auto w-full object-cover" /></a>
-            
           </div>
         </div>
       </section>
