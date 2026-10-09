@@ -32,7 +32,7 @@ export default function NewZealandLivePage() {
             </div>
           </div>
           <div className="relative mx-auto w-full max-w-[390px] overflow-hidden rounded-3xl border border-white/15 bg-black shadow-[0_25px_75px_rgba(89,38,143,.25)]">
-            <Image src="/assets/images/gallery/p03_portrait_mic.jpg" alt="Official KAM DRIDI artist portrait with microphone" width={1280} height={1920} priority className="h-auto w-full object-cover" />
+            <a href="/nz/kamdridi-wellington-2027-poster.png" target="_blank" rel="noopener noreferrer" aria-label="Open Wellington show poster"><Image src="/nz/kamdridi-wellington-2027-poster.png" alt="Wellington KAM DRIDI concert poster, 2 March 2027 at The Fringe Bar" width={1055} height={1491} priority className="h-auto w-full object-cover" /></a>
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/55 to-transparent p-6 pt-16"><p className="text-sm font-bold tracking-[.3em] text-white">KAM DRIDI</p><p className="mt-1 text-xs uppercase tracking-[.22em] text-[#dfc7fa]">Montréal → Aotearoa</p></div>
           </div>
         </div>
