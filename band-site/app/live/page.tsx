@@ -164,7 +164,7 @@ export default function LivePage() {
                   role="img"
                   aria-label="KAM DRIDI Australia"
                   className="h-full w-full bg-contain bg-center bg-no-repeat mix-blend-screen drop-shadow-[0_0_30px_rgba(48,133,255,0.42)]"
-                  style={{ backgroundImage: 'url("/australia/kamdridi-australia-logo.webp")' }}
+                  style={{ backgroundImage: 'url("/australia/kamdridi-australia-logo-transparent.png")' }}
                 />
               </div>
 
