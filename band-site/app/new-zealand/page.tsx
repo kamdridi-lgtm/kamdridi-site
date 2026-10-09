@@ -43,7 +43,7 @@ export default function NewZealandLivePage() {
       <section id="wellington-show" className="relative isolate overflow-hidden border-b border-white/10 bg-[#120c17]">
         {/* Fringe Bar interior: atmosphere behind the Wellington details, never over the Morocco live hero. */}
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[url('/nz/fringe-bar-venue-interior.png')] bg-cover bg-center" aria-hidden="true" />
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-[#0b0810]/85 via-[#0b0810]/75 to-[#0b0810]/85" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-[#0b0810]/35 via-[#0b0810]/20 to-[#0b0810]/40" aria-hidden="true" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-5 py-12 sm:px-8 md:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)] md:gap-12 md:py-20 lg:px-10">
           <div className="mx-auto w-full max-w-[410px]">
             <a href="/nz/kamdridi-wellington-2027-poster.png" target="_blank" rel="noopener noreferrer" aria-label="Open the original Wellington 2027 concert poster at full size" className="group block overflow-hidden rounded-2xl border border-white/20 bg-black shadow-[0_25px_65px_rgba(0,0,0,.55)]">
@@ -66,7 +66,7 @@ export default function NewZealandLivePage() {
             </a>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link href="/press" className="inline-flex items-center rounded-full bg-white px-6 py-3 text-xs font-bold uppercase tracking-[.12em] !text-black hover:bg-stone-200">Artist EPK <ArrowUpRight className="ml-2 h-4 w-4" /></Link>
-              <Link href="/tour#dates" className="inline-flex items-center rounded-full border border-white/30 px-6 py-3 text-xs font-bold uppercase tracking-[.12em] text-white hover:bg-white/10">Tour dates</Link>
+              <a href="https://www.fringe.co.nz/" target="_blank" rel="noopener noreferrer" aria-label="Buy tickets — visit the official NZ Fringe website for ticket availability" className="inline-flex items-center rounded-full border border-white/40 bg-black/45 px-6 py-3 text-xs font-bold uppercase tracking-[.12em] text-white transition hover:bg-white/15">Buy tickets <ArrowUpRight className="ml-2 h-4 w-4" /></a>
             </div>
           </div>
         </div>
