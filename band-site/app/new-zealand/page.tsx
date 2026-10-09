@@ -40,8 +40,11 @@ export default function NewZealandLivePage() {
       </section>
 
       {/* Wellington show and poster belong below the concert photograph. */}
-      <section id="wellington-show" className="border-b border-white/10 bg-[linear-gradient(145deg,#160c20,#08070d_65%)]">
-        <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 py-12 sm:px-8 md:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)] md:gap-12 md:py-20 lg:px-10">
+      <section id="wellington-show" className="relative isolate overflow-hidden border-b border-white/10 bg-[#120c17]">
+        {/* Fringe Bar interior: atmosphere behind the Wellington details, never over the Morocco live hero. */}
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-[url('/nz/fringe-bar-venue-interior.png')] bg-cover bg-center" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-[#0b0810]/85 via-[#0b0810]/75 to-[#0b0810]/85" aria-hidden="true" />
+        <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-5 py-12 sm:px-8 md:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)] md:gap-12 md:py-20 lg:px-10">
           <div className="mx-auto w-full max-w-[410px]">
             <a href="/nz/kamdridi-wellington-2027-poster.png" target="_blank" rel="noopener noreferrer" aria-label="Open the original Wellington 2027 concert poster at full size" className="group block overflow-hidden rounded-2xl border border-white/20 bg-black shadow-[0_25px_65px_rgba(0,0,0,.55)]">
               <Image src="/nz/kamdridi-wellington-2027-poster.png" alt="KAM DRIDI Wellington 2027 concert poster at The Fringe Bar" width={1055} height={1491} priority sizes="(max-width: 767px) 90vw, 410px" className="block h-auto w-full transition-transform duration-300 group-hover:scale-[1.015]" />
