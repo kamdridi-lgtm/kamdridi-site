@@ -214,21 +214,17 @@ export default function LivePage() {
 
             <div className="relative">
               <div className="absolute -inset-5 rounded-[38px] bg-[conic-gradient(from_180deg_at_50%_50%,rgba(29,99,255,0.28),rgba(255,255,255,0.02),rgba(220,30,42,0.28),rgba(29,99,255,0.28))] blur-2xl" />
-              <div className="relative isolate overflow-hidden rounded-[32px] border border-white/15 bg-black/10 p-6 shadow-2xl shadow-black/60 backdrop-blur-xl sm:p-8">
-                <div className="pointer-events-none absolute inset-0 -z-10 bg-cover bg-center opacity-100" style={{ backgroundImage: "url('/adelaide/domain-theatre-user-photo.svg')" }} aria-hidden="true" />
-                <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-black/10" aria-hidden="true" />
+              <div className="relative isolate overflow-hidden rounded-[32px] border border-white/15 bg-transparent p-6 shadow-2xl shadow-black/60 sm:p-8">
+                <div className="pointer-events-none absolute inset-0 -z-10 bg-cover bg-center opacity-100" style={{ backgroundImage: "url('/adelaide/domain-theatre-hd.jpg')" }} aria-hidden="true" />
                 <div className="border-b border-white/10 pb-6">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-red-300">
                     Adelaide · Australia
                   </p>
                   <h2 className="sr-only">Marion Cultural Centre | Domain Theatre</h2>
-                  <img
-                    src="/adelaide/domain-marion-white-logo.svg"
-                    alt="Marion Cultural Centre | Domain Theatre — official venue logos"
-                    width={375}
-                    height={94}
-                    className="mt-5 h-auto w-full max-w-[455px] object-contain object-left drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
-                  />
+                  <div className="mt-5 flex flex-wrap items-center gap-3 sm:gap-4">
+                    <img src="/adelaide/domain-theatre-logo-hd.png" alt="Domain Theatre" width={1672} height={941} className="h-auto w-[47%] max-w-[215px] object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]" />
+                    <img src="/adelaide/marion-cultural-centre-logo-hd.png" alt="Marion Cultural Centre" width={1983} height={793} className="h-auto w-[47%] max-w-[215px] object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]" />
+                  </div>
                 </div>
 
                 <div className="grid gap-4 py-6 sm:grid-cols-2">
