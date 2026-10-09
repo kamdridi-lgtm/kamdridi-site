@@ -5,7 +5,7 @@ import { ArrowUpRight, CalendarDays, MapPin, Mic2 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "KAM DRIDI — New Zealand Live",
-  description: "KAM DRIDI in Aotearoa New Zealand: Wellington live plans, artist photo, and official Wellington arts organisation links.",
+  description: "KAM DRIDI live in Wellington, New Zealand at The Fringe Bar, Tuesday 2 March 2027, 7:30 PM.",
 };
 
 const organisations = [
@@ -33,20 +33,20 @@ export default function NewZealandLivePage() {
           </div>
           <div className="relative mx-auto w-full max-w-[390px] overflow-hidden rounded-3xl border border-white/15 bg-black shadow-[0_25px_75px_rgba(89,38,143,.25)]">
             <a href="/nz/kamdridi-wellington-2027-poster.png" target="_blank" rel="noopener noreferrer" aria-label="Open Wellington show poster"><Image src="/nz/kamdridi-wellington-2027-poster.png" alt="Wellington KAM DRIDI concert poster, 2 March 2027 at The Fringe Bar" width={1055} height={1491} priority className="h-auto w-full object-cover" /></a>
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/55 to-transparent p-6 pt-16"><p className="text-sm font-bold tracking-[.3em] text-white">KAM DRIDI</p><p className="mt-1 text-xs uppercase tracking-[.22em] text-[#dfc7fa]">Montréal → Aotearoa</p></div>
+            
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-12 sm:px-8 md:py-16">
         <div className="flex flex-wrap items-center gap-3">
-          <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[.2em] text-[#f4c66a]">Provisional · Not confirmed</span>
+          <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[.2em] text-[#f4c66a]">Wellington · New Zealand</span>
           <span className="text-xs uppercase tracking-[.2em] text-stone-400">Wellington 2027</span>
         </div>
-        <h2 className="mt-5 font-display text-3xl uppercase tracking-wide text-white sm:text-5xl">Wellington live plans</h2>
+        <h2 className="mt-5 font-display text-3xl uppercase tracking-wide text-white sm:text-5xl">The Fringe Bar · Wellington</h2>
         <div className="mt-6 grid gap-4 rounded-3xl border border-white/15 bg-white/[.04] p-6 sm:grid-cols-2 sm:p-8">
-          <div><p className="mb-3 flex items-center gap-2 text-sm text-[#e7d7f9]"><CalendarDays className="h-4 w-4" /> 2 March 2027 · 7:30 PM (provisional)</p><p className="flex items-center gap-2 text-sm text-stone-200"><MapPin className="h-4 w-4" /> Fringe Bar · Wellington, New Zealand</p></div>
-          <div><p className="flex items-center gap-2 text-sm text-stone-200"><Mic2 className="h-4 w-4" /> Solo lead vocal live · instrumental backing tracks</p><p className="mt-3 text-xs leading-6 text-stone-400">Planning information only. The venue/date will be announced as confirmed only after written confirmation.</p></div>
+          <div><p className="mb-3 flex items-center gap-2 text-sm text-[#e7d7f9]"><CalendarDays className="h-4 w-4" /> Tuesday 2 March 2027 · 7:30 PM</p><p className="flex items-center gap-2 text-sm text-stone-200"><MapPin className="h-4 w-4" /> The Fringe Bar · 26–32 Allen Street, Wellington, New Zealand</p></div>
+          <div><p className="flex items-center gap-2 text-sm text-stone-200"><Mic2 className="h-4 w-4" /> Solo lead vocal live · instrumental backing tracks</p><p className="mt-3 text-xs leading-6 text-stone-400">Explore the full-size Wellington 2027 poster above for show details and the festival information link.</p></div>
         </div>
       </section>
 
