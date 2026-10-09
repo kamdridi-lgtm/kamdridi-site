@@ -10,8 +10,9 @@ export default function JapanLivePage() {
   return (
     <main className="min-h-screen bg-[#07080d] text-white">
       <section className="relative isolate overflow-hidden border-b border-white/10">
-        <div className="pointer-events-none absolute inset-0 bg-[url('/japan/17-for-ever-original-poster.png')] bg-right bg-no-repeat bg-contain opacity-35" aria-hidden="true" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#07080d] via-[#07080d]/80 to-[#07080d]/20" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 bg-[url('/japan/japan-header-crowd-hd.png')] bg-cover bg-[center_48%]" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#07080d]/85 via-[#07080d]/45 to-transparent" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#07080d]/70 via-transparent to-transparent" aria-hidden="true" />
         <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
           <Link href="/live" className="text-xs font-bold uppercase tracking-[.24em] text-[#f4c66a] hover:underline">← Asia-Pacific Live</Link>
           <p className="mt-14 text-sm font-bold uppercase tracking-[.4em] text-red-300">🇯🇵 Japan · 2027</p>
