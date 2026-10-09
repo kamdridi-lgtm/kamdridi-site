@@ -59,8 +59,8 @@ export default function NewZealandLivePage() {
             {organisations.map((org) => (
               <a key={org.kind} href={org.url} target="_blank" rel="noopener noreferrer" aria-label={`Official website: ${org.name}`} className="group flex min-h-[154px] items-center justify-center rounded-2xl border border-white/15 bg-white px-5 py-7 text-center transition hover:-translate-y-1 hover:border-[#ad76d5] hover:shadow-[0_10px_35px_rgba(148,60,170,.2)]">
                 {org.kind === "ccat" && <div className="text-left text-[27px] font-extrabold leading-[.9] tracking-[-.045em] text-[#7551c7] sm:text-[32px]">creative<br/>capital<br/><span className="text-[#121019]">arts</span><br/>trust</div>}
-                {org.kind === "fringe" && <img src="https://www.fringe.co.nz/wp-content/uploads/2024/08/FringeLogo.svg" loading="lazy" alt="Official New Zealand Fringe Festival logo" className="max-h-[120px] max-w-full object-contain" />}
-                {org.kind === "cubadupa" && <div className="rounded-xl bg-[#4f1c69] p-5"><img src="https://www.cubadupa.co.nz/wp-content/uploads/2024/11/CubaDupa_HeaderLogo-white.svg" loading="lazy" alt="Official CubaDupa logo" className="h-[90px] max-w-full object-contain" /></div>}
+                {org.kind === "fringe" && <img src="/nz/fringe-official.svg" loading="lazy" alt="Official New Zealand Fringe Festival logo" className="max-h-[120px] max-w-full object-contain" />}
+                {org.kind === "cubadupa" && <div className="rounded-xl bg-[#4f1c69] p-5"><img src="/nz/cubadupa-official.svg" loading="lazy" alt="Official CubaDupa logo" className="h-[90px] max-w-full object-contain" /></div>}
                 {org.kind === "classical" && <div className="flex items-center gap-3 text-[#9b16ac]"><span className="text-7xl font-black leading-none">C</span><span className="text-left text-2xl font-bold uppercase leading-[.95] tracking-tight">Classical<br/>on Cuba</span></div>}
                 <ArrowUpRight className="absolute right-5 top-5 h-4 w-4 text-[#7e5597] opacity-0 transition group-hover:opacity-100" />
               </a>
