@@ -186,7 +186,7 @@ export default function LivePage() {
                   href={fringeUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-xs font-bold uppercase tracking-[0.22em] text-black transition hover:bg-red-500 hover:text-white"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-xs font-bold uppercase tracking-[0.22em] !text-black [&_svg]:!text-black transition hover:bg-stone-100"
                 >
                   <Ticket className="h-4 w-4" />
                   Official Adelaide Fringe
