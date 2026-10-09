@@ -48,6 +48,26 @@ function AustraliaCollectorIcon() {
     </svg>
   );
 }
+function NewZealandCollectorIcon() {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true" className="h-full w-full">
+      <circle cx="24" cy="24" r="22" fill="#dbbd83" />
+      <circle cx="24" cy="24" r="19.5" fill="#08234c" stroke="#071124" strokeWidth="1.2" />
+      <g transform="translate(5 5) scale(.48)">
+        <path d="M0 0H38V30H0Z" fill="#fff" />
+        <path d="M0 0 38 30M38 0 0 30" stroke="#c8102e" strokeWidth="5" />
+        <path d="M19 0V30M0 15H38" stroke="#fff" strokeWidth="10" />
+        <path d="M19 0V30M0 15H38" stroke="#c8102e" strokeWidth="5" />
+      </g>
+      <g fill="#d92237" stroke="#fff" strokeWidth="1.1">
+        <path d="m32 13 1.2 2.4 2.7.4-2 1.9.5 2.6-2.4-1.2-2.4 1.2.5-2.6-2-1.9 2.7-.4z" />
+        <path d="m38 25 1 2.2 2.4.4-1.7 1.7.4 2.4-2.1-1.1-2.1 1.1.4-2.4-1.7-1.7 2.4-.4z" />
+        <path d="m29 32 1 2.2 2.4.4-1.7 1.7.4 2.4-2.1-1.1-2.1 1.1.4-2.4-1.7-1.7 2.4-.4z" />
+        <path d="m24 23 1 2.2 2.4.4-1.7 1.7.4 2.4-2.1-1.1-2.1 1.1.4-2.4-1.7-1.7 2.4-.4z" />
+      </g>
+    </svg>
+  );
+}
 function JapanCollectorIcon() {
   return (
     <svg viewBox="0 0 48 48" aria-hidden="true" className="h-full w-full">
@@ -512,6 +532,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     isNavItemActive(pathname, item),
   );
   const isAustraliaCampaign = pathname === "/australia";
+  const isNewZealandCampaign = pathname.startsWith("/new-zealand");
   const isJapanCampaign = pathname === "/app/war-machines-jp";
   const isBrasilCampaign = pathname.startsWith("/releases/echoes-un-live-in-brasil");
   const showSecondaryExplore = !isHome && pathname !== salieriReleaseHref && !isAustraliaCampaign;
@@ -524,11 +545,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <SocialBar />{" "}
       <header className="sticky top-0 z-[1000] border-b border-white/10 bg-[#090909]/88 backdrop-blur-xl">
         {" "}
-        <div className="relative mx-auto flex max-w-[1500px] items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
+        <div className="relative mx-auto flex max-w-[1500px] items-center justify-between gap-1.5 px-2 py-2.5 sm:gap-4 sm:px-6">
           {" "}
           <Link href="/" className="flex shrink-0 items-center gap-3">
             {" "}
-            <div className="relative h-12 w-32 shrink-0 sm:w-36 2xl:w-44">
+            <div className="relative h-12 w-20 shrink-0 min-[390px]:w-24 sm:w-36 2xl:w-44">
               {" "}
               <Image
                 src={brandLogo}
@@ -690,6 +711,15 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 glowClass="shadow-[0_0_22px_rgba(42,91,151,0.18)] hover:shadow-[0_0_28px_rgba(190,42,48,0.34)]"
               >
                 <AustraliaCollectorIcon />
+              </CampaignBadgeLink>
+              <CampaignBadgeLink
+                href="/new-zealand"
+                label="KAM DRIDI live — Aotearoa New Zealand"
+                shortLabel="NZ"
+                active={isNewZealandCampaign}
+                glowClass="shadow-[0_0_22px_rgba(118,68,160,0.22)] hover:shadow-[0_0_28px_rgba(173,103,204,0.45)]"
+              >
+                <NewZealandCollectorIcon />
               </CampaignBadgeLink>
             </div>{" "}
             <button
