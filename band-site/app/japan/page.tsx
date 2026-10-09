@@ -19,7 +19,7 @@ export default function JapanLivePage() {
           <h1 className="mt-5 max-w-4xl font-display text-5xl uppercase leading-[.95] tracking-[.035em] sm:text-7xl">KAM DRIDI <span className="mt-3 block text-red-500">LIVE IN JAPAN</span></h1>
           <p className="mt-7 max-w-2xl text-base leading-8 text-stone-200">Melodic Hard Rock / Cinematic Melodic Hard Rock. Live lead vocals with professional instrumental backing tracks and optional synchronized visuals.</p>
           <div className="mt-10 flex flex-wrap gap-3">
-            <Link href="/press" className="rounded-full bg-white px-6 py-3 text-xs font-bold uppercase tracking-widest text-black hover:bg-stone-200">Artist / EPK ↗</Link>
+            <Link href="/press" className="rounded-full bg-white px-6 py-3 text-xs font-bold uppercase tracking-widest !text-black hover:bg-stone-200">Artist / EPK ↗</Link>
             <Link href="/new-zealand" className="rounded-full border border-white/25 px-6 py-3 text-xs font-bold uppercase tracking-widest text-white hover:bg-white/10">🇳🇿 New Zealand</Link>
             <Link href="/live#adelaide-show" className="rounded-full border border-white/25 px-6 py-3 text-xs font-bold uppercase tracking-widest text-white hover:bg-white/10">🇦🇺 Australia</Link>
           </div>
