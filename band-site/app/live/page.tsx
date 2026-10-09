@@ -171,10 +171,14 @@ export default function LivePage() {
               <p className="text-sm font-semibold uppercase tracking-[0.45em] text-white/80">
                 Live in Australia
               </p>
-              <h1 className="mt-4 max-w-4xl font-display text-5xl uppercase leading-[0.88] tracking-[0.04em] text-white sm:text-6xl lg:text-8xl">
-                Adelaide
-                <span className="block text-red-500">Fringe 2027</span>
-              </h1>
+              <h1 className="sr-only">Adelaide Fringe 2027 — KAM DRIDI Live</h1>
+              <Image
+                src="/adelaide/adelaide-fringe-2027-official.svg"
+                alt="Adelaide Fringe — 19 February to 21 March 2027 (official festival logo)"
+                width={721}
+                height={209}
+                className="mt-5 h-auto w-full max-w-[680px] object-contain object-left drop-shadow-[0_12px_26px_rgba(0,0,0,0.48)]"
+              />
               <p className="mt-7 max-w-2xl text-base leading-8 text-stone-200 sm:text-lg">
                 KAM DRIDI brings the cinematic melodic hard rock live show to
                 Domain Theatre at Marion Cultural Centre for one confirmed
