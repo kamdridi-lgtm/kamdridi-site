@@ -214,9 +214,9 @@ export default function LivePage() {
 
             <div className="relative">
               <div className="absolute -inset-5 rounded-[38px] bg-[conic-gradient(from_180deg_at_50%_50%,rgba(29,99,255,0.28),rgba(255,255,255,0.02),rgba(220,30,42,0.28),rgba(29,99,255,0.28))] blur-2xl" />
-              <div className="relative isolate overflow-hidden rounded-[32px] border border-white/15 bg-black/65 p-6 shadow-2xl shadow-black/60 backdrop-blur-xl sm:p-8">
-                <div className="pointer-events-none absolute inset-0 -z-10 bg-cover bg-center opacity-90" style={{ backgroundImage: "url('/adelaide/domain-theatre-user-photo.svg')" }} aria-hidden="true" />
-                <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[#09060c]/80 via-[#09060c]/75 to-[#09060c]/95" aria-hidden="true" />
+              <div className="relative isolate overflow-hidden rounded-[32px] border border-white/15 bg-black/10 p-6 shadow-2xl shadow-black/60 backdrop-blur-xl sm:p-8">
+                <div className="pointer-events-none absolute inset-0 -z-10 bg-cover bg-center opacity-100" style={{ backgroundImage: "url('/adelaide/domain-theatre-user-photo.svg')" }} aria-hidden="true" />
+                <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-black/10" aria-hidden="true" />
                 <div className="border-b border-white/10 pb-6">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-red-300">
                     Adelaide · Australia
@@ -230,7 +230,7 @@ export default function LivePage() {
                 </div>
 
                 <div className="grid gap-4 py-6 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                  <div className="rounded-2xl border border-white/20 bg-black/55 p-4">
                     <CalendarDays className="h-5 w-5 text-[#f4c66a]" />
                     <p className="mt-3 text-[10px] uppercase tracking-[0.26em] text-stone-500">
                       Date
