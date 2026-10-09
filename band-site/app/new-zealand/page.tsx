@@ -22,10 +22,18 @@ export default function NewZealandLivePage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(119,36,137,.24),transparent_45%),radial-gradient(circle_at_12%_80%,rgba(33,72,125,.24),transparent_46%)]" />
         <div className="relative mx-auto grid max-w-6xl items-center gap-8 px-5 pb-12 pt-10 sm:px-8 md:grid-cols-[1fr_.8fr] md:gap-12 md:py-16">
           <div>
-            <Link href="/live" className="text-xs font-bold uppercase tracking-[.25em] text-[#f4c66a] hover:underline">← Live / Tour</Link>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link href="/live" className="text-xs font-bold uppercase tracking-[.22em] text-[#f4c66a] hover:underline">← Live / Tour</Link>
+              <Link href="/japan" className="text-xs font-semibold uppercase tracking-[.18em] text-stone-300 hover:text-white">🇯🇵 Japan</Link>
+              <Link href="/live#adelaide-show" className="text-xs font-semibold uppercase tracking-[.18em] text-stone-300 hover:text-white">🇦🇺 Australia</Link>
+            </div>
             <p className="mt-10 text-xs font-semibold uppercase tracking-[.38em] text-[#cda2ff]">Aotearoa · New Zealand</p>
             <h1 className="mt-4 font-display text-5xl font-bold uppercase leading-[.95] tracking-[.02em] text-white sm:text-7xl">KAM DRIDI <span className="mt-2 block text-[#cba5f4]">LIVE IN NZ</span></h1>
             <p className="mt-7 max-w-xl text-base leading-8 text-stone-200">Cinematic Melodic Hard Rock — live lead vocals with professional instrumental backing tracks and cinematic visuals.</p>
+            <a href="https://www.fringe.co.nz/" target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex max-w-full flex-col items-start gap-3 rounded-2xl border border-white/20 bg-[#201329] px-6 py-5 transition hover:border-white/50" aria-label="New Zealand Fringe Festival — official website">
+              <img src="/nz/fringe-official.svg" alt="New Zealand Fringe Festival official logo" width={168} height={84} className="h-[70px] w-auto max-w-full object-contain" />
+              <span className="text-xs font-semibold uppercase tracking-[.18em] text-white">Wellington · NZ Fringe Festival 2027 ↗</span>
+            </a>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/press" className="rounded-full bg-white px-6 py-3 text-xs font-bold uppercase tracking-[.16em] !text-black hover:bg-[#e7d7f9]">Artist EPK <ArrowUpRight className="ml-2 inline h-4 w-4" /></Link>
               <Link href="/tour#dates" className="rounded-full border border-white/30 px-6 py-3 text-xs font-bold uppercase tracking-[.16em] text-white hover:bg-white/10">Tour dates</Link>
