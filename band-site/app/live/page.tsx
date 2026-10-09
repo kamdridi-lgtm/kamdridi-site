@@ -113,12 +113,18 @@ export default function LivePage() {
         </div>
       </section>
 
-      <section aria-label="Explore live shows by country" className="mx-auto grid max-w-7xl gap-4 px-5 py-8 sm:grid-cols-2 sm:px-8 lg:px-10">
+      <section aria-label="Explore live shows by country" className="mx-auto grid max-w-7xl gap-4 px-5 py-8 sm:grid-cols-2 sm:px-8 lg:grid-cols-3 lg:px-10">
         <Link href="#adelaide-show" className="group rounded-3xl border border-white/20 bg-[linear-gradient(120deg,#171d39,#14090e)] p-6 transition hover:border-blue-400/60 hover:bg-white/10">
           <span className="text-3xl" aria-hidden="true">🇦🇺</span>
           <h2 className="mt-3 font-display text-3xl uppercase tracking-wide text-white">Australia</h2>
           <p className="mt-2 text-sm text-stone-300">Adelaide Fringe · Coolangatta · additional dates</p>
           <span className="mt-4 inline-block text-xs font-bold uppercase tracking-[.2em] text-white">Explore shows →</span>
+        </Link>
+        <Link href="/japan" className="group rounded-3xl border border-white/20 bg-[linear-gradient(120deg,#281419,#0b0a14)] p-6 transition hover:border-red-400/60 hover:bg-white/10">
+          <span className="text-3xl" aria-hidden="true">🇯🇵</span>
+          <h2 className="mt-3 font-display text-3xl uppercase tracking-wide text-white">Japan</h2>
+          <p className="mt-2 text-sm text-stone-300">Tokyo · Osaka · 2027 live plans</p>
+          <span className="mt-4 inline-block text-xs font-bold uppercase tracking-[.2em] text-white">Explore Japan →</span>
         </Link>
         <Link href="/new-zealand" className="group rounded-3xl border border-white/20 bg-[linear-gradient(120deg,#32101b,#100912)] p-6 transition hover:border-red-400/60 hover:bg-white/10">
           <span className="text-3xl" aria-hidden="true">🇳🇿</span>
