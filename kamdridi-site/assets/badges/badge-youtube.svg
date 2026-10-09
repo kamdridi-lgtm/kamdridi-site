@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="210" height="56" viewBox="0 0 210 56" role="img" aria-label="YouTube">
+  <defs></defs>
+  <rect x="1" y="1" width="208" height="54" rx="14" fill="rgba(0,0,0,0.72)" stroke="rgba(255,255,255,0.18)"/>
+  <rect x="1" y="1" width="208" height="54" rx="14" fill="#FF0000" fill-opacity="0.10"/>
+  <circle cx="28" cy="28" r="14" fill="#FF0000"/>
+  <g transform="translate(28 28) scale(0.045) translate(-256 -256)" fill="#fff">
+    <path d="M549.7 124.1c-6.3-23.6-24.8-42.2-48.4-48.5C458.8 64 288 64 288 64S117.2 64 74.7 75.6c-23.6 6.3-42.2 24.8-48.5 48.5C14.6 166.6 14.6 256 14.6 256s0 89.4 11.6 131.9c6.3 23.6 24.8 41 48.5 47.3C117.2 448 288 448 288 448s170.8 0 213.3-11.6c23.6-6.3 42.2-23.7 48.4-47.3C561.3 345.4 561.3 256 561.3 256s0-89.4-11.6-131.9zM232 338V174l142 82-142 82z"/>
+  </g>
+  <text x="118" y="35" font-family="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">YouTube</text>
+</svg>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KAM DRIDI | Confirmation</title>
+  <meta name="description" content="Confirmation screen for orders and contact submissions on the KAM DRIDI site." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/site-enhancements.css" />
+</head>
+<body>
+  <main class="section" style="min-height:100vh;">
+    <div class="container" style="max-width:860px;">
+      <div class="form-shell">
+        <div class="tag" id="success-tag">CONFIRMED</div>
+        <h1 id="success-title" style="margin:14px 0 8px;">Artifact Secured</h1>
+        <p id="success-copy" class="meta-copy">Your request has been received. A confirmation email should follow shortly.</p>
+        <div class="info-panel" id="product-summary" style="padding:18px; margin-top:18px; display:none;">
+          <h3 style="margin:0 0 6px;">Latest item</h3>
+          <p id="product-name" style="margin:0;"></p>
+          <p id="product-meta" class="meta-copy" style="margin:8px 0 0;"></p>
+        </div>
+        <div class="button-row" style="margin-top:20px;">
+          <a class="btn primary" href="merch.html">Return to Store</a>
+          <a class="btn" href="index.html">Back to Site</a>
+          <a class="btn" href="press.html">Press Kit</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/store-catalog.js" defer></script>
+  <script src="assets/js/site-core.js" defer></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const type = params.get("type");
+      const productKey = params.get("product");
+      const title = document.getElementById("success-title");
+      const copy = document.getElementById("success-copy");
+      const tag = document.getElementById("success-tag");
+      const summary = document.getElementById("product-summary");
+      const productName = document.getElementById("product-name");
+      const productMeta = document.getElementById("product-meta");
+      let stored = null;
+
+      try {
+        stored = JSON.parse(sessionStorage.getItem("kamdridi:last-product") || "null");
+      } catch (_) {
+        stored = null;
+      }
+
+      const catalog = window.KAM_DRIDI_PRODUCTS || {};
+      const product = (productKey && catalog[productKey]) || stored;
+
+      if (type === "contact") {
+        tag.textContent = "MESSAGE RECEIVED";
+        title.textContent = "Request Sent";
+        copy.textContent = "Your categorized message has been submitted. We will review it with the right context and get back to you.";
+      }
+
+      if (product) {
+        summary.style.display = "block";
+        productName.textContent = product.name;
+        productMeta.textContent = `${product.category} / ${product.priceLabel}`;
+      }
+    });
+  </script>
+</body>
+</html>

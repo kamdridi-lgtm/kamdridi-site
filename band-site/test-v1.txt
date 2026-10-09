@@ -1,0 +1,3 @@
+drawtext=fontfile='C\:/Windows/Fonts/impact.ttf':text='OUT NOW':fontcolor=lightblue:fontsize=150:x=(w-text_w)/2:y=(h/2)-200:borderw=6:bordercolor=black,
+drawtext=fontfile='C\:/Windows/Fonts/impact.ttf':text='visit kamdridi.com':fontcolor=red:fontsize=100:x=(w-text_w)/2:y=(h/2):borderw=5:bordercolor=black,
+drawtext=fontfile='C\:/Windows/Fonts/impact.ttf':text='TOO FAST TOO YOUNG':fontcolor=lightblue:fontsize=180:x=(w-text_w)/2:y=h-200:borderw=8:bordercolor=black

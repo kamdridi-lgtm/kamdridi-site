@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="210" height="56" viewBox="0 0 210 56" role="img" aria-label="X">
+  <defs></defs>
+  <rect x="1" y="1" width="208" height="54" rx="14" fill="rgba(0,0,0,0.72)" stroke="rgba(255,255,255,0.18)"/>
+  <rect x="1" y="1" width="208" height="54" rx="14" fill="#111111" fill-opacity="0.10"/>
+  <circle cx="28" cy="28" r="14" fill="#111111"/>
+  <g transform="translate(28 28) scale(0.045) translate(-256 -256)" fill="#fff">
+    <path d="M357.2 32H476L281.3 254.6 512 480H331.5L189.7 333.9 63.9 480H0L208.8 243.6 0 32h184.9l128.3 133.1L357.2 32z"/>
+  </g>
+  <text x="118" y="35" font-family="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">X</text>
+</svg>

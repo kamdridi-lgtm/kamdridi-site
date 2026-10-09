@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap');
+
+:root {
+    --gold: #C9952A;
+    --gold-light: #F5DFA0;
+    --dark: #030202;
+    --red: #8B1A1A;
+    --red-bright: #FF3030;
+    --mono: 'Share Tech Mono', monospace;
+    --deco: 'Bebas Neue', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #000; color: #E8E2D6; font-family: var(--mono); user-select: none; -webkit-tap-highlight-color: transparent; }
+.hidden { display: none !important; }

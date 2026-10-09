@@ -1,0 +1,1 @@
+const https = require('https'); const key = require('fs').readFileSync('.env.local', 'utf8').split('\n').find(l => l.startsWith('GEMINI_API_KEY=')).split('=')[1].trim().replace(/^"|"$/g, ''); https.get('https://generativelanguage.googleapis.com/v1beta/models?key=' + key, res => { let d = ''; res.on('data', c => d += c); res.on('end', () => console.log(d)); });

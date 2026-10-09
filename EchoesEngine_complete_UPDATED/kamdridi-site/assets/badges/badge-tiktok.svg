@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="210" height="56" viewBox="0 0 210 56" role="img" aria-label="TikTok">
+  <defs></defs>
+  <rect x="1" y="1" width="208" height="54" rx="14" fill="rgba(0,0,0,0.72)" stroke="rgba(255,255,255,0.18)"/>
+  <rect x="1" y="1" width="208" height="54" rx="14" fill="#111111" fill-opacity="0.10"/>
+  <circle cx="28" cy="28" r="14" fill="#111111"/>
+  <g transform="translate(28 28) scale(0.045) translate(-256 -256)" fill="#fff">
+    <path d="M448 209.9v125.1c-44.3 0-87.6-14.6-123.1-41.8v123.2c0 80.7-65.7 95.6-103.9 95.6-70.7 0-127.1-47-127.1-117.7 0-71.1 58.3-127.6 129.4-117.3V64h101.7c9.2 72.7 45.8 116.9 122.9 145.9z"/>
+  </g>
+  <text x="118" y="35" font-family="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">TikTok</text>
+</svg>

@@ -1,0 +1,1406 @@
+{
+  "agent_registry": [
+    {
+      "id": "orchestrator_agent",
+      "name": "Orchestrator Agent",
+      "agent_group": "leadership",
+      "description": "Controls all agents, routes work, validates output, and restarts failed agents.",
+      "is_chief": true,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": null,
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "cto_agent",
+      "name": "CTO Agent",
+      "agent_group": "direction",
+      "description": "Owns technical architecture, technology choices, and system strategy.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": null,
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "project_manager_agent",
+      "name": "Project Manager Agent",
+      "agent_group": "direction",
+      "description": "Breaks initiatives into tickets, sequences delivery, and maintains execution plans.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": null,
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "code_builder_agent",
+      "name": "Code Builder Agent",
+      "agent_group": "development",
+      "description": "Builds new code, pages, and product features.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": null,
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "code_repair_agent",
+      "name": "Code Repair Agent",
+      "agent_group": "development",
+      "description": "Fixes bugs, regressions, and JS/CSS/backend errors.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": "2026-03-30T21:30:32.595Z",
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "refactor_agent",
+      "name": "Refactor Agent",
+      "agent_group": "development",
+      "description": "Improves structure, reduces debt, and keeps the codebase maintainable.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": null,
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "performance_agent",
+      "name": "Performance Agent",
+      "agent_group": "development",
+      "description": "Optimizes loading speed, assets, and runtime efficiency.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": "2026-03-30T21:30:32.611Z",
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "security_agent",
+      "name": "Security Agent",
+      "agent_group": "development",
+      "description": "Audits vulnerabilities, secrets, and API protection.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": null,
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "database_agent",
+      "name": "Database Agent",
+      "agent_group": "backend",
+      "description": "Maintains Supabase schema, migrations, and data organization.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": null,
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "api_agent",
+      "name": "API Agent",
+      "agent_group": "backend",
+      "description": "Builds endpoints and connects frontend with backend services.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": null,
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "automation_agent",
+      "name": "Automation Agent",
+      "agent_group": "backend",
+      "description": "Builds scheduled scripts, cron flows, and workflow automations.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": null,
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "radio_finder_agent",
+      "name": "Radio Finder Agent",
+      "agent_group": "research",
+      "description": "Finds rock and heavy radios and gathers contact channels.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": "2026-03-30T21:30:32.664Z",
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "festival_finder_agent",
+      "name": "Festival Finder Agent",
+      "agent_group": "research",
+      "description": "Finds festivals, deadlines, and relevant booking contacts.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": "2026-03-30T21:30:32.629Z",
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "press_finder_agent",
+      "name": "Press Finder Agent",
+      "agent_group": "research",
+      "description": "Finds music blogs, magazines, and editorial opportunities.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": "2026-03-30T21:30:32.646Z",
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "playlist_finder_agent",
+      "name": "Playlist Finder Agent",
+      "agent_group": "research",
+      "description": "Finds playlist curators, Spotify opportunities, and rock playlists.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": "2026-03-30T21:29:06.007Z",
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "email_outreach_agent",
+      "name": "Email Outreach Agent",
+      "agent_group": "outreach",
+      "description": "Builds outreach emails, follow-ups, and communication sequences.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": "2026-03-30T21:30:32.685Z",
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "social_media_agent",
+      "name": "Social Media Agent",
+      "agent_group": "outreach",
+      "description": "Prepares automated announcements and social publication plans.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": null,
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "fan_growth_agent",
+      "name": "Fan Growth Agent",
+      "agent_group": "outreach",
+      "description": "Captures fan leads, newsletter growth, and conversion opportunities.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": null,
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "content_writer_agent",
+      "name": "Content Writer Agent",
+      "agent_group": "content",
+      "description": "Writes bios, press releases, newsletters, and campaign copy.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": null,
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "visual_creator_agent",
+      "name": "Visual Creator Agent",
+      "agent_group": "content",
+      "description": "Plans promo visuals and image deliverables without altering site identity.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": null,
+      "created_at": "2026-03-30T21:29:05.883Z"
+    },
+    {
+      "id": "analytics_agent",
+      "name": "Analytics Agent",
+      "agent_group": "content",
+      "description": "Measures traffic, conversions, and growth performance.",
+      "is_chief": false,
+      "status": "idle",
+      "autonomy_mode": "autonomous",
+      "restart_count": 0,
+      "last_seen": null,
+      "created_at": "2026-03-30T21:29:05.883Z"
+    }
+  ],
+  "agent_tasks": [
+    {
+      "id": "f9363218-b11a-4c3d-bea0-79c3536fe59f",
+      "title": "Continuous site maintenance",
+      "description": "Keep the site healthy without changing design identity.",
+      "task_type": "code_repair",
+      "status": "completed",
+      "priority": 80,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": "code_repair_agent",
+      "parent_task_id": null,
+      "payload": {},
+      "result": {
+        "summary": "code_repair_agent processed code_repair and flagged repair opportunities.",
+        "next_actions": [
+          "Validate failing components",
+          "Escalate unresolved issues"
+        ],
+        "stored_records": 0
+      },
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:29:05.888Z",
+      "started_at": "2026-03-30T21:29:05.894Z",
+      "completed_at": "2026-03-30T21:29:05.907Z",
+      "created_at": "2026-03-30T21:29:05.888Z"
+    },
+    {
+      "id": "153a6cbe-7026-4e54-9a1a-9ef72944c3a6",
+      "title": "Continuous performance watch",
+      "description": "Review load speed and asset performance continuously.",
+      "task_type": "performance",
+      "status": "completed",
+      "priority": 75,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": "performance_agent",
+      "parent_task_id": null,
+      "payload": {},
+      "result": {
+        "summary": "performance_agent processed performance and checked speed optimization candidates.",
+        "next_actions": [
+          "Compress heavy assets",
+          "Review blocking scripts"
+        ],
+        "stored_records": 0
+      },
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:29:05.888Z",
+      "started_at": "2026-03-30T21:29:05.915Z",
+      "completed_at": "2026-03-30T21:29:05.922Z",
+      "created_at": "2026-03-30T21:29:05.888Z"
+    },
+    {
+      "id": "df69c039-85d7-499b-a258-63c4609fc86d",
+      "title": "Continuous festival opportunity scan",
+      "description": "Look for festivals, deadlines, and opportunity signals.",
+      "task_type": "festival_research",
+      "status": "completed",
+      "priority": 70,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": "festival_finder_agent",
+      "parent_task_id": null,
+      "payload": {},
+      "result": {
+        "summary": "festival_finder_agent processed festival_research and prepared festival leads for follow-up.",
+        "leads": [],
+        "next_actions": [
+          "Persist festivals",
+          "Trigger outreach drafting"
+        ],
+        "stored_records": 0
+      },
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:29:05.888Z",
+      "started_at": "2026-03-30T21:29:05.930Z",
+      "completed_at": "2026-03-30T21:29:05.940Z",
+      "created_at": "2026-03-30T21:29:05.888Z"
+    },
+    {
+      "id": "a00250ae-61c1-47e1-95c1-563fc24b5fba",
+      "title": "Continuous press opportunity scan",
+      "description": "Look for press, blogs, and editorial opportunities.",
+      "task_type": "press_research",
+      "status": "completed",
+      "priority": 68,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": "press_finder_agent",
+      "parent_task_id": null,
+      "payload": {},
+      "result": {
+        "summary": "press_finder_agent processed press_research and prepared editorial targets.",
+        "opportunities": [],
+        "next_actions": [
+          "Normalize press contacts",
+          "Prepare personalized messaging"
+        ],
+        "stored_records": 0
+      },
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:29:05.888Z",
+      "started_at": "2026-03-30T21:29:05.950Z",
+      "completed_at": "2026-03-30T21:29:05.960Z",
+      "created_at": "2026-03-30T21:29:05.888Z"
+    },
+    {
+      "id": "a1c77cd5-9bf7-44e8-bfa7-7091ac686979",
+      "title": "Continuous radio opportunity scan",
+      "description": "Look for radio opportunities and contact sources.",
+      "task_type": "radio_research",
+      "status": "completed",
+      "priority": 66,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": "radio_finder_agent",
+      "parent_task_id": null,
+      "payload": {},
+      "result": {
+        "summary": "radio_finder_agent processed radio_research and prepared radio prospecting targets.",
+        "opportunities": [],
+        "next_actions": [
+          "Store radios",
+          "Queue outreach drafts"
+        ],
+        "stored_records": 0
+      },
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:29:05.888Z",
+      "started_at": "2026-03-30T21:29:05.970Z",
+      "completed_at": "2026-03-30T21:29:05.981Z",
+      "created_at": "2026-03-30T21:29:05.888Z"
+    },
+    {
+      "id": "97beb2cb-e3d9-4142-b2fe-00a74978ca8f",
+      "title": "Continuous playlist opportunity scan",
+      "description": "Look for playlist curator opportunities.",
+      "task_type": "playlist_research",
+      "status": "completed",
+      "priority": 65,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": "playlist_finder_agent",
+      "parent_task_id": null,
+      "payload": {},
+      "result": {
+        "summary": "playlist_finder_agent processed playlist_research and prepared playlist curator targets.",
+        "opportunities": [],
+        "next_actions": [
+          "Store playlist leads",
+          "Queue outreach sequences"
+        ],
+        "stored_records": 0
+      },
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:29:05.888Z",
+      "started_at": "2026-03-30T21:29:05.991Z",
+      "completed_at": "2026-03-30T21:29:06.003Z",
+      "created_at": "2026-03-30T21:29:05.888Z"
+    },
+    {
+      "id": "dedba3ad-8dc7-4608-9c0b-6277f030ef76",
+      "title": "Continuous fan growth review",
+      "description": "Track lead capture and fanbase growth paths.",
+      "task_type": "fan_growth",
+      "status": "pending",
+      "priority": 64,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": null,
+      "parent_task_id": null,
+      "payload": {},
+      "result": null,
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:29:05.888Z",
+      "started_at": null,
+      "completed_at": null,
+      "created_at": "2026-03-30T21:29:05.888Z"
+    },
+    {
+      "id": "f4209d29-ac14-4670-8965-755899e1d877",
+      "title": "Continuous analytics checkpoint",
+      "description": "Review traffic, conversions, and growth signals.",
+      "task_type": "analytics",
+      "status": "pending",
+      "priority": 62,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": null,
+      "parent_task_id": null,
+      "payload": {},
+      "result": null,
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:29:05.888Z",
+      "started_at": null,
+      "completed_at": null,
+      "created_at": "2026-03-30T21:29:05.888Z"
+    },
+    {
+      "id": "908f42d4-192b-49f8-a712-bd1babe88135",
+      "title": "Prepare outreach for Continuous festival opportunity scan",
+      "description": "Draft outreach sequence for discovered opportunities.",
+      "task_type": "outreach_email",
+      "status": "completed",
+      "priority": 65,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": "email_outreach_agent",
+      "parent_task_id": "df69c039-85d7-499b-a258-63c4609fc86d",
+      "payload": {
+        "source_task": "df69c039-85d7-499b-a258-63c4609fc86d",
+        "source_type": "festival_research"
+      },
+      "result": {
+        "summary": "email_outreach_agent processed outreach_email and prepared 0 outreach drafts.",
+        "emails": [],
+        "next_actions": [
+          "Review drafts",
+          "Send outreach batch"
+        ],
+        "stored_records": 0
+      },
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:29:05.936Z",
+      "started_at": "2026-03-30T21:30:32.669Z",
+      "completed_at": "2026-03-30T21:30:32.681Z",
+      "created_at": "2026-03-30T21:29:05.936Z"
+    },
+    {
+      "id": "c3bbb04a-bdb4-448e-bf24-599753004596",
+      "title": "Prepare outreach for Continuous press opportunity scan",
+      "description": "Draft outreach sequence for discovered opportunities.",
+      "task_type": "outreach_email",
+      "status": "pending",
+      "priority": 63,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": null,
+      "parent_task_id": "a00250ae-61c1-47e1-95c1-563fc24b5fba",
+      "payload": {
+        "source_task": "a00250ae-61c1-47e1-95c1-563fc24b5fba",
+        "source_type": "press_research"
+      },
+      "result": null,
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:29:05.956Z",
+      "started_at": null,
+      "completed_at": null,
+      "created_at": "2026-03-30T21:29:05.956Z"
+    },
+    {
+      "id": "7ac072d7-e174-4310-8388-fe829115e070",
+      "title": "Prepare outreach for Continuous radio opportunity scan",
+      "description": "Draft outreach sequence for discovered opportunities.",
+      "task_type": "outreach_email",
+      "status": "pending",
+      "priority": 61,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": null,
+      "parent_task_id": "a1c77cd5-9bf7-44e8-bfa7-7091ac686979",
+      "payload": {
+        "source_task": "a1c77cd5-9bf7-44e8-bfa7-7091ac686979",
+        "source_type": "radio_research"
+      },
+      "result": null,
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:29:05.977Z",
+      "started_at": null,
+      "completed_at": null,
+      "created_at": "2026-03-30T21:29:05.977Z"
+    },
+    {
+      "id": "a51ef781-bfd5-4af7-869e-6ef0b654fb5d",
+      "title": "Prepare outreach for Continuous playlist opportunity scan",
+      "description": "Draft outreach sequence for discovered opportunities.",
+      "task_type": "outreach_email",
+      "status": "pending",
+      "priority": 60,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": null,
+      "parent_task_id": "97beb2cb-e3d9-4142-b2fe-00a74978ca8f",
+      "payload": {
+        "source_task": "97beb2cb-e3d9-4142-b2fe-00a74978ca8f",
+        "source_type": "playlist_research"
+      },
+      "result": null,
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:29:05.999Z",
+      "started_at": null,
+      "completed_at": null,
+      "created_at": "2026-03-30T21:29:05.999Z"
+    },
+    {
+      "id": "edf4c567-18b7-4a57-8068-643811fedf4d",
+      "title": "Continuous site maintenance",
+      "description": "Keep the site healthy without changing design identity.",
+      "task_type": "code_repair",
+      "status": "completed",
+      "priority": 80,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": "code_repair_agent",
+      "parent_task_id": null,
+      "payload": {},
+      "result": {
+        "summary": "code_repair_agent processed code_repair and flagged repair opportunities.",
+        "next_actions": [
+          "Validate failing components",
+          "Escalate unresolved issues"
+        ],
+        "stored_records": 0
+      },
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:30:32.575Z",
+      "started_at": "2026-03-30T21:30:32.580Z",
+      "completed_at": "2026-03-30T21:30:32.589Z",
+      "created_at": "2026-03-30T21:30:32.575Z"
+    },
+    {
+      "id": "aabbe36c-ab2e-4007-92e4-909b5ff4b898",
+      "title": "Continuous performance watch",
+      "description": "Review load speed and asset performance continuously.",
+      "task_type": "performance",
+      "status": "completed",
+      "priority": 75,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": "performance_agent",
+      "parent_task_id": null,
+      "payload": {},
+      "result": {
+        "summary": "performance_agent processed performance and checked speed optimization candidates.",
+        "next_actions": [
+          "Compress heavy assets",
+          "Review blocking scripts"
+        ],
+        "stored_records": 0
+      },
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:30:32.575Z",
+      "started_at": "2026-03-30T21:30:32.600Z",
+      "completed_at": "2026-03-30T21:30:32.607Z",
+      "created_at": "2026-03-30T21:30:32.575Z"
+    },
+    {
+      "id": "3cfafbdb-1898-4bae-b670-965c66ea3277",
+      "title": "Continuous festival opportunity scan",
+      "description": "Look for festivals, deadlines, and opportunity signals.",
+      "task_type": "festival_research",
+      "status": "completed",
+      "priority": 70,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": "festival_finder_agent",
+      "parent_task_id": null,
+      "payload": {},
+      "result": {
+        "summary": "festival_finder_agent processed festival_research and prepared festival leads for follow-up.",
+        "leads": [],
+        "next_actions": [
+          "Persist festivals",
+          "Trigger outreach drafting"
+        ],
+        "stored_records": 0
+      },
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:30:32.575Z",
+      "started_at": "2026-03-30T21:30:32.615Z",
+      "completed_at": "2026-03-30T21:30:32.624Z",
+      "created_at": "2026-03-30T21:30:32.575Z"
+    },
+    {
+      "id": "a5568df6-f82b-434b-8f3c-6d78de2b2f15",
+      "title": "Continuous press opportunity scan",
+      "description": "Look for press, blogs, and editorial opportunities.",
+      "task_type": "press_research",
+      "status": "completed",
+      "priority": 68,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": "press_finder_agent",
+      "parent_task_id": null,
+      "payload": {},
+      "result": {
+        "summary": "press_finder_agent processed press_research and prepared editorial targets.",
+        "opportunities": [],
+        "next_actions": [
+          "Normalize press contacts",
+          "Prepare personalized messaging"
+        ],
+        "stored_records": 0
+      },
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:30:32.575Z",
+      "started_at": "2026-03-30T21:30:32.632Z",
+      "completed_at": "2026-03-30T21:30:32.642Z",
+      "created_at": "2026-03-30T21:30:32.575Z"
+    },
+    {
+      "id": "4349cec9-fb91-46d0-88ca-8d55693273f5",
+      "title": "Continuous radio opportunity scan",
+      "description": "Look for radio opportunities and contact sources.",
+      "task_type": "radio_research",
+      "status": "completed",
+      "priority": 66,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": "radio_finder_agent",
+      "parent_task_id": null,
+      "payload": {},
+      "result": {
+        "summary": "radio_finder_agent processed radio_research and prepared radio prospecting targets.",
+        "opportunities": [],
+        "next_actions": [
+          "Store radios",
+          "Queue outreach drafts"
+        ],
+        "stored_records": 0
+      },
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:30:32.575Z",
+      "started_at": "2026-03-30T21:30:32.650Z",
+      "completed_at": "2026-03-30T21:30:32.658Z",
+      "created_at": "2026-03-30T21:30:32.575Z"
+    },
+    {
+      "id": "94b55ca7-0e44-4c69-ad0d-77434de006ab",
+      "title": "Continuous playlist opportunity scan",
+      "description": "Look for playlist curator opportunities.",
+      "task_type": "playlist_research",
+      "status": "pending",
+      "priority": 65,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": null,
+      "parent_task_id": null,
+      "payload": {},
+      "result": null,
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:30:32.575Z",
+      "started_at": null,
+      "completed_at": null,
+      "created_at": "2026-03-30T21:30:32.575Z"
+    },
+    {
+      "id": "f0f020d5-fd17-48a8-a047-52518e3b6e0e",
+      "title": "Prepare outreach for Continuous festival opportunity scan",
+      "description": "Draft outreach sequence for discovered opportunities.",
+      "task_type": "outreach_email",
+      "status": "pending",
+      "priority": 65,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": null,
+      "parent_task_id": "3cfafbdb-1898-4bae-b670-965c66ea3277",
+      "payload": {
+        "source_task": "3cfafbdb-1898-4bae-b670-965c66ea3277",
+        "source_type": "festival_research"
+      },
+      "result": null,
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:30:32.621Z",
+      "started_at": null,
+      "completed_at": null,
+      "created_at": "2026-03-30T21:30:32.621Z"
+    },
+    {
+      "id": "4e9f3eda-2ef3-4d8b-904a-3fce1bd6bd34",
+      "title": "Prepare outreach for Continuous press opportunity scan",
+      "description": "Draft outreach sequence for discovered opportunities.",
+      "task_type": "outreach_email",
+      "status": "pending",
+      "priority": 63,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": null,
+      "parent_task_id": "a5568df6-f82b-434b-8f3c-6d78de2b2f15",
+      "payload": {
+        "source_task": "a5568df6-f82b-434b-8f3c-6d78de2b2f15",
+        "source_type": "press_research"
+      },
+      "result": null,
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:30:32.638Z",
+      "started_at": null,
+      "completed_at": null,
+      "created_at": "2026-03-30T21:30:32.638Z"
+    },
+    {
+      "id": "d5a9974b-a625-4aa5-9efa-171785acfac1",
+      "title": "Prepare outreach for Continuous radio opportunity scan",
+      "description": "Draft outreach sequence for discovered opportunities.",
+      "task_type": "outreach_email",
+      "status": "pending",
+      "priority": 61,
+      "requested_by": "orchestrator_agent",
+      "assigned_agent_id": null,
+      "parent_task_id": "4349cec9-fb91-46d0-88ca-8d55693273f5",
+      "payload": {
+        "source_task": "4349cec9-fb91-46d0-88ca-8d55693273f5",
+        "source_type": "radio_research"
+      },
+      "result": null,
+      "retry_count": 0,
+      "scheduled_for": "2026-03-30T21:30:32.656Z",
+      "started_at": null,
+      "completed_at": null,
+      "created_at": "2026-03-30T21:30:32.656Z"
+    }
+  ],
+  "agent_runs": [
+    {
+      "id": "dab8c55d-1dde-4a1e-863f-b37f9e0935f7",
+      "task_id": "f9363218-b11a-4c3d-bea0-79c3536fe59f",
+      "agent_id": "code_repair_agent",
+      "status": "completed",
+      "summary": "code_repair_agent processed code_repair and flagged repair opportunities.",
+      "log_entries": [],
+      "created_at": "2026-03-30T21:29:05.892Z",
+      "updated_at": "2026-03-30T21:29:05.909Z"
+    },
+    {
+      "id": "485c0394-118d-4486-b8ab-b2568aa840db",
+      "task_id": "153a6cbe-7026-4e54-9a1a-9ef72944c3a6",
+      "agent_id": "performance_agent",
+      "status": "completed",
+      "summary": "performance_agent processed performance and checked speed optimization candidates.",
+      "log_entries": [],
+      "created_at": "2026-03-30T21:29:05.913Z",
+      "updated_at": "2026-03-30T21:29:05.924Z"
+    },
+    {
+      "id": "a9b56967-67ee-4fd2-8de1-3fb94bf7e059",
+      "task_id": "df69c039-85d7-499b-a258-63c4609fc86d",
+      "agent_id": "festival_finder_agent",
+      "status": "completed",
+      "summary": "festival_finder_agent processed festival_research and prepared festival leads for follow-up.",
+      "log_entries": [],
+      "created_at": "2026-03-30T21:29:05.928Z",
+      "updated_at": "2026-03-30T21:29:05.942Z"
+    },
+    {
+      "id": "d4a524de-5925-4318-992c-66dab1dac387",
+      "task_id": "a00250ae-61c1-47e1-95c1-563fc24b5fba",
+      "agent_id": "press_finder_agent",
+      "status": "completed",
+      "summary": "press_finder_agent processed press_research and prepared editorial targets.",
+      "log_entries": [],
+      "created_at": "2026-03-30T21:29:05.948Z",
+      "updated_at": "2026-03-30T21:29:05.963Z"
+    },
+    {
+      "id": "301a60dd-d7c6-4700-8ea8-743b14eae5f0",
+      "task_id": "a1c77cd5-9bf7-44e8-bfa7-7091ac686979",
+      "agent_id": "radio_finder_agent",
+      "status": "completed",
+      "summary": "radio_finder_agent processed radio_research and prepared radio prospecting targets.",
+      "log_entries": [],
+      "created_at": "2026-03-30T21:29:05.967Z",
+      "updated_at": "2026-03-30T21:29:05.983Z"
+    },
+    {
+      "id": "c9218af5-20d2-409d-beda-6a6875479472",
+      "task_id": "97beb2cb-e3d9-4142-b2fe-00a74978ca8f",
+      "agent_id": "playlist_finder_agent",
+      "status": "completed",
+      "summary": "playlist_finder_agent processed playlist_research and prepared playlist curator targets.",
+      "log_entries": [],
+      "created_at": "2026-03-30T21:29:05.987Z",
+      "updated_at": "2026-03-30T21:29:06.005Z"
+    },
+    {
+      "id": "13943ac0-d144-44d7-97ad-d1b8ae004776",
+      "task_id": "edf4c567-18b7-4a57-8068-643811fedf4d",
+      "agent_id": "code_repair_agent",
+      "status": "completed",
+      "summary": "code_repair_agent processed code_repair and flagged repair opportunities.",
+      "log_entries": [],
+      "created_at": "2026-03-30T21:30:32.578Z",
+      "updated_at": "2026-03-30T21:30:32.592Z"
+    },
+    {
+      "id": "e6559100-49d1-4e48-b239-f9d6eb076e13",
+      "task_id": "aabbe36c-ab2e-4007-92e4-909b5ff4b898",
+      "agent_id": "performance_agent",
+      "status": "completed",
+      "summary": "performance_agent processed performance and checked speed optimization candidates.",
+      "log_entries": [],
+      "created_at": "2026-03-30T21:30:32.598Z",
+      "updated_at": "2026-03-30T21:30:32.609Z"
+    },
+    {
+      "id": "77683147-5d32-4cbf-b586-047ef0561761",
+      "task_id": "3cfafbdb-1898-4bae-b670-965c66ea3277",
+      "agent_id": "festival_finder_agent",
+      "status": "completed",
+      "summary": "festival_finder_agent processed festival_research and prepared festival leads for follow-up.",
+      "log_entries": [],
+      "created_at": "2026-03-30T21:30:32.613Z",
+      "updated_at": "2026-03-30T21:30:32.626Z"
+    },
+    {
+      "id": "f43337a4-5b7d-4f3d-9fef-2dcf1043a620",
+      "task_id": "a5568df6-f82b-434b-8f3c-6d78de2b2f15",
+      "agent_id": "press_finder_agent",
+      "status": "completed",
+      "summary": "press_finder_agent processed press_research and prepared editorial targets.",
+      "log_entries": [],
+      "created_at": "2026-03-30T21:30:32.630Z",
+      "updated_at": "2026-03-30T21:30:32.644Z"
+    },
+    {
+      "id": "4148ce73-06eb-4d16-9d18-8252cf84ad2b",
+      "task_id": "4349cec9-fb91-46d0-88ca-8d55693273f5",
+      "agent_id": "radio_finder_agent",
+      "status": "completed",
+      "summary": "radio_finder_agent processed radio_research and prepared radio prospecting targets.",
+      "log_entries": [],
+      "created_at": "2026-03-30T21:30:32.648Z",
+      "updated_at": "2026-03-30T21:30:32.661Z"
+    },
+    {
+      "id": "f42ffc4d-bf79-4cc9-90b1-656d6780472f",
+      "task_id": "908f42d4-192b-49f8-a712-bd1babe88135",
+      "agent_id": "email_outreach_agent",
+      "status": "completed",
+      "summary": "email_outreach_agent processed outreach_email and prepared 0 outreach drafts.",
+      "log_entries": [],
+      "created_at": "2026-03-30T21:30:32.667Z",
+      "updated_at": "2026-03-30T21:30:32.683Z"
+    }
+  ],
+  "agent_messages": [
+    {
+      "from_agent_id": "orchestrator_agent",
+      "to_agent_id": "code_repair_agent",
+      "task_id": "f9363218-b11a-4c3d-bea0-79c3536fe59f",
+      "message_type": "dispatch",
+      "content": {
+        "title": "Continuous site maintenance",
+        "task_type": "code_repair"
+      },
+      "id": "04e0a371-3138-4b06-8fa0-a83bf97697a3",
+      "created_at": "2026-03-30T21:29:05.903Z"
+    },
+    {
+      "from_agent_id": "code_repair_agent",
+      "to_agent_id": "orchestrator_agent",
+      "task_id": "f9363218-b11a-4c3d-bea0-79c3536fe59f",
+      "message_type": "result",
+      "content": {
+        "summary": "code_repair_agent processed code_repair and flagged repair opportunities.",
+        "next_actions": [
+          "Validate failing components",
+          "Escalate unresolved issues"
+        ]
+      },
+      "id": "6f4d146c-9675-4bd4-85ea-550321f158d0",
+      "created_at": "2026-03-30T21:29:05.903Z"
+    },
+    {
+      "from_agent_id": "orchestrator_agent",
+      "to_agent_id": "performance_agent",
+      "task_id": "153a6cbe-7026-4e54-9a1a-9ef72944c3a6",
+      "message_type": "dispatch",
+      "content": {
+        "title": "Continuous performance watch",
+        "task_type": "performance"
+      },
+      "id": "d8de69bb-63b9-4566-9567-7f72e4ebc221",
+      "created_at": "2026-03-30T21:29:05.919Z"
+    },
+    {
+      "from_agent_id": "performance_agent",
+      "to_agent_id": "orchestrator_agent",
+      "task_id": "153a6cbe-7026-4e54-9a1a-9ef72944c3a6",
+      "message_type": "result",
+      "content": {
+        "summary": "performance_agent processed performance and checked speed optimization candidates.",
+        "next_actions": [
+          "Compress heavy assets",
+          "Review blocking scripts"
+        ]
+      },
+      "id": "23c50ebf-9f64-41ea-b481-1ed1ff6b37a3",
+      "created_at": "2026-03-30T21:29:05.919Z"
+    },
+    {
+      "from_agent_id": "orchestrator_agent",
+      "to_agent_id": "festival_finder_agent",
+      "task_id": "df69c039-85d7-499b-a258-63c4609fc86d",
+      "message_type": "dispatch",
+      "content": {
+        "title": "Continuous festival opportunity scan",
+        "task_type": "festival_research"
+      },
+      "id": "5c4bd6e5-f43d-4263-8905-e18ed26dbcbb",
+      "created_at": "2026-03-30T21:29:05.934Z"
+    },
+    {
+      "from_agent_id": "festival_finder_agent",
+      "to_agent_id": "orchestrator_agent",
+      "task_id": "df69c039-85d7-499b-a258-63c4609fc86d",
+      "message_type": "result",
+      "content": {
+        "summary": "festival_finder_agent processed festival_research and prepared festival leads for follow-up.",
+        "next_actions": [
+          "Persist festivals",
+          "Trigger outreach drafting"
+        ]
+      },
+      "id": "62604a1b-ee9c-4c63-9792-3bba5f6e8024",
+      "created_at": "2026-03-30T21:29:05.934Z"
+    },
+    {
+      "from_agent_id": "orchestrator_agent",
+      "to_agent_id": "press_finder_agent",
+      "task_id": "a00250ae-61c1-47e1-95c1-563fc24b5fba",
+      "message_type": "dispatch",
+      "content": {
+        "title": "Continuous press opportunity scan",
+        "task_type": "press_research"
+      },
+      "id": "a12bf3be-48aa-4eae-a5d0-0cafd2f9d17a",
+      "created_at": "2026-03-30T21:29:05.954Z"
+    },
+    {
+      "from_agent_id": "press_finder_agent",
+      "to_agent_id": "orchestrator_agent",
+      "task_id": "a00250ae-61c1-47e1-95c1-563fc24b5fba",
+      "message_type": "result",
+      "content": {
+        "summary": "press_finder_agent processed press_research and prepared editorial targets.",
+        "next_actions": [
+          "Normalize press contacts",
+          "Prepare personalized messaging"
+        ]
+      },
+      "id": "5497e9fd-6d66-4452-9586-03060d19b4fd",
+      "created_at": "2026-03-30T21:29:05.954Z"
+    },
+    {
+      "from_agent_id": "orchestrator_agent",
+      "to_agent_id": "radio_finder_agent",
+      "task_id": "a1c77cd5-9bf7-44e8-bfa7-7091ac686979",
+      "message_type": "dispatch",
+      "content": {
+        "title": "Continuous radio opportunity scan",
+        "task_type": "radio_research"
+      },
+      "id": "da14ec1a-64ba-499e-8eb9-5eb0bffd2fc5",
+      "created_at": "2026-03-30T21:29:05.974Z"
+    },
+    {
+      "from_agent_id": "radio_finder_agent",
+      "to_agent_id": "orchestrator_agent",
+      "task_id": "a1c77cd5-9bf7-44e8-bfa7-7091ac686979",
+      "message_type": "result",
+      "content": {
+        "summary": "radio_finder_agent processed radio_research and prepared radio prospecting targets.",
+        "next_actions": [
+          "Store radios",
+          "Queue outreach drafts"
+        ]
+      },
+      "id": "64030ee5-2288-4807-9029-ea3b8e1d14ce",
+      "created_at": "2026-03-30T21:29:05.974Z"
+    },
+    {
+      "from_agent_id": "orchestrator_agent",
+      "to_agent_id": "playlist_finder_agent",
+      "task_id": "97beb2cb-e3d9-4142-b2fe-00a74978ca8f",
+      "message_type": "dispatch",
+      "content": {
+        "title": "Continuous playlist opportunity scan",
+        "task_type": "playlist_research"
+      },
+      "id": "254feb3f-33a8-4ae6-9236-ae3d848a2aab",
+      "created_at": "2026-03-30T21:29:05.997Z"
+    },
+    {
+      "from_agent_id": "playlist_finder_agent",
+      "to_agent_id": "orchestrator_agent",
+      "task_id": "97beb2cb-e3d9-4142-b2fe-00a74978ca8f",
+      "message_type": "result",
+      "content": {
+        "summary": "playlist_finder_agent processed playlist_research and prepared playlist curator targets.",
+        "next_actions": [
+          "Store playlist leads",
+          "Queue outreach sequences"
+        ]
+      },
+      "id": "2d00f90f-eb18-45db-be78-a44cde70c41d",
+      "created_at": "2026-03-30T21:29:05.997Z"
+    },
+    {
+      "from_agent_id": "orchestrator_agent",
+      "to_agent_id": "code_repair_agent",
+      "task_id": "edf4c567-18b7-4a57-8068-643811fedf4d",
+      "message_type": "dispatch",
+      "content": {
+        "title": "Continuous site maintenance",
+        "task_type": "code_repair"
+      },
+      "id": "ffa4bb95-3569-4dc9-a31b-398aceab9445",
+      "created_at": "2026-03-30T21:30:32.585Z"
+    },
+    {
+      "from_agent_id": "code_repair_agent",
+      "to_agent_id": "orchestrator_agent",
+      "task_id": "edf4c567-18b7-4a57-8068-643811fedf4d",
+      "message_type": "result",
+      "content": {
+        "summary": "code_repair_agent processed code_repair and flagged repair opportunities.",
+        "next_actions": [
+          "Validate failing components",
+          "Escalate unresolved issues"
+        ]
+      },
+      "id": "500136f1-c96c-4926-8583-365a78fa03c5",
+      "created_at": "2026-03-30T21:30:32.585Z"
+    },
+    {
+      "from_agent_id": "orchestrator_agent",
+      "to_agent_id": "performance_agent",
+      "task_id": "aabbe36c-ab2e-4007-92e4-909b5ff4b898",
+      "message_type": "dispatch",
+      "content": {
+        "title": "Continuous performance watch",
+        "task_type": "performance"
+      },
+      "id": "b39ced32-3e16-4be7-8fbd-75fa64c320d4",
+      "created_at": "2026-03-30T21:30:32.604Z"
+    },
+    {
+      "from_agent_id": "performance_agent",
+      "to_agent_id": "orchestrator_agent",
+      "task_id": "aabbe36c-ab2e-4007-92e4-909b5ff4b898",
+      "message_type": "result",
+      "content": {
+        "summary": "performance_agent processed performance and checked speed optimization candidates.",
+        "next_actions": [
+          "Compress heavy assets",
+          "Review blocking scripts"
+        ]
+      },
+      "id": "d2fe5ad9-0c6e-4a13-93b0-dec00f79e6ce",
+      "created_at": "2026-03-30T21:30:32.604Z"
+    },
+    {
+      "from_agent_id": "orchestrator_agent",
+      "to_agent_id": "festival_finder_agent",
+      "task_id": "3cfafbdb-1898-4bae-b670-965c66ea3277",
+      "message_type": "dispatch",
+      "content": {
+        "title": "Continuous festival opportunity scan",
+        "task_type": "festival_research"
+      },
+      "id": "fbda0a74-7dd4-48e3-95d9-bc1c0a0b936c",
+      "created_at": "2026-03-30T21:30:32.619Z"
+    },
+    {
+      "from_agent_id": "festival_finder_agent",
+      "to_agent_id": "orchestrator_agent",
+      "task_id": "3cfafbdb-1898-4bae-b670-965c66ea3277",
+      "message_type": "result",
+      "content": {
+        "summary": "festival_finder_agent processed festival_research and prepared festival leads for follow-up.",
+        "next_actions": [
+          "Persist festivals",
+          "Trigger outreach drafting"
+        ]
+      },
+      "id": "a52d37d7-a782-4e38-8305-825f66eccbca",
+      "created_at": "2026-03-30T21:30:32.619Z"
+    },
+    {
+      "from_agent_id": "orchestrator_agent",
+      "to_agent_id": "press_finder_agent",
+      "task_id": "a5568df6-f82b-434b-8f3c-6d78de2b2f15",
+      "message_type": "dispatch",
+      "content": {
+        "title": "Continuous press opportunity scan",
+        "task_type": "press_research"
+      },
+      "id": "85cb5a93-de5c-483b-a382-fcdcf771fab9",
+      "created_at": "2026-03-30T21:30:32.636Z"
+    },
+    {
+      "from_agent_id": "press_finder_agent",
+      "to_agent_id": "orchestrator_agent",
+      "task_id": "a5568df6-f82b-434b-8f3c-6d78de2b2f15",
+      "message_type": "result",
+      "content": {
+        "summary": "press_finder_agent processed press_research and prepared editorial targets.",
+        "next_actions": [
+          "Normalize press contacts",
+          "Prepare personalized messaging"
+        ]
+      },
+      "id": "3d33d6f8-bad7-4be8-8ce5-99b1a4d71674",
+      "created_at": "2026-03-30T21:30:32.636Z"
+    },
+    {
+      "from_agent_id": "orchestrator_agent",
+      "to_agent_id": "radio_finder_agent",
+      "task_id": "4349cec9-fb91-46d0-88ca-8d55693273f5",
+      "message_type": "dispatch",
+      "content": {
+        "title": "Continuous radio opportunity scan",
+        "task_type": "radio_research"
+      },
+      "id": "b03bf270-a135-4459-87cc-320a293278e1",
+      "created_at": "2026-03-30T21:30:32.654Z"
+    },
+    {
+      "from_agent_id": "radio_finder_agent",
+      "to_agent_id": "orchestrator_agent",
+      "task_id": "4349cec9-fb91-46d0-88ca-8d55693273f5",
+      "message_type": "result",
+      "content": {
+        "summary": "radio_finder_agent processed radio_research and prepared radio prospecting targets.",
+        "next_actions": [
+          "Store radios",
+          "Queue outreach drafts"
+        ]
+      },
+      "id": "6eb8c1df-3109-4436-8f4a-aac0349c805e",
+      "created_at": "2026-03-30T21:30:32.654Z"
+    },
+    {
+      "from_agent_id": "orchestrator_agent",
+      "to_agent_id": "email_outreach_agent",
+      "task_id": "908f42d4-192b-49f8-a712-bd1babe88135",
+      "message_type": "dispatch",
+      "content": {
+        "title": "Prepare outreach for Continuous festival opportunity scan",
+        "task_type": "outreach_email"
+      },
+      "id": "6614b3bd-08ce-434a-a6f4-d40a6a00c850",
+      "created_at": "2026-03-30T21:30:32.675Z"
+    },
+    {
+      "from_agent_id": "email_outreach_agent",
+      "to_agent_id": "orchestrator_agent",
+      "task_id": "908f42d4-192b-49f8-a712-bd1babe88135",
+      "message_type": "result",
+      "content": {
+        "summary": "email_outreach_agent processed outreach_email and prepared 0 outreach drafts.",
+        "next_actions": [
+          "Review drafts",
+          "Send outreach batch"
+        ]
+      },
+      "id": "0ac76641-f1a9-40b4-892a-36817d9c843d",
+      "created_at": "2026-03-30T21:30:32.675Z"
+    }
+  ],
+  "agent_metrics": [],
+  "agent_results": [
+    {
+      "task_id": "f9363218-b11a-4c3d-bea0-79c3536fe59f",
+      "agent_id": "code_repair_agent",
+      "result_type": "code_repair",
+      "summary": "code_repair_agent processed code_repair and flagged repair opportunities.",
+      "payload": {
+        "summary": "code_repair_agent processed code_repair and flagged repair opportunities.",
+        "next_actions": [
+          "Validate failing components",
+          "Escalate unresolved issues"
+        ],
+        "stored_records": 0
+      },
+      "id": "c6d5dd7f-bc49-49ed-abdf-8d8510851589",
+      "created_at": "2026-03-30T21:29:05.906Z"
+    },
+    {
+      "task_id": "153a6cbe-7026-4e54-9a1a-9ef72944c3a6",
+      "agent_id": "performance_agent",
+      "result_type": "performance",
+      "summary": "performance_agent processed performance and checked speed optimization candidates.",
+      "payload": {
+        "summary": "performance_agent processed performance and checked speed optimization candidates.",
+        "next_actions": [
+          "Compress heavy assets",
+          "Review blocking scripts"
+        ],
+        "stored_records": 0
+      },
+      "id": "8a2de036-7c5d-4baa-9b6b-5987fc4f5e6f",
+      "created_at": "2026-03-30T21:29:05.921Z"
+    },
+    {
+      "task_id": "df69c039-85d7-499b-a258-63c4609fc86d",
+      "agent_id": "festival_finder_agent",
+      "result_type": "festival_research",
+      "summary": "festival_finder_agent processed festival_research and prepared festival leads for follow-up.",
+      "payload": {
+        "summary": "festival_finder_agent processed festival_research and prepared festival leads for follow-up.",
+        "leads": [],
+        "next_actions": [
+          "Persist festivals",
+          "Trigger outreach drafting"
+        ],
+        "stored_records": 0
+      },
+      "id": "a383cae9-9bbb-40ae-b808-a6fa5f4d944b",
+      "created_at": "2026-03-30T21:29:05.937Z"
+    },
+    {
+      "task_id": "a00250ae-61c1-47e1-95c1-563fc24b5fba",
+      "agent_id": "press_finder_agent",
+      "result_type": "press_research",
+      "summary": "press_finder_agent processed press_research and prepared editorial targets.",
+      "payload": {
+        "summary": "press_finder_agent processed press_research and prepared editorial targets.",
+        "opportunities": [],
+        "next_actions": [
+          "Normalize press contacts",
+          "Prepare personalized messaging"
+        ],
+        "stored_records": 0
+      },
+      "id": "04a98552-17a0-4ed3-ab10-9fce137dce05",
+      "created_at": "2026-03-30T21:29:05.958Z"
+    },
+    {
+      "task_id": "a1c77cd5-9bf7-44e8-bfa7-7091ac686979",
+      "agent_id": "radio_finder_agent",
+      "result_type": "radio_research",
+      "summary": "radio_finder_agent processed radio_research and prepared radio prospecting targets.",
+      "payload": {
+        "summary": "radio_finder_agent processed radio_research and prepared radio prospecting targets.",
+        "opportunities": [],
+        "next_actions": [
+          "Store radios",
+          "Queue outreach drafts"
+        ],
+        "stored_records": 0
+      },
+      "id": "2c1def40-d770-436a-b66a-1761cd0c01d6",
+      "created_at": "2026-03-30T21:29:05.979Z"
+    },
+    {
+      "task_id": "97beb2cb-e3d9-4142-b2fe-00a74978ca8f",
+      "agent_id": "playlist_finder_agent",
+      "result_type": "playlist_research",
+      "summary": "playlist_finder_agent processed playlist_research and prepared playlist curator targets.",
+      "payload": {
+        "summary": "playlist_finder_agent processed playlist_research and prepared playlist curator targets.",
+        "opportunities": [],
+        "next_actions": [
+          "Store playlist leads",
+          "Queue outreach sequences"
+        ],
+        "stored_records": 0
+      },
+      "id": "0d6c2515-93b0-4b0c-8d41-0d87e1d4c36b",
+      "created_at": "2026-03-30T21:29:06.001Z"
+    },
+    {
+      "task_id": "edf4c567-18b7-4a57-8068-643811fedf4d",
+      "agent_id": "code_repair_agent",
+      "result_type": "code_repair",
+      "summary": "code_repair_agent processed code_repair and flagged repair opportunities.",
+      "payload": {
+        "summary": "code_repair_agent processed code_repair and flagged repair opportunities.",
+        "next_actions": [
+          "Validate failing components",
+          "Escalate unresolved issues"
+        ],
+        "stored_records": 0
+      },
+      "id": "f8dd051d-bb28-49e0-b402-7abdcdd3445c",
+      "created_at": "2026-03-30T21:30:32.587Z"
+    },
+    {
+      "task_id": "aabbe36c-ab2e-4007-92e4-909b5ff4b898",
+      "agent_id": "performance_agent",
+      "result_type": "performance",
+      "summary": "performance_agent processed performance and checked speed optimization candidates.",
+      "payload": {
+        "summary": "performance_agent processed performance and checked speed optimization candidates.",
+        "next_actions": [
+          "Compress heavy assets",
+          "Review blocking scripts"
+        ],
+        "stored_records": 0
+      },
+      "id": "75ebb693-723b-47e1-baa0-7d3adb9eedfa",
+      "created_at": "2026-03-30T21:30:32.605Z"
+    },
+    {
+      "task_id": "3cfafbdb-1898-4bae-b670-965c66ea3277",
+      "agent_id": "festival_finder_agent",
+      "result_type": "festival_research",
+      "summary": "festival_finder_agent processed festival_research and prepared festival leads for follow-up.",
+      "payload": {
+        "summary": "festival_finder_agent processed festival_research and prepared festival leads for follow-up.",
+        "leads": [],
+        "next_actions": [
+          "Persist festivals",
+          "Trigger outreach drafting"
+        ],
+        "stored_records": 0
+      },
+      "id": "23f5e7b3-c648-457e-b0e7-d3ce3a74f8a4",
+      "created_at": "2026-03-30T21:30:32.622Z"
+    },
+    {
+      "task_id": "a5568df6-f82b-434b-8f3c-6d78de2b2f15",
+      "agent_id": "press_finder_agent",
+      "result_type": "press_research",
+      "summary": "press_finder_agent processed press_research and prepared editorial targets.",
+      "payload": {
+        "summary": "press_finder_agent processed press_research and prepared editorial targets.",
+        "opportunities": [],
+        "next_actions": [
+          "Normalize press contacts",
+          "Prepare personalized messaging"
+        ],
+        "stored_records": 0
+      },
+      "id": "bb3396c3-582d-4f83-99d4-3ee85f886b94",
+      "created_at": "2026-03-30T21:30:32.640Z"
+    },
+    {
+      "task_id": "4349cec9-fb91-46d0-88ca-8d55693273f5",
+      "agent_id": "radio_finder_agent",
+      "result_type": "radio_research",
+      "summary": "radio_finder_agent processed radio_research and prepared radio prospecting targets.",
+      "payload": {
+        "summary": "radio_finder_agent processed radio_research and prepared radio prospecting targets.",
+        "opportunities": [],
+        "next_actions": [
+          "Store radios",
+          "Queue outreach drafts"
+        ],
+        "stored_records": 0
+      },
+      "id": "6b15e894-c11c-45da-bfc6-73b9ddb073c7",
+      "created_at": "2026-03-30T21:30:32.657Z"
+    },
+    {
+      "task_id": "908f42d4-192b-49f8-a712-bd1babe88135",
+      "agent_id": "email_outreach_agent",
+      "result_type": "outreach_email",
+      "summary": "email_outreach_agent processed outreach_email and prepared 0 outreach drafts.",
+      "payload": {
+        "summary": "email_outreach_agent processed outreach_email and prepared 0 outreach drafts.",
+        "emails": [],
+        "next_actions": [
+          "Review drafts",
+          "Send outreach batch"
+        ],
+        "stored_records": 0
+      },
+      "id": "66f820b0-aa76-4362-ba51-04bec13a009e",
+      "created_at": "2026-03-30T21:30:32.677Z"
+    }
+  ],
+  "fans": [],
+  "festivals": [],
+  "press_contact": [],
+  "radios": [],
+  "playlists": [],
+  "outreach_emails": []
+}

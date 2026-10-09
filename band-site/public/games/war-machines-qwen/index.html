@@ -1,0 +1,36 @@
+﻿<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>KAMDRIDI - War Machines Qwen Original</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        overflow: hidden;
+        background: #000;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+      }
+
+      #game-canvas {
+        display: block;
+        width: 100vw;
+        height: 100svh;
+        background: #000;
+        object-fit: contain;
+        touch-action: none;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="game-canvas" width="640" height="360"></canvas>
+    <script src="/games/war-machines-qwen/game.js?v=qwen-original-v4"></script>
+  </body>
+</html>
+

@@ -1,0 +1,39 @@
+name: Site Quality
+
+on:
+  pull_request:
+    paths:
+      - "band-site/**"
+      - ".github/workflows/site-quality.yml"
+  push:
+    branches: [main]
+    paths:
+      - "band-site/**"
+      - ".github/workflows/site-quality.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: band-site
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: band-site/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify discovery network
+        run: node scripts/verify-discovery-network.mjs
+
+      - name: Build Next.js site
+        run: npm run build

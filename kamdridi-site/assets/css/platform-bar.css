@@ -1,0 +1,76 @@
+/* ============================
+   KAMDRIDI PLATFORM BAR (ADD ONLY)
+   Sticky top, industrial pro
+============================ */
+.kd-platformbar{
+  position: sticky;
+  top: 0;
+  z-index: 99999;
+  background: rgba(0,0,0,0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+.kd-platformbar__inner{
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.kd-platformbar .kd-badge{
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+.kd-platformbar .kd-badge img{
+  height: 34px;
+  width: auto;
+  display: block;
+  transition: transform .14s ease, filter .14s ease, opacity .14s ease;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.35));
+  opacity: 0.95;
+}
+.kd-platformbar .kd-badge:hover img{
+  transform: translateY(-1px);
+  opacity: 1;
+}
+.kd-platformbar .kd-link{
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #fff;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  transition: transform .14s ease, background .14s ease, border-color .14s ease;
+}
+.kd-platformbar .kd-link:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.18);
+}
+.kd-platformbar .kd-link--store{
+  box-shadow: 0 0 0 1px rgba(201,162,77,0.25) inset;
+}
+.kd-platformbar .kd-link--booking{
+  box-shadow: 0 0 0 1px rgba(255,0,0,0.22) inset;
+}
+.kd-platformbar .kd-link--epk{
+  box-shadow: 0 0 0 1px rgba(29,185,84,0.18) inset;
+}
+
+@media (max-width: 520px){
+  .kd-platformbar__inner{ padding: 10px 10px; gap: 8px; }
+  .kd-platformbar .kd-badge img{ height: 32px; }
+  .kd-platformbar .kd-link{ height: 32px; padding: 0 10px; font-size: 11px; }
+}

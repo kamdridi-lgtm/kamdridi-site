@@ -1,0 +1,3 @@
+drawtext=fontfile='C\:/Windows/Fonts/impact.ttf':text='TOO FAST TOO YOUNG':fontcolor=lightblue:fontsize=180:x=(w-text_w)/2:y=h-220:borderw=8:bordercolor=black:enable='between(t\,0\,3.5)',
+drawtext=fontfile='C\:/Windows/Fonts/impact.ttf':text='OUT NOW':fontcolor=yellow:fontsize=220:x=(w-text_w)/2:y=h-250:borderw=8:bordercolor=black:enable='between(t\,3.5\,7)',
+drawtext=fontfile='C\:/Windows/Fonts/impact.ttf':text='visit kamdridi.com':fontcolor=red:fontsize=130:x=(w-text_w)/2:y=h-180:borderw=6:bordercolor=black:enable='gte(t\,7)'

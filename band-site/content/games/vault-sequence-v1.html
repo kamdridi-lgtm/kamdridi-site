@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>THE GILDED NULL — PART II: VAULT SEQUENCE | MONSTER SYSTEM</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#D2B15C; --gold2:#FFB830; --goldw:#FFF4C2;
+  --dark:#040302; --void:#0a0006;
+  --red:#9B1B1B; --corrupt:#3D0050;
+  --bb:'Bebas Neue',cursive; --mono:'Share Tech Mono',monospace; --serif:'Cinzel',serif;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--dark)}
+body{cursor:none}
+
+/* CURSOR */
+#cur{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+#cur svg{width:28px;height:28px;transition:transform .12s}
+#cur.hover svg{transform:scale(1.6)}
+
+/* SCANLINES */
+#sl{position:fixed;inset:0;pointer-events:none;z-index:600;
+  background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(0,0,0,.055) 3px,rgba(0,0,0,.055) 4px)}
+
+/* CANVAS */
+#c{position:fixed;inset:0;display:block}
+
+/* ═══ MENU ═══ */
+#menu{
+  position:fixed;inset:0;z-index:500;background:var(--dark);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity 1.2s
+}
+.m-eyebrow{
+  font-family:var(--mono);font-size:clamp(8px,1vw,10px);
+  letter-spacing:.6em;color:rgba(210,177,92,.3);text-transform:uppercase;margin-bottom:36px
+}
+.m-part{
+  font-family:var(--mono);font-size:clamp(9px,1.1vw,11px);
+  letter-spacing:.35em;color:rgba(210,177,92,.38);text-transform:uppercase;margin-bottom:18px
+}
+.m-title{
+  font-family:var(--bb);font-size:clamp(54px,9.5vw,118px);
+  color:var(--gold);letter-spacing:.06em;line-height:.92;text-align:center;
+  text-shadow:0 0 80px rgba(210,177,92,.3),0 0 160px rgba(210,177,92,.12);
+  animation:breathe 4s ease-in-out infinite
+}
+@keyframes breathe{
+  0%,100%{text-shadow:0 0 80px rgba(210,177,92,.3),0 0 160px rgba(210,177,92,.12)}
+  50%{text-shadow:0 0 130px rgba(210,177,92,.5),0 0 260px rgba(210,177,92,.22)}
+}
+.m-vs{
+  font-family:var(--bb);font-size:clamp(24px,4vw,52px);
+  color:rgba(210,177,92,.35);letter-spacing:.25em;margin-top:8px
+}
+.m-line{width:200px;height:1px;background:linear-gradient(to right,transparent,rgba(210,177,92,.35),transparent);margin:28px 0}
+.m-desc{
+  font-family:var(--mono);font-size:clamp(8px,1vw,10px);letter-spacing:.22em;
+  color:rgba(210,177,92,.25);text-align:center;line-height:2.6;text-transform:uppercase;margin-bottom:38px
+}
+.m-btn{
+  font-family:var(--mono);font-size:clamp(9px,1vw,11px);letter-spacing:.4em;
+  text-transform:uppercase;color:var(--dark);background:var(--gold);
+  border:none;padding:16px 44px;cursor:none;transition:background .3s,box-shadow .3s
+}
+.m-btn:hover{background:var(--gold2);box-shadow:0 0 40px rgba(255,184,48,.35)}
+.m-hs{
+  font-family:var(--mono);font-size:9px;letter-spacing:.22em;
+  color:rgba(210,177,92,.18);margin-top:20px;text-transform:uppercase
+}
+
+/* ═══ HUD ═══ */
+#hud{position:fixed;inset:0;pointer-events:none;z-index:450;display:none}
+.hm{font-family:var(--mono);font-size:clamp(8px,.9vw,10px);letter-spacing:.2em;
+  color:rgba(210,177,92,.45);text-transform:uppercase;line-height:2}
+.h-tl{position:absolute;top:20px;left:22px}
+.h-tr{position:absolute;top:20px;right:22px;text-align:right}
+.h-bc{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);text-align:center}
+
+/* Fragment counter ring */
+.fc-wrap{display:flex;align-items:center;gap:10px;margin-top:8px}
+.fc-dot{width:9px;height:9px;border-radius:50%;border:1px solid rgba(210,177,92,.25);transition:all .3s}
+.fc-dot.collected{background:var(--gold);border-color:var(--gold);box-shadow:0 0 6px rgba(210,177,92,.7)}
+.fc-dot.corrupted{background:#3D0050;border-color:#7B0090}
+
+/* Corruption bar */
+.corr-label{font-family:var(--mono);font-size:9px;letter-spacing:.3em;color:rgba(210,177,92,.3);text-transform:uppercase}
+.corr-track{width:140px;height:3px;background:rgba(210,177,92,.07);margin-top:5px}
+.corr-fill{height:100%;background:var(--corrupt);transition:width .1s linear}
+
+/* Narrative reveal */
+#narr{
+  position:fixed;bottom:52px;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:clamp(9px,1vw,11px);letter-spacing:.18em;
+  color:rgba(210,177,92,.55);text-align:center;text-transform:uppercase;
+  pointer-events:none;z-index:460;opacity:0;transition:opacity .6s;
+  white-space:nowrap
+}
+
+/* ═══ GAME OVER ═══ */
+#gameover{
+  position:fixed;inset:0;z-index:700;background:#000;
+  display:none;flex-direction:column;align-items:center;justify-content:center
+}
+.go-err{font-family:var(--mono);font-size:clamp(8px,1vw,10px);letter-spacing:.45em;
+  color:var(--red);text-transform:uppercase;margin-bottom:20px;animation:glerr 2s infinite}
+@keyframes glerr{0%,88%,100%{opacity:1}90%{opacity:.5;transform:translateX(3px)}94%{transform:translateX(-2px)}}
+.go-t{font-family:var(--bb);font-size:clamp(56px,11vw,128px);color:var(--gold);letter-spacing:.06em;line-height:.9}
+.go-info{font-family:var(--mono);font-size:clamp(9px,1.1vw,12px);color:rgba(210,177,92,.45);
+  letter-spacing:.22em;margin:26px 0 34px;line-height:2.4;text-align:center;text-transform:uppercase}
+.go-btn{font-family:var(--mono);font-size:10px;letter-spacing:.4em;text-transform:uppercase;
+  background:transparent;border:1px solid rgba(210,177,92,.35);color:var(--gold);
+  padding:14px 40px;cursor:none;transition:all .3s}
+.go-btn:hover{background:rgba(210,177,92,.07);border-color:var(--gold)}
+
+/* ═══ VICTORY ═══ */
+#victory{
+  position:fixed;inset:0;z-index:700;background:#000;
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  gap:0
+}
+.v-pre{font-family:var(--mono);font-size:9px;letter-spacing:.5em;
+  color:rgba(210,177,92,.25);text-transform:uppercase;margin-bottom:32px;opacity:0}
+.v-t1{font-family:var(--bb);font-size:clamp(48px,9vw,112px);color:var(--gold);
+  letter-spacing:.06em;line-height:.9;text-align:center;opacity:0}
+.v-t2{font-family:var(--bb);font-size:clamp(18px,3vw,36px);letter-spacing:.18em;
+  color:rgba(210,177,92,.38);text-align:center;opacity:0}
+.v-fragments{
+  font-family:var(--mono);font-size:9px;letter-spacing:.15em;
+  color:rgba(210,177,92,.35);line-height:2.8;margin:32px 0 8px;text-align:center;
+  opacity:0;max-width:480px;white-space:pre-line
+}
+.v-score{font-family:var(--mono);font-size:clamp(9px,1.1vw,11px);letter-spacing:.25em;
+  color:rgba(210,177,92,.4);text-transform:uppercase;opacity:0;text-align:center}
+.v-btn{font-family:var(--mono);font-size:10px;letter-spacing:.4em;text-transform:uppercase;
+  background:transparent;border:1px solid rgba(210,177,92,.25);color:rgba(210,177,92,.45);
+  padding:14px 42px;cursor:none;margin-top:28px;opacity:0;transition:all .3s}
+.v-btn:hover{border-color:var(--gold);color:var(--gold)}
+@keyframes fu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.a1{animation:fu 2.5s 1.5s both}.a2{animation:fu 2.5s 3.5s both}
+.a3{animation:fu 2s  5.5s both}.a4{animation:fu 2s  7s   both}
+.a5{animation:fu 1.8s 8.5s both}.a6{animation:fu 1.5s 10s  both}
+</style>
+</head>
+<body>
+
+<div id="sl"></div>
+<div id="cur">
+  <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="14" y1="0"  x2="14" y2="28" stroke="rgba(210,177,92,.75)" stroke-width="1"/>
+    <line x1="0"  y1="14" x2="28" y2="14" stroke="rgba(210,177,92,.75)" stroke-width="1"/>
+    <circle cx="14" cy="14" r="2.5" fill="rgba(210,177,92,.9)"/>
+    <circle cx="14" cy="14" r="8"   stroke="rgba(210,177,92,.2)" stroke-width="1" stroke-dasharray="3 4"/>
+  </svg>
+</div>
+
+<canvas id="c"></canvas>
+
+<!-- MENU -->
+<div id="menu">
+  <div class="m-eyebrow">KAMDRIDI · MONSTER SYSTEM · ARCHIVE ACCESS</div>
+  <div class="m-part">THE GILDED NULL — PART II</div>
+  <div class="m-title">VAULT<br>SEQUENCE</div>
+  <div class="m-vs">MONSTER SYSTEM</div>
+  <div class="m-line"></div>
+  <div class="m-desc">
+    THE CORRIDOR HAS BEEN BREACHED<br>
+    10 MEMORY FRAGMENTS REMAIN IN THE ARCHIVE<br>
+    COLLECT THEM BEFORE CORRUPTION TAKES HOLD<br>
+    THE MONSTER IS ALREADY INSIDE
+  </div>
+  <button class="m-btn" onclick="startGame()">OPEN THE VAULT</button>
+  <div class="m-hs" id="m-hs">BEST: 0 &nbsp;·&nbsp; PERFECT RUNS: 0</div>
+</div>
+
+<!-- HUD -->
+<div id="hud">
+  <div class="h-tl hm">
+    <div id="h-phase">VAULT SEQUENCE</div>
+    <div id="h-time">00:00</div>
+    <div id="h-score" style="margin-top:4px">SCORE: 0</div>
+    <div class="fc-wrap" id="fc-dots"></div>
+  </div>
+  <div class="h-tr hm">
+    <div class="corr-label">CORRUPTION</div>
+    <div class="corr-track"><div class="corr-fill" id="corr-fill" style="width:0%"></div></div>
+    <div style="margin-top:10px" id="h-rem">FRAGMENTS: 10</div>
+    <div id="h-monster" style="color:rgba(155,27,27,.0);transition:color .4s">MONSTER DETECTED</div>
+  </div>
+  <div class="h-bc hm" id="h-bc"></div>
+</div>
+
+<div id="narr"></div>
+
+<!-- GAME OVER -->
+<div id="gameover" style="display:none;flex-direction:column;align-items:center;justify-content:center">
+  <div class="go-err">CORRUPTION PROTOCOL ENGAGED — ARCHIVE LOST</div>
+  <div class="go-t">CONSUMED</div>
+  <div class="go-info" id="go-info"></div>
+  <button class="go-btn" onclick="resetMenu()">REOPEN THE VAULT</button>
+</div>
+
+<!-- VICTORY -->
+<div id="victory" style="display:none;flex-direction:column;align-items:center;justify-content:center">
+  <div class="v-pre a1">ARCHIVE RESTORED — MONSTER SYSTEM OFFLINE</div>
+  <div class="v-t1 a2">VAULT<br>CLEAR.</div>
+  <div class="v-t2 a3">THE MEMORY HOLDS.</div>
+  <div class="v-fragments a4" id="v-frags"></div>
+  <div class="v-score a5" id="v-score"></div>
+  <button class="v-btn a6" onclick="resetMenu()">ENTER THE VAULT AGAIN</button>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// THE GILDED NULL — PART II: VAULT SEQUENCE / MONSTER SYSTEM
+// © KAMDRIDI
+// ═══════════════════════════════════════════════════════════
+
+const canvas=document.getElementById('c'), ctx=canvas.getContext('2d');
+const cur=document.getElementById('cur');
+let W,H;
+const resize=()=>{W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight};
+resize(); window.addEventListener('resize',resize);
+
+// ── PERSISTENCE ────────────────────────────────────────────
+let hiScore=+localStorage.getItem('vs_hi')||0;
+let perfRuns=+localStorage.getItem('vs_perf')||0;
+const saveHi=(s,perf)=>{
+  if(s>hiScore){hiScore=s;localStorage.setItem('vs_hi',s)}
+  if(perf){perfRuns++;localStorage.setItem('vs_perf',perfRuns)}
+  document.getElementById('m-hs').textContent=`BEST: ${hiScore}  ·  PERFECT RUNS: ${perfRuns}`;
+};
+saveHi(0,false);
+
+// ── AUDIO ──────────────────────────────────────────────────
+let aCtx,mGain; const drones=[];
+const initAudio=()=>{
+  aCtx=new(window.AudioContext||window.webkitAudioContext)();
+  mGain=aCtx.createGain();mGain.gain.value=.24;mGain.connect(aCtx.destination);
+};
+const addDrone=(f,amp,type='sine',det=0,ramp=3)=>{
+  const o=aCtx.createOscillator(),g=aCtx.createGain();
+  o.type=type;o.frequency.value=f;o.detune.value=det;
+  g.gain.value=0;o.connect(g);g.connect(mGain);o.start();
+  g.gain.linearRampToValueAtTime(amp,aCtx.currentTime+ramp);
+  drones.push({o,g});
+};
+const killDrones=(r=3)=>{
+  drones.forEach(d=>d.g.gain.linearRampToValueAtTime(0,aCtx.currentTime+r));
+  setTimeout(()=>{drones.forEach(d=>{try{d.o.stop()}catch(e){}});drones.length=0},r*1000+100);
+};
+const vaultAudio=()=>{
+  addDrone(41.2,.20,'sine',0,3);    // low E: oppressive
+  addDrone(82.4,.07,'sine',0,4);
+  addDrone(55,.25,'sine',0,2);      // A: golden resonance
+  addDrone(110,.04,'triangle',-8,5);
+  addDrone(220,.015,'sine',0,7);
+  addDrone(27.5,.22,'sine',0,2);    // sub
+};
+const corruptAudio=()=>{
+  killDrones(5);
+  setTimeout(()=>{
+    addDrone(46.2,.18,'sawtooth',0,3);
+    addDrone(92.5,.06,'sawtooth',12,4);
+    addDrone(34.6,.22,'sine',0,2);
+    addDrone(138,.04,'square',0,5);
+    addDrone(23.1,.28,'sine',0,2);
+  },5000);
+};
+const fadeAudio=(t=5)=>{
+  if(!mGain)return;
+  mGain.gain.linearRampToValueAtTime(0,aCtx.currentTime+t);
+};
+const sfxCollect=()=>{
+  if(!aCtx)return;
+  const o=aCtx.createOscillator(),g=aCtx.createGain();
+  o.type='sine';
+  o.frequency.setValueAtTime(880,aCtx.currentTime);
+  o.frequency.exponentialRampToValueAtTime(1760,aCtx.currentTime+.25);
+  g.gain.setValueAtTime(.18,aCtx.currentTime);
+  g.gain.linearRampToValueAtTime(0,aCtx.currentTime+.4);
+  o.connect(g);g.connect(mGain);o.start();o.stop(aCtx.currentTime+.4);
+};
+const sfxCorrupt=()=>{
+  if(!aCtx)return;
+  const o=aCtx.createOscillator(),g=aCtx.createGain();
+  o.type='sawtooth';o.frequency.value=55;
+  o.frequency.linearRampToValueAtTime(22,aCtx.currentTime+.7);
+  g.gain.setValueAtTime(.22,aCtx.currentTime);
+  g.gain.linearRampToValueAtTime(0,aCtx.currentTime+.7);
+  o.connect(g);g.connect(mGain);o.start();o.stop(aCtx.currentTime+.7);
+};
+const sfxMonsterGrowl=()=>{
+  if(!aCtx)return;
+  const o=aCtx.createOscillator(),g=aCtx.createGain();
+  o.type='sawtooth';o.frequency.value=32;
+  o.frequency.linearRampToValueAtTime(18,aCtx.currentTime+1.1);
+  g.gain.setValueAtTime(.15,aCtx.currentTime);
+  g.gain.linearRampToValueAtTime(0,aCtx.currentTime+1.1);
+  o.connect(g);g.connect(mGain);o.start();o.stop(aCtx.currentTime+1.1);
+};
+
+// ── NARRATIVE FRAGMENTS ────────────────────────────────────
+const FRAGMENTS=[
+  {text:"the vault was sealed the night michael disappeared",  col:'#D2B15C'},
+  {text:"unit 7 was never meant to remember",                   col:'#E8C87A'},
+  {text:"the empire built this archive to hold what it feared", col:'#D2B15C'},
+  {text:"the corridor leads here. it always did.",              col:'#FFB830'},
+  {text:"monster system is not a machine — it is a memory",    col:'#D2B15C'},
+  {text:"ten fragments. one truth.",                            col:'#FFF4C2'},
+  {text:"the gold is what remains after everything burns",      col:'#D2B15C'},
+  {text:"we were here before the null consumed the light",     col:'#E8C87A'},
+  {text:"outrun nothing — stand still and remember",           col:'#D2B15C'},
+  {text:"the vault sequence ends. the archive endures.",        col:'#FFB830'},
+];
+
+// ── STATE ──────────────────────────────────────────────────
+let G={};
+const resetState=()=>({
+  active:false, time:0, score:0,
+  mx:.5, my:.5,       // mouse normalised
+  fragments:[],
+  particles:[],
+  stars:[],
+  collected:0,
+  corrupted:0,
+  corruption:0,       // 0-1 overall corruption pressure
+  phase:0,            // 0=normal 1=monster hunting 2=critical
+  monster:{x:-.2,y:-.2,vx:.0018,vy:.0012,pulse:0,visible:0,growlT:0},
+  glitch:0, shake:0,
+  msgT:0, msg:'',
+  phaseT:0,
+  grids:[],
+  vaultLines:[],
+});
+
+// ── STARS (background) ─────────────────────────────────────
+const buildStars=(n=180)=>{
+  const s=[];
+  for(let i=0;i<n;i++) s.push({
+    x:Math.random(),y:Math.random(),
+    r:.2+Math.random()*1.1,
+    a:Math.random()*.35+.05,
+    twinkle:Math.random()*Math.PI*2,
+    speed:.3+Math.random()*1.2,
+  });
+  return s;
+};
+
+// ── VAULT GRID ─────────────────────────────────────────────
+const buildVaultLines=()=>{
+  const lines=[];
+  // Horizontal depth rings (vaulted arches feel)
+  for(let d=0;d<8;d++){
+    const t=1-(d+1)/8;
+    lines.push({type:'h',t,al:.04+t*.12});
+  }
+  // Vertical columns
+  const cols=7;
+  for(let c=0;c<=cols;c++){
+    lines.push({type:'v',frac:c/cols,al:.06});
+  }
+  return lines;
+};
+
+// ── SPAWN FRAGMENT ─────────────────────────────────────────
+const spawnFragment=(idx)=>{
+  // spread across vault space, no clustering near edge
+  const margin=.15;
+  const fx=margin+Math.random()*(1-margin*2);
+  const fy=margin+Math.random()*(1-margin*2);
+  return {
+    id:idx,
+    nx:fx, ny:fy,            // normalised position
+    vx:(Math.random()-.5)*.00028*(1+idx*.06),
+    vy:(Math.random()-.5)*.00022*(1+idx*.06),
+    pulse:Math.random()*Math.PI*2,
+    spinT:Math.random()*Math.PI*2,
+    alpha:0,
+    size:10+Math.random()*9,
+    state:'alive',           // alive | collected | corrupted
+    corruptPct:0,            // 0-1: corrupts over time once monster phase
+    data:FRAGMENTS[idx],
+    ripple:0,                // burst ripple on collect
+    collected_at:null,
+  };
+};
+
+// ── PARTICLES ──────────────────────────────────────────────
+const burst=(x,y,col,n=14)=>{
+  for(let i=0;i<n;i++){
+    const a=Math.random()*Math.PI*2,v=1.5+Math.random()*4;
+    G.particles.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,
+      life:1,decay:.018+Math.random()*.035,
+      size:.6+Math.random()*2.4,col,type:'b'});
+  }
+};
+const dustSpawn=()=>{
+  if(Math.random()>.55)return;
+  G.particles.push({
+    x:Math.random()*W,y:Math.random()*H,
+    vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.18,
+    life:1,decay:.002+Math.random()*.004,
+    size:.3+Math.random()*1.2,col:'dust',type:'d'
+  });
+};
+const updateParticles=(dt)=>{
+  for(let i=G.particles.length-1;i>=0;i--){
+    const p=G.particles[i];
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.type==='b')p.vy+=.03;
+    p.life-=p.decay;
+    if(p.life<=0)G.particles.splice(i,1);
+  }
+};
+
+// ── DRAWING ────────────────────────────────────────────────
+
+function drawBackground(){
+  // Deep vault darkness — slightly lighter at centre
+  const bg=ctx.createRadialGradient(W*.5,H*.48,0,W*.5,H*.48,Math.max(W,H)*.72);
+  const corruptBlend=G.corruption;
+  const r1=Math.floor(8+corruptBlend*18), g1=Math.floor(5+corruptBlend*2), b1=Math.floor(4+corruptBlend*12);
+  const r2=Math.floor(2+corruptBlend*8),  g2=1, b2=Math.floor(1+corruptBlend*6);
+  bg.addColorStop(0,`rgb(${r1},${g1},${b1})`);
+  bg.addColorStop(1,`rgb(${r2},${g2},${b2})`);
+  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+}
+
+function drawStars(dt){
+  for(const s of G.stars){
+    s.twinkle+=dt*s.speed;
+    const a=s.a*(0.6+Math.sin(s.twinkle)*.4)*(1-G.corruption*.6);
+    ctx.fillStyle=`rgba(210,177,92,${a})`;
+    ctx.beginPath(); ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2); ctx.fill();
+  }
+}
+
+function drawVaultGrid(){
+  // Arched-vault architectural lines
+  for(const l of G.vaultLines){
+    const al=l.al*(1-G.corruption*.3);
+    ctx.strokeStyle=`rgba(210,177,92,${al})`; ctx.lineWidth=.4;
+    if(l.type==='h'){
+      const t=l.t;
+      const y=H*(.1+t*.82);
+      const shrink=(1-t)*.38;
+      ctx.beginPath(); ctx.moveTo(W*shrink,y); ctx.lineTo(W*(1-shrink),y); ctx.stroke();
+      // arch curve suggestion
+      ctx.strokeStyle=`rgba(210,177,92,${al*.5})`;
+      ctx.beginPath();
+      ctx.arc(W*.5,y,W*(1-shrink*2)*.5*.9,Math.PI*.85,Math.PI*.15,true);
+      ctx.stroke();
+    } else {
+      const x=l.frac*W;
+      ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke();
+    }
+  }
+}
+
+function drawCorruptionMist(){
+  if(G.corruption<.05)return;
+  const t=G.time;
+  // Tendrils from corners
+  const corners=[[0,0],[W,0],[0,H],[W,H]];
+  corners.forEach(([cx,cy],i)=>{
+    const reach=G.corruption*Math.max(W,H)*.55*(1+Math.sin(t*.3+i)*.12);
+    const mg=ctx.createRadialGradient(cx,cy,0,cx,cy,reach);
+    mg.addColorStop(0,`rgba(50,0,70,${G.corruption*.65})`);
+    mg.addColorStop(.5,`rgba(20,0,35,${G.corruption*.3})`);
+    mg.addColorStop(1,'transparent');
+    ctx.fillStyle=mg; ctx.fillRect(0,0,W,H);
+  });
+}
+
+function drawMonster(){
+  const m=G.monster;
+  m.pulse+=.04;
+  if(m.visible<=0)return;
+
+  const mx_=W*.5+m.x*W*.5*(1+Math.sin(G.time*.22)*.05);
+  const my_=H*.5+m.y*H*.5*(1+Math.cos(G.time*.18)*.05);
+  const v=m.visible;
+
+  // Body mass
+  if(v>.2){
+    const bAl=(v-.2)/.8*.55;
+    const bg_=ctx.createRadialGradient(mx_,my_,0,mx_,my_,180+v*80);
+    bg_.addColorStop(0,`rgba(0,0,0,${bAl})`);
+    bg_.addColorStop(.4,`rgba(8,0,18,${bAl*.6})`);
+    bg_.addColorStop(1,'transparent');
+    ctx.fillStyle=bg_; ctx.beginPath(); ctx.ellipse(mx_,my_+50,180+v*60,140+v*40,0,0,Math.PI*2); ctx.fill();
+  }
+
+  // Eyes — two golden-white orbs with slit pupils
+  const eyeGap=30+v*60;
+  const eyeR=5+v*18;
+  const blink=.8+Math.sin(G.time*1.4)*.2;
+
+  [[mx_-eyeGap/2,my_-8],[mx_+eyeGap/2,my_-8]].forEach(([ex,ey])=>{
+    // Outer glow
+    const eg=ctx.createRadialGradient(ex,ey,0,ex,ey,eyeR*4);
+    eg.addColorStop(0,'rgba(255,230,120,.3)');
+    eg.addColorStop(1,'transparent');
+    ctx.fillStyle=eg; ctx.fillRect(ex-eyeR*4,ey-eyeR*4,eyeR*8,eyeR*8);
+
+    // Iris
+    const ig=ctx.createRadialGradient(ex-eyeR*.2,ey-eyeR*.15,0,ex,ey,eyeR);
+    ig.addColorStop(0,'rgba(255,255,220,1)');
+    ig.addColorStop(.3,'rgba(255,190,50,.9)');
+    ig.addColorStop(1,'rgba(120,60,0,0)');
+    ctx.fillStyle=ig;
+    ctx.save(); ctx.translate(ex,ey); ctx.scale(1,.5*blink);
+    ctx.beginPath(); ctx.arc(0,0,eyeR,0,Math.PI*2); ctx.fill();
+    // Slit pupil
+    ctx.fillStyle='rgba(0,0,0,.9)';
+    ctx.fillRect(-eyeR*.08,-eyeR*.6,eyeR*.16,eyeR*1.2);
+    ctx.restore();
+  });
+
+  // Corruption tendrils from monster
+  if(v>.45){
+    for(let t2=0;t2<6;t2++){
+      const angle=G.time*.4+t2*(Math.PI*2/6);
+      const len=50+v*120+Math.sin(G.time*2+t2)*30;
+      const ex2=mx_+Math.cos(angle)*len, ey2=my_+Math.sin(angle)*len;
+      const tg=ctx.createLinearGradient(mx_,my_,ex2,ey2);
+      tg.addColorStop(0,`rgba(60,0,80,${v*.35})`);
+      tg.addColorStop(1,'transparent');
+      ctx.strokeStyle=tg; ctx.lineWidth=1+v*2;
+      ctx.beginPath(); ctx.moveTo(mx_,my_); ctx.lineTo(ex2,ey2); ctx.stroke();
+    }
+  }
+}
+
+function drawFragments(dt){
+  const mx_=G.mx*W, my_=G.my*H;
+  for(const f of G.fragments){
+    if(f.state==='collected')continue;
+
+    // Update position
+    if(f.state==='alive'){
+      f.nx+=f.vx; f.ny+=f.vy;
+      // Bounce off vault walls
+      if(f.nx<.06||f.nx>.94)f.vx*=-1;
+      if(f.ny<.08||f.ny>.92)f.vy*=-1;
+      // Monster phase: fragments flee mouse slowly
+      if(G.phase>=1){
+        const dx=f.nx-G.mx, dy=f.ny-G.my;
+        const dist=Math.hypot(dx,dy);
+        if(dist<.22){
+          f.vx+=dx/dist*.00018;
+          f.vy+=dy/dist*.00018;
+          const maxV=.0008;
+          const sp=Math.hypot(f.vx,f.vy);
+          if(sp>maxV){f.vx=f.vx/sp*maxV;f.vy=f.vy/sp*maxV;}
+        }
+      }
+      // Corruption pressure
+      if(G.phase>=1) f.corruptPct+=dt*.012*(1+G.corruption*.8);
+      if(f.corruptPct>=1){
+        f.state='corrupted'; f.corruptPct=1;
+        G.corrupted++; G.corruption=Math.min(1,G.corruption+.12);
+        sfxCorrupt(); burst(f.nx*W,f.ny*H,'rgba(80,0,110,.8)',12);
+        updateCorruptDots();
+      }
+    }
+
+    f.pulse+=dt*2.1;
+    f.spinT+=dt*.55;
+    f.alpha=Math.min(1,f.alpha+dt*1.8);
+    if(f.ripple>0)f.ripple-=dt*2.5;
+
+    const fx=f.nx*W, fy=f.ny*H;
+    const p=.78+Math.sin(f.pulse)*.22;
+    const base=f.size*(1+Math.sin(f.pulse)*.08);
+    const corrupting=f.corruptPct;
+
+    // Hit detection for cursor
+    const dist=Math.hypot(fx-mx_,fy-my_);
+    const hovering=(dist<base*3.2);
+    if(hovering) cur.classList.add('hover'); else cur.classList.remove('hover');
+
+    ctx.save();
+
+    if(f.state==='corrupted'){
+      // Corrupted: dark void fragment
+      const vg=ctx.createRadialGradient(fx,fy,0,fx,fy,base*2.8);
+      vg.addColorStop(0,'rgba(50,0,70,.9)');
+      vg.addColorStop(.5,'rgba(15,0,30,.55)');
+      vg.addColorStop(1,'transparent');
+      ctx.fillStyle=vg; ctx.beginPath(); ctx.arc(fx,fy,base*2.8,0,Math.PI*2); ctx.fill();
+
+      // Void spinning ring
+      ctx.strokeStyle='rgba(80,0,110,.5)'; ctx.lineWidth=.8;
+      ctx.save(); ctx.translate(fx,fy); ctx.rotate(f.spinT*1.8);
+      ctx.beginPath(); ctx.arc(0,0,base*2,0,Math.PI*1.5); ctx.stroke();
+      ctx.restore();
+
+    } else {
+      // Alive fragment — gold → corrupt blend
+      const pur=corrupting;
+      const gr=Math.floor(210-pur*140), gg=Math.floor(177-pur*170), gb=Math.floor(92-pur*30);
+      const gc1=`rgb(255,255,220)`, gc2=`rgb(${gr},${gg},${gb})`;
+
+      // Halo
+      const halo=ctx.createRadialGradient(fx,fy,0,fx,fy,base*3.5);
+      halo.addColorStop(0,`rgba(${gr},${gg},${gb},.22)`);
+      halo.addColorStop(1,'transparent');
+      ctx.globalAlpha=f.alpha; ctx.fillStyle=halo;
+      ctx.beginPath(); ctx.arc(fx,fy,base*3.5,0,Math.PI*2); ctx.fill();
+
+      // Core orb
+      const core=ctx.createRadialGradient(fx-base*.22,fy-base*.18,0,fx,fy,base);
+      core.addColorStop(0,gc1);
+      core.addColorStop(.35,gc2);
+      core.addColorStop(1,'rgba(60,30,10,0)');
+      ctx.shadowColor=gc2; ctx.shadowBlur=base*1.6;
+      ctx.fillStyle=core;
+      ctx.beginPath(); ctx.arc(fx,fy,base*p,0,Math.PI*2); ctx.fill();
+      ctx.shadowBlur=0;
+
+      // Orbit ring
+      ctx.strokeStyle=`rgba(${gr},${gg},${gb},${.25-pur*.1})`;
+      ctx.lineWidth=.6;
+      ctx.save(); ctx.translate(fx,fy); ctx.rotate(f.spinT);
+      ctx.beginPath(); ctx.arc(0,0,base*1.9,0,Math.PI*1.85); ctx.stroke();
+      ctx.restore();
+
+      // Corruption creep visualised as darkening arc
+      if(pur>.05){
+        ctx.strokeStyle=`rgba(80,0,110,${pur*.7})`; ctx.lineWidth=2;
+        ctx.save(); ctx.translate(fx,fy); ctx.rotate(-Math.PI/2);
+        ctx.beginPath(); ctx.arc(0,0,base*1.9,0,pur*Math.PI*2); ctx.stroke();
+        ctx.restore();
+      }
+
+      // Hover text reveal
+      if(hovering && f.state==='alive'){
+        const ta=Math.min(1,(base*3.2-dist)/(base*3.2));
+        const fs=Math.ceil(8+ta*4);
+        ctx.font=`${fs}px 'Share Tech Mono',monospace`;
+        ctx.textAlign='center'; ctx.textBaseline='top';
+        ctx.fillStyle=`rgba(210,177,92,${ta*.75})`;
+        const words=f.data.text;
+        const maxW=clamp(fs*words.length*.65,80,260);
+        wrapText(ctx,words.toUpperCase(),fx,fy+base*p+10,maxW,fs*1.5);
+      }
+
+      // Collect on cursor touch
+      if(hovering && f.state==='alive'){
+        f.state='collected'; f.collected_at=G.time;
+        G.collected++;
+        G.score+=Math.floor(150*(1-f.corruptPct*0.5)); // bonus for clean collect
+        G.corruption=Math.max(0,G.corruption-.03);
+        sfxCollect();
+        burst(fx,fy,'#D2B15C',18);
+        f.ripple=1;
+        showNarr(f.data.text);
+        updateCollectedDots(f.id);
+
+        if(G.collected===10){setTimeout(triggerVictory,800);G.active=false;}
+      }
+
+      // Ripple ring
+      if(f.ripple>0){
+        const rr=base*(2+f.ripple*5);
+        ctx.strokeStyle=`rgba(210,177,92,${f.ripple*.5})`; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.arc(fx,fy,rr,0,Math.PI*2); ctx.stroke();
+      }
+    }
+    ctx.restore();
+  }
+  cur.classList.remove('hover');
+}
+
+function drawParticles(){
+  for(const p of G.particles){
+    ctx.save();
+    if(p.type==='d') ctx.fillStyle=`rgba(210,177,92,${p.life*.22})`;
+    else{ctx.globalAlpha=p.life; ctx.fillStyle=p.col;}
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.size*p.life,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+}
+
+function drawGlitch(){
+  if(G.glitch<=0)return;
+  const sl=Math.floor(G.glitch*8)+2;
+  for(let i=0;i<sl;i++){
+    const y=Math.random()*H,h=Math.random()*18+2,dx=(Math.random()-.5)*50*G.glitch;
+    try{const d=ctx.getImageData(0,y,W,h);ctx.putImageData(d,dx,y);}catch(e){}
+  }
+  ctx.save();ctx.globalAlpha=G.glitch*.18;ctx.globalCompositeOperation='screen';
+  ctx.fillStyle='rgba(255,0,0,.5)'; ctx.fillRect(G.glitch*5,0,W,H);
+  ctx.fillStyle='rgba(0,50,255,.4)'; ctx.fillRect(-G.glitch*4,0,W,H);
+  ctx.restore();
+}
+
+function drawVignette(){
+  const vg=ctx.createRadialGradient(W/2,H/2,H*.1,W/2,H/2,H*.82);
+  vg.addColorStop(0,'transparent'); vg.addColorStop(1,'rgba(0,0,0,.72)');
+  ctx.fillStyle=vg; ctx.fillRect(0,0,W,H);
+}
+
+function drawFilmGrain(){
+  const step=4,al=.025;
+  for(let x=0;x<W;x+=step)for(let y=0;y<H;y+=step)
+    if(Math.random()>.66){
+      const b=Math.random()*255;
+      ctx.fillStyle=`rgba(${b},${Math.floor(b*.88)},${Math.floor(b*.72)},${al})`;
+      ctx.fillRect(x,y,step,step);
+    }
+}
+
+// ── UTILITIES ──────────────────────────────────────────────
+const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+function wrapText(ctx,text,x,y,maxW,lh){
+  const words=text.split(' ');
+  let line='';
+  let lines=[];
+  for(const w of words){
+    const test=line+w+' ';
+    if(ctx.measureText(test).width>maxW&&line!=''){lines.push(line.trim());line=w+' ';}
+    else line=test;
+  }
+  if(line) lines.push(line.trim());
+  const startY=y-(lines.length-1)*lh*.5;
+  lines.forEach((l,i)=>ctx.fillText(l,x,startY+i*lh));
+}
+
+// ── HUD UPDATE ─────────────────────────────────────────────
+function updateHUD(){
+  const m=String(Math.floor(G.time/60)).padStart(2,'0');
+  const s=String(Math.floor(G.time%60)).padStart(2,'0');
+  document.getElementById('h-time').textContent=m+':'+s;
+  document.getElementById('h-score').textContent=`SCORE: ${G.score}`;
+  document.getElementById('h-rem').textContent=`REMAINING: ${10-G.collected-G.corrupted}`;
+  const cf=document.getElementById('corr-fill');
+  cf.style.width=(G.corruption*100)+'%';
+  cf.style.background=G.corruption<.4?'#3D0050':G.corruption<.7?'#7B0090':'#B000D0';
+  const hmEl=document.getElementById('h-monster');
+  hmEl.style.color=G.monster.visible>.2?`rgba(155,27,27,${G.monster.visible*.9})`:'rgba(155,27,27,0)';
+  const phEl=document.getElementById('h-phase');
+  phEl.textContent=['VAULT SEQUENCE','MONSTER SYSTEM','CRITICAL BREACH'][G.phase]||'VAULT SEQUENCE';
+}
+function updateCollectedDots(id){
+  const dots=document.querySelectorAll('.fc-dot');
+  if(dots[id]) dots[id].classList.replace('fc-dot','fc-dot collected');
+}
+function updateCorruptDots(){
+  const alive=G.fragments.filter(f=>f.state==='corrupted');
+  const dots=[...document.querySelectorAll('.fc-dot')];
+  let cnt=0;
+  dots.forEach(d=>{ if(!d.classList.contains('collected')&&cnt<alive.length){ d.classList.add('corrupted'); cnt++; } });
+}
+function showNarr(text){
+  const el=document.getElementById('narr');
+  el.textContent='— '+text+' —';
+  el.style.opacity='1';
+  setTimeout(()=>el.style.opacity='0',3000);
+}
+
+// ── INPUT ──────────────────────────────────────────────────
+document.addEventListener('mousemove',e=>{
+  cur.style.left=e.clientX+'px'; cur.style.top=e.clientY+'px';
+  if(G.active){G.mx=e.clientX/W; G.my=e.clientY/H;}
+});
+canvas.addEventListener('touchmove',e=>{
+  e.preventDefault();
+  const t=e.touches[0]; G.mx=t.clientX/W; G.my=t.clientY/H;
+},{passive:false});
+canvas.addEventListener('touchstart',e=>{
+  const t=e.touches[0]; G.mx=t.clientX/W; G.my=t.clientY/H;
+},{passive:false});
+
+// ── MONSTER AI ─────────────────────────────────────────────
+const updateMonster=(dt)=>{
+  const m=G.monster;
+  m.growlT-=dt;
+
+  if(G.phase===0){ m.visible=Math.max(0,m.visible-dt*.5); return; }
+
+  // Phase 1+: monster wanders, increasingly visible
+  const targetVis=G.phase===1?.45+G.corruption*.35:.75+G.corruption*.25;
+  m.visible+=(targetVis-m.visible)*dt*.6;
+
+  // Slow wander
+  m.x+=m.vx*(1+G.corruption*.8);
+  m.y+=m.vy*(1+G.corruption*.8);
+  if(m.x<-.85||m.x>.85) m.vx*=-1;
+  if(m.y<-.85||m.y>.85) m.vy*=-1;
+
+  // Occasional growl
+  if(m.growlT<=0&&m.visible>.3){
+    m.growlT=8+Math.random()*12;
+    sfxMonsterGrowl();
+    G.glitch=.4;
+    document.getElementById('h-monster').style.color=`rgba(155,27,27,.9)`;
+    setTimeout(()=>document.getElementById('h-monster').style.color='rgba(155,27,27,0)',1200);
+  }
+
+  // Phase 2: corruption accelerates dramatically
+  if(G.phase===2){
+    G.corruption=Math.min(1,G.corruption+dt*.008);
+    m.vx*=(1+dt*.01);m.vy*=(1+dt*.01);
+  }
+};
+
+// ── MAIN LOOP ──────────────────────────────────────────────
+let lastTS=0;
+function loop(ts){
+  if(!G.active)return;
+  const dt=Math.min((ts-lastTS)/1000,.05); lastTS=ts;
+  G.time+=dt; G.score+=Math.floor(dt*.5);
+
+  // Phase transitions
+  if(G.corruption>.35&&G.phase===0){
+    G.phase=1; G.glitch=.8; corruptAudio();
+    G.msg='MONSTER SYSTEM ONLINE'; G.msgT=2;
+    document.getElementById('h-phase').textContent='MONSTER SYSTEM';
+  }
+  if(G.corruption>.7&&G.phase===1){
+    G.phase=2; G.glitch=.7;
+    G.msg='CRITICAL BREACH'; G.msgT=2;
+  }
+
+  // Death: all fragments corrupted OR corruption maxed
+  if(G.corrupted>=10||(G.corruption>=1&&G.collected<10)){
+    triggerGameOver(); return;
+  }
+
+  // Decay
+  G.glitch=Math.max(0,G.glitch-dt*1.8);
+  G.shake=Math.max(0,G.shake-dt*2.5);
+  if(G.msgT>0) G.msgT-=dt;
+
+  updateMonster(dt);
+  updateParticles(dt);
+  dustSpawn();
+
+  if(G.shake>0){
+    ctx.save();
+    ctx.translate((Math.random()-.5)*G.shake*12,(Math.random()-.5)*G.shake*9);
+  }
+
+  drawBackground();
+  drawStars(dt);
+  drawVaultGrid();
+  drawCorruptionMist();
+  drawMonster();
+  drawFragments(dt);
+  drawParticles();
+  drawGlitch();
+  drawVignette();
+  drawFilmGrain();
+
+  if(G.shake>0) ctx.restore();
+  updateHUD();
+
+  requestAnimationFrame(loop);
+}
+
+// ── GAME OVER ──────────────────────────────────────────────
+function triggerGameOver(){
+  G.active=false; fadeAudio(3);
+  saveHi(G.score,false);
+  document.getElementById('hud').style.display='none';
+  document.getElementById('go-info').innerHTML=
+    `SCORE &nbsp; ${G.score}<br>FRAGMENTS RECOVERED &nbsp; ${G.collected}/10<br>CORRUPTED &nbsp; ${G.corrupted}<br>TIME &nbsp; ${Math.floor(G.time)}s`;
+  setTimeout(()=>{document.getElementById('gameover').style.display='flex';},1000);
+}
+
+// ── VICTORY ────────────────────────────────────────────────
+function triggerVictory(){
+  fadeAudio(9);
+  saveHi(G.score, G.corrupted===0);
+  document.getElementById('hud').style.display='none';
+  const frags=G.fragments.filter(f=>f.state==='collected').map(f=>'— '+f.data.text).join('\n');
+  document.getElementById('v-frags').textContent=frags;
+  document.getElementById('v-score').textContent=
+    `SCORE: ${G.score}  ·  TIME: ${Math.floor(G.time)}s  ·  ${G.corrupted===0?'PERFECT RUN':'FRAGMENTS LOST: '+G.corrupted}`;
+  setTimeout(()=>{ document.getElementById('victory').style.display='flex'; },1200);
+}
+
+// ── RESET ──────────────────────────────────────────────────
+function resetMenu(){
+  ['gameover','victory'].forEach(id=>{
+    document.getElementById(id).style.display='none';
+  });
+  document.getElementById('menu').style.opacity='1';
+  document.getElementById('menu').style.display='flex';
+  // Re-run idle
+  requestAnimationFrame(menuIdle);
+}
+
+// ── START ──────────────────────────────────────────────────
+function startGame(){
+  document.getElementById('menu').style.opacity='0';
+  setTimeout(()=>{
+    document.getElementById('menu').style.display='none';
+    document.getElementById('hud').style.display='block';
+    ['gameover','victory'].forEach(id=>document.getElementById(id).style.display='none');
+
+    G=resetState();
+    G.active=true;
+    G.stars=buildStars(200);
+    G.vaultLines=buildVaultLines();
+    G.fragments=FRAGMENTS.map((_,i)=>spawnFragment(i));
+
+    // Build dot indicators
+    const fc=document.getElementById('fc-dots');
+    fc.innerHTML='';
+    for(let i=0;i<10;i++){
+      const d=document.createElement('div'); d.className='fc-dot'; d.id='dot-'+i; fc.appendChild(d);
+    }
+
+    initAudio(); vaultAudio();
+    lastTS=performance.now(); requestAnimationFrame(loop);
+  },1100);
+}
+
+// ── MENU IDLE ──────────────────────────────────────────────
+function menuIdle(ts){
+  ctx.fillStyle='#040302'; ctx.fillRect(0,0,W,H);
+
+  // Slow pulsing vault grid
+  const t=ts*.0003;
+  const cx2=W/2+Math.sin(t*.6)*W*.04, cy2=H*.46;
+  const vls=buildVaultLines();
+  vls.forEach(l=>{
+    if(l.type!=='v')return;
+    ctx.strokeStyle='rgba(210,177,92,.04)'; ctx.lineWidth=.3;
+    ctx.beginPath(); ctx.moveTo(l.frac*W,0); ctx.lineTo(l.frac*W,H); ctx.stroke();
+  });
+
+  // Floating idle orbs
+  for(let i=0;i<6;i++){
+    const a=t*.7+i*(Math.PI*2/6);
+    const r=80+Math.sin(t+i*1.2)*20;
+    const ox=W*.5+Math.cos(a)*r*2.5, oy=H*.5+Math.sin(a)*r*.9;
+    const og=ctx.createRadialGradient(ox,oy,0,ox,oy,18);
+    og.addColorStop(0,'rgba(210,177,92,.08)'); og.addColorStop(1,'transparent');
+    ctx.fillStyle=og; ctx.beginPath(); ctx.arc(ox,oy,18,0,Math.PI*2); ctx.fill();
+  }
+
+  // Vignette
+  const vg=ctx.createRadialGradient(W/2,H/2,H*.12,W/2,H/2,H*.85);
+  vg.addColorStop(0,'transparent'); vg.addColorStop(1,'rgba(0,0,0,.85)');
+  ctx.fillStyle=vg; ctx.fillRect(0,0,W,H);
+
+  const menuEl=document.getElementById('menu');
+  if(menuEl.style.display!=='none'&&menuEl.style.opacity!=='0') requestAnimationFrame(menuIdle);
+}
+requestAnimationFrame(menuIdle);
+</script>
+</body>
+</html>

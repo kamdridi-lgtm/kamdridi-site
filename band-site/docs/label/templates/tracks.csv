@@ -1,0 +1,6 @@
+track_id,release_id,artist_id,artist_name,track_title,isrc,writers,producers,performers,bpm,key,explicit,language,lyrics_status,master_file,instrumental_file,stems_status,mood_tags,genre_tags,notes
+track_001,release_001,artist_002,IRON COUNTY GHOSTS,Dust on the Altar,,,,June Marlowe,,,,English,final,,,,haunted;dusty;dark;cinematic,dark country;outlaw americana,
+track_002,release_001,artist_002,IRON COUNTY GHOSTS,Highway 17 Ghost,,,,June Marlowe,,,,English,final,,,,road;ghost;night;cinematic,dark country;country rock,
+track_003,release_001,artist_002,IRON COUNTY GHOSTS,Whiskey Don’t Pray,,,,June Marlowe,,,,English,final,,,,whiskey;bar;regret;danger,outlaw country;country rock,
+track_004,release_001,artist_002,IRON COUNTY GHOSTS,Mama Left the Porch Light On,,,,June Marlowe,,,,English,final,,,,mother;home;porch light;emotional,dark country ballad,
+track_005,release_001,artist_002,IRON COUNTY GHOSTS,Black River Sunday,,,,June Marlowe,,,,English,final,,,,river;sins;church;southern gothic,dark country;southern gothic,
