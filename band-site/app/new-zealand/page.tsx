@@ -19,7 +19,9 @@ export default function NewZealandLivePage() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#08070d] text-white">
       <section className="relative isolate border-b border-white/10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(119,36,137,.24),transparent_45%),radial-gradient(circle_at_12%_80%,rgba(33,72,125,.24),transparent_46%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[url('/nz/wellington-live-header-crowd-hd.png')] bg-cover bg-[center_48%]" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#08070d]/90 via-[#08070d]/60 to-[#08070d]/20" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#08070d]/75 via-transparent to-[#08070d]/10" aria-hidden="true" />
         <div className="relative mx-auto grid max-w-6xl items-center gap-8 px-5 pb-12 pt-10 sm:px-8 md:grid-cols-[1fr_.8fr] md:gap-12 md:py-16">
           <div>
             <div className="flex flex-wrap items-center gap-4">
