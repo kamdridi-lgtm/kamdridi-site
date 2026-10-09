@@ -113,6 +113,21 @@ export default function LivePage() {
         </div>
       </section>
 
+      <section aria-label="Explore live shows by country" className="mx-auto grid max-w-7xl gap-4 px-5 py-8 sm:grid-cols-2 sm:px-8 lg:px-10">
+        <Link href="#adelaide-show" className="group rounded-3xl border border-white/20 bg-[linear-gradient(120deg,#171d39,#14090e)] p-6 transition hover:border-blue-400/60 hover:bg-white/10">
+          <span className="text-3xl" aria-hidden="true">🇦🇺</span>
+          <h2 className="mt-3 font-display text-3xl uppercase tracking-wide text-white">Australia</h2>
+          <p className="mt-2 text-sm text-stone-300">Adelaide Fringe · Coolangatta · additional dates</p>
+          <span className="mt-4 inline-block text-xs font-bold uppercase tracking-[.2em] text-white">Explore shows →</span>
+        </Link>
+        <Link href="/new-zealand" className="group rounded-3xl border border-white/20 bg-[linear-gradient(120deg,#32101b,#100912)] p-6 transition hover:border-red-400/60 hover:bg-white/10">
+          <span className="text-3xl" aria-hidden="true">🇳🇿</span>
+          <h2 className="mt-3 font-display text-3xl uppercase tracking-wide text-white">New Zealand</h2>
+          <p className="mt-2 text-sm text-stone-300">Wellington · The Fringe Bar · 2 March 2027</p>
+          <span className="mt-4 inline-block text-xs font-bold uppercase tracking-[.2em] text-white">View Wellington poster →</span>
+        </Link>
+      </section>
+
       <section id="tour-dates" className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:px-10 lg:py-20">
         <div className="mb-8 flex items-end justify-between gap-6 border-b border-white/15 pb-5">
           <div><p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-[#f4c66a]">Asia-Pacific · 2027</p><h2 className="mt-3 font-display text-4xl uppercase tracking-[0.04em] sm:text-5xl">Tour Dates</h2></div>
@@ -131,7 +146,7 @@ export default function LivePage() {
         <p className="mt-7 max-w-2xl text-xs leading-6 text-stone-500">Additional dates and venue details to be announced.</p>
       </section>
 
-      <section className="relative isolate overflow-hidden border-b border-white/10">
+      <section id="adelaide-show" className="relative isolate overflow-hidden border-b border-white/10">
         <Image
           src="/assets/images/tour/tour-crowd-stage.png"
           alt="KAM DRIDI live concert crowd and stage"
