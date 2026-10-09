@@ -186,11 +186,12 @@ export default function LivePage() {
                   href={fringeUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-xs font-bold uppercase tracking-[0.22em] !text-black [&_svg]:!text-black transition hover:bg-stone-100"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-xs font-bold uppercase tracking-[0.22em] transition hover:bg-stone-100"
+                  style={{ color: "#080808" }}
                 >
-                  <Ticket className="h-4 w-4" />
-                  Official Adelaide Fringe
-                  <ArrowUpRight className="h-4 w-4" />
+                  <Ticket className="h-4 w-4" style={{ color: "#080808" }} />
+                  <span style={{ color: "#080808" }}>Official Adelaide Fringe</span>
+                  <ArrowUpRight className="h-4 w-4" style={{ color: "#080808" }} />
                 </a>
                 <Link
                   href="/tour#dates"
