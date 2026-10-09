@@ -221,12 +221,14 @@ export default function LivePage() {
                   <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-red-300">
                     Adelaide · Australia
                   </p>
-                  <h2 className="mt-3 font-display text-4xl uppercase tracking-[0.06em] text-white sm:text-5xl">
-                    Domain Theatre
-                  </h2>
-                  <p className="mt-2 text-sm uppercase tracking-[0.24em] text-stone-400">
-                    Marion Cultural Centre
-                  </p>
+                  <h2 className="sr-only">Marion Cultural Centre | Domain Theatre</h2>
+                  <img
+                    src="/adelaide/domain-marion-white-logo.svg"
+                    alt="Marion Cultural Centre | Domain Theatre — official venue logos"
+                    width={375}
+                    height={94}
+                    className="mt-5 h-auto w-full max-w-[455px] object-contain object-left drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
+                  />
                 </div>
 
                 <div className="grid gap-4 py-6 sm:grid-cols-2">
@@ -237,14 +239,14 @@ export default function LivePage() {
                     </p>
                     <p className="mt-1 text-sm font-semibold text-white">{event.date}</p>
                   </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                  <div className="rounded-2xl border border-white/25 bg-black/45 p-4">
                     <Clock3 className="h-5 w-5 text-[#f4c66a]" />
                     <p className="mt-3 text-[10px] uppercase tracking-[0.26em] text-stone-500">
                       Showtime
                     </p>
                     <p className="mt-1 text-sm font-semibold text-white">{event.time}</p>
                   </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 sm:col-span-2">
+                  <div className="rounded-2xl border border-white/25 bg-black/45 p-4 sm:col-span-2">
                     <MapPin className="h-5 w-5 text-[#f4c66a]" />
                     <p className="mt-3 text-[10px] uppercase tracking-[0.26em] text-stone-500">
                       Venue address
@@ -254,7 +256,7 @@ export default function LivePage() {
                   </div>
                 </div>
 
-                <div className="rounded-2xl border border-[#f4c66a]/20 bg-[#f4c66a]/[0.06] p-5">
+                <div className="rounded-2xl border border-[#f4c66a]/30 bg-black/40 p-5">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#f4c66a]">
                     Official ticketing
                   </p>
