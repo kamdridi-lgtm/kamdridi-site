@@ -14,7 +14,7 @@ import {
 
 const fringeUrl = "https://adelaidefringe.com.au/";
 const tourDates = [
-  { date: "17 JAN 2027", city: "Tokyo", country: "Japan", venue: "TBA" },
+  { date: "17 JAN 2027", city: "Tokyo", country: "Japan", venue: "GEKIRIN · The Playhouse, Machida", detailsLink: "/japan", ticketLink: "https://mohanak.com/ticket/" },
   { date: "22–24 JAN 2027", city: "Canberra", country: "Australia", venue: "TBA" },
   { date: "FEB 2027", city: "Brisbane", country: "Australia", venue: "TBA" },
   { date: "06 FEB 2027", city: "Coolangatta · Gold Coast", country: "Australia", venue: "Eddie’s Grub House" },
@@ -123,7 +123,7 @@ export default function LivePage() {
         <Link href="/japan" className="group rounded-3xl border border-white/20 bg-[linear-gradient(120deg,#281419,#0b0a14)] p-6 transition hover:border-red-400/60 hover:bg-white/10">
           <span className="text-3xl" aria-hidden="true">🇯🇵</span>
           <h2 className="mt-3 font-display text-3xl uppercase tracking-wide text-white">Japan</h2>
-          <p className="mt-2 text-sm text-stone-300">Tokyo · Osaka · 2027 live plans</p>
+          <p className="mt-2 text-sm text-stone-300">Tokyo · GEKIRIN · The Playhouse · 17 January 2027</p>
           <span className="mt-4 inline-block text-xs font-bold uppercase tracking-[.2em] text-white">Explore Japan →</span>
         </Link>
         <Link href="/new-zealand" className="group rounded-3xl border border-white/20 bg-[linear-gradient(120deg,#32101b,#100912)] p-6 transition hover:border-red-400/60 hover:bg-white/10">
@@ -144,7 +144,18 @@ export default function LivePage() {
             <div key={show.date + show.city} className="group grid grid-cols-[105px_1fr] gap-x-4 border-b border-white/10 py-6 transition hover:border-white/35 sm:grid-cols-[155px_1fr_1fr_auto] sm:items-center sm:gap-x-7">
               <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-400 sm:text-xs">{show.date}</div>
               <div><div className="font-display text-xl uppercase tracking-[0.04em] text-white sm:text-2xl">{show.city}</div><div className="mt-1 flex items-center gap-2 text-[9px] uppercase tracking-[0.2em] text-stone-500"><img src={show.country === "Japan" ? "https://flagcdn.com/w40/jp.png" : show.country === "Australia" ? "https://flagcdn.com/w40/au.png" : "https://flagcdn.com/w40/nz.png"} alt="" aria-hidden="true" className="h-[12px] w-[20px] shrink-0 rounded-[2px] object-cover shadow-[0_0_0_1px_rgba(255,255,255,0.18)]" loading="lazy" /><span>{show.country}</span></div></div>
-              <div className="col-start-2 mt-2 sm:col-start-auto sm:mt-0"><div className="text-xs font-semibold uppercase tracking-[0.1em] text-stone-200 sm:text-sm">{show.venue}</div><div className="mt-1 hidden text-[9px] uppercase tracking-[0.2em] text-stone-500 sm:block">{show.country}</div></div>
+              <div className="col-start-2 mt-2 sm:col-start-auto sm:mt-0">
+                <div className="text-xs font-semibold uppercase tracking-[0.1em] text-stone-200 sm:text-sm">{show.venue}</div>
+                <div className="mt-1 hidden text-[9px] uppercase tracking-[0.2em] text-stone-500 sm:block">{show.country}</div>
+                {"detailsLink" in show && show.detailsLink && (
+                  <div className="mt-2 flex flex-wrap items-center gap-3">
+                    <Link href={show.detailsLink} className="text-xs font-semibold text-[#f4c66a] underline underline-offset-4 hover:text-white">Concert details ↗</Link>
+                    {"ticketLink" in show && show.ticketLink && (
+                      <a href={show.ticketLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-full border border-red-500/60 bg-red-700 px-3 py-1.5 text-[10px] font-bold uppercase text-white hover:bg-red-600"><Ticket className="h-3 w-3" /> Buy Tickets ↗</a>
+                    )}
+                  </div>
+                )}
+              </div>
 
             </div>
           ))}
