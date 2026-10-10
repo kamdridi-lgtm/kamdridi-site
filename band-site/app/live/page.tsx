@@ -17,17 +17,17 @@ const tourDates = [
   { date: "17 JAN 2027", city: "Tokyo", country: "Japan", venue: "GEKIRIN · The Playhouse, Machida", detailsLink: "/japan", ticketLink: "https://mohanak.com/ticket/" },
   { date: "22–24 JAN 2027", city: "Canberra", country: "Australia", venue: "TBA" },
   { date: "FEB 2027", city: "Brisbane", country: "Australia", venue: "TBA" },
-  { date: "06 FEB 2027", city: "Coolangatta · Gold Coast", country: "Australia", venue: "Eddie’s Grub House" },
+  { date: "06 FEB 2027", city: "Coolangatta · Gold Coast", country: "Australia", venue: "Eddie’s Grub House", venueLink: "https://www.eddiesgrubhouse.com/" },
   { date: "FEB 2027", city: "Rockhampton", country: "Australia", venue: "TBA" },
   { date: "FEB 2027", city: "Mackay", country: "Australia", venue: "TBA" },
   { date: "FEB 2027", city: "Airlie Beach", country: "Australia", venue: "TBA" },
   { date: "FEB 2027", city: "Cairns", country: "Australia", venue: "TBA" },
-  { date: "02 MAR 2027 · 19:30", city: "Wellington", country: "New Zealand", venue: "The Fringe Bar · NZ Fringe" },
+  { date: "02 MAR 2027 · 19:30", city: "Wellington", country: "New Zealand", venue: "The Fringe Bar · NZ Fringe", detailsLink: "/new-zealand", ticketLink: "https://tickets.fringe.co.nz/", ticketLabel: "Festival tickets" },
   { date: "MAR 2027", city: "Lyttelton · Christchurch", country: "New Zealand", venue: "Wunderbar" },
   { date: "MAR 2027", city: "Auckland", country: "New Zealand", venue: "TBA" },
   { date: "MAR 2027", city: "Dunedin", country: "New Zealand", venue: "TBA" },
   { date: "05 MAR 2027", city: "Sydney", country: "Australia", venue: "Dead Set" },
-  { date: "18 MAR 2027 · 19:30", city: "Adelaide", country: "Australia", venue: "Domain Theatre · Marion Cultural Centre" },
+  { date: "18 MAR 2027 · 19:30", city: "Adelaide", country: "Australia", venue: "Domain Theatre · Marion Cultural Centre", detailsLink: "/live#adelaide-show", ticketLink: "https://adelaidefringe.com.au/", ticketLabel: "Tickets from 4 Dec" },
   { date: "2027", city: "Perth", country: "Australia", venue: "TBA" },
 ];
 
@@ -151,12 +151,16 @@ export default function LivePage() {
                   <div className="mt-2 flex flex-wrap items-center gap-3">
                     <Link href={show.detailsLink} className="text-xs font-semibold text-[#f4c66a] underline underline-offset-4 hover:text-white">Concert details ↗</Link>
                     {"ticketLink" in show && show.ticketLink && (
-                      <a href={show.ticketLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-full border border-red-500/60 bg-red-700 px-3 py-1.5 text-[10px] font-bold uppercase text-white hover:bg-red-600"><Ticket className="h-3 w-3" /> Buy Tickets ↗</a>
+                      <a href={show.ticketLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-full border border-red-500/60 bg-red-700 px-3 py-1.5 text-[10px] font-bold uppercase text-white hover:bg-red-600"><Ticket className="h-3 w-3" /> {"ticketLabel" in show && show.ticketLabel ? show.ticketLabel : "Buy Tickets"} ↗</a>
                     )}
                   </div>
                 )}
               </div>
-
+              {"venueLink" in show && show.venueLink && (
+                <div className="col-start-2 mt-2 sm:col-start-4 sm:mt-0">
+                  <a href={show.venueLink} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-[#f4c66a] underline underline-offset-4 hover:text-white">Visit venue ↗</a>
+                </div>
+              )}
             </div>
           ))}
         </div>
