@@ -38,12 +38,12 @@ export default function JapanLivePage() {
       </section>
 
       <section id="tokyo-show" className="relative isolate overflow-hidden border-b border-white/10 bg-[#10090b]">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-[url('/japan/the-playhouse-stage-tokyo.png')] bg-cover bg-center" aria-hidden="true" />
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-black/45 via-black/15 to-black/35" aria-hidden="true" />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-5 py-12 sm:px-8 md:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)] md:gap-12 md:py-20 lg:px-10">
-          <div className="mx-auto w-full max-w-[420px]">
+        <div className="pointer-events-none absolute inset-y-0 right-0 -z-10 w-full bg-[url('/japan/the-playhouse-stage-tokyo.png')] bg-contain bg-right bg-no-repeat opacity-85 md:w-[62%]" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-[#10090b]/80 via-[#10090b]/35 to-black/20" aria-hidden="true" />
+        <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-5 py-12 sm:px-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,.9fr)] md:gap-10 md:py-20 lg:px-10">
+          <div className="mx-auto w-full max-w-[550px]">
             <a href="/japan/kamdridi-gekirin-tokyo-2027.png" target="_blank" rel="noopener noreferrer" aria-label="Open the KAM DRIDI GEKIRIN Tokyo 2027 concert poster at full size" className="group block overflow-hidden rounded-2xl border border-white/20 bg-black shadow-[0_25px_65px_rgba(0,0,0,.55)]">
-              <Image src="/japan/kamdridi-gekirin-tokyo-2027.png" alt="KAM DRIDI performing at GEKIRIN on 17 January 2027, The Playhouse, Tokyo, concert poster with QR code" width={1122} height={1402} priority sizes="(max-width: 767px) 90vw, 420px" className="block h-auto w-full transition-transform duration-300 group-hover:scale-[1.015]" />
+              <Image src="/japan/kamdridi-gekirin-tokyo-2027.png" alt="KAM DRIDI performing at GEKIRIN on 17 January 2027, The Playhouse, Tokyo, concert poster with QR code" width={1122} height={1402} priority sizes="(max-width: 767px) 90vw, 550px" className="block h-auto w-full transition-transform duration-300 group-hover:scale-[1.015]" />
             </a>
             <p className="mt-3 text-center text-[11px] font-semibold uppercase tracking-[.16em] text-stone-200">GEKIRIN Tokyo · Concert poster · Tap to enlarge ↗</p>
           </div>
@@ -58,17 +58,21 @@ export default function JapanLivePage() {
               <p className="flex items-start gap-3 text-sm leading-6 text-white sm:text-base"><MapPin className="mt-1 h-5 w-5 shrink-0 text-[#f4c66a]" /> The Playhouse · Machida, Tokyo, Japan</p>
               <p className="flex items-start gap-3 text-sm leading-6 text-white sm:text-base"><Mic2 className="mt-1 h-5 w-5 shrink-0 text-[#f4c66a]" /> Melodic Hard Rock / Cinematic Melodic Hard Rock · Live lead vocals with professional instrumental backing tracks</p>
             </div>
-            <div className="mt-6 flex items-center gap-3 rounded-xl border border-red-500/30 bg-black/45 px-5 py-4">
-              <Ticket className="h-5 w-5 shrink-0 text-[#f4c66a]" />
-              <p className="text-sm leading-6 text-white">Ticket reservation QR code is on the concert poster. Event details and showtime will be updated here when officially released.</p>
+            <div className="mt-6 flex items-start gap-3 rounded-xl border border-red-500/30 bg-black/60 px-5 py-4">
+              <Ticket className="mt-1 h-5 w-5 shrink-0 text-[#f4c66a]" />
+              <div className="min-w-0">
+                <p className="text-sm font-bold text-white">Tickets · MOHANAK</p>
+                <a href="https://mohanak.com/ticket/" target="_blank" rel="noopener noreferrer" className="mt-1 block break-all text-sm font-semibold leading-6 text-red-300 underline underline-offset-4 hover:text-white">mohanak.com/ticket/ ↗</a>
+                <p className="mt-2 text-xs leading-5 text-stone-200">Official ticket reservation form · チケット予約</p>
+              </div>
             </div>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Link href="/press" className="inline-flex items-center rounded-full bg-white px-6 py-3 text-xs font-bold uppercase tracking-[.12em] !text-black hover:bg-stone-200">
+              <a href="https://mohanak.com/ticket/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border border-red-400/70 bg-red-700 px-6 py-3 text-xs font-bold uppercase tracking-[.12em] text-white transition hover:bg-red-600">
+                <Ticket className="mr-2 h-4 w-4" /> Buy Tickets <ArrowUpRight className="ml-2 h-4 w-4" />
+              </a>
+              <Link href="/press" className="inline-flex items-center rounded-full border border-white/40 bg-black/60 px-6 py-3 text-xs font-bold uppercase tracking-[.12em] text-white hover:bg-white/15">
                 Artist EPK <ArrowUpRight className="ml-2 h-4 w-4" />
               </Link>
-              <a href="/japan/kamdridi-gekirin-tokyo-2027.png" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border border-white/40 bg-black/45 px-6 py-3 text-xs font-bold uppercase tracking-[.12em] text-white transition hover:bg-white/15">
-                Tickets / QR on poster <ArrowUpRight className="ml-2 h-4 w-4" />
-              </a>
             </div>
           </div>
         </div>
