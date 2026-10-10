@@ -38,41 +38,30 @@ export default function JapanLivePage() {
       </section>
 
       <section id="tokyo-show" className="relative isolate overflow-hidden border-b border-white/10 bg-[#10090b]">
-        <div className="pointer-events-none absolute inset-y-0 right-0 -z-10 w-full bg-[url('/japan/the-playhouse-stage-tokyo.png')] bg-contain bg-right bg-no-repeat opacity-85 md:w-[62%]" aria-hidden="true" />
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-[#10090b]/80 via-[#10090b]/35 to-black/20" aria-hidden="true" />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-5 py-12 sm:px-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,.9fr)] md:gap-10 md:py-20 lg:px-10">
-          <div className="mx-auto w-full max-w-[550px]">
-            <a href="/japan/kamdridi-gekirin-tokyo-2027.png" target="_blank" rel="noopener noreferrer" aria-label="Open the KAM DRIDI GEKIRIN Tokyo 2027 concert poster at full size" className="group block overflow-hidden rounded-2xl border border-white/20 bg-black shadow-[0_25px_65px_rgba(0,0,0,.55)]">
-              <Image src="/japan/kamdridi-gekirin-tokyo-2027.png" alt="KAM DRIDI performing at GEKIRIN on 17 January 2027, The Playhouse, Tokyo, concert poster with QR code" width={1122} height={1402} priority sizes="(max-width: 767px) 90vw, 550px" className="block h-auto w-full transition-transform duration-300 group-hover:scale-[1.015]" />
-            </a>
-            <p className="mt-3 text-center text-[11px] font-semibold uppercase tracking-[.16em] text-stone-200">GEKIRIN Tokyo · Concert poster · Tap to enlarge ↗</p>
-          </div>
-
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[.28em] text-red-300">Tokyo · Japan · GEKIRIN 2027</p>
-            <h2 className="mt-4 font-display text-3xl uppercase leading-[1.05] text-white drop-shadow-lg sm:text-5xl">
-              The Playhouse <span className="block">Machida · Tokyo</span>
-            </h2>
-            <div className="mt-7 space-y-4 rounded-2xl border border-white/25 bg-black/50 p-5 backdrop-blur-[2px] sm:p-7">
-              <p className="flex items-start gap-3 text-sm leading-6 text-white sm:text-base"><CalendarDays className="mt-1 h-5 w-5 shrink-0 text-[#f4c66a]" /> Sunday 17 January 2027</p>
-              <p className="flex items-start gap-3 text-sm leading-6 text-white sm:text-base"><MapPin className="mt-1 h-5 w-5 shrink-0 text-[#f4c66a]" /> The Playhouse · Machida, Tokyo, Japan</p>
-              <p className="flex items-start gap-3 text-sm leading-6 text-white sm:text-base"><Mic2 className="mt-1 h-5 w-5 shrink-0 text-[#f4c66a]" /> Melodic Hard Rock / Cinematic Melodic Hard Rock · Live lead vocals with professional instrumental backing tracks</p>
-            </div>
-            <div className="mt-6 flex items-start gap-3 rounded-xl border border-red-500/30 bg-black/60 px-5 py-4">
-              <Ticket className="mt-1 h-5 w-5 shrink-0 text-[#f4c66a]" />
-              <div className="min-w-0">
-                <p className="text-sm font-bold text-white">Tickets · MOHANAK</p>
-                <a href="https://mohanak.com/ticket/" target="_blank" rel="noopener noreferrer" className="mt-1 block break-all text-sm font-semibold leading-6 text-red-300 underline underline-offset-4 hover:text-white">mohanak.com/ticket/ ↗</a>
-                <p className="mt-2 text-xs leading-5 text-stone-200">Official ticket reservation form · チケット予約</p>
-              </div>
-            </div>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <a href="https://mohanak.com/ticket/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border border-red-400/70 bg-red-700 px-6 py-3 text-xs font-bold uppercase tracking-[.12em] text-white transition hover:bg-red-600">
-                <Ticket className="mr-2 h-4 w-4" /> Buy Tickets <ArrowUpRight className="ml-2 h-4 w-4" />
+        <div className="mx-auto max-w-[1600px] px-2 py-8 sm:px-5 lg:px-0 lg:py-16">
+          <div className="relative grid items-center gap-0 lg:grid-cols-[43%_57%]">
+            {/* Let the singer poster occupy the unused left edge and gently overlap the venue photo. */}
+            <div className="relative z-20 mx-auto w-full max-w-[590px] lg:ml-0 lg:mr-[-7%] lg:max-w-none">
+              <a href="/japan/kamdridi-gekirin-tokyo-2027.png" target="_blank" rel="noopener noreferrer" aria-label="Open the GEKIRIN concert poster full size" className="block">
+                <Image src="/japan/kamdridi-gekirin-tokyo-2027.png" alt="KAM DRIDI singer with microphone · GEKIRIN Tokyo concert poster · 17 January 2027" width={1122} height={1402} priority sizes="(max-width: 1023px) 95vw, 45vw" className="block h-auto w-full rounded-xl object-contain shadow-[16px_18px_45px_rgba(0,0,0,.4)]" />
               </a>
-              <Link href="/press" className="inline-flex items-center rounded-full border border-white/40 bg-black/60 px-6 py-3 text-xs font-bold uppercase tracking-[.12em] text-white hover:bg-white/15">
-                Artist EPK <ArrowUpRight className="ml-2 h-4 w-4" />
-              </Link>
+            </div>
+            <div className="relative z-10 -mt-8 min-h-[570px] overflow-hidden rounded-xl sm:min-h-[650px] lg:ml-[-5%] lg:mt-0 lg:min-h-[750px]">
+              <Image src="/japan/the-playhouse-stage-tokyo.png" alt="The Playhouse stage in Tokyo with spotlights, waiting for KAM DRIDI to perform" fill sizes="(max-width: 1023px) 100vw, 60vw" className="object-cover object-center" />
+              {/* Light shading only behind the information, never across the whole stage. */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-black/80 via-black/35 to-transparent" aria-hidden="true" />
+              <div className="absolute inset-x-3 bottom-4 z-10 sm:inset-x-6 sm:bottom-6 lg:left-[12%] lg:right-7">
+                <div className="max-w-[600px] rounded-xl border border-white/20 bg-black/25 p-4 backdrop-blur-[1px] sm:p-6">
+                  <p className="text-xs font-bold uppercase tracking-[.2em] text-red-200">Tokyo · Japan · GEKIRIN 2027</p>
+                  <h2 className="mt-2 font-display text-2xl uppercase text-white drop-shadow-lg sm:text-4xl">The Playhouse · Machida</h2>
+                  <p className="mt-3 flex items-center gap-2 text-sm text-white sm:text-base"><CalendarDays className="h-4 w-4 shrink-0 text-[#f4c66a]" /> Sunday 17 January 2027</p>
+                  <p className="mt-2 flex items-center gap-2 text-sm text-white sm:text-base"><MapPin className="h-4 w-4 shrink-0 text-[#f4c66a]" /> Machida, Tokyo, Japan</p>
+                  <div className="mt-4 flex flex-wrap items-center gap-3">
+                    <a href="https://mohanak.com/ticket/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-red-700 px-5 py-3 text-xs font-bold uppercase tracking-[.1em] text-white hover:bg-red-600"><Ticket className="mr-2 h-4 w-4" />Buy Tickets <ArrowUpRight className="ml-2 h-4 w-4" /></a>
+                    <a href="https://mohanak.com/ticket/" target="_blank" rel="noopener noreferrer" className="text-sm text-white underline underline-offset-4 hover:text-red-200">mohanak.com/ticket/ ↗</a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
