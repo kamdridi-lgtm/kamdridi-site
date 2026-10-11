@@ -86,18 +86,18 @@ export default function JapanLivePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#08080d]/0 via-[#08080d]/20 to-[#08080d]/70 sm:bg-[linear-gradient(90deg,rgba(8,8,13,.1),rgba(8,8,13,.18)_30%,rgba(8,8,13,.22)_70%,rgba(8,8,13,.1))]" />
         </div>
         <div className="relative z-10 mx-auto max-w-5xl px-5 py-20 text-center [text-shadow:0_2px_16px_rgba(0,0,0,.95)] sm:px-8 sm:py-28">
-          <p className="text-xs font-bold uppercase tracking-[.28em] text-red-300">🇯🇵 日本限定 · 17セット限定</p>
+          <p className="text-xs font-bold uppercase tracking-[.28em] text-red-300">🇯🇵 GEKIRIN · KAM DRIDI SPECIAL</p>
           <h2 className="mt-4 font-display text-4xl font-bold uppercase leading-tight text-white sm:text-6xl">ECHOES UNEARTHED<br/><span className="text-red-500">＋ GEKIRIN LIVE</span></h2>
-          <p className="mx-auto mt-6 max-w-3xl text-lg font-semibold leading-8 text-white sm:text-xl">チケットを買えば、アルバム全曲がついてくる。友達を誘ってライブへ！</p>
-          <p className="mx-auto mt-3 max-w-3xl text-sm leading-7 text-stone-300 sm:text-base"><strong className="text-white">2,500円でGEKIRINライブ入場＋ECHOES UNEARTHED 全曲デジタル版。</strong> ライブ前に曲を聴いて、友達を誘って、1月17日はThe Playhouse・町田で一緒に盛り上がろう。</p>
+          <p className="mx-auto mt-6 max-w-3xl text-lg font-semibold leading-8 text-white sm:text-xl">どうせチケットを買うなら、ここから。2,500円のチケットで、KAM DRIDIのアルバムが無料でついてくる！</p>
+          <p className="mx-auto mt-3 max-w-3xl text-sm leading-7 text-stone-300 sm:text-base"><strong className="text-white">チケットは通常と同じ2,500円。追加料金なしで ECHOES UNEARTHED 全曲デジタル版がついてくる。</strong> ライブ前に曲を聴いて、友達を誘って、1月17日はThe Playhouse・町田で一緒に盛り上がろう！</p>
           <div className="mx-auto mt-7 grid max-w-3xl gap-3 text-left sm:grid-cols-3">
             <div className="rounded-2xl border border-white/15 bg-white/[.04] p-4"><span className="text-xl">🎧</span><p className="mt-2 text-sm font-bold text-white">アルバム全曲</p><p className="mt-1 text-xs leading-5 text-stone-400">ECHOES UNEARTHED デジタル版</p></div>
             <div className="rounded-2xl border border-white/15 bg-white/[.04] p-4"><span className="text-xl">📱</span><p className="mt-2 text-sm font-bold text-white">デバイスで楽しめる</p><p className="mt-1 text-xs leading-5 text-stone-400">スマホ・PCなどでダウンロード</p></div>
             <div className="rounded-2xl border border-white/15 bg-white/[.04] p-4"><span className="text-xl">🎟️</span><p className="mt-2 text-sm font-bold text-white">1/17 ライブ入場</p><p className="mt-1 text-xs leading-5 text-stone-400">GEKIRIN · The Playhouse · 町田</p></div>
           </div>
           <div className="mt-8 rounded-3xl border-2 border-red-500/70 bg-black/75 p-6 shadow-[0_0_45px_rgba(220,38,38,.20)] backdrop-blur-sm sm:p-8">
-            <p className="text-xs font-black uppercase tracking-[.24em] text-red-300">17セット限定 · SPECIAL BUNDLE</p><p className="mt-2 font-display text-5xl font-black text-white sm:text-7xl">2,500<span className="ml-2 text-2xl text-red-400 sm:text-3xl">円</span></p><p className="mt-2 text-lg font-black text-white">GEKIRIN ライブチケット ＋ ECHOES UNEARTHED 全曲デジタル版</p>
-            <p className="mt-2 text-xs leading-6 text-stone-400">チケットとアルバムが同じ2,500円。追加料金なし。友達を誘って、一緒にGEKIRINへ！</p>
+            <p className="text-xs font-black uppercase tracking-[.24em] text-red-300">SAME TICKET PRICE · FREE DIGITAL ALBUM</p><p className="mt-2 font-display text-5xl font-black text-white sm:text-7xl">2,500<span className="ml-2 text-2xl text-red-400 sm:text-3xl">円</span></p><p className="mt-2 text-lg font-black text-white">GEKIRIN ライブチケット ＋ ECHOES UNEARTHED 全曲デジタル版</p>
+            <p className="mt-2 text-xs leading-6 text-stone-400">どうせチケットを買うなら、ここから。通常と同じ2,500円で、デジタルアルバム全曲が無料。友達を誘って、一緒にGEKIRINへ！</p>
             <a href="https://mohanak.com/ticket/" target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center rounded-full bg-red-700 px-6 py-3 text-xs font-bold uppercase tracking-[.1em] text-white hover:bg-red-600"><Ticket className="mr-2 h-4 w-4" />STEP 1 · 2,500円 チケット予約 <ArrowUpRight className="ml-2 h-4 w-4" /></a>
           </div>
           <p className="mt-5 text-[11px] leading-5 text-stone-500">広告・SNS・クリエイター向けリンク先: kamdridi.com/japan#echoes-gekirin</p>
