@@ -8,7 +8,7 @@ export type PayoutRecord = {
   artistId: string;
   amountCents: number;
   thresholdCents: number;
-  status: "blocked_threshold" | "simulated" | "paid";
+  status: "blocked_threshold" | "paid";
   transferId?: string;
   receiptNumber: string;
   createdAt: string;
@@ -30,7 +30,7 @@ export async function processArtistPayout(artistId: string, thresholdCents = Num
     artistId,
     amountCents: payableCents,
     thresholdCents,
-    status: payableCents >= thresholdCents ? "simulated" : "blocked_threshold",
+    status: "blocked_threshold",
     receiptNumber: `KDR-${createdAt.slice(0, 10).replace(/-/g, "")}-${artist.id.slice(-5).toUpperCase()}`,
     createdAt
   };
@@ -38,7 +38,7 @@ export async function processArtistPayout(artistId: string, thresholdCents = Num
   if (payableCents >= thresholdCents) {
     const payout = await payArtistRoyalties(artistId);
     record.transferId = payout.transferId;
-    record.status = payout.mode === "stripe" ? "paid" : "simulated";
+    record.status = "paid";
     await updateLabelApplication(artistId, { payableRoyaltiesCents: 0, generatedRoyaltiesCents: Math.max(artist.generatedRoyaltiesCents, payableCents) });
   }
 
