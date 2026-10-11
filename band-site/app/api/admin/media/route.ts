@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
-import { storeLabelFile } from "@/lib/label-file-storage";
 import { list } from "@vercel/blob";
+import { requireLabelAdmin } from "@/lib/label-auth";
 
 export async function GET() {
   try {
+    await requireLabelAdmin();
     if (!process.env.BLOB_READ_WRITE_TOKEN) {
       return NextResponse.json({ files: [], message: "No BLOB_READ_WRITE_TOKEN found. Cloud library is empty." });
     }
