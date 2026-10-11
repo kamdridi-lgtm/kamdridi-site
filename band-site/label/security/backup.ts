@@ -25,7 +25,8 @@ export async function logLabelActivity(input: { actor: string; action: string; t
   return record;
 }
 
-export function encryptSensitiveValue(value: string, secret = process.env.LABEL_ENCRYPTION_SECRET || "kamdridi-simulation-secret") {
+export function encryptSensitiveValue(value: string, secret = process.env.LABEL_ENCRYPTION_SECRET || "") {
+  if (!secret) throw new Error("LABEL_ENCRYPTION_SECRET is required.");
   const key = crypto.createHash("sha256").update(secret).digest();
   const iv = crypto.randomBytes(12);
   const cipher = crypto.createCipheriv("aes-256-gcm", key, iv);
@@ -34,7 +35,8 @@ export function encryptSensitiveValue(value: string, secret = process.env.LABEL_
   return `${iv.toString("hex")}:${tag.toString("hex")}:${encrypted.toString("hex")}`;
 }
 
-export function decryptSensitiveValue(payload: string, secret = process.env.LABEL_ENCRYPTION_SECRET || "kamdridi-simulation-secret") {
+export function decryptSensitiveValue(payload: string, secret = process.env.LABEL_ENCRYPTION_SECRET || "") {
+  if (!secret) throw new Error("LABEL_ENCRYPTION_SECRET is required.");
   const [ivHex, tagHex, encryptedHex] = payload.split(":");
   const key = crypto.createHash("sha256").update(secret).digest();
   const decipher = crypto.createDecipheriv("aes-256-gcm", key, Buffer.from(ivHex, "hex"));
