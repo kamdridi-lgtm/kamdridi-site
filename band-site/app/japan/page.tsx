@@ -67,6 +67,26 @@ export default function JapanLivePage() {
         </div>
       </section>
 
+      <section id="echoes-gekirin" className="border-b border-white/10 bg-[radial-gradient(circle_at_top,rgba(185,28,28,.22),transparent_38%),#08080d]">
+        <div className="mx-auto max-w-5xl px-5 py-14 text-center sm:px-8 sm:py-20">
+          <p className="text-xs font-bold uppercase tracking-[.28em] text-red-300">🇯🇵 日本限定 · 17セット限定</p>
+          <h2 className="mt-4 font-display text-4xl font-bold uppercase leading-tight text-white sm:text-6xl">ECHOES UNEARTHED<br/><span className="text-red-500">＋ GEKIRIN LIVE</span></h2>
+          <p className="mx-auto mt-6 max-w-3xl text-lg font-semibold leading-8 text-white sm:text-xl">アルバムを聴いて、友達とライブへ。</p>
+          <p className="mx-auto mt-3 max-w-3xl text-sm leading-7 text-stone-300 sm:text-base">KAM DRIDIのアルバム <strong className="text-white">ECHOES UNEARTHED</strong> 全曲デジタル版をスマホやデバイスで楽しんで、2027年1月17日（日）The Playhouse・町田で開催されるGEKIRIN公演へ。ライブ前に曲を聴いて、当日は一緒に盛り上がろう。</p>
+          <div className="mx-auto mt-7 grid max-w-3xl gap-3 text-left sm:grid-cols-3">
+            <div className="rounded-2xl border border-white/15 bg-white/[.04] p-4"><span className="text-xl">🎧</span><p className="mt-2 text-sm font-bold text-white">アルバム全曲</p><p className="mt-1 text-xs leading-5 text-stone-400">ECHOES UNEARTHED デジタル版</p></div>
+            <div className="rounded-2xl border border-white/15 bg-white/[.04] p-4"><span className="text-xl">📱</span><p className="mt-2 text-sm font-bold text-white">デバイスで楽しめる</p><p className="mt-1 text-xs leading-5 text-stone-400">スマホ・PCなどでダウンロード</p></div>
+            <div className="rounded-2xl border border-white/15 bg-white/[.04] p-4"><span className="text-xl">🎟️</span><p className="mt-2 text-sm font-bold text-white">1/17 ライブ入場</p><p className="mt-1 text-xs leading-5 text-stone-400">GEKIRIN · The Playhouse · 町田</p></div>
+          </div>
+          <div className="mt-8 rounded-2xl border border-red-500/40 bg-red-950/20 p-5">
+            <p className="text-sm font-bold text-red-200">この限定パッケージの受付開始に向けて準備中です。</p>
+            <p className="mt-2 text-xs leading-6 text-stone-400">通常のGEKIRINチケット予約は現在ご利用いただけます。限定パッケージは入場確認とデジタル配信方法の最終確認後に受付を開始します。</p>
+            <a href="https://mohanak.com/ticket/" target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center rounded-full bg-red-700 px-6 py-3 text-xs font-bold uppercase tracking-[.1em] text-white hover:bg-red-600"><Ticket className="mr-2 h-4 w-4" />GEKIRIN チケット予約 <ArrowUpRight className="ml-2 h-4 w-4" /></a>
+          </div>
+          <p className="mt-5 text-[11px] leading-5 text-stone-500">広告・SNS・クリエイター向けリンク先: kamdridi.com/japan#echoes-gekirin</p>
+        </div>
+      </section>
+
       <section className="border-b border-white/10 bg-[#0d0e16]">
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 sm:px-8 md:grid-cols-[minmax(0,390px)_1fr] md:items-center md:gap-12 md:py-16">
           <a href="/japan/17-for-ever-original-poster.png" target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-2xl border border-white/20 bg-white transition hover:border-red-500/70" aria-label="View the original 17 FOR EVER Japanese promotional poster in full">
