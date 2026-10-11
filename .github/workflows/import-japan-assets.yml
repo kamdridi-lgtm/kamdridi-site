@@ -1,0 +1,29 @@
+name: Import Japan site assets
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-japan-assets.yml'
+permissions:
+  contents: write
+jobs:
+  import-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Import exact supplied artwork
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p band-site/public/japan
+          curl -L --fail --retry 3 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-d4c8-81f5-bfb3-ae76092f29a5/raw?se=2026-10-11T15%3A52%3A52Z&sp=r&sv=2026-02-06&sr=b&scid=1d6f2e3d-1814-56d8-b789-ff3f916ec6bd&skoid=434ec24f-a0f0-4e64-b0de-2e2053f69735&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-11T10%3A38%3A58Z&ske=2026-10-12T10%3A38%3A58Z&sks=b&skv=2026-02-06&sig=XGPrbkBZGEgT5bMUok//iw2l0ShY8eSSt3irlJbYj6E%3D' -o band-site/public/japan/echoes-unearthed-exact.png
+          curl -L --fail --retry 3 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-23d0-81f5-bc7f-85dfcdd2e37d/raw?se=2026-10-11T15%3A52%3A53Z&sp=r&sv=2026-02-06&sr=b&scid=0b91c414-bdf3-5651-bfc2-9df7e0085b05&skoid=434ec24f-a0f0-4e64-b0de-2e2053f69735&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-11T11%3A38%3A55Z&ske=2026-10-12T11%3A38%3A55Z&sks=b&skv=2026-02-06&sig=noNrXdjhZ8a5ULCpKup5PfulDgJ5851Hks9%2B4YIo2IQ%3D' -o band-site/public/japan/gekirin-ticket-exact.png
+          test -s band-site/public/japan/echoes-unearthed-exact.png
+          test -s band-site/public/japan/gekirin-ticket-exact.png
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add band-site/public/japan/echoes-unearthed-exact.png band-site/public/japan/gekirin-ticket-exact.png
+          git commit -m 'assets(japan): add exact supplied album and GEKIRIN ticket' || exit 0
+          git push
