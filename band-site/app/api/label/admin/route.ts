@@ -25,10 +25,7 @@ export async function POST(request: Request) {
         // Existing fan-club account is acceptable; access is controlled by signed label status.
       }
       const signed = await updateLabelApplication(app.id, {
-        status: "signed",
-        paymentStatus: app.paymentStatus === "unpaid" ? "simulated" : app.paymentStatus,
-        generatedRoyaltiesCents: Math.max(app.generatedRoyaltiesCents, 12500),
-        payableRoyaltiesCents: Math.max(app.payableRoyaltiesCents, 8750)
+        status: "signed"
       });
       await sendLabelEmail({ event: "welcome_signed_artist", to: app.email, params: { artistName: app.artistName } });
       await logLabelActivity({ actor: "label-admin", action: "sign_artist", target: app.id, ip: request.headers.get("x-forwarded-for") || undefined });
