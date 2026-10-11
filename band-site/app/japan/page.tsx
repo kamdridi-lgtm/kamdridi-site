@@ -88,8 +88,8 @@ export default function JapanLivePage() {
         <div className="relative z-10 mx-auto max-w-5xl px-5 py-20 text-center [text-shadow:0_2px_16px_rgba(0,0,0,.95)] sm:px-8 sm:py-28">
           <p className="text-xs font-bold uppercase tracking-[.28em] text-red-300">🇯🇵 GEKIRIN · KAM DRIDI SPECIAL</p>
           <h2 className="mt-4 font-display text-4xl font-bold uppercase leading-tight text-white sm:text-6xl">ECHOES UNEARTHED<br/><span className="text-red-500">＋ GEKIRIN LIVE</span></h2>
-          <p className="mx-auto mt-6 max-w-3xl text-lg font-semibold leading-8 text-white sm:text-xl">どうせチケットを買うなら、ここから。2,500円のチケットで、KAM DRIDIのアルバムが無料でついてくる！</p>
-          <p className="mx-auto mt-3 max-w-3xl text-sm leading-7 text-stone-300 sm:text-base"><strong className="text-white">チケットは通常と同じ2,500円。追加料金なしで ECHOES UNEARTHED 全曲デジタル版がついてくる。</strong> ライブ前に曲を聴いて、友達を誘って、1月17日はThe Playhouse・町田で一緒に盛り上がろう！</p>
+          <p className="mx-auto mt-6 max-w-3xl rounded-2xl border border-red-500/25 bg-black/75 px-5 py-4 text-lg font-semibold leading-8 text-white shadow-[0_12px_38px_rgba(0,0,0,.45)] backdrop-blur-md sm:px-7 sm:text-xl">どうせチケットを買うなら、ここから。2,500円のチケットで、KAM DRIDIのアルバムが無料でついてくる！</p>
+          <p className="mx-auto mt-3 max-w-3xl rounded-2xl border border-white/10 bg-black/70 px-5 py-4 text-sm leading-7 text-stone-200 shadow-[0_12px_38px_rgba(0,0,0,.40)] backdrop-blur-md sm:px-7 sm:text-base"><strong className="text-white">チケットは通常と同じ2,500円。追加料金なしで ECHOES UNEARTHED 全曲デジタル版がついてくる。</strong> ライブ前に曲を聴いて、友達を誘って、1月17日はThe Playhouse・町田で一緒に盛り上がろう！</p>
           <div className="mx-auto mt-7 grid max-w-3xl gap-3 text-left sm:grid-cols-3">
             <div className="rounded-2xl border border-white/15 bg-white/[.04] p-4"><span className="text-xl">🎧</span><p className="mt-2 text-sm font-bold text-white">アルバム全曲</p><p className="mt-1 text-xs leading-5 text-stone-400">ECHOES UNEARTHED デジタル版</p></div>
             <div className="rounded-2xl border border-white/15 bg-white/[.04] p-4"><span className="text-xl">📱</span><p className="mt-2 text-sm font-bold text-white">デバイスで楽しめる</p><p className="mt-1 text-xs leading-5 text-stone-400">スマホ・PCなどでダウンロード</p></div>
