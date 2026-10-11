@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireLabelAdmin } from "@/lib/label-auth";
 import { listLabelApplications, listLabelReleases } from "@/lib/label-storage";
-import { buildRoyaltyReport, seedSimulatedStats } from "@/label/analytics/advanced_stats";
+import { buildRoyaltyReport, listStreamStats } from "@/label/analytics/advanced_stats";
 import { buildEditorialCalendar } from "@/label/releases/manager";
 import { listPayoutHistory } from "@/label/finance/payouts";
 import { listContractRenewalAlerts } from "@/label/legal/advanced_contracts";
@@ -15,7 +15,7 @@ export async function GET() {
     const [applications, releases, stats, payouts, contractAlerts] = await Promise.all([
       listLabelApplications(),
       listLabelReleases(),
-      seedSimulatedStats(),
+      listStreamStats(),
       listPayoutHistory(),
       listContractRenewalAlerts()
     ]);
