@@ -18,7 +18,10 @@ export async function POST(request: Request) {
       .map((e) => e.trim().toLowerCase())
       .filter(Boolean);
 
-    const masterPassword = process.env.LABEL_ADMIN_PASSWORD || "kamdridi2026"; // Fallback password for testing
+    const masterPassword = process.env.LABEL_ADMIN_PASSWORD;
+    if (!masterPassword) {
+      return NextResponse.json({ error: "Admin login is not configured." }, { status: 503 });
+    }
 
     if (!adminEmails.includes(email.toLowerCase()) || password !== masterPassword) {
       return NextResponse.json({ error: "Invalid admin credentials." }, { status: 401 });
