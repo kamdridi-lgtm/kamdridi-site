@@ -51,7 +51,7 @@ export async function storeLabelFile(file: File | null, folder: LabelFileFolder)
     return { ...base, url: `/uploads/${key}`, storageMode: "local" };
   }
 
-  return { ...base, url: `simulation://${key}`, storageMode: "simulation" };
+  throw new Error("Persistent label file storage is not configured.");
 }
 
 export async function storeGeneratedLabelFile(input: {
@@ -85,5 +85,5 @@ export async function storeGeneratedLabelFile(input: {
     return { ...base, url: `/uploads/${key}`, storageMode: "local" };
   }
 
-  return { ...base, url: `simulation://${key}`, storageMode: "simulation" };
+  throw new Error("Persistent label file storage is not configured.");
 }
