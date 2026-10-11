@@ -6,15 +6,7 @@ export async function createArtistConnectAccount(artistId: string, origin: strin
   if (!app) throw new Error("Artist not found.");
   const stripe = getStripeServer();
 
-  if (!stripe) {
-    const simulatedAccountId = `acct_sim_${artistId.slice(-8)}`;
-    await updateLabelApplication(artistId, { stripeAccountId: simulatedAccountId });
-    return {
-      mode: "simulated",
-      accountId: simulatedAccountId,
-      url: `${origin}/label/artist?connect=simulated`
-    };
-  }
+  if (!stripe) throw new Error("Stripe Connect is not configured.");
 
   const account = await stripe.accounts.create({
     type: "express",
@@ -45,14 +37,8 @@ export async function payArtistRoyalties(artistId: string) {
   if (app.payableRoyaltiesCents <= 0) throw new Error("No payable royalties available.");
 
   const stripe = getStripeServer();
-  if (!stripe || !app.stripeAccountId || app.stripeAccountId.startsWith("acct_sim_")) {
-    await updateLabelApplication(artistId, { payableRoyaltiesCents: 0 });
-    return {
-      mode: "simulated",
-      amount: app.payableRoyaltiesCents,
-      transferId: `tr_sim_${Date.now()}`
-    };
-  }
+  if (!stripe) throw new Error("Stripe payouts are not configured.");
+  if (!app.stripeAccountId || app.stripeAccountId.startsWith("acct_sim_")) throw new Error("Artist Stripe Connect account is not configured.");
 
   const transfer = await stripe.transfers.create({
     amount: app.payableRoyaltiesCents,
