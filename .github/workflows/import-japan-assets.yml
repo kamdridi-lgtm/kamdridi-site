@@ -1,4 +1,4 @@
-name: Import Japan site assets
+name: Install exact Japan visuals
 on:
   push:
     branches: [main]
@@ -7,23 +7,38 @@ on:
 permissions:
   contents: write
 jobs:
-  import-assets:
+  patch-page:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: true
-      - name: Import exact supplied artwork
+      - name: Replace reconstructed visuals with exact supplied files
         shell: bash
         run: |
-          set -euo pipefail
-          mkdir -p band-site/public/japan
-          curl -L --fail --retry 3 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-d4c8-81f5-bfb3-ae76092f29a5/raw?se=2026-10-11T15%3A52%3A52Z&sp=r&sv=2026-02-06&sr=b&scid=1d6f2e3d-1814-56d8-b789-ff3f916ec6bd&skoid=434ec24f-a0f0-4e64-b0de-2e2053f69735&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-11T10%3A38%3A58Z&ske=2026-10-12T10%3A38%3A58Z&sks=b&skv=2026-02-06&sig=XGPrbkBZGEgT5bMUok//iw2l0ShY8eSSt3irlJbYj6E%3D' -o band-site/public/japan/echoes-unearthed-exact.png
-          curl -L --fail --retry 3 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-23d0-81f5-bc7f-85dfcdd2e37d/raw?se=2026-10-11T15%3A52%3A53Z&sp=r&sv=2026-02-06&sr=b&scid=0b91c414-bdf3-5651-bfc2-9df7e0085b05&skoid=434ec24f-a0f0-4e64-b0de-2e2053f69735&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-11T11%3A38%3A55Z&ske=2026-10-12T11%3A38%3A55Z&sks=b&skv=2026-02-06&sig=noNrXdjhZ8a5ULCpKup5PfulDgJ5851Hks9%2B4YIo2IQ%3D' -o band-site/public/japan/gekirin-ticket-exact.png
-          test -s band-site/public/japan/echoes-unearthed-exact.png
-          test -s band-site/public/japan/gekirin-ticket-exact.png
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("band-site/app/japan/page.tsx")
+          s=p.read_text()
+          start='        {/* The album and two layered concert-ticket visuals sit BEHIND the Japanese copy. */}'
+          end='        <div className="relative z-10 mx-auto max-w-5xl px-5 py-20 text-center [text-shadow:0_2px_16px_rgba(0,0,0,.95)] sm:px-8 sm:py-28">'
+          i=s.index(start)
+          j=s.index(end)
+          replacement='''        {/* Exact user-supplied album artwork and GEKIRIN ticket. No reconstructed ticket graphics. */}
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+          <div className="absolute -left-[22%] top-8 w-[72%] -rotate-[8deg] opacity-95 drop-shadow-[18px_28px_28px_rgba(0,0,0,.9)] sm:-left-[8%] sm:top-12 sm:w-[43%] lg:left-[max(-7%,calc(50%-710px))] lg:w-[500px]">
+            <Image src="/japan/echoes-unearthed-exact.png" alt="" width={2048} height={2048} sizes="(max-width:640px) 72vw, 500px" className="h-auto w-full object-contain" />
+          </div>
+          <div className="absolute -right-[46%] top-10 w-[108%] rotate-[7deg] opacity-80 drop-shadow-[16px_28px_28px_rgba(0,0,0,.92)] sm:-right-[28%] sm:top-16 sm:w-[76%] lg:right-[max(-20%,calc(50%-860px))] lg:w-[760px] lg:opacity-90">
+            <Image src="/japan/gekirin-ticket-exact.png" alt="" width={1672} height={941} sizes="(max-width:640px) 108vw, 760px" className="h-auto w-full object-contain" />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#08080d]/5 via-[#08080d]/28 to-[#08080d]/78 sm:bg-[linear-gradient(90deg,rgba(8,8,13,.18),rgba(8,8,13,.28)_28%,rgba(8,8,13,.30)_72%,rgba(8,8,13,.18))]" />
+        </div>
+'''
+          p.write_text(s[:i]+replacement+s[j:])
+          PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add band-site/public/japan/echoes-unearthed-exact.png band-site/public/japan/gekirin-ticket-exact.png
-          git commit -m 'assets(japan): add exact supplied album and GEKIRIN ticket' || exit 0
+          git add band-site/app/japan/page.tsx
+          git commit -m 'fix(japan): use exact supplied album and ticket visuals' || exit 0
           git push
