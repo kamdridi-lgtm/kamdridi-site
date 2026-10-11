@@ -40,13 +40,10 @@ export function validateArtwork(cover: ReleaseMetadata["cover"]) {
 
 export function analyzeAudioQuality(wav: LabelDemoFile): AudioQualityReport {
   const isLossless = /wav|flac|aiff/i.test(`${wav.type} ${wav.name}`);
-  const loudnessLufs = isLossless ? -10.8 : -7.5;
-  const truePeakDb = isLossless ? -1.1 : 0.2;
-  const notes = [];
-  if (!isLossless) notes.push("Master should be WAV, FLAC, or AIFF.");
-  if (loudnessLufs > -8) notes.push("Master is probably too loud for streaming normalization.");
-  if (truePeakDb > -1) notes.push("True peak should stay below -1.0 dBTP.");
-  return { loudnessLufs, truePeakDb, passed: notes.length === 0, notes };
+  const notes = isLossless
+    ? ["Audio format accepted. LUFS and true-peak measurements require real audio analysis and are not inferred from the filename."]
+    : ["Master should be WAV, FLAC, or AIFF."];
+  return { loudnessLufs: 0, truePeakDb: 0, passed: isLossless, notes };
 }
 
 export async function submitManagedRelease(input: ReleaseMetadata) {
