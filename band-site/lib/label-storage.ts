@@ -73,7 +73,44 @@ const dataDir = path.join(root, "data");
 const applicationsPath = path.join(dataDir, "label-applications.json");
 const releasesPath = path.join(dataDir, "label-releases.json");
 
-function now() {
+
+function supabaseConfig() {
+  const url = (process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || "").replace(/\/$/, "");
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+  if (!url || !key) throw new Error("Persistent label database is not configured.");
+  return { url, key };
+}
+async function sb(table: string, init?: RequestInit, query = "") {
+  const { url, key } = supabaseConfig();
+  const response = await fetch(`${url}/rest/v1/${table}${query}`, { ...init, headers: { apikey:key, Authorization:`Bearer ${key}`, "Content-Type":"application/json", ...(init?.headers||{}) }, cache:"no-store" });
+  if (!response.ok) throw new Error(`Label database request failed (${response.status}).`);
+  return response.status === 204 ? null : response.json();
+}
+async function listApplicationsFromSupabase() {
+  const rows = await sb("label_applications", undefined, "?select=*&order=created_at.desc") as Record<string,unknown>[];
+  return rows.map(mapApplication);
+}
+async function insertApplicationSupabase(app: LabelApplication) {
+  await sb("label_applications", {method:"POST", headers:{Prefer:"return=minimal"}, body:JSON.stringify({id:app.id,artist_name:app.artistName,legal_name:app.legalName,email:app.email,bio:app.bio,links:app.links,demos:app.demos,status:app.status,payment_status:app.paymentStatus,contract_accepted:app.contractAccepted,revenue_split_artist:app.revenueSplitArtist,revenue_split_label:app.revenueSplitLabel,generated_royalties_cents:app.generatedRoyaltiesCents,payable_royalties_cents:app.payableRoyaltiesCents,created_at:app.createdAt,updated_at:app.updatedAt})});
+  return app;
+}
+async function updateApplicationSupabase(app: LabelApplication) {
+  await sb("label_applications", {method:"PATCH", headers:{Prefer:"return=minimal"}, body:JSON.stringify({artist_name:app.artistName,legal_name:app.legalName,email:app.email,bio:app.bio,links:app.links,demos:app.demos,status:app.status,payment_status:app.paymentStatus,stripe_session_id:app.stripeSessionId??null,stripe_account_id:app.stripeAccountId??null,contract_accepted:app.contractAccepted,revenue_split_artist:app.revenueSplitArtist,revenue_split_label:app.revenueSplitLabel,generated_royalties_cents:app.generatedRoyaltiesCents,payable_royalties_cents:app.payableRoyaltiesCents,updated_at:app.updatedAt})}, `?id=eq.${encodeURIComponent(app.id)}`);
+  return app;
+}
+async function listReleasesFromSupabase() {
+  const rows = await sb("label_releases", undefined, "?select=*&order=created_at.desc") as Record<string,unknown>[];
+  return rows.map(mapRelease);
+}
+async function insertReleaseSupabase(release: LabelRelease) {
+  await sb("label_releases",{method:"POST",headers:{Prefer:"return=minimal"},body:JSON.stringify({id:release.id,artist_id:release.artistId,title:release.title,isrc:release.isrc,upc:release.upc,release_date:release.releaseDate,wav:release.wav,cover:release.cover,status:release.status,featuring:release.featuring??null,genre:release.genre??null,bpm:release.bpm??null,musical_key:release.musicalKey??null,quality_report:release.qualityReport??null,created_at:release.createdAt})});
+  return release;
+}
+async function updateReleaseSupabase(release: LabelRelease) {
+  await sb("label_releases",{method:"PATCH",headers:{Prefer:"return=minimal"},body:JSON.stringify({title:release.title,isrc:release.isrc,upc:release.upc,release_date:release.releaseDate,wav:release.wav,cover:release.cover,status:release.status,featuring:release.featuring??null,genre:release.genre??null,bpm:release.bpm??null,musical_key:release.musicalKey??null,quality_report:release.qualityReport??null})},`?id=eq.${encodeURIComponent(release.id)}`);
+  return release;
+}
+\nfunction now() {
   return new Date().toISOString();
 }
 
@@ -186,7 +223,7 @@ function mapRelease(row: Record<string, unknown>): LabelRelease {
 
 export async function listLabelApplications() {
   const sql = sqlClient();
-  if (!sql) return readJson<LabelApplication[]>(applicationsPath, []);
+  if (!sql && process.env.VERCEL === "1") return listApplicationsFromSupabase();\n  if (!sql) return readJson<LabelApplication[]>(applicationsPath, []);
   await ensureTables();
   const rows = await sql`SELECT * FROM label_applications ORDER BY created_at DESC`;
   return rows.map((row) => mapApplication(row as Record<string, unknown>));
@@ -259,7 +296,7 @@ export async function updateLabelApplication(idValue: string, patch: Partial<Lab
   const next = { ...current, ...patch, updatedAt: now() };
 
   const sql = sqlClient();
-  if (!sql) {
+  if (!sql && process.env.VERCEL === "1") return updateApplicationSupabase(next);\n  if (!sql) {
     const apps = await listLabelApplications();
     await writeJson(
       applicationsPath,
@@ -285,7 +322,7 @@ export async function updateLabelApplication(idValue: string, patch: Partial<Lab
 
 export async function listLabelReleases() {
   const sql = sqlClient();
-  if (!sql) return readJson<LabelRelease[]>(releasesPath, []);
+  if (!sql && process.env.VERCEL === "1") return listReleasesFromSupabase();\n  if (!sql) return readJson<LabelRelease[]>(releasesPath, []);
   await ensureTables();
   const rows = await sql`SELECT * FROM label_releases ORDER BY created_at DESC`;
   return rows.map((row) => mapRelease(row as Record<string, unknown>));
@@ -300,7 +337,7 @@ export async function createLabelRelease(input: Omit<LabelRelease, "id" | "creat
   };
 
   const sql = sqlClient();
-  if (!sql) {
+  if (!sql && process.env.VERCEL === "1") return insertReleaseSupabase(release);\n  if (!sql) {
     const releases = await listLabelReleases();
     releases.unshift(release);
     await writeJson(releasesPath, releases);
@@ -326,7 +363,7 @@ export async function updateLabelRelease(idValue: string, patch: Partial<LabelRe
   const next = { ...current, ...patch };
 
   const sql = sqlClient();
-  if (!sql) {
+  if (!sql && process.env.VERCEL === "1") return updateReleaseSupabase(next);\n  if (!sql) {
     await writeJson(
       releasesPath,
       releases.map((release) => (release.id === idValue ? next : release))
