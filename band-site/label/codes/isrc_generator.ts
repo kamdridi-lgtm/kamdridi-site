@@ -32,7 +32,9 @@ function upcCheckDigit(firstTwelve: string) {
 export async function generateISRC(input: { artistId?: string; releaseId?: string; registrantCode?: string; year?: number }) {
   const codes = await listCodes();
   const year = String(input.year ?? new Date().getFullYear()).slice(-2);
-  const registrant = (input.registrantCode || process.env.LABEL_ISRC_REGISTRANT || "KDR").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 3).padEnd(3, "X");
+  const sourceRegistrant = input.registrantCode || process.env.LABEL_ISRC_REGISTRANT || "";
+  if (!sourceRegistrant) throw new Error("Official ISRC registrant code is not configured.");
+  const registrant = sourceRegistrant.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 3).padEnd(3, "X");
   const prefix = `CA-${registrant}-${year}`;
   const sequence = codes.filter((code) => code.type === "ISRC" && code.value.startsWith(prefix)).length + 1;
   const value = `${prefix}-${String(sequence).padStart(5, "0")}`;
@@ -52,7 +54,9 @@ export async function generateISRC(input: { artistId?: string; releaseId?: strin
 
 export async function generateUPC(input: { artistId?: string; releaseId?: string; prefix?: string }) {
   const codes = await listCodes();
-  const prefix = (input.prefix || process.env.LABEL_UPC_PREFIX || "628011").replace(/\D/g, "").slice(0, 6).padEnd(6, "0");
+  const sourcePrefix = input.prefix || process.env.LABEL_UPC_PREFIX || "";
+  if (!sourcePrefix) throw new Error("Official UPC company prefix is not configured.");
+  const prefix = sourcePrefix.replace(/\D/g, "").slice(0, 6).padEnd(6, "0");
   const sequence = String(codes.filter((code) => code.type === "UPC").length + 1).padStart(6, "0");
   const firstTwelve = `${prefix}${sequence}`.slice(0, 12);
   const value = `${firstTwelve}${upcCheckDigit(firstTwelve)}`;
