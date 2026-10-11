@@ -110,7 +110,8 @@ async function updateReleaseSupabase(release: LabelRelease) {
   await sb("label_releases",{method:"PATCH",headers:{Prefer:"return=minimal"},body:JSON.stringify({title:release.title,isrc:release.isrc,upc:release.upc,release_date:release.releaseDate,wav:release.wav,cover:release.cover,status:release.status,featuring:release.featuring??null,genre:release.genre??null,bpm:release.bpm??null,musical_key:release.musicalKey??null,quality_report:release.qualityReport??null})},`?id=eq.${encodeURIComponent(release.id)}`);
   return release;
 }
-\nfunction now() {
+
+function now() {
   return new Date().toISOString();
 }
 
@@ -217,13 +218,19 @@ function mapRelease(row: Record<string, unknown>): LabelRelease {
     wav: row.wav as LabelDemoFile,
     cover: row.cover as LabelDemoFile,
     status: row.status as LabelReleaseStatus,
+    featuring: row.featuring ? String(row.featuring) : undefined,
+    genre: row.genre ? String(row.genre) : undefined,
+    bpm: row.bpm == null ? undefined : Number(row.bpm),
+    musicalKey: row.musical_key ? String(row.musical_key) : undefined,
+    qualityReport: row.quality_report ? row.quality_report as LabelRelease["qualityReport"] : undefined,
     createdAt: String(row.created_at)
   };
 }
 
 export async function listLabelApplications() {
   const sql = sqlClient();
-  if (!sql && process.env.VERCEL === "1") return listApplicationsFromSupabase();\n  if (!sql) return readJson<LabelApplication[]>(applicationsPath, []);
+  if (!sql && process.env.VERCEL === "1") return listApplicationsFromSupabase();
+  if (!sql) return readJson<LabelApplication[]>(applicationsPath, []);
   await ensureTables();
   const rows = await sql`SELECT * FROM label_applications ORDER BY created_at DESC`;
   return rows.map((row) => mapApplication(row as Record<string, unknown>));
@@ -266,6 +273,7 @@ export async function createLabelApplication(input: {
   };
 
   const sql = sqlClient();
+  if (!sql && process.env.VERCEL === "1") return insertApplicationSupabase(app);
   if (!sql) {
     const apps = await listLabelApplications();
     apps.unshift(app);
@@ -296,7 +304,8 @@ export async function updateLabelApplication(idValue: string, patch: Partial<Lab
   const next = { ...current, ...patch, updatedAt: now() };
 
   const sql = sqlClient();
-  if (!sql && process.env.VERCEL === "1") return updateApplicationSupabase(next);\n  if (!sql) {
+  if (!sql && process.env.VERCEL === "1") return updateApplicationSupabase(next);
+  if (!sql) {
     const apps = await listLabelApplications();
     await writeJson(
       applicationsPath,
@@ -322,7 +331,8 @@ export async function updateLabelApplication(idValue: string, patch: Partial<Lab
 
 export async function listLabelReleases() {
   const sql = sqlClient();
-  if (!sql && process.env.VERCEL === "1") return listReleasesFromSupabase();\n  if (!sql) return readJson<LabelRelease[]>(releasesPath, []);
+  if (!sql && process.env.VERCEL === "1") return listReleasesFromSupabase();
+  if (!sql) return readJson<LabelRelease[]>(releasesPath, []);
   await ensureTables();
   const rows = await sql`SELECT * FROM label_releases ORDER BY created_at DESC`;
   return rows.map((row) => mapRelease(row as Record<string, unknown>));
@@ -337,7 +347,8 @@ export async function createLabelRelease(input: Omit<LabelRelease, "id" | "creat
   };
 
   const sql = sqlClient();
-  if (!sql && process.env.VERCEL === "1") return insertReleaseSupabase(release);\n  if (!sql) {
+  if (!sql && process.env.VERCEL === "1") return insertReleaseSupabase(release);
+  if (!sql) {
     const releases = await listLabelReleases();
     releases.unshift(release);
     await writeJson(releasesPath, releases);
@@ -363,7 +374,8 @@ export async function updateLabelRelease(idValue: string, patch: Partial<LabelRe
   const next = { ...current, ...patch };
 
   const sql = sqlClient();
-  if (!sql && process.env.VERCEL === "1") return updateReleaseSupabase(next);\n  if (!sql) {
+  if (!sql && process.env.VERCEL === "1") return updateReleaseSupabase(next);
+  if (!sql) {
     await writeJson(
       releasesPath,
       releases.map((release) => (release.id === idValue ? next : release))
