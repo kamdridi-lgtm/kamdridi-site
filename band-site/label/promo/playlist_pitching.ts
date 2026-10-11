@@ -21,14 +21,7 @@ export type PlaylistPitch = {
 };
 
 export async function listPlaylists() {
-  const existing = await readLabelJson<Playlist[]>("playlists.json", []);
-  if (existing.length) return existing;
-  const seed: Playlist[] = [
-    { id: "pl_cyber_metal", name: "Cyber Metal Radar", platform: "spotify", curator: "KDR Research", contact: "curator@example.com", genres: ["metal", "industrial"], successRatePct: 18 },
-    { id: "pl_dark_game", name: "Dark Game Soundtracks", platform: "independent", curator: "KDR Research", contact: "games@example.com", genres: ["soundtrack", "cyberpunk"], successRatePct: 24 }
-  ];
-  await writeLabelJson("playlists.json", seed);
-  return seed;
+  return readLabelJson<Playlist[]>("playlists.json", []);
 }
 
 export function renderPitchTemplate(input: { artistName: string; title: string; genre: string; link: string }) {
@@ -44,7 +37,7 @@ export async function submitPlaylistPitch(input: { playlistId: string; releaseId
     playlistId: input.playlistId,
     releaseId: input.releaseId,
     message: input.message,
-    status: "sent",
+    status: "draft",
     createdAt: new Date().toISOString(),
     followUpAt: follow.toISOString()
   };
