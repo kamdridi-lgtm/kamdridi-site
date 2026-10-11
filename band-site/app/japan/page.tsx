@@ -70,20 +70,20 @@ export default function JapanLivePage() {
       <section id="echoes-gekirin" className="relative isolate overflow-hidden border-b border-white/10 bg-[radial-gradient(ellipse_at_50%_25%,rgba(145,28,35,.35),transparent_65%),#08080d]">
         {/* The album and two layered concert-ticket visuals sit BEHIND the Japanese copy. */}
         <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-          <div className="absolute -left-[24%] top-10 w-[70%] -rotate-[13deg] opacity-55 drop-shadow-[16px_25px_20px_rgba(0,0,0,.9)] sm:-left-[8%] sm:top-14 sm:w-[42%] lg:left-[max(-8%,calc(50%-700px))] lg:w-[470px] lg:opacity-85">
+          <div className="absolute -left-[24%] top-10 w-[70%] -rotate-[13deg] opacity-90 drop-shadow-[16px_25px_20px_rgba(0,0,0,.9)] sm:-left-[8%] sm:top-14 sm:w-[42%] lg:left-[max(-8%,calc(50%-700px))] lg:w-[470px] lg:opacity-85">
             <Image src="/assets/images/releases/echoes-unearthed-cover.jpg" alt="" width={900} height={900} sizes="(max-width:640px) 70vw, 470px" className="h-auto w-full rounded-xl border border-amber-500/25 object-contain" />
           </div>
-          <div className="absolute -right-[45%] top-14 w-[94%] rotate-[18deg] opacity-35 sm:-right-[24%] sm:top-24 sm:w-[65%] lg:right-[max(-18%,calc(50%-810px))] lg:w-[650px] lg:opacity-55">
+          <div className="absolute -right-[45%] top-14 w-[94%] rotate-[18deg] opacity-65 sm:-right-[24%] sm:top-24 sm:w-[65%] lg:right-[max(-18%,calc(50%-810px))] lg:w-[650px] lg:opacity-55">
             <div className="aspect-[2.6/1] overflow-hidden rounded-lg border-[5px] border-stone-400/70 bg-[linear-gradient(135deg,#210609,#08070a_70%)] shadow-[12px_22px_25px_rgba(0,0,0,.9)]">
               <div className="flex h-full items-center gap-3 px-5"><div className="min-w-0 flex-1"><p className="font-display text-[clamp(12px,2vw,28px)] font-black text-red-500">GEKIRIN 激輪</p><p className="text-[clamp(8px,1.1vw,15px)] font-bold text-white">KAM DRIDI · JAPAN 2027</p><p className="text-[clamp(7px,1vw,12px)] text-stone-300">01.17 · THE PLAYHOUSE · MACHIDA</p></div><div className="h-full w-[28%] border-l-2 border-dashed border-stone-300/60 bg-red-800/70" /></div>
             </div>
           </div>
-          <div className="absolute -right-[38%] top-9 w-[94%] rotate-[10deg] opacity-50 sm:-right-[19%] sm:top-16 sm:w-[65%] lg:right-[max(-13%,calc(50%-760px))] lg:w-[650px] lg:opacity-85">
+          <div className="absolute -right-[38%] top-9 w-[94%] rotate-[10deg] opacity-80 sm:-right-[19%] sm:top-16 sm:w-[65%] lg:right-[max(-13%,calc(50%-760px))] lg:w-[650px] lg:opacity-85">
             <div className="aspect-[2.6/1] overflow-hidden rounded-lg border-[5px] border-stone-300/80 bg-[linear-gradient(120deg,#260609,#09090d_75%)] shadow-[12px_22px_25px_rgba(0,0,0,.9)]">
               <div className="flex h-full items-center gap-3 px-5"><div className="min-w-0 flex-1"><p className="font-display text-[clamp(12px,2vw,28px)] font-black text-red-500">GEKIRIN 激輪</p><p className="text-[clamp(8px,1.1vw,15px)] font-bold text-white">KAM DRIDI · JAPAN 2027</p><p className="text-[clamp(7px,1vw,12px)] text-stone-300">01.17 · THE PLAYHOUSE · MACHIDA</p></div><div className="flex h-full w-[28%] flex-col items-center justify-center border-l-2 border-dashed border-stone-300/60 bg-red-800/80"><span className="text-[clamp(7px,1vw,13px)] font-bold text-white">LIVE</span><span className="text-[clamp(7px,1vw,13px)] font-bold text-white">2027</span></div></div>
             </div>
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#08080d]/5 via-[#08080d]/50 to-[#08080d]/95 sm:bg-[linear-gradient(90deg,rgba(8,8,13,.1),rgba(8,8,13,.42)_30%,rgba(8,8,13,.5)_70%,rgba(8,8,13,.1))]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#08080d]/0 via-[#08080d]/20 to-[#08080d]/70 sm:bg-[linear-gradient(90deg,rgba(8,8,13,.1),rgba(8,8,13,.18)_30%,rgba(8,8,13,.22)_70%,rgba(8,8,13,.1))]" />
         </div>
         <div className="relative z-10 mx-auto max-w-5xl px-5 py-20 text-center [text-shadow:0_2px_16px_rgba(0,0,0,.95)] sm:px-8 sm:py-28">
           <p className="text-xs font-bold uppercase tracking-[.28em] text-red-300">🇯🇵 日本限定 · 17セット限定</p>
