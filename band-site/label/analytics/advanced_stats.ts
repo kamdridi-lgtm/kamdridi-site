@@ -133,7 +133,7 @@ export async function seedSimulatedStats() {
 }
 
 export async function buildRoyaltyReport(artistId: string, split?: Partial<RoyaltySplit>): Promise<RoyaltyReport> {
-  const [artists, releases, allStats] = await Promise.all([listLabelApplications(), listLabelReleases(), seedSimulatedStats()]);
+  const [artists, releases, allStats] = await Promise.all([listLabelApplications(), listLabelReleases(), listStreamStats()]);
   const artist = artists.find((entry) => entry.id === artistId);
   if (!artist) throw new Error("Artist not found.");
   const artistReleases = releases.filter((release) => release.artistId === artist.id);
