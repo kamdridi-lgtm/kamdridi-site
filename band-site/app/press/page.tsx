@@ -106,6 +106,40 @@ export default function PressPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 pb-12">
+        <article className="rounded-[2rem] border border-red-900/45 bg-[radial-gradient(circle_at_12%_0%,rgba(220,38,38,0.14),transparent_36%),rgba(12,9,9,0.88)] p-6 md:p-9">
+          <p className="text-[10px] font-black uppercase tracking-[0.34em] text-red-500">
+            International Story
+          </p>
+          <h2 className="mt-4 max-w-5xl text-3xl font-black uppercase leading-tight tracking-[0.04em] md:text-5xl">
+            No viral hit. No major label. A rock song travelling the world.
+          </h2>
+          <p className="mt-5 max-w-4xl text-sm leading-7 text-stone-300 md:text-base md:leading-8">
+            KAM DRIDI is building international reach through independent outreach, cinematic melodic hard rock, and persistent contact with broadcasters and concert organizers — without first relying on a viral social-media breakthrough.
+          </p>
+          <p className="mt-4 max-w-4xl text-sm leading-7 text-stone-300 md:text-base md:leading-8">
+            OUR LOST DREAMS has documented radio support across several international territories. In Canberra, the track reached No. 4 on Valley FM 89.5&apos;s own Australia&apos;s Top 10 station chart. Zone Radio Cape Town confirmed the track remained in rotation in October 2026.
+          </p>
+          <p className="mt-4 max-w-4xl text-sm leading-7 text-stone-300 md:text-base md:leading-8">
+            A 2027 live route is also taking shape, including Tokyo, Wellington, Sydney, and Adelaide. The live concept combines genuinely live lead vocals with professionally produced instrumental backing tracks and optional synchronized cinematic stage video.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Link
+              href="/our-lost-dreams"
+              className={`${buttonBase} bg-red-600 text-white hover:bg-red-500`}
+            >
+              Hear OUR LOST DREAMS
+            </Link>
+            <a
+              href="mailto:management@kamdridi.com?subject=KAM%20DRIDI%20-%20Press%20Inquiry"
+              className={`${buttonBase} border border-white/15 text-stone-100 hover:border-white/35 hover:bg-white/5`}
+            >
+              Press Contact
+            </a>
+          </div>
+        </article>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 pb-12">
         <article className="rounded-[2rem] border border-red-900/45 bg-[radial-gradient(circle_at_10%_0%,rgba(220,38,38,0.10),transparent_34%),rgba(12,9,9,0.86)] p-6 md:p-9">
           <p className="text-[10px] font-black uppercase tracking-[0.34em] text-red-500">
             Featured Campaign Track
@@ -114,7 +148,7 @@ export default function PressPage() {
             OUR LOST DREAMS
           </h2>
           <p className="mt-4 text-sm leading-7 text-stone-300">
-            ISRC: QZZ7M2627618 · Official radio audio available below.
+            ISRC: QZZ7M2627617 · Official radio audio available below.
           </p>
 
           <audio className="mt-7 w-full" controls preload="metadata">
