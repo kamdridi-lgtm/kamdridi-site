@@ -39,7 +39,7 @@ export default function DiscoverIndexPage() {
       </section>
 
       <section className="mx-auto mt-12 max-w-6xl">
-        <h2 className="text-2xl font-black uppercase tracking-[0.05em]">Priority tracks</h2>
+        <h2 className="text-2xl font-black uppercase tracking-[0.05em]">Professional track hubs</h2>
         <div className="mt-6 grid gap-5 md:grid-cols-2">
           {discoveryTrackHubs.map((track) => (
             <Link

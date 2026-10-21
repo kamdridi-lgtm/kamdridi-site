@@ -86,10 +86,12 @@ if (!discoverIndex.includes("/discover/market/")) {
   throw new Error("International market coverage must link to market hubs");
 }
 
-for (const trackSlug of ["our-lost-dreams", "war-machines"]) {
+for (const trackSlug of ["our-lost-dreams", "war-machines", "17-for-ever"]) {
   if (!discovery.includes(`slug: "${trackSlug}"`)) {
     throw new Error(`Discovery track hub missing: ${trackSlug}`);
   }
 }
 
-console.log(`Discovery QA passed: ${markets.length} markets × ${audienceSlugs.length} audiences = ${expectedRoutes} market routes + 2 track hubs, with natural navigation guardrails.`);
+if (!discovery.includes('isrc: "QZZ7M2627619"')) throw new Error("17 FOR EVER ISRC missing or changed");
+
+console.log(`Discovery QA passed: ${markets.length} markets × ${audienceSlugs.length} audiences = ${expectedRoutes} market routes + 3 track hubs, with natural navigation guardrails.`);
