@@ -212,6 +212,17 @@ export const discoveryTrackHubs = [
     description: "Primary KAM DRIDI track for the Japan-focused campaign, including physical-release, media, retail and professional discovery.",
     href: "/app/war-machines-jp",
     markets: discoveryMarkets.filter((market) => market.slug === "japan")
+  },
+  {
+    slug: "17-for-ever",
+    title: "17 FOR EVER",
+    subtitle: "Australia campaign track",
+    album: "Echoes Unearthed",
+    isrc: "QZZ7M2627619",
+    genre: "Cinematic Melodic Hard Rock",
+    description: "Secondary KAM DRIDI professional discovery track tied to the Australia 2027 campaign and limited-edition maxi-single release.",
+    href: "/australia",
+    markets: discoveryMarkets.filter((market) => market.slug === "australia")
   }
 ];
 
