@@ -9,25 +9,29 @@ const releases = [
     title: "Echoes Unearthed",
     image: "/assets/images/releases/echoes-unearthed-cover.jpg",
     href: "/releases/echoes-unearthed",
-    fit: "cover"
+    fit: "cover",
+    category: "STUDIO ALBUM · Nº 1"
   },
   {
     title: "War Machines — Japan Edition",
     image: "/assets/images/war-machines-jp-cover.png",
     href: "/app/war-machines-jp",
-    fit: "cover"
+    fit: "cover",
+    category: "SINGLE · SPECIAL EDITION"
   },
   {
     title: "Salieri's Hands",
     image: "/assets/images/releases/salieris-hands-cover.webp",
     href: "/releases/salieris-hands",
-    fit: "cover"
+    fit: "cover",
+    category: "OFF-SERIES · CLASSICAL PROJECT"
   },
   {
     title: "ECHOES UN LIVE IN BRASIL",
     image: "/assets/images/releases/echoes-unlive-in-brasil-cover.webp",
     href: "/releases/echoes-un-live-in-brasil",
-    fit: "contain"
+    fit: "contain",
+    category: "OFF-SERIES ALBUM"
   }
 ] as const;
 
@@ -86,6 +90,7 @@ export function HomeReleaseCoverCarousel() {
           />
         ))}
 
+        <div aria-hidden="true" className="pointer-events-none absolute left-3 top-3 z-20 max-w-[85%] border border-white/25 bg-[#080b10]/90 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-[#e5d6c3] shadow-lg backdrop-blur-sm sm:left-4 sm:top-4">{activeRelease.category}</div>
         <Link
           href={activeRelease.href}
           className="absolute inset-0 z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#f4c66a]"
