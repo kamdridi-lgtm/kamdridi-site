@@ -31,7 +31,7 @@ const releases = [
   },
   {
     title: "UNDERCOVER",
-    image: "/assets/images/releases/undercover-backstage.png",
+    image: "/assets/images/releases/undercover-original-20261105.jpg",
     href: "/releases",
     fit: "cover"
   },
