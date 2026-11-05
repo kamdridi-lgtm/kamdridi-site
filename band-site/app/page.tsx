@@ -14,6 +14,7 @@ import { HomeReleaseCoverCarousel } from "@/components/home-release-cover-carous
 import { HomeCinematicIntro } from "@/components/home-cinematic-intro";
 import { SalieriCinematicIntro } from "@/components/salieri-cinematic-intro";
 import { EchoesBrasilCinematicIntro } from "@/components/echoes-brasil-cinematic-intro";
+import { InSenistreEntrance } from "@/components/in-senistre-entrance";
 import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
 import { LostRequiemUniverseCard } from "@/components/lost-requiem-universe-card";
 import { ActiveSignalsTV } from "@/components/active-signals-tv";
@@ -250,6 +251,7 @@ function PlatformLinks({ compact = false }: { compact?: boolean }) {
 export default function HomePage() {
   return (
     <>
+      <InSenistreEntrance />
       <BuySingleFab />
       <HomeCinematicIntro />
       <SalieriCinematicIntro />
