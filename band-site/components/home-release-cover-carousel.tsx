@@ -9,43 +9,37 @@ const releases = [
     title: "Echoes Unearthed",
     image: "/assets/images/releases/echoes-unearthed-cover.jpg",
     href: "/releases/echoes-unearthed",
-    fit: "cover",
-    category: "STUDIO ALBUM · Nº 1"
+    fit: "cover"
   },
   {
     title: "War Machines — Japan Edition",
     image: "/assets/images/war-machines-jp-cover.png",
     href: "/app/war-machines-jp",
-    fit: "cover",
-    category: "SINGLE · SPECIAL EDITION"
+    fit: "cover"
   },
   {
     title: "Salieri's Hands",
     image: "/assets/images/releases/salieris-hands-cover.webp",
     href: "/releases/salieris-hands",
-    fit: "cover",
-    category: "OFF-SERIES · CLASSICAL PROJECT"
+    fit: "cover"
   },
   {
     title: "ECHOES UN LIVE IN BRASIL",
     image: "/assets/images/releases/echoes-unlive-in-brasil-cover.webp",
     href: "/releases/echoes-un-live-in-brasil",
-    fit: "contain",
-    category: "OFF-SERIES ALBUM"
+    fit: "contain"
   },
   {
     title: "UNDERCOVER",
     image: "/assets/images/releases/undercover-backstage.png",
     href: "/releases",
-    fit: "cover",
-    category: "OFF-SERIES ALBUM"
+    fit: "cover"
   },
   {
     title: "IN | SENISTRE",
     image: "/in-senistre/assets/in_senistre_official_cover.webp",
     href: "/in-senistre/index.html",
-    fit: "cover",
-    category: "OFF-SERIES ALBUM"
+    fit: "cover"
   }
 ] as const;
 
@@ -103,8 +97,6 @@ export function HomeReleaseCoverCarousel() {
             }
           />
         ))}
-
-        <div aria-hidden="true" className="pointer-events-none absolute left-3 top-3 z-20 max-w-[85%] border border-white/25 bg-[#080b10]/90 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-[#e5d6c3] shadow-lg backdrop-blur-sm sm:left-4 sm:top-4">{activeRelease.category}</div>
         <Link
           href={activeRelease.href}
           className="absolute inset-0 z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#f4c66a]"
