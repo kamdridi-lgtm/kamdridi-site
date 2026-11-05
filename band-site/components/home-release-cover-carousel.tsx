@@ -32,6 +32,20 @@ const releases = [
     href: "/releases/echoes-un-live-in-brasil",
     fit: "contain",
     category: "OFF-SERIES ALBUM"
+  },
+  {
+    title: "UNDERCOVER",
+    image: "/assets/images/releases/undercover-backstage.png",
+    href: "/releases",
+    fit: "cover",
+    category: "OFF-SERIES ALBUM"
+  },
+  {
+    title: "IN | SENISTRE",
+    image: "/in-senistre/assets/in_senistre_official_cover.webp",
+    href: "/in-senistre/index.html",
+    fit: "cover",
+    category: "OFF-SERIES ALBUM"
   }
 ] as const;
 
