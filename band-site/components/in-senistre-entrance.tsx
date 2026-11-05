@@ -65,8 +65,12 @@ export function InSenistreEntrance() {
         <nav aria-label="Choose a destination" className="flex w-full max-w-lg flex-col gap-3 sm:flex-row md:max-w-none">
           <a
             ref={portalRef}
-            href="/in-senistre"
-            onClick={markEntered}
+            href="/in-senistre/index.html"
+            onClick={(event) => {
+              event.preventDefault();
+              markEntered();
+              window.location.assign("/in-senistre/index.html");
+            }}
             className="inline-flex min-h-[56px] items-center justify-center border border-[#f3dcb9] bg-[#ddc5a2] px-6 py-4 text-center text-xs font-bold uppercase tracking-[0.13em] text-[#18130f] shadow-[0_10px_30px_rgba(0,0,0,0.45)] transition hover:bg-[#fff0d5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
             ENTER IN | SENISTRE
