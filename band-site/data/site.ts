@@ -277,6 +277,13 @@ export const navigation: NavItem[] = [
     ]
   },
   {
+    label: "IN | SENISTRE",
+    href: "/in-senistre",
+    children: [
+      { label: "The Ninth Discovery", href: "/in-senistre" },
+    ]
+  },
+  {
     label: "Visual Album",
     href: "/visual-album",
     children: [

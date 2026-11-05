@@ -39,6 +39,12 @@ const youtubeWatchHref = "https://www.youtube.com/watch?v=hzlVyLQN6a8";
 
 const universeCards = [
   {
+    title: "IN | SENISTRE",
+    text: "Eight letters. Eight songs. One hidden discovery.",
+    image: "/in-senistre/assets/in_senistre_official_cover.webp",
+    href: "/in-senistre"
+  },
+  {
     title: "Visual Album",
     text: "Watch the cinematic experience.",
     image: visualAlbumScenes[0]?.image || warMachinesCover,

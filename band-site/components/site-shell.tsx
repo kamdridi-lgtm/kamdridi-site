@@ -384,6 +384,7 @@ const lowerPriorityNavLabels = new Set([
   "Fan Club",
   "Games",
   "Visual Album",
+  "IN | SENISTRE",
   "Who is Kam Dridi",
 ]);
 function isActivePath(pathname: string, href: string) {
