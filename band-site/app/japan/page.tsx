@@ -98,7 +98,14 @@ export default function JapanLivePage() {
           <div className="mt-8 rounded-3xl border-2 border-red-500/70 bg-black/75 p-6 shadow-[0_0_45px_rgba(220,38,38,.20)] backdrop-blur-sm sm:p-8">
             <p className="text-xs font-black uppercase tracking-[.24em] text-red-300">SAME TICKET PRICE · FREE DIGITAL ALBUM</p><p className="mt-2 font-display text-5xl font-black text-white sm:text-7xl">2,500<span className="ml-2 text-2xl text-red-400 sm:text-3xl">円</span></p><p className="mt-2 text-lg font-black text-white">GEKIRIN ライブチケット ＋ ECHOES UNEARTHED 全曲デジタル版</p>
             <p className="mt-2 text-xs leading-6 text-stone-400">どうせチケットを買うなら、ここから。通常と同じ2,500円で、デジタルアルバム全曲が無料。友達を誘って、一緒にGEKIRINへ！</p>
-            <a href="https://mohanak.com/ticket/" target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center rounded-full bg-red-700 px-6 py-3 text-xs font-bold uppercase tracking-[.1em] text-white hover:bg-red-600"><Ticket className="mr-2 h-4 w-4" />STEP 1 · 2,500円 チケット予約 <ArrowUpRight className="ml-2 h-4 w-4" /></a>
+            <div lang="ja" className="mt-5 space-y-3 text-left text-sm leading-6 text-stone-200">
+              <p><strong className="text-white">1. チケットを予約：</strong> MOHANAKの公式フォームで「1/17(日) 激麒麟-GEKIRIN-」を選び、「お目当て」に <strong className="text-white">KAM DRIDI</strong> と入力してください。ご友人の分もまとめて予約できます。</p>
+              <p><strong className="text-white">2. 無料アルバムを受け取る：</strong> MOHANAKから予約確認メールが届いたら、確認内容と予約枚数をKAM DRIDIにお知らせください。確認後、デジタルアルバムのダウンロード方法をメールでご案内します。</p>
+            </div>
+            <div className="mt-5 flex flex-wrap justify-center gap-3">
+            <a href="https://mohanak.com/ticket/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-red-700 px-6 py-3 text-xs font-bold uppercase tracking-[.1em] text-white hover:bg-red-600"><Ticket className="mr-2 h-4 w-4" />STEP 1 · チケット予約 <ArrowUpRight className="ml-2 h-4 w-4" /></a>
+              <a href="mailto:contact@kamdridi.com?subject=GEKIRIN%20Album%20Claim" className="inline-flex items-center rounded-full border border-white/35 px-6 py-3 text-xs font-bold tracking-[.1em] text-white hover:bg-white/10">STEP 2 · 無料アルバムを申し込む</a>
+            </div>
           </div>
           <p className="mt-5 text-[11px] leading-5 text-stone-500">広告・SNS・クリエイター向けリンク先: kamdridi.com/japan#echoes-gekirin</p>
         </div>
