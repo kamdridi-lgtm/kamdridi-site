@@ -104,7 +104,7 @@ export default function JapanLivePage() {
             </div>
             <div className="mt-5 flex flex-wrap justify-center gap-3">
             <a href="https://mohanak.com/ticket/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-red-700 px-6 py-3 text-xs font-bold uppercase tracking-[.1em] text-white hover:bg-red-600"><Ticket className="mr-2 h-4 w-4" />STEP 1 · チケット予約 <ArrowUpRight className="ml-2 h-4 w-4" /></a>
-              <a href="mailto:contact@kamdridi.com?subject=GEKIRIN%20Album%20Claim" className="inline-flex items-center rounded-full border border-white/35 px-6 py-3 text-xs font-bold tracking-[.1em] text-white hover:bg-white/10">STEP 2 · 無料アルバムを申し込む</a>
+              <a href="mailto:management@kamdridi.com?subject=GEKIRIN%20Album%20Claim" className="inline-flex items-center rounded-full border border-white/35 px-6 py-3 text-xs font-bold tracking-[.1em] text-white hover:bg-white/10">STEP 2 · 無料アルバムを申し込む</a>
             </div>
           </div>
           <p className="mt-5 text-[11px] leading-5 text-stone-500">広告・SNS・クリエイター向けリンク先: kamdridi.com/japan#echoes-gekirin</p>
