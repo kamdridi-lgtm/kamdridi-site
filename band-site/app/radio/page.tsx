@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "KAM DRIDI — Radio Airplay & Broadcast Assets",
+  title: "Radio Airplay & Broadcast Assets",
   description: "Official radio page for KAM DRIDI with priority single metadata, broadcast assets and press access.",
   alternates: { canonical: "https://kamdridi.com/radio" },
 };
@@ -11,12 +11,13 @@ export default function RadioPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "MusicRecording",
+    "@id": "https://kamdridi.com/our-lost-dreams#recording",
     name: "OUR LOST DREAMS",
     url: "https://kamdridi.com/our-lost-dreams",
     duration: "PT4M55S",
     isrcCode: "QZZ7M2627617",
     genre: ["Melodic Hard Rock", "Cinematic Melodic Hard Rock"],
-    byArtist: { "@type": "MusicGroup", name: "KAM DRIDI", url: "https://kamdridi.com" },
+    byArtist: { "@id": "https://kamdridi.com/#artist" },
     inAlbum: { "@type": "MusicAlbum", name: "Echoes Unearthed" },
   };
 
