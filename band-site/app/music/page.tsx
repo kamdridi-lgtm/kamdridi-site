@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 export default function MusicPage() {
   return (
     <div className="music-premium">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"MusicAlbum","@id":"https://kamdridi.com/music#echoes-unearthed","name":"Echoes Unearthed","url":"https://kamdridi.com/music","byArtist":{"@id":"https://kamdridi.com/#artist"},"genre":["Melodic Hard Rock","Cinematic Melodic Hard Rock"],"image":"https://kamdridi.com/assets/images/releases/echoes-unearthed-cover.jpg","sameAs":["https://open.spotify.com/album/4rrOMu0BIhzJt1ElOfgXZu"],"albumReleaseType":"https://schema.org/AlbumRelease"}) }} />
       <section className="overflow-hidden border-b border-white/10">
         <div className="relative isolate">
           <video
@@ -23,7 +24,7 @@ export default function MusicPage() {
             playsInline
             preload="metadata"
             poster="/assets/images/gallery/p01_hero.jpg"
-            aria-label="KAMDRIDI trailer"
+            aria-label="KAM DRIDI trailer"
           >
             <source src="/videos/Trailer_TVxaNOjn.mp4" type="video/mp4" />
           </video>
@@ -56,7 +57,7 @@ export default function MusicPage() {
                 <span className="block">atmosphere</span>
               </h1>
               <p className="music-copy mt-6 max-w-2xl text-[15px] leading-7 text-stone-300 sm:text-base sm:leading-8">
-                The official music hub for KAMDRIDI with embedded video, gallery imagery, release
+                The official music hub for KAM DRIDI with embedded video, gallery imagery, release
                 history, and the visual world around the album.
               </p>
             </div>
