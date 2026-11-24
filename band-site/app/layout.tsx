@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent"
   },
   title: {
-    default: "KAM DRIDI | Official Artist Website",
+    default: "KAM DRIDI | Cinematic Melodic Hard Rock",
     template: "%s | KAM DRIDI"
   },
   description: siteMeta.description,
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "KAM DRIDI | Official Artist Website",
+    title: "KAM DRIDI | Cinematic Melodic Hard Rock",
     description: siteMeta.description,
     url: metadataBase,
     siteName: "KAM DRIDI",
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "KAM DRIDI | Official Artist Website",
+    title: "KAM DRIDI | Cinematic Melodic Hard Rock",
     description: siteMeta.description,
     images: ["/assets/images/gallery/p04_portrait_leather.jpg"]
   }
