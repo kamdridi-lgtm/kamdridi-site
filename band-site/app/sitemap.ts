@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/news",
     "/band",
     "/tour",
+    "/live",
     "/store",
     "/contact",
     "/fan-club",
