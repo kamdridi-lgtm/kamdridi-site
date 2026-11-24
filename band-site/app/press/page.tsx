@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Press Kit / EPK — KAM DRIDI",
+  title: "Official Press Kit / EPK",
+  alternates: { canonical: "https://kamdridi.com/press" },
   description:
-    "Official KAM DRIDI electronic press kit: bio, quick facts, OUR LOST DREAMS audio, media assets, and contact information.",
+    "Official electronic press kit for KAM DRIDI, Montreal cinematic melodic hard rock artist: biography, OUR LOST DREAMS audio, media assets and booking contacts.",
 };
 
 const radioMp3 = "/audio/radio/03-our-lost-dreams-radio.mp3";
