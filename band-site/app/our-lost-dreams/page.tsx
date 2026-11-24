@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "OUR LOST DREAMS — KAM DRIDI",
+  title: "OUR LOST DREAMS — Official Song & Radio Hub",
+  alternates: { canonical: "https://kamdridi.com/our-lost-dreams" },
   description:
     "Official KAM DRIDI radio and media hub for OUR LOST DREAMS: the cinematic original and unplugged live interpretation.",
 };
@@ -42,8 +43,21 @@ function ActionLink({
 }
 
 export default function OurLostDreamsPage() {
+  const recording = {
+    "@context": "https://schema.org",
+    "@type": "MusicRecording",
+    "@id": "https://kamdridi.com/our-lost-dreams#recording",
+    name: "OUR LOST DREAMS",
+    url: "https://kamdridi.com/our-lost-dreams",
+    duration: "PT4M55S",
+    isrcCode: "QZZ7M2627617",
+    byArtist: { "@id": "https://kamdridi.com/#artist" },
+    inAlbum: { "@type": "MusicAlbum", name: "Echoes Unearthed" },
+    genre: "Cinematic Melodic Hard Rock"
+  };
   return (
     <main className="min-h-screen bg-[#050505] text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(recording) }} />
       <section className="relative overflow-hidden border-b border-red-900/40 px-5 py-20 md:py-28">
         <div
           className="pointer-events-none absolute inset-0 bg-cover bg-center"

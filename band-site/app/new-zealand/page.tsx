@@ -4,8 +4,9 @@ import Link from "next/link";
 import { ArrowUpRight, CalendarDays, MapPin, Mic2 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "KAM DRIDI — New Zealand Live",
-  description: "KAM DRIDI live in Wellington, New Zealand at The Fringe Bar, Tuesday 2 March 2027, 7:30 PM.",
+  title: "Live in New Zealand 2027 — Wellington Fringe Bar",
+  alternates: { canonical: "https://kamdridi.com/new-zealand" },
+  description: "KAM DRIDI live in Wellington, New Zealand at The Fringe Bar, Tuesday 2 March 2027, 7:30 PM. Cinematic melodic hard rock with live vocals and visuals.",
 };
 
 const organisations = [

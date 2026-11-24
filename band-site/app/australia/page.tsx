@@ -6,9 +6,10 @@ import { TrackAccessControls } from "@/components/track-access-controls";
 import { getPreparedPreview } from "@/lib/master-catalog";
 
 export const metadata: Metadata = {
-  title: "17 FOR EVER — Australia",
+  title: "17 FOR EVER — Australian Maxi Single",
+  alternates: { canonical: "https://kamdridi.com/australia" },
   description:
-    "KAMDRIDI presents 17 FOR EVER, the limited-edition Australian maxi single arriving for the Australian summer in January 2027.",
+    "KAM DRIDI presents 17 FOR EVER, the limited-edition Australian maxi single arriving for the Australian summer in January 2027.",
   openGraph: {
     title: "17 FOR EVER — Australia | KAMDRIDI",
     description:

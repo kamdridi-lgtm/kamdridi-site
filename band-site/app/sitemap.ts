@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/news",
     "/band",
     "/tour",
+    "/live",
     "/store",
     "/contact",
     "/fan-club",
@@ -30,6 +31,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/visual-album",
     "/who-is-kam-dridi",
     "/australia",
+    "/japan",
+    "/new-zealand",
     "/app/war-machines-jp",
     "/label",
     "/label/ai-artists",
@@ -46,9 +49,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...discoveryRoutes
   ];
 
-  return routes.map((route) => ({
+  return [...new Set(routes)].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
     changeFrequency:
       route === "/" ||
       route === "/industry" ||

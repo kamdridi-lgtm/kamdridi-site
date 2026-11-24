@@ -146,9 +146,10 @@ const listenLinks = [
 ].filter((link) => link.href);
 
 export const metadata: Metadata = {
-  title: "Echoes Unearthed - Official Album Hub",
+  title: { absolute: "KAM DRIDI | Cinematic Melodic Hard Rock" },
+  alternates: { canonical: "https://kamdridi.com/" },
   description:
-    "Official KAMDRIDI album headquarters for Echoes Unearthed with streaming links, tracklist, collector editions, video, and the cinematic universe."
+    "Official website of KAM DRIDI, independent cinematic melodic hard rock artist from Montreal. Discover Echoes Unearthed, music videos, collector editions and live shows."
 };
 
 function PremiumButton({

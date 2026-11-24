@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "KAM DRIDI — Industry Hub | Radio, Sync, Festivals, Press",
+  title: "Industry Hub | Radio, Sync, Festivals, Press",
   description: "Official professional access point for KAM DRIDI: radio, sync licensing, festival booking, press, EPK and verified music metadata.",
   alternates: { canonical: "https://kamdridi.com/industry" },
 };
@@ -19,6 +19,7 @@ export default function IndustryPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "MusicGroup",
+    "@id": "https://kamdridi.com/#artist",
     name: "KAM DRIDI",
     url: "https://kamdridi.com",
     genre: ["Melodic Hard Rock", "Cinematic Melodic Hard Rock"],
@@ -30,11 +31,12 @@ export default function IndustryPage() {
       "https://x.com/kamdridi"
     ],
     track: {
+      "@id": "https://kamdridi.com/our-lost-dreams#recording",
       "@type": "MusicRecording",
       name: "OUR LOST DREAMS",
       duration: "PT4M55S",
       isrcCode: "QZZ7M2627617",
-      byArtist: { "@type": "MusicGroup", name: "KAM DRIDI" },
+      byArtist: { "@id": "https://kamdridi.com/#artist" },
       inAlbum: { "@type": "MusicAlbum", name: "Echoes Unearthed" },
       url: "https://kamdridi.com/our-lost-dreams"
     }

@@ -12,7 +12,9 @@ let siteUrl = process.env.NEXT_PUBLIC_SITE_URL || siteMeta.domain;
 if (siteUrl && !siteUrl.startsWith("http")) {
   siteUrl = `https://${siteUrl}`;
 }
+siteUrl = siteUrl.replace(/\/$/, "");
 const metadataBase = new URL(siteUrl);
+const artistId = "https://kamdridi.com/#artist";
 
 export const metadata: Metadata = {
   metadataBase,
@@ -27,7 +29,7 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent"
   },
   title: {
-    default: "KAM DRIDI | Official Artist Website",
+    default: "KAM DRIDI | Cinematic Melodic Hard Rock",
     template: "%s | KAM DRIDI"
   },
   description: siteMeta.description,
@@ -48,7 +50,7 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "KAM DRIDI | Official Artist Website",
+    title: "KAM DRIDI | Cinematic Melodic Hard Rock",
     description: siteMeta.description,
     url: metadataBase,
     siteName: "KAM DRIDI",
@@ -71,7 +73,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "KAM DRIDI | Official Artist Website",
+    title: "KAM DRIDI | Cinematic Melodic Hard Rock",
     description: siteMeta.description,
     images: ["/assets/images/gallery/p04_portrait_leather.jpg"]
   }
@@ -80,7 +82,7 @@ export const metadata: Metadata = {
 const artistStructuredData = {
   "@context": "https://schema.org",
   "@type": "MusicGroup",
-  "@id": `${siteUrl}/#artist`,
+  "@id": artistId,
   name: "KAM DRIDI",
   alternateName: ["KAMDRIDI", "Kam Dridi"],
   url: siteUrl,
@@ -115,7 +117,7 @@ const websiteStructuredData = {
   name: "KAM DRIDI",
   alternateName: "KAMDRIDI",
   publisher: {
-    "@id": `${siteUrl}/#artist`
+    "@id": artistId
   }
 };
 

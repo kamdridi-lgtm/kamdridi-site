@@ -4,9 +4,10 @@ import Link from "next/link";
 import { ArrowUpRight, CalendarDays, MapPin, Mic2, Ticket } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "KAM DRIDI — Live in Japan 2027 | GEKIRIN Tokyo",
+  title: "Live in Japan 2027 — GEKIRIN Tokyo",
+  alternates: { canonical: "https://kamdridi.com/japan" },
   description:
-    "KAM DRIDI live at GEKIRIN, The Playhouse, Machida, Tokyo, Sunday 17 January 2027. Discover the concert, venue and official artwork.",
+    "KAM DRIDI live at GEKIRIN, The Playhouse, Machida, Tokyo, Sunday 17 January 2027. Cinematic melodic hard rock concert, venue and official artwork.",
 };
 
 export default function JapanLivePage() {

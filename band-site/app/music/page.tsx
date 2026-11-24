@@ -4,9 +4,10 @@ import { MusicHub } from "@/components/music-hub";
 import { Section } from "@/components/ui";
 
 export const metadata: Metadata = {
-  title: "Music",
+  title: "Music, Discography & Videos",
+  alternates: { canonical: "https://kamdridi.com/music" },
   description:
-    "Explore the official KAMDRIDI music hub with video, gallery, discography, and Echoes Unearthed campaign content."
+    "Explore KAM DRIDI’s cinematic melodic hard rock music, Echoes Unearthed, official videos, discography and release history."
 };
 
 export default function MusicPage() {
