@@ -6,7 +6,8 @@ import { warMachinesCover } from "@/data/site";
 import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
 
 export const metadata: Metadata = {
-  title: "KAMDRIDI RECORDS Releases",
+  title: "Official Releases & Discography",
+  alternates: { canonical: "https://kamdridi.com/releases" },
   description: "KAM DRIDI studio albums in sequence, off-series projects, singles and KAMDRIDI RECORDS releases."
 };
 
@@ -71,7 +72,7 @@ export default function ReleasesPage() {
           </Link>
           <div className="border border-[#7c858e]/40 bg-[#101217] p-5">
             <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#bfc9d3]">OFF-SERIES ALBUM · IN PREPARATION</p>
-            <h3 className="mt-3 font-display text-2xl uppercase text-white">UNDER COVER</h3>
+            <h3 className="mt-3 font-display text-2xl uppercase text-white">UNDERCOVER</h3>
             <p className="mt-2 text-sm leading-6 text-stone-400">A personal collection of covers. No release date or physical stock is announced.</p>
           </div>
           <a href="/in-senistre/index.html" className="block border border-[#7c858e]/40 bg-[#101217] p-5 transition hover:border-[#ccd0d4]">
