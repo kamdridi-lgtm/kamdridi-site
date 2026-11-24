@@ -23,9 +23,10 @@ const mediaGallery = [
 ];
 
 export const metadata: Metadata = {
-  title: "Media",
+  title: "Official Music Videos & Media",
+  alternates: { canonical: "https://kamdridi.com/media" },
   description:
-    "Official KAMDRIDI media hub with featured video, campaign stills, streaming platforms, and public-facing assets."
+    "Watch official KAM DRIDI music videos and explore cinematic melodic hard rock visuals, photography and music platforms."
 };
 
 export default function MediaPage() {
@@ -59,6 +60,7 @@ export default function MediaPage() {
             </h2>
             <p className="mt-5 text-sm leading-8 text-stone-400">{featuredVideo.description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
+              <a href="https://www.youtube.com/@kamdridi" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 text-sm uppercase tracking-[0.25em] text-white transition hover:border-[#f4c66a]/60 hover:text-[#f4c66a]">Official YouTube Channel</a>
               <Link
                 href="/music#videos"
                 className="inline-flex items-center justify-center rounded-full bg-[#f4c66a] px-6 py-3 text-sm uppercase tracking-[0.25em] text-black transition hover:-translate-y-0.5 hover:bg-[#ffd989]"
