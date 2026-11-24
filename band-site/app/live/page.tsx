@@ -33,9 +33,10 @@ const tourDates = [
 
 
 export const metadata: Metadata = {
-  title: "Live in Australia — Adelaide Fringe 2027",
+  title: "Asia-Pacific Tour 2027 — Live Concerts",
+  alternates: { canonical: "https://kamdridi.com/live" },
   description:
-    "KAM DRIDI live at Domain Theatre, Marion Cultural Centre, Adelaide — Thursday 18 March 2027 at 7:30 PM.",
+    "KAM DRIDI Asia-Pacific Tour 2027: Japan, Australia and New Zealand. Explore live dates, venues and Adelaide Fringe concert details.",
   openGraph: {
     title: "KAM DRIDI — Live in Australia · Adelaide Fringe 2027",
     description:
