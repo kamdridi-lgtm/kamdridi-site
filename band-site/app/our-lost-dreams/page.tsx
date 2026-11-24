@@ -153,6 +153,9 @@ export default function OurLostDreamsPage() {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <ActionLink href="/">Official Site</ActionLink>
+              <ActionLink href="/music">Explore the music</ActionLink>
+              <ActionLink href="/releases">Official discography</ActionLink>
+              <ActionLink href="/australia">Discover 17 FOR EVER</ActionLink>
               <ActionLink href={contactHref}>Contact</ActionLink>
             </div>
           </section>
