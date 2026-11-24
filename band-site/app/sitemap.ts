@@ -31,6 +31,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/visual-album",
     "/who-is-kam-dridi",
     "/australia",
+    "/japan",
+    "/new-zealand",
     "/app/war-machines-jp",
     "/label",
     "/label/ai-artists",
