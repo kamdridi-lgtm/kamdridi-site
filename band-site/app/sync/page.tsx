@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "KAM DRIDI — Sync Licensing | Film, TV, Games, Advertising",
-  description: "Official sync licensing page for KAM DRIDI music for film, television, trailers, games, advertising and visual media.",
+  title: "Sync Licensing | Film, TV, Games, Advertising",
+  description: "Official cinematic melodic hard rock sync licensing inquiries for KAM DRIDI music for film, television, trailers, games, advertising and visual media.",
   alternates: { canonical: "https://kamdridi.com/sync" },
 };
 
