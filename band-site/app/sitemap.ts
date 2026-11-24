@@ -46,9 +46,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...discoveryRoutes
   ];
 
-  return routes.map((route) => ({
+  return [...new Set(routes)].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
     changeFrequency:
       route === "/" ||
       route === "/industry" ||
