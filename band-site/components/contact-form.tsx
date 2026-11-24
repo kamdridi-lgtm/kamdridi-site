@@ -12,10 +12,14 @@ export function ContactForm() {
     message: ""
   });
   const [status, setStatus] = useState<string | null>(null);
+  const [sending, setSending] = useState(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (sending) return;
+    setSending(true);
     setStatus("Sending...");
+    try {
 
     const response = await fetch("/api/contact", {
       method: "POST",
@@ -31,6 +35,11 @@ export function ContactForm() {
 
     setStatus("Message sent successfully.");
     setForm({ name: "", email: "", subject: "", message: "" });
+    } catch {
+      setStatus("Unable to send your message. Please try again or use the management email.");
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -44,6 +53,7 @@ export function ContactForm() {
           <input
             className="rounded-full border border-white/10 bg-black/40 px-5 py-4 text-white placeholder:text-stone-500"
             placeholder="Name"
+            aria-label="Name"
             value={form.name}
             onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
           />
@@ -51,29 +61,33 @@ export function ContactForm() {
             className="rounded-full border border-white/10 bg-black/40 px-5 py-4 text-white placeholder:text-stone-500"
             type="email"
             placeholder="Email"
+            aria-label="Email"
             value={form.email}
             onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
           />
           <input
             className="rounded-full border border-white/10 bg-black/40 px-5 py-4 text-white placeholder:text-stone-500"
             placeholder="Subject"
+            aria-label="Subject"
             value={form.subject}
             onChange={(event) => setForm((current) => ({ ...current, subject: event.target.value }))}
           />
           <textarea
             className="min-h-40 rounded-[28px] border border-white/10 bg-black/40 px-5 py-4 text-white placeholder:text-stone-500"
             placeholder="Message"
+            aria-label="Message"
             value={form.message}
             onChange={(event) => setForm((current) => ({ ...current, message: event.target.value }))}
           />
           <button
             type="submit"
+            disabled={sending}
             className="rounded-full bg-[#f4c66a] px-6 py-4 text-xs uppercase tracking-[0.25em] text-black transition hover:bg-[#ffd989]"
           >
             Submit
           </button>
         </form>
-        {status ? <p className="mt-4 text-sm text-stone-300">{status}</p> : null}
+        {status ? <p role="status" className="mt-4 text-sm text-stone-300">{status}</p> : null}
       </GlassCard>
 
       <GlassCard id="management" className="grid gap-6">
