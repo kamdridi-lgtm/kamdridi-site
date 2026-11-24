@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { MusicHub } from "@/components/music-hub";
-import { Section } from "@/components/ui";
+import { CTAButton, Section } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Music, Discography & Videos",
@@ -65,6 +65,18 @@ export default function MusicPage() {
         </div>
       </section>
       <MusicHub />
+      <Section className="py-12">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="font-display text-3xl uppercase tracking-wide text-white">Stay connected</h2>
+          <p className="mt-4 text-stone-300">Follow KAM DRIDI on your preferred music platform, explore the next release, or discover the official member world.</p>
+          <div className="mt-6 flex flex-wrap gap-4">
+            <CTAButton href="https://open.spotify.com/artist/17yVPHf6qsH2kyQjW4wT2o">Spotify</CTAButton>
+            <CTAButton href="https://music.apple.com/us/artist/kam-dridi/1871722663" tone="secondary">Apple Music</CTAButton>
+            <CTAButton href="/australia" tone="secondary">17 FOR EVER</CTAButton>
+            <CTAButton href="/fan-club" tone="secondary">Fan Club</CTAButton>
+          </div>
+        </div>
+      </Section>
     </div>
   );
 }
