@@ -5,9 +5,10 @@ import { CTAButton, GlassCard, PageHero, Section, SectionHeading } from "@/compo
 import { bandBio } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "KAM DRIDI — Artist Biography & Live Project",
+  title: "Artist Biography & Live Project",
+  alternates: { canonical: "https://kamdridi.com/band" },
   description:
-    "Official KAM DRIDI artist biography, creative identity, live direction, music links, booking, press, and licensing information."
+    "Biography of KAM DRIDI, independent melodic hard rock artist from Montreal, Canada. Explore the music, cinematic live project and official press resources."
 };
 
 export default function BandPage() {
