@@ -123,6 +123,12 @@ export default function PressPage() {
           <p className="mt-4 max-w-4xl text-sm leading-7 text-stone-300 md:text-base md:leading-8">
             A 2027 live route is also taking shape, including Tokyo, Wellington, Sydney, and Adelaide. The live concept combines genuinely live lead vocals with professionally produced instrumental backing tracks and optional synchronized cinematic stage video.
           </p>
+          <div className="mt-6 space-y-3 text-sm leading-7 text-stone-300">
+            <h3 className="font-bold text-white">Independent media references</h3>
+            <p><a className="underline hover:text-red-400" href="https://thenextradio.net/artist/kam-dridi/">The Next Radio</a> — artist profile featuring OUR LOST DREAMS and 17 FOR EVER.</p>
+            <p><a className="underline hover:text-red-400" href="https://darksymphonyradio.co.uk/">Dark Symphony Radio</a> — Discovery entry 006, OUR LOST DREAMS.</p>
+            <p><a className="underline hover:text-red-400" href="https://radiohp.net/news-from-the-highway-august/">Radio Highway Pirates</a> — August music news featuring OUR LOST DREAMS.</p>
+          </div>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link
               href="/our-lost-dreams"
