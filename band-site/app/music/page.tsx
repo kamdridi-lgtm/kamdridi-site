@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function MusicPage() {
   return (
     <div className="music-premium">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"MusicAlbum","@id":"https://kamdridi.com/music#echoes-unearthed","name":"Echoes Unearthed","url":"https://kamdridi.com/music","byArtist":{"@id":"https://kamdridi.com/#artist"},"genre":["Melodic Hard Rock","Cinematic Melodic Hard Rock"],"image":"https://kamdridi.com/assets/images/releases/echoes-unearthed-cover.jpg","sameAs":["https://open.spotify.com/album/4rrOMu0BIhzJt1ElOfgXZu"],"albumReleaseType":"https://schema.org/AlbumRelease"}) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"MusicAlbum","@id":"https://kamdridi.com/music#echoes-unearthed","name":"Echoes Unearthed","url":"https://kamdridi.com/music","byArtist":{"@id":"https://kamdridi.com/#artist"},"genre":["Melodic Hard Rock","Cinematic Melodic Hard Rock"],"image":"https://kamdridi.com/assets/images/releases/echoes-unearthed-cover.jpg","albumReleaseType":"https://schema.org/AlbumRelease"}) }} />
       <section className="overflow-hidden border-b border-white/10">
         <div className="relative isolate">
           <video
