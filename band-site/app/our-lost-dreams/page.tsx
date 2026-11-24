@@ -50,6 +50,7 @@ export default function OurLostDreamsPage() {
     name: "OUR LOST DREAMS",
     url: "https://kamdridi.com/our-lost-dreams",
     duration: "PT4M55S",
+    isrcCode: "QZZ7M2627617",
     byArtist: { "@id": "https://kamdridi.com/#artist" },
     inAlbum: { "@type": "MusicAlbum", name: "Echoes Unearthed" },
     genre: "Cinematic Melodic Hard Rock"
