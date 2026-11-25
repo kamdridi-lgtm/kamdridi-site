@@ -4,7 +4,8 @@ import { LabelAssistantChat } from "@/components/label/LabelAssistantChat";
 import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
 
 export const metadata: Metadata = {
-  title: "KAMDRIDI Records",
+  title: "KAMDRIDI RECORDS — Independent Creative Label",
+  alternates: { canonical: "https://kamdridi.com/label" },
   description:
     "KAMDRIDI RECORDS is a boutique creative label for rock, dark country, cinematic music, and artist-driven projects."
 };
@@ -147,6 +148,7 @@ export default function LabelPage() {
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-4">
             <ActionLink href="#roster">View Roster</ActionLink>
+            <ActionLink href="/releases" variant="secondary">Official Releases</ActionLink>
             <ActionLink href="/label/artist-services" variant="secondary">Artist Services</ActionLink>
             <ActionLink href="/submit" variant="secondary">Submit Your Music</ActionLink>
           </div>
@@ -182,7 +184,7 @@ export default function LabelPage() {
             </article>
 
             <article className="rounded-[2rem] border border-[#f4c66a]/18 bg-[radial-gradient(circle_at_14%_0%,rgba(244,198,106,0.12),transparent_34%),rgba(8,6,4,0.7)] p-6 shadow-[0_30px_100px_rgba(0,0,0,0.32)] md:p-8">
-              <p className="text-[10px] uppercase tracking-[0.28em] text-[#f4c66a]">Rock / Cinematic / Independent Artist</p>
+              <p className="text-[10px] uppercase tracking-[0.28em] text-[#f4c66a]">Melodic Hard Rock / Cinematic Melodic Hard Rock</p>
               <h2 className="mt-4 text-3xl font-black uppercase tracking-[0.08em] text-white">KAM DRIDI</h2>
               <p className="mt-4 text-sm leading-7 text-stone-300">Official KAMDRIDI artist site and universe hub.</p>
               <div className="mt-7">
