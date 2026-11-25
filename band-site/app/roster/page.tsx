@@ -5,7 +5,8 @@ import { getAiArtist } from "@/data/ai-artists";
 import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
 
 export const metadata: Metadata = {
-  title: "KAMDRIDI RECORDS Roster",
+  title: "KAMDRIDI RECORDS — Artist Roster",
+  alternates: { canonical: "https://kamdridi.com/roster" },
   description: "Current KAMDRIDI RECORDS artist projects including KAM DRIDI and IRON COUNTY GHOSTS."
 };
 
@@ -17,7 +18,7 @@ export default function RosterPage() {
   const roster = [
     {
       name: "KAM DRIDI",
-      genre: "Rock / Cinematic / Independent Artist",
+      genre: "Melodic Hard Rock / Cinematic Melodic Hard Rock",
       description: "The core artist identity behind Echoes Unearthed, War Machines, and the wider KAMDRIDI universe.",
       image: "/assets/images/gallery/p04_portrait_leather.jpg",
       href: "/",
