@@ -109,6 +109,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
     tone: "success" | "warning" | "error";
   } | null>(null);
   const [allProducts, setAllProducts] = useState<CommerceProduct[]>([]);
+  const [catalogState, setCatalogState] = useState<"loading" | "ready" | "error">("loading");
   const [activeFilter, setActiveFilter] = useState<string>("ALL");
   const [selectedSizes, setSelectedSizes] = useState<Record<string, string | undefined>>({});
   const [selectedColors, setSelectedColors] = useState<Record<string, string | undefined>>({});
@@ -132,10 +133,14 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
           // sale mode and checkout eligibility. Fail closed rather than
           // exposing stale checked-in merchandise when the catalog is down.
           setAllProducts(normalized);
+          setCatalogState("ready");
         }
       })
       .catch(() => {
-        if (!cancelled) setAllProducts([]);
+        if (!cancelled) {
+          setAllProducts([]);
+          setCatalogState("error");
+        }
       });
 
     return () => {
@@ -207,7 +212,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
   const getButtonLabel = (product: CommerceProduct) => {
     if (product.saleMode === "sold_out") return "SOLD OUT";
     if (product.saleMode === "coming_soon") return "PRE-ORDERS OPEN SOON";
-    if (!product.checkoutEnabled) return "NOT AVAILABLE YET";
+    if (!checkoutEnabled || !product.checkoutEnabled) return "NOT AVAILABLE YET";
     if (product.saleMode === "preorder") return "PRE-ORDER";
     if (product.saleMode === "digital") return "ORDER DIGITAL";
     return "ADD TO CART";
@@ -217,7 +222,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
     if (
       product.saleMode === "sold_out" ||
       product.saleMode === "coming_soon" ||
-      !product.checkoutEnabled
+      !checkoutEnabled || !product.checkoutEnabled
     ) return;
     addToCart({
       id: product.id,
@@ -233,7 +238,7 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
   const renderProductCard = (product: CommerceProduct) => {
     const isSoldOut = product.saleMode === "sold_out";
     const isComingSoon = product.saleMode === "coming_soon";
-    const isUnavailable = isSoldOut || isComingSoon || !product.checkoutEnabled;
+    const isUnavailable = isSoldOut || isComingSoon || !checkoutEnabled || !product.checkoutEnabled;
 
     return (
       <div key={product.id} id={product.id} className="group relative flex flex-col overflow-hidden rounded-[24px] border border-white/10 bg-black/40">
@@ -364,8 +369,14 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
     (p) => (p.category === "Digital Access" || p.saleMode === "digital") && p.projectSlug !== "echoes-unearthed"
   );
 
+  const groupedIds = new Set([...featured, ...australia, ...echoesBrasil, ...salieri, ...echoesUnearthed, ...keychainProducts, ...kamdridiCore, ...digitalAccess].filter(p => activeFilter === "ALL" || !featured.includes(p) || [...australia, ...echoesBrasil, ...salieri, ...echoesUnearthed, ...keychainProducts, ...kamdridiCore, ...digitalAccess].includes(p)).map(p => p.id));
+  const otherProducts = filteredProducts.filter(p => !groupedIds.has(p.id));
+
   return (
     <div className="grid gap-16">
+      {catalogState === "loading" && <p role="status" className="text-center text-stone-300">Loading official merchandise…</p>}
+      {catalogState === "error" && <p role="alert" className="text-center text-stone-300">The catalog is temporarily unavailable. Please try again later or <Link href="/contact" className="underline">contact us</Link>.</p>}
+      {catalogState === "ready" && filteredProducts.length === 0 && <p role="status" className="text-center text-stone-300">No products are currently listed in this selection.</p>}
       {status && (
         <div aria-live="polite" className={`rounded-[24px] border p-4 text-center text-sm font-semibold tracking-wide ${
           status.tone === "success"
@@ -487,6 +498,13 @@ export function Storefront({ checkoutEnabled }: { checkoutEnabled: boolean }) {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {kamdridiCore.map(renderProductCard)}
           </div>
+        </section>
+      )}
+
+      {otherProducts.length > 0 && (
+        <section>
+          <h2 className="mb-8 font-display text-3xl uppercase tracking-widest text-white">More official products</h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{otherProducts.map(renderProductCard)}</div>
         </section>
       )}
 
