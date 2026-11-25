@@ -3,7 +3,8 @@ import Link from "next/link";
 import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
 
 export const metadata: Metadata = {
-  title: "KAMDRIDI RECORDS Artist Services | Music Direction, Release Strategy & Creative Label Support",
+  title: "Artist Services — Release Strategy, EPK & Creative Direction",
+  alternates: { canonical: "https://kamdridi.com/label/artist-services" },
   description:
     "KAMDRIDI RECORDS helps artists structure, package, improve, and present their music professionally through boutique artist services, release strategy, creative direction, and label-level guidance."
 };
@@ -171,7 +172,7 @@ export default function ArtistServicesPage() {
               </h2>
             </div>
             <p className="max-w-2xl text-sm leading-7 text-stone-300">
-              Every tier is handled by direct email for now. No fake checkout, no fake portal, no automatic label deal.
+              Request a service by email. Include your music links, release timeline and goals so we can review your project before agreeing on the scope. Artist services do not require a record deal.
             </p>
           </div>
           <div className="mt-7 grid gap-5 lg:grid-cols-3">

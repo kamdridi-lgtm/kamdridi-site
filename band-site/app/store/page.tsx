@@ -7,9 +7,10 @@ import { Storefront } from "@/components/storefront";
 import { hasStripeServerCredentials } from "@/lib/stripe";
 
 export const metadata: Metadata = {
-  title: "Store",
+  title: "Official Merchandise & Collector Editions",
+  alternates: { canonical: "https://kamdridi.com/store" },
   description:
-    "Shop the official KAMDRIDI merch store with cinematic collector products, hosted checkout support, and direct order capture."
+    "Explore official KAM DRIDI merchandise, logo T-shirts, Echoes Unearthed apparel and made-to-order collector editions."
 };
 
 const storeHeroVideo = "/videos/store-hero-grok.mp4";
@@ -54,11 +55,11 @@ export default function StorePage() {
                   Shop the drop
                 </h1>
                 <p className="mt-5 max-w-2xl text-base leading-8 text-stone-300">
-                  Best sellers first, prices visible, variants clear, and the cart always one click away.
+                  Explore featured merchandise, available variants and collector editions.
                   Start with the logo tee, Echoes crest tee, or Signal Target capsule.
                 </p>
                 <div className="mt-7 flex flex-wrap gap-3">
-                  <CTAButton href="#featured">Shop Best Sellers</CTAButton>
+                  <CTAButton href="#featured">Shop Featured Merch</CTAButton>
                   <CTAButton href="#collector-artifact-pack" tone="secondary">
                     Collector Bundle
                   </CTAButton>
@@ -110,7 +111,7 @@ export default function StorePage() {
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.05),rgba(0,0,0,0.78))]" />
                   <div className="absolute inset-x-0 bottom-0 p-4">
                     <p className={`text-[10px] uppercase tracking-[0.28em] ${item.title === "Boxed Keychain" ? "text-red-300" : "text-[#f4c66a]"}`}>
-                      {item.title === "Boxed Keychain" ? "Proof pending" : "Best Seller"}
+                      {item.title === "Boxed Keychain" ? "Proof pending" : "Featured"}
                     </p>
                     <h2 className="mt-2 text-xl text-white">{item.title}</h2>
                     <p className={`mt-2 text-lg ${item.title === "Boxed Keychain" ? "text-red-300" : "text-[#f4c66a]"}`}>{item.price}</p>
