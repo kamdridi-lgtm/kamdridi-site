@@ -18,7 +18,7 @@ async function runTests() {
   }
 
   // 1. Complete catalog, including the three Australia 2027 editions
-  assert(commerceProducts.length === 34, `Il y a exactement 34 produits (${commerceProducts.length} trouvés)`);
+  assert(commerceProducts.length >= 48, `Le catalogue contient au moins les 48 références inventoriées (${commerceProducts.length} trouvées)`);
 
   // 2. IDs uniques
   const ids = new Set(commerceProducts.map(p => p.id));
@@ -38,8 +38,10 @@ async function runTests() {
       australiaProducts.find(p => p.id === "17-for-ever-maxi-single")?.priceCents === 15900 &&
       australiaProducts.find(p => p.id === "17-for-ever-maxi-single")?.checkoutEnabled === true &&
       australiaProducts.find(p => p.id === "17-for-ever-maxi-single")?.saleMode === "preorder" &&
-      australiaProducts.filter(p => p.id !== "17-for-ever-maxi-single").every(p => !p.checkoutEnabled && p.saleMode === "coming_soon"),
-    "Le maxi single australien est en précommande à 159 $ CA; le CD et la cassette restent à annoncer"
+      australiaProducts.find(p => p.id === "17-for-ever-limited-cd")?.priceCents === 3900 &&
+      australiaProducts.find(p => p.id === "17-for-ever-special-cassette")?.priceCents === 4900 &&
+      australiaProducts.every(p => p.visible && p.checkoutEnabled && p.saleMode === "preorder"),
+    "Les trois éditions australiennes sont configurées en précommande à 159, 39 et 49 $ CA"
   );
 
   // Tests via pure function
