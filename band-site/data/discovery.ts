@@ -216,11 +216,11 @@ export const discoveryTrackHubs = [
   {
     slug: "17-for-ever",
     title: "17 FOR EVER",
-    subtitle: "Australia campaign track",
+    subtitle: "Australian maxi-single · transition to Album II",
     album: "Echoes Unearthed",
     isrc: "QZZ7M2627619",
     genre: "Cinematic Melodic Hard Rock",
-    description: "Secondary KAM DRIDI professional discovery track tied to the Australia 2027 campaign and limited-edition maxi-single release.",
+    description: "KAM DRIDI’s January 2027 Australian collector maxi-single, bridging Echoes Unearthed and the second official studio album, Twice Upon a Time.",
     href: "/australia",
     markets: discoveryMarkets.filter((market) => market.slug === "australia")
   }
