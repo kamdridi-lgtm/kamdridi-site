@@ -15,7 +15,7 @@ import {
 const fringeUrl = "https://adelaidefringe.com.au/";
 const tourDates = [
   { date: "17 JAN 2027", city: "Tokyo", country: "Japan", venue: "GEKIRIN · The Playhouse, Machida", venueLink: "https://theplayhouse.jp/", detailsLink: "/japan", ticketLink: "https://mohanak.com/ticket/" },
-  { date: "22–24 JAN 2027", city: "Canberra", country: "Australia", venue: "TBA" },
+  { date: "22–24 JAN 2027", city: "Canberra", country: "Australia", venue: "Smith’s Alternative · Target venue, pending booking", venueLink: "https://www.smithsalternative.com/" },
   { date: "FEB 2027", city: "Brisbane", country: "Australia", venue: "TBA" },
   { date: "06 FEB 2027 · PROVISIONAL", city: "Coolangatta · Gold Coast", country: "Australia", venue: "Eddie’s Grub House", venueLink: "https://www.eddiesgrubhouse.com/" },
   { date: "FEB 2027", city: "Rockhampton", country: "Australia", venue: "TBA" },
@@ -32,8 +32,8 @@ const tourDates = [
   { date: "08–10 APR 2027 · TBA", city: "Tallinn", country: "Estonia", venue: "Tallinn Music Week · Target showcase, pending selection", festivalLink: "https://tmw.ee/music" },
   { date: "APR–MAY 2027 · TBA", city: "Centurion", country: "South Africa", venue: "At The River · Date to be announced", venueLink: "https://at-theriver.co.za/" },
   { date: "30 APR–02 MAY 2027 · TBA", city: "Whitby", country: "United Kingdom", venue: "Revenant V · Whitby Goth Weekend · The Royal Hotel · Pending booking", festivalLink: "https://whitbyrevenant.com/" },
-  { date: "19 JUN 2027 · PROVISIONAL", city: "Ninane · Chaudfontaine", country: "Belgium", venue: "Fête de la Musique · Pending confirmation" },
-  { date: "20 JUN 2027 · TBA", city: "Paris", country: "France", venue: "TBA · In development" },
+  { date: "19 JUN 2027 · PROVISIONAL", city: "Ninane · Chaudfontaine", country: "Belgium", venue: "Festival de musique · ASBL Ninane Village · Pending confirmation", festivalLink: "https://stayhappening.com/e/festival-de-musique-gratuit-E2ISXKYVH0Q", festivalLabel: "2025 festival archive" },
+  { date: "20 JUN 2027 · TBA", city: "Paris", country: "France", venue: "Supersonic · Target venue, pending booking", venueLink: "https://supersonic-club.fr/infos-pratiques/" },
   { date: "SUMMER 2027 · TBA", city: "Luxembourg", country: "Luxembourg", venue: "TBA · In development" },
   { date: "SUMMER 2027 · TBA", city: "Cologne · Aachen", country: "Germany", venue: "TBA · In development" },
   { date: "SUMMER 2027 · TBA", city: "Location TBA", country: "Switzerland", venue: "TBA · In development" },
@@ -170,7 +170,7 @@ export default function LivePage() {
                 )}
               </div>
               {"festivalLink" in show && show.festivalLink && (
-                <div className="col-start-2 mt-2 sm:col-start-4 sm:mt-0"><a href={show.festivalLink} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-[#f4c66a] underline underline-offset-4 hover:text-white">Festival website ↗</a></div>
+                <div className="col-start-2 mt-2 sm:col-start-4 sm:mt-0"><a href={show.festivalLink} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-[#f4c66a] underline underline-offset-4 hover:text-white">{"festivalLabel" in show && show.festivalLabel ? show.festivalLabel : "Festival website"} ↗</a></div>
               )}
               {"venueLink" in show && show.venueLink && (
                 <div className="col-start-2 mt-2 sm:col-start-4 sm:mt-0">
