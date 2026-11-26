@@ -184,6 +184,20 @@ export default function LivePage() {
         <p className="mt-7 max-w-2xl text-xs leading-6 text-stone-500">Provisional dates and destinations are subject to confirmation. Malaysia and Singapore represent alternative routing options for the same METALVERSE opportunity, not two confirmed performances. Additional dates and venue details to be announced.</p>
       </section>
 
+      <section id="international-booking" className="border-b border-white/10 bg-[#080808] px-5 py-14 sm:py-20">
+        <div className="mx-auto max-w-4xl rounded-2xl border border-[#f4c66a]/20 bg-[#111111] px-6 py-12 text-center sm:px-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#f4c66a]">KAM DRIDI · WORLD TOUR 2027</p>
+          <h2 className="font-display mt-5 text-4xl uppercase tracking-[0.04em] text-white sm:text-6xl">Bring KAM DRIDI to your city</h2>
+          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-stone-300 sm:text-lg">International booking now open for festivals, theatres, live venues and special events.</p>
+          <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-stone-400">Cinematic melodic hard rock from Montreal, Canada · Live lead vocals, professional instrumental backing tracks and optional synchronized visuals.</p>
+          <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+            <Link href="/press" className="rounded-full bg-white px-7 py-3 text-sm font-bold uppercase tracking-wide text-black hover:bg-[#f4c66a]">Artist Press Kit</Link>
+            <Link href="/industry" className="rounded-full border border-white/30 px-7 py-3 text-sm font-bold uppercase tracking-wide text-white hover:border-[#f4c66a]">Industry &amp; Booking</Link>
+          </div>
+          <a href="mailto:management@kamdridi.com?subject=KAM%20DRIDI%20World%20Tour%202027%20Booking" className="mt-6 inline-block text-sm text-[#f4c66a] underline underline-offset-4">Contact management ↗</a>
+        </div>
+      </section>
+
       <section id="adelaide-show" className="relative isolate overflow-hidden border-b border-white/10">
         <Image
           src="/assets/images/tour/tour-crowd-stage.png"
