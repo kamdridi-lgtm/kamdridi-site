@@ -29,17 +29,20 @@ const tourDates = [
   { date: "05 MAR 2027", city: "Sydney", country: "Australia", venue: "Dead Set" },
   { date: "18 MAR 2027 · 19:30", city: "Adelaide", country: "Australia", venue: "Domain Theatre · Marion Cultural Centre", detailsLink: "/live#adelaide-show", ticketLink: "https://adelaidefringe.com.au/", ticketLabel: "Tickets from 4 Dec" },
   { date: "2027", city: "Perth", country: "Australia", venue: "TBA" },
-  { date: "APR–MAY 2027 · TBA", city: "Location TBA", country: "South Africa", venue: "At The River · Date to be announced" },
+  { date: "08–10 APR 2027 · TBA", city: "Tallinn", country: "Estonia", venue: "Tallinn Music Week · Target showcase, pending selection" },
+  { date: "APR–MAY 2027 · TBA", city: "Centurion", country: "South Africa", venue: "At The River · Date to be announced" },
+  { date: "30 APR–02 MAY 2027 · TBA", city: "Whitby", country: "United Kingdom", venue: "Revenant V · Whitby Goth Weekend · The Royal Hotel · Pending booking" },
   { date: "19 JUN 2027 · PROVISIONAL", city: "Ninane · Chaudfontaine", country: "Belgium", venue: "Fête de la Musique · Pending confirmation" },
   { date: "20 JUN 2027 · TBA", city: "Paris", country: "France", venue: "TBA · In development" },
   { date: "SUMMER 2027 · TBA", city: "Luxembourg", country: "Luxembourg", venue: "TBA · In development" },
   { date: "SUMMER 2027 · TBA", city: "Cologne · Aachen", country: "Germany", venue: "TBA · In development" },
   { date: "SUMMER 2027 · TBA", city: "Location TBA", country: "Switzerland", venue: "TBA · In development" },
-  { date: "SUMMER 2027 · TBA", city: "Whitby · Additional cities", country: "United Kingdom", venue: "TBA · In development" },
+  { date: "SUMMER 2027 · TBA", city: "Additional UK cities", country: "United Kingdom", venue: "TBA · In development" },
+  { date: "2027 · TBA", city: "Location TBA", country: "Southeast Asia", venue: "METALVERSE · Malaysia / Singapore routing · Pending confirmation" },
 ];
 
 
-const countryFlags: Record<string, string> = { Japan: "jp", Australia: "au", "New Zealand": "nz", "South Africa": "za", Belgium: "be", France: "fr", Luxembourg: "lu", Germany: "de", Switzerland: "ch", "United Kingdom": "gb" };
+const countryFlags: Record<string, string> = { Japan: "jp", Australia: "au", "New Zealand": "nz", "South Africa": "za", Belgium: "be", Estonia: "ee", France: "fr", Luxembourg: "lu", Germany: "de", Switzerland: "ch", "United Kingdom": "gb" };
 
 export const metadata: Metadata = {
   title: "World Tour 2027 — Live Concerts",
@@ -153,7 +156,7 @@ export default function LivePage() {
           {tourDates.map((show) => (
             <div key={show.date + show.city} className="group grid grid-cols-[105px_1fr] gap-x-4 border-b border-white/10 py-6 transition hover:border-white/35 sm:grid-cols-[155px_1fr_1fr_auto] sm:items-center sm:gap-x-7">
               <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-400 sm:text-xs">{show.date}</div>
-              <div><div className="font-display text-xl uppercase tracking-[0.04em] text-white sm:text-2xl">{show.city}</div><div className="mt-1 flex items-center gap-2 text-[9px] uppercase tracking-[0.2em] text-stone-500"><img src={`https://flagcdn.com/w40/${countryFlags[show.country]}.png`} alt="" aria-hidden="true" className="h-[12px] w-[20px] shrink-0 rounded-[2px] object-cover shadow-[0_0_0_1px_rgba(255,255,255,0.18)]" loading="lazy" /><span>{show.country}</span></div></div>
+              <div><div className="font-display text-xl uppercase tracking-[0.04em] text-white sm:text-2xl">{show.city}</div><div className="mt-1 flex items-center gap-2 text-[9px] uppercase tracking-[0.2em] text-stone-500">{countryFlags[show.country] && <img src={`https://flagcdn.com/w40/${countryFlags[show.country]}.png`} alt="" aria-hidden="true" className="h-[12px] w-[20px] shrink-0 rounded-[2px] object-cover shadow-[0_0_0_1px_rgba(255,255,255,0.18)]" loading="lazy" />}<span>{show.country}</span></div></div>
               <div className="col-start-2 mt-2 sm:col-start-auto sm:mt-0">
                 <div className="text-xs font-semibold uppercase tracking-[0.1em] text-stone-200 sm:text-sm">{show.venue}</div>
                 <div className="mt-1 hidden text-[9px] uppercase tracking-[0.2em] text-stone-500 sm:block">{show.country}</div>
