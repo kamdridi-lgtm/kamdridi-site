@@ -29,14 +29,23 @@ const tourDates = [
   { date: "05 MAR 2027", city: "Sydney", country: "Australia", venue: "Dead Set" },
   { date: "18 MAR 2027 · 19:30", city: "Adelaide", country: "Australia", venue: "Domain Theatre · Marion Cultural Centre", detailsLink: "/live#adelaide-show", ticketLink: "https://adelaidefringe.com.au/", ticketLabel: "Tickets from 4 Dec" },
   { date: "2027", city: "Perth", country: "Australia", venue: "TBA" },
+  { date: "APR–MAY 2027 · TBA", city: "Location TBA", country: "South Africa", venue: "At The River · Date to be announced" },
+  { date: "19 JUN 2027 · PROVISIONAL", city: "Ninane · Chaudfontaine", country: "Belgium", venue: "Fête de la Musique · Pending confirmation" },
+  { date: "20 JUN 2027 · TBA", city: "Paris", country: "France", venue: "TBA · In development" },
+  { date: "SUMMER 2027 · TBA", city: "Luxembourg", country: "Luxembourg", venue: "TBA · In development" },
+  { date: "SUMMER 2027 · TBA", city: "Cologne · Aachen", country: "Germany", venue: "TBA · In development" },
+  { date: "SUMMER 2027 · TBA", city: "Location TBA", country: "Switzerland", venue: "TBA · In development" },
+  { date: "SUMMER 2027 · TBA", city: "Whitby · Additional cities", country: "United Kingdom", venue: "TBA · In development" },
 ];
 
 
+const countryFlags: Record<string, string> = { Japan: "jp", Australia: "au", "New Zealand": "nz", "South Africa": "za", Belgium: "be", France: "fr", Luxembourg: "lu", Germany: "de", Switzerland: "ch", "United Kingdom": "gb" };
+
 export const metadata: Metadata = {
-  title: "Asia-Pacific Tour 2027 — Live Concerts",
+  title: "World Tour 2027 — Live Concerts",
   alternates: { canonical: "https://kamdridi.com/live" },
   description:
-    "KAM DRIDI Asia-Pacific Tour 2027: Japan, Australia and New Zealand. Explore live dates, venues and Adelaide Fringe concert details.",
+    "KAM DRIDI World Tour 2027: Asia-Pacific, South Africa and Europe. Explore confirmed shows and provisional tour dates.",
   openGraph: {
     title: "KAM DRIDI — Live in Australia · Adelaide Fringe 2027",
     description:
@@ -103,14 +112,14 @@ export default function LivePage() {
       />
 
       <section className="relative isolate overflow-hidden border-b border-white/10">
-        <Image src="/assets/images/tour/tour-crowd-stage.png" alt="KAM DRIDI Asia-Pacific Tour 2027" fill priority className="object-cover object-center opacity-70" sizes="100vw" />
+        <Image src="/assets/images/tour/tour-crowd-stage.png" alt="KAM DRIDI World Tour 2027" fill priority className="object-cover object-center opacity-70" sizes="100vw" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,3,4,0.2)_0%,rgba(3,3,4,0.5)_48%,#050403_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_25%,rgba(28,99,255,0.22),transparent_32%),radial-gradient(circle_at_82%_30%,rgba(217,31,43,0.26),transparent_30%)]" />
         <div className="relative z-10 mx-auto flex min-h-[82vh] max-w-7xl flex-col justify-end px-5 pb-14 pt-28 sm:px-8 lg:px-10 lg:pb-20">
           <p className="text-xs font-semibold uppercase tracking-[0.42em] text-[#f4c66a]">KAM DRIDI · LIVE 2027</p>
-          <h1 className="mt-5 max-w-5xl font-display text-5xl uppercase leading-[0.86] tracking-[0.03em] text-white sm:text-7xl lg:text-8xl">Asia-Pacific <span className="block text-red-500">Tour 2027</span></h1>
-          <p className="mt-6 max-w-xl text-sm uppercase tracking-[0.25em] text-white/70">Japan · Australia · New Zealand</p>
-          <p className="mt-4 max-w-xl text-sm leading-6 text-stone-300">Asia-Pacific 2027. Additional dates, venues and ticket details to be announced.</p>
+          <h1 className="mt-5 max-w-5xl font-display text-5xl uppercase leading-[0.86] tracking-[0.03em] text-white sm:text-7xl lg:text-8xl">World <span className="block text-red-500">Tour 2027</span></h1>
+          <p className="mt-6 max-w-xl text-sm uppercase tracking-[0.25em] text-white/70">Japan · Australia · New Zealand · South Africa · Europe · UK</p>
+          <p className="mt-4 max-w-xl text-sm leading-6 text-stone-300">World Tour 2027. Confirmed shows and provisional destinations. Additional dates, venues and ticket details to be announced.</p>
         </div>
       </section>
 
@@ -137,14 +146,14 @@ export default function LivePage() {
 
       <section id="tour-dates" className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:px-10 lg:py-20">
         <div className="mb-8 flex items-end justify-between gap-6 border-b border-white/15 pb-5">
-          <div><p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-[#f4c66a]">Asia-Pacific · 2027</p><h2 className="mt-3 font-display text-4xl uppercase tracking-[0.04em] sm:text-5xl">Tour Dates</h2></div>
+          <div><p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-[#f4c66a]">World Tour · 2027</p><h2 className="mt-3 font-display text-4xl uppercase tracking-[0.04em] sm:text-5xl">Tour Dates</h2></div>
           <p className="hidden text-[10px] uppercase tracking-[0.24em] text-stone-500 sm:block">More dates incoming</p>
         </div>
         <div>
           {tourDates.map((show) => (
             <div key={show.date + show.city} className="group grid grid-cols-[105px_1fr] gap-x-4 border-b border-white/10 py-6 transition hover:border-white/35 sm:grid-cols-[155px_1fr_1fr_auto] sm:items-center sm:gap-x-7">
               <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-400 sm:text-xs">{show.date}</div>
-              <div><div className="font-display text-xl uppercase tracking-[0.04em] text-white sm:text-2xl">{show.city}</div><div className="mt-1 flex items-center gap-2 text-[9px] uppercase tracking-[0.2em] text-stone-500"><img src={show.country === "Japan" ? "https://flagcdn.com/w40/jp.png" : show.country === "Australia" ? "https://flagcdn.com/w40/au.png" : "https://flagcdn.com/w40/nz.png"} alt="" aria-hidden="true" className="h-[12px] w-[20px] shrink-0 rounded-[2px] object-cover shadow-[0_0_0_1px_rgba(255,255,255,0.18)]" loading="lazy" /><span>{show.country}</span></div></div>
+              <div><div className="font-display text-xl uppercase tracking-[0.04em] text-white sm:text-2xl">{show.city}</div><div className="mt-1 flex items-center gap-2 text-[9px] uppercase tracking-[0.2em] text-stone-500"><img src={`https://flagcdn.com/w40/${countryFlags[show.country]}.png`} alt="" aria-hidden="true" className="h-[12px] w-[20px] shrink-0 rounded-[2px] object-cover shadow-[0_0_0_1px_rgba(255,255,255,0.18)]" loading="lazy" /><span>{show.country}</span></div></div>
               <div className="col-start-2 mt-2 sm:col-start-auto sm:mt-0">
                 <div className="text-xs font-semibold uppercase tracking-[0.1em] text-stone-200 sm:text-sm">{show.venue}</div>
                 <div className="mt-1 hidden text-[9px] uppercase tracking-[0.2em] text-stone-500 sm:block">{show.country}</div>
@@ -165,7 +174,7 @@ export default function LivePage() {
             </div>
           ))}
         </div>
-        <p className="mt-7 max-w-2xl text-xs leading-6 text-stone-500">Additional dates and venue details to be announced.</p>
+        <p className="mt-7 max-w-2xl text-xs leading-6 text-stone-500">Provisional dates and destinations are subject to confirmation. Additional dates and venue details to be announced.</p>
       </section>
 
       <section id="adelaide-show" className="relative isolate overflow-hidden border-b border-white/10">
