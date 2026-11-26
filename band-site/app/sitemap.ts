@@ -3,7 +3,7 @@ import { siteMeta } from "@/data/site";
 import { discoveryMarketRoutes, discoveryRegionRoutes, discoveryRoutes, discoveryTrackRoutes } from "@/data/discovery";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  let baseUrl = process.env.NEXT_PUBLIC_SITE_URL || siteMeta.domain;
+  let baseUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim() || siteMeta.domain.trim();
   if (baseUrl && !baseUrl.startsWith("http")) {
     baseUrl = `https://${baseUrl}`;
   }
