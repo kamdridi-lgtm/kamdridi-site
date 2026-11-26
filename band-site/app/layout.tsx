@@ -8,7 +8,7 @@ import { MyriamWidget } from "@/components/myriam-widget";
 import { DemographicsTracker } from "@/components/demographics-tracker";
 import { GlobalAudioPlayer } from "@/components/global-audio-player";
 
-let siteUrl = process.env.NEXT_PUBLIC_SITE_URL || siteMeta.domain;
+let siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim() || siteMeta.domain.trim();
 if (siteUrl && !siteUrl.startsWith("http")) {
   siteUrl = `https://${siteUrl}`;
 }
