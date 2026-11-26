@@ -38,11 +38,12 @@ const tourDates = [
   { date: "SUMMER 2027 · TBA", city: "Cologne · Aachen", country: "Germany", venue: "TBA · In development" },
   { date: "SUMMER 2027 · TBA", city: "Location TBA", country: "Switzerland", venue: "TBA · In development" },
   { date: "SUMMER 2027 · TBA", city: "Additional UK cities", country: "United Kingdom", venue: "TBA · In development" },
-  { date: "2027 · TBA", city: "Location TBA", country: "Southeast Asia", venue: "METALVERSE · Malaysia / Singapore routing · Pending confirmation", festivalLink: "https://voxnationlive.com/" },
+  { date: "2027 · TBA", city: "Location TBA", country: "Malaysia", venue: "METALVERSE · Possible host country · Pending confirmation", festivalLink: "https://voxnationlive.com/", festivalLabel: "Promoter website" },
+  { date: "2027 · TBA", city: "Singapore", country: "Singapore", venue: "METALVERSE · Alternative host country · Pending confirmation", festivalLink: "https://voxnationlive.com/", festivalLabel: "Promoter website" },
 ];
 
 
-const countryFlags: Record<string, string> = { Japan: "jp", Australia: "au", "New Zealand": "nz", "South Africa": "za", Belgium: "be", Estonia: "ee", France: "fr", Luxembourg: "lu", Germany: "de", Switzerland: "ch", "United Kingdom": "gb" };
+const countryFlags: Record<string, string> = { Japan: "jp", Australia: "au", "New Zealand": "nz", "South Africa": "za", Belgium: "be", Estonia: "ee", Malaysia: "my", Singapore: "sg", France: "fr", Luxembourg: "lu", Germany: "de", Switzerland: "ch", "United Kingdom": "gb" };
 
 export const metadata: Metadata = {
   title: "World Tour 2027 — Live Concerts",
@@ -180,7 +181,7 @@ export default function LivePage() {
             </div>
           ))}
         </div>
-        <p className="mt-7 max-w-2xl text-xs leading-6 text-stone-500">Provisional dates and destinations are subject to confirmation. Additional dates and venue details to be announced.</p>
+        <p className="mt-7 max-w-2xl text-xs leading-6 text-stone-500">Provisional dates and destinations are subject to confirmation. Malaysia and Singapore represent alternative routing options for the same METALVERSE opportunity, not two confirmed performances. Additional dates and venue details to be announced.</p>
       </section>
 
       <section id="adelaide-show" className="relative isolate overflow-hidden border-b border-white/10">
