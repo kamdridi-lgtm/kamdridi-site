@@ -31,13 +31,13 @@ const tourDates = [
   { date: "2027", city: "Perth", country: "Australia", venue: "TBA" },
   { date: "08–10 APR 2027 · TBA", city: "Tallinn", country: "Estonia", venue: "Tallinn Music Week · Target showcase, pending selection", festivalLink: "https://tmw.ee/music" },
   { date: "APR–MAY 2027 · TBA", city: "Centurion", country: "South Africa", venue: "At The River · Date to be announced", venueLink: "https://at-theriver.co.za/" },
-  { date: "30 APR–02 MAY 2027 · TBA", city: "Whitby", country: "United Kingdom", venue: "Revenant V · Whitby Goth Weekend · The Royal Hotel · Pending booking", festivalLink: "https://whitbyrevenant.com/" },
   { date: "19 JUN 2027 · PROVISIONAL", city: "Ninane · Chaudfontaine", country: "Belgium", venue: "Festival de musique · ASBL Ninane Village · Pending confirmation", festivalLink: "https://stayhappening.com/e/festival-de-musique-gratuit-E2ISXKYVH0Q", festivalLabel: "2025 festival archive" },
   { date: "20 JUN 2027 · TBA", city: "Paris", country: "France", venue: "Supersonic · Target venue, pending booking", venueLink: "https://supersonic-club.fr/infos-pratiques/" },
   { date: "SUMMER 2027 · TBA", city: "Luxembourg", country: "Luxembourg", venue: "TBA · In development" },
   { date: "SUMMER 2027 · TBA", city: "Cologne · Aachen", country: "Germany", venue: "TBA · In development" },
   { date: "SUMMER 2027 · TBA", city: "Location TBA", country: "Switzerland", venue: "TBA · In development" },
   { date: "SUMMER 2027 · TBA", city: "Additional UK cities", country: "United Kingdom", venue: "TBA · In development" },
+  { date: "29 OCT 2027 · PROVISIONAL", city: "Whitby", country: "United Kingdom", venue: "KAM DRIDI — HALLOWEEN REVENANT 2027", festivalLink: "https://whitbyrevenant.com/" },
   { date: "2027 · TBA", city: "Location TBA", country: "Malaysia", venue: "METALVERSE · Possible host country · Pending confirmation", festivalLink: "https://voxnationlive.com/", festivalLabel: "Promoter website" },
   { date: "2027 · TBA", city: "Singapore", country: "Singapore", venue: "METALVERSE · Alternative host country · Pending confirmation", festivalLink: "https://voxnationlive.com/", festivalLabel: "Promoter website" },
 ];
@@ -191,7 +191,8 @@ export default function LivePage() {
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-stone-300 sm:text-lg">International booking now open for festivals, theatres, live venues and special events.</p>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-stone-400">Cinematic melodic hard rock from Montreal, Canada · Live lead vocals, professional instrumental backing tracks and optional synchronized visuals.</p>
           <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-            <Link href="/press" className="rounded-full bg-white px-7 py-3 text-sm font-bold uppercase tracking-wide text-black hover:bg-[#f4c66a]">Artist Press Kit</Link>
+            <a href="mailto:management@kamdridi.com?subject=KAM%20DRIDI%20World%20Tour%202027%20Booking" className="rounded-full bg-white px-7 py-3 text-sm font-bold uppercase tracking-wide !text-black hover:bg-[#f4c66a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f4c66a]">Request a show</a>
+            <Link href="/press" className="rounded-full border border-white/30 px-7 py-3 text-sm font-bold uppercase tracking-wide text-white hover:border-[#f4c66a]">Artist Press Kit</Link>
             <Link href="/industry" className="rounded-full border border-white/30 px-7 py-3 text-sm font-bold uppercase tracking-wide text-white hover:border-[#f4c66a]">Industry &amp; Booking</Link>
           </div>
           <a href="mailto:management@kamdridi.com?subject=KAM%20DRIDI%20World%20Tour%202027%20Booking" className="mt-6 inline-block text-sm text-[#f4c66a] underline underline-offset-4">Contact management ↗</a>
