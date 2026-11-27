@@ -19,6 +19,7 @@ import { KamdridiRecordsLogo } from "@/components/label/KamdridiRecordsLogo";
 import { LostRequiemUniverseCard } from "@/components/lost-requiem-universe-card";
 import { ActiveSignalsTV } from "@/components/active-signals-tv";
 import { EchoesUnearthedDirectSales } from "@/components/echoes-unearthed-direct-sales";
+import { UndercoverHomeFeatureBanner, UndercoverHomeTrackShowcase } from "@/components/undercover-home-feature";
 import { BuySingleFab } from "@/components/buy-single-fab";
 import { featuredVideo, gameExperiences, socialFeed, streamingLinks, visualAlbumScenes } from "@/data/site";
 
@@ -341,12 +342,18 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* UNDERCOVER featured first: before the existing ECHOES direct-sales section. */}
+        <UndercoverHomeFeatureBanner />
+
         <section id="tracklist" className="relative z-10 border-b border-[#a86225]/20 px-4 py-10 sm:px-6">
           <SectionTitle eyebrow="Direct from KAM DRIDI" title="Buy Echoes Unearthed" />
           <div className="mt-8">
             <EchoesUnearthedDirectSales returnPath="/" />
           </div>
         </section>
+
+        {/* The complete UNDERCOVER listening showcase follows ECHOES; its sales are catalog-gated. */}
+        <UndercoverHomeTrackShowcase />
 
         <section id="collector-products" className="relative z-10 border-b border-[#a86225]/20 px-4 py-10 sm:px-6">
           <SectionTitle eyebrow="Official Store" title="Collector Products" />
